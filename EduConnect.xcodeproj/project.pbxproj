@@ -14,7 +14,7 @@
 		DA958F882F08D3940017938F /* Exceptions for "EduConnect" folder in "EduConnect" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = DA958F752F08D3920017938F /* EduConnect */;
 		};
@@ -147,7 +147,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UJQW6TGS7Z;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = EduConnect/Info.plist;
+				INFOPLIST_FILE = EduConnect/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -184,7 +184,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UJQW6TGS7Z;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = EduConnect/Info.plist;
+				INFOPLIST_FILE = EduConnect/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
