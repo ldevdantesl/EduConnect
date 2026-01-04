@@ -91,8 +91,4 @@ open class ECIconButton: UIButton {
     @objc private func didTapAction() {
         viewModel?.didTapAction?()
     }
-    
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("tapped")
-    }
 }
