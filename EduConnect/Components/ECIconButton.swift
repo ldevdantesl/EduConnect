@@ -16,13 +16,13 @@ public struct ECIconButtonVM {
     public var didTapAction: (() -> Void)?
     
     public init(
-        icon: UIImage,
+        iconName: String,
         color: UIColor = .systemBlue,
         style: UIFont.TextStyle = .body,
         weight: UIImage.SymbolWeight = .regular,
         didTapAction: (() -> Void)? = nil
     ) {
-        self.icon = icon
+        self.icon = UIImage(named: iconName) ?? UIImage(systemName: "questionmark.circle")!
         self.color = color
         self.style = style
         self.weight = weight

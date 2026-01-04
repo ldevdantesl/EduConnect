@@ -12,9 +12,14 @@ final class ECHeaderView: UIView {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // AccountButton
-        static let accountButtonImageName = "person"
-        static let accountButtonColor: UIColor = UIColor.systemBlue
-        static let accountButtonSize = 44
+        static let accountButtonImageName = ImageConstants.accountIconImage
+        
+        // BarButton
+        static let barButtonImageName = ImageConstants.tabBarIconImage
+        
+        // App Logo Image
+        static let logoImageW = 74.0
+        static let logoImageH = 44
         
         // Spacing
         static let vSpacing = 10.0
@@ -24,14 +29,32 @@ final class ECHeaderView: UIView {
     // MARK: - VIEW PROPERTIES
     private let accountButton: ECIconButton = {
         let vm = ECIconButtonVM(
-            systemImage: Constants.accountButtonImageName,
-            color: Constants.accountButtonColor,
-            style: .title3, weight: .heavy
+            iconName: Constants.accountButtonImageName,
+            style: .title3, weight: .bold
         ) {
             print("Tapped Account Button")
         }
         let button = ECIconButton(viewModel: vm)
         return button
+    }()
+    
+    private let barButton: ECIconButton = {
+        let vm = ECIconButtonVM(
+            iconName: Constants.barButtonImageName,
+            style: .title3, weight: .bold
+        ) {
+            print("Tapped Bar Button")
+        }
+        let button = ECIconButton(viewModel: vm)
+        return button
+    }()
+    
+    private let logoImage: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: ImageConstants.appLogo)
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
+        return view
     }()
     
     // MARK: - LIFECYCLE
@@ -47,14 +70,26 @@ final class ECHeaderView: UIView {
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
-        self.isUserInteractionEnabled = true
-        self.backgroundColor = .systemGray6
-        self.addSubview(accountButton)
+        self.backgroundColor = .white
         
+        self.addSubview(accountButton)
         accountButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(-Constants.vSpacing)
             $0.trailing.equalToSuperview().offset(-Constants.hSpacing)
-            $0.size.equalTo(Constants.accountButtonSize)
         }
+        
+        self.addSubview(logoImage)
+        logoImage.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-Constants.vSpacing)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(snp.topMargin)
+        }
+        
+        self.addSubview(barButton)
+        barButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-Constants.vSpacing)
+            $0.leading.equalToSuperview().offset(Constants.hSpacing)
+        }
+        
     }
 }

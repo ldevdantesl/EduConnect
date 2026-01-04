@@ -17,6 +17,14 @@ final class LoginScreenVC: UIViewController {
 
     // MARK: - VIEW PROPERTIES
     private var headerView: ECHeaderView = ECHeaderView()
+    private let collectionView: ECCollectionView = {
+        let cvLayout = UICollectionViewFlowLayout()
+        cvLayout.scrollDirection = .vertical
+        cvLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        let collectionView = ECCollectionView(layout: cvLayout)
+        collectionView.backgroundColor = .systemBlue
+        return collectionView
+    }()
     
     // MARK: - FUNC
     override func viewDidLoad() {
@@ -25,12 +33,16 @@ final class LoginScreenVC: UIViewController {
     }
     
     private func setupUI() {
-        self.view.backgroundColor = .systemBlue
         self.view.addSubview(headerView)
         headerView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(self.headerHeight)
+        }
+        self.view.addSubview(collectionView)
+        collectionView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(self.headerHeight)
+            $0.bottom.horizontalEdges.equalToSuperview()
         }
     }
 }
