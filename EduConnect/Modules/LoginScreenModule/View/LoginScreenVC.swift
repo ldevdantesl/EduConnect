@@ -17,11 +17,12 @@ final class LoginScreenVC: UIViewController {
 
     // MARK: - VIEW PROPERTIES
     private var headerView: ECHeaderView = ECHeaderView()
-    private let collectionView: ECCollectionView = {
+    private let collectionView: UICollectionView = {
         let cvLayout = UICollectionViewFlowLayout()
         cvLayout.scrollDirection = .vertical
         cvLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        let collectionView = ECCollectionView(layout: cvLayout)
+        let collectionView = UICollectionView(frame:.zero, collectionViewLayout: cvLayout)
+        collectionView.register(cell: LoginScreenRegistrationCell.self)
         collectionView.backgroundColor = .systemBlue
         return collectionView
     }()

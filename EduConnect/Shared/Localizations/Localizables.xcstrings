@@ -35,7 +35,7 @@
         }
       }
     },
-    "registration_onetimeCode" : {
+    "registration_enterEmail" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

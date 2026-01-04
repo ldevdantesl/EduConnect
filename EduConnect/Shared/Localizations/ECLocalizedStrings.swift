@@ -12,7 +12,7 @@ public enum ECLocalizedStrings {
     /// For __Registration__ page flow
     enum Registration {
         static let signIn = String(localized: "registration_signIn")
-        static let oneTimeCode = String(localized: "registration_onetimeCode")
+        static let enterEmail = String(localized: "registration_enterEmail")
     }
     
     /// For __Common__ words

@@ -10,15 +10,38 @@ import SnapKit
 
 final class LoginScreenRegistrationCell: ECCollectionViewCell {
     // MARK: - CONSTANTS
-    fileprivate enum Constants { }
+    fileprivate enum Constants {
+        //Spacings
+        static let hSpacing = 20
+        static let vSpacing = 10
+    }
     
     // MARK: - VIEW PROPERTIES
-    private let registerTitleLabel: UILabel = {
+    private let signInTitleLabel: UILabel = {
         let label = UILabel()
         label.text = ECLocalizedStrings.Registration.signIn
-        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.font = ECFont.font(.bold, size: 30)
+        label.numberOfLines = 1
+        label.textAlignment = .center
         label.textColor = .white
         return label
+    }()
+    
+    private let enterEmailLabel: UILabel = {
+        let label = UILabel()
+        label.text = ECLocalizedStrings.Registration.enterEmail
+        label.font = ECFont.font(.medium, size: 14)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.textColor = .white
+        return label
+    }()
+    
+    private lazy var vStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.alignment = .center
+        return stack
     }()
     
     // MARK: - LIFECYCLE
@@ -32,11 +55,15 @@ final class LoginScreenRegistrationCell: ECCollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - PUBLIC FUNC
-    public func configure() { }
-    
     // MARK: - PRIVATE FUNC
-    private func setupUI() { }
+    private func setupUI() {
+        vStack.addArrangedSubview(signInTitleLabel)
+        vStack.addArrangedSubview(enterEmailLabel)
+        contentView.addSubview(vStack)
+        vStack.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
     
     // MARK: - OBJC FUNC
 }
