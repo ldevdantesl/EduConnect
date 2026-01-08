@@ -16,7 +16,18 @@ final class ECButton: UIButton {
         super.init(frame: frame)
     }
     
-    convenience init(text: String, cornerRadius: CGFloat = 15, action: (() -> Void)? = nil) {
+    override var isHighlighted: Bool {
+        didSet {
+            UIView.animate(withDuration: 0.15) {
+                self.alpha = self.isHighlighted ? 0.6 : 1.0
+                self.transform = self.isHighlighted
+                ? CGAffineTransform(scaleX: 0.97, y: 0.97)
+                : .identity
+            }
+        }
+    }
+    
+    convenience init(text: String, cornerRadius: CGFloat = 15) {
         self.init(frame: .zero)
         let attrTitle = NSAttributedString(
             string: text,
@@ -28,7 +39,6 @@ final class ECButton: UIButton {
         
         setAttributedTitle(attrTitle, for: .normal)
         self.cornerRadius = cornerRadius
-        self.action = action
         self.addTarget(self, action: #selector(didTap), for: .touchUpInside)
         self.backgroundColor = .systemBlue
         layoutIfNeeded()

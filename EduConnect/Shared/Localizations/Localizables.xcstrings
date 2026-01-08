@@ -18,6 +18,23 @@
         }
       }
     },
+    "common_confirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подтвердить"
+          }
+        }
+      }
+    },
     "common_ok" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -31,6 +48,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ОК"
+          }
+        }
+      }
+    },
+    "registration_checkEmail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter the 6-digit code sent to your email address. If you didn’t receive the message, check your «Spam» folder or request a resend."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пожалуйста, введите 6-значный код, отправленный на ваш адрес электронной почты. Если вы не получили письмо, проверьте папку «Спам» или запросите повторную отправку."
+          }
+        }
+      }
+    },
+    "registration_confirmCodeTextField" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Code"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подтвердите код"
+          }
+        }
+      }
+    },
+    "registration_confirmSignIn" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Sign In"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подтверждение регистрации"
           }
         }
       }
@@ -69,6 +137,23 @@
         }
       }
     },
+    "registration_resendCode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resend Code"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отправить код повторно"
+          }
+        }
+      }
+    },
     "registration_sendCodeButton" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -76,6 +161,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Send Code"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отправить код"
           }
         }
       }

@@ -9,25 +9,39 @@ import UIKit
 
 final class ECTextField: UITextField, UITextFieldDelegate {
     
-    private var cornerRadius: CGFloat = 0
+    private var cornerRadius: CGFloat = 15
     private var returnAction: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    convenience init(placeHolder: String, cornerRadius: CGFloat) {
+    convenience init(placeHolder: String, cornerRadius: CGFloat = 15) {
         self.init(frame: .zero)
-        self.placeholder = placeHolder
+        let attrPlaceholder = NSAttributedString(
+            string: placeHolder,
+            attributes: [
+                .foregroundColor: UIColor.systemGray,
+                .font: ECFont.font(.medium, size: 14)
+            ]
+        )
+        self.attributedPlaceholder = attrPlaceholder
         self.cornerRadius = cornerRadius
         self.returnKeyType = .done
         self.delegate = self
         layoutIfNeeded()
     }
     
-    convenience init(placeHolder: String, cornerRadius: CGFloat, returnKeyType: UIReturnKeyType, returnAction: (() -> Void)? = nil) {
+    convenience init(placeHolder: String, cornerRadius: CGFloat = 15, returnKeyType: UIReturnKeyType, returnAction: (() -> Void)? = nil) {
         self.init(frame: .zero)
-        self.placeholder = placeHolder
+        let attrPlaceholder = NSAttributedString(
+            string: placeHolder,
+            attributes: [
+                .foregroundColor: UIColor.systemGray,
+                .font: ECFont.font(.medium, size: 14)
+            ]
+        )
+        self.attributedPlaceholder = attrPlaceholder
         self.cornerRadius = cornerRadius
         self.returnKeyType = returnKeyType
         self.returnAction = returnAction

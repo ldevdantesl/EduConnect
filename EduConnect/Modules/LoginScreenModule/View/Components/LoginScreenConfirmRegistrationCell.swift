@@ -1,58 +1,64 @@
 //
-//  LoginScreenRegistrationCell.swift
+//  LoginScreenConfirmRegistrationCell.swift
 //  EduConnect
 //
-//  Created by Buzurg Rakhimzoda on 4.01.2026.
+//  Created by Buzurg Rakhimzoda on 8.01.2026.
 //
 
 import UIKit
 import SnapKit
 
-struct LoginScreenRegistrationCellViewModel: CellViewModel {
-    var cellIdentifier: String = "LoginScreenRegistrationCell"
-    let didTapSendCode: (() -> Void)?
+struct LoginScreenConfirmRegistrationCellVM: CellViewModel {
+    var cellIdentifier: String = "LoginScreenConfirmRegistrationCell"
+    let confirmAction: (() -> Void)?
+    let resendAction: (() -> Void)?
+    
+    init(confirmAction: (() -> Void)? = nil, resendAction: (() -> Void)? = nil) {
+        self.confirmAction = confirmAction
+        self.resendAction = resendAction
+    }
 }
 
-final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell {
+final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, ConfigurableCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
-        //Spacings
+        // Spacing
         static let hSpacing = 15.0
-        static let vSpacing = 10.0
-        static let spacing = 5.0
         static let verticalStackSpacing = 25.0
     }
     
     // MARK: - PROPERTIES
-    private var viewModel: LoginScreenRegistrationCellViewModel?
+    private var viewModel: LoginScreenConfirmRegistrationCellVM?
+    
+    // MARK: - VIEW PROPERTIES
+    private let confirmSignInLabel: UILabel = {
+        let label = UILabel()
+        label.text = ECLocalizedStrings.Registration.confirmSignIn
+        label.font = ECFont.font(.bold, size: 30)
+        label.textAlignment = .center
+        label.textColor = .black
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let checkEmailLabel: UILabel = {
+        let label = UILabel()
+        label.text = ECLocalizedStrings.Registration.checkEmail
+        label.font = ECFont.font(.bold, size: 14)
+        label.textAlignment = .center
+        label.textColor = .systemGray
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let codeField: ECTextField = ECTextField(placeHolder: ECLocalizedStrings.Registration.confirmCodeTextField)
+    
+    private let confirmButton: ECButton = ECButton(text: ECLocalizedStrings.Common.confirm)
+    
+    private let resendCodeButton: ECUnderlineButton = ECUnderlineButton(text: ECLocalizedStrings.Registration.resendCode)
     
     private let topSpacer = UIView()
     private let bottomSpacer = UIView()
-    
-    // MARK: - VIEW PROPERTIES
-    private let signInTitleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.text = ECLocalizedStrings.Registration.signIn
-        label.font = ECFont.font(.extraBold, size: 30)
-        label.numberOfLines = 1
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private let enterEmailLabel: UILabel = {
-        let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.enterEmail
-        label.font = ECFont.font(.medium, size: 14)
-        label.textColor = .systemGray
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private let emailTextField: ECTextField = ECTextField(placeHolder: ECLocalizedStrings.Registration.enterEmailTextField)
-    
-    private let sendCodeButton: ECButton = ECButton(text: ECLocalizedStrings.Registration.sendCodeButton)
     
     private lazy var vStack: UIStackView = {
         let stack = UIStackView()
@@ -83,11 +89,12 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
         self.vStack.layer.cornerRadius = SharedConstants.standardCornerRadius
     }
     
-    // MARK: - PUBLIC FUNX
-    public func configure(withVM vm: CellViewModel) {
-        guard let vm = vm as? LoginScreenRegistrationCellViewModel else { return }
+    // MARK: - PUBLIC FUNC
+    func configure(withVM vm: any CellViewModel) {
+        guard let vm = vm as? LoginScreenConfirmRegistrationCellVM else { return }
         self.viewModel = vm
-        self.sendCodeButton.setAction(action: vm.didTapSendCode)
+        self.confirmButton.setAction(action: vm.confirmAction)
+        self.resendCodeButton.setAction(action: vm.resendAction)
         layoutIfNeeded()
     }
     
@@ -102,33 +109,42 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
         bottomSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
 
         vStack.addArrangedSubview(topSpacer)
-        vStack.addArrangedSubview(signInTitleLabel)
-        vStack.setCustomSpacing(10, after: signInTitleLabel)
-        vStack.addArrangedSubview(enterEmailLabel)
-        vStack.setCustomSpacing(30, after: enterEmailLabel)
+        vStack.addArrangedSubview(confirmSignInLabel)
+        vStack.setCustomSpacing(10, after: confirmSignInLabel)
+        vStack.addArrangedSubview(checkEmailLabel)
+        vStack.setCustomSpacing(20, after: checkEmailLabel)
         
-        vStack.addArrangedSubview(emailTextField)
-        emailTextField.snp.makeConstraints {
+        vStack.addArrangedSubview(codeField)
+        codeField.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.textFieldsHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
-        vStack.setCustomSpacing(20, after: emailTextField)
+        vStack.setCustomSpacing(20, after: codeField)
         
-        vStack.addArrangedSubview(sendCodeButton)
-        sendCodeButton.snp.makeConstraints {
+        vStack.addArrangedSubview(confirmButton)
+        confirmButton.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.buttonHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
+        vStack.setCustomSpacing(20, after: confirmButton)
+        
+        vStack.addArrangedSubview(resendCodeButton)
+        resendCodeButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+        }
+        
         vStack.addArrangedSubview(bottomSpacer)
         topSpacer.snp.makeConstraints {
             $0.height.equalTo(bottomSpacer.snp.height).multipliedBy(0.6)
         }
         
-        contentView.addSubview(vStack)
+        self.contentView.addSubview(vStack)
         vStack.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview().inset(Constants.verticalStackSpacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
+        vStack.addArrangedSubview(bottomSpacer)
+        layoutIfNeeded()
     }
     
     // MARK: - OBJC FUNC
