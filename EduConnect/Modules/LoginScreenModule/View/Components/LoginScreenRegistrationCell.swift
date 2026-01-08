@@ -10,6 +10,7 @@ import SnapKit
 
 struct LoginScreenRegistrationCellViewModel: CellViewModel {
     var cellIdentifier: String = "LoginScreenRegistrationCell"
+    let didTapSendCode: (() -> Void)?
 }
 
 final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell {
@@ -17,11 +18,10 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
     fileprivate enum Constants {
         // Other
         static let cornerRadius = 15.0
-        static let buttonCornerRadius = 25.0
         
         // Heights
-        static let textFieldHeight = 70
-        static let sendCodeButtonHeight = 60
+        static let textFieldHeight = 60
+        static let sendCodeButtonHeight = 50
         
         //Spacings
         static let hSpacing = 15.0
@@ -50,28 +50,23 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
     private let enterEmailLabel: UILabel = {
         let label = UILabel()
         label.text = ECLocalizedStrings.Registration.enterEmail
-        label.font = ECFont.font(.bold, size: 14)
-        label.textColor = .black
+        label.font = ECFont.font(.medium, size: 14)
+        label.textColor = .systemGray
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
     }()
     
-    private let emailTextField: UITextField = {
-        let textField = UITextField()
+    private let emailTextField: ECTextField = {
+        let textField = ECTextField(placeHolder: ECLocalizedStrings.Registration.enterEmailTextField, cornerRadius: Constants.cornerRadius)
         textField.placeholder = ECLocalizedStrings.Registration.enterEmail
         textField.font = ECFont.font(.medium, size: 14)
-        textField.textAlignment = .center
+        textField.textAlignment = .left
         return textField
     }()
     
-    private let sendCodeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Send Code", for: .normal)
-        button.configuration = .borderedProminent()
-        button.setTitleColor(.label, for: .normal)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
+    private let sendCodeButton: ECButton = {
+        let button = ECButton(text: ECLocalizedStrings.Registration.sendCodeButton)
         return button
     }()
     
@@ -82,6 +77,9 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
         stack.distribution = .fill
         stack.alignment = .center
         stack.spacing = 0
+        stack.isUserInteractionEnabled = true
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layoutMargins = UIEdgeInsets(top: 0, left: Constants.hSpacing, bottom: 0, right: Constants.hSpacing)
         return stack
     }()
     
@@ -99,13 +97,13 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
     override func layoutSubviews() {
         super.layoutSubviews()
         self.vStack.layer.cornerRadius = Constants.cornerRadius
-        self.sendCodeButton.layer.cornerRadius = Constants.buttonCornerRadius
     }
     
     // MARK: - PUBLIC FUNX
     public func configure(withVM vm: CellViewModel) {
         guard let vm = vm as? LoginScreenRegistrationCellViewModel else { return }
         self.viewModel = vm
+        self.sendCodeButton.setAction(action: vm.didTapSendCode)
         layoutIfNeeded()
     }
     

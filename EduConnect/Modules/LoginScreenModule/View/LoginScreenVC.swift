@@ -62,7 +62,7 @@ extension LoginScreenVC: LoginScreenViewProtocol {
 
 extension LoginScreenVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width - 20
+        let width = collectionView.bounds.width
         let height = collectionView.bounds.height
         return CGSize(width: width, height: height)
     }

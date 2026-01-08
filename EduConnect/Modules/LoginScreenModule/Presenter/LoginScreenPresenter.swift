@@ -25,7 +25,7 @@ final class LoginScreenPresenter {
 extension LoginScreenPresenter: LoginScreenPresenterProtocol {
     func viewDidLoad() {
         let items = [
-            LoginScreenRegistrationCellViewModel()
+            LoginScreenRegistrationCellViewModel { print("Tapped Send Code") }
         ]
         let dataSource = LoginScreenDataSource(items: items)
         self.dataSource = dataSource
