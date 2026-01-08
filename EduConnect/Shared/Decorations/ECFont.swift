@@ -14,6 +14,7 @@ public enum ECFont {
         case medium = "Montserrat-Medium"
         case semiBold = "Montserrat-SemiBold"
         case bold = "Montserrat-Bold"
+        case extraBold = "Montserrat-ExtraBold"
     }
     
     static func font(_ family: Family = .regular, size: CGFloat) -> UIFont {
