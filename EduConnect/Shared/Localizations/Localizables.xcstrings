@@ -52,7 +52,7 @@
         }
       }
     },
-    "registration_checkEmail" : {
+    "registration_checkEmailSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -86,7 +86,7 @@
         }
       }
     },
-    "registration_confirmSignIn" : {
+    "registration_confirmSignInTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -103,7 +103,24 @@
         }
       }
     },
-    "registration_enterEmail" : {
+    "registration_createPasswordSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create a secure password to access your personal account.\nThe password must contain at least 8 characters."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Придумайте надежный пароль для входа в личный кабинет. Пароль должен содержать не менее 8 символов."
+          }
+        }
+      }
+    },
+    "registration_enterEmailSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -137,7 +154,24 @@
         }
       }
     },
-    "registration_resendCode" : {
+    "registration_re-enterPasswordTextField" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Re-enter new password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Повторите пароль"
+          }
+        }
+      }
+    },
+    "registration_resendCodeUnderlineButton" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -150,6 +184,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Отправить код повторно"
+          }
+        }
+      }
+    },
+    "registration_savePasswordButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save Password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранить пароль"
           }
         }
       }
@@ -171,7 +222,41 @@
         }
       }
     },
-    "registration_signIn" : {
+    "registration_setNewPasswordTextField" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новый пароль"
+          }
+        }
+      }
+    },
+    "registration_setPasswordTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set Password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Установка\nпароля"
+          }
+        }
+      }
+    },
+    "registration_signInTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

@@ -11,14 +11,28 @@ public enum ECLocalizedStrings {
     
     /// For __Registration__ page flow
     enum Registration {
-        static let signIn = String(localized: .Localizables.registrationSignIn)
-        static let enterEmail = String(localized: .Localizables.registrationEnterEmail)
-        static let enterEmailTextField = String(localized: .Localizables.registrationEnterEmailTextField)
-        static let sendCodeButton = String(localized: .Localizables.registrationSendCodeButton)
-        static let confirmSignIn = String(localized: .Localizables.registrationConfirmSignIn)
-        static let checkEmail = String(localized: .Localizables.registrationCheckEmail)
-        static let confirmCodeTextField = String(localized: .Localizables.registrationConfirmCodeTextField)
-        static let resendCode = String(localized: .Localizables.registrationResendCode)
+        
+        enum Page1 {
+            static let signInTitle = String(localized: .Localizables.registrationSignInTitle)
+            static let enterEmailSubtitle = String(localized: .Localizables.registrationEnterEmailSubtitle)
+            static let enterEmailTextField = String(localized: .Localizables.registrationEnterEmailTextField)
+            static let sendCodeButton = String(localized: .Localizables.registrationSendCodeButton)
+        }
+        
+        enum Page2 {
+            static let confirmSignInTitle = String(localized: .Localizables.registrationConfirmSignInTitle)
+            static let checkEmailSubtitle = String(localized: .Localizables.registrationCheckEmailSubtitle)
+            static let confirmCodeTextField = String(localized: .Localizables.registrationConfirmCodeTextField)
+            static let resendCodeUnderlineButton = String(localized: .Localizables.registrationResendCodeUnderlineButton)
+        }
+        
+        enum Page3 {
+            static let setPasswordTitle = String(localized: .Localizables.registrationSetPasswordTitle)
+            static let setNewPasswordSubtitle = String(localized: .Localizables.registrationCreatePasswordSubtitle)
+            static let newPasswordTextField = String(localized: .Localizables.registrationSetNewPasswordTextField)
+            static let reenterPasswordTextField = String(localized: .Localizables.registrationReEnterPasswordTextField)
+            static let savePasswordButton = String(localized: .Localizables.registrationSavePasswordButton)
+        }
     }
     
     /// For __Common__ words

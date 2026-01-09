@@ -29,9 +29,16 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
                 guard let self = self else { return }
                 self.view?.scrollToNextCell()
             },
-            LoginScreenConfirmRegistrationCellVM {
-                print("Tapped Confirm Button")
+            
+            LoginScreenConfirmRegistrationCellVM { [weak self] in
+                guard let self = self else { return }
+                self.view?.scrollToNextCell()
             } resendAction: { [weak self] in
+                guard let self = self else { return }
+                self.view?.scrollBackToPreviousCell()
+            },
+            
+            LoginScreenSetPasswordCellViewModel { [weak self] in
                 guard let self = self else { return }
                 self.view?.scrollBackToPreviousCell()
             }

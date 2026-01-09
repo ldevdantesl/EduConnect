@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ECTextField: UITextField, UITextFieldDelegate {
+open class ECTextField: UITextField, UITextFieldDelegate {
     
     private var cornerRadius: CGFloat = 15
     private var returnAction: (() -> Void)?
@@ -50,11 +50,11 @@ final class ECTextField: UITextField, UITextFieldDelegate {
     }
     
     @available(*, unavailable)
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         self.layer.cornerRadius = cornerRadius
         self.layer.borderWidth = 1
@@ -62,15 +62,15 @@ final class ECTextField: UITextField, UITextFieldDelegate {
         layoutIfNeeded()
     }
     
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
+    public override func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: 10, dy: 0)
     }
     
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+    public override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: 10, dy: 0)
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.resignFirstResponder()
         returnAction?()
         return true

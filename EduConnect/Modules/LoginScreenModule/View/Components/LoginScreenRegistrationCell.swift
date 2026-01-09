@@ -33,7 +33,7 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
     private let signInTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.text = ECLocalizedStrings.Registration.signIn
+        label.text = ECLocalizedStrings.Registration.Page1.signInTitle
         label.font = ECFont.font(.extraBold, size: 30)
         label.numberOfLines = 1
         label.textAlignment = .center
@@ -42,7 +42,7 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
     
     private let enterEmailLabel: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.enterEmail
+        label.text = ECLocalizedStrings.Registration.Page1.enterEmailSubtitle
         label.font = ECFont.font(.medium, size: 14)
         label.textColor = .systemGray
         label.numberOfLines = 0
@@ -50,9 +50,9 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
         return label
     }()
     
-    private let emailTextField: ECTextField = ECTextField(placeHolder: ECLocalizedStrings.Registration.enterEmailTextField)
+    private let emailTextField: ECTextField = ECTextField(placeHolder: ECLocalizedStrings.Registration.Page1.enterEmailTextField)
     
-    private let sendCodeButton: ECButton = ECButton(text: ECLocalizedStrings.Registration.sendCodeButton)
+    private let sendCodeButton: ECButton = ECButton(text: ECLocalizedStrings.Registration.Page1.sendCodeButton)
     
     private lazy var vStack: UIStackView = {
         let stack = UIStackView()
@@ -130,6 +130,4 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
     }
-    
-    // MARK: - OBJC FUNC
 }

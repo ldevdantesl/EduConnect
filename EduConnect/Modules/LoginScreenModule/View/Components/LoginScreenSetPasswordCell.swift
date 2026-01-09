@@ -1,5 +1,5 @@
 //
-//  LoginScreenConfirmRegistrationCell.swift
+//  LoginScreenSetPasswordCell.swift
 //  EduConnect
 //
 //  Created by Buzurg Rakhimzoda on 8.01.2026.
@@ -8,18 +8,16 @@
 import UIKit
 import SnapKit
 
-struct LoginScreenConfirmRegistrationCellVM: CellViewModel {
-    var cellIdentifier: String = "LoginScreenConfirmRegistrationCell"
-    let confirmAction: (() -> Void)?
-    let resendAction: (() -> Void)?
+struct LoginScreenSetPasswordCellViewModel: CellViewModel {
+    var cellIdentifier: String = "LoginScreenSetPasswordCell"
+    let savePasswordAction: (() -> Void)?
     
-    init(confirmAction: (() -> Void)? = nil, resendAction: (() -> Void)? = nil) {
-        self.confirmAction = confirmAction
-        self.resendAction = resendAction
+    init(savePasswordAction: (() -> Void)?) {
+        self.savePasswordAction = savePasswordAction
     }
 }
 
-final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, ConfigurableCell {
+final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // Spacing
@@ -28,12 +26,12 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
     }
     
     // MARK: - PROPERTIES
-    private var viewModel: LoginScreenConfirmRegistrationCellVM?
+    private var viewModel: LoginScreenSetPasswordCellViewModel?
     
     // MARK: - VIEW PROPERTIES
-    private let confirmSignInLabel: UILabel = {
+    private let setPasswordLabel: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page2.confirmSignInTitle
+        label.text = ECLocalizedStrings.Registration.Page3.setPasswordTitle
         label.font = ECFont.font(.bold, size: 30)
         label.textAlignment = .center
         label.textColor = .black
@@ -41,9 +39,9 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
         return label
     }()
     
-    private let checkEmailLabel: UILabel = {
+    private let setPasswordSubtitle: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page2.checkEmailSubtitle
+        label.text = ECLocalizedStrings.Registration.Page3.setNewPasswordSubtitle
         label.font = ECFont.font(.bold, size: 14)
         label.textAlignment = .center
         label.textColor = .systemGray
@@ -51,11 +49,17 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
         return label
     }()
     
-    private let codeField: ECTextField = ECTextField(placeHolder: ECLocalizedStrings.Registration.Page2.confirmCodeTextField)
+    private lazy var passwordField: ECTextField = {
+        let field = ECSecureTextField(
+            placeHolder: ECLocalizedStrings.Registration.Page3.newPasswordTextField,
+            returnKeyType: .next,
+            returnAction: self.makeReenterFieldFirstResponder
+        )
+        return field
+    }()
+    private let reenterPasswordField: ECTextField = ECSecureTextField(placeHolder: ECLocalizedStrings.Registration.Page3.reenterPasswordTextField)
     
-    private let confirmButton: ECButton = ECButton(text: ECLocalizedStrings.Common.confirm)
-    
-    private let resendCodeButton: ECUnderlineButton = ECUnderlineButton(text: ECLocalizedStrings.Registration.Page2.resendCodeUnderlineButton)
+    private let savePasswordButton: ECButton = ECButton(text: ECLocalizedStrings.Registration.Page3.savePasswordButton)
     
     private let topSpacer = UIView()
     private let bottomSpacer = UIView()
@@ -91,10 +95,9 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
     
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: any CellViewModel) {
-        guard let vm = vm as? LoginScreenConfirmRegistrationCellVM else { return }
+        guard let vm = vm as? LoginScreenSetPasswordCellViewModel else { return }
         self.viewModel = vm
-        self.confirmButton.setAction(action: vm.confirmAction)
-        self.resendCodeButton.setAction(action: vm.resendAction)
+        self.savePasswordButton.setAction(action: vm.savePasswordAction)
         layoutIfNeeded()
     }
     
@@ -109,33 +112,35 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
         bottomSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
 
         vStack.addArrangedSubview(topSpacer)
-        vStack.addArrangedSubview(confirmSignInLabel)
-        vStack.setCustomSpacing(10, after: confirmSignInLabel)
-        vStack.addArrangedSubview(checkEmailLabel)
-        vStack.setCustomSpacing(20, after: checkEmailLabel)
+        vStack.addArrangedSubview(setPasswordLabel)
+        vStack.setCustomSpacing(10, after: setPasswordLabel)
+        vStack.addArrangedSubview(setPasswordSubtitle)
+        vStack.setCustomSpacing(20, after: setPasswordSubtitle)
         
-        vStack.addArrangedSubview(codeField)
-        codeField.snp.makeConstraints {
+        vStack.addArrangedSubview(passwordField)
+        passwordField.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.textFieldsHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
-        vStack.setCustomSpacing(20, after: codeField)
+        vStack.setCustomSpacing(20, after: passwordField)
         
-        vStack.addArrangedSubview(confirmButton)
-        confirmButton.snp.makeConstraints {
+        vStack.addArrangedSubview(reenterPasswordField)
+        reenterPasswordField.snp.makeConstraints {
+            $0.height.equalTo(SharedConstants.textFieldsHeight)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
+        }
+        vStack.setCustomSpacing(20, after: reenterPasswordField)
+        
+        vStack.addArrangedSubview(savePasswordButton)
+        savePasswordButton.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.buttonHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
-        vStack.setCustomSpacing(20, after: confirmButton)
-        
-        vStack.addArrangedSubview(resendCodeButton)
-        resendCodeButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-        }
+        vStack.setCustomSpacing(20, after: savePasswordButton)
         
         vStack.addArrangedSubview(bottomSpacer)
         topSpacer.snp.makeConstraints {
-            $0.height.equalTo(bottomSpacer.snp.height).multipliedBy(0.6)
+            $0.height.equalTo(bottomSpacer.snp.height).multipliedBy(0.5)
         }
         
         self.contentView.addSubview(vStack)
@@ -145,5 +150,9 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
         }
         vStack.addArrangedSubview(bottomSpacer)
         layoutIfNeeded()
+    }
+    
+    private func makeReenterFieldFirstResponder() {
+        self.reenterPasswordField.becomeFirstResponder()
     }
 }
