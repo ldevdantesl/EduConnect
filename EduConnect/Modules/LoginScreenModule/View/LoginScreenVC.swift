@@ -103,6 +103,4 @@ extension LoginScreenVC: UICollectionViewDelegateFlowLayout {
         let height = collectionView.bounds.height
         return CGSize(width: width, height: height)
     }
-    
-    
 }

@@ -6,6 +6,7 @@
 //
 
 protocol HomeScreenPresenterProtocol: AnyObject {
+    func viewDidLoad()
 }
 
 final class HomeScreenPresenter {
@@ -20,4 +21,5 @@ final class HomeScreenPresenter {
 }
 
 extension HomeScreenPresenter: HomeScreenPresenterProtocol {
+    func viewDidLoad() { }
 }
