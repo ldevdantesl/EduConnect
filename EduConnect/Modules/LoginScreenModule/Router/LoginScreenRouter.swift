@@ -5,8 +5,16 @@
 //  Created by Buzurg Rakhimzoda on 3.01.2026
 //
 
-protocol LoginScreenRouterProtocol { }
+import UIKit
+
+protocol LoginScreenRouterProtocol {
+    func routeToMainScreen()
+}
 
 final class LoginScreenRouter: LoginScreenRouterProtocol {
     weak var viewController: LoginScreenVC?
+    
+    func routeToMainScreen() {
+        AppRouter.shared.showHome()
+    }
 }

@@ -17,11 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         
-        let initialVC = LoginScreenAssembler.assemble()
-        let navController = UINavigationController()
-        navController.viewControllers = [initialVC]
-        navController.isNavigationBarHidden = true
-        window.rootViewController = navController
+        AppRouter.shared.window = window
+        AppRouter.shared.start()
+        window.rootViewController = AppRouter.shared.navController
         window.makeKeyAndVisible()
     }
 }

@@ -82,7 +82,6 @@ final class ECHeaderView: UIView {
         logoImage.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(-Constants.vSpacing)
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(snp.topMargin)
         }
         
         self.addSubview(barButton)

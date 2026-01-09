@@ -48,8 +48,9 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
             
             LoginScreenCompleteRegistrationCellVM {
                 print("Go to Account")
-            } goToMainAction: {
-                print("Go To Main")
+            } goToMainAction: { [weak self] in
+                guard let self = self else { return }
+                self.router.routeToMainScreen()
             }
         ]
         let dataSource = LoginScreenDataSource(items: items)
