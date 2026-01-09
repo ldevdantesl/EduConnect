@@ -154,6 +154,17 @@
         }
       }
     },
+    "registration_goToAccountButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перейти во вход"
+          }
+        }
+      }
+    },
     "registration_re-enterPasswordTextField" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -256,6 +267,28 @@
         }
       }
     },
+    "registration_signInCompletedSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы успешно зарегистрированы в системе. Теперь вы можете войти в личный кабинет, используя ваш email и пароль."
+          }
+        }
+      }
+    },
+    "registration_signInCompletedTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🎉 \nРегистрация\nзавершена!"
+          }
+        }
+      }
+    },
     "registration_signInTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -269,6 +302,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Регистрация"
+          }
+        }
+      }
+    },
+    "registrationGoToMainButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перейти на главную"
           }
         }
       }

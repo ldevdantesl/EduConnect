@@ -34,6 +34,7 @@ final class LoginScreenVC: UIViewController {
         collectionView.register(cell: LoginScreenRegistrationCell.self)
         collectionView.register(cell: LoginScreenConfirmRegistrationCell.self)
         collectionView.register(cell: LoginScreenSetPasswordCell.self)
+        collectionView.register(cell: LoginScreenCompleteRegistrationCell.self)
         collectionView.backgroundColor = .systemBlue
         collectionView.isScrollEnabled = false
         collectionView.isPagingEnabled = true

@@ -1,44 +1,39 @@
 //
-//  LoginScreenConfirmRegistrationCell.swift
+//  LoginScreenCompleteRegistrationCell.swift
 //  EduConnect
 //
-//  Created by Buzurg Rakhimzoda on 8.01.2026.
+//  Created by Buzurg Rakhimzoda on 9.01.2026.
 //
 
 import UIKit
 import SnapKit
 
-struct LoginScreenConfirmRegistrationCellVM: CellViewModel {
-    var cellIdentifier: String = "LoginScreenConfirmRegistrationCell"
-    let confirmAction: (() -> Void)?
-    let backButtonAction: (() -> Void)?
-    let resendAction: (() -> Void)?
+struct LoginScreenCompleteRegistrationCellVM: CellViewModel {
+    var cellIdentifier: String = "LoginScreenCompleteRegistrationCell"
+    let goToAccountAction: (() -> Void)?
+    let goToMainAction: (() -> Void)?
     
-    init(confirmAction: (() -> Void)? = nil, resendAction: (() -> Void)? = nil, backButtonAction: (() -> Void)? = nil) {
-        self.confirmAction = confirmAction
-        self.resendAction = resendAction
-        self.backButtonAction = backButtonAction
+    init(goToAccountAction: (() -> Void)? = nil, goToMainAction: (() -> Void)? = nil) {
+        self.goToAccountAction = goToAccountAction
+        self.goToMainAction = goToMainAction
     }
 }
 
-final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, ConfigurableCell {
+final class LoginScreenCompleteRegistrationCell: UICollectionViewCell, ConfigurableCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // Spacing
         static let hSpacing = 15.0
-        static let spacing = 5.0
         static let verticalStackSpacing = 25.0
-        
-        static let backButtonImageName = "arrow.left.circle.fill"
     }
     
     // MARK: - PROPERTIES
-    private var viewModel: LoginScreenConfirmRegistrationCellVM?
+    private var viewModel: LoginScreenCompleteRegistrationCellVM?
     
     // MARK: - VIEW PROPERTIES
-    private let confirmSignInLabel: UILabel = {
+    private let signInCompletedTitle: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page2.confirmSignInTitle
+        label.text = ECLocalizedStrings.Registration.Page4.signInCompletedTitle
         label.font = ECFont.font(.bold, size: 30)
         label.textAlignment = .center
         label.textColor = .black
@@ -46,9 +41,9 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
         return label
     }()
     
-    private let checkEmailLabel: UILabel = {
+    private let signInCompletedSubtitle: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page2.checkEmailSubtitle
+        label.text = ECLocalizedStrings.Registration.Page4.signInCompletedSubtitle
         label.font = ECFont.font(.bold, size: 14)
         label.textAlignment = .center
         label.textColor = .systemGray
@@ -56,13 +51,8 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
         return label
     }()
     
-    private let backButton: ECIconButton = ECIconButton()
-    
-    private let codeField: ECTextField = ECTextField(placeHolder: ECLocalizedStrings.Registration.Page2.confirmCodeTextField)
-    
-    private let confirmButton: ECButton = ECButton(text: ECLocalizedStrings.Common.confirm)
-    
-    private let resendCodeButton: ECUnderlineButton = ECUnderlineButton(text: ECLocalizedStrings.Registration.Page2.resendCodeUnderlineButton)
+    private let goToAccountButton: ECButton = ECButton(text: ECLocalizedStrings.Registration.Page4.goToAccountButton)
+    private let goToMainButton: ECButton = ECButton(text: ECLocalizedStrings.Registration.Page4.goToMainButton)
     
     private let topSpacer = UIView()
     private let bottomSpacer = UIView()
@@ -98,16 +88,10 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
     
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: any CellViewModel) {
-        guard let vm = vm as? LoginScreenConfirmRegistrationCellVM else { return }
+        guard let vm = vm as? LoginScreenCompleteRegistrationCellVM else { return }
         self.viewModel = vm
-        self.confirmButton.setAction(action: vm.confirmAction)
-        self.resendCodeButton.setAction(action: vm.resendAction)
-        let backButtonVM = ECIconButtonVM(
-            systemImage: Constants.backButtonImageName,
-            style: .title3, weight: .semibold,
-            didTapAction: vm.backButtonAction
-        )
-        self.backButton.configure(viewModel: backButtonVM)
+        self.goToAccountButton.setAction(action: vm.goToAccountAction)
+        self.goToMainButton.setAction(action: vm.goToMainAction)
         layoutIfNeeded()
     }
     
@@ -122,39 +106,27 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
         bottomSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
 
         vStack.addArrangedSubview(topSpacer)
-        vStack.addArrangedSubview(confirmSignInLabel)
-        vStack.setCustomSpacing(10, after: confirmSignInLabel)
-        vStack.addArrangedSubview(checkEmailLabel)
-        vStack.setCustomSpacing(20, after: checkEmailLabel)
+        vStack.addArrangedSubview(signInCompletedTitle)
+        vStack.setCustomSpacing(10, after: signInCompletedTitle)
+        vStack.addArrangedSubview(signInCompletedSubtitle)
+        vStack.setCustomSpacing(20, after: signInCompletedSubtitle)
         
-        vStack.addArrangedSubview(codeField)
-        codeField.snp.makeConstraints {
-            $0.height.equalTo(SharedConstants.textFieldsHeight)
-            $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
-        }
-        vStack.setCustomSpacing(20, after: codeField)
-        
-        vStack.addArrangedSubview(confirmButton)
-        confirmButton.snp.makeConstraints {
+        vStack.addArrangedSubview(goToAccountButton)
+        goToAccountButton.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.buttonHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
-        vStack.setCustomSpacing(20, after: confirmButton)
+        vStack.setCustomSpacing(20, after: goToAccountButton)
         
-        vStack.addArrangedSubview(resendCodeButton)
-        resendCodeButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+        vStack.addArrangedSubview(goToMainButton)
+        goToMainButton.snp.makeConstraints {
+            $0.height.equalTo(SharedConstants.buttonHeight)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
         
         vStack.addArrangedSubview(bottomSpacer)
         topSpacer.snp.makeConstraints {
             $0.height.equalTo(bottomSpacer.snp.height).multipliedBy(0.6)
-        }
-        
-        vStack.addSubview(backButton)
-        backButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(Constants.hSpacing)
-            $0.leading.equalToSuperview().offset(Constants.spacing)
         }
         
         self.contentView.addSubview(vStack)

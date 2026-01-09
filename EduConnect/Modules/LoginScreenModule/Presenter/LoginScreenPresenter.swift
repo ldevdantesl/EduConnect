@@ -33,14 +33,23 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
             LoginScreenConfirmRegistrationCellVM { [weak self] in
                 guard let self = self else { return }
                 self.view?.scrollToNextCell()
-            } resendAction: { [weak self] in
+            } backButtonAction: { [weak self] in
                 guard let self = self else { return }
                 self.view?.scrollBackToPreviousCell()
             },
             
             LoginScreenSetPasswordCellViewModel { [weak self] in
                 guard let self = self else { return }
+                self.view?.scrollToNextCell()
+            } backButtonAction: { [weak self] in
+                guard let self = self else { return }
                 self.view?.scrollBackToPreviousCell()
+            },
+            
+            LoginScreenCompleteRegistrationCellVM {
+                print("Go to Account")
+            } goToMainAction: {
+                print("Go To Main")
             }
         ]
         let dataSource = LoginScreenDataSource(items: items)

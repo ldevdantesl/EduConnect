@@ -33,6 +33,13 @@ public enum ECLocalizedStrings {
             static let reenterPasswordTextField = String(localized: .Localizables.registrationReEnterPasswordTextField)
             static let savePasswordButton = String(localized: .Localizables.registrationSavePasswordButton)
         }
+        
+        enum Page4 {
+            static let signInCompletedTitle = String(localized: .Localizables.registrationSignInCompletedTitle)
+            static let signInCompletedSubtitle = String(localized: .Localizables.registrationSignInCompletedSubtitle)
+            static let goToAccountButton = String(localized: .Localizables.registrationGoToAccountButton)
+            static let goToMainButton = String(localized: .Localizables.registrationGoToMainButton)
+        }
     }
     
     /// For __Common__ words

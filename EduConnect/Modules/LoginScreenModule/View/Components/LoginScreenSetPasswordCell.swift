@@ -11,9 +11,11 @@ import SnapKit
 struct LoginScreenSetPasswordCellViewModel: CellViewModel {
     var cellIdentifier: String = "LoginScreenSetPasswordCell"
     let savePasswordAction: (() -> Void)?
+    let backButtonAction: (() -> Void)?
     
-    init(savePasswordAction: (() -> Void)?) {
+    init(savePasswordAction: (() -> Void)? = nil, backButtonAction: (() -> Void)? = nil) {
         self.savePasswordAction = savePasswordAction
+        self.backButtonAction = backButtonAction
     }
 }
 
@@ -22,7 +24,10 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCell {
     fileprivate enum Constants {
         // Spacing
         static let hSpacing = 15.0
+        static let spacing = 5.0
         static let verticalStackSpacing = 25.0
+        
+        static let backButtonImageName = "arrow.left.circle.fill"
     }
     
     // MARK: - PROPERTIES
@@ -61,9 +66,6 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCell {
     
     private let savePasswordButton: ECButton = ECButton(text: ECLocalizedStrings.Registration.Page3.savePasswordButton)
     
-    private let topSpacer = UIView()
-    private let bottomSpacer = UIView()
-    
     private lazy var vStack: UIStackView = {
         let stack = UIStackView()
         stack.backgroundColor = .white
@@ -76,6 +78,11 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCell {
         stack.layoutMargins = UIEdgeInsets(top: 0, left: Constants.hSpacing, bottom: 0, right: Constants.hSpacing)
         return stack
     }()
+    
+    private let topSpacer = UIView()
+    private let bottomSpacer = UIView()
+    
+    private let backButton: ECIconButton = ECIconButton()
     
     // MARK: - LIFECYCLE
     override init(frame: CGRect) {
@@ -98,6 +105,12 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCell {
         guard let vm = vm as? LoginScreenSetPasswordCellViewModel else { return }
         self.viewModel = vm
         self.savePasswordButton.setAction(action: vm.savePasswordAction)
+        let backButtonVM = ECIconButtonVM(
+            systemImage: Constants.backButtonImageName,
+            style: .title3, weight: .semibold,
+            didTapAction: vm.backButtonAction
+        )
+        self.backButton.configure(viewModel: backButtonVM)
         layoutIfNeeded()
     }
     
@@ -141,6 +154,12 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCell {
         vStack.addArrangedSubview(bottomSpacer)
         topSpacer.snp.makeConstraints {
             $0.height.equalTo(bottomSpacer.snp.height).multipliedBy(0.5)
+        }
+        
+        vStack.addSubview(backButton)
+        backButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(Constants.hSpacing)
+            $0.leading.equalToSuperview().offset(Constants.spacing)
         }
         
         self.contentView.addSubview(vStack)
