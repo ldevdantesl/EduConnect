@@ -54,6 +54,22 @@ final class ECButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func configure(text: String, cornerRadius: CGFloat = 15) {
+        let attrTitle = NSAttributedString(
+            string: text,
+            attributes: [
+                .font: ECFont.font(.semiBold, size: 16),
+                .foregroundColor: UIColor.white
+            ]
+        )
+        
+        setAttributedTitle(attrTitle, for: .normal)
+        self.cornerRadius = cornerRadius
+        self.addTarget(self, action: #selector(didTap), for: .touchUpInside)
+        self.backgroundColor = .systemBlue
+        layoutIfNeeded()
+    }
+    
     public func setAction(action: (() -> Void)?) {
         self.action = action
     }

@@ -15,4 +15,8 @@ public enum ImageConstants {
     // Icons
     static let tabBarIconImage: String = "TabBarIconImage"
     static let accountIconImage: String = "AccountIconImage"
+    static let universityCapIconImage: String = "UniversityCapIconImage"
+    
+    // Samples
+    static let universityImageSample: String = "UniversityImageSample"
 }

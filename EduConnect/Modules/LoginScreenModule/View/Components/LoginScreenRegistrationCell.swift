@@ -84,7 +84,7 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
     }
     
     // MARK: - PUBLIC FUNX
-    public func configure(withVM vm: CellViewModel) {
+    public func configure(withVM vm: any CellViewModel) {
         guard let vm = vm as? LoginScreenRegistrationCellViewModel else { return }
         self.viewModel = vm
         self.sendCodeButton.setAction(action: vm.didTapSendCode)

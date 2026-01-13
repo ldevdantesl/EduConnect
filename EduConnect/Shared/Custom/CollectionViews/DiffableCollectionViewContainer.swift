@@ -73,4 +73,24 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         didSelectHandler?(indexPath)
     }
+    
+    // MARK: - Registration
+    func registerCell<T: UICollectionViewCell>(
+        _ cellType: T.Type,
+        reuseID: String
+    ) {
+        collectionView.register(cellType, forCellWithReuseIdentifier: reuseID)
+    }
+
+    func registerSupplementary<T: UICollectionReusableView>(
+        _ viewType: T.Type,
+        kind: String,
+        reuseID: String
+    ) {
+        collectionView.register(
+            viewType,
+            forSupplementaryViewOfKind: kind,
+            withReuseIdentifier: reuseID
+        )
+    }
 }

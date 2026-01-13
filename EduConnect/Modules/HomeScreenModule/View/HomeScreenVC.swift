@@ -8,7 +8,9 @@
 import UIKit
 import SnapKit
 
-protocol HomeScreenViewProtocol: AnyObject { }
+protocol HomeScreenViewProtocol: AnyObject {
+    func applySnapshot(sections: [HomeSection], itemsBySection: [HomeSection : [HomeItem]])
+}
 
 final class HomeScreenVC: UIViewController {
     
@@ -18,15 +20,25 @@ final class HomeScreenVC: UIViewController {
     // MARK: - VIEW PROPERTIES
     private let headerView = ECHeaderView()
     
-    private lazy var collectionContainer =
-        DiffableCollectionViewContainer<HomeSection, HomeItem>(
+    private lazy var collectionContainer: DiffableCollectionViewContainer = {
+        let cv = DiffableCollectionViewContainer<HomeSection, HomeItem>(
             layout: HomeLayoutFactory.make()
         )
+        cv.registerCell(HomeScreenUniversityCell.self, reuseID: HomeScreenUniversityCell.identifier)
+        cv.registerSupplementary(
+            HomeScreenSegmentedReusableMenu.self,
+            kind: UICollectionView.elementKindSectionHeader,
+            reuseID: HomeScreenSegmentedReusableMenu.reuseID
+        )
+        return cv
+    }()
 
     // MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        configureCollectionView()
+        presenter?.viewDidLoad()
     }
     
     // MARK: - PRIVATE FUNC
@@ -44,8 +56,33 @@ final class HomeScreenVC: UIViewController {
             $0.horizontalEdges.bottom.equalToSuperview()
         }
     }
+    
+    private func configureCollectionView() {
+        collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
+            switch itemIdentifier {
+            case .university(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? HomeScreenUniversityCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+            default:
+                return UICollectionViewCell()
+            }
+        }
+        
+        collectionContainer.setSupplementaryViewProvider { collectionView, kind, indexPath in
+            guard kind == UICollectionView.elementKindSectionHeader else { return nil }
+            guard let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: HomeScreenSegmentedReusableMenu.reuseID,
+                for: indexPath
+            ) as? HomeScreenSegmentedReusableMenu else { return nil }
+            return header
+        }
+    }
 }
 
 extension HomeScreenVC: HomeScreenViewProtocol {
-    
+    func applySnapshot(sections: [HomeSection], itemsBySection: [HomeSection : [HomeItem]]) {
+        collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
+    }
 }

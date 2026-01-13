@@ -14,9 +14,10 @@ final class ECUnderlineButton: UIView {
         static let spacing = 5.0
     }
     
+    // MARK: - PROPERTIES
     private var action: (() -> Void)?
     
-    
+    // MARK: - VIEW PROPERTIES
     private let textLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
@@ -25,8 +26,10 @@ final class ECUnderlineButton: UIView {
     
     private let underlineView: UIView = UIView()
     
+    // MARK: - LIFECYCLE
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setup()
     }
     
     convenience init(text: String, textSize: CGFloat = 14, textColor: UIColor = UIColor.systemGray) {
@@ -76,10 +79,20 @@ final class ECUnderlineButton: UIView {
         }
     }
     
+    // MARK: - PUBLIC FUNC
     public func setAction(action: (() -> Void)?) {
         self.action = action
     }
     
+    public func configure(text: String, textSize: CGFloat = 14, textColor: UIColor = UIColor.systemGray) {
+        self.textLabel.text = text
+        self.textLabel.font = ECFont.font(.semiBold, size: textSize)
+        self.textLabel.textColor = textColor
+        self.textLabel.textAlignment = .center
+        self.underlineView.backgroundColor = textColor
+    }
+    
+    // MARK: - PRIVATE FUNC
     private func setup() {
         self.addSubview(textLabel)
         textLabel.snp.makeConstraints {
@@ -101,6 +114,7 @@ final class ECUnderlineButton: UIView {
         self.addGestureRecognizer(gesture)
     }
     
+    // MARK: - OBJC FUNC
     @objc private func didTap() {
         self.action?()
     }

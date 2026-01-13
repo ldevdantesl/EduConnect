@@ -18,8 +18,8 @@ final class ECHeaderView: UIView {
         static let barButtonImageName = ImageConstants.tabBarIconImage
         
         // App Logo Image
-        static let logoImageW = 74.0
-        static let logoImageH = 44
+        static let logoImageW = 80.0
+        static let logoImageH = 44.0
         
         // Spacing
         static let vSpacing = 10.0
@@ -82,6 +82,8 @@ final class ECHeaderView: UIView {
         logoImage.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(-Constants.vSpacing)
             $0.centerX.equalToSuperview()
+            $0.width.equalTo(Constants.logoImageW)
+            $0.height.equalTo(Constants.logoImageH)
         }
         
         self.addSubview(barButton)

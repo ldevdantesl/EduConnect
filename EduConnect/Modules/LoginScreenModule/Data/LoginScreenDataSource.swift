@@ -9,9 +9,9 @@ import UIKit
 
 final class LoginScreenDataSource: NSObject, UICollectionViewDataSource {
     
-    private let items: [CellViewModel]
+    private let items: [any CellViewModel]
     
-    init(items: [CellViewModel]) {
+    init(items: [any CellViewModel]) {
         self.items = items
     }
     

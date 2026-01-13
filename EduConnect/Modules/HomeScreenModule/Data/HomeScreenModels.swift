@@ -14,7 +14,7 @@ enum HomeSection: Hashable {
 }
 
 enum HomeItem: Hashable {
-    case university
+    case university(DiffableItem<HomeScreenUniversityCellViewModel>)
     case application
     case banner
 }

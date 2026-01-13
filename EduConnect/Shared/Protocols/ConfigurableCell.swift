@@ -8,5 +8,5 @@
 import UIKit
 
 protocol ConfigurableCell {
-    func configure(withVM vm: CellViewModel)
+    func configure(withVM vm: any CellViewModel)
 }
