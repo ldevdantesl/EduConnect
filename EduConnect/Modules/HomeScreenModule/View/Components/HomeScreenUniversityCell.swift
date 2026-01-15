@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 struct HomeScreenUniversityCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = "HomeScreenUniversityCell"
@@ -18,7 +19,7 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProt
     fileprivate enum Constants {
         // other
         static let containerCornerRadius = 20.0
-        static let backgroundImageHeightRatio = 0.4
+        static let backgroundImageHeight = 160
         
         static let capIconWidth = 25.0
         static let capIconHeight = 20.0
@@ -41,10 +42,16 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProt
     // MARK: - VIEW PROPERTIES
     private let backgroundImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named:ImageConstants.universityImageSample)
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
         return image
+    }()
+    
+    private let imageOverlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        view.isUserInteractionEnabled = false
+        return view
     }()
     
     private let locationAndOwnershipLabel: UILabel = {
@@ -93,7 +100,7 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProt
     
     private let universityAdmissionInfo: UILabel = {
         let label = UILabel()
-        label.font = ECFont.font(.bold, size: 15)
+        label.font = ECFont.font(.bold, size: 16)
         label.textAlignment = .left
         label.textColor = .white
         label.numberOfLines = 0
@@ -126,6 +133,7 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProt
         super.layoutSubviews()
         containerView.layer.cornerRadius = 20
         containerView.clipsToBounds = true
+        
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 20
@@ -135,6 +143,12 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProt
             roundedRect: bounds,
             cornerRadius: Constants.containerCornerRadius
         ).cgPath
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        backgroundImage.kf.cancelDownloadTask()
+        backgroundImage.image = nil
     }
     
     // MARK: - PRIVATE FUNC
@@ -147,6 +161,7 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProt
         containerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        layoutIfNeeded()
     }
     
     private func validatedProfessionsText(professions: [ECUniversityProfessions]) -> String {
@@ -155,15 +170,34 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProt
         return "\(professionNames[0]); \(professionNames[1]) и ещё \(professionNames.count - 2) направлений"
     }
     
+    private func decoratedAdmissionInfoText(_ text: String) -> NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+
+        return NSAttributedString(
+            string: text,
+            attributes: [
+                .paragraphStyle: paragraphStyle,
+                .foregroundColor: UIColor.white,
+                .font: ECFont.font(.bold, size: 16)
+            ]
+        )
+    }
+    
     private func layoutContainerView() {
         containerView.addSubview(backgroundImage)
         backgroundImage.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalToSuperview().multipliedBy(Constants.backgroundImageHeightRatio)
+            $0.height.equalTo(Constants.backgroundImageHeight)
         }
         
-        backgroundImage.addSubview(universityCapIconImage)
+        backgroundImage.addSubview(imageOverlayView)
+        imageOverlayView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        imageOverlayView.addSubview(universityCapIconImage)
         universityCapIconImage.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Constants.bigSpacing)
             $0.leading.equalToSuperview().offset(Constants.bigSpacing)
@@ -171,7 +205,7 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProt
             $0.height.equalTo(Constants.capIconHeight)
         }
         
-        backgroundImage.addSubview(universityAdmissionInfo)
+        imageOverlayView.addSubview(universityAdmissionInfo)
         universityAdmissionInfo.snp.makeConstraints {
             $0.top.equalTo(universityCapIconImage.snp.bottom).offset(Constants.semiBigSpacing)
             $0.leading.equalTo(universityCapIconImage.snp.leading)
@@ -223,15 +257,28 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProt
     public func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? HomeScreenUniversityCellViewModel else { return }
         self.viewModel = vm
+        self.backgroundImage.kf.indicatorType = .activity
+        if let indicator = backgroundImage.kf.indicator as? UIActivityIndicatorView {
+            indicator.color = .systemPurple
+        }
+        self.backgroundImage.kf.setImage(
+            with: URL(string: vm.university.mainImageURL),
+            options: [
+                .transition(.fade(0.25)),
+                .cacheOriginalImage
+            ]
+        )
         self.locationAndOwnershipLabel.text = "\(vm.university.city.name) / \(vm.university.universityTypeName)"
         self.nameLabel.text = vm.university.name
         self.priceLabel.text = "от \(vm.university.minContractPrice)₸ / год"
-        self.universityAdmissionInfo.text = """
-        от \(vm.university.entScores?.budgetScore ?? "0") бал.бюджет
-        от \(vm.university.entScores?.contractScore ?? "0") бал.платно
+        let admissionText = """
+        от \(vm.university.entScores?.budgetScore ?? "0") бал бюджет
+        от \(vm.university.entScores?.contractScore ?? "0") бал платно
         \(vm.university.budgetPlaces) места бюджет
         \(vm.university.paidPlaces) места платно
         """
+        self.universityAdmissionInfo.attributedText = decoratedAdmissionInfoText(admissionText)
+        
         self.professionsLabel.text = validatedProfessionsText(professions: vm.university.professions)
         self.programsButton.configure(text: "\(vm.university.programsCount) программ")
         self.facultyButton.configure(text: "\(vm.university.facultiesCount) факультета")

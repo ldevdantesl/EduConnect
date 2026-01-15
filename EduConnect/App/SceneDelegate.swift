@@ -18,7 +18,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         
         let container = DIContainer()
-        container.authentication.logOut()
         let appRouter = AppRouter(authState: container.authentication)
         appRouter.window = window
         

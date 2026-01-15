@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DADCD6402F08E88E006D4F9A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DADCD63F2F08E88E006D4F9A /* SnapKit */; };
+		DAE016672F18D99400C67090 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DAE016662F18D99400C67090 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAE016672F18D99400C67090 /* Kingfisher in Frameworks */,
 				DADCD6402F08E88E006D4F9A /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +86,7 @@
 			name = EduConnect;
 			packageProductDependencies = (
 				DADCD63F2F08E88E006D4F9A /* SnapKit */,
+				DAE016662F18D99400C67090 /* Kingfisher */,
 			);
 			productName = EduConnect;
 			productReference = DA958F762F08D3920017938F /* EduConnect.app */;
@@ -117,6 +120,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				DADCD63E2F08E88E006D4F9A /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DAE016652F18D99400C67090 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DA958F772F08D3920017938F /* Products */;
@@ -378,6 +382,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		DAE016652F18D99400C67090 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.6.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -385,6 +397,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DADCD63E2F08E88E006D4F9A /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		DAE016662F18D99400C67090 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAE016652F18D99400C67090 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
