@@ -9,9 +9,9 @@ import UIKit
 
 final class LoginScreenDataSource: NSObject, UICollectionViewDataSource {
     
-    private let items: [any CellViewModel]
+    private let items: [any CellViewModelProtocol]
     
-    init(items: [any CellViewModel]) {
+    init(items: [any CellViewModelProtocol]) {
         self.items = items
     }
     
@@ -23,7 +23,7 @@ final class LoginScreenDataSource: NSObject, UICollectionViewDataSource {
         let item = items[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.cellIdentifier, for: indexPath)
         
-        if let cell = cell as? ConfigurableCell {
+        if let cell = cell as? ConfigurableCellProtocol {
             cell.configure(withVM: item)
         }
         

@@ -10,4 +10,9 @@ protocol HomeScreenRouterProtocol {
 
 final class HomeScreenRouter: HomeScreenRouterProtocol {
     weak var viewController: HomeScreenVC?
+    weak var appRoter: AppRoutingProtocol?
+    
+    init(appRouter: AppRoutingProtocol) {
+        self.appRoter = appRouter
+    }
 }

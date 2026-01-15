@@ -7,6 +7,6 @@
 
 import UIKit
 
-protocol ConfigurableCell {
-    func configure(withVM vm: any CellViewModel)
+protocol ConfigurableCellProtocol {
+    func configure(withVM vm: any CellViewModelProtocol)
 }

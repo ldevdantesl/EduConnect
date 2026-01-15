@@ -13,7 +13,7 @@ enum HomeLayoutFactory {
 
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(500)
+            heightDimension: .estimated(1000)
         )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -22,7 +22,7 @@ enum HomeLayoutFactory {
     
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(500)
+            heightDimension: .estimated(1000)
         )
 
         let group = NSCollectionLayoutGroup.vertical(

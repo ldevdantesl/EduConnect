@@ -31,7 +31,7 @@ extension HomeScreenPresenter: HomeScreenPresenterProtocol {
             itemsBySection: [
                 .universities : [
                     .university(DiffableItem(id: university.id, viewModel: viewModel)),
-                    .university(DiffableItem(id: UUID(), viewModel: viewModel))
+                    .university(DiffableItem(id: 12343, viewModel: viewModel))
                 ]
             ]
         )

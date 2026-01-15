@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-struct LoginScreenConfirmRegistrationCellVM: CellViewModel {
+struct LoginScreenConfirmRegistrationCellVM: CellViewModelProtocol {
     var cellIdentifier: String = "LoginScreenConfirmRegistrationCell"
     let confirmAction: (() -> Void)?
     let backButtonAction: (() -> Void)?
@@ -21,7 +21,7 @@ struct LoginScreenConfirmRegistrationCellVM: CellViewModel {
     }
 }
 
-final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, ConfigurableCell {
+final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, ConfigurableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // Spacing
@@ -97,7 +97,7 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModel) {
+    func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? LoginScreenConfirmRegistrationCellVM else { return }
         self.viewModel = vm
         self.confirmButton.setAction(action: vm.confirmAction)

@@ -7,10 +7,12 @@
 
 import UIKit
 
-final class AppRouter {
-    static let shared = AppRouter()
+final class AppRouter: AppRoutingProtocol {
+    private let authState: ECAuthenticationProtocol
     
-    private init() { }
+    init(authState: ECAuthenticationProtocol) {
+        self.authState = authState
+    }
     
     weak var window: UIWindow?
     
@@ -19,12 +21,18 @@ final class AppRouter {
     
     func start() {
         navController.delegate = navAnimator
-        let vc = LoginScreenAssembler.assemble()
+        window?.rootViewController = navController
+        window?.makeKeyAndVisible()
+        authState.isLoggedIn ? routeToMain() : routeToAuthentication()
+    }
+
+    func routeToAuthentication() {
+        let vc = LoginScreenAssembler.assemble(appRouter: self, authState: authState)
         navController.setViewControllers([vc], animated: true)
     }
     
-    func showHome() {
-        let vc = HomeScreenAssembler.assemble()
+    func routeToMain() {
+        let vc = HomeScreenAssembler.assemble(appRouter: self)
         navController.setViewControllers([vc], animated: true)
     }
 }

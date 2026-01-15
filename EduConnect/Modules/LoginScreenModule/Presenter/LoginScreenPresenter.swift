@@ -24,7 +24,7 @@ final class LoginScreenPresenter {
 
 extension LoginScreenPresenter: LoginScreenPresenterProtocol {
     func viewDidLoad() {
-        let items: [any CellViewModel] = [
+        let items: [any CellViewModelProtocol] = [
             LoginScreenRegistrationCellViewModel { [weak self] in
                 guard let self = self else { return }
                 self.view?.scrollToNextCell()
@@ -50,6 +50,7 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
                 print("Go to Account")
             } goToMainAction: { [weak self] in
                 guard let self = self else { return }
+                self.interactor.logIn()
                 self.router.routeToMainScreen()
             }
         ]

@@ -1,0 +1,45 @@
+{
+    "id": 2,
+    "name": "КазГУ",
+    "description": "Лучший государственный университет в Казахстане",
+    "logo_url": "https://educonnect.kz/storage/universities/logos/Pz5XSnj7My2nJVyXiHcoobIqrztckmEC5Crpk1Zt.png",
+    "main_image_url": "https://educonnect.kz/storage/universities/main/rkkAuX0TFwmMzXhG4DutwIDAEIymIwF891CG2jYP.png",
+    "phone": "444333111",
+    "email": "kaz@edu.kz",
+    "address": "г. Алматы",
+    "founded_year": 1950,
+    "has_dormitory": true,
+    "has_military_department": false,
+    "university_type": "state",
+    "university_type_name": "Государственный",
+    "is_active": true,
+    "sort_order": 2,
+    "min_contract_price": "3000000.00",
+    "city": {
+        "id": 3,
+        "name": "Алматы"
+    },
+    "professions": [
+        {
+            "id": 3,
+            "name": "Психолог"
+        }
+    ],
+    "faculties": [
+        {
+            "id": 3,
+            "name": "Факультет философии и политологии"
+        }
+    ],
+    "programs_count": 1,
+    "faculties_count": 1,
+    "budget_places": 5,
+    "paid_places": 15,
+    "ent_scores": {
+        "year": 2026,
+        "budget_score": "80.00",
+        "contract_score": "60.00"
+    },
+    "created_at": "2026-01-07T06:13:27.000000Z",
+    "updated_at": "2026-01-07T07:07:01.000000Z"
+}

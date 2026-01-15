@@ -8,9 +8,9 @@
 import UIKit
 
 final class HomeScreenAssembler {
-    static func assemble() -> HomeScreenVC {
+    static func assemble(appRouter: AppRoutingProtocol) -> HomeScreenVC {
         let interactor = HomeScreenInteractor()
-        let router = HomeScreenRouter()
+        let router = HomeScreenRouter(appRouter: appRouter)
         let presenter = HomeScreenPresenter(interactor: interactor, router: router)
         let viewController = HomeScreenVC()
         presenter.view  = viewController

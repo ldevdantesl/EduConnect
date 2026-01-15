@@ -13,8 +13,13 @@ protocol LoginScreenRouterProtocol {
 
 final class LoginScreenRouter: LoginScreenRouterProtocol {
     weak var viewController: LoginScreenVC?
+    weak var appRouter: AppRoutingProtocol?
+    
+    init(appRouter: AppRoutingProtocol) {
+        self.appRouter = appRouter
+    }
     
     func routeToMainScreen() {
-        AppRouter.shared.showHome()
+        appRouter?.routeToMain()
     }
 }

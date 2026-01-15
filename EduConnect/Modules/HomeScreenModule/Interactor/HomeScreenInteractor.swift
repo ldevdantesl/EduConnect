@@ -6,6 +6,7 @@
 //
 
 protocol HomeScreenInteractorProtocol: AnyObject {
+    
 }
 
 final class HomeScreenInteractor: HomeScreenInteractorProtocol {

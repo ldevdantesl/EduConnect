@@ -7,6 +7,6 @@
 
 import UIKit
 
-protocol CellViewModel {
+protocol CellViewModelProtocol {
     var cellIdentifier: String { get }
 }

@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct DIContainer {
+    let authentication: ECAuthenticationProtocol
+    
+    init() {
+        self.authentication = ECAuthentication()
+    }
+}

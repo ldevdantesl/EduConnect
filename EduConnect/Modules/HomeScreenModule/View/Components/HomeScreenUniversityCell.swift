@@ -8,12 +8,12 @@
 import UIKit
 import SnapKit
 
-struct HomeScreenUniversityCellViewModel: CellViewModel {
+struct HomeScreenUniversityCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = "HomeScreenUniversityCell"
     let university: ECUniversity
 }
 
-final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCell {
+final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // other
@@ -65,7 +65,7 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCell {
         return label
     }()
     
-    private let fieldsLabel: UILabel = {
+    private let professionsLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGray2
         label.textAlignment = .left
@@ -149,9 +149,10 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCell {
         }
     }
     
-    private func validatedFieldsText(fields: [String]) -> String {
-        guard fields.count > 1 else { return fields.joined(separator: ";") }
-        return "\(fields[0]); \(fields[1]) и ещё 8 направлений"
+    private func validatedProfessionsText(professions: [ECUniversityProfessions]) -> String {
+        let professionNames = professions.map { $0.name }
+        guard professionNames.count > 2 else { return professionNames.joined(separator: ";") }
+        return "\(professionNames[0]); \(professionNames[1]) и ещё \(professionNames.count - 2) направлений"
     }
     
     private func layoutContainerView() {
@@ -189,15 +190,15 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCell {
             $0.horizontalEdges.equalTo(locationAndOwnershipLabel)
         }
         
-        containerView.addSubview(fieldsLabel)
-        fieldsLabel.snp.makeConstraints {
+        containerView.addSubview(professionsLabel)
+        professionsLabel.snp.makeConstraints {
             $0.top.equalTo(nameLabel.snp.bottom).offset(Constants.midSpacing)
             $0.horizontalEdges.equalTo(locationAndOwnershipLabel)
         }
         
         containerView.addSubview(priceLabel)
         priceLabel.snp.makeConstraints {
-            $0.top.equalTo(fieldsLabel.snp.bottom).offset(Constants.midSpacing)
+            $0.top.equalTo(professionsLabel.snp.bottom).offset(Constants.midSpacing)
             $0.horizontalEdges.equalTo(locationAndOwnershipLabel)
         }
         
@@ -219,20 +220,20 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCell {
     }
     
     // MARK: - PUBLIC FUNC
-    public func configure(withVM vm: any CellViewModel) {
+    public func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? HomeScreenUniversityCellViewModel else { return }
         self.viewModel = vm
-        self.locationAndOwnershipLabel.text = "\(vm.university.location) / \(vm.university.ownerShip.rawValue)"
+        self.locationAndOwnershipLabel.text = "\(vm.university.city.name) / \(vm.university.universityTypeName)"
         self.nameLabel.text = vm.university.name
-        self.priceLabel.text = "от \(vm.university.price) / год"
+        self.priceLabel.text = "от \(vm.university.minContractPrice)₸ / год"
         self.universityAdmissionInfo.text = """
-        от \(vm.university.admissionInfo.budget.minScore) бал.бюджет
-        от \(vm.university.admissionInfo.paid.minScore) бал.платно
-        \(vm.university.admissionInfo.budget.seats) места бюджет
-        \(vm.university.admissionInfo.paid.seats) места платно
+        от \(vm.university.entScores?.budgetScore ?? "0") бал.бюджет
+        от \(vm.university.entScores?.contractScore ?? "0") бал.платно
+        \(vm.university.budgetPlaces) места бюджет
+        \(vm.university.paidPlaces) места платно
         """
-        self.fieldsLabel.text = validatedFieldsText(fields: vm.university.fields)
-        self.programsButton.configure(text: "\(vm.university.programs) программ")
-        self.facultyButton.configure(text: "\(vm.university.faculties) факультета")
+        self.professionsLabel.text = validatedProfessionsText(professions: vm.university.professions)
+        self.programsButton.configure(text: "\(vm.university.programsCount) программ")
+        self.facultyButton.configure(text: "\(vm.university.facultiesCount) факультета")
     }
 }
