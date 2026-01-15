@@ -26,12 +26,14 @@ extension HomeScreenPresenter: HomeScreenPresenterProtocol {
     func viewDidLoad() {
         let university = ECUniversity.sample
         let viewModel = HomeScreenUniversityCellViewModel(university: university)
+        let headerVM = SectionHeaderCellViewModel(title: "My Universities", titleSize: 30)
         self.view?.applySnapshot(
             sections: [.universities],
             itemsBySection: [
                 .universities : [
+                    .headerItem(DiffableItem(id: -1, viewModel: headerVM)),
                     .university(DiffableItem(id: university.id, viewModel: viewModel)),
-                    .university(DiffableItem(id: 12343, viewModel: viewModel))
+                    .university(DiffableItem(id: 1234, viewModel: viewModel))
                 ]
             ]
         )

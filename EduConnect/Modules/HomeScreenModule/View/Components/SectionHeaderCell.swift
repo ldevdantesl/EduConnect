@@ -1,0 +1,66 @@
+//
+//  SectionHeaderCell.swift
+//  EduConnect
+//
+//  Created by Buzurg Rakhimzoda on 15.01.2026.
+//
+
+import UIKit
+import SnapKit
+
+struct SectionHeaderCellViewModel: CellViewModelProtocol, Hashable {
+    var cellIdentifier: String = "SectionHeaderCell"
+    let title: String
+    let titleFamily: ECFont.Family
+    let titleSize: CGFloat
+    let titleColor: UIColor
+    
+    init(title: String, titleFamily: ECFont.Family = .bold, titleSize: CGFloat, titleColor: UIColor = .label) {
+        self.title = title
+        self.titleFamily = titleFamily
+        self.titleSize = titleSize
+        self.titleColor = titleColor
+    }
+}
+
+final class SectionHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
+    // MARK: - CONSTANTS
+    fileprivate enum Constants { }
+    
+    // MARK: - PROPERTIES
+    private var viewModel: SectionHeaderCellViewModel?
+    
+    // MARK: - VIEW PROPERTIES
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        return label
+    }()
+    
+    // MARK: - LIFECYCLE
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - PUBLIC FUNC
+    func configure(withVM vm: any CellViewModelProtocol) {
+        guard let vm = vm as? SectionHeaderCellViewModel else { return }
+        titleLabel.text = vm.title
+        titleLabel.font = ECFont.font(vm.titleFamily, size: vm.titleSize)
+        titleLabel.textColor = vm.titleColor
+    }
+    
+    // MARK: - PRIVATE FUNC
+    private func setupUI() {
+        self.contentView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+}

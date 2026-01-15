@@ -25,6 +25,7 @@ final class HomeScreenVC: UIViewController {
             layout: HomeLayoutFactory.make()
         )
         cv.registerCell(HomeScreenUniversityCell.self, reuseID: HomeScreenUniversityCell.identifier)
+        cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
         cv.registerSupplementary(
             HomeScreenSegmentedReusableMenu.self,
             kind: UICollectionView.elementKindSectionHeader,
@@ -60,6 +61,10 @@ final class HomeScreenVC: UIViewController {
     private func configureCollectionView() {
         collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
+            case .headerItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? SectionHeaderCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
             case .university(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? HomeScreenUniversityCell
                 cell?.configure(withVM: item.viewModel)

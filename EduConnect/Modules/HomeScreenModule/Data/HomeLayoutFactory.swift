@@ -10,47 +10,35 @@ import UIKit
 enum HomeLayoutFactory {
 
     static func make() -> UICollectionViewLayout {
-
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(1000)
+        let item = NSCollectionLayoutItem(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .estimated(1000))
         )
-
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
         item.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
-        item.edgeSpacing = .init(leading: nil, top: .fixed(10), trailing: nil, bottom: .fixed(10))
-    
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(1000)
-        )
+        item.edgeSpacing = .init(leading: nil, top: .fixed(10), trailing:.fixed(10), bottom: .fixed(10))
 
         let group = NSCollectionLayoutGroup.vertical(
-            layoutSize: groupSize,
+            layoutSize: .init(
+                widthDimension: item.layoutSize.widthDimension,
+                heightDimension: item.layoutSize.heightDimension
+            ),
             subitems: [item]
         )
-        group.interItemSpacing = .fixed(10)
 
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 12
+        section.interGroupSpacing = 15
         
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(70)
-        )
-
         let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .absolute(110)
+            ),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
         )
-
-        header.edgeSpacing = NSCollectionLayoutEdgeSpacing(
-            leading: nil,
-            top: nil,
-            trailing: nil,
-            bottom: .fixed(12)
-        )
+        header.contentInsets = .init(top: 0, leading: 0, bottom: 30, trailing: 0)
         
         section.boundarySupplementaryItems = [header]
 
