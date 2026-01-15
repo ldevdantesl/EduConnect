@@ -15,32 +15,33 @@ final class HomeScreenSegmentedReusableMenu: UICollectionReusableView {
     fileprivate enum Constants {
         static let spacing = 10.0
         static let hSpacing = 30.0
+        static let cornerRadius = 15.0
     }
     
     // MARK: - STATIC
     static let reuseID = "HomeScreenSegmentedReusableMenu"
     
+    // MARK: - PROPERTIES
+    static let selectedTab: Int = 1
+    
     // MARK: - VIEW PROPERTIES
-    private let mainButton: UIButton = {
-        let button = UIButton()
-        button.configuration = .plain()
-        button.setTitle("Main", for: .normal)
+    private let mainButton: ECButton = {
+        let button = ECButton(text: "Main", cornerRadius: Constants.cornerRadius)
+        button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         return button
     }()
     
-    private let myUniversitiesButton: UIButton = {
-        let button = UIButton()
-        button.configuration = .plain()
-        button.setTitle("My Unis", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+    private let myUniversitiesButton: ECButton = {
+        let button = ECButton(text: "My Unis", cornerRadius: Constants.cornerRadius)
+        button.backgroundColor = .white
+        button.setTitleColor(.systemBlue, for: .normal)
         return button
     }()
     
-    private let applicationButton: UIButton = {
-        let button = UIButton()
-        button.configuration = .plain()
-        button.setTitle("Application", for: .normal)
+    private let applicationButton: ECButton = {
+        let button = ECButton(text: "Application", cornerRadius: Constants.cornerRadius)
+        button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         return button
     }()
