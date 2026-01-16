@@ -8,7 +8,7 @@
 import Foundation
 
 struct DiffableItem<VM>: Hashable {
-    let id: Int
+    let id: AnyHashable
     let viewModel: VM
     
     func hash(into hasher: inout Hasher) {

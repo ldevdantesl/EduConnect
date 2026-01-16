@@ -12,6 +12,8 @@ final class ECButton: UIButton {
     private var action: (() -> Void)?
     private var cornerRadius: CGFloat = 25
     
+    var config = UIButton.Configuration.plain()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -27,21 +29,17 @@ final class ECButton: UIButton {
         }
     }
     
-    convenience init(text: String, cornerRadius: CGFloat = 15) {
+    convenience init(
+        text: String, textSize: CGFloat = 16,
+        backgroundColor: UIColor = .systemBlue,
+        textColor: UIColor = .white, cornerRadius: CGFloat = 15
+    ) {
         self.init(frame: .zero)
-        let attrTitle = NSAttributedString(
-            string: text,
-            attributes: [
-                .font: ECFont.font(.semiBold, size: 16),
-                .foregroundColor: UIColor.white
-            ]
+        configure(
+            text: text, textSize: textSize,
+            backgroundColor: backgroundColor,
+            textColor: textColor, cornerRadius: cornerRadius
         )
-        
-        setAttributedTitle(attrTitle, for: .normal)
-        self.cornerRadius = cornerRadius
-        self.addTarget(self, action: #selector(didTap), for: .touchUpInside)
-        self.backgroundColor = .systemBlue
-        layoutIfNeeded()
     }
     
     override func layoutSubviews() {
@@ -54,24 +52,65 @@ final class ECButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(text: String, cornerRadius: CGFloat = 15) {
-        let attrTitle = NSAttributedString(
-            string: text,
-            attributes: [
-                .font: ECFont.font(.semiBold, size: 16),
-                .foregroundColor: UIColor.white
-            ]
-        )
-        
-        setAttributedTitle(attrTitle, for: .normal)
+    public func configure(
+        text: String,
+        textSize: CGFloat = 16,
+        backgroundColor: UIColor = .systemBlue,
+        textColor: UIColor = .white,
+        cornerRadius: CGFloat = 15
+    ) {
+        var title = AttributedString(text)
+        title.font = ECFont.font(.semiBold, size: textSize)
+        title.foregroundColor = textColor
+
+        config.attributedTitle = title
+        config.titleLineBreakMode = .byTruncatingTail
+        self.backgroundColor = backgroundColor
+        self.configuration = config
         self.cornerRadius = cornerRadius
         self.addTarget(self, action: #selector(didTap), for: .touchUpInside)
-        self.backgroundColor = .systemBlue
-        layoutIfNeeded()
+    }
+    
+    public func reconfigure(
+        text: String? = nil,
+        textSize: CGFloat? = nil,
+        backgroundColor: UIColor? = nil,
+        textColor: UIColor? = nil,
+        cornerRadius: CGFloat? = nil
+    ) {
+        var title = config.attributedTitle ?? AttributedString("")
+
+        if let text {
+            title = AttributedString(text)
+        }
+        if let textSize {
+            title.font = ECFont.font(.semiBold, size: textSize)
+        }
+        if let textColor {
+            title.foregroundColor = textColor
+        }
+
+        config.attributedTitle = title
+
+        if let backgroundColor {
+            self.backgroundColor = backgroundColor
+        }
+        if let cornerRadius {
+            self.cornerRadius = cornerRadius
+            setNeedsLayout()
+        }
+
+        self.configuration = config
     }
     
     public func setAction(action: (() -> Void)?) {
         self.action = action
+    }
+    
+    public func setContentInsets(insets: NSDirectionalEdgeInsets) {
+        config.contentInsets = insets
+        self.configuration = config
+        layoutIfNeeded()
     }
     
     @objc private func didTap() {

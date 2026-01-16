@@ -19,3 +19,9 @@ enum HomeItem: Hashable {
     case application
     case banner
 }
+
+enum HomeTabs: Int {
+    case myUniversities
+    case application
+    case main
+}

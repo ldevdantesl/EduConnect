@@ -13,7 +13,7 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
 
     // MARK: - Properties
-    private let collectionView: UICollectionView
+    let collectionView: UICollectionView
     private var diffableDataSource: DataSource!
     private var didSelectHandler: ((IndexPath) -> Void)?
 
@@ -51,6 +51,12 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
 
     func setDidSelectHandler(_ handler: @escaping (IndexPath) -> Void) {
         didSelectHandler = handler
+    }
+    
+    func reapplyCurrentSnapshot() {
+        guard var snapshot = diffableDataSource?.snapshot() else { return }
+        snapshot.reloadSections(snapshot.sectionIdentifiers)
+        diffableDataSource.apply(snapshot, animatingDifferences: false)
     }
 
     func applySnapshot(

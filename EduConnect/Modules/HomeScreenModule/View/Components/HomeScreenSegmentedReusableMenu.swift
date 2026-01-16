@@ -8,12 +8,17 @@
 import UIKit
 import SnapKit
 
+struct HomeScreenSegmentedReusableMenuViewModel {
+    let currentTab: HomeTabs
+    let didSelectTab: ((HomeTabs) -> Void)?
+}
 
 final class HomeScreenSegmentedReusableMenu: UICollectionReusableView {
     
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
+        static let biggerSpacing = 20.0
         static let hSpacing = 30.0
         static let cornerRadius = 15.0
     }
@@ -22,35 +27,20 @@ final class HomeScreenSegmentedReusableMenu: UICollectionReusableView {
     static let reuseID = "HomeScreenSegmentedReusableMenu"
     
     // MARK: - PROPERTIES
-    static let selectedTab: Int = 1
+    private var viewModel: HomeScreenSegmentedReusableMenuViewModel?
     
     // MARK: - VIEW PROPERTIES
-    private let mainButton: ECButton = {
-        let button = ECButton(text: "Main", cornerRadius: Constants.cornerRadius)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
+    private let mainButton: ECButton = ECButton(text: "Main", textSize: 15, cornerRadius: Constants.cornerRadius)
     
-    private let myUniversitiesButton: ECButton = {
-        let button = ECButton(text: "My Unis", cornerRadius: Constants.cornerRadius)
-        button.backgroundColor = .white
-        button.setTitleColor(.systemBlue, for: .normal)
-        return button
-    }()
+    private let myUniversitiesButton: ECButton = ECButton(text: "My Unis", textSize: 15, cornerRadius: Constants.cornerRadius)
     
-    private let applicationButton: ECButton = {
-        let button = ECButton(text: "Application", cornerRadius: Constants.cornerRadius)
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
+    private let applicationButton: ECButton = ECButton(text: "Application", textSize: 15, cornerRadius: Constants.cornerRadius)
     
     private lazy var hStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [mainButton,myUniversitiesButton,applicationButton])
+        let stack = UIStackView(arrangedSubviews: [mainButton, myUniversitiesButton, applicationButton])
         stack.axis = .horizontal
         stack.spacing = Constants.spacing
-        stack.alignment = .center
+        stack.alignment = .fill
         stack.distribution = .fillEqually
         return stack
     }()
@@ -66,13 +56,47 @@ final class HomeScreenSegmentedReusableMenu: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        viewModel = nil
+
+        resetButtons()
+    }
+    
+    // MARK: - PUBLIC FUNC
+    public func configure(withVM vm: HomeScreenSegmentedReusableMenuViewModel) {
+        viewModel = vm
+
+        resetButtons()
+
+        switch vm.currentTab {
+        case .myUniversities: myUniversitiesButton.reconfigure(backgroundColor: .white, textColor: .black)
+        case .application: applicationButton.reconfigure(backgroundColor: .white, textColor: .black)
+        case .main: mainButton.reconfigure(backgroundColor: .white, textColor: .black)
+        }
+
+        myUniversitiesButton.setAction { vm.didSelectTab?(.myUniversities) }
+        applicationButton.setAction { vm.didSelectTab?(.application) }
+        mainButton.setAction { vm.didSelectTab?(.main) }
+    }
+    
     // MARK: - PRIVATE FUNC
     private func setupUI() {
         self.backgroundColor = .systemBlue
         addSubview(hStack)
         hStack.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(Constants.spacing)
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(Constants.spacing)
+        }
+    }
+    
+    private func resetButtons() {
+        [mainButton, myUniversitiesButton, applicationButton].forEach {
+            $0.reconfigure(
+                backgroundColor: .clear,
+                textColor: .white
+            )
+            $0.setAction(action: nil)
         }
     }
 }

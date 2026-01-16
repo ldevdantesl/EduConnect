@@ -10,6 +10,7 @@ import SnapKit
 
 protocol HomeScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [HomeSection], itemsBySection: [HomeSection : [HomeItem]])
+    func reloadHeader()
 }
 
 final class HomeScreenVC: UIViewController {
@@ -74,13 +75,16 @@ final class HomeScreenVC: UIViewController {
             }
         }
         
-        collectionContainer.setSupplementaryViewProvider { collectionView, kind, indexPath in
+        collectionContainer.setSupplementaryViewProvider { [weak self] collectionView, kind, indexPath in
+            guard let self = self else { return nil }
             guard kind == UICollectionView.elementKindSectionHeader else { return nil }
             guard let header = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: HomeScreenSegmentedReusableMenu.reuseID,
                 for: indexPath
             ) as? HomeScreenSegmentedReusableMenu else { return nil }
+            guard let vm = self.presenter?.headerMenuViewModel else { return header }
+            header.configure(withVM: vm)
             return header
         }
     }
@@ -89,5 +93,9 @@ final class HomeScreenVC: UIViewController {
 extension HomeScreenVC: HomeScreenViewProtocol {
     func applySnapshot(sections: [HomeSection], itemsBySection: [HomeSection : [HomeItem]]) {
         collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
+    }
+    
+    func reloadHeader() {
+        self.collectionContainer.reapplyCurrentSnapshot()
     }
 }
