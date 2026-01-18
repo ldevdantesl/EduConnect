@@ -78,10 +78,12 @@ final class ECButton: UIButton {
         textColor: UIColor? = nil,
         cornerRadius: CGFloat? = nil
     ) {
+        var config = self.configuration ?? .plain()
+
         var title = config.attributedTitle ?? AttributedString("")
 
         if let text {
-            title = AttributedString(text)
+            title.characters = AttributedString(text).characters
         }
         if let textSize {
             title.font = ECFont.font(.semiBold, size: textSize)
@@ -93,14 +95,15 @@ final class ECButton: UIButton {
         config.attributedTitle = title
 
         if let backgroundColor {
-            self.backgroundColor = backgroundColor
+            config.background.backgroundColor = backgroundColor
         }
         if let cornerRadius {
-            self.cornerRadius = cornerRadius
-            setNeedsLayout()
+            config.background.cornerRadius = cornerRadius
         }
 
         self.configuration = config
+        layoutIfNeeded()
+        
     }
     
     public func setAction(action: (() -> Void)?) {

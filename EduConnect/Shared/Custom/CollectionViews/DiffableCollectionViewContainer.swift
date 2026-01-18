@@ -14,6 +14,9 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
 
     // MARK: - Properties
     let collectionView: UICollectionView
+    var resignsFirstResponderOnScroll: Bool = false
+    
+    // MARK: - PRIVATE VAR
     private var diffableDataSource: DataSource!
     private var didSelectHandler: ((IndexPath) -> Void)?
 
@@ -82,7 +85,6 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
         diffableDataSource.snapshot()
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         didSelectHandler?(indexPath)
     }
@@ -105,5 +107,11 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
             forSupplementaryViewOfKind: kind,
             withReuseIdentifier: reuseID
         )
+    }
+    
+    // MARK: - DELEGATE
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        guard resignsFirstResponderOnScroll else { return }
+        scrollView.endEditing(true)
     }
 }

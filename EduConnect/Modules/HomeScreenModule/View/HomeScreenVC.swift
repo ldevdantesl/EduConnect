@@ -25,9 +25,11 @@ final class HomeScreenVC: UIViewController {
         let cv = DiffableCollectionViewContainer<HomeSection, HomeItem>(
             layout: HomeLayoutFactory.make()
         )
+        cv.resignsFirstResponderOnScroll = true
         cv.registerCell(HomeScreenUniversityCell.self, reuseID: HomeScreenUniversityCell.identifier)
         cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
         cv.registerCell(HomeScreenExpandablePersonalInfoCell.self, reuseID: HomeScreenExpandablePersonalInfoCell.identifier)
+        cv.registerCell(HomeScreenExpandableFamilyInfoCell.self, reuseID: HomeScreenExpandableFamilyInfoCell.identifier)
         cv.registerSupplementary(
             HomeScreenSegmentedReusableMenu.self,
             kind: UICollectionView.elementKindSectionHeader,

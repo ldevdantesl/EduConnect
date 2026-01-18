@@ -48,14 +48,44 @@ open class ECTextField: UITextField, UITextFieldDelegate {
         self.delegate = self
     }
     
+    public func reconfigure(
+        placeHolder: String? = nil,
+        showsBorder: Bool? = nil,
+        cornerRadius: CGFloat? = nil,
+        returnKeyType: UIReturnKeyType? = nil,
+        returnAction: (() -> Void)? = nil
+    ) {
+        if let placeHolder {
+            self.attributedPlaceholder = NSAttributedString(
+                string: placeHolder,
+                attributes: [
+                    .foregroundColor: UIColor.systemGray,
+                    .font: ECFont.font(.medium, size: 14)
+                ]
+            )
+        }
+        
+        if let showsBorder { self.showsBorder = showsBorder }
+        if let cornerRadius { self.cornerRadius = cornerRadius }
+        if let returnKeyType { self.returnKeyType = returnKeyType }
+        if let returnAction { self.returnAction = returnAction }
+        
+        self.delegate = self
+        setNeedsLayout()
+    }
+    
     public override func layoutSubviews() {
         super.layoutSubviews()
         if showsBorder {
             self.layer.cornerRadius = cornerRadius
             self.layer.borderWidth = 1
             self.layer.borderColor = UIColor.systemGray2.cgColor
-            layoutIfNeeded()
+        } else {
+            layer.cornerRadius = 0
+            layer.borderWidth = 0
+            layer.borderColor = nil
         }
+        layoutIfNeeded()
     }
     
     public override func textRect(forBounds bounds: CGRect) -> CGRect {

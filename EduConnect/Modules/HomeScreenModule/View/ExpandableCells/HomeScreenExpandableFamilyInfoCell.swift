@@ -1,49 +1,48 @@
 //
-//  HomeScreenApplicationCell.swift
+//  HomeScreenExpandableFamilyInfoCell.swift
 //  EduConnect
 //
-//  Created by Buzurg Rakhimzoda on 16.01.2026.
+//  Created by Buzurg Rakhimzoda on 18.01.2026.
 //
 
 import UIKit
 import SnapKit
 
-final class HomeScreenExpandablePersonalInfoCellViewModel: ExpandableCellViewModel {
-    var cellIdentifier: String = "HomeScreenExpandablePersonalInfoCell"
+final class HomeScreenExpandableFamilyInfoCellViewModel: ExpandableCellViewModel {
+    var cellIdentifier: String = "HomeScreenExpandableFamilyInfoCell"
     var isExpanded: Bool
     let didTapExpand: (() -> Void)?
-    let didTapSave: ((String?, String?, String?) -> Void)?
+    let didTapSave: ((String?, String?) -> Void)?
     
-    init(isExpanded: Bool = false, didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?, String?) -> Void)? = nil) {
+    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?) -> Void)? = nil) {
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
         self.didTapSave = didTapSave
     }
 }
 
-final class HomeScreenExpandablePersonalInfoCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class HomeScreenExpandableFamilyInfoCell: UICollectionViewCell, ConfigurableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
-        
         static let expandImageSize = 20.0
         static let chevronDownImage = "chevron.down"
         static let chevronUpImage = "chevron.up"
     }
     
     // MARK: - PROPERTIES
-    private var viewModel: HomeScreenExpandablePersonalInfoCellViewModel?
+    private var viewModel: HomeScreenExpandableFamilyInfoCellViewModel?
     private var expandableHeightConstraint: Constraint?
     private var isEditing: Bool = false
     
     // MARK: - VIEW PROPERTIES
-    private let headerContainer: UIView = {
-        let container = UIView()
-        container.backgroundColor = .systemGray6
-        return container
+    private var headerContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray6
+        return view
     }()
     
-    private let expandableContainer: UIView = {
+    private var expandableContainer: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.clipsToBounds = true
@@ -58,49 +57,38 @@ final class HomeScreenExpandablePersonalInfoCell: UICollectionViewCell, Configur
         return image
     }()
     
-    private let personalInfoLabel: UILabel = {
+    private let familyInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "Personal information"
+        label.text = "Family information"
         label.font = ECFont.font(.semiBold, size: 14)
         label.textColor = UIColor.label
         return label
     }()
     
-    private let nameLabel: UILabel = {
+    private let fathersPhoneNumberLabel: UILabel = {
         let label = UILabel()
-        label.text = "Name"
+        label.text = "Fathers Phone Number"
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
     
-    private let nameField: ECTextField = {
-        let field = ECTextField(placeHolder: "YourName", showsBorder: false)
+    private let fathersPhoneNumberField: ECTextField = {
+        let field = ECTextField(placeHolder: "+52", showsBorder: false)
+        field.keyboardType = .phonePad
         field.isEnabled = false
         return field
     }()
     
-    private let surnameLabel: UILabel = {
+    private let momsPhoneNumberLabel: UILabel = {
         let label = UILabel()
-        label.text = "Surname"
+        label.text = "Moms Phone Number"
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
     
-    private let surnameField: ECTextField = {
-        let field = ECTextField(placeHolder: "Surname", showsBorder: false)
-        field.isEnabled = false
-        return field
-    }()
-    
-    private let patronymicLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Patronymic"
-        label.font = ECFont.font(.medium, size: 14)
-        return label
-    }()
-    
-    private let patronymicField: ECTextField = {
-        let field = ECTextField(placeHolder: "patronymic", showsBorder: false)
+    private let momsPhoneNumberField: ECTextField = {
+        let field = ECTextField(placeHolder: "+52", showsBorder: false)
+        field.keyboardType = .phonePad
         field.isEnabled = false
         return field
     }()
@@ -109,7 +97,7 @@ final class HomeScreenExpandablePersonalInfoCell: UICollectionViewCell, Configur
         let button = ECButton(text: "Edit")
         button.setAction { [weak self] in
             guard let self = self else { return }
-            self.didTapEdit()
+            self.didPressEditButton()
         }
         return button
     }()
@@ -143,34 +131,35 @@ final class HomeScreenExpandablePersonalInfoCell: UICollectionViewCell, Configur
     
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? HomeScreenExpandablePersonalInfoCellViewModel else { return }
+        guard let vm = vm as? HomeScreenExpandableFamilyInfoCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()
     }
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(expandTapped))
-        headerContainer.addGestureRecognizer(tap)
-
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapExpand))
+        self.headerContainer.addGestureRecognizer(tap)
+        
         contentView.addSubview(headerContainer)
         headerContainer.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
         }
         
-        headerContainer.addSubview(personalInfoLabel)
-        personalInfoLabel.snp.makeConstraints {
+        headerContainer.addSubview(familyInfoLabel)
+        familyInfoLabel.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview().inset(Constants.spacing)
-            $0.leading.equalToSuperview().inset(Constants.spacing)
+            $0.leading.equalToSuperview().offset(Constants.spacing)
         }
-
+        
         headerContainer.addSubview(expandImageView)
         expandImageView.snp.makeConstraints {
-            $0.centerY.equalTo(personalInfoLabel)
-            $0.trailing.equalToSuperview().inset(Constants.spacing)
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-Constants.spacing)
             $0.size.equalTo(Constants.expandImageSize)
         }
-
+        
         contentView.addSubview(expandableContainer)
         expandableContainer.snp.makeConstraints {
             $0.top.equalTo(headerContainer.snp.bottom)
@@ -179,46 +168,34 @@ final class HomeScreenExpandablePersonalInfoCell: UICollectionViewCell, Configur
             expandableHeightConstraint = $0.height.equalTo(0).priority(.required).constraint
         }
         
-        expandableContainer.addSubview(nameLabel)
-        nameLabel.snp.makeConstraints {
+        expandableContainer.addSubview(momsPhoneNumberLabel)
+        momsPhoneNumberLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Constants.spacing).priority(.high)
-            $0.leading.equalToSuperview().offset(Constants.spacing)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
         }
         
-        expandableContainer.addSubview(nameField)
-        nameField.snp.makeConstraints {
-            $0.top.equalTo(nameLabel.snp.bottom).offset(Constants.spacing).priority(.high)
+        expandableContainer.addSubview(momsPhoneNumberField)
+        momsPhoneNumberField.snp.makeConstraints {
+            $0.top.equalTo(momsPhoneNumberLabel.snp.bottom).offset(Constants.spacing).priority(.high)
             $0.horizontalEdges.equalToSuperview()
         }
         
-        expandableContainer.addSubview(surnameLabel)
-        surnameLabel.snp.makeConstraints {
-            $0.top.equalTo(nameField.snp.bottom).offset(Constants.spacing).priority(.high)
-            $0.leading.equalToSuperview().offset(Constants.spacing)
+        expandableContainer.addSubview(fathersPhoneNumberLabel)
+        fathersPhoneNumberLabel.snp.makeConstraints {
+            $0.top.equalTo(momsPhoneNumberField.snp.bottom).offset(Constants.spacing).priority(.high)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
         }
         
-        expandableContainer.addSubview(surnameField)
-        surnameField.snp.makeConstraints {
-            $0.top.equalTo(surnameLabel.snp.bottom).offset(Constants.spacing).priority(.high)
-            $0.horizontalEdges.equalToSuperview()
-        }
-        
-        expandableContainer.addSubview(patronymicLabel)
-        patronymicLabel.snp.makeConstraints {
-            $0.top.equalTo(surnameField.snp.bottom).offset(Constants.spacing).priority(.high)
-            $0.leading.equalToSuperview().offset(Constants.spacing)
-        }
-        
-        expandableContainer.addSubview(patronymicField)
-        patronymicField.snp.makeConstraints {
-            $0.top.equalTo(patronymicLabel.snp.bottom).offset(Constants.spacing).priority(.high)
+        expandableContainer.addSubview(fathersPhoneNumberField)
+        fathersPhoneNumberField.snp.makeConstraints {
+            $0.top.equalTo(fathersPhoneNumberLabel.snp.bottom).offset(Constants.spacing).priority(.high)
             $0.horizontalEdges.equalToSuperview()
         }
         
         expandableContainer.addSubview(editButton)
         editButton.snp.makeConstraints {
-            $0.top.equalTo(patronymicField.snp.bottom).offset(Constants.spacing).priority(.high)
-            $0.leading.equalToSuperview().offset(Constants.spacing)
+            $0.top.equalTo(fathersPhoneNumberField.snp.bottom).offset(Constants.spacing).priority(.high)
+            $0.leading.equalToSuperview().inset(Constants.spacing)
             $0.bottom.equalToSuperview().offset(-Constants.spacing).priority(.high)
         }
     }
@@ -228,36 +205,33 @@ final class HomeScreenExpandablePersonalInfoCell: UICollectionViewCell, Configur
         expandImageView.image = UIImage(systemName: Constants.chevronUpImage)
         layoutIfNeeded()
     }
-
+    
     private func collapseCell() {
         expandableHeightConstraint?.activate()
         expandImageView.image = UIImage(systemName: Constants.chevronDownImage)
         layoutIfNeeded()
     }
     
-    private func didTapEdit() {
+    private func didPressEditButton() {
         if !isEditing {
             editButton.reconfigure(text: "Save")
-            nameField.reconfigure(showsBorder: true)
-            nameField.isEnabled = true
-            surnameField.reconfigure(showsBorder: true)
-            surnameField.isEnabled = true
-            patronymicField.reconfigure(showsBorder: true)
-            patronymicField.isEnabled = true
+            fathersPhoneNumberField.reconfigure(showsBorder: true)
+            fathersPhoneNumberField.isEnabled = true
+            momsPhoneNumberField.reconfigure(showsBorder: true)
+            momsPhoneNumberField.isEnabled = true
         } else {
+            self.viewModel?.didTapSave?(momsPhoneNumberField.text, fathersPhoneNumberField.text)
             editButton.reconfigure(text: "Edit")
-            nameField.reconfigure(showsBorder: false)
-            nameField.isEnabled = false
-            surnameField.reconfigure(showsBorder: false)
-            surnameField.isEnabled = false
-            patronymicField.reconfigure(showsBorder: false)
-            patronymicField.isEnabled = false
-            self.viewModel?.didTapSave?(nameField.text, surnameField.text, patronymicField.text)
+            fathersPhoneNumberField.reconfigure(showsBorder: false)
+            fathersPhoneNumberField.isEnabled = false
+            momsPhoneNumberField.reconfigure(showsBorder: false)
+            momsPhoneNumberField.isEnabled = false
         }
         isEditing.toggle()
     }
     
-    @objc private func expandTapped() {
+    // MARK: - OBJC FUNC
+    @objc private func didTapExpand() {
         viewModel?.didTapExpand?()
     }
 }

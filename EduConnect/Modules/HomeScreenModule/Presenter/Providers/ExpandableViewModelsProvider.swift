@@ -37,29 +37,26 @@ final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
     var onCellToggled: ((HomeItem) -> Void)?
     
     // MARK: - Init
-    
     init() {
         setupViewModels()
     }
     
     // MARK: - Setup
-    
     private func setupViewModels() {
         ExpandableCellID.allCases.forEach { id in
             expandableViewModels[id] = makeExpandableVM(
                 id: id,
-                isExpanded: id == .personalInfo // First one expanded by default
+                isExpanded: id == .personalInfo
             )
         }
     }
     
     // MARK: - Public Methods
-    
     func makeExpandableItem(for id: ExpandableCellID) -> HomeItem? {
-        guard let vm = expandableViewModels[id] as? HomeScreenExpandablePersonalInfoCellViewModel else {
-            return nil
-        }
-        return .expandableCell(DiffableItem(id: id.rawValue, viewModel: vm))
+        guard let vm = expandableViewModels[id] else { return nil }
+        return .expandableCell(
+            DiffableItem(id: id.rawValue, viewModel: vm)
+        )
     }
     
     @discardableResult
@@ -73,17 +70,36 @@ final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
     }
     
     // MARK: - Private Methods
-    
     private func makeExpandableVM(
         id: ExpandableCellID,
         isExpanded: Bool
     ) -> ExpandableCellViewModel {
-        HomeScreenExpandablePersonalInfoCellViewModel(
-            isExpanded: isExpanded,
-            didTapExpand: { [weak self] in
-                self?.toggleExpandableCell(id: id)
-            }
-        )
+        switch id {
+        case .personalInfo:
+            return HomeScreenExpandablePersonalInfoCellViewModel(
+                isExpanded: isExpanded,
+                didTapExpand: { [weak self] in
+                    guard let self = self else { return }
+                    self.toggleExpandableCell(id: id)
+                },
+            )
+        case .familyInfo:
+            return HomeScreenExpandableFamilyInfoCellViewModel(
+                isExpanded: isExpanded,
+                didTapExpand: { [weak self] in
+                    guard let self = self else { return }
+                    self.toggleExpandableCell(id: id)
+                }
+            )
+        default:
+            return HomeScreenExpandablePersonalInfoCellViewModel(
+                isExpanded: isExpanded,
+                didTapExpand: { [weak self] in
+                    guard let self = self else { return }
+                    self.toggleExpandableCell(id: id)
+                },
+            )
+        }
     }
 }
 
