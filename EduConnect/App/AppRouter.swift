@@ -20,6 +20,7 @@ final class AppRouter: AppRoutingProtocol {
     private(set) var navController = UINavigationController()
     
     func start() {
+        navController.navigationBar.isHidden = true
         navController.delegate = navAnimator
         window?.rootViewController = navController
         window?.makeKeyAndVisible()

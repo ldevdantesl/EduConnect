@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 
 struct HomeScreenSegmentedReusableMenuViewModel {
-    let currentTab: HomeTabs
-    let didSelectTab: ((HomeTabs) -> Void)?
+    let currentTab: HomeTab
+    let didSelectTab: ((HomeTab) -> Void)?
 }
 
 final class HomeScreenSegmentedReusableMenu: UICollectionReusableView {

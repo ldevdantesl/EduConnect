@@ -10,15 +10,21 @@ import UIKit
 protocol HomeScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
     
-    var selectedTab: HomeTabs { get set }
+    var selectedTab: HomeTab { get set }
     var headerMenuViewModel: HomeScreenSegmentedReusableMenuViewModel { get }
 }
 
 final class HomeScreenPresenter {
+    
+    // MARK: - Properties
     weak var view: HomeScreenViewProtocol?
     var router: HomeScreenRouterProtocol
     var interactor: HomeScreenInteractorProtocol
-    var selectedTab: HomeTabs = .myUniversities
+    var selectedTab: HomeTab = .main
+    
+    private let snapshotFactory: HomeScreenSnapshotFactoryProtocol
+    private let expandableProvider: ExpandableViewModelsProvider
+    
     var headerMenuViewModel: HomeScreenSegmentedReusableMenuViewModel {
         HomeScreenSegmentedReusableMenuViewModel(
             currentTab: selectedTab,
@@ -27,36 +33,40 @@ final class HomeScreenPresenter {
             }
         )
     }
-
-    init(interactor: HomeScreenInteractorProtocol, router: HomeScreenRouterProtocol) {
+    
+    init(
+        interactor: HomeScreenInteractorProtocol,
+        router: HomeScreenRouterProtocol,
+        expandableProvider: ExpandableViewModelsProvider = ExpandableViewModelsProvider(),
+        snapshotFactory: HomeScreenSnapshotFactoryProtocol? = nil
+    ) {
         self.interactor = interactor
         self.router = router
+        self.expandableProvider = expandableProvider
+        self.snapshotFactory = snapshotFactory ?? HomeScreenSnapshotFactory(expandableProvider: expandableProvider)
+        
+        setupBindings()
     }
     
-    func didSelectAnotherTab(newTab: HomeTabs) {
+    // MARK: - Private Methods
+    private func setupBindings() {
+        expandableProvider.onCellToggled = { [weak self] item in
+            self?.view?.reconfigureItems(items: [item])
+        }
+    }
+    
+    func didSelectAnotherTab(newTab: HomeTab) {
         guard selectedTab != newTab else { return }
-
         selectedTab = newTab
-        view?.reloadHeader()
+        let snapshot = snapshotFactory.makeSnapshot(for: newTab)
+        view?.applySnapshot(sections: snapshot.sections, itemsBySection: snapshot.itemsBySection)
     }
-    
 }
+
+// MARK: - HomeScreenPresenterProtocol
 
 extension HomeScreenPresenter: HomeScreenPresenterProtocol {
     func viewDidLoad() {
-        self.selectedTab = .myUniversities
-        let university = ECUniversity.sample
-        let viewModel = HomeScreenUniversityCellViewModel(university: university)
-        let headerVM = SectionHeaderCellViewModel(title: "My Universities", titleSize: 30)
-        self.view?.applySnapshot(
-            sections: [.universities],
-            itemsBySection: [
-                .universities : [
-                    .headerItem(DiffableItem(id: "header", viewModel: headerVM)),
-                    .university(DiffableItem(id: university.id, viewModel: viewModel)),
-                    .university(DiffableItem(id: 1234, viewModel: viewModel))
-                ]
-            ]
-        )
+        didSelectAnotherTab(newTab: .myUniversities)
     }
 }

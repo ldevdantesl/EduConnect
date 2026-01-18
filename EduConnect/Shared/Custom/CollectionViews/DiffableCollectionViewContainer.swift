@@ -72,9 +72,16 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
         diffableDataSource.apply(snapshot, animatingDifferences: animated)
     }
 
+    func reconfigureItems(_ items: [Item], animated: Bool = true) {
+        guard var snapshot = diffableDataSource?.snapshot() else { return }
+        snapshot.reconfigureItems(items)
+        diffableDataSource.apply(snapshot, animatingDifferences: animated)
+    }
+
     func snapshot() -> NSDiffableDataSourceSnapshot<Section, Item> {
         diffableDataSource.snapshot()
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         didSelectHandler?(indexPath)

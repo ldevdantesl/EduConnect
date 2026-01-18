@@ -10,7 +10,7 @@ import SnapKit
 
 protocol HomeScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [HomeSection], itemsBySection: [HomeSection : [HomeItem]])
-    func reloadHeader()
+    func reconfigureItems(items: [HomeItem])
 }
 
 final class HomeScreenVC: UIViewController {
@@ -27,6 +27,7 @@ final class HomeScreenVC: UIViewController {
         )
         cv.registerCell(HomeScreenUniversityCell.self, reuseID: HomeScreenUniversityCell.identifier)
         cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
+        cv.registerCell(HomeScreenExpandablePersonalInfoCell.self, reuseID: HomeScreenExpandablePersonalInfoCell.identifier)
         cv.registerSupplementary(
             HomeScreenSegmentedReusableMenu.self,
             kind: UICollectionView.elementKindSectionHeader,
@@ -70,8 +71,11 @@ final class HomeScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? HomeScreenUniversityCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
-            default:
-                return UICollectionViewCell()
+            case .expandableCell(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath)
+                (cell as? ConfigurableCellProtocol)?.configure(withVM: item.viewModel)
+                return cell
+            case .banner: fatalError("Not implemented")
             }
         }
         
@@ -95,7 +99,7 @@ extension HomeScreenVC: HomeScreenViewProtocol {
         collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
     }
     
-    func reloadHeader() {
-        self.collectionContainer.reapplyCurrentSnapshot()
+    func reconfigureItems(items: [HomeItem]) {
+        collectionContainer.reconfigureItems(items)
     }
 }

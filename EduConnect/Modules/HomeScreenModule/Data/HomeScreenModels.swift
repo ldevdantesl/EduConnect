@@ -16,12 +16,21 @@ enum HomeSection: Hashable {
 enum HomeItem: Hashable {
     case headerItem(DiffableItem<SectionHeaderCellViewModel>)
     case university(DiffableItem<HomeScreenUniversityCellViewModel>)
-    case application
+    case expandableCell(DiffableItem<any ExpandableCellViewModel>)
     case banner
 }
 
-enum HomeTabs: Int {
+enum HomeTab: Int {
     case myUniversities
     case application
     case main
+    
+    var headerNames: String {
+        switch self {
+        case .myUniversities: "My Universities"
+        case .application: "Application"
+        case .main: "Welcome"
+        }
+    }
 }
+
