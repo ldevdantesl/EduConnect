@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Protocol
-protocol ExpandableCellViewModel: CellViewModelProtocol, AnyObject {
+public protocol ExpandableCellViewModel: CellViewModelProtocol, AnyObject {
     var isExpanded: Bool { get set }
     var didTapExpand: (() -> Void)? { get }
 }
@@ -78,26 +78,35 @@ final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
         case .personalInfo:
             return HomeScreenExpandablePersonalInfoCellViewModel(
                 isExpanded: isExpanded,
-                didTapExpand: { [weak self] in
-                    guard let self = self else { return }
-                    self.toggleExpandableCell(id: id)
-                },
+                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) }
             )
         case .familyInfo:
             return HomeScreenExpandableFamilyInfoCellViewModel(
                 isExpanded: isExpanded,
-                didTapExpand: { [weak self] in
-                    guard let self = self else { return }
-                    self.toggleExpandableCell(id: id)
-                }
+                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) }
             )
-        default:
-            return HomeScreenExpandablePersonalInfoCellViewModel(
+            
+        case .education:
+            return HomeScreenExpandableEducationCellViewModel(
                 isExpanded: isExpanded,
-                didTapExpand: { [weak self] in
-                    guard let self = self else { return }
-                    self.toggleExpandableCell(id: id)
-                },
+                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) }
+            )
+            
+        case .ENT:
+            return HomeScreenExpandableENTCellViewModel(
+                isExpanded: isExpanded,
+                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) }
+            )
+        case .extracurricular:
+            return HomeScreenExpandableExtracurricularCellViewModel(
+                isExpanded: isExpanded,
+                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id)}
+            )
+            
+        case .olympiads:
+            return HomeScreenExpandableOlympiadCellViewModel(
+                isExpanded: isExpanded,
+                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id)}
             )
         }
     }

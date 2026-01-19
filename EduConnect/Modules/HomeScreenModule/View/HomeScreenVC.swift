@@ -30,6 +30,10 @@ final class HomeScreenVC: UIViewController {
         cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
         cv.registerCell(HomeScreenExpandablePersonalInfoCell.self, reuseID: HomeScreenExpandablePersonalInfoCell.identifier)
         cv.registerCell(HomeScreenExpandableFamilyInfoCell.self, reuseID: HomeScreenExpandableFamilyInfoCell.identifier)
+        cv.registerCell(HomeScreenExpandableEducationCell.self, reuseID: HomeScreenExpandableEducationCell.identifier)
+        cv.registerCell(HomeScreenExpandableENTCell.self, reuseID: HomeScreenExpandableENTCell.identifier)
+        cv.registerCell(HomeScreenExpandableOlympiadCell.self, reuseID: HomeScreenExpandableOlympiadCell.identifier)
+        cv.registerCell(HomeScreenExpandableExtracurricularCell.self, reuseID: HomeScreenExpandableExtracurricularCell.identifier)
         cv.registerSupplementary(
             HomeScreenSegmentedReusableMenu.self,
             kind: UICollectionView.elementKindSectionHeader,

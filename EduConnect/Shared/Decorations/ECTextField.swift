@@ -9,9 +9,10 @@ import UIKit
 
 open class ECTextField: UITextField, UITextFieldDelegate {
     
-    private var cornerRadius: CGFloat = 15
-    private var returnAction: (() -> Void)?
-    private var showsBorder: Bool = true
+    var cornerRadius: CGFloat = 15
+    var returnAction: (() -> Void)?
+    var showsBorder: Bool = true
+    var maximumCharacters = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -104,5 +105,19 @@ open class ECTextField: UITextField, UITextFieldDelegate {
         self.resignFirstResponder()
         returnAction?()
         return true
+    }
+    
+    public func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
+        guard maximumCharacters > 0 else { return true }
+
+        let currentText = textField.text ?? ""
+        guard let textRange = Range(range, in: currentText) else { return false }
+
+        let updatedText = currentText.replacingCharacters(in: textRange, with: string)
+        return updatedText.count <= maximumCharacters
     }
 }
