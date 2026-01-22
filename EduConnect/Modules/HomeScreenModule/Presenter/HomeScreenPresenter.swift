@@ -30,6 +30,10 @@ final class HomeScreenPresenter {
             didTapAddActivity: { [weak self] in
                 let vm = AddExtracurricularActivityPopUpViewModel(onClose: self?.clearPopupView, didAddNewActivity: nil)
                 self?.router.showAddExtracurricularPopUp(viewModel: vm)
+            },
+            didTapAddENTSubject: { [weak self] in
+                let vm = AddENTSubjectPopUpViewModel(onClose: self?.clearPopupView, didAddNewSubject: nil)
+                self?.router.showAddEntSubjectPopUp(viewModel: vm)
             }
         )
         

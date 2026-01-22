@@ -31,6 +31,7 @@ struct ExpandableActions {
     
     var didTapAddActivity: (() -> Void)?
     var didTapAddOlympiad: (() -> Void)?
+    var didTapAddENTSubject: (() -> Void)?
 }
 
 // MARK: - Provider Protocol
@@ -103,13 +104,14 @@ final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
             return HomeScreenExpandableEducationCellViewModel(
                 isExpanded: isExpanded,
                 didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) },
-                didTapSave: {[weak self] in self?.actions.didTapSaveEducation?($0, $1, $2)}
+                didTapSave: { [weak self] in self?.actions.didTapSaveEducation?($0, $1, $2)}
             )
             
         case .ENT:
             return HomeScreenExpandableENTCellViewModel(
                 isExpanded: isExpanded,
-                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) }
+                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) },
+                didTapAddNewSubject: { [weak self] in self?.actions.didTapAddENTSubject?() }
             )
             
         case .extracurricular:

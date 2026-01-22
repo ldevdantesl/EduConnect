@@ -11,12 +11,14 @@ import SnapKit
 final class HomeScreenExpandableENTCellViewModel: ExpandableCellViewModel {
     private(set) var cellIdentifier: String = "HomeScreenExpandableENTCell"
     var isExpanded: Bool
-    let didTapExpand: (() -> Void)?
-    let didSetNewENTYear: ((String?) -> Void)?
+    var didTapExpand: (() -> Void)?
+    var didTapAddNewSubject: (() -> Void)?
+    var didSetNewENTYear: ((String?) -> Void)?
     
-    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didSetNewENTYear: ((String?) -> Void)? = nil) {
+    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapAddNewSubject: (() -> Void)? = nil, didSetNewENTYear: ((String?) -> Void)? = nil) {
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
+        self.didTapAddNewSubject = didTapAddNewSubject
         self.didSetNewENTYear = didSetNewENTYear
     }
 }
@@ -238,6 +240,7 @@ final class HomeScreenExpandableENTCell: UICollectionViewCell, ConfigurableCellP
         
         let view = UIView()
         view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAddSubject)))
         view.addSubview(imageView)
         imageView.snp.makeConstraints {
             $0.leading.centerY.equalToSuperview()
@@ -258,5 +261,9 @@ final class HomeScreenExpandableENTCell: UICollectionViewCell, ConfigurableCellP
     // MARK: - OBJC FUNC
     @objc private func didTapExpand() {
         viewModel?.didTapExpand?()
+    }
+    
+    @objc private func didTapAddSubject() {
+        self.viewModel?.didTapAddNewSubject?()
     }
 }

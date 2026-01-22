@@ -9,11 +9,20 @@ import UIKit
 
 open class ECTextField: UITextField, UITextFieldDelegate {
     
+    // MARK: - PROPERTIES
     var cornerRadius: CGFloat = 15
     var returnAction: (() -> Void)?
     var showsBorder: Bool = true
     var maximumCharacters = 0
     
+    // MARK: - OVERRIDDEN
+    open override var keyboardType: UIKeyboardType {
+        didSet {
+            updateInputAccessoryIfNeeded()
+        }
+    }
+    
+    // MARK: - LIFECYCLE
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -33,7 +42,28 @@ open class ECTextField: UITextField, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(placeHolder: String, showsBorder: Bool = true, cornerRadius: CGFloat = 15, returnKeyType: UIReturnKeyType = .done, returnAction: (() -> Void)? = nil) {
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        if showsBorder {
+            self.layer.cornerRadius = cornerRadius
+            self.layer.borderWidth = 1
+            self.layer.borderColor = UIColor.systemGray2.cgColor
+        } else {
+            layer.cornerRadius = 0
+            layer.borderWidth = 0
+            layer.borderColor = nil
+        }
+        layoutIfNeeded()
+    }
+    
+    // MARK: - PUBLIC FUNC
+    public func configure(
+        placeHolder: String,
+        showsBorder: Bool = true,
+        cornerRadius: CGFloat = 15,
+        returnKeyType: UIReturnKeyType = .done,
+        returnAction: (() -> Void)? = nil
+    ) {
         let attrPlaceholder = NSAttributedString(
             string: placeHolder,
             attributes: [
@@ -47,6 +77,7 @@ open class ECTextField: UITextField, UITextFieldDelegate {
         self.returnAction = returnAction
         self.showsBorder = showsBorder
         self.delegate = self
+        updateInputAccessoryIfNeeded()
     }
     
     public func reconfigure(
@@ -75,20 +106,35 @@ open class ECTextField: UITextField, UITextFieldDelegate {
         setNeedsLayout()
     }
     
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        if showsBorder {
-            self.layer.cornerRadius = cornerRadius
-            self.layer.borderWidth = 1
-            self.layer.borderColor = UIColor.systemGray2.cgColor
-        } else {
-            layer.cornerRadius = 0
-            layer.borderWidth = 0
-            layer.borderColor = nil
+    // MARK: - PRIVATE FUNC
+    private func updateInputAccessoryIfNeeded() {
+        switch keyboardType {
+        case .numberPad, .phonePad:
+            let toolbar = UIToolbar()
+            toolbar.sizeToFit()
+
+            let flex = UIBarButtonItem(
+                barButtonSystemItem: .flexibleSpace,
+                target: nil,
+                action: nil
+            )
+
+            let done = UIBarButtonItem(
+                title: "Done",
+                style: .done,
+                target: self,
+                action: #selector(doneTapped)
+            )
+
+            toolbar.items = [flex, done]
+            inputAccessoryView = toolbar
+
+        default:
+            inputAccessoryView = nil
         }
-        layoutIfNeeded()
     }
     
+    // MARK: - OVERRIDDEN FUNC
     public override func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: 10, dy: 10)
     }
@@ -101,6 +147,7 @@ open class ECTextField: UITextField, UITextFieldDelegate {
         bounds.insetBy(dx: 10, dy: 10)
     }
     
+    // MARK: - DELEGATE
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.resignFirstResponder()
         returnAction?()
@@ -119,5 +166,11 @@ open class ECTextField: UITextField, UITextFieldDelegate {
 
         let updatedText = currentText.replacingCharacters(in: textRange, with: string)
         return updatedText.count <= maximumCharacters
+    }
+    
+    // MARK: - OBJC FUNC
+    @objc private func doneTapped() {
+        resignFirstResponder()
+        returnAction?()
     }
 }
