@@ -12,10 +12,12 @@ final class HomeScreenExpandableOlympiadCellViewModel: ExpandableCellViewModel {
     private(set) var cellIdentifier: String = "HomeScreenExpandableOlympiadCell"
     var isExpanded: Bool
     let didTapExpand: (() -> Void)?
+    let didTapAddOlympiad: (() -> Void)?
     
-    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil) {
+    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapAddOlympiad: (() -> Void)? = nil) {
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
+        self.didTapAddOlympiad = didTapAddOlympiad
     }
 }
 
@@ -87,7 +89,6 @@ final class HomeScreenExpandableOlympiadCell: UICollectionViewCell, Configurable
         headerContainer.layer.borderWidth = 1
         headerContainer.layer.borderColor = UIColor.black.withAlphaComponent(0.8).cgColor
         headerContainer.layer.cornerRadius = 10
-        
     }
     
     override func prepareForReuse() {
@@ -163,9 +164,9 @@ final class HomeScreenExpandableOlympiadCell: UICollectionViewCell, Configurable
         addSubjectTextLabel.textColor = .systemBlue
         addSubjectTextLabel.font = ECFont.font(.regular, size: 14)
         
-        
         let view = UIView()
         view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAdd)))
         view.addSubview(imageView)
         imageView.snp.makeConstraints {
             $0.leading.centerY.equalToSuperview()
@@ -184,6 +185,10 @@ final class HomeScreenExpandableOlympiadCell: UICollectionViewCell, Configurable
     }
     
     // MARK: - OBJC FUNC
+    @objc private func didTapAdd() {
+        viewModel?.didTapAddOlympiad?()
+    }
+    
     @objc private func didTapExpand() {
         viewModel?.didTapExpand?()
     }

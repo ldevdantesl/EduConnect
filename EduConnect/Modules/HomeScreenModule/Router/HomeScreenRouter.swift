@@ -10,6 +10,7 @@ import UIKit
 protocol HomeScreenRouterProtocol {
     func showAddExtracurricularPopUp(viewModel: AddExtracurricularActivityPopUpViewModel)
     func showAddEntSubjectPopUp(viewModel: AddENTSubjectPopUpViewModel)
+    func showAddNewOlympiadPopUp(viewModel: AddOlympiadPopUpViewModel)
 }
 
 final class HomeScreenRouter: HomeScreenRouterProtocol {
@@ -29,6 +30,13 @@ final class HomeScreenRouter: HomeScreenRouterProtocol {
     
     func showAddEntSubjectPopUp(viewModel: AddENTSubjectPopUpViewModel) {
         let popUpView = AddENTSubjectPopUpView(viewModel: viewModel)
+        guard let view = viewController?.view else { return }
+        popUpView.show(in: view)
+        viewController?.popUpView = popUpView
+    }
+    
+    func showAddNewOlympiadPopUp(viewModel: AddOlympiadPopUpViewModel) {
+        let popUpView = AddOlympiadPopUpView(viewModel: viewModel)
         guard let view = viewController?.view else { return }
         popUpView.show(in: view)
         viewController?.popUpView = popUpView
