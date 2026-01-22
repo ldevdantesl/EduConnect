@@ -12,7 +12,10 @@ final class ECButton: UIButton {
     private var action: (() -> Void)?
     private var cornerRadius: CGFloat = 25
     
-    var config = UIButton.Configuration.plain()
+    private var config = UIButton.Configuration.plain()
+    
+    var borderColor: UIColor?
+    var borderWidth = 0.0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,6 +48,10 @@ final class ECButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.layer.cornerRadius = self.cornerRadius
+        self.layer.borderWidth = borderWidth
+        if let borderColor {
+            self.layer.borderColor = borderColor.cgColor
+        }
     }
     
     @available(*, unavailable)

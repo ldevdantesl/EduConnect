@@ -12,10 +12,12 @@ final class HomeScreenExpandableExtracurricularCellViewModel: ExpandableCellView
     private(set) var cellIdentifier: String = "HomeScreenExpandableExtracurricularCell"
     var isExpanded: Bool
     let didTapExpand: (() -> Void)?
+    let didTapAddActivity: (() -> Void)?
     
-    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil) {
+    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapAddActivity: (() -> Void)? = nil) {
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
+        self.didTapAddActivity = didTapAddActivity
     }
 }
 
@@ -163,9 +165,9 @@ final class HomeScreenExpandableExtracurricularCell: UICollectionViewCell, Confi
         addSubjectTextLabel.textColor = .systemBlue
         addSubjectTextLabel.font = ECFont.font(.regular, size: 14)
         
-        
         let view = UIView()
         view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAddActivity)))
         view.addSubview(imageView)
         imageView.snp.makeConstraints {
             $0.leading.centerY.equalToSuperview()
@@ -186,5 +188,9 @@ final class HomeScreenExpandableExtracurricularCell: UICollectionViewCell, Confi
     // MARK: - OBJC FUNC
     @objc private func didTapExpand() {
         viewModel?.didTapExpand?()
+    }
+    
+    @objc private func didTapAddActivity() {
+        viewModel?.didTapAddActivity?()
     }
 }

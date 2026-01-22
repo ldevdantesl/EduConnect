@@ -24,6 +24,15 @@ enum ExpandableCellID: String, CaseIterable {
     case olympiads
 }
 
+struct ExpandableActions {
+    var didTapSavePersonalInfo: ((String?, String?, String?) -> Void)?
+    var didTapSaveFamilyInfo: ((String?, String?) -> Void)?
+    var didTapSaveEducation: ((String?, String?, String?) -> Void)?
+    
+    var didTapAddActivity: (() -> Void)?
+    var didTapAddOlympiad: (() -> Void)?
+}
+
 // MARK: - Provider Protocol
 
 protocol ExpandableViewModelsProviderProtocol {
@@ -34,10 +43,12 @@ protocol ExpandableViewModelsProviderProtocol {
 final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
     
     private var expandableViewModels: [ExpandableCellID: ExpandableCellViewModel] = [:]
+    private var actions: ExpandableActions
     var onCellToggled: ((HomeItem) -> Void)?
     
     // MARK: - Init
-    init() {
+    init(actions: ExpandableActions) {
+        self.actions = actions
         setupViewModels()
     }
     
@@ -78,18 +89,21 @@ final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
         case .personalInfo:
             return HomeScreenExpandablePersonalInfoCellViewModel(
                 isExpanded: isExpanded,
-                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) }
+                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) },
+                didTapSave: { [weak self] in self?.actions.didTapSavePersonalInfo?($0, $1, $2)}
             )
         case .familyInfo:
             return HomeScreenExpandableFamilyInfoCellViewModel(
                 isExpanded: isExpanded,
-                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) }
+                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) },
+                didTapSave: { [weak self] in self?.actions.didTapSaveFamilyInfo?($0, $1)}
             )
             
         case .education:
             return HomeScreenExpandableEducationCellViewModel(
                 isExpanded: isExpanded,
-                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) }
+                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) },
+                didTapSave: {[weak self] in self?.actions.didTapSaveEducation?($0, $1, $2)}
             )
             
         case .ENT:
@@ -97,10 +111,12 @@ final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
                 isExpanded: isExpanded,
                 didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) }
             )
+            
         case .extracurricular:
             return HomeScreenExpandableExtracurricularCellViewModel(
                 isExpanded: isExpanded,
-                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id)}
+                didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id)},
+                didTapAddActivity: { [weak self] in self?.actions.didTapAddActivity?() }
             )
             
         case .olympiads:

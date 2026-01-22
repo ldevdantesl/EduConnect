@@ -11,12 +11,16 @@ import SnapKit
 protocol HomeScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [HomeSection], itemsBySection: [HomeSection : [HomeItem]])
     func reconfigureItems(items: [HomeItem])
+    
+    var popUpView: PopUpView? { get set }
 }
 
 final class HomeScreenVC: UIViewController {
     
     // MARK: - VIPER
     var presenter: HomeScreenPresenterProtocol?
+    
+    var popUpView: PopUpView?
     
     // MARK: - VIEW PROPERTIES
     private let headerView = ECHeaderView()

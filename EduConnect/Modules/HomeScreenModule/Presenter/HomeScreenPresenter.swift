@@ -16,54 +16,60 @@ protocol HomeScreenPresenterProtocol: AnyObject {
 
 final class HomeScreenPresenter {
     
-    // MARK: - Properties
+    // MARK: - VIPER
     weak var view: HomeScreenViewProtocol?
     var router: HomeScreenRouterProtocol
     var interactor: HomeScreenInteractorProtocol
+    
+    // MARK: - PROPERTIES
     var selectedTab: HomeTab = .main
     
-    private let snapshotFactory: HomeScreenSnapshotFactoryProtocol
-    private let expandableProvider: ExpandableViewModelsProvider
+    // MARK: - LAZY PROPERTIES
+    private lazy var expandableProvider: ExpandableViewModelsProvider = {
+        let expandableActions = ExpandableActions(
+            didTapAddActivity: { [weak self] in
+                let vm = AddExtracurricularActivityPopUpViewModel(onClose: self?.clearPopupView, didAddNewActivity: nil)
+                self?.router.showAddExtracurricularPopUp(viewModel: vm)
+            }
+        )
+        
+        let provider = ExpandableViewModelsProvider(actions: expandableActions)
+        
+        provider.onCellToggled = { [weak self] item in
+            self?.view?.reconfigureItems(items: [item])
+        }
+        
+        return provider
+    }()
     
+    private lazy var snapshotFactory: HomeScreenSnapshotFactoryProtocol = HomeScreenSnapshotFactory(expandableProvider: expandableProvider)
+    
+    // MARK: - COMPUTED PROPERTIES
     var headerMenuViewModel: HomeScreenSegmentedReusableMenuViewModel {
         HomeScreenSegmentedReusableMenuViewModel(
             currentTab: selectedTab,
-            didSelectTab: { [weak self] tab in
-                self?.didSelectAnotherTab(newTab: tab)
-            }
+            didSelectTab: { [weak self] in self?.didSelectAnotherTab(newTab: $0) }
         )
     }
     
-    init(
-        interactor: HomeScreenInteractorProtocol,
-        router: HomeScreenRouterProtocol,
-        expandableProvider: ExpandableViewModelsProvider = ExpandableViewModelsProvider(),
-        snapshotFactory: HomeScreenSnapshotFactoryProtocol? = nil
-    ) {
+    // MARK: - LIFECYCLE
+    init(interactor: HomeScreenInteractorProtocol, router: HomeScreenRouterProtocol) {
         self.interactor = interactor
         self.router = router
-        self.expandableProvider = expandableProvider
-        self.snapshotFactory = snapshotFactory ?? HomeScreenSnapshotFactory(expandableProvider: expandableProvider)
-        
-        setupBindings()
     }
     
-    // MARK: - Private Methods
-    private func setupBindings() {
-        expandableProvider.onCellToggled = { [weak self] item in
-            self?.view?.reconfigureItems(items: [item])
-        }
+    // MARK: - PRIVATE FUNC
+    private func clearPopupView() {
+        self.view?.popUpView = nil
     }
     
-    func didSelectAnotherTab(newTab: HomeTab) {
+    private func didSelectAnotherTab(newTab: HomeTab) {
         guard selectedTab != newTab else { return }
         selectedTab = newTab
         let snapshot = snapshotFactory.makeSnapshot(for: newTab)
         view?.applySnapshot(sections: snapshot.sections, itemsBySection: snapshot.itemsBySection)
     }
 }
-
-// MARK: - HomeScreenPresenterProtocol
 
 extension HomeScreenPresenter: HomeScreenPresenterProtocol {
     func viewDidLoad() {
