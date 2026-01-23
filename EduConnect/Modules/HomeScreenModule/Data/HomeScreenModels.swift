@@ -17,7 +17,7 @@ enum HomeItem: Hashable {
     case headerItem(DiffableItem<SectionHeaderCellViewModel>)
     case university(DiffableItem<HomeScreenUniversityCellViewModel>)
     case expandableCell(DiffableItem<any ExpandableCellViewModel>)
-    case banner
+    case mainScreenInfo(DiffableItem<HomeScreenMainTabInfoCellViewModel>)
 }
 
 enum HomeTab: Int {
@@ -29,7 +29,7 @@ enum HomeTab: Int {
         switch self {
         case .myUniversities: "My Universities"
         case .application: "Application"
-        case .main: "Welcome"
+        case .main: "Welcome, User"
         }
     }
 }

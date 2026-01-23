@@ -38,6 +38,7 @@ final class HomeScreenVC: UIViewController {
         cv.registerCell(HomeScreenExpandableENTCell.self, reuseID: HomeScreenExpandableENTCell.identifier)
         cv.registerCell(HomeScreenExpandableOlympiadCell.self, reuseID: HomeScreenExpandableOlympiadCell.identifier)
         cv.registerCell(HomeScreenExpandableExtracurricularCell.self, reuseID: HomeScreenExpandableExtracurricularCell.identifier)
+        cv.registerCell(HomeScreenMainTabInfoCell.self, reuseID: HomeScreenMainTabInfoCell.identifier)
         cv.registerSupplementary(
             HomeScreenSegmentedReusableMenu.self,
             kind: UICollectionView.elementKindSectionHeader,
@@ -85,7 +86,10 @@ final class HomeScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath)
                 (cell as? ConfigurableCellProtocol)?.configure(withVM: item.viewModel)
                 return cell
-            case .banner: fatalError("Not implemented")
+            case .mainScreenInfo(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? HomeScreenMainTabInfoCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
             }
         }
         

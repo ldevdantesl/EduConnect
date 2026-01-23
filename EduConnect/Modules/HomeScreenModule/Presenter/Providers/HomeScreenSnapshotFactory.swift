@@ -83,12 +83,13 @@ final class HomeScreenSnapshotFactory: HomeScreenSnapshotFactoryProtocol {
     
     private func makeMainSnapshot(for tab: HomeTab) -> SnapshotResult {
         let headerVM = makeHeaderVM(for: tab)
-        
+        let homeInfoVM = HomeScreenMainTabInfoCellViewModel()
         return (
             sections: [.main],
             itemsBySection: [
                 .main: [
-                    .headerItem(.init(id: "header", viewModel: headerVM))
+                    .headerItem(.init(id: "header", viewModel: headerVM)),
+                    .mainScreenInfo(.init(id: "info", viewModel: homeInfoVM))
                 ]
             ]
         )
