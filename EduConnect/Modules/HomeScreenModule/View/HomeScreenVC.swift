@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 
 protocol HomeScreenViewProtocol: AnyObject {
-    func applySnapshot(sections: [HomeSection], itemsBySection: [HomeSection : [HomeItem]])
-    func reconfigureItems(items: [HomeItem])
+    func applySnapshot(sections: [HomeScreenSection], itemsBySection: [HomeScreenSection : [HomeScreenItem]])
+    func reconfigureItems(items: [HomeScreenItem])
     func showPopup(_ popUp: PopUpView)
     func dismissPopup()
 }
@@ -32,11 +32,11 @@ final class HomeScreenVC: UIViewController {
     }()
     
     private lazy var collectionContainer: DiffableCollectionViewContainer = {
-        let cv = DiffableCollectionViewContainer<HomeSection, HomeItem>(
+        let cv = DiffableCollectionViewContainer<HomeScreenSection, HomeScreenItem>(
             layout: HomeLayoutFactory.make()
         )
         cv.resignsFirstResponderOnScroll = true
-        cv.registerCell(HomeScreenUniversityCell.self, reuseID: HomeScreenUniversityCell.identifier)
+        cv.registerCell(UniversityCell.self, reuseID: UniversityCell.identifier)
         cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
         cv.registerCell(HomeScreenExpandablePersonalInfoCell.self, reuseID: HomeScreenExpandablePersonalInfoCell.identifier)
         cv.registerCell(HomeScreenExpandableFamilyInfoCell.self, reuseID: HomeScreenExpandableFamilyInfoCell.identifier)
@@ -85,7 +85,7 @@ final class HomeScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
             case .university(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? HomeScreenUniversityCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             case .expandableCell(let item):
@@ -115,11 +115,11 @@ final class HomeScreenVC: UIViewController {
 }
 
 extension HomeScreenVC: HomeScreenViewProtocol {
-    func applySnapshot(sections: [HomeSection], itemsBySection: [HomeSection : [HomeItem]]) {
+    func applySnapshot(sections: [HomeScreenSection], itemsBySection: [HomeScreenSection : [HomeScreenItem]]) {
         collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
     }
     
-    func reconfigureItems(items: [HomeItem]) {
+    func reconfigureItems(items: [HomeScreenItem]) {
         collectionContainer.reconfigureItems(items)
     }
     

@@ -9,12 +9,12 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-struct HomeScreenUniversityCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = "HomeScreenUniversityCell"
+struct UniversityCellViewModel: CellViewModelProtocol {
+    var cellIdentifier: String = "UniversityCell"
     let university: ECUniversity
 }
 
-final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // other
@@ -37,7 +37,7 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProt
     }
     
     // MARK: - PROPERTIES
-    private var viewModel: HomeScreenUniversityCellViewModel?
+    private var viewModel: UniversityCellViewModel?
     
     // MARK: - VIEW PROPERTIES
     private let backgroundImage: UIImageView = {
@@ -92,7 +92,7 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProt
     
     private let universityCapIconImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: ImageConstants.universityCapIconImage)
+        image.image = ImageConstants.universityCapIconImage.image
         image.contentMode = .scaleAspectFit
         image.clipsToBounds = true
         return image
@@ -255,7 +255,7 @@ final class HomeScreenUniversityCell: UICollectionViewCell, ConfigurableCellProt
     
     // MARK: - PUBLIC FUNC
     public func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? HomeScreenUniversityCellViewModel else { return }
+        guard let vm = vm as? UniversityCellViewModel else { return }
         self.viewModel = vm
         self.backgroundImage.kf.indicatorType = .activity
         if let indicator = backgroundImage.kf.indicator as? UIActivityIndicatorView {

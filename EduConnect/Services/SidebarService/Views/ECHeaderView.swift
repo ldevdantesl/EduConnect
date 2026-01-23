@@ -15,10 +15,6 @@ struct ECHeaderViewModel {
 final class ECHeaderView: UIView {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
-        static let accountButtonImageName = ImageConstants.accountIconImage
-        
-        static let barButtonImageName = ImageConstants.tabBarIconImage
-        
         static let logoImageW = 80.0
         static let logoImageH = 44.0
         
@@ -32,7 +28,7 @@ final class ECHeaderView: UIView {
     // MARK: - VIEW PROPERTIES
     private let accountButton: ECIconButton = {
         let vm = ECIconButtonVM(
-            iconName: Constants.accountButtonImageName,
+            iconName: ImageConstants.accountIconImage.rawValue,
             style: .title3, weight: .bold
         )
         let button = ECIconButton(viewModel: vm)
@@ -41,7 +37,7 @@ final class ECHeaderView: UIView {
     
     private let barButton: ECIconButton = {
         let vm = ECIconButtonVM(
-            iconName: Constants.barButtonImageName,
+            iconName: ImageConstants.tabBarIconImage.rawValue,
             style: .title3, weight: .bold
         )
         let button = ECIconButton(viewModel: vm)
@@ -50,7 +46,7 @@ final class ECHeaderView: UIView {
     
     private let logoImage: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: ImageConstants.appLogo)
+        view.image = UIImage(named: ImageConstants.appLogo.rawValue)
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         return view

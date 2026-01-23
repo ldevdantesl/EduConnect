@@ -5,18 +5,23 @@
 //  Created by Buzurg Rakhimzoda on 4.01.2026.
 //
 
-import Foundation
+import UIKit
 
-public enum ImageConstants {
-    
+public enum ImageConstants: String {
+
     // Images
-    static let appLogo: String = "AppLogo"
-    
+    case appLogo = "AppLogo"
+
     // Icons
-    static let tabBarIconImage: String = "TabBarIconImage"
-    static let accountIconImage: String = "AccountIconImage"
-    static let universityCapIconImage: String = "UniversityCapIconImage"
-    
+    case tabBarIconImage = "TabBarIconImage"
+    case accountIconImage = "AccountIconImage"
+    case universityCapIconImage = "UniversityCapIconImage"
+    case universityScreenHeaderImage = "UniversityScreenHeaderImage"
+
     // Samples
-    static let universityImageSample: String = "UniversityImageSample"
+    case universityImageSample = "UniversityImageSample"
+
+    var image: UIImage? {
+        UIImage(named: rawValue)
+    }
 }

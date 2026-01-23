@@ -61,7 +61,9 @@ final class AppRouter: AppRoutingProtocol {
     
     private func navigateFromSidebar(to tab: SidebarMenuTab) {
         switch tab {
-        case .universities: print("Navigating to Uni")
+        case .universities:
+            let vc = UniversityScreenAssembler.assemble()
+            navController.setViewControllers([vc], animated: true)
         case .programs:  print("Navigating to Programs")
         case .professions: print("Navigating to Professions")
         case .tests: print("Navigating to Tests")

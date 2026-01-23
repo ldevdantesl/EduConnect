@@ -31,7 +31,7 @@ final class SidebarMenuView: UIView {
     // MARK: - VIEW PROPERTIES
     private let logoImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: ImageConstants.appLogo)
+        image.image = ImageConstants.appLogo.image
         image.contentMode = .scaleAspectFill
         return image
     }()

@@ -10,7 +10,7 @@ import UIKit
 protocol HomeScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapTabBar()
-    var selectedTab: HomeTab { get set }
+    var selectedTab: HomeScreenTab { get set }
     var headerMenuViewModel: HomeScreenSegmentedReusableMenuViewModel { get }
 }
 
@@ -22,7 +22,7 @@ final class HomeScreenPresenter {
     var interactor: HomeScreenInteractorProtocol
     
     // MARK: - PROPERTIES
-    var selectedTab: HomeTab = .main
+    var selectedTab: HomeScreenTab = .main
     
     // MARK: - LAZY PROPERTIES
     private lazy var expandableProvider: ExpandableViewModelsProvider = {
@@ -67,7 +67,7 @@ final class HomeScreenPresenter {
     }
     
     // MARK: - PRIVATE FUNC
-    private func didSelectAnotherTab(newTab: HomeTab) {
+    private func didSelectAnotherTab(newTab: HomeScreenTab) {
         guard selectedTab != newTab else { return }
         selectedTab = newTab
         let snapshot = snapshotFactory.makeSnapshot(for: newTab)

@@ -37,15 +37,15 @@ struct ExpandableActions {
 // MARK: - Provider Protocol
 
 protocol ExpandableViewModelsProviderProtocol {
-    func makeExpandableItem(for id: ExpandableCellID) -> HomeItem?
-    func toggleExpandableCell(id: ExpandableCellID) -> HomeItem?
+    func makeExpandableItem(for id: ExpandableCellID) -> HomeScreenItem?
+    func toggleExpandableCell(id: ExpandableCellID) -> HomeScreenItem?
 }
 
 final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
     
     private var expandableViewModels: [ExpandableCellID: ExpandableCellViewModel] = [:]
     private var actions: ExpandableActions
-    var onCellToggled: ((HomeItem) -> Void)?
+    var onCellToggled: ((HomeScreenItem) -> Void)?
     
     // MARK: - Init
     init(actions: ExpandableActions) {
@@ -64,7 +64,7 @@ final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
     }
     
     // MARK: - Public Methods
-    func makeExpandableItem(for id: ExpandableCellID) -> HomeItem? {
+    func makeExpandableItem(for id: ExpandableCellID) -> HomeScreenItem? {
         guard let vm = expandableViewModels[id] else { return nil }
         return .expandableCell(
             DiffableItem(id: id.rawValue, viewModel: vm)
@@ -72,7 +72,7 @@ final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
     }
     
     @discardableResult
-    func toggleExpandableCell(id: ExpandableCellID) -> HomeItem? {
+    func toggleExpandableCell(id: ExpandableCellID) -> HomeScreenItem? {
         guard let vm = expandableViewModels[id] else { return nil }
         vm.isExpanded.toggle()
         
