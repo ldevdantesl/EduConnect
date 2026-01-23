@@ -8,32 +8,33 @@
 import UIKit
 import SnapKit
 
+struct ECHeaderViewModel {
+    var didTapBar: (() -> Void)?
+}
+
 final class ECHeaderView: UIView {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
-        // AccountButton
         static let accountButtonImageName = ImageConstants.accountIconImage
         
-        // BarButton
         static let barButtonImageName = ImageConstants.tabBarIconImage
         
-        // App Logo Image
         static let logoImageW = 80.0
         static let logoImageH = 44.0
         
-        // Spacing
         static let vSpacing = 10.0
         static let hSpacing = 10.0
     }
+    
+    // MARK: - PROPERTIES
+    private var viewModel: ECHeaderViewModel?
     
     // MARK: - VIEW PROPERTIES
     private let accountButton: ECIconButton = {
         let vm = ECIconButtonVM(
             iconName: Constants.accountButtonImageName,
             style: .title3, weight: .bold
-        ) {
-            print("Tapped Account Button")
-        }
+        )
         let button = ECIconButton(viewModel: vm)
         return button
     }()
@@ -42,9 +43,7 @@ final class ECHeaderView: UIView {
         let vm = ECIconButtonVM(
             iconName: Constants.barButtonImageName,
             style: .title3, weight: .bold
-        ) {
-            print("Tapped Bar Button")
-        }
+        )
         let button = ECIconButton(viewModel: vm)
         return button
     }()
@@ -66,6 +65,14 @@ final class ECHeaderView: UIView {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func configure(vm: ECHeaderViewModel) {
+        self.viewModel = vm
+        self.barButton.setAction { [weak self] in
+            guard let self = self else { return }
+            self.viewModel?.didTapBar?()
+        }
     }
     
     // MARK: - PRIVATE FUNC

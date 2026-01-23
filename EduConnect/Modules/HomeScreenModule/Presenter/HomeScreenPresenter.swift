@@ -9,7 +9,7 @@ import UIKit
 
 protocol HomeScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
-    
+    func didTapTabBar()
     var selectedTab: HomeTab { get set }
     var headerMenuViewModel: HomeScreenSegmentedReusableMenuViewModel { get }
 }
@@ -28,15 +28,15 @@ final class HomeScreenPresenter {
     private lazy var expandableProvider: ExpandableViewModelsProvider = {
         let expandableActions = ExpandableActions(
             didTapAddActivity: { [weak self] in
-                let vm = AddExtracurricularActivityPopUpViewModel(onClose: self?.clearPopupView, didAddNewActivity: nil)
+                let vm = AddExtracurricularActivityPopUpViewModel(onClose: self?.view?.dismissPopup, didAddNewActivity: nil)
                 self?.router.showAddExtracurricularPopUp(viewModel: vm)
             },
             didTapAddOlympiad: { [weak self] in
-                let vm = AddOlympiadPopUpViewModel(onClose: self?.clearPopupView, didAddNewOlympiad: nil)
+                let vm = AddOlympiadPopUpViewModel(onClose: self?.view?.dismissPopup, didAddNewOlympiad: nil)
                 self?.router.showAddNewOlympiadPopUp(viewModel: vm)
             },
             didTapAddENTSubject: { [weak self] in
-                let vm = AddENTSubjectPopUpViewModel(onClose: self?.clearPopupView, didAddNewSubject: nil)
+                let vm = AddENTSubjectPopUpViewModel(onClose: self?.view?.dismissPopup, didAddNewSubject: nil)
                 self?.router.showAddEntSubjectPopUp(viewModel: vm)
             }
         )
@@ -67,10 +67,6 @@ final class HomeScreenPresenter {
     }
     
     // MARK: - PRIVATE FUNC
-    private func clearPopupView() {
-        self.view?.popUpView = nil
-    }
-    
     private func didSelectAnotherTab(newTab: HomeTab) {
         guard selectedTab != newTab else { return }
         selectedTab = newTab
@@ -82,5 +78,9 @@ final class HomeScreenPresenter {
 extension HomeScreenPresenter: HomeScreenPresenterProtocol {
     func viewDidLoad() {
         didSelectAnotherTab(newTab: .myUniversities)
+    }
+    
+    func didTapTabBar() {
+        router.showSidebar()
     }
 }

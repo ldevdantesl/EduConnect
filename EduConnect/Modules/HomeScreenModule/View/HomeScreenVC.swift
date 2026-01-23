@@ -11,8 +11,8 @@ import SnapKit
 protocol HomeScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [HomeSection], itemsBySection: [HomeSection : [HomeItem]])
     func reconfigureItems(items: [HomeItem])
-    
-    var popUpView: PopUpView? { get set }
+    func showPopup(_ popUp: PopUpView)
+    func dismissPopup()
 }
 
 final class HomeScreenVC: UIViewController {
@@ -20,10 +20,16 @@ final class HomeScreenVC: UIViewController {
     // MARK: - VIPER
     var presenter: HomeScreenPresenterProtocol?
     
-    var popUpView: PopUpView?
+    // MARK: - PROPERTIES
+    private var popUpView: PopUpView?
     
     // MARK: - VIEW PROPERTIES
-    private let headerView = ECHeaderView()
+    private lazy var headerView: ECHeaderView = {
+        let vm = ECHeaderViewModel { [weak self] in self?.presenter?.didTapTabBar() }
+        let header = ECHeaderView()
+        header.configure(vm: vm)
+        return header
+    }()
     
     private lazy var collectionContainer: DiffableCollectionViewContainer = {
         let cv = DiffableCollectionViewContainer<HomeSection, HomeItem>(
@@ -115,5 +121,14 @@ extension HomeScreenVC: HomeScreenViewProtocol {
     
     func reconfigureItems(items: [HomeItem]) {
         collectionContainer.reconfigureItems(items)
+    }
+    
+    func showPopup(_ popUp: PopUpView) {
+        self.popUpView = popUp
+        popUp.show(in: view)
+    }
+    
+    func dismissPopup() {
+        self.popUpView = nil
     }
 }

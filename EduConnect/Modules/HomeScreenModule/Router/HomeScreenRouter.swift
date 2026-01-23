@@ -11,34 +11,35 @@ protocol HomeScreenRouterProtocol {
     func showAddExtracurricularPopUp(viewModel: AddExtracurricularActivityPopUpViewModel)
     func showAddEntSubjectPopUp(viewModel: AddENTSubjectPopUpViewModel)
     func showAddNewOlympiadPopUp(viewModel: AddOlympiadPopUpViewModel)
+    func showSidebar()
 }
 
 final class HomeScreenRouter: HomeScreenRouterProtocol {
     weak var viewController: HomeScreenVC?
-    weak var appRoter: AppRoutingProtocol?
+    private let appRoter: AppRoutingProtocol
+    private let sidebarService: SidebarServiceProtocol
     
-    init(appRouter: AppRoutingProtocol) {
+    init(appRouter: AppRoutingProtocol, sidebarService: SidebarServiceProtocol) {
         self.appRoter = appRouter
+        self.sidebarService = sidebarService
     }
     
     func showAddExtracurricularPopUp(viewModel: AddExtracurricularActivityPopUpViewModel) {
         let popUpView = AddExtracurricularActivityPopUpView(viewModel: viewModel)
-        guard let view = viewController?.view else { return }
-        popUpView.show(in: view)
-        viewController?.popUpView = popUpView
+        viewController?.showPopup(popUpView)
     }
     
     func showAddEntSubjectPopUp(viewModel: AddENTSubjectPopUpViewModel) {
         let popUpView = AddENTSubjectPopUpView(viewModel: viewModel)
-        guard let view = viewController?.view else { return }
-        popUpView.show(in: view)
-        viewController?.popUpView = popUpView
+        viewController?.showPopup(popUpView)
     }
     
     func showAddNewOlympiadPopUp(viewModel: AddOlympiadPopUpViewModel) {
         let popUpView = AddOlympiadPopUpView(viewModel: viewModel)
-        guard let view = viewController?.view else { return }
-        popUpView.show(in: view)
-        viewController?.popUpView = popUpView
+        viewController?.showPopup(popUpView)
+    }
+    
+    func showSidebar() {
+        sidebarService.open()
     }
 }

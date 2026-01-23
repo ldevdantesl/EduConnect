@@ -8,7 +8,6 @@
 import UIKit
 
 public struct ECIconButtonVM {
-    
     public var icon: UIImage
     public var color: UIColor
     public var style: UIFont.TextStyle
@@ -47,6 +46,7 @@ open class ECIconButton: UIButton {
     
     // MARK: - PROPERTIES
     private var viewModel: ECIconButtonVM?
+    private var action: (() -> Void)?
     
     // MARK: - INIT
     public override init(frame: CGRect) {
@@ -78,6 +78,7 @@ open class ECIconButton: UIButton {
         config.baseForegroundColor = viewModel.color
         self.isUserInteractionEnabled = true
         self.configuration = config
+        self.action = viewModel.didTapAction
         self.addTarget(self, action: #selector(didTapAction), for: .touchUpInside)
     }
     
@@ -87,8 +88,12 @@ open class ECIconButton: UIButton {
         setup()
     }
     
+    public func setAction(action: @escaping (() -> Void)) {
+        self.action = action
+    }
+    
     // MARK: - OBJC FUNC
     @objc private func didTapAction() {
-        viewModel?.didTapAction?()
+        action?()
     }
 }

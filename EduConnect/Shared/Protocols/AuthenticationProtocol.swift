@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ECAuthenticationProtocol: AnyObject {
+protocol AuthenticationProtocol: AnyObject {
     var isLoggedIn: Bool { get }
     
     func logIn()

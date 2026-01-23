@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ECAuthentication: ECAuthenticationProtocol {
+final class ECAuthentication: AuthenticationProtocol {
     private var isLoggedInKey = "isLoggedInKey"
     
     var isLoggedIn: Bool {

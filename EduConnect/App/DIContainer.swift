@@ -8,9 +8,11 @@
 import Foundation
 
 struct DIContainer {
-    let authentication: ECAuthenticationProtocol
+    let authentication: ECAuthentication
+    let sidebarService: ECSidebarService
     
     init() {
         self.authentication = ECAuthentication()
+        self.sidebarService = ECSidebarService()
     }
 }

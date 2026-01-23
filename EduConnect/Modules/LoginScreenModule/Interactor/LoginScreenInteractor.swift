@@ -11,9 +11,9 @@ protocol LoginScreenInteractorProtocol: AnyObject {
 
 final class LoginScreenInteractor: LoginScreenInteractorProtocol {
     weak var presenter: LoginScreenPresenterProtocol?
-    private let authState: ECAuthenticationProtocol
+    private let authState: AuthenticationProtocol
     
-    init(authState: ECAuthenticationProtocol) {
+    init(authState: AuthenticationProtocol) {
         self.authState = authState
     }
     

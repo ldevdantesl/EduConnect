@@ -8,17 +8,25 @@
 import UIKit
 
 final class AppRouter: AppRoutingProtocol {
-    private let authState: ECAuthenticationProtocol
+    // MARK: - INJECTED PROPERTIES
+    private let authState: ECAuthentication
+    private var sidebarService: ECSidebarService
     
-    init(authState: ECAuthenticationProtocol) {
-        self.authState = authState
-    }
-    
+    // MARK: - WEAK PROPERTIES
     weak var window: UIWindow?
     
+    // MARK: - PROPERTIES
     private let navAnimator = NavigationAnimatorDelegate()
     private(set) var navController = UINavigationController()
+    private(set) var sidebarContainer: SidebarContainerViewController?
     
+    init(authState: ECAuthentication, sidebarService: ECSidebarService) {
+        self.authState = authState
+        self.sidebarService = sidebarService
+        setup()
+    }
+    
+    // MARK: - PROTOCOL FUNC
     func start() {
         navController.navigationBar.isHidden = true
         navController.delegate = navAnimator
@@ -33,7 +41,33 @@ final class AppRouter: AppRoutingProtocol {
     }
     
     func routeToMain() {
-        let vc = HomeScreenAssembler.assemble(appRouter: self)
+        sidebarContainer = SidebarContainerViewController(
+            rootViewController: navController,
+            sidebarService: sidebarService
+        )
+        window?.rootViewController = sidebarContainer
+        window?.makeKeyAndVisible()
+        let vc = HomeScreenAssembler.assemble(appRouter: self, sidebarService: sidebarService)
         navController.setViewControllers([vc], animated: true)
+    }
+    
+    // MARK: - PRIVATE FUNC
+    private func setup() {
+        sidebarService.onTabSelected = { [weak self] in
+            guard let self = self else { return }
+            self.navigateFromSidebar(to: $0)
+        }
+    }
+    
+    private func navigateFromSidebar(to tab: SidebarMenuTab) {
+        switch tab {
+        case .universities: print("Navigating to Uni")
+        case .programs:  print("Navigating to Programs")
+        case .professions: print("Navigating to Professions")
+        case .tests: print("Navigating to Tests")
+        case .article: print("Navigating to Artcles")
+        case .calendar: print("Navigating to Calendar")
+        case .none: print("Not navigating")
+        }
     }
 }
