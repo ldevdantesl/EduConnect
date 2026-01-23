@@ -56,13 +56,12 @@ final class SidebarContainerViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
     
-    // MARK: - Setup
+    // MARK: - PRIVATE FUNC
     private func setup() {
         addChild(rootViewController)
         mainContainerView.addSubview(rootViewController.view)
@@ -89,7 +88,7 @@ final class SidebarContainerViewController: UIViewController {
         }
     }
     
-    // MARK: - Public
+    // MARK: - PUBLIC FUNC
     public func toggleSidebar() {
         isSidebarOpen ? closeSidebar() : openSidebar()
     }
@@ -110,6 +109,7 @@ final class SidebarContainerViewController: UIViewController {
         }
     }
     
+    // MARK: - OBJC FUNC
     @objc public func closeSidebar() {
         guard isSidebarOpen else { return }
         isSidebarOpen = false
