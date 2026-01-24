@@ -12,6 +12,12 @@ import Kingfisher
 struct UniversityCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = "UniversityCell"
     let university: ECUniversity
+    let horizontallySpaced: Bool
+    
+    init(university: ECUniversity, horizontallySpaced: Bool = false) {
+        self.university = university
+        self.horizontallySpaced = horizontallySpaced
+    }
 }
 
 final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
@@ -158,9 +164,6 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
         self.contentView.clipsToBounds = false
         self.clipsToBounds = false
         self.contentView.addSubview(containerView)
-        containerView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
         layoutIfNeeded()
     }
     
@@ -253,6 +256,13 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
         }
     }
     
+    private func makeConstraints() {
+        containerView.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset((viewModel?.horizontallySpaced ?? false) ? Constants.midSpacing : 0)
+        }
+    }
+    
     // MARK: - PUBLIC FUNC
     public func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? UniversityCellViewModel else { return }
@@ -282,5 +292,7 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
         self.professionsLabel.text = validatedProfessionsText(professions: vm.university.professions)
         self.programsButton.configure(text: "\(vm.university.programsCount) программ")
         self.facultyButton.configure(text: "\(vm.university.facultiesCount) факультета")
+        
+        makeConstraints()
     }
 }

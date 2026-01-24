@@ -24,15 +24,29 @@ final class UniversityScreenPresenter {
 
 extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
     func viewDidLoad() {
+        var count = 0
         let headerVM = UniversityScreenHeaderCellViewModel()
         let filtersVM = UniversityScreenFilterCellViewModel()
+        let pageIndicatorVM = PageIndicatorCellViewModel(totalPages: 4, currentPage: 3)
+        let universities: [ECUniversity] = [.sample, .sample, .sample]
+        
+        var universityItems: [UniversityScreenItem] = universities.map {
+            let vm = UniversityCellViewModel(university: $0, horizontallySpaced: true)
+            let item = DiffableItem(id: $0.id + count, viewModel: vm)
+            count += 1
+            return .universityItem(item)
+        }
+        
+        universityItems.append(UniversityScreenItem.pageIndicatorItem(.init(id: "pageIndicator", viewModel: pageIndicatorVM)))
+        
         view?.applySnapshot(
-            sections: [.headerInfo],
+            sections: [.headerInfo, .universities],
             itemsBySection: [
                 .headerInfo: [
                     .headerItem(.init(id: "header", viewModel: headerVM)),
                     .filterItem(.init(id: "filter", viewModel: filtersVM))
-                ]
+                ],
+                .universities : universityItems
             ]
         )
     }

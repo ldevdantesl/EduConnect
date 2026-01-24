@@ -27,6 +27,7 @@ final class UniversityScreenVC: UIViewController {
         cv.registerCell(UniversityScreenHeaderCell.self, reuseID: UniversityScreenHeaderCell.identifier)
         cv.registerCell(UniversityScreenFilterCell.self, reuseID: UniversityScreenFilterCell.identifier)
         cv.registerCell(UniversityCell.self, reuseID: UniversityCell.identifier)
+        cv.registerCell(PageIndicatorCell.self, reuseID: PageIndicatorCell.identifier)
         cv.backgroundColor = .clear
         cv.resignsFirstResponderOnScroll = true
         return cv
@@ -66,6 +67,16 @@ final class UniversityScreenVC: UIViewController {
                 
             case .filterItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityScreenFilterCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .pageIndicatorItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? PageIndicatorCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .universityItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 

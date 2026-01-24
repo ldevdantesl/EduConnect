@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum UniversityScreenSection: Hashable {
+enum UniversityScreenSection: Hashable, CaseIterable {
     case headerInfo
     case universities
     case bottomInfo
@@ -16,7 +16,7 @@ enum UniversityScreenSection: Hashable {
 enum UniversityScreenItem: Hashable {
     case headerItem(DiffableItem<UniversityScreenHeaderCellViewModel>)
     case filterItem(DiffableItem<UniversityScreenFilterCellViewModel>)
-    case universityItem(DiffableItem<UniversityCell>)
-    case pageIndicatorItem
+    case universityItem(DiffableItem<UniversityCellViewModel>)
+    case pageIndicatorItem(DiffableItem<PageIndicatorCellViewModel>)
     case infoItem
 }
