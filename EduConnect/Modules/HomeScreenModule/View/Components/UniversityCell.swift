@@ -120,6 +120,7 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         return view
     }()

@@ -28,6 +28,7 @@ extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
         let headerVM = UniversityScreenHeaderCellViewModel()
         let filtersVM = UniversityScreenFilterCellViewModel()
         let pageIndicatorVM = PageIndicatorCellViewModel(totalPages: 4, currentPage: 3)
+        let bottomInfoVM = UniversityScreenBottomInfoCellViewModel()
         let universities: [ECUniversity] = [.sample, .sample, .sample]
         
         var universityItems: [UniversityScreenItem] = universities.map {
@@ -40,13 +41,14 @@ extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
         universityItems.append(UniversityScreenItem.pageIndicatorItem(.init(id: "pageIndicator", viewModel: pageIndicatorVM)))
         
         view?.applySnapshot(
-            sections: [.headerInfo, .universities],
+            sections: [.headerInfo, .universities, .bottomInfo],
             itemsBySection: [
                 .headerInfo: [
                     .headerItem(.init(id: "header", viewModel: headerVM)),
                     .filterItem(.init(id: "filter", viewModel: filtersVM))
                 ],
-                .universities : universityItems
+                .universities : universityItems,
+                .bottomInfo : [.bottomInfoItem(.init(id: "bottomInfo", viewModel: bottomInfoVM))]
             ]
         )
     }
