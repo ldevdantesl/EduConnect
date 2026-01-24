@@ -25,8 +25,10 @@ final class UniversityScreenVC: UIViewController {
             layout: UniversityScreenLayoutFactory.make()
         )
         cv.registerCell(UniversityScreenHeaderCell.self, reuseID: UniversityScreenHeaderCell.identifier)
+        cv.registerCell(UniversityScreenFilterCell.self, reuseID: UniversityScreenFilterCell.identifier)
         cv.registerCell(UniversityCell.self, reuseID: UniversityCell.identifier)
         cv.backgroundColor = .clear
+        cv.resignsFirstResponderOnScroll = true
         return cv
     }()
     
@@ -61,6 +63,12 @@ final class UniversityScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityScreenHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
+                
+            case .filterItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityScreenFilterCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
             default:
                 return UICollectionViewCell()
             }

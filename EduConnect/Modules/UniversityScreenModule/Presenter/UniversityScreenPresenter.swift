@@ -24,12 +24,14 @@ final class UniversityScreenPresenter {
 
 extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
     func viewDidLoad() {
-        let vm = UniversityScreenHeaderCellViewModel()
+        let headerVM = UniversityScreenHeaderCellViewModel()
+        let filtersVM = UniversityScreenFilterCellViewModel()
         view?.applySnapshot(
-            sections: [.main],
+            sections: [.headerInfo],
             itemsBySection: [
-                .main : [
-                    .headerItem(.init(id: "header", viewModel: vm))
+                .headerInfo: [
+                    .headerItem(.init(id: "header", viewModel: headerVM)),
+                    .filterItem(.init(id: "filter", viewModel: filtersVM))
                 ]
             ]
         )

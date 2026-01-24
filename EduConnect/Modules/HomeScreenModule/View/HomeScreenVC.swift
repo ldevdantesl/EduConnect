@@ -129,6 +129,7 @@ extension HomeScreenVC: HomeScreenViewProtocol {
     }
     
     func dismissPopup() {
+        popUpView?.dismiss()
         self.popUpView = nil
     }
 }
