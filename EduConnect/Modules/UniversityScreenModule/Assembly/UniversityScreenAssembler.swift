@@ -8,9 +8,9 @@
 import UIKit
 
 final class UniversityScreenAssembler {
-    static func assemble() -> UniversityScreenVC {
+    static func assemble(sidebarService: SidebarServiceProtocol) -> UniversityScreenVC {
         let interactor = UniversityScreenInteractor()
-        let router = UniversityScreenRouter()
+        let router = UniversityScreenRouter(sidebarService: sidebarService)
         let presenter = UniversityScreenPresenter(interactor: interactor, router: router)
         let viewController = UniversityScreenVC()
         presenter.view  = viewController

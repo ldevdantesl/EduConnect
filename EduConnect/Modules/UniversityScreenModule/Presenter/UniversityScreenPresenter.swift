@@ -9,6 +9,7 @@ import SnapKit
 
 protocol UniversityScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
+    func didTapTabBar()
 }
 
 final class UniversityScreenPresenter {
@@ -26,7 +27,7 @@ extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
     func viewDidLoad() {
         var count = 0
         let headerVM = UniversityScreenHeaderCellViewModel()
-        let filtersVM = UniversityScreenFilterCellViewModel()
+        let filtersVM = UniversityScreenFilterCellViewModel(didTapFilters: { [weak self] in self?.router.presentFilterView() })
         let pageIndicatorVM = PageIndicatorCellViewModel(totalPages: 4, currentPage: 3)
         let bottomInfoVM = UniversityScreenBottomInfoCellViewModel()
         let universities: [ECUniversity] = [.sample, .sample, .sample]
@@ -51,5 +52,9 @@ extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
                 .bottomInfo : [.bottomInfoItem(.init(id: "bottomInfo", viewModel: bottomInfoVM))]
             ]
         )
+    }
+    
+    func didTapTabBar() {
+        router.openSidebar()
     }
 }
