@@ -1,27 +1,27 @@
 //
-//  HomeScreenExpandableEducationCell.swift
+//  HomeScreenApplicationCell.swift
 //  EduConnect
 //
-//  Created by Buzurg Rakhimzoda on 18.01.2026.
+//  Created by Buzurg Rakhimzoda on 16.01.2026.
 //
 
 import UIKit
 import SnapKit
 
-final class HomeScreenExpandableEducationCellViewModel: ExpandableCellViewModel {
-    private(set) var cellIdentifier: String = "HomeScreenExpandableEducationCell"
+final class AccountScreenExpandablePersonalInfoCellViewModel: ExpandableCellViewModel {
+    var cellIdentifier: String = "AccountScreenExpandablePersonalInfoCell"
     var isExpanded: Bool
     let didTapExpand: (() -> Void)?
     let didTapSave: ((String?, String?, String?) -> Void)?
     
-    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?, String?) -> Void)? = nil) {
+    init(isExpanded: Bool = false, didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?, String?) -> Void)? = nil) {
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
         self.didTapSave = didTapSave
     }
 }
 
-final class HomeScreenExpandableEducationCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class AccountScreenExpandablePersonalInfoCell: UICollectionViewCell, ConfigurableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -32,7 +32,7 @@ final class HomeScreenExpandableEducationCell: UICollectionViewCell, Configurabl
     }
     
     // MARK: - PROPERTIES
-    private var viewModel: HomeScreenExpandableEducationCellViewModel?
+    private var viewModel: AccountScreenExpandablePersonalInfoCellViewModel?
     private var expandableHeightConstraint: Constraint?
     private var isEditing: Bool = false
     
@@ -58,51 +58,49 @@ final class HomeScreenExpandableEducationCell: UICollectionViewCell, Configurabl
         return image
     }()
     
-    private let educationLabel: UILabel = {
+    private let personalInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "Education"
+        label.text = "Personal information"
         label.font = ECFont.font(.semiBold, size: 14)
         label.textColor = UIColor.label
         return label
     }()
     
-    private let schoolLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "School (Education Center)"
+        label.text = "Name"
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
     
-    private let schoolField: ECTextField = {
-        let field = ECTextField(placeHolder: "School", showsBorder: false)
+    private let nameField: ECTextField = {
+        let field = ECTextField(placeHolder: "YourName", showsBorder: false)
         field.isEnabled = false
         return field
     }()
     
-    private let finalClassLabel: UILabel = {
+    private let surnameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Final Class"
+        label.text = "Surname"
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
     
-    private let finalClassField: ECTextField = {
-        let field = ECTextField(placeHolder: "Final Class", showsBorder: false)
+    private let surnameField: ECTextField = {
+        let field = ECTextField(placeHolder: "Surname", showsBorder: false)
         field.isEnabled = false
         return field
     }()
     
-    private let averageLabel: UILabel = {
+    private let patronymicLabel: UILabel = {
         let label = UILabel()
-        label.text = "Average Score"
+        label.text = "Patronymic"
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
     
-    private let averageField: ECTextField = {
-        let field = ECTextField(placeHolder: "20", showsBorder: false)
-        field.keyboardType = .numberPad
-        field.maximumCharacters = 3
+    private let patronymicField: ECTextField = {
+        let field = ECTextField(placeHolder: "patronymic", showsBorder: false)
         field.isEnabled = false
         return field
     }()
@@ -145,7 +143,7 @@ final class HomeScreenExpandableEducationCell: UICollectionViewCell, Configurabl
     
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? HomeScreenExpandableEducationCellViewModel else { return }
+        guard let vm = vm as? AccountScreenExpandablePersonalInfoCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()
     }
@@ -160,15 +158,15 @@ final class HomeScreenExpandableEducationCell: UICollectionViewCell, Configurabl
             $0.top.horizontalEdges.equalToSuperview()
         }
         
-        headerContainer.addSubview(educationLabel)
-        educationLabel.snp.makeConstraints {
+        headerContainer.addSubview(personalInfoLabel)
+        personalInfoLabel.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview().inset(Constants.spacing)
             $0.leading.equalToSuperview().inset(Constants.spacing)
         }
 
         headerContainer.addSubview(expandImageView)
         expandImageView.snp.makeConstraints {
-            $0.centerY.equalTo(educationLabel)
+            $0.centerY.equalTo(personalInfoLabel)
             $0.trailing.equalToSuperview().inset(Constants.spacing)
             $0.size.equalTo(Constants.expandImageSize)
         }
@@ -181,46 +179,45 @@ final class HomeScreenExpandableEducationCell: UICollectionViewCell, Configurabl
             expandableHeightConstraint = $0.height.equalTo(0).priority(.required).constraint
         }
         
-        expandableContainer.addSubview(schoolLabel)
-        schoolLabel.snp.makeConstraints {
+        expandableContainer.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Constants.spacing).priority(.high)
             $0.leading.equalToSuperview().offset(Constants.spacing)
         }
         
-        expandableContainer.addSubview(schoolField)
-        schoolField.snp.makeConstraints {
-            $0.top.equalTo(schoolLabel.snp.bottom).offset(Constants.spacing).priority(.high)
+        expandableContainer.addSubview(nameField)
+        nameField.snp.makeConstraints {
+            $0.top.equalTo(nameLabel.snp.bottom).offset(Constants.spacing).priority(.high)
             $0.horizontalEdges.equalToSuperview()
         }
         
-        expandableContainer.addSubview(finalClassLabel)
-        finalClassLabel.snp.makeConstraints {
-            $0.top.equalTo(schoolField.snp.bottom).offset(Constants.spacing).priority(.high)
+        expandableContainer.addSubview(surnameLabel)
+        surnameLabel.snp.makeConstraints {
+            $0.top.equalTo(nameField.snp.bottom).offset(Constants.spacing).priority(.high)
             $0.leading.equalToSuperview().offset(Constants.spacing)
         }
         
-        expandableContainer.addSubview(finalClassField)
-        finalClassField.snp.makeConstraints {
-            $0.top.equalTo(finalClassLabel.snp.bottom).offset(Constants.spacing).priority(.high)
+        expandableContainer.addSubview(surnameField)
+        surnameField.snp.makeConstraints {
+            $0.top.equalTo(surnameLabel.snp.bottom).offset(Constants.spacing).priority(.high)
             $0.horizontalEdges.equalToSuperview()
         }
         
-        expandableContainer.addSubview(averageLabel)
-        averageLabel.snp.makeConstraints {
-            $0.top.equalTo(finalClassField.snp.bottom).offset(Constants.spacing).priority(.high)
+        expandableContainer.addSubview(patronymicLabel)
+        patronymicLabel.snp.makeConstraints {
+            $0.top.equalTo(surnameField.snp.bottom).offset(Constants.spacing).priority(.high)
             $0.leading.equalToSuperview().offset(Constants.spacing)
         }
         
-        expandableContainer.addSubview(averageField)
-        averageField.snp.makeConstraints {
-            $0.top.equalTo(averageLabel.snp.bottom).offset(Constants.spacing).priority(.high)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview().multipliedBy(0.4)
+        expandableContainer.addSubview(patronymicField)
+        patronymicField.snp.makeConstraints {
+            $0.top.equalTo(patronymicLabel.snp.bottom).offset(Constants.spacing).priority(.high)
+            $0.horizontalEdges.equalToSuperview()
         }
         
         expandableContainer.addSubview(editButton)
         editButton.snp.makeConstraints {
-            $0.top.equalTo(averageField.snp.bottom).offset(Constants.spacing).priority(.high)
+            $0.top.equalTo(patronymicField.snp.bottom).offset(Constants.spacing).priority(.high)
             $0.leading.equalToSuperview().offset(Constants.spacing)
             $0.bottom.equalToSuperview().offset(-Constants.spacing).priority(.high)
         }
@@ -241,21 +238,21 @@ final class HomeScreenExpandableEducationCell: UICollectionViewCell, Configurabl
     private func didTapEdit() {
         if !isEditing {
             editButton.reconfigure(text: "Save")
-            schoolField.reconfigure(showsBorder: true)
-            schoolField.isEnabled = true
-            finalClassField.reconfigure(showsBorder: true)
-            finalClassField.isEnabled = true
-            averageField.reconfigure(showsBorder: true)
-            averageField.isEnabled = true
+            nameField.reconfigure(showsBorder: true)
+            nameField.isEnabled = true
+            surnameField.reconfigure(showsBorder: true)
+            surnameField.isEnabled = true
+            patronymicField.reconfigure(showsBorder: true)
+            patronymicField.isEnabled = true
         } else {
             editButton.reconfigure(text: "Edit")
-            schoolField.reconfigure(showsBorder: false)
-            schoolField.isEnabled = false
-            finalClassField.reconfigure(showsBorder: false)
-            finalClassField.isEnabled = false
-            averageField.reconfigure(showsBorder: false)
-            averageField.isEnabled = false
-            self.viewModel?.didTapSave?(schoolField.text, finalClassField.text, averageField.text)
+            nameField.reconfigure(showsBorder: false)
+            nameField.isEnabled = false
+            surnameField.reconfigure(showsBorder: false)
+            surnameField.isEnabled = false
+            patronymicField.reconfigure(showsBorder: false)
+            patronymicField.isEnabled = false
+            self.viewModel?.didTapSave?(nameField.text, surnameField.text, patronymicField.text)
         }
         isEditing.toggle()
     }

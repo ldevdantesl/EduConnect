@@ -10,6 +10,7 @@ import SnapKit
 
 struct ECHeaderViewModel {
     var didTapBar: (() -> Void)?
+    var didTapAccount: (() -> Void)?
 }
 
 final class ECHeaderView: UIView {
@@ -68,6 +69,10 @@ final class ECHeaderView: UIView {
         self.barButton.setAction { [weak self] in
             guard let self = self else { return }
             self.viewModel?.didTapBar?()
+        }
+        self.accountButton.setAction { [weak self] in
+            guard let self = self else { return }
+            self.viewModel?.didTapAccount?()
         }
     }
     

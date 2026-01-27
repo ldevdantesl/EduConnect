@@ -8,18 +8,18 @@
 import UIKit
 import SnapKit
 
-struct HomeScreenMainTabInfoCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = "HomeScreenMainTabInfoCell"
+struct AccountScreenMainTabInfoCellViewModel: CellViewModelProtocol {
+    var cellIdentifier: String = "AccountScreenMainTabInfoCell"
 }
 
-final class HomeScreenMainTabInfoCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class AccountScreenMainTabInfoCell: UICollectionViewCell, ConfigurableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
     }
     
     // MARK: - PROPERTIES
-    private var viewModel: HomeScreenMainTabInfoCellViewModel?
+    private var viewModel: AccountScreenMainTabInfoCellViewModel?
     
     // MARK: - VIEW PROPERTIES
     private let welcomeMessageLabel: UILabel = {
@@ -73,7 +73,7 @@ final class HomeScreenMainTabInfoCell: UICollectionViewCell, ConfigurableCellPro
     
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? HomeScreenMainTabInfoCellViewModel else { return }
+        guard let vm = vm as? AccountScreenMainTabInfoCellViewModel else { return }
         self.viewModel = vm
     }
     

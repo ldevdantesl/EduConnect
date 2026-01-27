@@ -10,6 +10,7 @@ import SnapKit
 protocol UniversityScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapTabBar()
+    func didTapAccount()
 }
 
 final class UniversityScreenPresenter {
@@ -56,5 +57,9 @@ extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
     
     func didTapTabBar() {
         router.openSidebar()
+    }
+    
+    func didTapAccount() {
+        router.openAccount()
     }
 }

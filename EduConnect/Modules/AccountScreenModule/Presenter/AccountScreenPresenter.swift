@@ -7,22 +7,22 @@
 
 import UIKit
 
-protocol HomeScreenPresenterProtocol: AnyObject {
+protocol AccountScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapTabBar()
-    var selectedTab: HomeScreenTab { get set }
-    var headerMenuViewModel: HomeScreenSegmentedReusableMenuViewModel { get }
+    var selectedTab: AccountScreenTab { get set }
+    var headerMenuViewModel: AccountScreenSegmentedReusableMenuViewModel { get }
 }
 
-final class HomeScreenPresenter {
+final class AccountScreenPresenter {
     
     // MARK: - VIPER
-    weak var view: HomeScreenViewProtocol?
-    var router: HomeScreenRouterProtocol
-    var interactor: HomeScreenInteractorProtocol
+    weak var view: AccountScreenViewProtocol?
+    var router: AccountScreenRouterProtocol
+    var interactor: AccountScreenInteractorProtocol
     
     // MARK: - PROPERTIES
-    var selectedTab: HomeScreenTab = .main
+    var selectedTab: AccountScreenTab = .main
     
     // MARK: - LAZY PROPERTIES
     private lazy var expandableProvider: ExpandableViewModelsProvider = {
@@ -53,21 +53,21 @@ final class HomeScreenPresenter {
     private lazy var snapshotFactory: HomeScreenSnapshotFactoryProtocol = HomeScreenSnapshotFactory(expandableProvider: expandableProvider)
     
     // MARK: - COMPUTED PROPERTIES
-    var headerMenuViewModel: HomeScreenSegmentedReusableMenuViewModel {
-        HomeScreenSegmentedReusableMenuViewModel(
+    var headerMenuViewModel: AccountScreenSegmentedReusableMenuViewModel {
+        AccountScreenSegmentedReusableMenuViewModel(
             currentTab: selectedTab,
             didSelectTab: { [weak self] in self?.didSelectAnotherTab(newTab: $0) }
         )
     }
     
     // MARK: - LIFECYCLE
-    init(interactor: HomeScreenInteractorProtocol, router: HomeScreenRouterProtocol) {
+    init(interactor: AccountScreenInteractorProtocol, router: AccountScreenRouterProtocol) {
         self.interactor = interactor
         self.router = router
     }
     
     // MARK: - PRIVATE FUNC
-    private func didSelectAnotherTab(newTab: HomeScreenTab) {
+    private func didSelectAnotherTab(newTab: AccountScreenTab) {
         guard selectedTab != newTab else { return }
         selectedTab = newTab
         let snapshot = snapshotFactory.makeSnapshot(for: newTab)
@@ -75,7 +75,7 @@ final class HomeScreenPresenter {
     }
 }
 
-extension HomeScreenPresenter: HomeScreenPresenterProtocol {
+extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     func viewDidLoad() {
         didSelectAnotherTab(newTab: .myUniversities)
     }

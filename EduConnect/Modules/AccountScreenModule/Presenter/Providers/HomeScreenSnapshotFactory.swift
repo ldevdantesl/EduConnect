@@ -8,12 +8,12 @@
 import Foundation
 
 typealias SnapshotResult = (
-    sections: [HomeScreenSection],
-    itemsBySection: [HomeScreenSection: [HomeScreenItem]]
+    sections: [AccountScreenSection],
+    itemsBySection: [AccountScreenSection: [AccountScreenItem]]
 )
 
 protocol HomeScreenSnapshotFactoryProtocol {
-    func makeSnapshot(for tab: HomeScreenTab) -> SnapshotResult
+    func makeSnapshot(for tab: AccountScreenTab) -> SnapshotResult
 }
 
 final class HomeScreenSnapshotFactory: HomeScreenSnapshotFactoryProtocol {
@@ -25,7 +25,7 @@ final class HomeScreenSnapshotFactory: HomeScreenSnapshotFactoryProtocol {
     }
     
     // MARK: - PUBLIC
-    public func makeSnapshot(for tab: HomeScreenTab) -> SnapshotResult {
+    public func makeSnapshot(for tab: AccountScreenTab) -> SnapshotResult {
         switch tab {
         case .myUniversities:
             return makeUniversitiesSnapshot(for: tab)
@@ -37,7 +37,7 @@ final class HomeScreenSnapshotFactory: HomeScreenSnapshotFactoryProtocol {
     }
     
     // MARK: - Private Builders
-    private func makeUniversitiesSnapshot(for tab: HomeScreenTab) -> SnapshotResult {
+    private func makeUniversitiesSnapshot(for tab: AccountScreenTab) -> SnapshotResult {
         let headerVM = makeHeaderVM(for: tab)
         let university = ECUniversity.sample
         let universityVM = UniversityCellViewModel(university: university)
@@ -53,10 +53,10 @@ final class HomeScreenSnapshotFactory: HomeScreenSnapshotFactoryProtocol {
         )
     }
     
-    private func makeApplicationSnapshot(for tab: HomeScreenTab) -> SnapshotResult {
+    private func makeApplicationSnapshot(for tab: AccountScreenTab) -> SnapshotResult {
         let headerVM = makeHeaderVM(for: tab)
         
-        var items: [HomeScreenItem] = [
+        var items: [AccountScreenItem] = [
             .headerItem(.init(id: "header", viewModel: headerVM))
         ]
         
@@ -81,15 +81,15 @@ final class HomeScreenSnapshotFactory: HomeScreenSnapshotFactoryProtocol {
         )
     }
     
-    private func makeMainSnapshot(for tab: HomeScreenTab) -> SnapshotResult {
+    private func makeMainSnapshot(for tab: AccountScreenTab) -> SnapshotResult {
         let headerVM = makeHeaderVM(for: tab)
-        let homeInfoVM = HomeScreenMainTabInfoCellViewModel()
+        let homeInfoVM = AccountScreenMainTabInfoCellViewModel()
         return (
             sections: [.main],
             itemsBySection: [
                 .main: [
                     .headerItem(.init(id: "header", viewModel: headerVM)),
-                    .mainScreenInfo(.init(id: "info", viewModel: homeInfoVM))
+                    .mainTabInfo(.init(id: "info", viewModel: homeInfoVM))
                 ]
             ]
         )
@@ -97,7 +97,7 @@ final class HomeScreenSnapshotFactory: HomeScreenSnapshotFactoryProtocol {
     
     // MARK: - Helpers
     
-    private func makeHeaderVM(for tab: HomeScreenTab) -> SectionHeaderCellViewModel {
+    private func makeHeaderVM(for tab: AccountScreenTab) -> SectionHeaderCellViewModel {
         SectionHeaderCellViewModel(title: tab.headerNames, titleSize: 30)
     }
 }

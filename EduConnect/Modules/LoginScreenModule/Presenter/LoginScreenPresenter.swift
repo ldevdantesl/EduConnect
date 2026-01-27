@@ -51,7 +51,7 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
             } goToMainAction: { [weak self] in
                 guard let self = self else { return }
                 self.interactor.logIn()
-                self.router.routeToMainScreen()
+                self.router.routeToAccountScreen()
             }
         ]
         let dataSource = LoginScreenDataSource(items: items)

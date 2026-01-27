@@ -10,6 +10,6 @@ import UIKit
 protocol AppRoutingProtocol: AnyObject {
     func start()
     func routeToAuthentication()
-    func routeToMain()
+    func routeToAccount()
 }
 

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LoginScreenRouterProtocol {
-    func routeToMainScreen()
+    func routeToAccountScreen()
 }
 
 final class LoginScreenRouter: LoginScreenRouterProtocol {
@@ -19,7 +19,7 @@ final class LoginScreenRouter: LoginScreenRouterProtocol {
         self.appRouter = appRouter
     }
     
-    func routeToMainScreen() {
-        appRouter?.routeToMain()
+    func routeToAccountScreen() {
+        appRouter?.routeToAccount()
     }
 }

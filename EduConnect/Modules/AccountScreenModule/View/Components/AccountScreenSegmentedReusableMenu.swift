@@ -8,12 +8,12 @@
 import UIKit
 import SnapKit
 
-struct HomeScreenSegmentedReusableMenuViewModel {
-    let currentTab: HomeScreenTab
-    let didSelectTab: ((HomeScreenTab) -> Void)?
+struct AccountScreenSegmentedReusableMenuViewModel {
+    let currentTab: AccountScreenTab
+    let didSelectTab: ((AccountScreenTab) -> Void)?
 }
 
-final class HomeScreenSegmentedReusableMenu: UICollectionReusableView {
+final class AccountScreenSegmentedReusableMenu: UICollectionReusableView {
     
     // MARK: - CONSTANTS
     fileprivate enum Constants {
@@ -24,10 +24,10 @@ final class HomeScreenSegmentedReusableMenu: UICollectionReusableView {
     }
     
     // MARK: - STATIC
-    static let reuseID = "HomeScreenSegmentedReusableMenu"
+    static let reuseID = "AccountScreenSegmentedReusableMenu"
     
     // MARK: - PROPERTIES
-    private var viewModel: HomeScreenSegmentedReusableMenuViewModel?
+    private var viewModel: AccountScreenSegmentedReusableMenuViewModel?
     
     // MARK: - VIEW PROPERTIES
     private let mainButton: ECButton = ECButton(text: "Main", textSize: 15, cornerRadius: Constants.cornerRadius)
@@ -64,7 +64,7 @@ final class HomeScreenSegmentedReusableMenu: UICollectionReusableView {
     }
     
     // MARK: - PUBLIC FUNC
-    public func configure(withVM vm: HomeScreenSegmentedReusableMenuViewModel) {
+    public func configure(withVM vm: AccountScreenSegmentedReusableMenuViewModel) {
         viewModel = vm
 
         resetButtons()

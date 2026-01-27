@@ -7,20 +7,20 @@
 
 import Foundation
 
-enum HomeScreenSection: Hashable {
+enum AccountScreenSection: Hashable {
     case main
     case universities
     case application
 }
 
-enum HomeScreenItem: Hashable {
+enum AccountScreenItem: Hashable {
     case headerItem(DiffableItem<SectionHeaderCellViewModel>)
     case university(DiffableItem<UniversityCellViewModel>)
     case expandableCell(DiffableItem<any ExpandableCellViewModel>)
-    case mainScreenInfo(DiffableItem<HomeScreenMainTabInfoCellViewModel>)
+    case mainTabInfo(DiffableItem<AccountScreenMainTabInfoCellViewModel>)
 }
 
-enum HomeScreenTab: Int {
+enum AccountScreenTab: Int {
     case myUniversities
     case application
     case main

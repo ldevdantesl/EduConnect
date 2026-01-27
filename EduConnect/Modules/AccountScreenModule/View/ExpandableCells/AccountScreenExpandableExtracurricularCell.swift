@@ -1,37 +1,39 @@
 //
-//  HomeScreenExpandableFamilyInfoCell.swift
+//  HomeScreenExtracurricularCell.swift
 //  EduConnect
 //
-//  Created by Buzurg Rakhimzoda on 18.01.2026.
+//  Created by Buzurg Rakhimzoda on 19.01.2026.
 //
 
 import UIKit
 import SnapKit
 
-final class HomeScreenExpandableFamilyInfoCellViewModel: ExpandableCellViewModel {
-    var cellIdentifier: String = "HomeScreenExpandableFamilyInfoCell"
+final class AccountScreenExpandableExtracurricularCellViewModel: ExpandableCellViewModel {
+    private(set) var cellIdentifier: String = "AccountScreenExpandableExtracurricularCell"
     var isExpanded: Bool
     let didTapExpand: (() -> Void)?
-    let didTapSave: ((String?, String?) -> Void)?
+    let didTapAddActivity: (() -> Void)?
     
-    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?) -> Void)? = nil) {
+    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapAddActivity: (() -> Void)? = nil) {
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
-        self.didTapSave = didTapSave
+        self.didTapAddActivity = didTapAddActivity
     }
 }
 
-final class HomeScreenExpandableFamilyInfoCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class AccountScreenExpandableExtracurricularCell: UICollectionViewCell, ConfigurableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
+        
+        static let plusImageName = "plus"
         static let expandImageSize = 20.0
         static let chevronDownImage = "chevron.down"
         static let chevronUpImage = "chevron.up"
     }
     
     // MARK: - PROPERTIES
-    private var viewModel: HomeScreenExpandableFamilyInfoCellViewModel?
+    private var viewModel: AccountScreenExpandableExtracurricularCellViewModel?
     private var expandableHeightConstraint: Constraint?
     private var isEditing: Bool = false
     
@@ -57,50 +59,15 @@ final class HomeScreenExpandableFamilyInfoCell: UICollectionViewCell, Configurab
         return image
     }()
     
-    private let familyInfoLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Family information"
+        label.text = "Extracurricular Activities"
         label.font = ECFont.font(.semiBold, size: 14)
         label.textColor = UIColor.label
         return label
     }()
     
-    private let fathersPhoneNumberLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Fathers Phone Number"
-        label.font = ECFont.font(.medium, size: 14)
-        return label
-    }()
-    
-    private let fathersPhoneNumberField: ECTextField = {
-        let field = ECTextField(placeHolder: "+52", showsBorder: false)
-        field.keyboardType = .phonePad
-        field.isEnabled = false
-        return field
-    }()
-    
-    private let momsPhoneNumberLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Moms Phone Number"
-        label.font = ECFont.font(.medium, size: 14)
-        return label
-    }()
-    
-    private let momsPhoneNumberField: ECTextField = {
-        let field = ECTextField(placeHolder: "+52", showsBorder: false)
-        field.keyboardType = .phonePad
-        field.isEnabled = false
-        return field
-    }()
-    
-    private lazy var editButton: ECButton = {
-        let button = ECButton(text: "Edit")
-        button.setAction { [weak self] in
-            guard let self = self else { return }
-            self.didPressEditButton()
-        }
-        return button
-    }()
+    private lazy var addExtraCurricularActivityView: UIView = makeExtraCurricularButton()
     
     // MARK: - LIFECYCLE
     override init(frame: CGRect) {
@@ -131,7 +98,7 @@ final class HomeScreenExpandableFamilyInfoCell: UICollectionViewCell, Configurab
     
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? HomeScreenExpandableFamilyInfoCellViewModel else { return }
+        guard let vm = vm as? AccountScreenExpandableExtracurricularCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()
     }
@@ -147,8 +114,8 @@ final class HomeScreenExpandableFamilyInfoCell: UICollectionViewCell, Configurab
             $0.horizontalEdges.equalToSuperview()
         }
         
-        headerContainer.addSubview(familyInfoLabel)
-        familyInfoLabel.snp.makeConstraints {
+        headerContainer.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview().inset(Constants.spacing)
             $0.leading.equalToSuperview().offset(Constants.spacing)
         }
@@ -168,34 +135,10 @@ final class HomeScreenExpandableFamilyInfoCell: UICollectionViewCell, Configurab
             expandableHeightConstraint = $0.height.equalTo(0).priority(.required).constraint
         }
         
-        expandableContainer.addSubview(momsPhoneNumberLabel)
-        momsPhoneNumberLabel.snp.makeConstraints {
+        expandableContainer.addSubview(addExtraCurricularActivityView)
+        addExtraCurricularActivityView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Constants.spacing).priority(.high)
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
-        }
-        
-        expandableContainer.addSubview(momsPhoneNumberField)
-        momsPhoneNumberField.snp.makeConstraints {
-            $0.top.equalTo(momsPhoneNumberLabel.snp.bottom).offset(Constants.spacing).priority(.high)
-            $0.horizontalEdges.equalToSuperview()
-        }
-        
-        expandableContainer.addSubview(fathersPhoneNumberLabel)
-        fathersPhoneNumberLabel.snp.makeConstraints {
-            $0.top.equalTo(momsPhoneNumberField.snp.bottom).offset(Constants.spacing).priority(.high)
-            $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
-        }
-        
-        expandableContainer.addSubview(fathersPhoneNumberField)
-        fathersPhoneNumberField.snp.makeConstraints {
-            $0.top.equalTo(fathersPhoneNumberLabel.snp.bottom).offset(Constants.spacing).priority(.high)
-            $0.horizontalEdges.equalToSuperview()
-        }
-        
-        expandableContainer.addSubview(editButton)
-        editButton.snp.makeConstraints {
-            $0.top.equalTo(fathersPhoneNumberField.snp.bottom).offset(Constants.spacing).priority(.high)
-            $0.leading.equalToSuperview().inset(Constants.spacing)
             $0.bottom.equalToSuperview().offset(-Constants.spacing).priority(.high)
         }
     }
@@ -212,26 +155,42 @@ final class HomeScreenExpandableFamilyInfoCell: UICollectionViewCell, Configurab
         layoutIfNeeded()
     }
     
-    private func didPressEditButton() {
-        if !isEditing {
-            editButton.reconfigure(text: "Save")
-            fathersPhoneNumberField.reconfigure(showsBorder: true)
-            fathersPhoneNumberField.isEnabled = true
-            momsPhoneNumberField.reconfigure(showsBorder: true)
-            momsPhoneNumberField.isEnabled = true
-        } else {
-            self.viewModel?.didTapSave?(momsPhoneNumberField.text, fathersPhoneNumberField.text)
-            editButton.reconfigure(text: "Edit")
-            fathersPhoneNumberField.reconfigure(showsBorder: false)
-            fathersPhoneNumberField.isEnabled = false
-            momsPhoneNumberField.reconfigure(showsBorder: false)
-            momsPhoneNumberField.isEnabled = false
+    private func makeExtraCurricularButton() -> UIView {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: Constants.plusImageName)
+        imageView.tintColor = .systemBlue
+        
+        let addSubjectTextLabel = UILabel()
+        addSubjectTextLabel.text = "Add Extracurricular Activity"
+        addSubjectTextLabel.textColor = .systemBlue
+        addSubjectTextLabel.font = ECFont.font(.regular, size: 14)
+        
+        let view = UIView()
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAddActivity)))
+        view.addSubview(imageView)
+        imageView.snp.makeConstraints {
+            $0.leading.centerY.equalToSuperview()
+            $0.size.equalTo(Constants.expandImageSize)
         }
-        isEditing.toggle()
+        
+        view.addSubview(addSubjectTextLabel)
+        addSubjectTextLabel.snp.makeConstraints {
+            $0.leading.equalTo(imageView.snp.trailing).offset(Constants.spacing)
+            $0.trailing.equalToSuperview().offset(Constants.spacing)
+            $0.centerY.equalTo(imageView)
+            $0.bottom.equalToSuperview().offset(-Constants.spacing)
+        }
+        
+        return view
     }
     
     // MARK: - OBJC FUNC
     @objc private func didTapExpand() {
         viewModel?.didTapExpand?()
+    }
+    
+    @objc private func didTapAddActivity() {
+        viewModel?.didTapAddActivity?()
     }
 }

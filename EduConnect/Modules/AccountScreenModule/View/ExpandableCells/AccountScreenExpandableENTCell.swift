@@ -1,27 +1,29 @@
 //
-//  HomeScreenExpandableOlympiadcell.swift
+//  HomeScreenExpandableENTCell.swift
 //  EduConnect
 //
-//  Created by Buzurg Rakhimzoda on 19.01.2026.
+//  Created by Buzurg Rakhimzoda on 18.01.2026.
 //
 
 import UIKit
 import SnapKit
 
-final class HomeScreenExpandableOlympiadCellViewModel: ExpandableCellViewModel {
-    private(set) var cellIdentifier: String = "HomeScreenExpandableOlympiadCell"
+final class AccountScreenExpandableENTCellViewModel: ExpandableCellViewModel {
+    private(set) var cellIdentifier: String = "AccountScreenExpandableENTCell"
     var isExpanded: Bool
-    let didTapExpand: (() -> Void)?
-    let didTapAddOlympiad: (() -> Void)?
+    var didTapExpand: (() -> Void)?
+    var didTapAddNewSubject: (() -> Void)?
+    var didSetNewENTYear: ((String?) -> Void)?
     
-    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapAddOlympiad: (() -> Void)? = nil) {
+    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapAddNewSubject: (() -> Void)? = nil, didSetNewENTYear: ((String?) -> Void)? = nil) {
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
-        self.didTapAddOlympiad = didTapAddOlympiad
+        self.didTapAddNewSubject = didTapAddNewSubject
+        self.didSetNewENTYear = didSetNewENTYear
     }
 }
 
-final class HomeScreenExpandableOlympiadCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -33,7 +35,7 @@ final class HomeScreenExpandableOlympiadCell: UICollectionViewCell, Configurable
     }
     
     // MARK: - PROPERTIES
-    private var viewModel: HomeScreenExpandableOlympiadCellViewModel?
+    private var viewModel: AccountScreenExpandableENTCellViewModel?
     private var expandableHeightConstraint: Constraint?
     private var isEditing: Bool = false
     
@@ -61,13 +63,44 @@ final class HomeScreenExpandableOlympiadCell: UICollectionViewCell, Configurable
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Olympiads"
+        label.text = "ENT"
         label.font = ECFont.font(.semiBold, size: 14)
         label.textColor = UIColor.label
         return label
     }()
     
-    private lazy var addOlympiadButton: UIView = makeAddOlympiadButton()
+    private let yearOfENTLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Year of ENT Submission"
+        label.font = ECFont.font(.medium, size: 14)
+        return label
+    }()
+    
+    private let yearOfENTField: ECTextField = {
+        let field = ECTextField(placeHolder: "2025", showsBorder: false)
+        field.maximumCharacters = 4
+        field.isEnabled = false
+        field.keyboardType = .numberPad
+        return field
+    }()
+    
+    private lazy var setYearButton: ECButton = {
+        let button = ECButton(text: "Set year")
+        button.setAction { [weak self] in
+            guard let self = self else { return }
+            self.didPressSetYearButton()
+        }
+        return button
+    }()
+    
+    private let subjectsENTLabel: UILabel = {
+        let label = UILabel()
+        label.text = "ENT Subjects"
+        label.font = ECFont.font(.medium, size: 14)
+        return label
+    }()
+    
+    private lazy var addSubjectButtonView: UIView = makeAddSubjectButton()
     
     // MARK: - LIFECYCLE
     override init(frame: CGRect) {
@@ -98,7 +131,7 @@ final class HomeScreenExpandableOlympiadCell: UICollectionViewCell, Configurable
     
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? HomeScreenExpandableOlympiadCellViewModel else { return }
+        guard let vm = vm as? AccountScreenExpandableENTCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()
     }
@@ -107,6 +140,7 @@ final class HomeScreenExpandableOlympiadCell: UICollectionViewCell, Configurable
     private func setupUI() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapExpand))
         self.headerContainer.addGestureRecognizer(tap)
+        
         contentView.addSubview(headerContainer)
         headerContainer.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -134,9 +168,34 @@ final class HomeScreenExpandableOlympiadCell: UICollectionViewCell, Configurable
             expandableHeightConstraint = $0.height.equalTo(0).priority(.required).constraint
         }
         
-        expandableContainer.addSubview(addOlympiadButton)
-        addOlympiadButton.snp.makeConstraints {
+        expandableContainer.addSubview(yearOfENTLabel)
+        yearOfENTLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Constants.spacing).priority(.high)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
+        }
+        
+        expandableContainer.addSubview(yearOfENTField)
+        yearOfENTField.snp.makeConstraints {
+            $0.top.equalTo(yearOfENTLabel.snp.bottom).offset(Constants.spacing).priority(.high)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview().multipliedBy(0.4)
+        }
+        
+        expandableContainer.addSubview(setYearButton)
+        setYearButton.snp.makeConstraints {
+            $0.top.equalTo(yearOfENTField.snp.bottom).offset(Constants.spacing).priority(.high)
+            $0.trailing.equalToSuperview().offset(-Constants.spacing)
+        }
+        
+        expandableContainer.addSubview(subjectsENTLabel)
+        subjectsENTLabel.snp.makeConstraints {
+            $0.top.equalTo(setYearButton.snp.bottom).offset(Constants.spacing).priority(.high)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
+        }
+        
+        expandableContainer.addSubview(addSubjectButtonView)
+        addSubjectButtonView.snp.makeConstraints {
+            $0.top.equalTo(subjectsENTLabel.snp.bottom).offset(Constants.spacing).priority(.high)
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
             $0.bottom.equalToSuperview().offset(-Constants.spacing).priority(.high)
         }
@@ -154,19 +213,34 @@ final class HomeScreenExpandableOlympiadCell: UICollectionViewCell, Configurable
         layoutIfNeeded()
     }
     
-    private func makeAddOlympiadButton() -> UIView {
+    private func didPressSetYearButton() {
+        if !isEditing {
+            yearOfENTField.reconfigure(showsBorder: true)
+            yearOfENTField.isEnabled = true
+            setYearButton.reconfigure(text: "Save")
+        } else {
+            yearOfENTField.reconfigure(showsBorder: false)
+            yearOfENTField.isEnabled = false
+            setYearButton.reconfigure(text: "Set Year")
+            self.viewModel?.didSetNewENTYear?(yearOfENTField.text)
+        }
+        isEditing.toggle()
+    }
+    
+    private func makeAddSubjectButton() -> UIView {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: Constants.plusImageName)
         imageView.tintColor = .systemBlue
         
         let addSubjectTextLabel = UILabel()
-        addSubjectTextLabel.text = "Add Olympiad"
+        addSubjectTextLabel.text = "Add Subject"
         addSubjectTextLabel.textColor = .systemBlue
         addSubjectTextLabel.font = ECFont.font(.regular, size: 14)
         
+        
         let view = UIView()
         view.isUserInteractionEnabled = true
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAdd)))
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAddSubject)))
         view.addSubview(imageView)
         imageView.snp.makeConstraints {
             $0.leading.centerY.equalToSuperview()
@@ -185,12 +259,11 @@ final class HomeScreenExpandableOlympiadCell: UICollectionViewCell, Configurable
     }
     
     // MARK: - OBJC FUNC
-    @objc private func didTapAdd() {
-        viewModel?.didTapAddOlympiad?()
-    }
-    
     @objc private func didTapExpand() {
         viewModel?.didTapExpand?()
     }
+    
+    @objc private func didTapAddSubject() {
+        self.viewModel?.didTapAddNewSubject?()
+    }
 }
-

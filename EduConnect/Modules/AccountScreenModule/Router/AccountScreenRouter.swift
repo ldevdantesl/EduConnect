@@ -7,15 +7,15 @@
 
 import UIKit
 
-protocol HomeScreenRouterProtocol {
+protocol AccountScreenRouterProtocol {
     func showAddExtracurricularPopUp(viewModel: AddExtracurricularActivityPopUpViewModel)
     func showAddEntSubjectPopUp(viewModel: AddENTSubjectPopUpViewModel)
     func showAddNewOlympiadPopUp(viewModel: AddOlympiadPopUpViewModel)
     func showSidebar()
 }
 
-final class HomeScreenRouter: HomeScreenRouterProtocol {
-    weak var viewController: HomeScreenVC?
+final class AccountScreenRouter: AccountScreenRouterProtocol {
+    weak var viewController: AccountScreenVC?
     private let appRoter: AppRoutingProtocol
     private let sidebarService: SidebarServiceProtocol
     

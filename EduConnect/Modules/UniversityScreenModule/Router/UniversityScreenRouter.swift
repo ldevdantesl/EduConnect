@@ -10,14 +10,17 @@ import UIKit
 protocol UniversityScreenRouterProtocol {
     func openSidebar()
     func presentFilterView()
+    func openAccount()
 }
 
 final class UniversityScreenRouter: UniversityScreenRouterProtocol {
     weak var viewController: UniversityScreenVC?
     private let sidebarService: SidebarServiceProtocol
+    private let appRouter: AppRoutingProtocol
     
-    init(sidebarService: SidebarServiceProtocol) {
+    init(sidebarService: SidebarServiceProtocol, appRouter: AppRoutingProtocol) {
         self.sidebarService = sidebarService
+        self.appRouter = appRouter
     }
     
     func openSidebar() {
@@ -37,5 +40,9 @@ final class UniversityScreenRouter: UniversityScreenRouterProtocol {
             sheet.prefersGrabberVisible = true
         }
         viewController?.present(vc, animated: true)
+    }
+    
+    func openAccount() {
+        appRouter.routeToAccount()
     }
 }

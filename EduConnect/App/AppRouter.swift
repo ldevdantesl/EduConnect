@@ -32,7 +32,7 @@ final class AppRouter: AppRoutingProtocol {
         navController.delegate = navAnimator
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
-        authState.isLoggedIn ? routeToMain() : routeToAuthentication()
+        authState.isLoggedIn ? routeToAccount() : routeToAuthentication()
     }
 
     func routeToAuthentication() {
@@ -40,14 +40,14 @@ final class AppRouter: AppRoutingProtocol {
         navController.setViewControllers([vc], animated: true)
     }
     
-    func routeToMain() {
+    func routeToAccount() {
         sidebarContainer = SidebarContainerViewController(
             rootViewController: navController,
             sidebarService: sidebarService
         )
         window?.rootViewController = sidebarContainer
         window?.makeKeyAndVisible()
-        let vc = HomeScreenAssembler.assemble(appRouter: self, sidebarService: sidebarService)
+        let vc = AccountScreenAssembler.assemble(appRouter: self, sidebarService: sidebarService)
         navController.setViewControllers([vc], animated: true)
     }
     
@@ -62,7 +62,7 @@ final class AppRouter: AppRoutingProtocol {
     private func navigateFromSidebar(to tab: SidebarMenuTab) {
         switch tab {
         case .universities:
-            let vc = UniversityScreenAssembler.assemble(sidebarService: sidebarService)
+            let vc = UniversityScreenAssembler.assemble(sidebarService: sidebarService, appRouter: self)
             navController.setViewControllers([vc], animated: true)
         case .programs:  print("Navigating to Programs")
         case .professions: print("Navigating to Professions")

@@ -37,15 +37,15 @@ struct ExpandableActions {
 // MARK: - Provider Protocol
 
 protocol ExpandableViewModelsProviderProtocol {
-    func makeExpandableItem(for id: ExpandableCellID) -> HomeScreenItem?
-    func toggleExpandableCell(id: ExpandableCellID) -> HomeScreenItem?
+    func makeExpandableItem(for id: ExpandableCellID) -> AccountScreenItem?
+    func toggleExpandableCell(id: ExpandableCellID) -> AccountScreenItem?
 }
 
 final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
     
     private var expandableViewModels: [ExpandableCellID: ExpandableCellViewModel] = [:]
     private var actions: ExpandableActions
-    var onCellToggled: ((HomeScreenItem) -> Void)?
+    var onCellToggled: ((AccountScreenItem) -> Void)?
     
     // MARK: - Init
     init(actions: ExpandableActions) {
@@ -64,7 +64,7 @@ final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
     }
     
     // MARK: - Public Methods
-    func makeExpandableItem(for id: ExpandableCellID) -> HomeScreenItem? {
+    func makeExpandableItem(for id: ExpandableCellID) -> AccountScreenItem? {
         guard let vm = expandableViewModels[id] else { return nil }
         return .expandableCell(
             DiffableItem(id: id.rawValue, viewModel: vm)
@@ -72,7 +72,7 @@ final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
     }
     
     @discardableResult
-    func toggleExpandableCell(id: ExpandableCellID) -> HomeScreenItem? {
+    func toggleExpandableCell(id: ExpandableCellID) -> AccountScreenItem? {
         guard let vm = expandableViewModels[id] else { return nil }
         vm.isExpanded.toggle()
         
@@ -88,41 +88,41 @@ final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
     ) -> ExpandableCellViewModel {
         switch id {
         case .personalInfo:
-            return HomeScreenExpandablePersonalInfoCellViewModel(
+            return AccountScreenExpandablePersonalInfoCellViewModel(
                 isExpanded: isExpanded,
                 didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) },
                 didTapSave: { [weak self] in self?.actions.didTapSavePersonalInfo?($0, $1, $2) }
             )
         case .familyInfo:
-            return HomeScreenExpandableFamilyInfoCellViewModel(
+            return AccountScreenExpandableFamilyInfoCellViewModel(
                 isExpanded: isExpanded,
                 didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) },
                 didTapSave: { [weak self] in self?.actions.didTapSaveFamilyInfo?($0, $1) }
             )
             
         case .education:
-            return HomeScreenExpandableEducationCellViewModel(
+            return AccountScreenExpandableEducationCellViewModel(
                 isExpanded: isExpanded,
                 didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) },
                 didTapSave: { [weak self] in self?.actions.didTapSaveEducation?($0, $1, $2) }
             )
             
         case .ENT:
-            return HomeScreenExpandableENTCellViewModel(
+            return AccountScreenExpandableENTCellViewModel(
                 isExpanded: isExpanded,
                 didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) },
                 didTapAddNewSubject: { [weak self] in self?.actions.didTapAddENTSubject?() }
             )
             
         case .extracurricular:
-            return HomeScreenExpandableExtracurricularCellViewModel(
+            return AccountScreenExpandableExtracurricularCellViewModel(
                 isExpanded: isExpanded,
                 didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) },
                 didTapAddActivity: { [weak self] in self?.actions.didTapAddActivity?() }
             )
             
         case .olympiads:
-            return HomeScreenExpandableOlympiadCellViewModel(
+            return AccountScreenExpandableOlympiadCellViewModel(
                 isExpanded: isExpanded,
                 didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) },
                 didTapAddOlympiad: { [weak self] in self?.actions.didTapAddOlympiad?() }
