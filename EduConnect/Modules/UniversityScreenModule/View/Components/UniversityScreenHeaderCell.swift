@@ -10,6 +10,15 @@ import SnapKit
 
 struct UniversityScreenHeaderCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = "UniversityScreenHeaderCell"
+    let totalUniversities: Int
+    let totalCities: Int
+    let totalBudgetSpaces: Int
+    
+    init(totalUniversities: Int = 1143, totalCities: Int = 285, totalBudgetSpaces: Int = 441343) {
+        self.totalUniversities = totalUniversities
+        self.totalCities = totalCities
+        self.totalBudgetSpaces = totalBudgetSpaces
+    }
 }
 
 final class UniversityScreenHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
@@ -30,7 +39,7 @@ final class UniversityScreenHeaderCell: UICollectionViewCell, ConfigurableCellPr
         let iv = UIImageView()
         iv.image = ImageConstants.universityScreenHeaderImage.image
         iv.contentMode = .scaleAspectFill
-        iv.layer.opacity = 0.3
+        iv.layer.opacity = 0.4
         return iv
     }()
     
@@ -57,8 +66,7 @@ final class UniversityScreenHeaderCell: UICollectionViewCell, ConfigurableCellPr
         label.font = ECFont.font(.regular, size: 16)
         label.numberOfLines = 2
         label.textAlignment = .left
-        label.text = "1 143\nвуза"
-        label.textColor = .white
+        label.textColor = .systemGray4
         return label
     }()
     
@@ -67,8 +75,7 @@ final class UniversityScreenHeaderCell: UICollectionViewCell, ConfigurableCellPr
         label.font = ECFont.font(.regular, size: 16)
         label.numberOfLines = 2
         label.textAlignment = .left
-        label.text = "285\nгородов"
-        label.textColor = .white
+        label.textColor = .systemGray4
         return label
     }()
     
@@ -77,14 +84,14 @@ final class UniversityScreenHeaderCell: UICollectionViewCell, ConfigurableCellPr
         label.font = ECFont.font(.regular, size: 16)
         label.numberOfLines = 3
         label.textAlignment = .left
-        label.text = "441 343\nбюджетных места"
-        label.textColor = .white
+        label.textColor = .systemGray4
         return label
     }()
     
     private lazy var totalsStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [universitiesTotalLabel, citiesTotalLabel, budgetSpacesTotalLabel])
         stack.axis = .horizontal
+        stack.alignment = .top
         stack.distribution = .fill
         return stack
     }()
@@ -138,7 +145,8 @@ final class UniversityScreenHeaderCell: UICollectionViewCell, ConfigurableCellPr
     func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? UniversityScreenHeaderCellViewModel else { return }
         self.viewModel = vm
+        self.universitiesTotalLabel.text = "\(vm.totalUniversities)\nвуза"
+        self.citiesTotalLabel.text = "\(vm.totalCities)\nгородов"
+        self.budgetSpacesTotalLabel.text = "\(vm.totalBudgetSpaces)\nбюджетных места"
     }
-    
-    // MARK: - OBJC FUNC
 }

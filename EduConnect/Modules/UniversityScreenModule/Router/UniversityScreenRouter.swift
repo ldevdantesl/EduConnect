@@ -23,10 +23,6 @@ final class UniversityScreenRouter: UniversityScreenRouterProtocol {
         self.appRouter = appRouter
     }
     
-    func openSidebar() {
-        sidebarService.open()
-    }
-    
     func presentFilterView() {
         let vm = UniversityScreenFilterModalControllerViewModel()
         let vc = UniversityScreenFilterModalController(viewModel: vm)
@@ -40,6 +36,10 @@ final class UniversityScreenRouter: UniversityScreenRouterProtocol {
             sheet.prefersGrabberVisible = true
         }
         viewController?.present(vc, animated: true)
+    }
+    
+    func openSidebar() {
+        sidebarService.open()
     }
     
     func openAccount() {

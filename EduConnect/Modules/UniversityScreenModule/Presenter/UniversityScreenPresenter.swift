@@ -30,7 +30,10 @@ extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
         let headerVM = UniversityScreenHeaderCellViewModel()
         let filtersVM = UniversityScreenFilterCellViewModel(didTapFilters: { [weak self] in self?.router.presentFilterView() })
         let pageIndicatorVM = PageIndicatorCellViewModel(totalPages: 4, currentPage: 3)
-        let bottomInfoVM = UniversityScreenBottomInfoCellViewModel()
+        let footerVM = TabsFooterCellViewModel(
+            titleLabelText: "Список вузов Казахстана по среднему баллу, стоимости обучения",
+            subtitleLabelText: "С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования. "
+        )
         let universities: [ECUniversity] = [.sample, .sample, .sample]
         
         var universityItems: [UniversityScreenItem] = universities.map {
@@ -43,14 +46,14 @@ extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
         universityItems.append(UniversityScreenItem.pageIndicatorItem(.init(id: "pageIndicator", viewModel: pageIndicatorVM)))
         
         view?.applySnapshot(
-            sections: [.headerInfo, .universities, .bottomInfo],
+            sections: [.header, .universities, .footer],
             itemsBySection: [
-                .headerInfo: [
+                .header: [
                     .headerItem(.init(id: "header", viewModel: headerVM)),
                     .filterItem(.init(id: "filter", viewModel: filtersVM))
                 ],
                 .universities : universityItems,
-                .bottomInfo : [.bottomInfoItem(.init(id: "bottomInfo", viewModel: bottomInfoVM))]
+                .footer : [.footerItem(.init(id: "footer", viewModel: footerVM))]
             ]
         )
     }

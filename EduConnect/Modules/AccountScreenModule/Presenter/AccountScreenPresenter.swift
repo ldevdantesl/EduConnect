@@ -50,7 +50,7 @@ final class AccountScreenPresenter {
         return provider
     }()
     
-    private lazy var snapshotFactory: HomeScreenSnapshotFactoryProtocol = HomeScreenSnapshotFactory(expandableProvider: expandableProvider)
+    private lazy var snapshotFactory: AccountScreenSnapshotFactoryProtocol = AccountScreenSnapshotFactory(expandableProvider: expandableProvider)
     
     // MARK: - COMPUTED PROPERTIES
     var headerMenuViewModel: AccountScreenSegmentedReusableMenuViewModel {

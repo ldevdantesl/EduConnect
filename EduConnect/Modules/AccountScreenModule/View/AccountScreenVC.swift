@@ -33,7 +33,7 @@ final class AccountScreenVC: UIViewController {
     
     private lazy var collectionContainer: DiffableCollectionViewContainer = {
         let cv = DiffableCollectionViewContainer<AccountScreenSection, AccountScreenItem>(
-            layout: HomeLayoutFactory.make()
+            layout: AccountLayoutFactory.make()
         )
         cv.resignsFirstResponderOnScroll = true
         cv.registerCell(UniversityCell.self, reuseID: UniversityCell.identifier)

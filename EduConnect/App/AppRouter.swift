@@ -64,7 +64,9 @@ final class AppRouter: AppRoutingProtocol {
         case .universities:
             let vc = UniversityScreenAssembler.assemble(sidebarService: sidebarService, appRouter: self)
             navController.setViewControllers([vc], animated: true)
-        case .programs:  print("Navigating to Programs")
+        case .programs:
+            let vc = ProgramsScreenAssembler.assemble(sidebarService: sidebarService, appRouter: self)
+            navController.setViewControllers([vc], animated: true)
         case .professions: print("Navigating to Professions")
         case .tests: print("Navigating to Tests")
         case .article: print("Navigating to Artcles")

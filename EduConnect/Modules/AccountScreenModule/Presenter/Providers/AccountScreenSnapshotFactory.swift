@@ -12,11 +12,11 @@ typealias SnapshotResult = (
     itemsBySection: [AccountScreenSection: [AccountScreenItem]]
 )
 
-protocol HomeScreenSnapshotFactoryProtocol {
+protocol AccountScreenSnapshotFactoryProtocol {
     func makeSnapshot(for tab: AccountScreenTab) -> SnapshotResult
 }
 
-final class HomeScreenSnapshotFactory: HomeScreenSnapshotFactoryProtocol {
+final class AccountScreenSnapshotFactory: AccountScreenSnapshotFactoryProtocol {
     
     private let expandableProvider: ExpandableViewModelsProvider
     
@@ -96,7 +96,6 @@ final class HomeScreenSnapshotFactory: HomeScreenSnapshotFactoryProtocol {
     }
     
     // MARK: - Helpers
-    
     private func makeHeaderVM(for tab: AccountScreenTab) -> SectionHeaderCellViewModel {
         SectionHeaderCellViewModel(title: tab.headerNames, titleSize: 30)
     }

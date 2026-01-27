@@ -17,9 +17,19 @@ public enum ImageConstants: String {
     case accountIconImage = "AccountIconImage"
     case universityCapIconImage = "UniversityCapIconImage"
     case universityScreenHeaderImage = "UniversityScreenHeaderImage"
+    case programsScreenHeaderImage = "ProgramsScreenHeaderImage"
 
     // Samples
     case universityImageSample = "UniversityImageSample"
+    
+    // SystemImage
+    enum SystemImages: String {
+        case questionMarkSystemImage = "questionmark.circle"
+        
+        var image: UIImage? {
+            UIImage(systemName: rawValue)
+        }
+    }
 
     var image: UIImage? {
         UIImage(named: rawValue)

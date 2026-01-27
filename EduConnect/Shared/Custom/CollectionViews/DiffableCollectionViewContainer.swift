@@ -17,7 +17,7 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
     var resignsFirstResponderOnScroll: Bool = false
     
     // MARK: - PRIVATE VAR
-    private var diffableDataSource: DataSource!
+    private(set) var diffableDataSource: DataSource!
     private var didSelectHandler: ((IndexPath) -> Void)?
 
     // MARK: - Init

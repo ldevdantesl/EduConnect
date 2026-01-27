@@ -35,7 +35,7 @@ final class UniversityScreenVC: UIViewController {
         cv.registerCell(UniversityScreenFilterCell.self, reuseID: UniversityScreenFilterCell.identifier)
         cv.registerCell(UniversityCell.self, reuseID: UniversityCell.identifier)
         cv.registerCell(PageIndicatorCell.self, reuseID: PageIndicatorCell.identifier)
-        cv.registerCell(UniversityScreenBottomInfoCell.self, reuseID: UniversityScreenBottomInfoCell.identifier)
+        cv.registerCell(TabsFooterCell.self, reuseID: TabsFooterCell.identifier)
         cv.backgroundColor = .clear
         cv.resignsFirstResponderOnScroll = true
         return cv
@@ -88,8 +88,9 @@ final class UniversityScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
-            case .bottomInfoItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityScreenBottomInfoCell
+            case .footerItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? TabsFooterCell
+                cell?.configure(withVM: item.viewModel)
                 return cell
             }
         }

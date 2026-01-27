@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum HomeLayoutFactory {
+enum AccountLayoutFactory {
 
     static func make() -> UICollectionViewLayout {
         let item = NSCollectionLayoutItem(
