@@ -11,6 +11,7 @@ import SnapKit
 protocol ProgramsScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [ProgramsScreenSection], itemsBySection: [ProgramsScreenSection : [ProgramsScreenItem]])
     func reconfigureItems(items: [ProgramsScreenItem])
+    func showError(errorMessage: String)
 }
 
 final class ProgramsScreenVC: UIViewController {
@@ -31,6 +32,7 @@ final class ProgramsScreenVC: UIViewController {
     private lazy var collectionContainer: DiffableCollectionViewContainer = {
         let layout = ProgramsScreenLayoutFactory.make(sectionStore: sectionStore)
         let cv = DiffableCollectionViewContainer<ProgramsScreenSection, ProgramsScreenItem>(layout: layout)
+        cv.registerCell(LoadingCell.self, reuseID: LoadingCell.identifier)
         cv.registerCell(ProgramsScreenHeaderCell.self, reuseID: ProgramsScreenHeaderCell.identifier)
         cv.registerCell(TabsFooterCell.self, reuseID: TabsFooterCell.identifier)
         cv.registerCell(ProgramsScreenProgramCell.self, reuseID: ProgramsScreenProgramCell.identifier)
@@ -77,6 +79,11 @@ final class ProgramsScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? ProgramsScreenProgramCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
+                
+            case .loadingItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoadingCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
             }
         }
     }
@@ -84,11 +91,15 @@ final class ProgramsScreenVC: UIViewController {
 
 extension ProgramsScreenVC: ProgramsScreenViewProtocol {
     func applySnapshot(sections: [ProgramsScreenSection], itemsBySection: [ProgramsScreenSection : [ProgramsScreenItem]]) {
-        collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
         sectionStore.update(sections)
+        collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
     }
     
     func reconfigureItems(items: [ProgramsScreenItem]) {
         collectionContainer.reconfigureItems(items)
+    }
+    
+    func showError(errorMessage: String) {
+        self.showError(message: errorMessage) /// Added from Extensions
     }
 }

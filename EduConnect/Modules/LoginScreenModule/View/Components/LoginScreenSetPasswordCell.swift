@@ -36,7 +36,7 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCellPr
     // MARK: - VIEW PROPERTIES
     private let setPasswordLabel: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page3.setPasswordTitle
+        label.text = ConstantLocalizedStrings.Registration.Page3.setPasswordTitle
         label.font = ECFont.font(.bold, size: 30)
         label.textAlignment = .center
         label.textColor = .black
@@ -46,7 +46,7 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCellPr
     
     private let setPasswordSubtitle: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page3.setNewPasswordSubtitle
+        label.text = ConstantLocalizedStrings.Registration.Page3.setNewPasswordSubtitle
         label.font = ECFont.font(.bold, size: 14)
         label.textAlignment = .center
         label.textColor = .systemGray
@@ -56,15 +56,15 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCellPr
     
     private lazy var passwordField: ECTextField = {
         let field = ECSecureTextField(
-            placeHolder: ECLocalizedStrings.Registration.Page3.newPasswordTextField,
+            placeHolder: ConstantLocalizedStrings.Registration.Page3.newPasswordTextField,
             returnKeyType: .next,
             returnAction: self.makeReenterFieldFirstResponder
         )
         return field
     }()
-    private let reenterPasswordField: ECTextField = ECSecureTextField(placeHolder: ECLocalizedStrings.Registration.Page3.reenterPasswordTextField)
+    private let reenterPasswordField: ECTextField = ECSecureTextField(placeHolder: ConstantLocalizedStrings.Registration.Page3.reenterPasswordTextField)
     
-    private let savePasswordButton: ECButton = ECButton(text: ECLocalizedStrings.Registration.Page3.savePasswordButton)
+    private let savePasswordButton: ECButton = ECButton(text: ConstantLocalizedStrings.Registration.Page3.savePasswordButton)
     
     private lazy var vStack: UIStackView = {
         let stack = UIStackView()

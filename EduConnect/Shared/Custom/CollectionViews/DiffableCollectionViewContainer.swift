@@ -47,6 +47,10 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
             cellProvider: cellProvider
         )
     }
+    
+    func getSnapshot() -> NSDiffableDataSourceSnapshot<Section, Item> {
+        diffableDataSource.snapshot()
+    }
 
     func setSupplementaryViewProvider(_ provider: @escaping DataSource.SupplementaryViewProvider) {
         diffableDataSource.supplementaryViewProvider = provider

@@ -8,6 +8,35 @@
 import UIKit
 
 struct ECUniversity: Codable {
+    
+    enum UniversityType: String, Codable, CaseIterable {
+        case state, `private`
+        
+        var title: String {
+            switch self {
+            case .state: return "Государственный"
+            case .private: return "Частный"
+            }
+        }
+    }
+    
+    struct NamedEntity: Codable {
+        let id: Int
+        let name: String
+    }
+    
+    struct ECUniversityEntScores: Codable {
+        let year: Int
+        let budgetScore: String
+        let contractScore: String
+
+        enum CodingKeys: String, CodingKey {
+            case year
+            case budgetScore = "budget_score"
+            case contractScore = "contract_score"
+        }
+    }
+    
     let id: Int
     let name: String
     let description: String
@@ -19,14 +48,14 @@ struct ECUniversity: Codable {
     let foundedYear: Int
     let hasDormitory: Bool
     let hasMilitaryDepartment: Bool
-    let universityType: String
+    let universityType: UniversityType
     let universityTypeName: String
     let isActive: Bool
     let sortOrder: Int
     let minContractPrice: String
-    let city: ECCity
-    let professions: [ECUniversityProfessions]
-    let faculties: [ECUniversityFaculties]
+    let city: NamedEntity
+    let professions: [NamedEntity]
+    let faculties: [NamedEntity]
     let programsCount: Int
     let facultiesCount: Int
     let budgetPlaces: Int

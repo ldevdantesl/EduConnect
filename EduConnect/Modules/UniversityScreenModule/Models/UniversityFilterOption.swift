@@ -7,26 +7,24 @@
 
 import Foundation
 
-enum UniversityFilterOption: CaseIterable {
-    case subjects
-    case specializations
-    case areas
+enum UniversityFilterOption: String, CaseIterable {
+    case city
+    case profession
+    case universityType
     case military
-    case stateOwned
     case dormitory
     case sorting
     case price
     
     var title: String {
         switch self {
-        case .subjects: return "Предметы ЕНТ"
-        case .specializations: return "Специализации вузов"
-        case .areas: return "Области обучения"
+        case .city: return "Город"
+        case .profession: return "Профессия"
+        case .universityType: return "Тип вуза"
         case .military: return "Военная кафедра"
-        case .stateOwned: return "Государственный или нет"
         case .dormitory: return "Общежитие"
         case .sorting: return "Сортировка"
-        case .price: return "Стоимость обучения"
+        case .price: return "Цена"
         }
     }
     

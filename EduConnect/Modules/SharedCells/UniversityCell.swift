@@ -168,7 +168,7 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
         layoutIfNeeded()
     }
     
-    private func validatedProfessionsText(professions: [ECUniversityProfessions]) -> String {
+    private func validatedProfessionsText(professions: [ECUniversity.NamedEntity]) -> String {
         let professionNames = professions.map { $0.name }
         guard professionNames.count > 2 else { return professionNames.joined(separator: ";") }
         return "\(professionNames[0]); \(professionNames[1]) и ещё \(professionNames.count - 2) направлений"

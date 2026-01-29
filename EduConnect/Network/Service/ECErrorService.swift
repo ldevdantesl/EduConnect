@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ErrorServiceProtocol {
-    func handle(_ error: APIError) -> UserFacingError
+    func handle(_ error: any Error) -> UserFacingError
     func shouldRetry(_ error: APIError) -> Bool
     func shouldLogout(_ error: APIError) -> Bool
 }
@@ -17,12 +17,21 @@ final class ECErrorService: ErrorServiceProtocol {
     
     var onUnauthorized: (() -> Void)?
     
-    func handle(_ error: APIError) -> UserFacingError {
+    func handle(_ error: any Error) -> UserFacingError {
         #if DEBUG
         print("🔴 API Error: \(error)")
         #endif
         
-        switch error {
+        guard let apiError = error as? APIError else {
+            return UserFacingError(
+                title: "Ошибка",
+                message: error.localizedDescription,
+                isRetryable: false
+            )
+        }
+        
+        
+        switch apiError {
         case .noConnection:
             return UserFacingError(
                 title: "Нет соединения",
@@ -60,7 +69,7 @@ final class ECErrorService: ErrorServiceProtocol {
             )
             
         default:
-            return UserFacingError.from(error)
+            return UserFacingError.from(apiError)
         }
     }
     

@@ -17,4 +17,5 @@ enum ProgramsScreenItem: Hashable {
     case headerItem(DiffableItem<ProgramsScreenHeaderCellViewModel>)
     case footerItem(DiffableItem<TabsFooterCellViewModel>)
     case programItem(DiffableItem<ProgramsScreenProgramCellViewModel>)
+    case loadingItem(DiffableItem<LoadingCellViewModel>)
 }

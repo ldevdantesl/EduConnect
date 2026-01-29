@@ -12,29 +12,38 @@ final class UniversityScreenFilterModalControllerViewModel {
     var filterOptions: [UniversityFilterOption] = UniversityFilterOption.allCases
     private(set) var selectedFilters = UniversityFilters()
     
+    var cities: [ECCity] = []
+    var professions: [ECProfession] = []
+    
     var onApplyFilters: ((UniversityFilters) -> Void)?
     var onUpdate: (() -> Void)?
     
     func subItems(for option: UniversityFilterOption) -> [String] {
         switch option {
-        case .subjects: return ["Математика", "Физика", "Химия", "Биология", "История"]
-        case .specializations: return ["IT", "Медицина", "Юриспруденция", "Экономика"]
-        case .areas: return ["Технические", "Гуманитарные", "Естественные"]
+        case .city: return cities.map { $0.name.ru }
+        case .profession: return professions.map { $0.name.ru }
+        case .universityType: return ECUniversity.UniversityType.allCases.map { $0.title }
         case .military: return ["Есть", "Нет"]
-        case .stateOwned: return ["Государственный", "Частный"]
         case .dormitory: return ["Есть", "Нет"]
-        case .sorting: return ["По рейтингу", "По названию А-Я", "По названию Я-А"]
+        case .sorting: return UniversityFilters.UniversitySortOption.allCases.map { $0.title }
         case .price: return []
         }
     }
     
     func selectedValue(for option: UniversityFilterOption) -> String? {
         switch option {
-        case .subjects: return selectedFilters.subjects.first
-        case .specializations: return selectedFilters.specializations.first
-        case .areas: return selectedFilters.areas.first
+        case .city:
+            guard let firstID = selectedFilters.cityIDs.first,
+                  let city = cities.first(where: { $0.id == firstID }) else { return nil }
+            return city.name.ru
+            
+        case .profession:
+            guard let id = selectedFilters.professionID,
+                  let profession = professions.first(where: { $0.id == id }) else { return nil }
+            return profession.name.ru
+            
+        case .universityType: return selectedFilters.universityType?.title
         case .military: return selectedFilters.hasMilitary.map { $0 ? "Есть" : "Нет" }
-        case .stateOwned: return selectedFilters.isStateOwned.map { $0 ? "Государственный" : "Частный" }
         case .dormitory: return selectedFilters.hasDormitory.map { $0 ? "Есть" : "Нет" }
         case .sorting: return selectedFilters.sorting == .default ? nil : selectedFilters.sorting.title
         case .price: return nil
@@ -43,19 +52,24 @@ final class UniversityScreenFilterModalControllerViewModel {
     
     func selectValue(_ value: String, for option: UniversityFilterOption) {
         switch option {
-        case .subjects: selectedFilters.subjects = [value]
-        case .specializations: selectedFilters.specializations = [value]
-        case .areas: selectedFilters.areas = [value]
+        case .city:
+            if let city = cities.first(where: { $0.name.ru == value }) {
+                selectedFilters.cityIDs = [city.id]
+            }
+        case .profession:
+            if let profession = professions.first(where: { $0.name.ru == value }) {
+                selectedFilters.professionID = profession.id
+            }
+        case .universityType: selectedFilters.universityType = ECUniversity.UniversityType.allCases.first { $0.title == value }
         case .military: selectedFilters.hasMilitary = (value == "Есть")
-        case .stateOwned: selectedFilters.isStateOwned = (value == "Государственный")
         case .dormitory: selectedFilters.hasDormitory = (value == "Есть")
-        case .sorting: selectedFilters.sorting = UniversitySortOption.from(value)
+        case .sorting: selectedFilters.sorting = .from(value)
         case .price: break
         }
         onUpdate?()
     }
     
-    func selectPriceRange(min: CGFloat, max: CGFloat) {
+    func selectPriceRange(min: Int, max: Int) {
         selectedFilters.priceMin = min
         selectedFilters.priceMax = max
     }
@@ -163,9 +177,9 @@ extension UniversityScreenFilterModalController: UICollectionViewDataSource, UIC
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UniversityScreenFilterModalSliderCell.identifier, for: indexPath) as! UniversityScreenFilterModalSliderCell
             let cellVM = UniversityScreenFilterModalSliderCellViewModel(
                 filterType: option,
-                currentMinValue: viewModel.selectedFilters.priceMin ?? 0,
-                currentMaxValue: viewModel.selectedFilters.priceMax ?? 5_000_000,
-                onValueChanged: { [weak self] min, max in self?.viewModel.selectPriceRange(min: min, max: max) }
+                currentMinValue: CGFloat(viewModel.selectedFilters.priceMin ?? 0),
+                currentMaxValue: CGFloat(viewModel.selectedFilters.priceMax ?? 5_000_000),
+                onValueChanged: { [weak self] min, max in self?.viewModel.selectPriceRange(min: Int(min), max: Int(max)) }
             )
             cell.configure(withVM: cellVM)
             return cell

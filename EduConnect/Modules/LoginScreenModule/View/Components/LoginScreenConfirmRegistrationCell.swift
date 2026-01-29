@@ -38,7 +38,7 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
     // MARK: - VIEW PROPERTIES
     private let confirmSignInLabel: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page2.confirmSignInTitle
+        label.text = ConstantLocalizedStrings.Registration.Page2.confirmSignInTitle
         label.font = ECFont.font(.bold, size: 30)
         label.textAlignment = .center
         label.textColor = .black
@@ -48,7 +48,7 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
     
     private let checkEmailLabel: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page2.checkEmailSubtitle
+        label.text = ConstantLocalizedStrings.Registration.Page2.checkEmailSubtitle
         label.font = ECFont.font(.bold, size: 14)
         label.textAlignment = .center
         label.textColor = .systemGray
@@ -58,11 +58,11 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
     
     private let backButton: ECIconButton = ECIconButton()
     
-    private let codeField: ECTextField = ECTextField(placeHolder: ECLocalizedStrings.Registration.Page2.confirmCodeTextField)
+    private let codeField: ECTextField = ECTextField(placeHolder: ConstantLocalizedStrings.Registration.Page2.confirmCodeTextField)
     
-    private let confirmButton: ECButton = ECButton(text: ECLocalizedStrings.Common.confirm)
+    private let confirmButton: ECButton = ECButton(text: ConstantLocalizedStrings.Common.confirm)
     
-    private let resendCodeButton: ECUnderlineButton = ECUnderlineButton(text: ECLocalizedStrings.Registration.Page2.resendCodeUnderlineButton)
+    private let resendCodeButton: ECUnderlineButton = ECUnderlineButton(text: ConstantLocalizedStrings.Registration.Page2.resendCodeUnderlineButton)
     
     private let topSpacer = UIView()
     private let bottomSpacer = UIView()

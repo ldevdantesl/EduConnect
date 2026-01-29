@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AuthEndpoint: Endpoint {
+enum AuthEndpoints: Endpoint {
     case sendCode(email: String)
     case verifyCode(email: String, code: String)
     case register(email: String, password: String)

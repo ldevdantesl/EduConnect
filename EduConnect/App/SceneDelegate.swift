@@ -20,7 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let container = DIContainer()
         let appRouter = AppRouter(
             authState: container.authentication,
-            sidebarService: container.sidebarService
+            sidebarService: container.sidebarService,
+            networkService: container.networkService,
+            errorService: container.errorService
         )
         appRouter.window = window
         

@@ -7,7 +7,7 @@
 
 import UIKit
 
-public enum ECLocalizedStrings {
+public enum ConstantLocalizedStrings {
     
     /// For __Registration__ page flow
     enum Registration {

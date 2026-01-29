@@ -8,38 +8,89 @@
 import Foundation
 
 struct UniversityFilters {
-    var subjects: [String] = []
-    var specializations: [String] = []
-    var areas: [String] = []
-    var hasMilitary: Bool? = nil
-    var isStateOwned: Bool? = nil
-    var hasDormitory: Bool? = nil
-    var sorting: UniversitySortOption = .default
-    var priceMin: CGFloat? = nil
-    var priceMax: CGFloat? = nil
-}
-
-enum UniversitySortOption {
-    case `default`
-    case rating
-    case nameAZ
-    case nameZA
     
-    var title: String {
-        switch self {
-        case .default: return "По умолчанию"
-        case .rating: return "По рейтингу"
-        case .nameAZ: return "По названию А-Я"
-        case .nameZA: return "По названию Я-А"
+    enum UniversitySortOption: String, CaseIterable {
+        case `default`
+        case nameAsc
+        case nameDesc
+        case priceAsc
+        case priceDesc
+
+        var title: String {
+            switch self {
+            case .default: return "По умолчанию"
+            case .nameAsc: return "По названию А-Я"
+            case .nameDesc: return "По названию Я-А"
+            case .priceAsc: return "По цене ↑"
+            case .priceDesc: return "По цене ↓"
+            }
+        }
+        
+        var apiValue: String {
+            switch self {
+            case .default: return "default"
+            case .nameAsc: return "name_asc"
+            case .nameDesc: return "name_desc"
+            case .priceAsc: return "price_asc"
+            case .priceDesc: return "price_desc"
+            }
+        }
+
+        static func from(_ value: String) -> UniversitySortOption {
+            switch value {
+            case "По названию А-Я": return .nameAsc
+            case "По названию Я-А": return .nameDesc
+            case "По цене ↑": return .priceAsc
+            case "По цене ↓": return .priceDesc
+            default: return .default
+            }
         }
     }
     
-    static func from(_ value: String) -> UniversitySortOption {
-        switch value {
-        case "По рейтингу": return .rating
-        case "По названию А-Я": return .nameAZ
-        case "По названию Я-А": return .nameZA
-        default: return .default
+    var cityIDs: [Int] = []
+    var professionID: Int?
+    var universityType: ECUniversity.UniversityType?
+    var hasMilitary: Bool?
+    var hasDormitory: Bool?
+    var priceMin: Int?
+    var priceMax: Int?
+    var sorting: UniversitySortOption = .default
+    
+    func toQueryItems() -> [URLQueryItem] {
+        var items: [URLQueryItem] = []
+        
+        if !cityIDs.isEmpty {
+            items.append(URLQueryItem(name: "city_ids", value: cityIDs.map(String.init).joined(separator: ",")))
         }
+        
+        if let professionID {
+            items.append(URLQueryItem(name: "profession_id", value: professionID.description))
+        }
+        
+        if let type = universityType {
+            items.append(URLQueryItem(name: "university_type", value: type.rawValue))
+        }
+        
+        if let hasMilitary {
+            items.append(URLQueryItem(name: "has_military_department", value: hasMilitary ? "1" : "0"))
+        }
+        
+        if let hasDormitory {
+            items.append(URLQueryItem(name: "has_dormitory", value: hasDormitory ? "1" : "0"))
+        }
+        
+        if let priceMin {
+            items.append(URLQueryItem(name: "price_min", value: "\(priceMin)"))
+        }
+        
+        if let priceMax {
+            items.append(URLQueryItem(name: "price_max", value: "\(priceMax)"))
+        }
+        
+        if sorting != .default {
+            items.append(URLQueryItem(name: "sort", value: sorting.apiValue))
+        }
+        
+        return items
     }
 }

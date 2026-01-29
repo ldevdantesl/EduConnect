@@ -10,7 +10,9 @@ import UIKit
 final class AppRouter: AppRoutingProtocol {
     // MARK: - INJECTED PROPERTIES
     private let authState: ECAuthentication
-    private var sidebarService: ECSidebarService
+    private let sidebarService: ECSidebarService
+    private let networkService: ECNetworkService
+    private let errorService: ECErrorService
     
     // MARK: - WEAK PROPERTIES
     weak var window: UIWindow?
@@ -20,9 +22,11 @@ final class AppRouter: AppRoutingProtocol {
     private(set) var navController = UINavigationController()
     private(set) var sidebarContainer: SidebarContainerViewController?
     
-    init(authState: ECAuthentication, sidebarService: ECSidebarService) {
+    init(authState: ECAuthentication, sidebarService: ECSidebarService, networkService: ECNetworkService, errorService: ECErrorService) {
         self.authState = authState
         self.sidebarService = sidebarService
+        self.networkService = networkService
+        self.errorService = errorService
         setup()
     }
     
@@ -65,7 +69,10 @@ final class AppRouter: AppRoutingProtocol {
             let vc = UniversityScreenAssembler.assemble(sidebarService: sidebarService, appRouter: self)
             navController.setViewControllers([vc], animated: true)
         case .programs:
-            let vc = ProgramsScreenAssembler.assemble(sidebarService: sidebarService, appRouter: self)
+            let vc = ProgramsScreenAssembler.assemble(
+                sidebarService: sidebarService, appRouter: self,
+                networkService: networkService, errorService: errorService
+            )
             navController.setViewControllers([vc], animated: true)
         case .professions: print("Navigating to Professions")
         case .tests: print("Navigating to Tests")
