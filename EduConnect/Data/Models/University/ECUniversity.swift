@@ -40,8 +40,9 @@ struct ECUniversity: Codable {
     let id: Int
     let name: String
     let description: String
-    let logoURL: String
+    let logoURL: String?
     let mainImageURL: String
+    let youtubeURL: String?
     let phone: String
     let email: String
     let address: String
@@ -61,13 +62,13 @@ struct ECUniversity: Codable {
     let budgetPlaces: Int
     let paidPlaces: Int
     let entScores: ECUniversityEntScores?
-    let createdAt, updatedAt: String
+    let createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
-        case id, name, description
+        case id, name, description, phone, email, address
         case logoURL = "logo_url"
         case mainImageURL = "main_image_url"
-        case phone, email, address
+        case youtubeURL = "youtube_url"
         case foundedYear = "founded_year"
         case hasDormitory = "has_dormitory"
         case hasMilitaryDepartment = "has_military_department"

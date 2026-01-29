@@ -19,4 +19,5 @@ enum UniversityScreenItem: Hashable {
     case universityItem(DiffableItem<UniversityCellViewModel>)
     case pageIndicatorItem(DiffableItem<PageIndicatorCellViewModel>)
     case footerItem(DiffableItem<TabsFooterCellViewModel>)
+    case loadingItem(DiffableItem<LoadingCellViewModel>)
 }

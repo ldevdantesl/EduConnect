@@ -14,7 +14,8 @@ struct DIContainer {
     let errorService: ECErrorService
     
     init() {
-        let httpClient = HTTPClient()
+        let logger = ECNetworkLogger()
+        let httpClient = HTTPClient(logger: logger)
         let tokenStorage = TokenStorage()
         self.authentication = ECAuthentication()
         self.sidebarService = ECSidebarService()

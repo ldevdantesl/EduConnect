@@ -8,7 +8,7 @@
 import UIKit
 
 protocol UniversityAPIServiceProtocol {
-    func getUniversities(page: Int, searchKey: String?, filters: UniversityFilters?) async throws -> [ECUniversity]
+    func getUniversities(page: Int, searchKey: String?, filters: UniversityFilters?) async throws -> PaginatedResponse<ECUniversity>
     func getUniversity(id: Int) async throws -> ECUniversity?
 }
 
@@ -19,12 +19,18 @@ final class UniversityAPIService: UniversityAPIServiceProtocol {
         self.httpClient = httpClient
     }
     
-    func getUniversities(page: Int, searchKey: String?, filters: UniversityFilters?) async throws -> [ECUniversity] {
-        let responseData: EduConnectDataResponse<[ECUniversity]> = try await httpClient.request(
+    func getUniversities(page: Int, searchKey: String?, filters: UniversityFilters?) async throws -> PaginatedResponse<ECUniversity> {
+        let responseData: EduConnectDataResponse<PaginatedResponse<ECUniversity>> = try await httpClient.request(
             UniversityEndpoints.getUniversities(page: page, search: searchKey, filters: filters)
         )
-        return responseData.data ?? []
+        
+        guard let data = responseData.data else {
+            throw APIError.noData
+        }
+        
+        return data
     }
+    
     
     func getUniversity(id: Int) async throws -> ECUniversity? {
         let responseData: EduConnectDataResponse<ECUniversity> = try await httpClient.request(

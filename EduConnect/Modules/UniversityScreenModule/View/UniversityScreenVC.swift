@@ -11,6 +11,7 @@ import SnapKit
 protocol UniversityScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [UniversityScreenSection], itemsBySection: [UniversityScreenSection : [UniversityScreenItem]])
     func reconfigureItems(items: [UniversityScreenItem])
+    func showError(errorMessage: String)
 }
 
 final class UniversityScreenVC: UIViewController {
@@ -31,6 +32,7 @@ final class UniversityScreenVC: UIViewController {
         let cv = DiffableCollectionViewContainer<UniversityScreenSection, UniversityScreenItem>(
             layout: UniversityScreenLayoutFactory.make()
         )
+        cv.registerCell(LoadingCell.self, reuseID: LoadingCell.identifier)
         cv.registerCell(UniversityScreenHeaderCell.self, reuseID: UniversityScreenHeaderCell.identifier)
         cv.registerCell(UniversityScreenFilterCell.self, reuseID: UniversityScreenFilterCell.identifier)
         cv.registerCell(UniversityCell.self, reuseID: UniversityCell.identifier)
@@ -92,6 +94,11 @@ final class UniversityScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? TabsFooterCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
+                
+            case .loadingItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoadingCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
             }
         }
     }
@@ -104,5 +111,9 @@ extension UniversityScreenVC: UniversityScreenViewProtocol {
     
     func reconfigureItems(items: [UniversityScreenItem]) {
         collectionContainer.reconfigureItems(items)
+    }
+    
+    func showError(errorMessage: String) {
+        self.showError(message: errorMessage) /// Added from Extensions
     }
 }

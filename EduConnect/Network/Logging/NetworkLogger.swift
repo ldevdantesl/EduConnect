@@ -13,7 +13,7 @@ protocol NetworkLoggerProtocol {
     func logError(_ error: Error, duration: TimeInterval)
 }
 
-final class NetworkLogger: NetworkLoggerProtocol {
+final class ECNetworkLogger: NetworkLoggerProtocol {
     
     enum LogLevel {
         case none

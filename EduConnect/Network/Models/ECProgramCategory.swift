@@ -10,5 +10,5 @@ import Foundation
 struct ECProgramCategory: Decodable {
     let id: Int
     let name: ECLocalizedString
-    let icon: String
+    let icon: String?
 }

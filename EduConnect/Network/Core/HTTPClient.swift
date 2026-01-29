@@ -23,7 +23,7 @@ final class HTTPClient: HTTPClientProtocol {
     // MARK: - Init
     init(
         session: URLSession = .shared,
-        decoder: JSONDecoder = .snakeCase,
+        decoder: JSONDecoder = .init(),
         timeout: TimeInterval = 30,
         logger: NetworkLoggerProtocol? = nil
     ) {
@@ -78,6 +78,7 @@ final class HTTPClient: HTTPClientProtocol {
         } catch {
             throw APIError.decodingFailed(error)
         }
+
     }
     
     // MARK: - Private: Build Request

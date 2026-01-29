@@ -4,6 +4,7 @@
     "description": "Лучший государственный университет в Казахстане",
     "logo_url": "https://educonnect.kz/storage/universities/logos/Pz5XSnj7My2nJVyXiHcoobIqrztckmEC5Crpk1Zt.png",
     "main_image_url": "https://educonnect.kz/storage/universities/main/rkkAuX0TFwmMzXhG4DutwIDAEIymIwF891CG2jYP.png",
+    "youtube_url": "https://youtu.be/t1VK4g3L0N8?si=RZ-LumYDzRch1v0V",
     "phone": "444333111",
     "email": "kaz@edu.kz",
     "address": "г. Алматы",
@@ -41,5 +42,5 @@
         "contract_score": "60.00"
     },
     "created_at": "2026-01-07T06:13:27.000000Z",
-    "updated_at": "2026-01-07T07:07:01.000000Z"
+    "updated_at": "2026-01-22T12:53:28.000000Z"
 }

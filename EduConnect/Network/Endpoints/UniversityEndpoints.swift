@@ -40,5 +40,4 @@ enum UniversityEndpoints: Endpoint {
         default: return nil
         }
     }
-    
 }
