@@ -9,7 +9,10 @@ import UIKit
 
 protocol UniversityScreenRouterProtocol {
     func openSidebar()
-    func presentFilterView()
+    func presentFilterView(
+        currentFilters: UniversityFilters, cities: [ECCity],
+        professions: [ECProfession], onApply: ((UniversityFilters) -> Void)?
+    )
     func openAccount()
 }
 
@@ -23,8 +26,12 @@ final class UniversityScreenRouter: UniversityScreenRouterProtocol {
         self.appRouter = appRouter
     }
     
-    func presentFilterView() {
-        let vm = UniversityScreenFilterModalControllerViewModel()
+    func presentFilterView(
+        currentFilters: UniversityFilters, cities: [ECCity],
+        professions: [ECProfession], onApply: ((UniversityFilters) -> Void)?
+    ) {
+        let vm = UniversityScreenFilterModalControllerViewModel(currentFilters: currentFilters, cities: cities, professions: professions)
+        vm.onApplyFilters = onApply
         let vc = UniversityScreenFilterModalController(viewModel: vm)
         vc.modalPresentationStyle = .pageSheet
 

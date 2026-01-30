@@ -93,7 +93,7 @@ final class UniversityScreenFilterModalOptionCell: UICollectionViewCell, Configu
         }
         
         menuButton.configuration?.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
-        menuButton.menu = UIMenu(title: "", children: actions)
+        menuButton.menu = UIMenu(title: vm.filterType.title, children: actions)
     }
     
     // MARK: - Private

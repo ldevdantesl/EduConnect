@@ -12,6 +12,7 @@ protocol UniversityScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [UniversityScreenSection], itemsBySection: [UniversityScreenSection : [UniversityScreenItem]])
     func reconfigureItems(items: [UniversityScreenItem])
     func showError(errorMessage: String)
+    func scrollToTop(onCompletion: (() -> Void)?)
 }
 
 final class UniversityScreenVC: UIViewController {
@@ -111,6 +112,10 @@ extension UniversityScreenVC: UniversityScreenViewProtocol {
     
     func reconfigureItems(items: [UniversityScreenItem]) {
         collectionContainer.reconfigureItems(items)
+    }
+    
+    func scrollToTop(onCompletion: (() -> Void)?) {
+        collectionContainer.scrollToTop(completion: onCompletion)
     }
     
     func showError(errorMessage: String) {

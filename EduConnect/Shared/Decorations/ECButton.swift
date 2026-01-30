@@ -10,7 +10,7 @@ import UIKit
 final class ECButton: UIButton {
     
     private var action: (() -> Void)?
-    private var cornerRadius: CGFloat = 25
+    private var cornerRadius: CGFloat = 15
     
     private var config = UIButton.Configuration.plain()
     
@@ -86,7 +86,6 @@ final class ECButton: UIButton {
         cornerRadius: CGFloat? = nil
     ) {
         var config = self.configuration ?? .plain()
-
         var title = config.attributedTitle ?? AttributedString("")
 
         if let text {
@@ -100,17 +99,16 @@ final class ECButton: UIButton {
         }
 
         config.attributedTitle = title
+        self.configuration = config
 
         if let backgroundColor {
-            config.background.backgroundColor = backgroundColor
+            self.backgroundColor = backgroundColor
         }
         if let cornerRadius {
-            config.background.cornerRadius = cornerRadius
+            self.cornerRadius = cornerRadius
         }
-
-        self.configuration = config
-        layoutIfNeeded()
         
+        setNeedsLayout()
     }
     
     public func setAction(action: (() -> Void)?) {

@@ -48,6 +48,23 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
         )
     }
     
+    func scrollToTop(animated: Bool = true, animationDuration: TimeInterval = 1, completion: (() -> Void)? = nil) {
+        guard collectionView.numberOfSections > 0 else {
+            completion?()
+            return
+        }
+        if animated {
+            UIView.animate(withDuration: animationDuration) { [weak self] in
+                self?.collectionView.setContentOffset(.zero, animated: false)
+            } completion: { _ in
+                completion?()
+            }
+        } else {
+            collectionView.setContentOffset(.zero, animated: false)
+            completion?()
+        }
+    }
+    
     func getSnapshot() -> NSDiffableDataSourceSnapshot<Section, Item> {
         diffableDataSource.snapshot()
     }

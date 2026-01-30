@@ -26,9 +26,11 @@ final class PageIndicatorCell: UICollectionViewCell, ConfigurableCellProtocol {
     private var viewModel: PageIndicatorCellViewModel?
     
     // MARK: - VIEW PROPERTIES
-    private let nextPageLabel: UILabel = {
+    private lazy var nextPageLabel: UILabel = {
         let label = UILabel()
         label.text = "Next"
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapNextPage)))
         label.font = ECFont.font(.medium, size: 16)
         return label
     }()
@@ -38,6 +40,7 @@ final class PageIndicatorCell: UICollectionViewCell, ConfigurableCellProtocol {
         stack.axis = .horizontal
         stack.spacing = 15
         stack.alignment = .center
+        stack.isUserInteractionEnabled = true
         stack.distribution = .fill
         return stack
     }()
@@ -70,20 +73,22 @@ final class PageIndicatorCell: UICollectionViewCell, ConfigurableCellProtocol {
     }
     
     private func makeStacK() {
-        guard let viewModel else { return }
+        guard let viewModel, viewModel.totalPages > 0 else { return }
         hStack.arrangedSubviews.forEach { $0.removeFromSuperview(); hStack.removeArrangedSubview($0) }
         
         let leadingSpacer = UIView()
         leadingSpacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
         leadingSpacer.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         hStack.addArrangedSubview(leadingSpacer)
+        let lastPage = min(5, viewModel.totalPages)
         
-        for page in 1...min(5, viewModel.totalPages) {
+        for page in 1...lastPage {
             let label = ECPaddedLabel()
             label.padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             label.text = "\(page)"
             label.font = ECFont.font(.medium, size: 16)
             label.setContentHuggingPriority(.required, for: .horizontal)
+            label.tag = page
             hStack.addArrangedSubview(label)
             
             if page == viewModel.currentPage {
@@ -92,10 +97,13 @@ final class PageIndicatorCell: UICollectionViewCell, ConfigurableCellProtocol {
                 label.backgroundColor = .systemBlue
                 label.clipsToBounds = true
                 label.makeCircular = true
+            } else {
+                label.isUserInteractionEnabled = true
+                label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapPage(_:))))
             }
         }
         
-        if hStack.arrangedSubviews.count > 2 {
+        if hStack.arrangedSubviews.count > 2 && lastPage > viewModel.currentPage {
             nextPageLabel.setContentHuggingPriority(.required, for: .horizontal)
             hStack.addArrangedSubview(nextPageLabel)
         }
@@ -108,5 +116,16 @@ final class PageIndicatorCell: UICollectionViewCell, ConfigurableCellProtocol {
         leadingSpacer.snp.makeConstraints {
             $0.width.equalTo(trailingSpacer)
         }
+    }
+    
+    // MARK: - OBJC FUNC
+    @objc private func didTapPage(_ gesture: UITapGestureRecognizer) {
+        guard let view = gesture.view as? UILabel else { return }
+        let page = view.tag
+        self.viewModel?.didPressPage?(page)
+    }
+    
+    @objc private func didTapNextPage() {
+        self.viewModel?.didPressNextPage?()
     }
 }

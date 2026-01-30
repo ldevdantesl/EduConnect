@@ -47,6 +47,7 @@ struct UniversityFilters {
         }
     }
     
+    // MARK: - PROPERTIES
     var cityIDs: [Int] = []
     var professionID: Int?
     var universityType: ECUniversity.UniversityType?
@@ -56,6 +57,26 @@ struct UniversityFilters {
     var priceMax: Int?
     var sorting: UniversitySortOption = .default
     
+    // MARK: - COMPUTED PROPERTY
+    var appliedCount: Int {
+           var count = 0
+           
+           if !cityIDs.isEmpty { count += 1 }
+           if professionID != nil { count += 1 }
+           if universityType != nil { count += 1 }
+           if hasMilitary != nil { count += 1 }
+           if hasDormitory != nil { count += 1 }
+           if priceMin != nil || priceMax != nil { count += 1 }  // price range counts as 1
+           if sorting != .default { count += 1 }
+           
+           return count
+       }
+    
+    var hasActiveFilters: Bool {
+        appliedCount > 0
+    }
+    
+    // MARK: - FUNC
     func toQueryItems() -> [URLQueryItem] {
         var items: [URLQueryItem] = []
         

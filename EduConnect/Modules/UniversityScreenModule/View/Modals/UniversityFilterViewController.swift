@@ -9,64 +9,40 @@ import UIKit
 import SnapKit
 
 final class UniversityScreenFilterModalControllerViewModel {
-    var filterOptions: [UniversityFilterOption] = UniversityFilterOption.allCases
-    private(set) var selectedFilters = UniversityFilters()
+    let filterOptions: [UniversityFilterOption] = UniversityFilterOption.allCases
+    var selectedFilters: UniversityFilters
     
     var cities: [ECCity] = []
     var professions: [ECProfession] = []
     
     var onApplyFilters: ((UniversityFilters) -> Void)?
-    var onUpdate: (() -> Void)?
+    var onFiltersChanged: (() -> Void)?
+    
+    init(currentFilters: UniversityFilters, cities: [ECCity] = [], professions: [ECProfession] = []) {
+        self.selectedFilters = currentFilters
+        self.cities = cities
+        self.professions = professions
+    }
     
     func subItems(for option: UniversityFilterOption) -> [String] {
+        if let staticItems = option.staticSubItems {
+            return staticItems
+        }
+        
         switch option {
-        case .city: return cities.map { $0.name.ru }
-        case .profession: return professions.map { $0.name.ru }
-        case .universityType: return ECUniversity.UniversityType.allCases.map { $0.title }
-        case .military: return ["Есть", "Нет"]
-        case .dormitory: return ["Есть", "Нет"]
-        case .sorting: return UniversityFilters.UniversitySortOption.allCases.map { $0.title }
-        case .price: return []
+        case .city: return [option.noneTitle] + cities.map { $0.name.ru }
+        case .profession: return [option.noneTitle] + professions.map { $0.name.ru }
+        default: return []
         }
     }
     
     func selectedValue(for option: UniversityFilterOption) -> String? {
-        switch option {
-        case .city:
-            guard let firstID = selectedFilters.cityIDs.first,
-                  let city = cities.first(where: { $0.id == firstID }) else { return nil }
-            return city.name.ru
-            
-        case .profession:
-            guard let id = selectedFilters.professionID,
-                  let profession = professions.first(where: { $0.id == id }) else { return nil }
-            return profession.name.ru
-            
-        case .universityType: return selectedFilters.universityType?.title
-        case .military: return selectedFilters.hasMilitary.map { $0 ? "Есть" : "Нет" }
-        case .dormitory: return selectedFilters.hasDormitory.map { $0 ? "Есть" : "Нет" }
-        case .sorting: return selectedFilters.sorting == .default ? nil : selectedFilters.sorting.title
-        case .price: return nil
-        }
+        option.selectedValue(from: selectedFilters, cities: cities, professions: professions)
     }
     
-    func selectValue(_ value: String, for option: UniversityFilterOption) {
-        switch option {
-        case .city:
-            if let city = cities.first(where: { $0.name.ru == value }) {
-                selectedFilters.cityIDs = [city.id]
-            }
-        case .profession:
-            if let profession = professions.first(where: { $0.name.ru == value }) {
-                selectedFilters.professionID = profession.id
-            }
-        case .universityType: selectedFilters.universityType = ECUniversity.UniversityType.allCases.first { $0.title == value }
-        case .military: selectedFilters.hasMilitary = (value == "Есть")
-        case .dormitory: selectedFilters.hasDormitory = (value == "Есть")
-        case .sorting: selectedFilters.sorting = .from(value)
-        case .price: break
-        }
-        onUpdate?()
+    func applyValue(_ value: String, for option: UniversityFilterOption) {
+        option.applyValue(value, to: &selectedFilters, cities: cities, professions: professions)
+        onFiltersChanged?()
     }
     
     func selectPriceRange(min: Int, max: Int) {
@@ -132,9 +108,14 @@ final class UniversityScreenFilterModalController: UIViewController {
         super.viewDidLoad()
         setupUI()
         
-        viewModel.onUpdate = { [weak self] in
+        viewModel.onFiltersChanged = { [weak self] in
             guard let self else { return }
             self.collectionView.reloadData()
+        }
+        
+        applyButton.setAction { [weak self] in
+            self?.viewModel.applyFilters()
+            self?.dismiss(animated: true)
         }
     }
     
@@ -191,7 +172,7 @@ extension UniversityScreenFilterModalController: UICollectionViewDataSource, UIC
             selectedValue: viewModel.selectedValue(for: option),
             subItems: viewModel.subItems(for: option),
             onSelectOption: { [weak self] value in
-                self?.viewModel.selectValue(value, for: option)
+                self?.viewModel.applyValue(value, for: option)
             }
         )
         cell.configure(withVM: cellVM)

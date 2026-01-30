@@ -10,6 +10,8 @@ import SnapKit
 
 struct UniversityScreenFilterCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = "UniversityScreenFilterCell"
+    var currentFilters: UniversityFilters
+    var searchText: String?
     var didTapChances: (() -> Void)?
     var didTapCity: (() -> Void)?
     var didTapSearch: ((String) -> Void)?
@@ -71,6 +73,19 @@ final class UniversityScreenFilterCell: UICollectionViewCell, ConfigurableCellPr
     func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? UniversityScreenFilterCellViewModel else { return }
         self.viewModel = vm
+        
+        if let searchText = vm.searchText {
+            self.searchField.text = searchText
+        }
+
+        if vm.currentFilters.appliedCount > 0 {
+            filtersButton.reconfigure(text: "Добавленные фильтры: \(vm.currentFilters.appliedCount)", backgroundColor: .systemBlue, textColor: .white)
+            filtersButton.borderWidth = 0
+        } else {
+            filtersButton.reconfigure(text: "Фильтр", backgroundColor: .systemBackground, textColor: .blue)
+            filtersButton.borderColor = .blue
+            filtersButton.borderWidth = 2
+        }
     }
     
     // MARK: - PRIVATE FUNC

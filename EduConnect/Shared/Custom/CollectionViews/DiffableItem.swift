@@ -9,23 +9,27 @@ import Foundation
 
 struct DiffableItem<VM>: Hashable {
     let id: AnyHashable
+    let version: Int
     let viewModel: VM
     
-    init(id: AnyHashable, viewModel: VM) {
+    init(id: AnyHashable, viewModel: VM, version: Int = 0) {
         self.id = id
         self.viewModel = viewModel
+        self.version = version
     }
     
     init(viewModel: VM) {
         self.id = UUID()
         self.viewModel = viewModel
+        self.version = 0
     }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+        hasher.combine(version)
     }
     
     static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.id == rhs.id
+        lhs.id == rhs.id && lhs.version == rhs.version
     }
 }
