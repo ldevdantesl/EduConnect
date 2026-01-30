@@ -13,10 +13,12 @@ struct UniversityCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = "UniversityCell"
     let university: ECUniversity
     let horizontallySpaced: Bool
+    let didTap: ((ECUniversity) -> Void)?
     
-    init(university: ECUniversity, horizontallySpaced: Bool = false) {
+    init(university: ECUniversity, horizontallySpaced: Bool = false, didTap: ((ECUniversity) -> Void)? = nil) {
         self.university = university
         self.horizontallySpaced = horizontallySpaced
+        self.didTap = didTap
     }
 }
 
@@ -117,11 +119,12 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
     
     private let facultyButton: ECUnderlineButton = ECUnderlineButton()
     
-    private let containerView: UIView = {
+    private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapSelf)))
         return view
     }()
     
@@ -160,35 +163,10 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
-        self.layoutContainerView()
         self.layer.masksToBounds = false
         self.contentView.clipsToBounds = false
         self.clipsToBounds = false
         self.contentView.addSubview(containerView)
-        layoutIfNeeded()
-    }
-    
-    private func validatedProfessionsText(professions: [ECUniversity.NamedEntity]) -> String {
-        let professionNames = professions.map { $0.name }
-        guard professionNames.count > 2 else { return professionNames.joined(separator: ";") }
-        return "\(professionNames[0]); \(professionNames[1]) и ещё \(professionNames.count - 2) направлений"
-    }
-    
-    private func decoratedAdmissionInfoText(_ text: String) -> NSAttributedString {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 4
-
-        return NSAttributedString(
-            string: text,
-            attributes: [
-                .paragraphStyle: paragraphStyle,
-                .foregroundColor: UIColor.white,
-                .font: ECFont.font(.bold, size: 16)
-            ]
-        )
-    }
-    
-    private func layoutContainerView() {
         containerView.addSubview(backgroundImage)
         backgroundImage.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -255,6 +233,27 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
             $0.leading.lessThanOrEqualTo(programsButton.snp.trailing).offset(Constants.hugeSpacing)
             $0.trailing.equalToSuperview().offset(-Constants.hugeSpacing)
         }
+        layoutIfNeeded()
+    }
+    
+    private func validatedProfessionsText(professions: [ECUniversity.NamedEntity]) -> String {
+        let professionNames = professions.map { $0.name }
+        guard professionNames.count > 2 else { return professionNames.joined(separator: ";") }
+        return "\(professionNames[0]); \(professionNames[1]) и ещё \(professionNames.count - 2) направлений"
+    }
+    
+    private func decoratedAdmissionInfoText(_ text: String) -> NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+
+        return NSAttributedString(
+            string: text,
+            attributes: [
+                .paragraphStyle: paragraphStyle,
+                .foregroundColor: UIColor.white,
+                .font: ECFont.font(.bold, size: 16)
+            ]
+        )
     }
     
     private func makeConstraints() {
@@ -281,10 +280,10 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
         )
         self.locationAndOwnershipLabel.text = "\(vm.university.city.name) / \(vm.university.universityTypeName)"
         self.nameLabel.text = vm.university.name
-        self.priceLabel.text = "от \(vm.university.minContractPrice)₸ / год"
+        self.priceLabel.text = "от \(ECNumberFormatter.toDecimalFromString(number: vm.university.minContractPrice))₸ / год"
         let admissionText = """
-        от \(vm.university.entScores?.budgetScore ?? "0") бал бюджет
-        от \(vm.university.entScores?.contractScore ?? "0") бал платно
+        от \(ECNumberFormatter.toDecimalFromString(number: (vm.university.entScores?.budgetScore ?? "0"))) бал бюджет
+        от \(ECNumberFormatter.toDecimalFromString(number: (vm.university.entScores?.contractScore ?? "0"))) бал платно
         \(vm.university.budgetPlaces) места бюджет
         \(vm.university.paidPlaces) места платно
         """
@@ -295,5 +294,11 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
         self.facultyButton.configure(text: "\(vm.university.facultiesCount) факультета")
         
         makeConstraints()
+    }
+    
+    // MARK: - OBJC
+    @objc private func didTapSelf() {
+        guard let university = viewModel?.university else { return }
+        viewModel?.didTap?(university)
     }
 }

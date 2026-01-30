@@ -51,7 +51,10 @@ final class AppRouter: AppRoutingProtocol {
         )
         window?.rootViewController = sidebarContainer
         window?.makeKeyAndVisible()
-        let vc = AccountScreenAssembler.assemble(appRouter: self, sidebarService: sidebarService)
+        let vc = AccountScreenAssembler.assemble(
+            appRouter: self, sidebarService: sidebarService,
+            networkService: networkService, errorService: errorService
+        )
         navController.setViewControllers([vc], animated: true)
     }
     

@@ -13,7 +13,7 @@ final class UniversityScreenAssembler {
         networkService: NetworkServiceProtocol, errorService: ErrorServiceProtocol
     ) -> UniversityScreenVC {
         let interactor = UniversityScreenInteractor(networkService: networkService)
-        let router = UniversityScreenRouter(sidebarService: sidebarService, appRouter: appRouter)
+        let router = UniversityScreenRouter(sidebarService: sidebarService, appRouter: appRouter, networkService: networkService, errorService: errorService)
         let presenter = UniversityScreenPresenter(interactor: interactor, router: router, errorService: errorService)
         let viewController = UniversityScreenVC()
         presenter.view  = viewController

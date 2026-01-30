@@ -1,6 +1,6 @@
 //
-//  HomeScreenPresenter.swift
-//  Super easy dev
+//  AccountScreenPresenter.swift
+//  EduConnect
 //
 //  Created by Buzurg Rakhimzoda on 9.01.2026
 //
@@ -15,71 +15,161 @@ protocol AccountScreenPresenterProtocol: AnyObject {
 }
 
 final class AccountScreenPresenter {
-    
+
     // MARK: - VIPER
     weak var view: AccountScreenViewProtocol?
-    var router: AccountScreenRouterProtocol
-    var interactor: AccountScreenInteractorProtocol
-    
-    // MARK: - PROPERTIES
+    private let router: AccountScreenRouterProtocol
+    private let interactor: AccountScreenInteractorProtocol
+
+    // MARK: - STATE
     var selectedTab: AccountScreenTab = .main
-    
-    // MARK: - LAZY PROPERTIES
+
+    // MARK: - EXPANDABLE PROVIDER
     private lazy var expandableProvider: ExpandableViewModelsProvider = {
-        let expandableActions = ExpandableActions(
+        let actions = ExpandableActions(
             didTapAddActivity: { [weak self] in
-                let vm = AddExtracurricularActivityPopUpViewModel(onClose: self?.view?.dismissPopup, didAddNewActivity: nil)
-                self?.router.showAddExtracurricularPopUp(viewModel: vm)
+                guard let self else { return }
+                let vm = AddExtracurricularActivityPopUpViewModel(
+                    onClose: self.view?.dismissPopup,
+                    didAddNewActivity: nil
+                )
+                self.router.showAddExtracurricularPopUp(viewModel: vm)
             },
             didTapAddOlympiad: { [weak self] in
-                let vm = AddOlympiadPopUpViewModel(onClose: self?.view?.dismissPopup, didAddNewOlympiad: nil)
-                self?.router.showAddNewOlympiadPopUp(viewModel: vm)
+                guard let self else { return }
+                let vm = AddOlympiadPopUpViewModel(
+                    onClose: self.view?.dismissPopup,
+                    didAddNewOlympiad: nil
+                )
+                self.router.showAddNewOlympiadPopUp(viewModel: vm)
             },
             didTapAddENTSubject: { [weak self] in
-                let vm = AddENTSubjectPopUpViewModel(onClose: self?.view?.dismissPopup, didAddNewSubject: nil)
-                self?.router.showAddEntSubjectPopUp(viewModel: vm)
+                guard let self else { return }
+                let vm = AddENTSubjectPopUpViewModel(
+                    onClose: self.view?.dismissPopup,
+                    didAddNewSubject: nil
+                )
+                self.router.showAddEntSubjectPopUp(viewModel: vm)
             }
         )
-        
-        let provider = ExpandableViewModelsProvider(actions: expandableActions)
-        
+
+        let provider = ExpandableViewModelsProvider(actions: actions)
+
         provider.onCellToggled = { [weak self] item in
             self?.view?.reconfigureItems(items: [item])
         }
-        
+
         return provider
     }()
-    
-    private lazy var snapshotFactory: AccountScreenSnapshotFactoryProtocol = AccountScreenSnapshotFactory(expandableProvider: expandableProvider)
-    
-    // MARK: - COMPUTED PROPERTIES
+
+    // MARK: - HEADER MENU VM
     var headerMenuViewModel: AccountScreenSegmentedReusableMenuViewModel {
         AccountScreenSegmentedReusableMenuViewModel(
             currentTab: selectedTab,
-            didSelectTab: { [weak self] in self?.didSelectAnotherTab(newTab: $0) }
+            didSelectTab: { [weak self] in
+                self?.didSelectAnotherTab(newTab: $0)
+            }
         )
     }
-    
-    // MARK: - LIFECYCLE
-    init(interactor: AccountScreenInteractorProtocol, router: AccountScreenRouterProtocol) {
+
+    // MARK: - INIT
+    init(
+        interactor: AccountScreenInteractorProtocol,
+        router: AccountScreenRouterProtocol
+    ) {
         self.interactor = interactor
         self.router = router
     }
-    
-    // MARK: - PRIVATE FUNC
+
+    // MARK: - SNAPSHOT DISPATCH
     private func didSelectAnotherTab(newTab: AccountScreenTab) {
         guard selectedTab != newTab else { return }
         selectedTab = newTab
-        let snapshot = snapshotFactory.makeSnapshot(for: newTab)
-        view?.applySnapshot(sections: snapshot.sections, itemsBySection: snapshot.itemsBySection)
+
+        switch newTab {
+        case .myUniversities:
+            showUniversities(tab: newTab)
+        case .application:
+            showApplication(tab: newTab)
+        case .main:
+            showMain(tab: newTab)
+        }
+    }
+
+    // MARK: - SNAPSHOTS
+    private func showUniversities(tab: AccountScreenTab) {
+        let headerVM = makeHeaderVM(for: tab)
+        let university = ECUniversity.sample
+        let universityVM = UniversityCellViewModel(university: university) { [weak self] in
+            self?.router.routeToUniversityInfo($0)
+        }
+
+        view?.applySnapshot(
+            sections: [.universities],
+            itemsBySection: [
+                .universities: [
+                    .headerItem(.init(id: "header", viewModel: headerVM)),
+                    .university(.init(id: university.id, viewModel: universityVM))
+                ]
+            ]
+        )
+    }
+
+    private func showApplication(tab: AccountScreenTab) {
+        let headerVM = makeHeaderVM(for: tab)
+
+        var items: [AccountScreenItem] = [
+            .headerItem(.init(id: "header", viewModel: headerVM))
+        ]
+
+        let expandableCells: [ExpandableCellID] = [
+            .personalInfo, .familyInfo,
+            .education, .ENT,
+            .extracurricular, .olympiads
+        ]
+
+        expandableCells.forEach {
+            if let item = expandableProvider.makeExpandableItem(for: $0) {
+                items.append(item)
+            }
+        }
+
+        view?.applySnapshot(
+            sections: [.application],
+            itemsBySection: [.application: items]
+        )
+    }
+
+    private func showMain(tab: AccountScreenTab) {
+        let headerVM = makeHeaderVM(for: tab)
+        let infoVM = AccountScreenMainTabInfoCellViewModel()
+
+        view?.applySnapshot(
+            sections: [.main],
+            itemsBySection: [
+                .main: [
+                    .headerItem(.init(id: "header", viewModel: headerVM)),
+                    .mainTabInfo(.init(id: "info", viewModel: infoVM))
+                ]
+            ]
+        )
+    }
+
+    // MARK: - HELPERS
+    private func makeHeaderVM(for tab: AccountScreenTab) -> SectionHeaderCellViewModel {
+        SectionHeaderCellViewModel(
+            title: tab.headerNames,
+            titleSize: 30
+        )
     }
 }
 
+// MARK: - PROTOCOL
 extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     func viewDidLoad() {
         didSelectAnotherTab(newTab: .myUniversities)
     }
-    
+
     func didTapTabBar() {
         router.showSidebar()
     }

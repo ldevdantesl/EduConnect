@@ -12,16 +12,21 @@ protocol AccountScreenRouterProtocol {
     func showAddEntSubjectPopUp(viewModel: AddENTSubjectPopUpViewModel)
     func showAddNewOlympiadPopUp(viewModel: AddOlympiadPopUpViewModel)
     func showSidebar()
+    func routeToUniversityInfo(_ university: ECUniversity)
 }
 
 final class AccountScreenRouter: AccountScreenRouterProtocol {
     weak var viewController: AccountScreenVC?
-    private let appRoter: AppRoutingProtocol
     private let sidebarService: SidebarServiceProtocol
+    private let appRouter: AppRoutingProtocol
+    private let networkService: NetworkServiceProtocol
+    private let errorService: ErrorServiceProtocol
     
-    init(appRouter: AppRoutingProtocol, sidebarService: SidebarServiceProtocol) {
-        self.appRoter = appRouter
+    init(sidebarService: SidebarServiceProtocol, appRouter: AppRoutingProtocol, networkService: NetworkServiceProtocol, errorService: ErrorServiceProtocol) {
         self.sidebarService = sidebarService
+        self.appRouter = appRouter
+        self.networkService = networkService
+        self.errorService = errorService
     }
     
     func showAddExtracurricularPopUp(viewModel: AddExtracurricularActivityPopUpViewModel) {
@@ -41,5 +46,10 @@ final class AccountScreenRouter: AccountScreenRouterProtocol {
     
     func showSidebar() {
         sidebarService.open()
+    }
+    
+    func routeToUniversityInfo(_ university: ECUniversity) {
+        let vc = UniversityInfoScreenAssembler.assemble(sidebarService: sidebarService, appRouter: appRouter, networkService: networkService, errorService: errorService, university: university)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

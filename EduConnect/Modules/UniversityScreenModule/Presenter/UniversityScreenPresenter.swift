@@ -102,7 +102,11 @@ final class UniversityScreenPresenter {
         )
         
         var universityItems = universities.map {
-            UniversityScreenItem.universityItem(.init(viewModel: .init(university: $0, horizontallySpaced: true)))
+            let vm = UniversityCellViewModel(university: $0, horizontallySpaced: true) { [weak self] in
+                guard let self = self else { return }
+                self.router.routeToUniversityInfo($0)
+            }
+            return UniversityScreenItem.universityItem(.init(viewModel: vm))
         }
         
         if totalPages > 1 {

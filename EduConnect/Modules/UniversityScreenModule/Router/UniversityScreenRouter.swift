@@ -13,6 +13,8 @@ protocol UniversityScreenRouterProtocol {
         currentFilters: UniversityFilters, cities: [ECCity],
         professions: [ECProfession], onApply: ((UniversityFilters) -> Void)?
     )
+    
+    func routeToUniversityInfo(_ university: ECUniversity)
     func openAccount()
 }
 
@@ -20,10 +22,14 @@ final class UniversityScreenRouter: UniversityScreenRouterProtocol {
     weak var viewController: UniversityScreenVC?
     private let sidebarService: SidebarServiceProtocol
     private let appRouter: AppRoutingProtocol
+    private let networkService: NetworkServiceProtocol
+    private let errorService: ErrorServiceProtocol
     
-    init(sidebarService: SidebarServiceProtocol, appRouter: AppRoutingProtocol) {
+    init(sidebarService: SidebarServiceProtocol, appRouter: AppRoutingProtocol, networkService: NetworkServiceProtocol, errorService: ErrorServiceProtocol) {
         self.sidebarService = sidebarService
         self.appRouter = appRouter
+        self.networkService = networkService
+        self.errorService = errorService
     }
     
     func presentFilterView(
@@ -51,5 +57,14 @@ final class UniversityScreenRouter: UniversityScreenRouterProtocol {
     
     func openAccount() {
         appRouter.routeToAccount()
+    }
+    
+    func routeToUniversityInfo(_ university: ECUniversity) {
+        let vc = UniversityInfoScreenAssembler.assemble(
+            sidebarService: sidebarService, appRouter: appRouter,
+            networkService: networkService, errorService: errorService,
+            university: university
+        )
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }
