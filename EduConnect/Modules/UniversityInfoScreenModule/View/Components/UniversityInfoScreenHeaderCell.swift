@@ -25,6 +25,8 @@ final class UniversityInfoScreenHeaderCell: UICollectionViewCell, ConfigurableCe
     private var viewModel: UniversityInfoScreenHeaderCellViewModel?
 
     // MARK: - VIEW PROPERTIES
+    private let youtubeView: EmbeddedYouTubeView = EmbeddedYouTubeView()
+    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = ECFont.font(.bold, size: 22)
@@ -140,25 +142,34 @@ final class UniversityInfoScreenHeaderCell: UICollectionViewCell, ConfigurableCe
         vm.university.hasDormitory ? advantagesText.append(", Общежитие") : ()
         vm.university.hasMilitaryDepartment ? advantagesText.append(", Воен. уч.") : ()
         self.advantagesLabel.text = advantagesText
+        
+        if let youtubeURL = vm.university.youtubeURL?.extractYouTubeID() {
+            self.youtubeView.loadVideo(videoID: youtubeURL)
+        }
     }
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
         contentView.backgroundColor = .systemBlue
             
-        contentView.addSubview(nameLabel)
+        contentView.addSubview(youtubeView)
+        youtubeView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        youtubeView.addSubview(nameLabel)
         nameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Constants.hSpacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
     
-        contentView.addSubview(firstHStack)
+        youtubeView.addSubview(firstHStack)
         firstHStack.snp.makeConstraints {
             $0.top.equalTo(nameLabel.snp.bottom).offset(Constants.spacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
         
-        contentView.addSubview(secondHStack)
+        youtubeView.addSubview(secondHStack)
         secondHStack.snp.makeConstraints {
             $0.top.equalTo(firstHStack.snp.bottom).offset(Constants.hSpacing + Constants.spacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)

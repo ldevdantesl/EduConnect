@@ -25,7 +25,7 @@ struct ECUniversity: Codable {
         let name: String
     }
     
-    struct ECUniversityEntScores: Codable {
+    struct EntScores: Codable {
         let year: Int
         let budgetScore: String
         let contractScore: String
@@ -61,7 +61,7 @@ struct ECUniversity: Codable {
     let facultiesCount: Int
     let budgetPlaces: Int
     let paidPlaces: Int
-    let entScores: ECUniversityEntScores?
+    let entScores: EntScores?
     let createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
