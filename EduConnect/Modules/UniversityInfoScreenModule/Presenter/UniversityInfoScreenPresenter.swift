@@ -9,6 +9,7 @@ protocol UniversityInfoScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapTabBar()
     func didTapAccount()
+    func didTapBack()
 }
 
 final class UniversityInfoScreenPresenter {
@@ -50,5 +51,9 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
     
     func didTapAccount() {
         router.openAccount()
+    }
+    
+    func didTapBack() {
+        router.goBack()
     }
 }

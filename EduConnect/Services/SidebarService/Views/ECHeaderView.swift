@@ -12,20 +12,20 @@ struct ECHeaderViewModel {
     var didTapBar: (() -> Void)?
     var didTapAccount: (() -> Void)?
     var didTapBack: (() -> Void)?
-    var showsBackButtonInsteadOfTapBar: Bool
+    var showsBackInsteadOfBar: Bool
     
-    init(didTapBar: (() -> Void)?, didTapAccount: (() -> Void)? = nil) {
+    init(didTapAccount: (() -> Void)? = nil, didTapBar: (() -> Void)?) {
         self.didTapBar = didTapBar
         self.didTapAccount = didTapAccount
         self.didTapBack = nil
-        self.showsBackButtonInsteadOfTapBar = false
+        self.showsBackInsteadOfBar = false
     }
     
-    init(didTapBack: (() -> Void)?, didTapAccount: (() -> Void)? = nil) {
+    init(didTapAccount: (() -> Void)? = nil, didTapBack: (() -> Void)?) {
         self.didTapBack = didTapBack
         self.didTapAccount = didTapAccount
         self.didTapBar = nil
-        self.showsBackButtonInsteadOfTapBar = true
+        self.showsBackInsteadOfBar = true
     }
 }
 
@@ -38,7 +38,7 @@ final class ECHeaderView: UIView {
         static let vSpacing = 10.0
         static let hSpacing = 10.0
         
-        static let backButtonImage = "arrow.left"
+        static let backButtonImage = "chevron.left"
     }
     
     // MARK: - PROPERTIES
@@ -66,7 +66,7 @@ final class ECHeaderView: UIView {
     private let backButton: ECIconButton = {
         let vm = ECIconButtonVM(
             systemImage: Constants.backButtonImage,
-            style: .title3, weight: .bold
+            color: .black, style: .headline, weight: .medium
         )
         let button = ECIconButton(viewModel: vm)
         return button
@@ -99,6 +99,9 @@ final class ECHeaderView: UIView {
         self.backButton.setAction { [weak self] in self?.viewModel?.didTapBack?() }
         
         self.accountButton.setAction { [weak self] in self?.viewModel?.didTapAccount?() }
+        
+        barButton.isHidden = vm.showsBackInsteadOfBar ? true : false
+        backButton.isHidden = vm.showsBackInsteadOfBar ? false : true
     }
     
     // MARK: - PRIVATE FUNC
@@ -125,5 +128,10 @@ final class ECHeaderView: UIView {
             $0.leading.equalToSuperview().offset(Constants.hSpacing)
         }
         
+        self.addSubview(backButton)
+        backButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-Constants.vSpacing)
+            $0.leading.equalToSuperview().offset(Constants.hSpacing)
+        }
     }
 }

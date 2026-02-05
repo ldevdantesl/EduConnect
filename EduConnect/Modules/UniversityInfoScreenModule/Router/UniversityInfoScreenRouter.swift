@@ -10,6 +10,7 @@ import UIKit
 protocol UniversityInfoScreenRouterProtocol {
     func openSidebar()
     func openAccount()
+    func goBack()
 }
 
 final class UniversityInfoScreenRouter: UniversityInfoScreenRouterProtocol {
@@ -28,5 +29,9 @@ final class UniversityInfoScreenRouter: UniversityInfoScreenRouterProtocol {
     
     func openAccount() {
         appRouter.routeToAccount()
+    }
+    
+    func goBack() {
+        viewController?.navigationController?.popViewController(animated: true)
     }
 }
