@@ -92,9 +92,6 @@ final class UniversityInfoScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? SectionHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
-                
-            default:
-                return UICollectionViewCell()
             }
         }
     }

@@ -20,9 +20,36 @@ struct ECUniversity: Codable {
         }
     }
     
-    struct NamedEntity: Codable {
+    struct City: Codable {
         let id: Int
         let name: String
+    }
+    
+    struct ImagedEntity: Codable {
+        let id: Int
+        let name: String
+        let imageURL: String
+        
+        enum CodingKeys: String, CodingKey {
+            case id, name
+            case imageURL = "image_url"
+        }
+    }
+    
+    struct Program: Codable {
+        let id: Int
+        let name, price: String
+        let budgetPlaces, paidPlaces: Int
+        let studyType: Int?
+        let studyTypeName: String
+
+        enum CodingKeys: String, CodingKey {
+            case id, name, price
+            case budgetPlaces = "budget_places"
+            case paidPlaces = "paid_places"
+            case studyType = "study_type"
+            case studyTypeName = "study_type_name"
+        }
     }
     
     struct EntScores: Codable {
@@ -54,9 +81,10 @@ struct ECUniversity: Codable {
     let isActive: Bool
     let sortOrder: Int
     let minContractPrice: String
-    let city: NamedEntity
-    let professions: [NamedEntity]
-    let faculties: [NamedEntity]
+    let city: City
+    let professions: [ImagedEntity]
+    let faculties: [ImagedEntity]
+    let programs: [Program]
     let programsCount: Int
     let facultiesCount: Int
     let budgetPlaces: Int
@@ -65,7 +93,7 @@ struct ECUniversity: Codable {
     let createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
-        case id, name, description, phone, email, address
+        case id, name, description, phone, email, address, programs
         case logoURL = "logo_url"
         case mainImageURL = "main_image_url"
         case youtubeURL = "youtube_url"

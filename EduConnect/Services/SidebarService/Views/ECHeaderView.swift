@@ -11,17 +11,18 @@ import SnapKit
 struct ECHeaderViewModel {
     var didTapBar: (() -> Void)?
     var didTapAccount: (() -> Void)?
+    var didTapImage: (() -> Void)?
     var didTapBack: (() -> Void)?
     var showsBackInsteadOfBar: Bool
     
-    init(didTapAccount: (() -> Void)? = nil, didTapBar: (() -> Void)?) {
+    init(didTapAccount: (() -> Void)? = nil, didTapImage: (() -> Void)? = nil, didTapBar: (() -> Void)?) {
         self.didTapBar = didTapBar
         self.didTapAccount = didTapAccount
         self.didTapBack = nil
         self.showsBackInsteadOfBar = false
     }
     
-    init(didTapAccount: (() -> Void)? = nil, didTapBack: (() -> Void)?) {
+    init(didTapAccount: (() -> Void)? = nil, didTapImage: (() -> Void)? = nil, didTapBack: (() -> Void)?) {
         self.didTapBack = didTapBack
         self.didTapAccount = didTapAccount
         self.didTapBar = nil
@@ -72,11 +73,13 @@ final class ECHeaderView: UIView {
         return button
     }()
     
-    private let logoImage: UIImageView = {
+    private lazy var logoImage: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: ImageConstants.appLogo.rawValue)
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapImage)))
         return view
     }()
     
@@ -133,5 +136,10 @@ final class ECHeaderView: UIView {
             $0.bottom.equalToSuperview().offset(-Constants.vSpacing)
             $0.leading.equalToSuperview().offset(Constants.hSpacing)
         }
+    }
+    
+    // MARK: - OBJC FUNC
+    @objc private func didTapImage() {
+        self.viewModel?.didTapImage?()
     }
 }
