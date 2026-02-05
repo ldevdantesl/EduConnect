@@ -11,14 +11,18 @@ public enum ImageConstants: String {
 
     // Images
     case appLogo = "AppLogo"
+    case universityScreenHeaderImage = "UniversityScreenHeaderImage"
+    case programsScreenHeaderImage = "ProgramsScreenHeaderImage"
+    case programsImage = "ProgramsImage"
+    case professionsImage = "ProfessionsImage"
+    case articlesImage = "ArticlesImage"
 
     // Icons
-    case tabBarIconImage = "TabBarIconImage"
-    case accountIconImage = "AccountIconImage"
-    case universityCapIconImage = "UniversityCapIconImage"
-    case universityScreenHeaderImage = "UniversityScreenHeaderImage"
-    case universityAdvantageCheckmarkIcon = "UniversityAdvantageCheckmarkIcon"
-    case programsScreenHeaderImage = "ProgramsScreenHeaderImage"
+    case tabBarIcon = "TabBarIcon"
+    case accountIcon = "AccountIcon"
+    case capIcon = "CapIcon"
+    case checkmarkIcon = "CheckmarkIcon"
+    case checkmarkIconBlue = "CheckmarkIconBlue"
 
     // Samples
     case universityImageSample = "UniversityImageSample"

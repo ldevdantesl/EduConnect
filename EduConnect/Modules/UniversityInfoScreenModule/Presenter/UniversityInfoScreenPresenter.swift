@@ -36,11 +36,15 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
     func viewDidLoad() {
         let headerVM = UniversityInfoScreenHeaderCellViewModel(university: university)
         let entScoresVM = UniversityInfoScreenAverageEntCellViewModel(entScores: university.entScores ?? [])
+        let aboutVM = UniversityInfoScreenAboutCellViewModel(university: university)
         view?.applySnapshot(
             sections: [.header, .main],
             itemsBySection: [
                 .header : [.headerItem(.init(id: "header", viewModel: headerVM))],
-                .main : [.averageENTScoreItem(.init(id: "averageENTCells", viewModel: entScoresVM))]
+                .main : [
+                    .averageENTScoreItem(.init(id: "averageENTCells", viewModel: entScoresVM)),
+                    .aboutItem(.init(id: "about", viewModel: aboutVM))
+                ]
             ]
         )
     }

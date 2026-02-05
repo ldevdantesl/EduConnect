@@ -34,6 +34,7 @@ final class UniversityInfoScreenVC: UIViewController {
         )
         cv.registerCell(UniversityInfoScreenHeaderCell.self, reuseID: UniversityInfoScreenHeaderCell.identifier)
         cv.registerCell(UniversityInfoScreenAverageEntCell.self, reuseID: UniversityInfoScreenAverageEntCell.identifier)
+        cv.registerCell(UniversityInfoScreenAboutCell.self, reuseID: UniversityInfoScreenAboutCell.identifier)
         cv.backgroundColor = .clear
         cv.resignsFirstResponderOnScroll = true
         return cv
@@ -72,6 +73,11 @@ final class UniversityInfoScreenVC: UIViewController {
                 return cell
             case .averageENTScoreItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityInfoScreenAverageEntCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .aboutItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityInfoScreenAboutCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 

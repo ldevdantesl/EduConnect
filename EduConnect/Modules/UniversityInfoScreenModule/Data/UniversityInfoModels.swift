@@ -16,5 +16,6 @@ enum UniversityInfoScreenSection: Hashable {
 enum UniversityInfoScreenItem: Hashable {
     case headerItem(DiffableItem<UniversityInfoScreenHeaderCellViewModel>)
     case averageENTScoreItem(DiffableItem<UniversityInfoScreenAverageEntCellViewModel>)
+    case aboutItem(DiffableItem<UniversityInfoScreenAboutCellViewModel>)
     case footerItem
 }

@@ -74,7 +74,7 @@ final class UniversityInfoScreenHeaderCell: UICollectionViewCell, ConfigurableCe
     
     private let advantagesImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = ImageConstants.universityAdvantageCheckmarkIcon.image
+        iv.image = ImageConstants.checkmarkIcon.image
         iv.contentMode = .scaleAspectFill
         return iv
     }()

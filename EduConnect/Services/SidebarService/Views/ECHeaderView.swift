@@ -47,7 +47,7 @@ final class ECHeaderView: UIView {
     // MARK: - VIEW PROPERTIES
     private let accountButton: ECIconButton = {
         let vm = ECIconButtonVM(
-            iconName: ImageConstants.accountIconImage.rawValue,
+            iconName: ImageConstants.accountIcon.rawValue,
             style: .title3, weight: .bold
         )
         let button = ECIconButton(viewModel: vm)
@@ -56,7 +56,7 @@ final class ECHeaderView: UIView {
     
     private let barButton: ECIconButton = {
         let vm = ECIconButtonVM(
-            iconName: ImageConstants.tabBarIconImage.rawValue,
+            iconName: ImageConstants.tabBarIcon.rawValue,
             style: .title3, weight: .bold
         )
         let button = ECIconButton(viewModel: vm)

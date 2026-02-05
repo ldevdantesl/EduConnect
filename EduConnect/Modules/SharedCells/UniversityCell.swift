@@ -100,7 +100,7 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
     
     private let universityCapIconImage: UIImageView = {
         let image = UIImageView()
-        image.image = ImageConstants.universityCapIconImage.image
+        image.image = ImageConstants.capIcon.image
         image.contentMode = .scaleAspectFit
         image.clipsToBounds = true
         return image
