@@ -282,8 +282,8 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
         self.nameLabel.text = vm.university.name
         self.priceLabel.text = "от \(ECNumberFormatter.toDecimalFromString(number: vm.university.minContractPrice))₸ / год"
         let admissionText = """
-        от \(ECNumberFormatter.toDecimalFromString(number: (vm.university.entScores?.budgetScore ?? "0"))) бал бюджет
-        от \(ECNumberFormatter.toDecimalFromString(number: (vm.university.entScores?.contractScore ?? "0"))) бал платно
+        от \(ECNumberFormatter.toDecimalFromString(number: vm.university.minContractPrice)) бал бюджет
+        от \(ECNumberFormatter.toDecimalFromString(number: vm.university.minContractPrice)) бал платно
         \(vm.university.budgetPlaces) места бюджет
         \(vm.university.paidPlaces) места платно
         """

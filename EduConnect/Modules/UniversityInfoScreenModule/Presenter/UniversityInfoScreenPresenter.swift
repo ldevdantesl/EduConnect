@@ -34,10 +34,12 @@ final class UniversityInfoScreenPresenter {
 extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
     func viewDidLoad() {
         let headerVM = UniversityInfoScreenHeaderCellViewModel(university: university)
+        let entScoresVM = UniversityInfoScreenAverageEntCellViewModel(entScores: university.entScores ?? [])
         view?.applySnapshot(
-            sections: [.header],
+            sections: [.header, .main],
             itemsBySection: [
-                .header : [.headerItem(.init(id: "header", viewModel: headerVM))]
+                .header : [.headerItem(.init(id: "header", viewModel: headerVM))],
+                .main : [.averageENTScoreItem(.init(id: "averageENTCells", viewModel: entScoresVM))]
             ]
         )
     }

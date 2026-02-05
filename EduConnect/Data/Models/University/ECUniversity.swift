@@ -61,7 +61,7 @@ struct ECUniversity: Codable {
     let facultiesCount: Int
     let budgetPlaces: Int
     let paidPlaces: Int
-    let entScores: EntScores?
+    let entScores: [EntScores]?
     let createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {

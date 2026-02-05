@@ -11,6 +11,22 @@ import SnapKit
 struct ECHeaderViewModel {
     var didTapBar: (() -> Void)?
     var didTapAccount: (() -> Void)?
+    var didTapBack: (() -> Void)?
+    var showsBackButtonInsteadOfTapBar: Bool
+    
+    init(didTapBar: (() -> Void)?, didTapAccount: (() -> Void)? = nil) {
+        self.didTapBar = didTapBar
+        self.didTapAccount = didTapAccount
+        self.didTapBack = nil
+        self.showsBackButtonInsteadOfTapBar = false
+    }
+    
+    init(didTapBack: (() -> Void)?, didTapAccount: (() -> Void)? = nil) {
+        self.didTapBack = didTapBack
+        self.didTapAccount = didTapAccount
+        self.didTapBar = nil
+        self.showsBackButtonInsteadOfTapBar = true
+    }
 }
 
 final class ECHeaderView: UIView {
@@ -21,6 +37,8 @@ final class ECHeaderView: UIView {
         
         static let vSpacing = 10.0
         static let hSpacing = 10.0
+        
+        static let backButtonImage = "arrow.left"
     }
     
     // MARK: - PROPERTIES
@@ -39,6 +57,15 @@ final class ECHeaderView: UIView {
     private let barButton: ECIconButton = {
         let vm = ECIconButtonVM(
             iconName: ImageConstants.tabBarIconImage.rawValue,
+            style: .title3, weight: .bold
+        )
+        let button = ECIconButton(viewModel: vm)
+        return button
+    }()
+    
+    private let backButton: ECIconButton = {
+        let vm = ECIconButtonVM(
+            systemImage: Constants.backButtonImage,
             style: .title3, weight: .bold
         )
         let button = ECIconButton(viewModel: vm)
@@ -66,14 +93,12 @@ final class ECHeaderView: UIView {
     
     public func configure(vm: ECHeaderViewModel) {
         self.viewModel = vm
-        self.barButton.setAction { [weak self] in
-            guard let self = self else { return }
-            self.viewModel?.didTapBar?()
-        }
-        self.accountButton.setAction { [weak self] in
-            guard let self = self else { return }
-            self.viewModel?.didTapAccount?()
-        }
+        
+        self.barButton.setAction { [weak self] in self?.viewModel?.didTapBar?() }
+        
+        self.backButton.setAction { [weak self] in self?.viewModel?.didTapBack?() }
+        
+        self.accountButton.setAction { [weak self] in self?.viewModel?.didTapAccount?() }
     }
     
     // MARK: - PRIVATE FUNC
