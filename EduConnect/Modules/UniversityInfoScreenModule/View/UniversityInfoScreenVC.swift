@@ -35,6 +35,8 @@ final class UniversityInfoScreenVC: UIViewController {
         cv.registerCell(UniversityInfoScreenHeaderCell.self, reuseID: UniversityInfoScreenHeaderCell.identifier)
         cv.registerCell(UniversityInfoScreenAverageEntCell.self, reuseID: UniversityInfoScreenAverageEntCell.identifier)
         cv.registerCell(UniversityInfoScreenAboutCell.self, reuseID: UniversityInfoScreenAboutCell.identifier)
+        cv.registerCell(UniversityInfoScreenContactsCell.self, reuseID: UniversityInfoScreenContactsCell.identifier)
+        cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
         cv.backgroundColor = .clear
         cv.resignsFirstResponderOnScroll = true
         return cv
@@ -78,6 +80,16 @@ final class UniversityInfoScreenVC: UIViewController {
                 
             case .aboutItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityInfoScreenAboutCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .contactsItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityInfoScreenContactsCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .sectionHeaderItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? SectionHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 

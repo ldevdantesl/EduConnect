@@ -23,6 +23,9 @@ public enum ImageConstants: String {
     case capIcon = "CapIcon"
     case checkmarkIcon = "CheckmarkIcon"
     case checkmarkIconBlue = "CheckmarkIconBlue"
+    case geopositionIcon = "GeopositionIcon"
+    case phoneIcon = "PhoneIcon"
+    case emailIcon = "EmailIcon"
 
     // Samples
     case universityImageSample = "UniversityImageSample"

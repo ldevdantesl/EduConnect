@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "GeopositionIcon.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

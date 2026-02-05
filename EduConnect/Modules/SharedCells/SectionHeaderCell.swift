@@ -14,19 +14,23 @@ struct SectionHeaderCellViewModel: CellViewModelProtocol, Hashable {
     let titleFamily: ECFont.Family
     let titleSize: CGFloat
     let titleColor: UIColor
+    let titleAlignment: NSTextAlignment
     
-    init(title: String, titleFamily: ECFont.Family = .bold, titleSize: CGFloat, titleColor: UIColor = .label) {
+    init(
+        title: String, titleFamily: ECFont.Family = .bold,
+        titleSize: CGFloat, titleColor: UIColor = .label,
+        titleAlignment: NSTextAlignment = .left
+    ) {
         self.title = title
         self.titleFamily = titleFamily
         self.titleSize = titleSize
         self.titleColor = titleColor
+        self.titleAlignment = titleAlignment
     }
 }
 
 final class SectionHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
-    // MARK: - CONSTANTS
-    fileprivate enum Constants { }
-    
+
     // MARK: - PROPERTIES
     private var viewModel: SectionHeaderCellViewModel?
     
@@ -54,6 +58,7 @@ final class SectionHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
         titleLabel.text = vm.title
         titleLabel.font = ECFont.font(vm.titleFamily, size: vm.titleSize)
         titleLabel.textColor = vm.titleColor
+        titleLabel.textAlignment = vm.titleAlignment
     }
     
     // MARK: - PRIVATE FUNC
