@@ -21,5 +21,6 @@ enum UniversityInfoScreenItem: Hashable {
     case averageENTScoreItem(DiffableItem<UniversityInfoScreenAverageEntCellViewModel>)
     case aboutItem(DiffableItem<UniversityInfoScreenAboutCellViewModel>)
     case contactsItem(DiffableItem<UniversityInfoScreenContactsCellViewModel>)
+    case cardItem(DiffableItem<CardWithImageCellViewModel>)
     case sectionHeaderItem(DiffableItem<SectionHeaderCellViewModel>)
 }

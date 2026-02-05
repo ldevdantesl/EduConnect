@@ -18,6 +18,7 @@ final class UniversityInfoScreenVC: UIViewController {
 
     // MARK: - VIPER
     var presenter: UniversityInfoScreenPresenterProtocol?
+    private let sectionStore = ECDiffableSectionStore<UniversityInfoScreenSection>()
     
     // MARK: - VIEW PROPERTIES
     private lazy var headerView: ECHeaderView = {
@@ -28,14 +29,14 @@ final class UniversityInfoScreenVC: UIViewController {
         return header
     }()
     
-    private let collectionContainer: DiffableCollectionViewContainer = {
-        let cv = DiffableCollectionViewContainer<UniversityInfoScreenSection, UniversityInfoScreenItem>(
-            layout: UniversityScreenLayoutFactory.make()
-        )
+    private lazy var collectionContainer: DiffableCollectionViewContainer = {
+        let layout = UniversityInfoScreenLayoutFactory.make(sectionStore: sectionStore)
+        let cv = DiffableCollectionViewContainer<UniversityInfoScreenSection, UniversityInfoScreenItem>(layout: layout)
         cv.registerCell(UniversityInfoScreenHeaderCell.self, reuseID: UniversityInfoScreenHeaderCell.identifier)
         cv.registerCell(UniversityInfoScreenAverageEntCell.self, reuseID: UniversityInfoScreenAverageEntCell.identifier)
         cv.registerCell(UniversityInfoScreenAboutCell.self, reuseID: UniversityInfoScreenAboutCell.identifier)
         cv.registerCell(UniversityInfoScreenContactsCell.self, reuseID: UniversityInfoScreenContactsCell.identifier)
+        cv.registerCell(CardWithImageCell.self, reuseID: CardWithImageCell.identifier)
         cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
         cv.backgroundColor = .clear
         cv.resignsFirstResponderOnScroll = true
@@ -92,6 +93,11 @@ final class UniversityInfoScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? SectionHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
+                
+            case .cardItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? CardWithImageCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
             }
         }
     }
@@ -99,6 +105,7 @@ final class UniversityInfoScreenVC: UIViewController {
 
 extension UniversityInfoScreenVC: UniversityInfoScreenViewProtocol {
     func applySnapshot(sections: [UniversityInfoScreenSection], itemsBySection: [UniversityInfoScreenSection : [UniversityInfoScreenItem]]) {
+        sectionStore.update(sections)
         collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
     }
     

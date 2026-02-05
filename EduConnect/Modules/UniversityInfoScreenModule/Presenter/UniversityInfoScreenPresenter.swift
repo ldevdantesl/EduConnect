@@ -40,12 +40,40 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
         let entScoresVM = UniversityInfoScreenAverageEntCellViewModel(entScores: university.entScores ?? [])
         let aboutVM = UniversityInfoScreenAboutCellViewModel(university: university)
         let contactsVM = UniversityInfoScreenContactsCellViewModel(university: university)
+        
         let facultiesHeaderVM = SectionHeaderCellViewModel(title: "Факультеты", titleSize: 22, titleAlignment: .center)
+        var facultyItems: [UniversityInfoScreenItem] = []
+        facultyItems.append(.sectionHeaderItem(.init(id: "facultiesHeader", viewModel: facultiesHeaderVM)))
+        
+        university.faculties.forEach {
+            let vm = CardWithImageCellViewModel(imageURL: $0.imageURL, title: $0.name)
+            facultyItems.append(.cardItem(.init(id: $0.id, viewModel: vm)))
+        }
+        
         let programsHeaderVM = SectionHeaderCellViewModel(title: "Программы образования", titleSize: 22, titleAlignment: .center)
+        var programItems: [UniversityInfoScreenItem] = []
+        programItems.append(.sectionHeaderItem(.init(id: "programsHeader", viewModel: programsHeaderVM)))
+        university.programs.forEach {
+            let vm = CardWithImageCellViewModel(
+                imageURL: university.logoURL,
+                imageContentMode: .scaleAspectFit, title: $0.name,
+                subtitle: "\($0.budgetPlaces) бюджет. мест, \($0.paidPlaces) платн. мест, \($0.studyTypeName) обучение"
+            )
+            programItems.append(.cardItem(.init(id: $0.id, viewModel: vm)))
+        }
+        
         let professionsHeaderVM = SectionHeaderCellViewModel(title: "Профессии", titleSize: 22, titleAlignment: .center)
-        let articlesHeaderVM = SectionHeaderCellViewModel(title: "Новости", titleSize: 22, titleAlignment: .center)
+        var professionItems: [UniversityInfoScreenItem] = []
+        professionItems.append(.sectionHeaderItem(.init(id: "professionsHeader", viewModel: professionsHeaderVM)))
+        
+        university.professions.forEach {
+            let vm = CardWithImageCellViewModel(imageURL: $0.imageURL, title: $0.name)
+            professionItems.append(.cardItem(.init(id: $0.id, viewModel: vm)))
+        }
+        
+        // let articlesHeaderVM = SectionHeaderCellViewModel(title: "Новости", titleSize: 22, titleAlignment: .center)
         view?.applySnapshot(
-            sections: [.header, .main, .faculties, .programs, .professions, .articles],
+            sections: [.header, .main, .faculties, .programs, .professions],
             itemsBySection: [
                 .header : [.headerItem(.init(id: "header", viewModel: headerVM))],
                 .main : [
@@ -53,18 +81,9 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
                     .aboutItem(.init(id: "about", viewModel: aboutVM)),
                     .contactsItem(.init(id: "contacts", viewModel: contactsVM))
                 ],
-                .faculties : [
-                    .sectionHeaderItem(.init(id: "facultiesHeader", viewModel: facultiesHeaderVM))
-                ],
-                .programs : [
-                    .sectionHeaderItem(.init(id: "programsHeader", viewModel: programsHeaderVM))
-                ],
-                .professions : [
-                    .sectionHeaderItem(.init(id: "professionsHeader", viewModel: professionsHeaderVM))
-                ],
-                .articles : [
-                    .sectionHeaderItem(.init(id: "articlesHeader", viewModel: articlesHeaderVM))
-                ]
+                .faculties : facultyItems,
+                .programs : programItems,
+                .professions : professionItems,
             ]
         )
     }

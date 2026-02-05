@@ -8,7 +8,21 @@
 import UIKit
 
 enum UniversityInfoScreenLayoutFactory {
+    
+    static func make(sectionStore: ECDiffableSectionStore<UniversityInfoScreenSection>) -> UICollectionViewLayout {
+        UICollectionViewCompositionalLayout { sectionIndex, _ in
+            guard let section = sectionStore.section(at: sectionIndex) else { return makeDefaultSection() }
+            switch section {
+            default: return makeDefaultSection()
+            }
+        }
+    }
+    
     static func make() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout(section: makeDefaultSection())
+    }
+    
+    static func makeDefaultSection() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(1),
@@ -25,6 +39,6 @@ enum UniversityInfoScreenLayoutFactory {
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 15
-        return UICollectionViewCompositionalLayout(section: section)
+        return section
     }
 }
