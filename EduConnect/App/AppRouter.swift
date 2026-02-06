@@ -101,6 +101,14 @@ final class AppRouter: AppRoutingProtocol {
                 networkService: networkService, errorService: errorService
             )
             navController.setViewControllers([vc], animated: true)
+            
+        case .main:
+            let vc = MainScreenAssembler.assemble(
+                sidebarService: sidebarService, appRouter: self,
+                networkService: networkService, errorService: errorService
+            )
+            navController.setViewControllers([vc], animated: true)
+            
         case .professions: print("Navigating to Professions")
         case .tests: print("Navigating to Tests")
         case .article: print("Navigating to Artcles")

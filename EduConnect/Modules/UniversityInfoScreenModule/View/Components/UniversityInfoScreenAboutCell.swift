@@ -81,7 +81,6 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell, ConfigurableCel
     
     private let aboutUniversityLabel: UILabel = {
         let label = UILabel()
-        label.text = "Классный Университет"
         label.font = ECFont.font(.regular, size: 16)
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -113,6 +112,7 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell, ConfigurableCel
         programsButton.subtitleText = "(\(vm.university.programsCount))"
         professionsButton.subtitleText = "(\(vm.university.professions.count))"
         articlesButton.subtitleText = "(0)"
+        aboutUniversityLabel.text = vm.university.description
     }
     
     // MARK: - PRIVATE FUNC

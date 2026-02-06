@@ -17,6 +17,7 @@ final class AccountScreenSegmentedReusableMenu: UICollectionReusableView {
     
     // MARK: - CONSTANTS
     fileprivate enum Constants {
+        static let smallSpacing = 5.0
         static let spacing = 10.0
         static let biggerSpacing = 20.0
         static let hSpacing = 30.0
@@ -39,8 +40,6 @@ final class AccountScreenSegmentedReusableMenu: UICollectionReusableView {
     private lazy var hStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [mainButton, myUniversitiesButton, applicationButton])
         stack.axis = .horizontal
-        stack.spacing = Constants.spacing
-        stack.alignment = .fill
         stack.distribution = .fillEqually
         return stack
     }()
@@ -85,8 +84,8 @@ final class AccountScreenSegmentedReusableMenu: UICollectionReusableView {
         self.backgroundColor = .systemBlue
         addSubview(hStack)
         hStack.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(Constants.spacing)
-            $0.leading.trailing.equalToSuperview().inset(Constants.spacing)
+            $0.verticalEdges.equalToSuperview().inset(Constants.spacing)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.smallSpacing)
         }
     }
     

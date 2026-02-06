@@ -8,6 +8,7 @@
 import Foundation
 
 enum SidebarMenuTab: CaseIterable {
+    case main
     case universities
     case programs
     case professions
@@ -24,6 +25,7 @@ enum SidebarMenuTab: CaseIterable {
         case .tests:        return "Tests"
         case .article:      return "Articles"
         case .calendar:     return "Calendar"
+        case .main:         return "Main"
         case .none:         return ""
         }
     }
