@@ -9,8 +9,8 @@ import UIKit
 
 enum MainScreenSection: Hashable {
     case header
-    case programs
     case careers
+    case programs
     case services
     case journal
     case footer
@@ -18,10 +18,10 @@ enum MainScreenSection: Hashable {
 
 enum MainScreenItem: Hashable {
     case headerItem(DiffableItem<MainScreenHeaderCellViewModel>)
+    case careersItem(DiffableItem<MainScreenCareersCellViewModel>)
     case programItem
     case universitiesItem
     case sectionHeaderItem
-    case careersItem
     case servicesItem
     case journalItem
     case footerItem

@@ -29,10 +29,12 @@ final class MainScreenPresenter {
 extension MainScreenPresenter: MainScreenPresenterProtocol {
     func viewDidLoad() {
         let headerVM = MainScreenHeaderCellViewModel()
+        let careersVM = MainScreenCareersCellViewModel(universities: [.sample, .sample, .sample, .sample])
         view?.applySnapshot(
-            sections: [.header],
+            sections: [.header, .careers],
             itemsBySection: [
-                .header : [.headerItem(.init(id: "header", viewModel: headerVM))]
+                .header : [.headerItem(.init(id: "header", viewModel: headerVM))],
+                .careers : [.careersItem(.init(id: "careers", viewModel: careersVM))]
             ]
         )
     }

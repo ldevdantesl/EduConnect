@@ -34,6 +34,7 @@ final class MainScreenVC: UIViewController {
         )
         cv.registerCell(MainScreenHeaderCell.self, reuseID: MainScreenHeaderCell.identifier)
         cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
+        cv.registerCell(MainScreenCareersCell.self, reuseID: MainScreenCareersCell.identifier)
         cv.backgroundColor = .clear
         cv.resignsFirstResponderOnScroll = true
         return cv
@@ -71,6 +72,12 @@ final class MainScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
+                
+            case .careersItem(let item) :
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenCareersCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
             default:
                 return UICollectionViewCell()
             }
