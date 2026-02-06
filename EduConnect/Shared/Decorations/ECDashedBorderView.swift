@@ -102,21 +102,18 @@ class ECDashedBorderView: UIView {
     private func setup() {
         backgroundColor = .clear
         
-        // Dashed border
         dashedBorderLayer.fillColor = UIColor.clear.cgColor
         dashedBorderLayer.strokeColor = borderColor.cgColor
         dashedBorderLayer.lineWidth = borderWidth
         dashedBorderLayer.lineDashPattern = dashPattern
         layer.addSublayer(dashedBorderLayer)
         
-        // Content view
         addSubview(contentView)
         contentView.layer.cornerRadius = cornerRadius - contentInset
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(contentInset)
         }
         
-        // Tap gesture
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         addGestureRecognizer(tap)
     }
@@ -146,7 +143,6 @@ class ECDashedBorderView: UIView {
     
     // MARK: - OBJC FUNC
     @objc private func handleTap() {
-        guard let onTap = onTap else { return }
         self.animateTap(onCompletion: onTap)
     }
 }

@@ -6,6 +6,8 @@
 //
 
 protocol MainScreenInteractorProtocol: AnyObject {
+    func getProgramCategories()
+    func getAllUniversities()
 }
 
 final class MainScreenInteractor: MainScreenInteractorProtocol {
@@ -14,5 +16,28 @@ final class MainScreenInteractor: MainScreenInteractorProtocol {
     
     init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
+    }
+    
+    func getProgramCategories() {
+        Task {
+            do {
+                let response = try await networkService.programs.getProgramCategories()
+                guard let data = response.data else { return }
+                presenter?.didReceiveProgramCategories(categories: data)
+            } catch {
+                presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
+    func getAllUniversities() {
+        Task {
+            do {
+                let response = try await networkService.university.getUniversities(page: 1, searchKey: nil, filters: nil)
+                presenter?.didReceiveUniversities(universities: response.data)
+            } catch {
+                presenter?.didReceiveError(error: error)
+            }
+        }
     }
 }

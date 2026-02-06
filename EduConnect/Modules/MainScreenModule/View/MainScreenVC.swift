@@ -32,8 +32,8 @@ final class MainScreenVC: UIViewController {
         let cv = DiffableCollectionViewContainer<MainScreenSection, MainScreenItem>(
             layout: UniversityScreenLayoutFactory.make()
         )
+        cv.registerCell(MainScreenProgramsCell.self, reuseID: MainScreenProgramsCell.identifier)
         cv.registerCell(MainScreenHeaderCell.self, reuseID: MainScreenHeaderCell.identifier)
-        cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
         cv.registerCell(MainScreenCareersCell.self, reuseID: MainScreenCareersCell.identifier)
         cv.backgroundColor = .clear
         cv.resignsFirstResponderOnScroll = true
@@ -78,6 +78,10 @@ final class MainScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
+            case .programItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenProgramsCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
             default:
                 return UICollectionViewCell()
             }
