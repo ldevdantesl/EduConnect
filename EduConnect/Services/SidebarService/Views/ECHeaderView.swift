@@ -17,12 +17,14 @@ struct ECHeaderViewModel {
     
     init(didTapAccount: (() -> Void)? = nil, didTapImage: (() -> Void)? = nil, didTapBar: (() -> Void)?) {
         self.didTapBar = didTapBar
+        self.didTapImage = didTapImage
         self.didTapAccount = didTapAccount
         self.didTapBack = nil
         self.showsBackInsteadOfBar = false
     }
     
     init(didTapAccount: (() -> Void)? = nil, didTapImage: (() -> Void)? = nil, didTapBack: (() -> Void)?) {
+        self.didTapImage = didTapImage
         self.didTapBack = didTapBack
         self.didTapAccount = didTapAccount
         self.didTapBar = nil
@@ -140,6 +142,7 @@ final class ECHeaderView: UIView {
     
     // MARK: - OBJC FUNC
     @objc private func didTapImage() {
-        self.viewModel?.didTapImage?()
+        guard let viewModel = viewModel else { return }
+        viewModel.didTapImage?()
     }
 }

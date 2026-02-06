@@ -10,6 +10,7 @@ import UIKit
 protocol ProgramsScreenRouterProtocol {
     func openSidebar() 
     func openAccount()
+    func routeToMain()
 }
 
 final class ProgramsScreenRouter: ProgramsScreenRouterProtocol {
@@ -28,5 +29,9 @@ final class ProgramsScreenRouter: ProgramsScreenRouterProtocol {
     
     func openAccount() {
         appRouter.routeToAccount()
+    }
+    
+    func routeToMain() {
+        appRouter.routeToMain()
     }
 }

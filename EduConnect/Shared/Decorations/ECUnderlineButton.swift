@@ -116,6 +116,6 @@ final class ECUnderlineButton: UIView {
     
     // MARK: - OBJC FUNC
     @objc private func didTap() {
-        self.action?()
+        animateTap(onCompletion: action)
     }
 }

@@ -11,6 +11,7 @@ protocol UniversityInfoScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapTabBar()
     func didTapAccount()
+    func didTapAppLogo()
     func didTapBack()
 }
 
@@ -47,7 +48,7 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
         
         university.faculties.forEach {
             let vm = CardWithImageCellViewModel(imageURL: $0.imageURL, title: $0.name)
-            facultyItems.append(.cardItem(.init(id: $0.id, viewModel: vm)))
+            facultyItems.append(.cardItem(.init(id: "faculty-\($0.id)", viewModel: vm)))
         }
         
         let programsHeaderVM = SectionHeaderCellViewModel(title: "Программы образования", titleSize: 22, titleAlignment: .center)
@@ -59,7 +60,7 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
                 imageContentMode: .scaleAspectFit, title: $0.name,
                 subtitle: "\($0.budgetPlaces) бюджет. мест, \($0.paidPlaces) платн. мест, \($0.studyTypeName) обучение"
             )
-            programItems.append(.cardItem(.init(id: $0.id, viewModel: vm)))
+            programItems.append(.cardItem(.init(id: "program-\($0.id)", viewModel: vm)))
         }
         
         let professionsHeaderVM = SectionHeaderCellViewModel(title: "Профессии", titleSize: 22, titleAlignment: .center)
@@ -68,7 +69,7 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
         
         university.professions.forEach {
             let vm = CardWithImageCellViewModel(imageURL: $0.imageURL, title: $0.name)
-            professionItems.append(.cardItem(.init(id: $0.id, viewModel: vm)))
+            professionItems.append(.cardItem(.init(id: "profession-\($0.id)", viewModel: vm)))
         }
         
         // let articlesHeaderVM = SectionHeaderCellViewModel(title: "Новости", titleSize: 22, titleAlignment: .center)
@@ -98,5 +99,9 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
     
     func didTapBack() {
         router.goBack()
+    }
+    
+    func didTapAppLogo() {
+        router.routeToMain()
     }
 }

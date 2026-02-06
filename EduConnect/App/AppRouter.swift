@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol AppRoutingProtocol: AnyObject {
+    func start()
+    func routeToAuthentication()
+    func routeToAccount()
+    func routeToMain()
+}
+
 final class AppRouter: AppRoutingProtocol {
     // MARK: - INJECTED PROPERTIES
     private let authState: ECAuthentication
@@ -34,25 +41,39 @@ final class AppRouter: AppRoutingProtocol {
     func start() {
         navController.navigationBar.isHidden = true
         navController.delegate = navAnimator
-        window?.rootViewController = navController
+        
+        sidebarContainer = SidebarContainerViewController(
+            rootViewController: navController,
+            sidebarService: sidebarService
+        )
+        
+        sidebarService.container = sidebarContainer
+        
+        window?.rootViewController = sidebarContainer
         window?.makeKeyAndVisible()
+        
         authState.isLoggedIn ? routeToAccount() : routeToAuthentication()
     }
 
     func routeToAuthentication() {
+        sidebarContainer?.setSidebarEnabled(false)
         let vc = LoginScreenAssembler.assemble(appRouter: self, authState: authState)
         navController.setViewControllers([vc], animated: true)
     }
     
     func routeToAccount() {
-        sidebarContainer = SidebarContainerViewController(
-            rootViewController: navController,
-            sidebarService: sidebarService
-        )
-        window?.rootViewController = sidebarContainer
-        window?.makeKeyAndVisible()
+        sidebarContainer?.setSidebarEnabled(true)
         let vc = AccountScreenAssembler.assemble(
             appRouter: self, sidebarService: sidebarService,
+            networkService: networkService, errorService: errorService
+        )
+        navController.setViewControllers([vc], animated: true)
+    }
+    
+    func routeToMain() {
+        sidebarContainer?.setSidebarEnabled(true)
+        let vc = MainScreenAssembler.assemble(
+            sidebarService: sidebarService, appRouter: self,
             networkService: networkService, errorService: errorService
         )
         navController.setViewControllers([vc], animated: true)

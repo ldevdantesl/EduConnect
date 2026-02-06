@@ -11,7 +11,7 @@ protocol UniversityScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapTabBar()
     func didTapAccount()
-    
+    func didTapAppLogo()
     func didGetCities(cities: [ECCity])
     func didGetProfessions(professions: [ECProfession])
     func didReceiveUniversities(paginatedUniversities: PaginatedResponse<ECUniversity>)
@@ -189,6 +189,10 @@ extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
     
     func didTapAccount() {
         router.openAccount()
+    }
+    
+    func didTapAppLogo() {
+        router.routeToMain()
     }
     
     func didGetCities(cities: [ECCity]) {

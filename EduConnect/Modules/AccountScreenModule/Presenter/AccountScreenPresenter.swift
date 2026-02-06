@@ -10,6 +10,7 @@ import UIKit
 protocol AccountScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapTabBar()
+    func didTapAppLogo()
     var selectedTab: AccountScreenTab { get set }
     var headerMenuViewModel: AccountScreenSegmentedReusableMenuViewModel { get }
 }
@@ -170,6 +171,10 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
         didSelectAnotherTab(newTab: .myUniversities)
     }
 
+    func didTapAppLogo() {
+        router.routeToMain()
+    }
+    
     func didTapTabBar() {
         router.showSidebar()
     }

@@ -21,6 +21,7 @@ final class SidebarContainerViewController: UIViewController {
     private let sidebarService: ECSidebarService
     private let rootViewController: UIViewController
     private var isSidebarOpen = false
+    private var isSidebarEnabled = true  // Add this
     private var sidebarLeadingConstraint: Constraint?
     
     // MARK: - VIEW PROPERTIES
@@ -90,11 +91,12 @@ final class SidebarContainerViewController: UIViewController {
     
     // MARK: - PUBLIC FUNC
     public func toggleSidebar() {
+        guard isSidebarEnabled else { return }
         isSidebarOpen ? closeSidebar() : openSidebar()
     }
     
     public func openSidebar() {
-        guard !isSidebarOpen else { return }
+        guard isSidebarEnabled, !isSidebarOpen else { return }
         isSidebarOpen = true
         
         let sidebarWidth = view.bounds.width * Constants.sidebarWidthRatio
@@ -106,6 +108,13 @@ final class SidebarContainerViewController: UIViewController {
             guard let self = self else { return }
             self.dimmingView.alpha = Constants.dimmingAlpha
             self.view.layoutIfNeeded()
+        }
+    }
+    
+    public func setSidebarEnabled(_ enabled: Bool) {
+        isSidebarEnabled = enabled
+        if !enabled && isSidebarOpen {
+            closeSidebar()
         }
     }
     

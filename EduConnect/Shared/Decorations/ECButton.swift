@@ -21,17 +21,6 @@ final class ECButton: UIButton {
         super.init(frame: frame)
     }
     
-    override var isHighlighted: Bool {
-        didSet {
-            UIView.animate(withDuration: 0.15) {
-                self.alpha = self.isHighlighted ? 0.6 : 1.0
-                self.transform = self.isHighlighted
-                ? CGAffineTransform(scaleX: 0.97, y: 0.97)
-                : .identity
-            }
-        }
-    }
-    
     convenience init(
         text: String, textSize: CGFloat = 16,
         backgroundColor: UIColor = .systemBlue,
@@ -122,6 +111,6 @@ final class ECButton: UIButton {
     }
     
     @objc private func didTap() {
-        action?()
+        self.animateTap { [weak self] in self?.action?() }
     }
 }

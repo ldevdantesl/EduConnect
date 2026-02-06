@@ -25,7 +25,10 @@ final class AccountScreenVC: UIViewController {
     
     // MARK: - VIEW PROPERTIES
     private lazy var headerView: ECHeaderView = {
-        let vm = ECHeaderViewModel(didTapBar: { [weak self] in self?.presenter?.didTapTabBar() })
+        let vm = ECHeaderViewModel(
+            didTapImage: {[weak self] in self?.presenter?.didTapAppLogo() },
+            didTapBar: { [weak self] in self?.presenter?.didTapTabBar() }
+        )
         let header = ECHeaderView()
         header.configure(vm: vm)
         return header

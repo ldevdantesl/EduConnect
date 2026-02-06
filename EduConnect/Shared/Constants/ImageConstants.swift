@@ -16,6 +16,8 @@ public enum ImageConstants: String {
     case programsImage = "ProgramsImage"
     case professionsImage = "ProfessionsImage"
     case articlesImage = "ArticlesImage"
+    case mainChooseProfessionImage = "MainChooseProfessionImage"
+    case mainChooseENTImage = "MainChooseENTImage"
 
     // Icons
     case tabBarIcon = "TabBarIcon"

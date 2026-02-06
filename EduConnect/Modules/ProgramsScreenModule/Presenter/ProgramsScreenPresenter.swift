@@ -11,7 +11,7 @@ protocol ProgramsScreenPresenterProtocol: AnyObject {
     func didTapTabBar()
     func didTapAccount()
     func viewDidLoad()
-    
+    func didTapAppLogo()
     func didReceivePrograms(_ programs: [ECProgramCategory])
     func didReceieveError(error: any Error)
 }
@@ -88,6 +88,10 @@ extension ProgramsScreenPresenter: ProgramsScreenPresenterProtocol {
     
     func didTapAccount() {
         router.openAccount()
+    }
+    
+    func didTapAppLogo() {
+        router.routeToMain()
     }
     
     func didReceieveError(error: any Error) {

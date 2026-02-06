@@ -11,7 +11,6 @@ protocol MainScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapTabBar()
     func didTapAccount()
-    func didTapBack()
 }
 
 final class MainScreenPresenter {
@@ -29,7 +28,13 @@ final class MainScreenPresenter {
 
 extension MainScreenPresenter: MainScreenPresenterProtocol {
     func viewDidLoad() {
-        
+        let headerVM = MainScreenHeaderCellViewModel()
+        view?.applySnapshot(
+            sections: [.header],
+            itemsBySection: [
+                .header : [.headerItem(.init(id: "header", viewModel: headerVM))]
+            ]
+        )
     }
     
     func didTapTabBar() {
@@ -38,9 +43,5 @@ extension MainScreenPresenter: MainScreenPresenterProtocol {
     
     func didTapAccount() {
         router.openAccount()
-    }
-    
-    func didTapBack() {
-        router.goBack()
     }
 }

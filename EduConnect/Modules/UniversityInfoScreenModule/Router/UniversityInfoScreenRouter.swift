@@ -11,6 +11,7 @@ protocol UniversityInfoScreenRouterProtocol {
     func openSidebar()
     func openAccount()
     func goBack()
+    func routeToMain()
 }
 
 final class UniversityInfoScreenRouter: UniversityInfoScreenRouterProtocol {
@@ -33,5 +34,9 @@ final class UniversityInfoScreenRouter: UniversityInfoScreenRouterProtocol {
     
     func goBack() {
         viewController?.navigationController?.popViewController(animated: true)
+    }
+    
+    func routeToMain() {
+        appRouter.routeToMain()
     }
 }

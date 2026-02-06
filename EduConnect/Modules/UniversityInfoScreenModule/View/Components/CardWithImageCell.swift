@@ -193,6 +193,8 @@ final class CardWithImageCell: UICollectionViewCell, ConfigurableCellProtocol {
             $0.horizontalEdges.equalToSuperview().inset(Constants.bigSpacing)
             $0.bottom.equalToSuperview().offset(-Constants.bigSpacing)
         }
+        
+        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapAction)))
     }
     
     private func applyShadow() {
@@ -205,5 +207,10 @@ final class CardWithImageCell: UICollectionViewCell, ConfigurableCellProtocol {
             cornerRadius: Constants.cornerRadius
         ).cgPath
         layer.masksToBounds = false
+    }
+    
+    // MARK: - OBJC FUNC
+    @objc private func tapAction() {
+        animateTap()
     }
 }

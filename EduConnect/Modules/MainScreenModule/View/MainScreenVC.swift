@@ -22,7 +22,7 @@ final class MainScreenVC: UIViewController {
     // MARK: - VIEW PROPERTIES
     private lazy var headerView: ECHeaderView = {
         let vm = ECHeaderViewModel { [weak self] in self?.presenter?.didTapAccount() }
-        didTapBack: { [weak self] in self?.presenter?.didTapBack() }
+        didTapBar: { [weak self] in self?.presenter?.didTapTabBar() }
         let header = ECHeaderView()
         header.configure(vm: vm)
         return header
@@ -32,6 +32,7 @@ final class MainScreenVC: UIViewController {
         let cv = DiffableCollectionViewContainer<MainScreenSection, MainScreenItem>(
             layout: UniversityScreenLayoutFactory.make()
         )
+        cv.registerCell(MainScreenHeaderCell.self, reuseID: MainScreenHeaderCell.identifier)
         cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
         cv.backgroundColor = .clear
         cv.resignsFirstResponderOnScroll = true
@@ -66,6 +67,10 @@ final class MainScreenVC: UIViewController {
     private func configureCollectionView() {
         collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
+            case .headerItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenHeaderCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
             default:
                 return UICollectionViewCell()
             }

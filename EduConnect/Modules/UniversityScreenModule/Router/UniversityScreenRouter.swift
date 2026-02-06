@@ -15,6 +15,7 @@ protocol UniversityScreenRouterProtocol {
     )
     
     func routeToUniversityInfo(_ university: ECUniversity)
+    func routeToMain()
     func openAccount()
 }
 
@@ -66,5 +67,9 @@ final class UniversityScreenRouter: UniversityScreenRouterProtocol {
             university: university
         )
         viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func routeToMain() {
+        appRouter.routeToMain()
     }
 }
