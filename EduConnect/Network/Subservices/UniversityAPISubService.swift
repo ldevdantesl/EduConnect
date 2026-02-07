@@ -23,12 +23,7 @@ final class UniversityAPISubService: UniversityAPISubServiceProtocol {
         let responseData: EduConnectDataResponse<PaginatedResponse<ECUniversity>> = try await httpClient.request(
             UniversityEndpoints.getUniversities(page: page, search: searchKey, filters: filters)
         )
-        
-        guard let data = responseData.data else {
-            throw APIError.noData
-        }
-        
-        return data
+        return responseData.data
     }
     
     

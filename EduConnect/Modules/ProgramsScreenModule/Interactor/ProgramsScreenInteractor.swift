@@ -22,7 +22,7 @@ final class ProgramsScreenInteractor: ProgramsScreenInteractorProtocol {
     func getPrograms() {
         Task {
             do {
-                let programs = try await networkService.references.getProgramCategories()
+                let programs = try await networkService.programs.getProgramCategories()
                 presenter?.didReceivePrograms(programs)
             } catch {
                 await MainActor.run { [weak self] in

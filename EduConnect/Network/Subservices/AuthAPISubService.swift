@@ -34,7 +34,7 @@ final class AuthAPISubService: AuthAPISubServiceProtocol {
         let response: AuthResponse = try await httpClient.request(
             AuthEndpoints.register(email: email, password: password)
         )
-        guard let data = response.data else { throw APIError.noData }
+         let data = response.data
         tokenStorage.save(token: data.token)
         return data.user
     }

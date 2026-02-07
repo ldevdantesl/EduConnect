@@ -8,7 +8,7 @@
 import Foundation
 
 enum ProfessionEndpoints: Endpoint {
-    case getProfessions(searchText: String)
+    case getProfessions(searchText: String?)
     case getProfessionDetails(professionID: Int)
     case getRelatedForProfession(professionID: Int, limit: Int)
     case getUniversitiesForProfession(professionID: Int, itemsPerPage: Int)
@@ -18,7 +18,7 @@ enum ProfessionEndpoints: Endpoint {
     
     var path: String {
         switch self {
-        case .getProfessions(let searchText): return "/professions-list"
+        case .getProfessions: return "/professions-list"
         case .getProfessionDetails(let professionID): return "/professions-list/\(professionID)"
         case .getRelatedForProfession(let professionID, _): return "/professions-list/\(professionID)/related"
         case .getUniversitiesForProfession(let professionID, _): return "/professions-list/\(professionID)/universities"
@@ -28,6 +28,9 @@ enum ProfessionEndpoints: Endpoint {
     
     var queryItems: [URLQueryItem]? {
         switch self {
+        case .getProfessions(let searchText):
+            guard let searchText else { return .none }
+            return [.init(name: "search_text", value: searchText)]
         case .getRelatedForProfession(_, let limit):
             return [.init(name: "limit", value: limit.description)]
         case .getUniversitiesForProfession(_, let itemsPerPage):

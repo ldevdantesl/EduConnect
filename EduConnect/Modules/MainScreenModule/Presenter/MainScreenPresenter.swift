@@ -12,7 +12,7 @@ protocol MainScreenPresenterProtocol: AnyObject {
     func didTapTabBar()
     func didTapAccount()
     
-    func didReceiveProfessions(professions: [ECReferenceProfession])
+    func didReceiveProfessions(professions: [ECProfession])
     func didReceiveUniversities(universities: [ECUniversity])
     func didReceiveProgramCategories(categories: [ECProgramCategory])
     func didReceiveError(error: any Error)
@@ -30,7 +30,7 @@ final class MainScreenPresenter {
     
     private var programCategories: [ECProgramCategory] = []
     private var universities: [ECUniversity] = []
-    private var professions: [ECReferenceProfession] = []
+    private var professions: [ECProfession] = []
     
     private var selectedAcademicTab: MainScreenAcademicCellViewModel.AcademicTab = .programs
 
@@ -63,34 +63,43 @@ final class MainScreenPresenter {
         let headerVM = MainScreenAcademicCellViewModel(selectedTab: selectedAcademicTab) { [weak self] tab in
             self?.didSelectAcademicTab(tab)
         }
-        items.append(.academicItem(.init(id: "academic", viewModel: headerVM)))
+        items.append(.academicItem(.init(viewModel: headerVM)))
         
         switch selectedAcademicTab {
         case .universities:
-            for university in universities {
-                let vm = UniversityCellViewModel(university: university, horizontallySpaced: true)
+            universities.prefix(3).forEach { university in
+                let vm = CardWithImageCellViewModel(
+                    imageURL: university.mainImageURL,
+                    preTitle: "\(university.city.name) / \(university.programsCount) программ",
+                    title: university.name,
+                    showsArrowRight: true
+                )
                 items.append(.academicUniversity(.init(id: "academic-uni-\(university.id)", viewModel: vm)))
             }
+            let showAllItem = MainScreenAcademicShowAllCellViewModel(title: "Показать все наши вузы")
+            items.append(.academicShowAll(.init(id: "academic-showAll", viewModel: showAllItem)))
             
         case .programs:
-            for program in programCategories {
-                let vm = CardWithImageCellViewModel(
-                    imageURL: program.iconURL,
-                    preTitle: "\(program.programsCount) программ",
-                    title: program.name.ru
-                )
+            programCategories.prefix(3).forEach { program in
+                let vm = MainScreenAcademicProgramCellViewModel(program: program)
                 items.append(.academicProgram(.init(id: "academic-program-\(program.id)", viewModel: vm)))
             }
+            let showAllItem = MainScreenAcademicShowAllCellViewModel(title: "Показать все программы вузов")
+            items.append(.academicShowAll(.init(id: "academic-showAll", viewModel: showAllItem)))
             
         case .professions:
-            for profession in professions {
+            professions.prefix(3).forEach { profession in
                 let vm = CardWithImageCellViewModel(
-                    imageURL: profession.image,
+                    imageURL: profession.imageURL,
+                    preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
                     title: profession.name.ru,
-                    subtitle: profession.description.ru
+                    subtitle: profession.description.ru,
+                    showsArrowRight: true
                 )
                 items.append(.academicProfession(.init(id: "academic-profession-\(profession.id)", viewModel: vm)))
             }
+            let showAllItem = MainScreenAcademicShowAllCellViewModel(title: "Показать все профессии вузов")
+            items.append(.academicShowAll(.init(id: "academic-showAll", viewModel: showAllItem)))
         }
         
         return items
@@ -127,7 +136,7 @@ extension MainScreenPresenter: MainScreenPresenterProtocol {
         router.openAccount()
     }
     
-    func didReceiveProfessions(professions: [ECReferenceProfession]) {
+    func didReceiveProfessions(professions: [ECProfession]) {
         self.professions = professions
         dispatchGroup.leave()
     }

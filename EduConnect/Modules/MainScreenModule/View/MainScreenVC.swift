@@ -35,8 +35,9 @@ final class MainScreenVC: UIViewController {
         cv.registerCell(MainScreenProgramsCell.self, reuseID: MainScreenProgramsCell.identifier)
         cv.registerCell(MainScreenHeaderCell.self, reuseID: MainScreenHeaderCell.identifier)
         cv.registerCell(MainScreenCareersCell.self, reuseID: MainScreenCareersCell.identifier)
-        cv.registerCell(UniversityCell.self, reuseID: UniversityCell.identifier)
         cv.registerCell(MainScreenAcademicCell.self, reuseID: MainScreenAcademicCell.identifier)
+        cv.registerCell(MainScreenAcademicProgramCell.self, reuseID: MainScreenAcademicProgramCell.identifier)
+        cv.registerCell(MainScreenAcademicShowAllCell.self, reuseID: MainScreenAcademicShowAllCell.identifier)
         cv.registerCell(CardWithImageCell.self, reuseID: CardWithImageCell.identifier)
         cv.backgroundColor = .clear
         cv.resignsFirstResponderOnScroll = true
@@ -90,16 +91,20 @@ final class MainScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
-            case .academicProgram(let item), .academicProfession(let item):
+            case .academicProfession(let item), .academicUniversity(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? CardWithImageCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
-            case .academicUniversity(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityCell
+            case .academicProgram(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenAcademicProgramCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
+            case .academicShowAll(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenAcademicShowAllCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
             default:
                 return UICollectionViewCell()
             }

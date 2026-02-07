@@ -17,10 +17,11 @@ struct CardWithImageCellViewModel: CellViewModelProtocol {
     let preTitle: String?
     let title: String
     let subtitle: String?
+    let showsArrowRight: Bool
     
     init(
         imageURL: String?, imageContentMode: UIImageView.ContentMode = .scaleAspectFill,
-        preTitle: String? = nil, title: String, subtitle: String? = nil
+        preTitle: String? = nil, title: String, subtitle: String? = nil, showsArrowRight: Bool = false
     ) {
         self.imageURL = imageURL
         self.image = nil
@@ -28,17 +29,20 @@ struct CardWithImageCellViewModel: CellViewModelProtocol {
         self.title = title
         self.preTitle = preTitle
         self.subtitle = subtitle
+        self.showsArrowRight = showsArrowRight
     }
     
     init(
         image: UIImage, imageContentMode: UIImageView.ContentMode = .scaleAspectFill,
-        preTitle: String? = nil, title: String, subtitle: String? = nil) {
+        preTitle: String? = nil, title: String, subtitle: String? = nil, showsArrowRight: Bool = false
+    ) {
         self.imageURL = nil
         self.image = image
         self.title = title
         self.imageContentMode = imageContentMode
         self.subtitle = subtitle
         self.preTitle = preTitle
+        self.showsArrowRight = showsArrowRight
     }
 }
 
@@ -46,12 +50,14 @@ final class CardWithImageCell: UICollectionViewCell, ConfigurableCellProtocol {
     
     // MARK: - CONSTANTS
     private enum Constants {
+        static let smallSpacing = 6.0
         static let spacing = 12.0
         static let bigSpacing = 16.0
         static let cornerRadius = 16.0
         static let imageInset = 12.0
         static let imageCornerRadius = 12.0
         static let imageHeight = 200.0
+        static let arrowImageSize = 25.0
     }
     
     // MARK: - PROPERTIES
@@ -100,6 +106,13 @@ final class CardWithImageCell: UICollectionViewCell, ConfigurableCellProtocol {
         label.textColor = .secondaryLabel
         label.numberOfLines = 2
         return label
+    }()
+    
+    private let arrowRightImage: UIImageView = {
+        let image = UIImageView()
+        image.image = ImageConstants.arrowRightIcon.image
+        image.contentMode = .scaleAspectFit
+        return image
     }()
     
     // MARK: - LIFECYCLE
@@ -157,6 +170,8 @@ final class CardWithImageCell: UICollectionViewCell, ConfigurableCellProtocol {
                 options: [.transition(.fade(0.2))]
             )
         }
+        
+        arrowRightImage.isHidden = !vm.showsArrowRight
     }
     
     // MARK: - PRIVATE FUNC
@@ -166,7 +181,8 @@ final class CardWithImageCell: UICollectionViewCell, ConfigurableCellProtocol {
         
         contentView.addSubview(containerView)
         containerView.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(Constants.spacing)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
+            $0.verticalEdges.equalToSuperview()
         }
         
         containerView.addSubview(cardImageView)
@@ -187,9 +203,16 @@ final class CardWithImageCell: UICollectionViewCell, ConfigurableCellProtocol {
             $0.horizontalEdges.equalToSuperview().inset(Constants.bigSpacing)
         }
         
+        containerView.addSubview(arrowRightImage)
+        arrowRightImage.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.top)
+            $0.trailing.equalToSuperview().offset(-Constants.spacing)
+            $0.size.equalTo(Constants.arrowImageSize)
+        }
+        
         containerView.addSubview(subtitleLabel)
         subtitleLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(6)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(Constants.smallSpacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.bigSpacing)
             $0.bottom.equalToSuperview().offset(-Constants.bigSpacing)
         }

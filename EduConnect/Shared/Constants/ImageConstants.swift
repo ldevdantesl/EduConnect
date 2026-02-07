@@ -28,6 +28,7 @@ public enum ImageConstants: String {
     case geopositionIcon = "GeopositionIcon"
     case phoneIcon = "PhoneIcon"
     case emailIcon = "EmailIcon"
+    case arrowRightIcon = "ArrowRightIcon"
 
     // Samples
     case universityImageSample = "UniversityImageSample"
@@ -35,6 +36,8 @@ public enum ImageConstants: String {
     // SystemImage
     enum SystemImages: String {
         case questionMarkSystemImage = "questionmark.circle"
+        case chevronRight = "chevron.right"
+        case chevronLeft = "chevron.left"
         
         var image: UIImage? {
             UIImage(systemName: rawValue)

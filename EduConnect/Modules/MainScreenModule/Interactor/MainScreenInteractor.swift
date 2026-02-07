@@ -23,8 +23,7 @@ final class MainScreenInteractor: MainScreenInteractorProtocol {
         Task {
             do {
                 let response = try await networkService.programs.getProgramCategories()
-                guard let data = response.data else { return }
-                presenter?.didReceiveProgramCategories(categories: data)
+                presenter?.didReceiveProgramCategories(categories: response)
             } catch {
                 presenter?.didReceiveError(error: error)
             }
@@ -45,7 +44,7 @@ final class MainScreenInteractor: MainScreenInteractorProtocol {
     func getProfessions() {
         Task {
             do {
-                let response = try await networkService.references.getProfessions()
+                let response = try await networkService.professions.getProfessions(searchText: nil) 
                 presenter?.didReceiveProfessions(professions: response)
             } catch {
                 presenter?.didReceiveError(error: error)

@@ -70,6 +70,7 @@ final class MainScreenAcademicCell: UICollectionViewCell, ConfigurableCellProtoc
     private let tabsStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
+        stack.distribution = .fillProportionally
         stack.spacing = 8
         return stack
     }()
@@ -122,19 +123,23 @@ final class MainScreenAcademicCell: UICollectionViewCell, ConfigurableCellProtoc
             let button = makeTabButton(title: tab.title, tag: tab.rawValue)
             tabButtons.append(button)
             tabsStack.addArrangedSubview(button)
+            button.setContentHuggingPriority(.defaultLow, for: .horizontal)
+            button.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         }
     }
     
     private func makeTabButton(title: String, tag: Int) -> UIButton {
         var config = UIButton.Configuration.plain()
-        config.contentInsets = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
+        config.contentInsets = .init(top: 8, leading: 10, bottom: 8, trailing: 10)
+        config.attributedTitle = AttributedString(stringLiteral: title)
+        config.attributedTitle?.font = ECFont.font(.medium, size: 16)
+        config.attributedTitle?.foregroundColor = .systemBlue
         
         let button = UIButton()
-        button.setTitle(title, for: .normal)
-        button.titleLabel?.font = ECFont.font(.medium, size: 14)
         button.configuration = config
+        button.titleLabel?.numberOfLines = 1
         button.tag = tag
-        button.layer.cornerRadius = Constants.tabHeight / 2
+        button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(tabTapped(_:)), for: .touchUpInside)
         return button
     }
@@ -142,10 +147,8 @@ final class MainScreenAcademicCell: UICollectionViewCell, ConfigurableCellProtoc
     private func updateTabSelection(selectedTab: MainScreenAcademicCellViewModel.AcademicTab) {
         tabButtons.forEach { button in
             let isSelected = button.tag == selectedTab.rawValue
-            button.backgroundColor = isSelected ? UIColor.purple : .clear
-            button.setTitleColor(isSelected ? .white : .label, for: .normal)
-            button.layer.borderWidth = isSelected ? 0 : 1
-            button.layer.borderColor = isSelected ? nil : UIColor.systemGray4.cgColor
+            button.backgroundColor = isSelected ? UIColor.systemBlue : .clear
+            button.configuration?.attributedTitle?.foregroundColor = isSelected ? UIColor.white : UIColor.systemGray
         }
     }
     
