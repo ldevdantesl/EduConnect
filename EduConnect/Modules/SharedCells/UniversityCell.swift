@@ -144,15 +144,7 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
         containerView.layer.cornerRadius = 20
         containerView.clipsToBounds = true
         
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.2
-        layer.shadowRadius = 20
-        layer.shadowOffset = CGSize(width: 0, height: 8)
-
-        layer.shadowPath = UIBezierPath(
-            roundedRect: bounds,
-            cornerRadius: Constants.containerCornerRadius
-        ).cgPath
+        applyFloatingShadow(cornerRadius: 20)
     }
     
     override func prepareForReuse() {

@@ -20,3 +20,27 @@ extension UIView {
         }
     }
 }
+
+extension UIView {
+    func applyFloatingShadow(
+        color: UIColor = .black,
+        opacity: Float = 0.15,
+        radius: CGFloat = 12,
+        offset: CGSize = CGSize(width: 0, height: 4),
+        cornerRadius: CGFloat? = nil
+    ) {
+        layer.masksToBounds = false  // Important!
+        layer.shadowColor = color.cgColor
+        layer.shadowOpacity = opacity
+        layer.shadowRadius = radius
+        layer.shadowOffset = offset
+        
+        let cr = cornerRadius ?? layer.cornerRadius
+        if bounds != .zero {
+            layer.shadowPath = UIBezierPath(
+                roundedRect: bounds,
+                cornerRadius: cr
+            ).cgPath
+        }
+    }
+}

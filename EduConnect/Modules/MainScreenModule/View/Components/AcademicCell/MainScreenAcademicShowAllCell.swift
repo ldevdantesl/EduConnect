@@ -72,6 +72,7 @@ final class MainScreenAcademicShowAllCell: UICollectionViewCell, ConfigurableCel
     override func layoutSubviews() {
         super.layoutSubviews()
         self.container.layer.cornerRadius = 30
+        self.container.applyFloatingShadow()
     }
     
     // MARK: - PUBLIC FUNC
