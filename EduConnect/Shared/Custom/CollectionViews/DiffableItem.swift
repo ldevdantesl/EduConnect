@@ -18,10 +18,22 @@ struct DiffableItem<VM>: Hashable {
         self.version = version
     }
     
-    init(viewModel: VM) {
+    init(viewModel: VM, version: Int = 0) {
         self.id = UUID()
         self.viewModel = viewModel
-        self.version = 0
+        self.version = version
+    }
+    
+    init<T: Identifiable>(item: T, prefix: String, viewModel: VM, version: Int = 0) {
+        self.id = "\(prefix)-\(item.id)"
+        self.viewModel = viewModel
+        self.version = version
+    }
+    
+    init<T: Identifiable>(item: T, viewModel: VM, version: Int = 0) {
+        self.id = "\(String(describing: T.self))-\(item.id)"
+        self.viewModel = viewModel
+        self.version = version
     }
     
     func hash(into hasher: inout Hasher) {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct ECUniversity: Codable {
+struct ECUniversity: Identifiable, Codable {
     
     enum UniversityType: String, Codable, CaseIterable {
         case state, `private`

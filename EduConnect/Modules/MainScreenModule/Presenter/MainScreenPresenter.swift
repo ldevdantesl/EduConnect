@@ -44,13 +44,15 @@ final class MainScreenPresenter {
         let headerVM = MainScreenHeaderCellViewModel()
         let careersVM = MainScreenCareersCellViewModel(universities: universities)
         let programsVM = MainScreenProgramsCellViewModel(programs: programCategories)
+        let servicesVM = MainScreenServicesCellViewModel()
         
-        let sections: [MainScreenSection] = [.header, .careers, .programs, .academic]
+        let sections: [MainScreenSection] = [.header, .careers, .programs, .academic, .services]
         let itemsBySection: [MainScreenSection: [MainScreenItem]] = [
             .header: [.headerItem(.init(id: "header", viewModel: headerVM))],
             .careers: [.careersItem(.init(id: "careers", viewModel: careersVM))],
             .programs: [.programItem(.init(id: "programs", viewModel: programsVM))],
-            .academic: buildAcademicItems()
+            .academic: buildAcademicItems(),
+            .services: [.servicesItem(.init(id: "services", viewModel: servicesVM))]
         ]
         
         view?.applySnapshot(sections: sections, itemsBySection: itemsBySection)
@@ -74,18 +76,18 @@ final class MainScreenPresenter {
                     title: university.name,
                     showsArrowRight: true
                 )
-                items.append(.academicUniversity(.init(id: "academic-uni-\(university.id)", viewModel: vm)))
+                items.append(.academicUniversity(.init(item: university, prefix: "academic-uni", viewModel: vm)))
             }
             let showAllItem = MainScreenAcademicShowAllCellViewModel(title: "Показать все наши вузы")
-            items.append(.academicShowAll(.init(id: "academic-showAll", viewModel: showAllItem)))
+            items.append(.academicShowAll(.init(viewModel: showAllItem)))
             
         case .programs:
             programCategories.prefix(3).forEach { program in
                 let vm = MainScreenAcademicProgramCellViewModel(program: program)
-                items.append(.academicProgram(.init(id: "academic-program-\(program.id)", viewModel: vm)))
+                items.append(.academicProgram(.init(item: program, prefix: "academic-program", viewModel: vm)))
             }
             let showAllItem = MainScreenAcademicShowAllCellViewModel(title: "Показать все программы вузов")
-            items.append(.academicShowAll(.init(id: "academic-showAll", viewModel: showAllItem)))
+            items.append(.academicShowAll(.init(viewModel: showAllItem)))
             
         case .professions:
             professions.prefix(3).forEach { profession in
@@ -96,10 +98,10 @@ final class MainScreenPresenter {
                     subtitle: profession.description.ru,
                     showsArrowRight: true
                 )
-                items.append(.academicProfession(.init(id: "academic-profession-\(profession.id)", viewModel: vm)))
+                items.append(.academicProfession(.init(item: profession, prefix: "academic-profession-", viewModel: vm)))
             }
             let showAllItem = MainScreenAcademicShowAllCellViewModel(title: "Показать все профессии вузов")
-            items.append(.academicShowAll(.init(id: "academic-showAll", viewModel: showAllItem)))
+            items.append(.academicShowAll(.init(viewModel: showAllItem)))
         }
         
         return items

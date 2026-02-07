@@ -86,7 +86,8 @@ final class MainScreenAcademicShowAllCell: UICollectionViewCell, ConfigurableCel
     private func setupUI() {
         contentView.addSubview(container)
         container.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-Constants.smallSpacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.smallSpacing)
         }
         

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ECProfession: Decodable {
+struct ECProfession: Identifiable, Decodable {
     let id: Int
     let name: ECLocalizedString
     let description: ECLocalizedString

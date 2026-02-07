@@ -38,8 +38,8 @@ final class MainScreenVC: UIViewController {
         cv.registerCell(MainScreenAcademicCell.self, reuseID: MainScreenAcademicCell.identifier)
         cv.registerCell(MainScreenAcademicProgramCell.self, reuseID: MainScreenAcademicProgramCell.identifier)
         cv.registerCell(MainScreenAcademicShowAllCell.self, reuseID: MainScreenAcademicShowAllCell.identifier)
+        cv.registerCell(MainScreenServicesCell.self, reuseID: MainScreenServicesCell.identifier)
         cv.registerCell(CardWithImageCell.self, reuseID: CardWithImageCell.identifier)
-        cv.backgroundColor = .clear
         cv.resignsFirstResponderOnScroll = true
         return cv
     }()
@@ -105,6 +105,12 @@ final class MainScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenAcademicShowAllCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
+                
+            case .servicesItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenServicesCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
             default:
                 return UICollectionViewCell()
             }

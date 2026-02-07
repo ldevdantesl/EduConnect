@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ECProgramCategory: Decodable {
+struct ECProgramCategory: Identifiable, Decodable {
     let id: Int
     let code: String
     let name: ECLocalizedString

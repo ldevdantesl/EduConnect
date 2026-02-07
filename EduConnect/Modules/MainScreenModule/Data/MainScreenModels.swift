@@ -21,13 +21,12 @@ enum MainScreenItem: Hashable {
     case headerItem(DiffableItem<MainScreenHeaderCellViewModel>)
     case careersItem(DiffableItem<MainScreenCareersCellViewModel>)
     case programItem(DiffableItem<MainScreenProgramsCellViewModel>)
-    case universitiesItem
     case academicUniversity(DiffableItem<CardWithImageCellViewModel>)
     case academicProfession(DiffableItem<CardWithImageCellViewModel>)
     case academicProgram(DiffableItem<MainScreenAcademicProgramCellViewModel>)
     case academicItem(DiffableItem<MainScreenAcademicCellViewModel>)
     case academicShowAll(DiffableItem<MainScreenAcademicShowAllCellViewModel>)
-    case servicesItem
+    case servicesItem(DiffableItem<MainScreenServicesCellViewModel>)
     case journalItem
     case footerItem
 }
