@@ -13,7 +13,7 @@ protocol UniversityScreenPresenterProtocol: AnyObject {
     func didTapAccount()
     func didTapAppLogo()
     func didGetCities(cities: [ECCity])
-    func didGetProfessions(professions: [ECProfession])
+    func didGetProfessions(professions: [ECReferenceProfession])
     func didReceiveUniversities(paginatedUniversities: PaginatedResponse<ECUniversity>)
     
     func didReceiveError(error: any Error)
@@ -38,7 +38,7 @@ final class UniversityScreenPresenter {
     
     private var universities: [ECUniversity] = []
     private var cities: [ECCity] = []
-    private var professions: [ECProfession] = []
+    private var professions: [ECReferenceProfession] = []
     
     private var totalPages: Int = 1
     private var currentPage: Int = 1
@@ -200,7 +200,7 @@ extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
         dispatchGroup.leave()
     }
     
-    func didGetProfessions(professions: [ECProfession]) {
+    func didGetProfessions(professions: [ECReferenceProfession]) {
         self.professions = professions
         dispatchGroup.leave()
     }

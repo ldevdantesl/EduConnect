@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ProgramsAPIServiceProtocol {
+protocol ProgramsAPISubServiceProtocol {
     func getProgramCategories() async throws -> EduConnectDataResponse<[ECProgramCategory]>
     func getProgramsOfCategory(categoryID: Int) async throws -> EduConnectDataResponse<[ECProgram]>
     func getAllPrograms() async throws  -> EduConnectDataResponse<[ECProgram]>
@@ -15,7 +15,7 @@ protocol ProgramsAPIServiceProtocol {
     func getRelatedProgramsForProgramID(programID: Int, limit: Int) async throws -> EduConnectDataResponse<[ECProgram]>
 }
 
-final class ProgramsAPIService: ProgramsAPIServiceProtocol {
+final class ProgramsAPISubService: ProgramsAPISubServiceProtocol {
     private let httpClient: HTTPClientProtocol
     
     init(httpClient: HTTPClientProtocol) {

@@ -8,22 +8,22 @@
 import UIKit
 
 protocol NetworkServiceProtocol {
-    var authentication: AuthAPIServiceProtocol { get }
-    var references: ReferencesAPIServiceProtocol { get }
-    var university: UniversityAPIServiceProtocol { get }
+    var authentication: AuthAPISubServiceProtocol { get }
+    var references: ReferencesAPISubServiceProtocol { get }
+    var university: UniversityAPISubServiceProtocol { get }
     var programs: ProgramsAPIServiceProtocol { get }
 }
 
 final class ECNetworkService: NetworkServiceProtocol {
-    let authentication: AuthAPIServiceProtocol
-    let references: ReferencesAPIServiceProtocol
-    let university: UniversityAPIServiceProtocol
+    let authentication: AuthAPISubServiceProtocol
+    let references: ReferencesAPISubServiceProtocol
+    let university: UniversityAPISubServiceProtocol
     let programs: ProgramsAPIServiceProtocol
     
     init(httpClient: HTTPClientProtocol, tokenStorage: TokenStorageProtocol) {
-        self.authentication = AuthAPIService(httpClient: httpClient, tokenStorage: tokenStorage)
-        self.references = ReferencesAPIService(httpClient: httpClient)
-        self.university = UniversityAPIService(httpClient: httpClient)
-        self.programs = ProgramsAPIService(httpClient: httpClient)
+        self.authentication = AuthAPISubService(httpClient: httpClient, tokenStorage: tokenStorage)
+        self.references = ReferencesAPISubService(httpClient: httpClient)
+        self.university = UniversityAPISubService(httpClient: httpClient)
+        self.programs = ProgramsAPISubService(httpClient: httpClient)
     }
 }

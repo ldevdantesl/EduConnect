@@ -8,6 +8,7 @@
 protocol MainScreenInteractorProtocol: AnyObject {
     func getProgramCategories()
     func getAllUniversities()
+    func getProfessions()
 }
 
 final class MainScreenInteractor: MainScreenInteractorProtocol {
@@ -35,6 +36,17 @@ final class MainScreenInteractor: MainScreenInteractorProtocol {
             do {
                 let response = try await networkService.university.getUniversities(page: 1, searchKey: nil, filters: nil)
                 presenter?.didReceiveUniversities(universities: response.data)
+            } catch {
+                presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
+    func getProfessions() {
+        Task {
+            do {
+                let response = try await networkService.references.getProfessions()
+                presenter?.didReceiveProfessions(professions: response)
             } catch {
                 presenter?.didReceiveError(error: error)
             }

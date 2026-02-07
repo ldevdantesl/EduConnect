@@ -35,11 +35,13 @@ final class MainScreenVC: UIViewController {
         cv.registerCell(MainScreenProgramsCell.self, reuseID: MainScreenProgramsCell.identifier)
         cv.registerCell(MainScreenHeaderCell.self, reuseID: MainScreenHeaderCell.identifier)
         cv.registerCell(MainScreenCareersCell.self, reuseID: MainScreenCareersCell.identifier)
+        cv.registerCell(UniversityCell.self, reuseID: UniversityCell.identifier)
+        cv.registerCell(MainScreenAcademicCell.self, reuseID: MainScreenAcademicCell.identifier)
+        cv.registerCell(CardWithImageCell.self, reuseID: CardWithImageCell.identifier)
         cv.backgroundColor = .clear
         cv.resignsFirstResponderOnScroll = true
         return cv
     }()
-
 
     // MARK: - LIFECYCLE
     override func viewDidLoad() {
@@ -82,6 +84,22 @@ final class MainScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenProgramsCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
+                
+            case .academicItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenAcademicCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .academicProgram(let item), .academicProfession(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? CardWithImageCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .academicUniversity(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
             default:
                 return UICollectionViewCell()
             }

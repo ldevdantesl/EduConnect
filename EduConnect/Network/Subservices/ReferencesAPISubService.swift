@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol ReferencesAPIServiceProtocol {
+protocol ReferencesAPISubServiceProtocol {
     func getCities() async throws -> [ECCity]
     func getFaculties() async throws -> [ECFaculty]
     func getProgramCategories() async throws -> [ECProgramCategory]
-    func getProfessions() async throws -> [ECProfession]
+    func getProfessions() async throws -> [ECReferenceProfession]
     func getFamilyMembers() async throws -> [ECFamilyMember]
     func getSpecialConditions() async throws -> [ECSpecialCondition]
     func getOlympiadTypes() async throws -> [ECOlympiadType]
@@ -20,7 +20,7 @@ protocol ReferencesAPIServiceProtocol {
     func getExtracurricularActivities() async throws -> [ECSubject]
 }
 
-final class ReferencesAPIService: ReferencesAPIServiceProtocol {
+final class ReferencesAPISubService: ReferencesAPISubServiceProtocol {
     private let httpClient: HTTPClientProtocol
     
     init(httpClient: HTTPClientProtocol) {
@@ -39,7 +39,7 @@ final class ReferencesAPIService: ReferencesAPIServiceProtocol {
         try await httpClient.request(ReferencesEndpoints.getProgramCategories)
     }
     
-    func getProfessions() async throws -> [ECProfession] {
+    func getProfessions() async throws -> [ECReferenceProfession] {
         try await httpClient.request(ReferencesEndpoints.getProfessions)
     }
     

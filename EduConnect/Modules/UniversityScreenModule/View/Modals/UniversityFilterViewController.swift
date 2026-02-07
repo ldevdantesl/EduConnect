@@ -13,12 +13,12 @@ final class UniversityScreenFilterModalControllerViewModel {
     var selectedFilters: UniversityFilters
     
     var cities: [ECCity] = []
-    var professions: [ECProfession] = []
+    var professions: [ECReferenceProfession] = []
     
     var onApplyFilters: ((UniversityFilters) -> Void)?
     var onFiltersChanged: (() -> Void)?
     
-    init(currentFilters: UniversityFilters, cities: [ECCity] = [], professions: [ECProfession] = []) {
+    init(currentFilters: UniversityFilters, cities: [ECCity] = [], professions: [ECReferenceProfession] = []) {
         self.selectedFilters = currentFilters
         self.cities = cities
         self.professions = professions

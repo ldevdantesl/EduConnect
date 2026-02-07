@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol AuthAPIServiceProtocol {
+protocol AuthAPISubServiceProtocol {
     func sendCode(email: String) async throws -> EduConnectResponse
     func verifyCode(email: String, code: String) async throws -> EduConnectResponse
     func register(email: String, password: String) async throws -> ECUser
 }
 
-final class AuthAPIService: AuthAPIServiceProtocol {
+final class AuthAPISubService: AuthAPISubServiceProtocol {
     private let httpClient: HTTPClientProtocol
     private let tokenStorage: TokenStorageProtocol
     

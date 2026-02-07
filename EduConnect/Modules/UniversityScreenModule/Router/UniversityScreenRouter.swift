@@ -11,7 +11,7 @@ protocol UniversityScreenRouterProtocol {
     func openSidebar()
     func presentFilterView(
         currentFilters: UniversityFilters, cities: [ECCity],
-        professions: [ECProfession], onApply: ((UniversityFilters) -> Void)?
+        professions: [ECReferenceProfession], onApply: ((UniversityFilters) -> Void)?
     )
     
     func routeToUniversityInfo(_ university: ECUniversity)
@@ -35,7 +35,7 @@ final class UniversityScreenRouter: UniversityScreenRouterProtocol {
     
     func presentFilterView(
         currentFilters: UniversityFilters, cities: [ECCity],
-        professions: [ECProfession], onApply: ((UniversityFilters) -> Void)?
+        professions: [ECReferenceProfession], onApply: ((UniversityFilters) -> Void)?
     ) {
         let vm = UniversityScreenFilterModalControllerViewModel(currentFilters: currentFilters, cities: cities, professions: professions)
         vm.onApplyFilters = onApply

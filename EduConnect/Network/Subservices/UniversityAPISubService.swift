@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol UniversityAPIServiceProtocol {
+protocol UniversityAPISubServiceProtocol {
     func getUniversities(page: Int, searchKey: String?, filters: UniversityFilters?) async throws -> PaginatedResponse<ECUniversity>
     func getUniversity(id: Int) async throws -> ECUniversity?
 }
 
-final class UniversityAPIService: UniversityAPIServiceProtocol {
+final class UniversityAPISubService: UniversityAPISubServiceProtocol {
     private let httpClient: HTTPClientProtocol
     
     init(httpClient: HTTPClientProtocol) {
