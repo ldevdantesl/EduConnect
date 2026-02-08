@@ -9,6 +9,9 @@ protocol MainScreenInteractorProtocol: AnyObject {
     func getProgramCategories()
     func getAllUniversities()
     func getProfessions()
+    func getNewsTypes()
+    func getNewsForNewsType(typeID: Int?)
+    func getAllNews()
 }
 
 final class MainScreenInteractor: MainScreenInteractorProtocol {
@@ -46,6 +49,39 @@ final class MainScreenInteractor: MainScreenInteractorProtocol {
             do {
                 let response = try await networkService.professions.getProfessions(searchText: nil) 
                 presenter?.didReceiveProfessions(professions: response)
+            } catch {
+                presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
+    func getNewsTypes() {
+        Task {
+            do {
+                let response = try await networkService.news.getNewsTypes()
+                presenter?.didReceiveNewsTypes(types: response)
+            } catch {
+                presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
+    func getNewsForNewsType(typeID: Int?) {
+        Task {
+            do {
+                let response = try await networkService.news.getNews(newsTypeID: typeID?.description, universityID: nil, itemsPerPage: 3)
+                presenter?.didReceiveNewsForType(news: response, typeID: typeID)
+            } catch {
+                presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
+    func getAllNews() {
+        Task {
+            do {
+                let response = try await networkService.news.getNews(newsTypeID: nil, universityID: nil, itemsPerPage: 3)
+                presenter?.didReceiveAllNews(news: response)
             } catch {
                 presenter?.didReceiveError(error: error)
             }

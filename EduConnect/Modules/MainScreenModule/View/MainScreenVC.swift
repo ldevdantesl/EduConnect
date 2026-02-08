@@ -30,7 +30,7 @@ final class MainScreenVC: UIViewController {
     
     private let collectionContainer: DiffableCollectionViewContainer = {
         let cv = DiffableCollectionViewContainer<MainScreenSection, MainScreenItem>(
-            layout: UniversityScreenLayoutFactory.make()
+            layout: MainScreenLayoutFactory.make()
         )
         cv.registerCell(MainScreenProgramsCell.self, reuseID: MainScreenProgramsCell.identifier)
         cv.registerCell(MainScreenHeaderCell.self, reuseID: MainScreenHeaderCell.identifier)
@@ -39,7 +39,11 @@ final class MainScreenVC: UIViewController {
         cv.registerCell(MainScreenAcademicProgramCell.self, reuseID: MainScreenAcademicProgramCell.identifier)
         cv.registerCell(MainScreenAcademicShowAllCell.self, reuseID: MainScreenAcademicShowAllCell.identifier)
         cv.registerCell(MainScreenServicesCell.self, reuseID: MainScreenServicesCell.identifier)
+        cv.registerCell(MainScreenJournalCell.self, reuseID: MainScreenJournalCell.identifier)
+        cv.registerCell(MainScreenFooterCell.self, reuseID: MainScreenFooterCell.identifier)
+        cv.registerCell(UnderlineButtonCell.self, reuseID: UnderlineButtonCell.identifier)
         cv.registerCell(CardWithImageCell.self, reuseID: CardWithImageCell.identifier)
+        cv.registerCell(LoadingCell.self, reuseID: LoadingCell.identifier)
         cv.resignsFirstResponderOnScroll = true
         return cv
     }()
@@ -91,11 +95,6 @@ final class MainScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
-            case .academicProfession(let item), .academicUniversity(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? CardWithImageCell
-                cell?.configure(withVM: item.viewModel)
-                return cell
-                
             case .academicProgram(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenAcademicProgramCell
                 cell?.configure(withVM: item.viewModel)
@@ -111,8 +110,30 @@ final class MainScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
-            default:
-                return UICollectionViewCell()
+            case .journalItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenJournalCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .cardWithImageItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? CardWithImageCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .loadingItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoadingCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .footerItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenFooterCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .underlineButtonItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UnderlineButtonCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
             }
         }
     }

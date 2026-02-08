@@ -197,17 +197,18 @@ final class CardWithImageCell: UICollectionViewCell, ConfigurableCellProtocol {
             $0.horizontalEdges.equalToSuperview().inset(Constants.bigSpacing)
         }
         
+        containerView.addSubview(arrowRightImage)
+        arrowRightImage.snp.makeConstraints {
+            $0.top.equalTo(pretitleLabel.snp.bottom).offset(Constants.spacing)
+            $0.trailing.equalToSuperview().offset(-Constants.spacing)
+            $0.size.equalTo(Constants.arrowImageSize)
+        }
+        
         containerView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(pretitleLabel.snp.bottom).offset(Constants.spacing)
-            $0.horizontalEdges.equalToSuperview().inset(Constants.bigSpacing)
-        }
-        
-        containerView.addSubview(arrowRightImage)
-        arrowRightImage.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.top)
-            $0.trailing.equalToSuperview().offset(-Constants.spacing)
-            $0.size.equalTo(Constants.arrowImageSize)
+            $0.leading.equalToSuperview().inset(Constants.bigSpacing)
+            $0.trailing.equalTo(arrowRightImage.snp.leading)
         }
         
         containerView.addSubview(subtitleLabel)
