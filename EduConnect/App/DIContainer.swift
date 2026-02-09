@@ -17,9 +17,10 @@ struct DIContainer {
         let logger = ECNetworkLogger()
         let httpClient = HTTPClient(logger: logger)
         let tokenStorage = TokenStorage()
-        self.authentication = ECAuthentication()
+        let networkSer = ECNetworkService(httpClient: httpClient)
         self.sidebarService = ECSidebarService()
         self.errorService = ECErrorService()
-        self.networkService = ECNetworkService(httpClient: httpClient, tokenStorage: tokenStorage)
+        self.networkService = networkSer
+        self.authentication = ECAuthentication(networkService: networkSer, tokenStorage: tokenStorage)
     }
 }

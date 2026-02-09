@@ -61,12 +61,15 @@ final class ECErrorService: ErrorServiceProtocol {
                 isRetryable: true
             )
             
-        case .custom(let message, _):
+        case .custom(let message, let errors):
+            let fieldDetails = errors?.values.flatMap { $0 }.joined(separator: "\n")
+            let fullMessage = [message, fieldDetails].compactMap { $0 }.joined(separator: "\n")
             return UserFacingError(
                 title: "Ошибка",
-                message: message,
+                message: fullMessage,
                 isRetryable: false
             )
+        
             
         default:
             return UserFacingError.from(apiError)

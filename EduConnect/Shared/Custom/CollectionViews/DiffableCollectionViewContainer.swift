@@ -16,6 +16,7 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
     let collectionView: UICollectionView
     var resignsFirstResponderOnScroll: Bool = false
     
+    
     // MARK: - PRIVATE VAR
     private(set) var diffableDataSource: DataSource!
     private var didSelectHandler: ((IndexPath) -> Void)?

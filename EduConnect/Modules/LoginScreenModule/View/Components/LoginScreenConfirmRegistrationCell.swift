@@ -10,11 +10,11 @@ import SnapKit
 
 struct LoginScreenConfirmRegistrationCellVM: CellViewModelProtocol {
     var cellIdentifier: String = "LoginScreenConfirmRegistrationCell"
-    let confirmAction: (() -> Void)?
+    let confirmAction: ((String?) -> Void)?
     let backButtonAction: (() -> Void)?
     let resendAction: (() -> Void)?
     
-    init(confirmAction: (() -> Void)? = nil, resendAction: (() -> Void)? = nil, backButtonAction: (() -> Void)? = nil) {
+    init(confirmAction: ((String?) -> Void)? = nil, resendAction: (() -> Void)? = nil, backButtonAction: (() -> Void)? = nil) {
         self.confirmAction = confirmAction
         self.resendAction = resendAction
         self.backButtonAction = backButtonAction
@@ -100,7 +100,7 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
     func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? LoginScreenConfirmRegistrationCellVM else { return }
         self.viewModel = vm
-        self.confirmButton.setAction(action: vm.confirmAction)
+        self.confirmButton.setAction { [weak self] in vm.confirmAction?(self?.codeField.text)}
         self.resendCodeButton.setAction(action: vm.resendAction)
         let backButtonVM = ECIconButtonVM(
             systemImage: Constants.backButtonImageName,

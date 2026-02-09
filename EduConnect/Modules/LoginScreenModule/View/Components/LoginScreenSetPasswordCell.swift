@@ -10,10 +10,10 @@ import SnapKit
 
 struct LoginScreenSetPasswordCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = "LoginScreenSetPasswordCell"
-    let savePasswordAction: (() -> Void)?
+    let savePasswordAction: ((String?, String?) -> Void)?
     let backButtonAction: (() -> Void)?
     
-    init(savePasswordAction: (() -> Void)? = nil, backButtonAction: (() -> Void)? = nil) {
+    init(savePasswordAction: ((String?, String?) -> Void)? = nil, backButtonAction: (() -> Void)? = nil) {
         self.savePasswordAction = savePasswordAction
         self.backButtonAction = backButtonAction
     }
@@ -104,7 +104,9 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCellPr
     func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? LoginScreenSetPasswordCellViewModel else { return }
         self.viewModel = vm
-        self.savePasswordButton.setAction(action: vm.savePasswordAction)
+        self.savePasswordButton.setAction { [weak self] in
+            vm.savePasswordAction?(self?.passwordField.text, self?.reenterPasswordField.text)
+        }
         let backButtonVM = ECIconButtonVM(
             systemImage: Constants.backButtonImageName,
             style: .title3, weight: .semibold,

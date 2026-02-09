@@ -24,8 +24,8 @@ final class ECNetworkService: NetworkServiceProtocol {
     let programs: ProgramsAPISubServiceProtocol
     let professions: ProfessionsAPISubServiceProtocol
     
-    init(httpClient: HTTPClientProtocol, tokenStorage: TokenStorageProtocol) {
-        self.authentication = AuthAPISubService(httpClient: httpClient, tokenStorage: tokenStorage)
+    init(httpClient: HTTPClientProtocol) {
+        self.authentication = AuthAPISubService(httpClient: httpClient)
         self.references = ReferencesAPISubService(httpClient: httpClient)
         self.university = UniversityAPISubService(httpClient: httpClient)
         self.programs = ProgramsAPISubService(httpClient: httpClient)

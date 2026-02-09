@@ -8,10 +8,10 @@
 import UIKit
 
 final class LoginScreenAssembler {
-    static func assemble(appRouter: AppRoutingProtocol, authState: AuthenticationProtocol) -> LoginScreenVC {
-        let interactor = LoginScreenInteractor(authState: authState)
+    static func assemble(appRouter: AppRoutingProtocol, authentication: AuthenticationProtocol, errorService: ErrorServiceProtocol) -> LoginScreenVC {
+        let interactor = LoginScreenInteractor(authentication: authentication)
         let router = LoginScreenRouter(appRouter: appRouter)
-        let presenter = LoginScreenPresenter(interactor: interactor, router: router)
+        let presenter = LoginScreenPresenter(interactor: interactor, router: router, errorService: errorService)
         let viewController = LoginScreenVC()
         presenter.view  = viewController
         viewController.presenter = presenter

@@ -8,22 +8,28 @@
 import Foundation
 
 enum AuthEndpoints: Endpoint {
-    case sendCode(email: String)
-    case verifyCode(email: String, code: String)
-    case register(email: String, password: String)
+    case sendCode(email: String?)
+    case verifyCode(email: String, code: String?)
+    case register(email: String, password: String?, passwordConfirmation: String?)
+    case login(email: String?, password: String?)
+    case logOut
+    case me
     
     var path: String {
         switch self {
         case .sendCode: return "/send-verification-code"
+        case .login: return "/login"
         case .verifyCode: return "/verify-code"
         case .register: return "/register"
+        case .me: return "/me"
+        case .logOut: return "/logout"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .sendCode, .verifyCode: return .get
-        case .register: return .post
+        case .me: return .get
+        default: return .post
         }
     }
     
@@ -38,12 +44,19 @@ enum AuthEndpoints: Endpoint {
                 URLQueryItem(name: "code", value: code)
             ]
             
-        case .register(let email, let password):
+        case .register(let email, let password, let passwordConfirmation):
             return [
                 URLQueryItem(name: "email", value: email),
                 URLQueryItem(name: "password", value: password),
-                URLQueryItem(name: "password_confirmation", value: password)
+                URLQueryItem(name: "password_confirmation", value: passwordConfirmation)
             ]
+        case .login(let email, let password):
+            return [
+                URLQueryItem(name: "email", value: email),
+                URLQueryItem(name: "password", value: password)
+            ]
+            
+        default: return .none
         }
     }
 }

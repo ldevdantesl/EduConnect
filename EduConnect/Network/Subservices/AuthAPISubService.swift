@@ -8,34 +8,54 @@
 import Foundation
 
 protocol AuthAPISubServiceProtocol {
-    func sendCode(email: String) async throws -> EduConnectResponse
-    func verifyCode(email: String, code: String) async throws -> EduConnectResponse
-    func register(email: String, password: String) async throws -> ECUser
+    func login(email: String?, password: String?) async throws -> AuthUserAndTokenData
+    
+    @discardableResult
+    func logOut() async throws -> EduConnectResponse
+    @discardableResult
+    func sendCode(email: String?) async throws -> EduConnectResponse
+    @discardableResult
+    func verifyCode(email: String, code: String?) async throws -> EduConnectResponse
+    
+    func me() async throws -> AuthUserAndTokenData
+    func register(email: String, password: String?, confirmPassword: String?) async throws -> AuthUserAndTokenData
 }
 
 final class AuthAPISubService: AuthAPISubServiceProtocol {
-    private let httpClient: HTTPClientProtocol
-    private let tokenStorage: TokenStorageProtocol
     
-    init(httpClient: HTTPClientProtocol, tokenStorage: TokenStorageProtocol) {
+    private let httpClient: HTTPClientProtocol
+    
+    init(httpClient: HTTPClientProtocol) {
         self.httpClient = httpClient
-        self.tokenStorage = tokenStorage
     }
     
-    func sendCode(email: String) async throws -> EduConnectResponse {
+    func sendCode(email: String?) async throws -> EduConnectResponse {
         try await httpClient.request(AuthEndpoints.sendCode(email: email))
     }
     
-    func verifyCode(email: String, code: String) async throws -> EduConnectResponse {
+    @discardableResult
+    func verifyCode(email: String, code: String?) async throws -> EduConnectResponse {
         try await httpClient.request(AuthEndpoints.verifyCode(email: email, code: code))
     }
     
-    func register(email: String, password: String) async throws -> ECUser {
-        let response: AuthResponse = try await httpClient.request(
-            AuthEndpoints.register(email: email, password: password)
+    func register(email: String, password: String?, confirmPassword: String?) async throws -> AuthUserAndTokenData {
+        let response: EduConnectDataResponse<AuthUserAndTokenData> = try await httpClient.request(
+            AuthEndpoints.register(email: email, password: password, passwordConfirmation: confirmPassword)
         )
-         let data = response.data
-        tokenStorage.save(token: data.token)
-        return data.user
+        return response.data
+    }
+    
+    func login(email: String?, password: String?) async throws -> AuthUserAndTokenData {
+        let response: EduConnectDataResponse<AuthUserAndTokenData> = try await httpClient.request(AuthEndpoints.login(email: email, password: password))
+        return response.data
+    }
+    
+    @discardableResult
+    func logOut() async throws -> EduConnectResponse {
+        try await httpClient.request(AuthEndpoints.logOut)
+    }
+    
+    func me() async throws -> AuthUserAndTokenData {
+        try await httpClient.request(AuthEndpoints.me)
     }
 }

@@ -10,7 +10,7 @@ import SnapKit
 
 struct LoginScreenRegistrationCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = "LoginScreenRegistrationCell"
-    let didTapSendCode: (() -> Void)?
+    let didTapSendCode: ((String?) -> Void)?
 }
 
 final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCellProtocol {
@@ -87,12 +87,13 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCellP
     public func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? LoginScreenRegistrationCellViewModel else { return }
         self.viewModel = vm
-        self.sendCodeButton.setAction(action: vm.didTapSendCode)
+        self.sendCodeButton.setAction { [weak self] in vm.didTapSendCode?(self?.emailTextField.text) }
         layoutIfNeeded()
     }
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
+        emailTextField.keyboardType = .emailAddress
         topSpacer.backgroundColor = .clear
         topSpacer.setContentHuggingPriority(.defaultLow, for: .vertical)
         topSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)

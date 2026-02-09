@@ -57,7 +57,7 @@ final class AppRouter: AppRoutingProtocol {
 
     func routeToAuthentication() {
         sidebarContainer?.setSidebarEnabled(false)
-        let vc = LoginScreenAssembler.assemble(appRouter: self, authState: authState)
+        let vc = LoginScreenAssembler.assemble(appRouter: self, authentication: authState, errorService: errorService)
         navController.setViewControllers([vc], animated: true)
     }
     
