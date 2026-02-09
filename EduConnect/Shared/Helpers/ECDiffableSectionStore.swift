@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ECDiffableSectionStore<Section: Hashable>: @unchecked Sendable {
+final class ECDiffableSectionStore<Section: Hashable> {
     private var sections: [Section] = []
     
     func update(_ newSections: [Section]) {
@@ -18,4 +18,6 @@ final class ECDiffableSectionStore<Section: Hashable>: @unchecked Sendable {
         guard index >= 0 && index < sections.count else { return nil }
         return sections[index]
     }
+    
+    deinit { }
 }
