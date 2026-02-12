@@ -8,18 +8,18 @@
 import UIKit
 import SnapKit
 
-struct LoginScreenSetPasswordCellViewModel: CellViewModel {
+struct LoginScreenSetPasswordCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = "LoginScreenSetPasswordCell"
-    let savePasswordAction: (() -> Void)?
+    let savePasswordAction: ((String?, String?) -> Void)?
     let backButtonAction: (() -> Void)?
     
-    init(savePasswordAction: (() -> Void)? = nil, backButtonAction: (() -> Void)? = nil) {
+    init(savePasswordAction: ((String?, String?) -> Void)? = nil, backButtonAction: (() -> Void)? = nil) {
         self.savePasswordAction = savePasswordAction
         self.backButtonAction = backButtonAction
     }
 }
 
-final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCell {
+final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // Spacing
@@ -36,7 +36,7 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCell {
     // MARK: - VIEW PROPERTIES
     private let setPasswordLabel: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page3.setPasswordTitle
+        label.text = ConstantLocalizedStrings.Registration.Page3.setPasswordTitle
         label.font = ECFont.font(.bold, size: 30)
         label.textAlignment = .center
         label.textColor = .black
@@ -46,7 +46,7 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCell {
     
     private let setPasswordSubtitle: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page3.setNewPasswordSubtitle
+        label.text = ConstantLocalizedStrings.Registration.Page3.setNewPasswordSubtitle
         label.font = ECFont.font(.bold, size: 14)
         label.textAlignment = .center
         label.textColor = .systemGray
@@ -56,15 +56,15 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCell {
     
     private lazy var passwordField: ECTextField = {
         let field = ECSecureTextField(
-            placeHolder: ECLocalizedStrings.Registration.Page3.newPasswordTextField,
+            placeHolder: ConstantLocalizedStrings.Registration.Page3.newPasswordTextField,
             returnKeyType: .next,
             returnAction: self.makeReenterFieldFirstResponder
         )
         return field
     }()
-    private let reenterPasswordField: ECTextField = ECSecureTextField(placeHolder: ECLocalizedStrings.Registration.Page3.reenterPasswordTextField)
+    private let reenterPasswordField: ECTextField = ECSecureTextField(placeHolder: ConstantLocalizedStrings.Registration.Page3.reenterPasswordTextField)
     
-    private let savePasswordButton: ECButton = ECButton(text: ECLocalizedStrings.Registration.Page3.savePasswordButton)
+    private let savePasswordButton: ECButton = ECButton(text: ConstantLocalizedStrings.Registration.Page3.savePasswordButton)
     
     private lazy var vStack: UIStackView = {
         let stack = UIStackView()
@@ -101,10 +101,12 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCell {
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModel) {
+    func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? LoginScreenSetPasswordCellViewModel else { return }
         self.viewModel = vm
-        self.savePasswordButton.setAction(action: vm.savePasswordAction)
+        self.savePasswordButton.setAction { [weak self] in
+            vm.savePasswordAction?(self?.passwordField.text, self?.reenterPasswordField.text)
+        }
         let backButtonVM = ECIconButtonVM(
             systemImage: Constants.backButtonImageName,
             style: .title3, weight: .semibold,

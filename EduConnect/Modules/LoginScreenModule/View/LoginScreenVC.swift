@@ -9,100 +9,144 @@ import UIKit
 import SnapKit
 
 protocol LoginScreenViewProtocol: AnyObject {
-    func configureCollectionView(dataSource: LoginScreenDataSource)
-    func scrollToNextCell()
-    func scrollBackToPreviousCell()
+    func applySnapshot(sections: [LoginScreenSection], itemsBySection: [LoginScreenSection : [LoginScreenItem]])
+    func showError(errorMessage: String)
+    func scrollToNextItem()
+    func scrollToPreviousItem()
+    func showLoading()
+    func hideLoading()
+    func removeKeyboard()
 }
 
 final class LoginScreenVC: UIViewController {
     
     // MARK: - VIPER
     var presenter: LoginScreenPresenterProtocol?
-
-    // MARK: - PROPERTIES
-    private var currentIndex: Int = 0
-
+    
     // MARK: - VIEW PROPERTIES
-    private var headerView: ECHeaderView = ECHeaderView()
-    private lazy var collectionView: UICollectionView = {
-        let cvLayout = UICollectionViewFlowLayout()
-        cvLayout.scrollDirection = .horizontal
-        cvLayout.minimumLineSpacing = 0
-        cvLayout.minimumInteritemSpacing = 0
-        
-        let collectionView = UICollectionView(frame:.zero, collectionViewLayout: cvLayout)
-        collectionView.register(cell: LoginScreenRegistrationCell.self)
-        collectionView.register(cell: LoginScreenConfirmRegistrationCell.self)
-        collectionView.register(cell: LoginScreenSetPasswordCell.self)
-        collectionView.register(cell: LoginScreenCompleteRegistrationCell.self)
+    private lazy var collectionContainer: DiffableCollectionViewContainer = {
+        let collectionView = DiffableCollectionViewContainer<LoginScreenSection, LoginScreenItem>(layout: LoginScreenLayoutFactory.make())
+        collectionView.registerCell(LoginScreenRegistrationCell.self, reuseID: LoginScreenRegistrationCell.identifier)
+        collectionView.registerCell(LoginScreenConfirmRegistrationCell.self, reuseID: LoginScreenConfirmRegistrationCell.identifier)
+        collectionView.registerCell(LoginScreenSetPasswordCell.self, reuseID: LoginScreenSetPasswordCell.identifier)
+        collectionView.registerCell(LoginScreenCompleteRegistrationCell.self, reuseID: LoginScreenCompleteRegistrationCell.identifier)
         collectionView.backgroundColor = .systemBlue
-        collectionView.isScrollEnabled = false
-        collectionView.isPagingEnabled = true
-        collectionView.delegate = self
+        collectionView.collectionView.backgroundColor = .systemBlue
+        collectionView.collectionView.isPagingEnabled = true
+        collectionView.collectionView.isScrollEnabled = false
+        collectionView.collectionView.bounces = false
         return collectionView
     }()
     
     // MARK: - FUNC
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter?.viewDidLoad()
         setupUI()
+        configureDataSource()
+        presenter?.viewDidLoad()
     }
     
     private func setupUI() {
-        self.view.addSubview(headerView)
-        headerView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(self.headerHeight)
+        self.view.addSubview(collectionContainer)
+        collectionContainer.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
-        self.view.addSubview(collectionView)
-        collectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(self.headerHeight)
-            $0.horizontalEdges.bottom.equalToSuperview()
+    }
+    
+    private func configureDataSource() {
+        collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
+            switch itemIdentifier {
+            case .completeRegisterItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoginScreenCompleteRegistrationCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .registrationItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoginScreenRegistrationCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .setPasswordItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoginScreenSetPasswordCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .confirmRegisterItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoginScreenConfirmRegistrationCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .loadingItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoadingCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+            }
         }
     }
 }
 
-extension LoginScreenVC: LoginScreenViewProtocol {
-    func configureCollectionView(dataSource: LoginScreenDataSource) {
-        self.collectionView.dataSource = dataSource
-        self.collectionView.reloadData()
+extension LoginScreenVC:LoginScreenViewProtocol {
+    func applySnapshot(sections: [LoginScreenSection], itemsBySection: [LoginScreenSection : [LoginScreenItem]]) {
+        collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
     }
     
-    func scrollToNextCell() {
-        print("Scrolling Next")
-        let next = currentIndex + 1
-        guard next < collectionView.numberOfItems(inSection: 0) else { return }
+    func showError(errorMessage: String) {
+        self.showError(message: errorMessage)
+    }
+    
+    func scrollToNextItem() {
+        let collectionView = collectionContainer.collectionView
 
-        currentIndex = next
+        guard
+            let currentIndexPath = collectionView.indexPathsForVisibleItems
+                .sorted().first
+        else { return }
+
+        let nextItem = currentIndexPath.item + 1
+        let section = currentIndexPath.section
+
+        guard nextItem < collectionView.numberOfItems(inSection: section) else { return }
+
+        let nextIndexPath = IndexPath(item: nextItem, section: section)
+
         collectionView.scrollToItem(
-            at: IndexPath(item: next, section: 0),
+            at: nextIndexPath,
             at: .centeredHorizontally,
             animated: true
         )
     }
     
-    func scrollBackToPreviousCell() {
-        print("Scrolling Back")
-        let prev = currentIndex - 1
-        guard prev >= 0 else { return }
+    func scrollToPreviousItem() {
+        let collectionView = collectionContainer.collectionView
 
-        currentIndex = prev
+        guard
+            let currentIndexPath = collectionView.indexPathsForVisibleItems
+                .sorted().first
+        else { return }
+
+        let prevItem = currentIndexPath.item - 1
+        let section = currentIndexPath.section
+
+        guard prevItem >= 0 else { return }
+
+        let prevIndexPath = IndexPath(item: prevItem, section: section)
+
         collectionView.scrollToItem(
-            at: IndexPath(item: prev, section: 0),
+            at: prevIndexPath,
             at: .centeredHorizontally,
             animated: true
         )
     }
-}
-
-extension LoginScreenVC: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width
-        let height = collectionView.bounds.height
-        return CGSize(width: width, height: height)
+    
+    func showLoading() {
+        showHoverLoading()
     }
     
+    func hideLoading() {
+        hideHoverLoading()
+    }
     
+    func removeKeyboard() {
+        self.view.endEditing(true)
+    }
 }

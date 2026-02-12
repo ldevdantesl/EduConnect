@@ -8,12 +8,12 @@
 import UIKit
 import SnapKit
 
-struct LoginScreenRegistrationCellViewModel: CellViewModel {
+struct LoginScreenRegistrationCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = "LoginScreenRegistrationCell"
-    let didTapSendCode: (() -> Void)?
+    let didTapSendCode: ((String?) -> Void)?
 }
 
-final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell {
+final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         //Spacings
@@ -33,7 +33,7 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
     private let signInTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.text = ECLocalizedStrings.Registration.Page1.signInTitle
+        label.text = ConstantLocalizedStrings.Registration.Page1.signInTitle
         label.font = ECFont.font(.extraBold, size: 30)
         label.numberOfLines = 1
         label.textAlignment = .center
@@ -42,7 +42,7 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
     
     private let enterEmailLabel: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page1.enterEmailSubtitle
+        label.text = ConstantLocalizedStrings.Registration.Page1.enterEmailSubtitle
         label.font = ECFont.font(.medium, size: 14)
         label.textColor = .systemGray
         label.numberOfLines = 0
@@ -50,9 +50,9 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
         return label
     }()
     
-    private let emailTextField: ECTextField = ECTextField(placeHolder: ECLocalizedStrings.Registration.Page1.enterEmailTextField)
+    private let emailTextField: ECTextField = ECTextField(placeHolder: ConstantLocalizedStrings.Registration.Page1.enterEmailTextField)
     
-    private let sendCodeButton: ECButton = ECButton(text: ECLocalizedStrings.Registration.Page1.sendCodeButton)
+    private let sendCodeButton: ECButton = ECButton(text: ConstantLocalizedStrings.Registration.Page1.sendCodeButton)
     
     private lazy var vStack: UIStackView = {
         let stack = UIStackView()
@@ -84,15 +84,16 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCell 
     }
     
     // MARK: - PUBLIC FUNX
-    public func configure(withVM vm: CellViewModel) {
+    public func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? LoginScreenRegistrationCellViewModel else { return }
         self.viewModel = vm
-        self.sendCodeButton.setAction(action: vm.didTapSendCode)
+        self.sendCodeButton.setAction { [weak self] in vm.didTapSendCode?(self?.emailTextField.text) }
         layoutIfNeeded()
     }
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
+        emailTextField.keyboardType = .emailAddress
         topSpacer.backgroundColor = .clear
         topSpacer.setContentHuggingPriority(.defaultLow, for: .vertical)
         topSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)

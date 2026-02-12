@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-struct LoginScreenCompleteRegistrationCellVM: CellViewModel {
+struct LoginScreenCompleteRegistrationCellVM: CellViewModelProtocol {
     var cellIdentifier: String = "LoginScreenCompleteRegistrationCell"
     let goToAccountAction: (() -> Void)?
     let goToMainAction: (() -> Void)?
@@ -19,7 +19,7 @@ struct LoginScreenCompleteRegistrationCellVM: CellViewModel {
     }
 }
 
-final class LoginScreenCompleteRegistrationCell: UICollectionViewCell, ConfigurableCell {
+final class LoginScreenCompleteRegistrationCell: UICollectionViewCell, ConfigurableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // Spacing
@@ -33,7 +33,7 @@ final class LoginScreenCompleteRegistrationCell: UICollectionViewCell, Configura
     // MARK: - VIEW PROPERTIES
     private let signInCompletedTitle: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page4.signInCompletedTitle
+        label.text = ConstantLocalizedStrings.Registration.Page4.signInCompletedTitle
         label.font = ECFont.font(.bold, size: 30)
         label.textAlignment = .center
         label.textColor = .black
@@ -43,7 +43,7 @@ final class LoginScreenCompleteRegistrationCell: UICollectionViewCell, Configura
     
     private let signInCompletedSubtitle: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page4.signInCompletedSubtitle
+        label.text = ConstantLocalizedStrings.Registration.Page4.signInCompletedSubtitle
         label.font = ECFont.font(.bold, size: 14)
         label.textAlignment = .center
         label.textColor = .systemGray
@@ -51,8 +51,8 @@ final class LoginScreenCompleteRegistrationCell: UICollectionViewCell, Configura
         return label
     }()
     
-    private let goToAccountButton: ECButton = ECButton(text: ECLocalizedStrings.Registration.Page4.goToAccountButton)
-    private let goToMainButton: ECButton = ECButton(text: ECLocalizedStrings.Registration.Page4.goToMainButton)
+    private let goToAccountButton: ECButton = ECButton(text: ConstantLocalizedStrings.Registration.Page4.goToAccountButton)
+    private let goToMainButton: ECButton = ECButton(text: ConstantLocalizedStrings.Registration.Page4.goToMainButton)
     
     private let topSpacer = UIView()
     private let bottomSpacer = UIView()
@@ -87,7 +87,7 @@ final class LoginScreenCompleteRegistrationCell: UICollectionViewCell, Configura
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModel) {
+    func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? LoginScreenCompleteRegistrationCellVM else { return }
         self.viewModel = vm
         self.goToAccountButton.setAction(action: vm.goToAccountAction)

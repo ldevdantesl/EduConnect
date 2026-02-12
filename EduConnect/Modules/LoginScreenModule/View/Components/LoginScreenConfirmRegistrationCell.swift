@@ -8,20 +8,20 @@
 import UIKit
 import SnapKit
 
-struct LoginScreenConfirmRegistrationCellVM: CellViewModel {
+struct LoginScreenConfirmRegistrationCellVM: CellViewModelProtocol {
     var cellIdentifier: String = "LoginScreenConfirmRegistrationCell"
-    let confirmAction: (() -> Void)?
+    let confirmAction: ((String?) -> Void)?
     let backButtonAction: (() -> Void)?
     let resendAction: (() -> Void)?
     
-    init(confirmAction: (() -> Void)? = nil, resendAction: (() -> Void)? = nil, backButtonAction: (() -> Void)? = nil) {
+    init(confirmAction: ((String?) -> Void)? = nil, resendAction: (() -> Void)? = nil, backButtonAction: (() -> Void)? = nil) {
         self.confirmAction = confirmAction
         self.resendAction = resendAction
         self.backButtonAction = backButtonAction
     }
 }
 
-final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, ConfigurableCell {
+final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, ConfigurableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // Spacing
@@ -38,7 +38,7 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
     // MARK: - VIEW PROPERTIES
     private let confirmSignInLabel: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page2.confirmSignInTitle
+        label.text = ConstantLocalizedStrings.Registration.Page2.confirmSignInTitle
         label.font = ECFont.font(.bold, size: 30)
         label.textAlignment = .center
         label.textColor = .black
@@ -48,7 +48,7 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
     
     private let checkEmailLabel: UILabel = {
         let label = UILabel()
-        label.text = ECLocalizedStrings.Registration.Page2.checkEmailSubtitle
+        label.text = ConstantLocalizedStrings.Registration.Page2.checkEmailSubtitle
         label.font = ECFont.font(.bold, size: 14)
         label.textAlignment = .center
         label.textColor = .systemGray
@@ -58,11 +58,11 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
     
     private let backButton: ECIconButton = ECIconButton()
     
-    private let codeField: ECTextField = ECTextField(placeHolder: ECLocalizedStrings.Registration.Page2.confirmCodeTextField)
+    private let codeField: ECTextField = ECTextField(placeHolder: ConstantLocalizedStrings.Registration.Page2.confirmCodeTextField)
     
-    private let confirmButton: ECButton = ECButton(text: ECLocalizedStrings.Common.confirm)
+    private let confirmButton: ECButton = ECButton(text: ConstantLocalizedStrings.Common.confirm)
     
-    private let resendCodeButton: ECUnderlineButton = ECUnderlineButton(text: ECLocalizedStrings.Registration.Page2.resendCodeUnderlineButton)
+    private let resendCodeButton: ECUnderlineButton = ECUnderlineButton(text: ConstantLocalizedStrings.Registration.Page2.resendCodeUnderlineButton)
     
     private let topSpacer = UIView()
     private let bottomSpacer = UIView()
@@ -97,10 +97,10 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell, Configurab
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModel) {
+    func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? LoginScreenConfirmRegistrationCellVM else { return }
         self.viewModel = vm
-        self.confirmButton.setAction(action: vm.confirmAction)
+        self.confirmButton.setAction { [weak self] in vm.confirmAction?(self?.codeField.text)}
         self.resendCodeButton.setAction(action: vm.resendAction)
         let backButtonVM = ECIconButtonVM(
             systemImage: Constants.backButtonImageName,

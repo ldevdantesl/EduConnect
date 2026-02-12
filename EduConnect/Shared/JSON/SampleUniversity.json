@@ -1,0 +1,119 @@
+{
+    "id": 2,
+    "name": "КазГУ",
+    "description": "Лучший государственный университет в Казахстане",
+    "logo_url": "https://educonnect.kz/storage/universities/logos/Pz5XSnj7My2nJVyXiHcoobIqrztckmEC5Crpk1Zt.png",
+    "main_image_url": "https://educonnect.kz/storage/universities/main/rkkAuX0TFwmMzXhG4DutwIDAEIymIwF891CG2jYP.png",
+    "youtube_url": "https://youtu.be/t1VK4g3L0N8?si=RZ-LumYDzRch1v0V",
+    "phone": "444333111",
+    "email": "kaz@edu.kz",
+    "address": "г. Алматы",
+    "founded_year": 1950,
+    "has_dormitory": true,
+    "has_military_department": false,
+    "university_type": "state",
+    "university_type_name": "Государственный",
+    "is_active": true,
+    "sort_order": 2,
+    "min_contract_price": "111111.00",
+    "city": {
+      "id": 3,
+      "name": "Алматы"
+    },
+    "professions": [
+      {
+        "id": 3,
+        "name": "Психолог",
+        "image_url": "https://educonnect.kz/storage/professions/eI0kgp91FoRLoZOWR20Q53uBSdS5kwDIk0qUEFPg.png"
+      },
+      {
+        "id": 4,
+        "name": "Управленец",
+        "image_url": "https://educonnect.kz/storage/professions/5XYOIZ3tIUbPk7jE0108bmX6Fo09nINAWb2GVTsj.png"
+      }
+    ],
+    "faculties": [
+      {
+        "id": 3,
+        "name": "Факультет философии и политологии",
+        "image_url": "https://educonnect.kz/storage/faculties/P18NpSAfpZCL2rZKaiHhJ5S1hfj39mPz3DJ3UhuY.png"
+      },
+      {
+        "id": 1,
+        "name": "Факультет управления бизнесом",
+        "image_url": "https://educonnect.kz/storage/faculties/4UdxQfy7b3CBzzcvBLMq9vpgTM8NXOVZJIWNsfWL.png"
+      }
+    ],
+    "programs": [
+      {
+        "id": 3,
+        "name": "Психология",
+        "price": "3000000.00",
+        "budget_places": 5,
+        "paid_places": 15,
+        "study_type": 1,
+        "study_type_name": "Очное"
+      },
+      {
+        "id": 4,
+        "name": "\"\\u0411\\u0438\\u0437\\u043d\\u0435\\u0441 \\u0443\\u043f\\u0440\\u0430\\u0432\\u043b\\u0435\\u043d\\u0438\\u0435\"",
+        "price": "7000000.00",
+        "budget_places": 10,
+        "paid_places": 20,
+        "study_type": null,
+        "study_type_name": "Не указано"
+      },
+      {
+        "id": 5,
+        "name": "Программа RU",
+        "price": "111111.00",
+        "budget_places": 11,
+        "paid_places": 2,
+        "study_type": null,
+        "study_type_name": "Не указано"
+      }
+    ],
+    "programs_count": 3,
+    "faculties_count": 2,
+    "budget_places": 26,
+    "paid_places": 37,
+    "ent_scores": [
+        {
+            "year": 2026,
+            "budget_score": "80.00",
+            "contract_score": "60.00"
+        },
+        {
+            "year": 2025,
+            "budget_score": "22.00",
+            "contract_score": "30.00"
+        },
+        {
+            "year": 2024,
+            "budget_score": "22.00",
+            "contract_score": "30.00"
+        },
+        {
+            "year": 2023,
+            "budget_score": "22.00",
+            "contract_score": "30.00"
+        },
+        {
+            "year": 2022,
+            "budget_score": "22.00",
+            "contract_score": "30.00"
+        },
+        {
+            "year": 2021,
+            "budget_score": "22.00",
+            "contract_score": "30.00"
+        },
+        {
+            "year": 2020,
+            "budget_score": "22.00",
+            "contract_score": "30.00"
+        }
+    ],
+    "created_at": "2026-01-07T06:13:27.000000Z",
+    "updated_at": "2026-01-22T12:53:28.000000Z"
+  }

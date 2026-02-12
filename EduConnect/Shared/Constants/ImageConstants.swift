@@ -5,14 +5,50 @@
 //  Created by Buzurg Rakhimzoda on 4.01.2026.
 //
 
-import Foundation
+import UIKit
 
-public enum ImageConstants {
-    
+public enum ImageConstants: String {
+
     // Images
-    static let appLogo: String = "AppLogo"
-    
+    case appLogo = "AppLogo"
+    case universityScreenHeaderImage = "UniversityScreenHeaderImage"
+    case programsScreenHeaderImage = "ProgramsScreenHeaderImage"
+    case programsImage = "ProgramsImage"
+    case professionsImage = "ProfessionsImage"
+    case articlesImage = "ArticlesImage"
+    case mainChooseProfessionImage = "MainChooseProfessionImage"
+    case mainChooseENTImage = "MainChooseENTImage"
+    case mainServicesTestImage = "MainServicesTestImage"
+    case mainServicesProfessionImage = "MainServicesProfessionImage"
+    case mainServicesUniversityImage = "MainServicesUniversityImage"
+    case mainServicesCalendarImage = "MainServicesCalendarImage"
+
     // Icons
-    static let tabBarIconImage: String = "TabBarIconImage"
-    static let accountIconImage: String = "AccountIconImage"
+    case tabBarIcon = "TabBarIcon"
+    case accountIcon = "AccountIcon"
+    case capIcon = "CapIcon"
+    case checkmarkIcon = "CheckmarkIcon"
+    case checkmarkIconBlue = "CheckmarkIconBlue"
+    case geopositionIcon = "GeopositionIcon"
+    case phoneIcon = "PhoneIcon"
+    case emailIcon = "EmailIcon"
+    case arrowRightIcon = "ArrowRightIcon"
+
+    // Samples
+    case universityImageSample = "UniversityImageSample"
+    
+    // SystemImage
+    enum SystemImages: String {
+        case questionMarkSystemImage = "questionmark.circle"
+        case chevronRight = "chevron.right"
+        case chevronLeft = "chevron.left"
+        
+        var image: UIImage? {
+            UIImage(systemName: rawValue)
+        }
+    }
+
+    var image: UIImage? {
+        UIImage(named: rawValue)
+    }
 }
