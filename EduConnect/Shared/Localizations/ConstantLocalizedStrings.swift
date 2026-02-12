@@ -65,6 +65,7 @@ public enum ConstantLocalizedStrings {
         static let phoneNumber = String(localized: .Localizables.commonPhoneNumber)
     }
     
+    /// For __Account__ Tab
     enum Account {
         enum MainTab {
             static let tab = String(localized: .Localizables.accountMainTab)
@@ -130,5 +131,16 @@ public enum ConstantLocalizedStrings {
                 static let chooseOlympiad = String(localized: .Localizables.accountOlympiadChooseOlympiad)
             }
         }
+    }
+    
+    /// For __Sidebar__ Container
+    enum Sidebar {
+        static let main = String(localized: .Localizables.sidebarMain)
+        static let universities = String(localized: .Localizables.sidebarUniversities)
+        static let programs = String(localized: .Localizables.sidebarPrograms)
+        static let professions = String(localized: .Localizables.sidebarProfessions)
+        static let tests = String(localized: .Localizables.sidebarTests)
+        static let articles = String(localized: .Localizables.sidebarArticles)
+        static let calendar = String(localized: .Localizables.sidebarCalendar)
     }
 }

@@ -174,6 +174,14 @@ final class AddOlympiadPopUpView: PopUpView {
         return button
     }()
     
+    private lazy var olympiadScrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.backgroundColor = .clear
+        scroll.showsHorizontalScrollIndicator = false
+        scroll.alwaysBounceHorizontal = true
+        return scroll
+    }()
+    
     private lazy var olympiadTypeStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [internationalButton, stateButton, cityButton])
         stack.axis = .horizontal
@@ -237,15 +245,22 @@ final class AddOlympiadPopUpView: PopUpView {
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
         }
         
-        contentView.addSubview(olympiadTypeStack)
-        olympiadTypeStack.snp.makeConstraints {
+        contentView.addSubview(olympiadScrollView)
+        olympiadScrollView.snp.makeConstraints {
             $0.top.equalTo(olympiadTypeLabel.snp.bottom).offset(Constants.spacing)
+            $0.horizontalEdges.equalToSuperview()
+        }
+
+        olympiadScrollView.addSubview(olympiadTypeStack)
+        olympiadTypeStack.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
+            $0.height.equalTo(olympiadScrollView.snp.height)
         }
         
         contentView.addSubview(yearLabel)
         yearLabel.snp.makeConstraints {
-            $0.top.equalTo(olympiadTypeStack.snp.bottom).offset(Constants.spacing)
+            $0.top.equalTo(olympiadScrollView.snp.bottom).offset(Constants.spacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
         }
         

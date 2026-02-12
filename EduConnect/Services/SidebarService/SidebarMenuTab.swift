@@ -19,13 +19,13 @@ enum SidebarMenuTab: CaseIterable {
     
     var title: String {
         switch self {
-        case .universities: return "Universities"
-        case .programs:     return "Programs"
-        case .professions:  return "Professions"
-        case .tests:        return "Tests"
-        case .article:      return "Articles"
-        case .calendar:     return "Calendar"
-        case .main:         return "Main"
+        case .universities: return ConstantLocalizedStrings.Sidebar.universities
+        case .programs:     return ConstantLocalizedStrings.Sidebar.programs
+        case .professions:  return ConstantLocalizedStrings.Sidebar.professions
+        case .tests:        return ConstantLocalizedStrings.Sidebar.tests
+        case .article:      return ConstantLocalizedStrings.Sidebar.articles
+        case .calendar:     return ConstantLocalizedStrings.Sidebar.calendar
+        case .main:         return ConstantLocalizedStrings.Sidebar.main
         case .none:         return ""
         }
     }
