@@ -25,11 +25,19 @@ enum AccountScreenTab: Int {
     case application
     case main
     
-    var headerNames: String {
+    var tabTitles: String {
         switch self {
-        case .myUniversities: "My Universities"
-        case .application: "Application"
-        case .main: "Welcome, User"
+        case .myUniversities: ConstantLocalizedStrings.Account.MyUniversityTab.title
+        case .application: ConstantLocalizedStrings.Account.ApplicationTab.title
+        case .main: ConstantLocalizedStrings.Account.MainTab.title
+        }
+    }
+    
+    var tabNames: String {
+        switch self {
+        case .myUniversities: ConstantLocalizedStrings.Account.MyUniversityTab.tab
+        case .application: ConstantLocalizedStrings.Account.ApplicationTab.tab
+        case .main: ConstantLocalizedStrings.Account.MainTab.tab
         }
     }
 }

@@ -31,11 +31,20 @@ final class AccountScreenSegmentedReusableMenu: UICollectionReusableView {
     private var viewModel: AccountScreenSegmentedReusableMenuViewModel?
     
     // MARK: - VIEW PROPERTIES
-    private let mainButton: ECButton = ECButton(text: "Main", textSize: 15, cornerRadius: Constants.cornerRadius)
+    private let mainButton: ECButton = ECButton(
+        text: ConstantLocalizedStrings.Account.MainTab.tab,
+        textSize: 15, cornerRadius: Constants.cornerRadius
+    )
     
-    private let myUniversitiesButton: ECButton = ECButton(text: "My Unis", textSize: 15, cornerRadius: Constants.cornerRadius)
+    private let myUniversitiesButton: ECButton = ECButton(
+        text: ConstantLocalizedStrings.Account.MyUniversityTab.tab,
+        textSize: 15, cornerRadius: Constants.cornerRadius
+    )
     
-    private let applicationButton: ECButton = ECButton(text: "Application", textSize: 15, cornerRadius: Constants.cornerRadius)
+    private let applicationButton: ECButton = ECButton(
+        text: ConstantLocalizedStrings.Account.ApplicationTab.tab,
+        textSize: 15, cornerRadius: Constants.cornerRadius
+    )
     
     private lazy var hStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [mainButton, myUniversitiesButton, applicationButton])

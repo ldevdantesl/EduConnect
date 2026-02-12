@@ -29,7 +29,7 @@ final class AddENTSubjectPopUpView: PopUpView {
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Add ENT subject"
+        label.text = ConstantLocalizedStrings.Account.Expandable.ENT.popupTitle
         label.font = ECFont.font(.bold, size: 16)
         return label
     }()
@@ -42,7 +42,7 @@ final class AddENTSubjectPopUpView: PopUpView {
     
     private let subjectLabel: UILabel = {
         let label = UILabel()
-        label.text = "Subject *"
+        label.text = "\(ConstantLocalizedStrings.Common.subject) *"
         label.textColor = .label
         label.font = ECFont.font(.medium, size: 14)
         return label
@@ -50,14 +50,14 @@ final class AddENTSubjectPopUpView: PopUpView {
     
     private let scoreLabel: UILabel = {
         let label = UILabel()
-        label.text = "Score *"
+        label.text = "\(ConstantLocalizedStrings.Account.Expandable.ENT.score) *"
         label.textColor = .label
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
     
     private let scoreField: ECTextField = {
-        let field = ECTextField(placeHolder: "Score: 10")
+        let field = ECTextField(placeHolder: "\(ConstantLocalizedStrings.Account.Expandable.ENT.score): 10")
         field.keyboardType = .numberPad
         return field
     }()
@@ -75,7 +75,7 @@ final class AddENTSubjectPopUpView: PopUpView {
     }()
     
     private lazy var cancelButton: ECButton = {
-        let button = ECButton(text: "Cancel", backgroundColor: .white, textColor: .blue)
+        let button = ECButton(text: ConstantLocalizedStrings.Common.cancel, backgroundColor: .white, textColor: .blue)
         button.borderColor = .blue
         button.borderWidth = 1
         button.setAction { [weak self] in self?.didTapCloseButton() }
@@ -83,7 +83,7 @@ final class AddENTSubjectPopUpView: PopUpView {
     }()
     
     private lazy var addButton: ECButton = {
-        let button = ECButton(text: "Add")
+        let button = ECButton(text: ConstantLocalizedStrings.Common.add)
         return button
     }()
     
@@ -100,11 +100,11 @@ final class AddENTSubjectPopUpView: PopUpView {
             }
         }
         
-        return UIMenu(title: "Subject", children: actions)
+        return UIMenu(title: ConstantLocalizedStrings.Common.subject, children: actions)
     }()
     
     private lazy var chooseSubjectButton: UIButton = {
-        var title = AttributedString("Choose Subject")
+        var title = AttributedString(ConstantLocalizedStrings.Account.Expandable.ENT.chooseSubject)
         title.font = ECFont.font(.semiBold, size: 14)
         title.foregroundColor = .label
         

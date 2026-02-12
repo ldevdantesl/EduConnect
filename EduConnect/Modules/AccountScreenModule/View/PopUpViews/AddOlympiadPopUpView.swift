@@ -32,7 +32,7 @@ final class AddOlympiadPopUpView: PopUpView {
     // MARK: - VIEW PROPERTIES
     private let addOlympiadTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Add Olympiad"
+        label.text = ConstantLocalizedStrings.Account.Expandable.Olympiad.popupTitle
         label.font = ECFont.font(.bold, size: 16)
         return label
     }()
@@ -45,7 +45,7 @@ final class AddOlympiadPopUpView: PopUpView {
     
     private let olympiadLabel: UILabel = {
         let label = UILabel()
-        label.text = "Olympiad *"
+        label.text = "\(ConstantLocalizedStrings.Account.Expandable.Olympiad.olympiad) *"
         label.textColor = .label
         label.font = ECFont.font(.medium, size: 14)
         return label
@@ -53,7 +53,7 @@ final class AddOlympiadPopUpView: PopUpView {
     
     private let olympiadTypeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Type *"
+        label.text = "\(ConstantLocalizedStrings.Common.type)*"
         label.textColor = .label
         label.font = ECFont.font(.medium, size: 14)
         return label
@@ -61,21 +61,21 @@ final class AddOlympiadPopUpView: PopUpView {
     
     private let yearLabel: UILabel = {
         let label = UILabel()
-        label.text = "Year of submission"
+        label.text = ConstantLocalizedStrings.Account.Expandable.Olympiad.yearOfSubmission
         label.textColor = .label
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
     
     private let yearField: ECTextField = {
-        let field = ECTextField(placeHolder: "Year: 2020")
+        let field = ECTextField(placeHolder: "2020")
         field.keyboardType = .numberPad
         return field
     }()
     
     private let filesLabel: UILabel = {
         let label = UILabel()
-        label.text = "Files"
+        label.text = ConstantLocalizedStrings.Common.files
         label.textColor = .label
         label.font = ECFont.font(.medium, size: 14)
         return label
@@ -101,7 +101,7 @@ final class AddOlympiadPopUpView: PopUpView {
     }()
     
     private lazy var cancelButton: ECButton = {
-        let button = ECButton(text: "Cancel", backgroundColor: .white, textColor: .blue)
+        let button = ECButton(text: ConstantLocalizedStrings.Common.cancel, backgroundColor: .white, textColor: .blue)
         button.borderColor = .blue
         button.borderWidth = 1
         button.setAction { [weak self] in self?.didTapCloseButton() }
@@ -109,7 +109,7 @@ final class AddOlympiadPopUpView: PopUpView {
     }()
     
     private lazy var addButton: ECButton = {
-        let button = ECButton(text: "Add")
+        let button = ECButton(text: ConstantLocalizedStrings.Common.add)
         return button
     }()
     
@@ -126,11 +126,11 @@ final class AddOlympiadPopUpView: PopUpView {
             }
         }
         
-        return UIMenu(title: "Olympics", children: actions)
+        return UIMenu(title: ConstantLocalizedStrings.Account.Expandable.Olympiad.olympiad, children: actions)
     }()
     
     private lazy var chooseOlympiadButton: UIButton = {
-        var title = AttributedString("Choose Olympiad")
+        var title = AttributedString(ConstantLocalizedStrings.Account.Expandable.Olympiad.chooseOlympiad)
         title.font = ECFont.font(.semiBold, size: 14)
         title.foregroundColor = .label
         
@@ -151,7 +151,7 @@ final class AddOlympiadPopUpView: PopUpView {
     /// Olympiad Type
     
     private lazy var internationalButton: ECButton = {
-        let button = ECButton(text: "International", backgroundColor: .systemBackground, textColor: .blue)
+        let button = ECButton(text: ConstantLocalizedStrings.Common.international, backgroundColor: .systemBackground, textColor: .blue)
         button.setAction { [weak self] in self?.chooseType(type: 1) }
         button.borderColor = .systemBlue
         button.borderWidth = 1
@@ -159,7 +159,7 @@ final class AddOlympiadPopUpView: PopUpView {
     }()
     
     private lazy var stateButton: ECButton = {
-        let button = ECButton(text: "State", backgroundColor: .systemBackground, textColor: .blue)
+        let button = ECButton(text: ConstantLocalizedStrings.Common.state, backgroundColor: .systemBackground, textColor: .blue)
         button.setAction { [weak self] in self?.chooseType(type: 2) }
         button.borderColor = .systemBlue
         button.borderWidth = 1
@@ -167,11 +167,19 @@ final class AddOlympiadPopUpView: PopUpView {
     }()
     
     private lazy var cityButton: ECButton = {
-        let button = ECButton(text: "City", backgroundColor: .systemBackground, textColor: .blue)
+        let button = ECButton(text: ConstantLocalizedStrings.Common.city, backgroundColor: .systemBackground, textColor: .blue)
         button.setAction { [weak self] in self?.chooseType(type: 3) }
         button.borderColor = .systemBlue
         button.borderWidth = 1
         return button
+    }()
+    
+    private lazy var olympiadScrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.backgroundColor = .clear
+        scroll.showsHorizontalScrollIndicator = false
+        scroll.alwaysBounceHorizontal = true
+        return scroll
     }()
     
     private lazy var olympiadTypeStack: UIStackView = {
@@ -237,15 +245,22 @@ final class AddOlympiadPopUpView: PopUpView {
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
         }
         
-        contentView.addSubview(olympiadTypeStack)
-        olympiadTypeStack.snp.makeConstraints {
+        contentView.addSubview(olympiadScrollView)
+        olympiadScrollView.snp.makeConstraints {
             $0.top.equalTo(olympiadTypeLabel.snp.bottom).offset(Constants.spacing)
+            $0.horizontalEdges.equalToSuperview()
+        }
+
+        olympiadScrollView.addSubview(olympiadTypeStack)
+        olympiadTypeStack.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
+            $0.height.equalTo(olympiadScrollView.snp.height)
         }
         
         contentView.addSubview(yearLabel)
         yearLabel.snp.makeConstraints {
-            $0.top.equalTo(olympiadTypeStack.snp.bottom).offset(Constants.spacing)
+            $0.top.equalTo(olympiadScrollView.snp.bottom).offset(Constants.spacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
         }
         

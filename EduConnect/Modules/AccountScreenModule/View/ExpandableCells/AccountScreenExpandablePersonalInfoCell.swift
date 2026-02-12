@@ -60,7 +60,7 @@ final class AccountScreenExpandablePersonalInfoCell: UICollectionViewCell, Confi
     
     private let personalInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "Personal information"
+        label.text = ConstantLocalizedStrings.Account.Expandable.PersonalInfo.title
         label.font = ECFont.font(.semiBold, size: 14)
         label.textColor = UIColor.label
         return label
@@ -68,45 +68,54 @@ final class AccountScreenExpandablePersonalInfoCell: UICollectionViewCell, Confi
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Name"
+        label.text = ConstantLocalizedStrings.Account.Expandable.PersonalInfo.name
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
     
     private let nameField: ECTextField = {
-        let field = ECTextField(placeHolder: "YourName", showsBorder: false)
+        let field = ECTextField(
+            placeHolder: ConstantLocalizedStrings.Account.Expandable.PersonalInfo.name,
+            showsBorder: false
+        )
         field.isEnabled = false
         return field
     }()
     
     private let surnameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Surname"
+        label.text = ConstantLocalizedStrings.Account.Expandable.PersonalInfo.surname
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
     
     private let surnameField: ECTextField = {
-        let field = ECTextField(placeHolder: "Surname", showsBorder: false)
+        let field = ECTextField(
+            placeHolder: ConstantLocalizedStrings.Account.Expandable.PersonalInfo.surname,
+            showsBorder: false
+        )
         field.isEnabled = false
         return field
     }()
     
     private let patronymicLabel: UILabel = {
         let label = UILabel()
-        label.text = "Patronymic"
+        label.text = ConstantLocalizedStrings.Account.Expandable.PersonalInfo.patronymic
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
     
     private let patronymicField: ECTextField = {
-        let field = ECTextField(placeHolder: "patronymic", showsBorder: false)
+        let field = ECTextField(
+            placeHolder: ConstantLocalizedStrings.Account.Expandable.PersonalInfo.patronymic,
+            showsBorder: false
+        )
         field.isEnabled = false
         return field
     }()
     
     private lazy var editButton: ECButton = {
-        let button = ECButton(text: "Edit")
+        let button = ECButton(text: ConstantLocalizedStrings.Common.edit)
         button.setAction { [weak self] in
             guard let self = self else { return }
             self.didTapEdit()
@@ -237,7 +246,7 @@ final class AccountScreenExpandablePersonalInfoCell: UICollectionViewCell, Confi
     
     private func didTapEdit() {
         if !isEditing {
-            editButton.reconfigure(text: "Save")
+            editButton.reconfigure(text: ConstantLocalizedStrings.Common.save)
             nameField.reconfigure(showsBorder: true)
             nameField.isEnabled = true
             surnameField.reconfigure(showsBorder: true)
@@ -245,7 +254,7 @@ final class AccountScreenExpandablePersonalInfoCell: UICollectionViewCell, Confi
             patronymicField.reconfigure(showsBorder: true)
             patronymicField.isEnabled = true
         } else {
-            editButton.reconfigure(text: "Edit")
+            editButton.reconfigure(text: ConstantLocalizedStrings.Common.edit)
             nameField.reconfigure(showsBorder: false)
             nameField.isEnabled = false
             surnameField.reconfigure(showsBorder: false)

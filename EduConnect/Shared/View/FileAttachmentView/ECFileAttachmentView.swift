@@ -35,7 +35,7 @@ final class ECFileAttachmentView: UIView {
     // MARK: - VIEW PROPERTIES
     private let noFileLabel: UILabel = {
         let label = UILabel()
-        label.text = "No file selected"
+        label.text = ConstantLocalizedStrings.Common.noFileSelected
         label.font = ECFont.font(.semiBold, size: 14)
         label.textColor = .secondaryLabel
         return label
@@ -57,7 +57,7 @@ final class ECFileAttachmentView: UIView {
     }()
 
     private lazy var browseButton: ECButton = {
-        let button = ECButton(text: "Browse...", textSize: 14, backgroundColor: .systemBackground, textColor: .blue)
+        let button = ECButton(text: ConstantLocalizedStrings.Common.browse, textSize: 14, backgroundColor: .systemBackground, textColor: .blue)
         button.borderColor = .blue
         button.borderWidth = 1
         button.setAction { [weak self] in self?.browseButtonTapped() }
@@ -143,7 +143,7 @@ final class ECFileAttachmentView: UIView {
     }
     
     private func updateUI() {
-        noFileLabel.text = (files.isEmpty ? "No file selected" : "\(files.count) file(s)") + "(max \(maxFiles))"
+        noFileLabel.text = (files.isEmpty ? ConstantLocalizedStrings.Common.noFileSelected : "\(files.count) \(ConstantLocalizedStrings.Common.files)") + "(\(ConstantLocalizedStrings.Common.max) \(maxFiles))"
         browseButton.isEnabled = files.count < maxFiles
         
         let hasFiles = !files.isEmpty
