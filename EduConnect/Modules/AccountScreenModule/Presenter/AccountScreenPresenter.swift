@@ -159,7 +159,7 @@ final class AccountScreenPresenter {
     // MARK: - HELPERS
     private func makeHeaderVM(for tab: AccountScreenTab) -> SectionHeaderCellViewModel {
         SectionHeaderCellViewModel(
-            title: tab.headerNames,
+            title: tab.tabTitles,
             titleSize: 30
         )
     }

@@ -61,7 +61,7 @@ final class AccountScreenExpandableExtracurricularCell: UICollectionViewCell, Co
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Extracurricular Activities"
+        label.text = ConstantLocalizedStrings.Account.Expandable.ExtraActivity.title
         label.font = ECFont.font(.semiBold, size: 14)
         label.textColor = UIColor.label
         return label
@@ -161,7 +161,7 @@ final class AccountScreenExpandableExtracurricularCell: UICollectionViewCell, Co
         imageView.tintColor = .systemBlue
         
         let addSubjectTextLabel = UILabel()
-        addSubjectTextLabel.text = "Add Extracurricular Activity"
+        addSubjectTextLabel.text = ConstantLocalizedStrings.Account.Expandable.ExtraActivity.addActivity
         addSubjectTextLabel.textColor = .systemBlue
         addSubjectTextLabel.font = ECFont.font(.regular, size: 14)
         

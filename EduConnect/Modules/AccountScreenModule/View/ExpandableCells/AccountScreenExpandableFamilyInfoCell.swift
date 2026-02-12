@@ -59,7 +59,7 @@ final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, Configu
     
     private let familyInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "Family information"
+        label.text = ConstantLocalizedStrings.Account.Expandable.FamilyInfo.title
         label.font = ECFont.font(.semiBold, size: 14)
         label.textColor = UIColor.label
         return label
@@ -67,7 +67,7 @@ final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, Configu
     
     private let fathersPhoneNumberLabel: UILabel = {
         let label = UILabel()
-        label.text = "Fathers Phone Number"
+        label.text = "\(ConstantLocalizedStrings.Common.phoneNumber) (\(ConstantLocalizedStrings.Account.Expandable.FamilyInfo.father))"
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
@@ -81,7 +81,7 @@ final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, Configu
     
     private let momsPhoneNumberLabel: UILabel = {
         let label = UILabel()
-        label.text = "Moms Phone Number"
+        label.text = "\(ConstantLocalizedStrings.Common.phoneNumber) (\(ConstantLocalizedStrings.Account.Expandable.FamilyInfo.mother))"
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
@@ -94,7 +94,7 @@ final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, Configu
     }()
     
     private lazy var editButton: ECButton = {
-        let button = ECButton(text: "Edit")
+        let button = ECButton(text: ConstantLocalizedStrings.Common.edit)
         button.setAction { [weak self] in
             guard let self = self else { return }
             self.didPressEditButton()
@@ -214,14 +214,14 @@ final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, Configu
     
     private func didPressEditButton() {
         if !isEditing {
-            editButton.reconfigure(text: "Save")
+            editButton.reconfigure(text: ConstantLocalizedStrings.Common.save)
             fathersPhoneNumberField.reconfigure(showsBorder: true)
             fathersPhoneNumberField.isEnabled = true
             momsPhoneNumberField.reconfigure(showsBorder: true)
             momsPhoneNumberField.isEnabled = true
         } else {
             self.viewModel?.didTapSave?(momsPhoneNumberField.text, fathersPhoneNumberField.text)
-            editButton.reconfigure(text: "Edit")
+            editButton.reconfigure(text: ConstantLocalizedStrings.Common.edit)
             fathersPhoneNumberField.reconfigure(showsBorder: false)
             fathersPhoneNumberField.isEnabled = false
             momsPhoneNumberField.reconfigure(showsBorder: false)

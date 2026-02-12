@@ -61,7 +61,7 @@ final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, Configura
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Olympiads"
+        label.text = ConstantLocalizedStrings.Account.Expandable.Olympiad.title
         label.font = ECFont.font(.semiBold, size: 14)
         label.textColor = UIColor.label
         return label
@@ -160,7 +160,7 @@ final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, Configura
         imageView.tintColor = .systemBlue
         
         let addSubjectTextLabel = UILabel()
-        addSubjectTextLabel.text = "Add Olympiad"
+        addSubjectTextLabel.text = ConstantLocalizedStrings.Account.Expandable.Olympiad.add
         addSubjectTextLabel.textColor = .systemBlue
         addSubjectTextLabel.font = ECFont.font(.regular, size: 14)
         

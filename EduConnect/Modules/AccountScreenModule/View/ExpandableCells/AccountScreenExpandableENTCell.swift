@@ -15,7 +15,10 @@ final class AccountScreenExpandableENTCellViewModel: ExpandableCellViewModel {
     var didTapAddNewSubject: (() -> Void)?
     var didSetNewENTYear: ((String?) -> Void)?
     
-    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapAddNewSubject: (() -> Void)? = nil, didSetNewENTYear: ((String?) -> Void)? = nil) {
+    init(
+        isExpanded: Bool, didTapExpand: (() -> Void)? = nil,
+        didTapAddNewSubject: (() -> Void)? = nil, didSetNewENTYear: ((String?) -> Void)? = nil
+    ) {
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
         self.didTapAddNewSubject = didTapAddNewSubject
@@ -63,7 +66,7 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "ENT"
+        label.text = ConstantLocalizedStrings.Account.Expandable.ENT.title
         label.font = ECFont.font(.semiBold, size: 14)
         label.textColor = UIColor.label
         return label
@@ -71,7 +74,7 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
     
     private let yearOfENTLabel: UILabel = {
         let label = UILabel()
-        label.text = "Year of ENT Submission"
+        label.text = ConstantLocalizedStrings.Account.Expandable.ENT.yearOfSubmission
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
@@ -85,7 +88,7 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
     }()
     
     private lazy var setYearButton: ECButton = {
-        let button = ECButton(text: "Set year")
+        let button = ECButton(text: ConstantLocalizedStrings.Common.set)
         button.setAction { [weak self] in
             guard let self = self else { return }
             self.didPressSetYearButton()
@@ -95,7 +98,7 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
     
     private let subjectsENTLabel: UILabel = {
         let label = UILabel()
-        label.text = "ENT Subjects"
+        label.text = ConstantLocalizedStrings.Account.Expandable.ENT.entSubjects
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
@@ -217,11 +220,11 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
         if !isEditing {
             yearOfENTField.reconfigure(showsBorder: true)
             yearOfENTField.isEnabled = true
-            setYearButton.reconfigure(text: "Save")
+            setYearButton.reconfigure(text: ConstantLocalizedStrings.Common.save)
         } else {
             yearOfENTField.reconfigure(showsBorder: false)
             yearOfENTField.isEnabled = false
-            setYearButton.reconfigure(text: "Set Year")
+            setYearButton.reconfigure(text: ConstantLocalizedStrings.Common.set)
             self.viewModel?.didSetNewENTYear?(yearOfENTField.text)
         }
         isEditing.toggle()
@@ -233,7 +236,7 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
         imageView.tintColor = .systemBlue
         
         let addSubjectTextLabel = UILabel()
-        addSubjectTextLabel.text = "Add Subject"
+        addSubjectTextLabel.text = ConstantLocalizedStrings.Account.Expandable.ENT.addEntSubjects
         addSubjectTextLabel.textColor = .systemBlue
         addSubjectTextLabel.font = ECFont.font(.regular, size: 14)
         

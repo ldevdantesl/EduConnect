@@ -60,7 +60,7 @@ final class AccountScreenExpandableEducationCell: UICollectionViewCell, Configur
     
     private let educationLabel: UILabel = {
         let label = UILabel()
-        label.text = "Education"
+        label.text = ConstantLocalizedStrings.Account.Expandable.Education.title
         label.font = ECFont.font(.semiBold, size: 14)
         label.textColor = UIColor.label
         return label
@@ -68,33 +68,39 @@ final class AccountScreenExpandableEducationCell: UICollectionViewCell, Configur
     
     private let schoolLabel: UILabel = {
         let label = UILabel()
-        label.text = "School (Education Center)"
+        label.text = ConstantLocalizedStrings.Account.Expandable.Education.school
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
     
     private let schoolField: ECTextField = {
-        let field = ECTextField(placeHolder: "School", showsBorder: false)
+        let field = ECTextField(
+            placeHolder: ConstantLocalizedStrings.Account.Expandable.Education.school,
+            showsBorder: false
+        )
         field.isEnabled = false
         return field
     }()
     
     private let finalClassLabel: UILabel = {
         let label = UILabel()
-        label.text = "Final Class"
+        label.text = ConstantLocalizedStrings.Account.Expandable.Education.finalClass
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
     
     private let finalClassField: ECTextField = {
-        let field = ECTextField(placeHolder: "Final Class", showsBorder: false)
+        let field = ECTextField(
+            placeHolder: ConstantLocalizedStrings.Account.Expandable.Education.finalClass,
+            showsBorder: false
+        )
         field.isEnabled = false
         return field
     }()
     
     private let averageLabel: UILabel = {
         let label = UILabel()
-        label.text = "Average Score"
+        label.text = ConstantLocalizedStrings.Account.Expandable.Education.averageScore
         label.font = ECFont.font(.medium, size: 14)
         return label
     }()
@@ -108,7 +114,7 @@ final class AccountScreenExpandableEducationCell: UICollectionViewCell, Configur
     }()
     
     private lazy var editButton: ECButton = {
-        let button = ECButton(text: "Edit")
+        let button = ECButton(text: ConstantLocalizedStrings.Common.edit)
         button.setAction { [weak self] in
             guard let self = self else { return }
             self.didTapEdit()
@@ -240,7 +246,7 @@ final class AccountScreenExpandableEducationCell: UICollectionViewCell, Configur
     
     private func didTapEdit() {
         if !isEditing {
-            editButton.reconfigure(text: "Save")
+            editButton.reconfigure(text: ConstantLocalizedStrings.Common.save)
             schoolField.reconfigure(showsBorder: true)
             schoolField.isEnabled = true
             finalClassField.reconfigure(showsBorder: true)
@@ -248,7 +254,7 @@ final class AccountScreenExpandableEducationCell: UICollectionViewCell, Configur
             averageField.reconfigure(showsBorder: true)
             averageField.isEnabled = true
         } else {
-            editButton.reconfigure(text: "Edit")
+            editButton.reconfigure(text: ConstantLocalizedStrings.Common.edit)
             schoolField.reconfigure(showsBorder: false)
             schoolField.isEnabled = false
             finalClassField.reconfigure(showsBorder: false)

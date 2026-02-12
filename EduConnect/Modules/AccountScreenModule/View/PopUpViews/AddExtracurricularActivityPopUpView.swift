@@ -30,7 +30,7 @@ final class AddExtracurricularActivityPopUpView: PopUpView {
     // MARK: - VIEW PROPERTIES
     private let addActivityTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Add Extracurricular activity"
+        label.text = ConstantLocalizedStrings.Account.Expandable.ExtraActivity.popupTitle
         label.font = ECFont.font(.bold, size: 16)
         return label
     }()
@@ -43,7 +43,7 @@ final class AddExtracurricularActivityPopUpView: PopUpView {
     
     private let typeOfActivityLabel: UILabel = {
         let label = UILabel()
-        label.text = "Type of Activity *"
+        label.text = "\(ConstantLocalizedStrings.Account.Expandable.ExtraActivity.typeOfActivity) *"
         label.textColor = .label
         label.font = ECFont.font(.medium, size: 14)
         return label
@@ -51,7 +51,7 @@ final class AddExtracurricularActivityPopUpView: PopUpView {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Description"
+        label.text = ConstantLocalizedStrings.Common.description
         label.textColor = .label
         label.font = ECFont.font(.medium, size: 14)
         return label
@@ -59,14 +59,14 @@ final class AddExtracurricularActivityPopUpView: PopUpView {
     
     private let descriptionTextView: ECExpandableTextView = {
         let text = ECExpandableTextView()
-        text.placeholder = "Describe activity..."
+        text.placeholder = ConstantLocalizedStrings.Account.Expandable.ExtraActivity.describeActivity
         text.minHeight = 70
         return text
     }()
     
     private let filesLabel: UILabel = {
         let label = UILabel()
-        label.text = "Files"
+        label.text = ConstantLocalizedStrings.Common.files
         label.textColor = .label
         label.font = ECFont.font(.medium, size: 14)
         return label
@@ -92,7 +92,7 @@ final class AddExtracurricularActivityPopUpView: PopUpView {
     }()
     
     private lazy var cancelButton: ECButton = {
-        let button = ECButton(text: "Cancel", backgroundColor: .white, textColor: .blue)
+        let button = ECButton(text: ConstantLocalizedStrings.Common.cancel, backgroundColor: .white, textColor: .blue)
         button.borderColor = .blue
         button.borderWidth = 1
         button.setAction { [weak self] in self?.didTapCloseButton() }
@@ -100,7 +100,7 @@ final class AddExtracurricularActivityPopUpView: PopUpView {
     }()
     
     private lazy var addButton: ECButton = {
-        let button = ECButton(text: "Add")
+        let button = ECButton(text: ConstantLocalizedStrings.Common.add)
         return button
     }()
     
@@ -117,11 +117,11 @@ final class AddExtracurricularActivityPopUpView: PopUpView {
             }
         }
         
-        return UIMenu(title: "Type of activity", children: actions)
+        return UIMenu(title: ConstantLocalizedStrings.Account.Expandable.ExtraActivity.typeOfActivity, children: actions)
     }()
     
     private lazy var chooseActivityButton: UIButton = {
-        var title = AttributedString("Choose activity")
+        var title = AttributedString(ConstantLocalizedStrings.Account.Expandable.ExtraActivity.chooseActivity)
         title.font = ECFont.font(.semiBold, size: 14)
         title.foregroundColor = .label
         
