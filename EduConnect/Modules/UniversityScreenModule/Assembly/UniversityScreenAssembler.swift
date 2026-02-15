@@ -9,11 +9,11 @@ import UIKit
 
 final class UniversityScreenAssembler {
     static func assemble(
-        sidebarService: SidebarServiceProtocol, appRouter: AppRoutingProtocol,
+        appRouter: AppRoutingProtocol,
         networkService: NetworkServiceProtocol, errorService: ErrorServiceProtocol
     ) -> UniversityScreenVC {
         let interactor = UniversityScreenInteractor(networkService: networkService)
-        let router = UniversityScreenRouter(sidebarService: sidebarService, appRouter: appRouter, networkService: networkService, errorService: errorService)
+        let router = UniversityScreenRouter(appRouter: appRouter, networkService: networkService, errorService: errorService)
         let presenter = UniversityScreenPresenter(interactor: interactor, router: router, errorService: errorService)
         let viewController = UniversityScreenVC()
         presenter.view  = viewController

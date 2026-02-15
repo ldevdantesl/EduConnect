@@ -18,13 +18,11 @@ protocol AccountScreenRouterProtocol {
 
 final class AccountScreenRouter: AccountScreenRouterProtocol {
     weak var viewController: AccountScreenVC?
-    private let sidebarService: SidebarServiceProtocol
     private let appRouter: AppRoutingProtocol
     private let networkService: NetworkServiceProtocol
     private let errorService: ErrorServiceProtocol
     
-    init(sidebarService: SidebarServiceProtocol, appRouter: AppRoutingProtocol, networkService: NetworkServiceProtocol, errorService: ErrorServiceProtocol) {
-        self.sidebarService = sidebarService
+    init(appRouter: AppRoutingProtocol, networkService: NetworkServiceProtocol, errorService: ErrorServiceProtocol) {
         self.appRouter = appRouter
         self.networkService = networkService
         self.errorService = errorService
@@ -46,7 +44,7 @@ final class AccountScreenRouter: AccountScreenRouterProtocol {
     }
     
     func showSidebar() {
-        sidebarService.open()
+        appRouter.sidebarService.open()
     }
     
     func routeToMain() {
@@ -54,7 +52,7 @@ final class AccountScreenRouter: AccountScreenRouterProtocol {
     }
     
     func routeToUniversityInfo(_ university: ECUniversity) {
-        let vc = UniversityInfoScreenAssembler.assemble(sidebarService: sidebarService, appRouter: appRouter, networkService: networkService, errorService: errorService, university: university)
+        let vc = UniversityInfoScreenAssembler.assemble(appRouter: appRouter, networkService: networkService, errorService: errorService, university: university)
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

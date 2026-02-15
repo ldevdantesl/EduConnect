@@ -12,14 +12,15 @@ protocol AppRoutingProtocol: AnyObject {
     func routeToAuthentication()
     func routeToAccount()
     func routeToMain()
+    var sidebarService: ECSidebarService { get }
 }
 
 final class AppRouter: AppRoutingProtocol {
     // MARK: - INJECTED PROPERTIES
     private let authState: ECAuthentication
-    private let sidebarService: ECSidebarService
     private let networkService: ECNetworkService
     private let errorService: ECErrorService
+    let sidebarService: ECSidebarService
     
     // MARK: - WEAK PROPERTIES
     weak var window: UIWindow?
@@ -64,7 +65,7 @@ final class AppRouter: AppRoutingProtocol {
     func routeToAccount() {
         sidebarContainer?.setSidebarEnabled(true)
         let vc = AccountScreenAssembler.assemble(
-            appRouter: self, sidebarService: sidebarService,
+            appRouter: self,
             networkService: networkService, errorService: errorService
         )
         navController.setViewControllers([vc], animated: true)
@@ -73,7 +74,7 @@ final class AppRouter: AppRoutingProtocol {
     func routeToMain() {
         sidebarContainer?.setSidebarEnabled(true)
         let vc = MainScreenAssembler.assemble(
-            sidebarService: sidebarService, appRouter: self,
+            appRouter: self,
             networkService: networkService, errorService: errorService
         )
         navController.setViewControllers([vc], animated: true)
@@ -91,25 +92,27 @@ final class AppRouter: AppRoutingProtocol {
         switch tab {
         case .universities:
             let vc = UniversityScreenAssembler.assemble(
-                sidebarService: sidebarService, appRouter: self,
+                appRouter: self,
                 networkService: networkService, errorService: errorService
             )
             navController.setViewControllers([vc], animated: true)
         case .programs:
             let vc = ProgramsScreenAssembler.assemble(
-                sidebarService: sidebarService, appRouter: self,
+                appRouter: self,
                 networkService: networkService, errorService: errorService
             )
             navController.setViewControllers([vc], animated: true)
             
         case .main:
             let vc = MainScreenAssembler.assemble(
-                sidebarService: sidebarService, appRouter: self,
+                appRouter: self,
                 networkService: networkService, errorService: errorService
             )
             navController.setViewControllers([vc], animated: true)
             
-        case .professions: print("Navigating to Professions")
+        case .professions:
+            let vc = ProfessionsScreenAssembler.assemble(appRouter: self, networkService: networkService, errorService: errorService)
+            navController.setViewControllers([vc], animated: true)
         case .tests: print("Navigating to Tests")
         case .article: print("Navigating to Artcles")
         case .calendar: print("Navigating to Calendar")

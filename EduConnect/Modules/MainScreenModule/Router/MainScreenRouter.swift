@@ -15,16 +15,14 @@ protocol MainScreenRouterProtocol {
 
 final class MainScreenRouter: MainScreenRouterProtocol {
     weak var viewController: MainScreenVC?
-    private let sidebarService: SidebarServiceProtocol
     private let appRouter: AppRoutingProtocol
     
-    init(sidebarService: SidebarServiceProtocol, appRouter: AppRoutingProtocol) {
-        self.sidebarService = sidebarService
+    init(appRouter: AppRoutingProtocol) {
         self.appRouter = appRouter
     }
     
     func openSidebar() {
-        sidebarService.open()
+        appRouter.sidebarService.open()
     }
     
     func openAccount() {
