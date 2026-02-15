@@ -9,6 +9,7 @@ import Foundation
 
 protocol ProfessionsAPISubServiceProtocol {
     func getProfessions(searchText: String?) async throws -> [ECProfession]
+    func getProfessions(searchText: String?) async throws -> PaginatedResponse<ECProfession>
     func getProfessionDetails(professionID: Int) async throws -> ECProfession
     func getRelatedForProfession(professionID: Int, limit: Int) async throws -> [ECProfession]
     func getUniversitiesForProfession(professionID: Int, itemsPerPage: Int) async throws -> [ECUniversity]
@@ -25,6 +26,11 @@ final class ProfessionsAPISubService: ProfessionsAPISubServiceProtocol {
     func getProfessions(searchText: String?) async throws -> [ECProfession] {
         let profession: EduConnectDataResponse<[ECProfession]> = try await httpClient.request(ProfessionEndpoints.getProfessions(searchText: searchText))
         return profession.data
+    }
+    
+    func getProfessions(searchText: String?) async throws -> PaginatedResponse<ECProfession> {
+        let response: PaginatedResponse<ECProfession> = try await httpClient.request(ProfessionEndpoints.getProfessions(searchText: searchText))
+        return response
     }
     
     func getProfessionDetails(professionID: Int) async throws -> ECProfession {

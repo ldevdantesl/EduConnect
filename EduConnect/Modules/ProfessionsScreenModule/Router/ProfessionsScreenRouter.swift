@@ -6,6 +6,9 @@
 //
 
 protocol ProfessionsScreenRouterProtocol {
+    func openSidebar()
+    func openAccount()
+    func routeToMain()
 }
 
 final class ProfessionsScreenRouter: ProfessionsScreenRouterProtocol {
@@ -15,5 +18,17 @@ final class ProfessionsScreenRouter: ProfessionsScreenRouterProtocol {
     
     init(appRouter: AppRoutingProtocol) {
         self.appRouter = appRouter
+    }
+    
+    func openSidebar() {
+        appRouter.sidebarService.open()
+    }
+    
+    func openAccount() {
+        appRouter.routeToAccount()
+    }
+    
+    func routeToMain() {
+        appRouter.routeToMain()
     }
 }

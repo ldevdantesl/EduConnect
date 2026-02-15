@@ -26,7 +26,7 @@ final class ProgramsScreenProgramCell: UICollectionViewCell, ConfigurableCellPro
         static let spacing = 10.0
         static let smallSpacing = 5.0
         static let cornerRadius = 24.0
-        static let imageSize = 25
+        static let imageSize = 35
     }
     
     // MARK: - PROPERTIES

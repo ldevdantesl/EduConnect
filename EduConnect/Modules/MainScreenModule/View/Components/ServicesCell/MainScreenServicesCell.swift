@@ -94,7 +94,7 @@ final class MainScreenServicesCell: UICollectionViewCell, ConfigurableCellProtoc
         self.viewModel = vm
         self.items = [
             .init(title: "Выбор профессии", image: .mainServicesProfessionImage, onTapAction: vm.didTapProfession),
-            .init(title: "Тесты", image: .mainServicesTestImage, onTapAction: vm.didTapTests),
+            //.init(title: "Тесты", image: .mainServicesTestImage, onTapAction: vm.didTapTests),
             .init(title: "Помощь в выборе вуза", image: .mainServicesUniversityImage, onTapAction: vm.didTapUniversity),
             .init(title: "Календарь", image: .mainServicesCalendarImage, onTapAction: vm.didTapCalendar)
         ]

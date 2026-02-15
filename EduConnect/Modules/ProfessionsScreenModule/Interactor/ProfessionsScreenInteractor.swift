@@ -5,7 +5,10 @@
 //  Created by Buzurg Rakhimzoda on 14.02.2026
 //
 
+import Foundation
+
 protocol ProfessionsScreenInteractorProtocol: AnyObject {
+    func getProfessions(searchText: String?)
 }
 
 final class ProfessionsScreenInteractor: ProfessionsScreenInteractorProtocol {
@@ -15,5 +18,16 @@ final class ProfessionsScreenInteractor: ProfessionsScreenInteractorProtocol {
     
     init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
+    }
+    
+    func getProfessions(searchText: String?) {
+        Task {
+            do {
+                let response: PaginatedResponse<ECProfession> = try await networkService.professions.getProfessions(searchText: searchText)
+                presenter?.didReceiveProfessions(response.data, currentPage: response.meta.currentPage, totalPages: response.meta.lastPage)
+            } catch {
+                presenter?.didReceiveError(error: error)
+            }
+        }
     }
 }

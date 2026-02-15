@@ -30,7 +30,7 @@ enum ProfessionEndpoints: Endpoint {
         switch self {
         case .getProfessions(let searchText):
             guard let searchText else { return .none }
-            return [.init(name: "search_text", value: searchText)]
+            return [.init(name: "search", value: searchText)]
         case .getRelatedForProfession(_, let limit):
             return [.init(name: "limit", value: limit.description)]
         case .getUniversitiesForProfession(_, let itemsPerPage):

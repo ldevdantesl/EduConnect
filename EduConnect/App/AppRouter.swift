@@ -91,31 +91,20 @@ final class AppRouter: AppRoutingProtocol {
     private func navigateFromSidebar(to tab: SidebarMenuTab) {
         switch tab {
         case .universities:
-            let vc = UniversityScreenAssembler.assemble(
-                appRouter: self,
-                networkService: networkService, errorService: errorService
-            )
+            let vc = UniversityScreenAssembler.assemble(appRouter: self, networkService: networkService, errorService: errorService)
             navController.setViewControllers([vc], animated: true)
         case .programs:
-            let vc = ProgramsScreenAssembler.assemble(
-                appRouter: self,
-                networkService: networkService, errorService: errorService
-            )
+            let vc = ProgramsScreenAssembler.assemble(appRouter: self, networkService: networkService, errorService: errorService)
             navController.setViewControllers([vc], animated: true)
             
         case .main:
-            let vc = MainScreenAssembler.assemble(
-                appRouter: self,
-                networkService: networkService, errorService: errorService
-            )
+            let vc = MainScreenAssembler.assemble(appRouter: self, networkService: networkService, errorService: errorService)
             navController.setViewControllers([vc], animated: true)
             
         case .professions:
             let vc = ProfessionsScreenAssembler.assemble(appRouter: self, networkService: networkService, errorService: errorService)
             navController.setViewControllers([vc], animated: true)
-        case .tests: print("Navigating to Tests")
-        case .article: print("Navigating to Artcles")
-        case .calendar: print("Navigating to Calendar")
+            
         case .none: print("Not navigating")
         }
     }

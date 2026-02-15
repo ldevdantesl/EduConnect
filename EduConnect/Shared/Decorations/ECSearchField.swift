@@ -1,16 +1,10 @@
-//
-//  ECSearchField.swift
-//  EduConnect
-//
-//  Created by Buzurg Rakhimzoda on 23.01.2026.
-//
-
 import UIKit
 
 final class ECSearchField: UITextField, UITextFieldDelegate {
     
     private let rightViewWidth: CGFloat = 44
     private(set) var tapAction: ((String) -> Void)?
+    private var searchImageView: UIImageView?
 
     // MARK: - LIFECYCLE
     init(placeholder: String) {
@@ -52,19 +46,42 @@ final class ECSearchField: UITextField, UITextFieldDelegate {
         self.delegate = self
 
         setupSearchIcon()
+        
+        addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
 
     private func setupSearchIcon() {
-        let imageView = UIImageView(image: UIImage(systemName: "magnifyingglass"))
+        let config = UIImage.SymbolConfiguration(weight: .bold)
+        let imageView = UIImageView(image: UIImage(systemName: "magnifyingglass", withConfiguration: config))
         imageView.tintColor = .systemGray
         imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
 
         let container = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 36))
+        container.isUserInteractionEnabled = true
         imageView.frame = CGRect(x: 6, y: 8, width: 20, height: 20)
         container.addSubview(imageView)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(searchIconTapped))
+        container.addGestureRecognizer(tapGesture)
 
         rightView = container
         rightViewMode = .always
+        
+        self.searchImageView = imageView
+    }
+
+    // MARK: - ACTIONS
+    @objc private func searchIconTapped() {
+        searchImageView?.animateTap()
+        resignFirstResponder()
+        guard let text = text, !text.isEmpty else { return }
+        tapAction?(text)
+    }
+    
+    @objc private func textDidChange() {
+        let hasText = (text?.count ?? 0) > 1
+        searchImageView?.tintColor = hasText ? .systemBlue : .systemGray
     }
     
     // MARK: - DELEGATE FUNC
