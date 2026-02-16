@@ -34,6 +34,7 @@ final class MainScreenVC: UIViewController {
         )
         cv.registerCell(MainScreenProgramsCell.self, reuseID: MainScreenProgramsCell.identifier)
         cv.registerCell(MainScreenHeaderCell.self, reuseID: MainScreenHeaderCell.identifier)
+        cv.registerCell(MainScreenStepsCell.self, reuseID: MainScreenStepsCell.identifier)
         cv.registerCell(MainScreenCareersCell.self, reuseID: MainScreenCareersCell.identifier)
         cv.registerCell(MainScreenAcademicCell.self, reuseID: MainScreenAcademicCell.identifier)
         cv.registerCell(MainScreenAcademicProgramCell.self, reuseID: MainScreenAcademicProgramCell.identifier)
@@ -102,6 +103,11 @@ final class MainScreenVC: UIViewController {
                 
             case .academicShowAll(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenAcademicShowAllCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .stepsItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenStepsCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 

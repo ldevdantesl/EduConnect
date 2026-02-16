@@ -35,6 +35,7 @@ final class MainScreenPresenter {
     
     private var selectedAcademicTab: MainScreenAcademicCellViewModel.AcademicTab = .programs
     private var selectedJournalTab: ECNewsType? = nil
+    private var showingAllSteps: Bool = false
     
     private var programCategories: [ECProgramCategory] = []
     private var universities: [ECUniversity] = []
@@ -52,6 +53,7 @@ final class MainScreenPresenter {
     
     private func applySnapshot(isLoadingOnJournals: Bool = false) {
         let headerVM = MainScreenHeaderCellViewModel()
+        let stepsVM = MainScreenStepsCellViewModel(showingAllItems: showingAllSteps, didTapShowAllItems: didTapShowAllSteps)
         let careersVM = MainScreenCareersCellViewModel(universities: universities)
         let programsVM = MainScreenProgramsCellViewModel(programs: programCategories)
         let servicesVM = MainScreenServicesCellViewModel()
@@ -59,7 +61,10 @@ final class MainScreenPresenter {
         
         let sections: [MainScreenSection] = [.header, .careers, .programs, .academic, .services, .journal, .footer]
         let itemsBySection: [MainScreenSection: [MainScreenItem]] = [
-            .header: [.headerItem(.init(id: "header", viewModel: headerVM))],
+            .header: [
+                .headerItem(.init(id: "header", viewModel: headerVM)),
+                .stepsItem(.init(viewModel: stepsVM))
+            ],
             .careers: [.careersItem(.init(id: "careers", viewModel: careersVM))],
             .programs: [.programItem(.init(id: "programs", viewModel: programsVM))],
             .academic: buildAcademicItems(),
@@ -175,6 +180,11 @@ final class MainScreenPresenter {
     private func didSelectAcademicTab(_ tab: MainScreenAcademicCellViewModel.AcademicTab) {
         guard tab != selectedAcademicTab else { return }
         selectedAcademicTab = tab
+        applySnapshot()
+    }
+    
+    private func didTapShowAllSteps() {
+        showingAllSteps.toggle()
         applySnapshot()
     }
 }
