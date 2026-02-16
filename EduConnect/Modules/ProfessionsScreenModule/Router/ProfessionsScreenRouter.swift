@@ -21,7 +21,7 @@ final class ProfessionsScreenRouter: ProfessionsScreenRouterProtocol {
     }
     
     func openSidebar() {
-        appRouter.sidebarService.open()
+        appRouter.openSidebar()
     }
     
     func openAccount() {

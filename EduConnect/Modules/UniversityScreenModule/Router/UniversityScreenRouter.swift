@@ -22,13 +22,9 @@ protocol UniversityScreenRouterProtocol {
 final class UniversityScreenRouter: UniversityScreenRouterProtocol {
     weak var viewController: UniversityScreenVC?
     private let appRouter: AppRoutingProtocol
-    private let networkService: NetworkServiceProtocol
-    private let errorService: ErrorServiceProtocol
     
-    init(appRouter: AppRoutingProtocol, networkService: NetworkServiceProtocol, errorService: ErrorServiceProtocol) {
+    init(appRouter: AppRoutingProtocol) {
         self.appRouter = appRouter
-        self.networkService = networkService
-        self.errorService = errorService
     }
     
     func presentFilterView(
@@ -51,7 +47,7 @@ final class UniversityScreenRouter: UniversityScreenRouterProtocol {
     }
     
     func openSidebar() {
-        appRouter.sidebarService.open()
+        appRouter.openSidebar()
     }
     
     func openAccount() {
@@ -59,11 +55,7 @@ final class UniversityScreenRouter: UniversityScreenRouterProtocol {
     }
     
     func routeToUniversityInfo(_ university: ECUniversity) {
-        let vc = UniversityInfoScreenAssembler.assemble(
-            appRouter: appRouter,
-            networkService: networkService, errorService: errorService,
-            university: university
-        )
+        let vc = UniversityInfoScreenAssembler.assemble(appRouter: appRouter, university: university)
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     

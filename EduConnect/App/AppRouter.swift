@@ -8,19 +8,21 @@
 import UIKit
 
 protocol AppRoutingProtocol: AnyObject {
+    var diContainer: DIContainer { get }
     func start()
     func routeToAuthentication()
     func routeToAccount()
     func routeToMain()
-    var sidebarService: ECSidebarService { get }
+    func openSidebar()
 }
 
 final class AppRouter: AppRoutingProtocol {
     // MARK: - INJECTED PROPERTIES
+    let diContainer: DIContainer
     private let authState: ECAuthentication
     private let networkService: ECNetworkService
     private let errorService: ECErrorService
-    let sidebarService: ECSidebarService
+    private let sidebarService: ECSidebarService
     
     // MARK: - WEAK PROPERTIES
     weak var window: UIWindow?
@@ -30,11 +32,12 @@ final class AppRouter: AppRoutingProtocol {
     private(set) var navController = UINavigationController()
     private(set) var sidebarContainer: SidebarContainerViewController?
     
-    init(authState: ECAuthentication, sidebarService: ECSidebarService, networkService: ECNetworkService, errorService: ECErrorService) {
-        self.authState = authState
-        self.sidebarService = sidebarService
-        self.networkService = networkService
-        self.errorService = errorService
+    init(diContainer: DIContainer) {
+        self.diContainer = diContainer
+        self.authState = diContainer.authentication
+        self.sidebarService = diContainer.sidebarService
+        self.networkService = diContainer.networkService
+        self.errorService = diContainer.errorService
         setup()
     }
     
@@ -58,26 +61,24 @@ final class AppRouter: AppRoutingProtocol {
 
     func routeToAuthentication() {
         sidebarContainer?.setSidebarEnabled(false)
-        let vc = LoginScreenAssembler.assemble(appRouter: self, authentication: authState, errorService: errorService)
+        let vc = LoginScreenAssembler.assemble(appRouter: self)
         navController.setViewControllers([vc], animated: true)
     }
     
     func routeToAccount() {
         sidebarContainer?.setSidebarEnabled(true)
-        let vc = AccountScreenAssembler.assemble(
-            appRouter: self,
-            networkService: networkService, errorService: errorService
-        )
+        let vc = AccountScreenAssembler.assemble(appRouter: self)
         navController.setViewControllers([vc], animated: true)
     }
     
     func routeToMain() {
         sidebarContainer?.setSidebarEnabled(true)
-        let vc = MainScreenAssembler.assemble(
-            appRouter: self,
-            networkService: networkService, errorService: errorService
-        )
+        let vc = MainScreenAssembler.assemble(appRouter: self)
         navController.setViewControllers([vc], animated: true)
+    }
+    
+    func openSidebar() {
+        sidebarService.open()
     }
     
     // MARK: - PRIVATE FUNC
@@ -91,18 +92,18 @@ final class AppRouter: AppRoutingProtocol {
     private func navigateFromSidebar(to tab: SidebarMenuTab) {
         switch tab {
         case .universities:
-            let vc = UniversityScreenAssembler.assemble(appRouter: self, networkService: networkService, errorService: errorService)
+            let vc = UniversityScreenAssembler.assemble(appRouter: self)
             navController.setViewControllers([vc], animated: true)
         case .programs:
-            let vc = ProgramsScreenAssembler.assemble(appRouter: self, networkService: networkService, errorService: errorService)
+            let vc = ProgramsScreenAssembler.assemble(appRouter: self)
             navController.setViewControllers([vc], animated: true)
             
         case .main:
-            let vc = MainScreenAssembler.assemble(appRouter: self, networkService: networkService, errorService: errorService)
+            let vc = MainScreenAssembler.assemble(appRouter: self)
             navController.setViewControllers([vc], animated: true)
             
         case .professions:
-            let vc = ProfessionsScreenAssembler.assemble(appRouter: self, networkService: networkService, errorService: errorService)
+            let vc = ProfessionsScreenAssembler.assemble(appRouter: self)
             navController.setViewControllers([vc], animated: true)
             
         case .none: print("Not navigating")

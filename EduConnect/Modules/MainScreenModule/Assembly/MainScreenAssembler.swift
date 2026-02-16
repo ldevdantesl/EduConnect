@@ -8,13 +8,10 @@
 import UIKit
 
 final class MainScreenAssembler {
-    static func assemble(
-        appRouter: AppRoutingProtocol,
-        networkService: NetworkServiceProtocol, errorService: ErrorServiceProtocol,
-    ) -> MainScreenVC {
-        let interactor = MainScreenInteractor(networkService: networkService)
+    static func assemble(appRouter: AppRoutingProtocol) -> MainScreenVC {
+        let interactor = MainScreenInteractor(networkService: appRouter.diContainer.networkService)
         let router = MainScreenRouter(appRouter: appRouter)
-        let presenter = MainScreenPresenter(interactor: interactor, router: router, errorService: errorService)
+        let presenter = MainScreenPresenter(interactor: interactor, router: router, errorService: appRouter.diContainer.errorService)
         let viewController = MainScreenVC()
         presenter.view  = viewController
         viewController.presenter = presenter

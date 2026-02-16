@@ -54,7 +54,7 @@ final class MainScreenPresenter {
     private func applySnapshot(isLoadingOnJournals: Bool = false) {
         let headerVM = MainScreenHeaderCellViewModel()
         let stepsVM = MainScreenStepsCellViewModel(showingAllItems: showingAllSteps, didTapShowAllItems: didTapShowAllSteps)
-        let careersVM = MainScreenCareersCellViewModel(universities: universities)
+        let careersVM = MainScreenCareersCellViewModel(universities: universities, didTapUniversity: didTapUniversity)
         let programsVM = MainScreenProgramsCellViewModel(programs: programCategories)
         let servicesVM = MainScreenServicesCellViewModel()
         let footerVM = MainScreenFooterCellViewModel()
@@ -186,6 +186,10 @@ final class MainScreenPresenter {
     private func didTapShowAllSteps() {
         showingAllSteps.toggle()
         applySnapshot()
+    }
+    
+    private func didTapUniversity(university: ECUniversity) {
+        self.router.navigateToUniversity(university: university)
     }
 }
 

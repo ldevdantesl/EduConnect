@@ -11,6 +11,7 @@ protocol MainScreenRouterProtocol {
     func openSidebar()
     func openAccount()
     func goBack()
+    func navigateToUniversity(university: ECUniversity)
 }
 
 final class MainScreenRouter: MainScreenRouterProtocol {
@@ -22,7 +23,7 @@ final class MainScreenRouter: MainScreenRouterProtocol {
     }
     
     func openSidebar() {
-        appRouter.sidebarService.open()
+        appRouter.openSidebar()
     }
     
     func openAccount() {
@@ -31,5 +32,10 @@ final class MainScreenRouter: MainScreenRouterProtocol {
     
     func goBack() {
         viewController?.navigationController?.popViewController(animated: true)
+    }
+    
+    func navigateToUniversity(university: ECUniversity) {
+        let vc = UniversityInfoScreenAssembler.assemble(appRouter: appRouter, university: university)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -8,13 +8,10 @@
 import UIKit
 
 final class ProgramsScreenAssembler {
-    static func assemble(
-        appRouter: AppRoutingProtocol,
-        networkService: NetworkServiceProtocol, errorService: ErrorServiceProtocol
-    ) -> ProgramsScreenVC {
-        let interactor = ProgramsScreenInteractor(networkService: networkService)
+    static func assemble(appRouter: AppRoutingProtocol) -> ProgramsScreenVC {
+        let interactor = ProgramsScreenInteractor(networkService: appRouter.diContainer.networkService)
         let router = ProgramsScreenRouter(appRouter: appRouter)
-        let presenter = ProgramsScreenPresenter(interactor: interactor, router: router, errorService: errorService)
+        let presenter = ProgramsScreenPresenter(interactor: interactor, router: router, errorService: appRouter.diContainer.errorService)
         let viewController = ProgramsScreenVC()
         presenter.view  = viewController
         viewController.presenter = presenter

@@ -8,13 +8,10 @@
 import UIKit
 
 final class ProfessionsScreenAssembler {
-    static func assemble(
-        appRouter: AppRoutingProtocol,
-        networkService: NetworkServiceProtocol, errorService: ErrorServiceProtocol
-    ) -> ProfessionsScreenVC {
-        let interactor = ProfessionsScreenInteractor(networkService: networkService)
+    static func assemble(appRouter: AppRoutingProtocol) -> ProfessionsScreenVC {
+        let interactor = ProfessionsScreenInteractor(networkService: appRouter.diContainer.networkService)
         let router = ProfessionsScreenRouter(appRouter: appRouter)
-        let presenter = ProfessionsScreenPresenter(interactor: interactor, router: router, errorService: errorService)
+        let presenter = ProfessionsScreenPresenter(interactor: interactor, router: router, errorService: appRouter.diContainer.errorService)
         let viewController = ProfessionsScreenVC()
         presenter.view  = viewController
         viewController.presenter = presenter

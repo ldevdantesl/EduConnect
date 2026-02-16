@@ -22,7 +22,7 @@ final class ProgramsScreenRouter: ProgramsScreenRouterProtocol {
     }
     
     func openSidebar() {
-        appRouter.sidebarService.open()
+        appRouter.openSidebar()
     }
     
     func openAccount() {
