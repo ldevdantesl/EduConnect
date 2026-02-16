@@ -44,7 +44,33 @@ final class MainScreenPresenter {
     private var newsTypes: [ECNewsType] = []
     private var allNews: [ECNews] = []
     private var newsByTypeId: [Int?: [ECNews]] = [:]
-
+    
+    // MARK: - SNAPSHOTING
+    private let snapshotBuilder = MainScreenSnapshotBuilder()
+    private lazy var actions = MainScreenSnapshotActions(
+        didTapShowAllSteps: { [weak self] in self?.didTapShowAllSteps() },
+        didTapUniversity: { [weak self] in self?.didTapUniversity(university: $0) },
+        didTapShowAllPrograms: { [weak self] in self?.didTapShowAllPrograms() },
+        didTapShowAllProfessions: { [weak self] in self?.didTapShowAllProfessions() },
+        didTapShowAllUniversities: { [weak self] in self?.didTapShowAllUniversities() },
+        didSelectAcademicTab: { [weak self] in self?.didSelectAcademicTab($0) },
+        didSelectJournalType: { [weak self] in self?.didSelectJournalType($0) }
+    )
+    private var currentState: MainScreenSnapshotState {
+        MainScreenSnapshotState(
+            showingAllSteps: showingAllSteps,
+            selectedAcademicTab: selectedAcademicTab,
+            selectedJournalTab: selectedJournalTab,
+            universities: universities,
+            programCategories: programCategories,
+            professions: professions,
+            newsTypes: newsTypes,
+            allNews: allNews,
+            newsByTypeId: newsByTypeId
+        )
+    }
+    
+    // MARK: - INIT
     init(interactor: MainScreenInteractorProtocol, router: MainScreenRouterProtocol, errorService: ErrorServiceProtocol) {
         self.interactor = interactor
         self.router = router
@@ -52,118 +78,12 @@ final class MainScreenPresenter {
     }
     
     private func applySnapshot(isLoadingOnJournals: Bool = false) {
-        let headerVM = MainScreenHeaderCellViewModel()
-        let stepsVM = MainScreenStepsCellViewModel(showingAllItems: showingAllSteps, didTapShowAllItems: didTapShowAllSteps)
-        let careersVM = MainScreenCareersCellViewModel(universities: universities, didTapUniversity: didTapUniversity)
-        let programsVM = MainScreenProgramsCellViewModel(programs: programCategories)
-        let servicesVM = MainScreenServicesCellViewModel()
-        let footerVM = MainScreenFooterCellViewModel()
-        
-        let sections: [MainScreenSection] = [.header, .careers, .programs, .academic, .services, .journal, .footer]
-        let itemsBySection: [MainScreenSection: [MainScreenItem]] = [
-            .header: [
-                .headerItem(.init(id: "header", viewModel: headerVM)),
-                .stepsItem(.init(viewModel: stepsVM))
-            ],
-            .careers: [.careersItem(.init(id: "careers", viewModel: careersVM))],
-            .programs: [.programItem(.init(id: "programs", viewModel: programsVM))],
-            .academic: buildAcademicItems(),
-            .services: [.servicesItem(.init(id: "services", viewModel: servicesVM))],
-            .journal: buildJournalItems(isLoading: isLoadingOnJournals),
-            .footer: [.footerItem(.init(id: "footer", viewModel: footerVM))]
-        ]
-        
-        view?.applySnapshot(sections: sections, itemsBySection: itemsBySection)
-    }
-    
-    private func buildAcademicItems() -> [MainScreenItem] {
-        var items: [MainScreenItem] = []
-        
-        let headerVM = MainScreenAcademicCellViewModel(selectedTab: selectedAcademicTab) { [weak self] tab in
-            self?.didSelectAcademicTab(tab)
-        }
-        items.append(.academicItem(.init(viewModel: headerVM)))
-        
-        switch selectedAcademicTab {
-        case .universities:
-            universities.prefix(3).forEach { university in
-                let vm = CardWithImageCellViewModel(
-                    imageURL: university.mainImageURL,
-                    preTitle: "\(university.city.name) / \(university.programsCount) программ",
-                    title: university.name,
-                    showsArrowRight: true
-                )
-                items.append(.cardWithImageItem(.init(item: university, prefix: "academic-uni", viewModel: vm)))
-            }
-            let showAllItem = MainScreenAcademicShowAllCellViewModel(title: "Показать все наши вузы")
-            items.append(.academicShowAll(.init(viewModel: showAllItem)))
-            
-        case .programs:
-            programCategories.prefix(3).forEach { program in
-                let vm = MainScreenAcademicProgramCellViewModel(program: program)
-                items.append(.academicProgram(.init(item: program, prefix: "academic-program", viewModel: vm)))
-            }
-            let showAllItem = MainScreenAcademicShowAllCellViewModel(title: "Показать все программы вузов")
-            items.append(.academicShowAll(.init(viewModel: showAllItem)))
-            
-        case .professions:
-            professions.prefix(3).forEach { profession in
-                let vm = CardWithImageCellViewModel(
-                    imageURL: profession.imageURL,
-                    preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
-                    title: profession.name.ru,
-                    subtitle: profession.description.ru,
-                    showsArrowRight: true
-                )
-                items.append(.cardWithImageItem(.init(item: profession, prefix: "academic-profession-", viewModel: vm)))
-            }
-            let showAllItem = MainScreenAcademicShowAllCellViewModel(title: "Показать все профессии вузов")
-            items.append(.academicShowAll(.init(viewModel: showAllItem)))
-        }
-        
-        return items
-    }
-    
-    private func buildJournalItems(isLoading: Bool = false) -> [MainScreenItem] {
-        var items: [MainScreenItem] = []
-        
-        let headerVM = MainScreenJournalCellViewModel(
-            selectedType: selectedJournalTab,
-            allTypes: newsTypes
-        ) { [weak self] type in
-            self?.didSelectJournalType(type)
-        }
-        items.append(.journalItem(.init(viewModel: headerVM)))
-        
-        guard !isLoading else {
-            let loadingVM = LoadingCellViewModel()
-            items.append(.loadingItem(.init(viewModel: loadingVM)))
-            return items
-        }
-        let newsToShow: [ECNews]
-        if let selectedType = selectedJournalTab {
-            newsToShow = newsByTypeId[selectedType.id] ?? []
-        } else {
-            newsToShow = allNews
-        }
-        
-        newsToShow.prefix(5).forEach { news in
-            let vm = CardWithImageCellViewModel(
-                imageURL: news.previewImageURL,
-                preTitle: news.newsType.name.ru,
-                title: news.title.ru,
-                subtitle: news.shortDescription.ru,
-                showsArrowRight: true
-            )
-            items.append(.cardWithImageItem(.init(item: news, prefix: "journal-news", viewModel: vm)))
-        }
-        
-        let underlineVM = UnderlineButtonCellViewModel(
-            titleName: "Посмотреть все новости",
-            titleSize: 14, titleColor: .darkGray, onTapAction: nil
+        let result = snapshotBuilder.build(
+            state: currentState,
+            actions: actions,
+            isLoadingOnJournals: isLoadingOnJournals
         )
-        items.append(.underlineButtonItem(.init(id: "underlineButton", viewModel: underlineVM)))
-        return items
+        view?.applySnapshot(sections: result.sections, itemsBySection: result.items)
     }
     
     private func didSelectJournalType(_ type: ECNewsType?) {
@@ -186,6 +106,18 @@ final class MainScreenPresenter {
     private func didTapShowAllSteps() {
         showingAllSteps.toggle()
         applySnapshot()
+    }
+    
+    private func didTapShowAllPrograms() {
+        self.router.navigateToPrograms()
+    }
+    
+    private func didTapShowAllProfessions() {
+        self.router.navigateToProfessions()
+    }
+    
+    private func didTapShowAllUniversities() {
+        self.router.navigateToUniversities()
     }
     
     private func didTapUniversity(university: ECUniversity) {

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 struct SectionHeaderCellViewModel: CellViewModelProtocol, Hashable {
-    var cellIdentifier: String = "SectionHeaderCell"
+    var cellIdentifier: String = SectionHeaderCell.identifier
     let title: String
     let titleFamily: ECFont.Family
     let titleSize: CGFloat
