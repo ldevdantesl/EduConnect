@@ -21,6 +21,7 @@ final class ProfessionsScreenVC: UIViewController {
     // MARK: - VIEW PROPERTIES
     private lazy var headerView: ECHeaderView = {
         let vm = ECHeaderViewModel { [weak self] in self?.presenter?.didTapAccount() }
+        didTapImage: { [weak self] in self?.presenter?.didTapAppLogo() }
         didTapBar: { [weak self] in self?.presenter?.didTapTabBar() }
         let header = ECHeaderView()
         header.configure(vm: vm)

@@ -25,6 +25,7 @@ final class ProfessionsScreenPresenter {
     private var professions: [ECProfession] = []
     private var totalPages: Int = 1
     private var currentPage: Int = 1
+    private var currentSearchText: String? = ""
 
     init(interactor: ProfessionsScreenInteractorProtocol, router: ProfessionsScreenRouterProtocol, errorService: ErrorServiceProtocol) {
         self.interactor = interactor
@@ -57,7 +58,12 @@ final class ProfessionsScreenPresenter {
         }
         
         if totalPages > 1 {
-            let vm = PageIndicatorCellViewModel(totalPages: totalPages, currentPage: currentPage)
+            let vm = PageIndicatorCellViewModel(totalPages: totalPages, currentPage: currentPage) { [weak self] in
+                guard let self = self else { return }
+                self.showPage(self.currentPage+1)
+            } didPressPage: { [weak self] in
+                self?.showPage($0)
+            }
             professionItems.append(.pageIndicatorItem(.init(viewModel: vm)))
         }
         
@@ -95,15 +101,22 @@ final class ProfessionsScreenPresenter {
     }
     
     private func didTapSearch(searchText: String) {
+        self.currentSearchText = searchText
         applyLoadingSnapshot()
-        interactor.getProfessions(searchText: searchText)
+        interactor.getProfessions(searchText: searchText, page: 1)
+    }
+    
+    private func showPage(_ page: Int) {
+        applyLoadingSnapshot()
+        interactor.getProfessions(searchText: currentSearchText, page: page)
+        currentPage += 1
     }
 }
 
 extension ProfessionsScreenPresenter: ProfessionsScreenPresenterProtocol {
     func viewDidLoad() {
         applyLoadingSnapshot()
-        interactor.getProfessions(searchText: nil)
+        interactor.getProfessions(searchText: nil, page: 1)
     }
     
     func didTapTabBar() {
@@ -119,7 +132,6 @@ extension ProfessionsScreenPresenter: ProfessionsScreenPresenterProtocol {
     }
     
     func didReceiveProfessions(_ professions: [ECProfession], currentPage: Int, totalPages: Int) {
-        print("📄 professions: \(professions.count), currentPage: \(currentPage), totalPages: \(totalPages)")
         self.professions = professions
         self.currentPage = currentPage
         self.totalPages = totalPages

@@ -47,7 +47,7 @@ final class MainScreenInteractor: MainScreenInteractorProtocol {
     func getProfessions() {
         Task {
             do {
-                let response: [ECProfession] = try await networkService.professions.getProfessions(searchText: nil) 
+                let response: [ECProfession] = try await networkService.professions.getProfessions(searchText: nil, page: 1) 
                 presenter?.didReceiveProfessions(professions: response)
             } catch {
                 presenter?.didReceiveError(error: error)
