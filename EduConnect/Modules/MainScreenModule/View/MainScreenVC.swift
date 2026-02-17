@@ -12,6 +12,8 @@ protocol MainScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [MainScreenSection], itemsBySection: [MainScreenSection : [MainScreenItem]])
     func reconfigureItems(items: [MainScreenItem])
     func showError(errorMessage: String)
+    func showLoading()
+    func hideLoading()
 }
 
 final class MainScreenVC: UIViewController {
@@ -155,6 +157,14 @@ extension MainScreenVC: MainScreenViewProtocol {
     }
     
     func showError(errorMessage: String) {
-        self.showError(message: errorMessage) /// Added from Extensions
+        self.showToastedError(message: errorMessage) /// Added from Extensions
+    }
+    
+    func showLoading() {
+        self.showHoverLoading()
+    }
+    
+    func hideLoading() {
+        self.hideHoverLoading()
     }
 }

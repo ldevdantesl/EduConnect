@@ -14,6 +14,7 @@ protocol NetworkServiceProtocol {
     var university: UniversityAPISubServiceProtocol { get }
     var professions: ProfessionsAPISubServiceProtocol { get }
     var programs: ProgramsAPISubServiceProtocol { get }
+    var profile: ProfileAPISubServiceProtocol { get }
 }
 
 final class ECNetworkService: NetworkServiceProtocol {
@@ -23,6 +24,7 @@ final class ECNetworkService: NetworkServiceProtocol {
     let university: UniversityAPISubServiceProtocol
     let programs: ProgramsAPISubServiceProtocol
     let professions: ProfessionsAPISubServiceProtocol
+    let profile: ProfileAPISubServiceProtocol
     
     init(httpClient: HTTPClientProtocol) {
         self.authentication = AuthAPISubService(httpClient: httpClient)
@@ -31,5 +33,6 @@ final class ECNetworkService: NetworkServiceProtocol {
         self.programs = ProgramsAPISubService(httpClient: httpClient)
         self.professions = ProfessionsAPISubService(httpClient: httpClient)
         self.news = NewsAPISubService(httpClient: httpClient)
+        self.profile = ProfileAPISubService(httpClient: httpClient)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ECLocalizedString: Decodable {
+struct ECLocalizedString: Codable {
     let ru: String
     let kz: String
 }

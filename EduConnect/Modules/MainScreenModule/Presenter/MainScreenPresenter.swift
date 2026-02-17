@@ -128,6 +128,7 @@ final class MainScreenPresenter {
 extension MainScreenPresenter: MainScreenPresenterProtocol {
     
     func viewDidLoad() {
+        self.view?.showLoading()
         dispatchGroup.enter()
         interactor.getProgramCategories()
         
@@ -148,6 +149,7 @@ extension MainScreenPresenter: MainScreenPresenterProtocol {
         
         dispatchGroup.notify(queue: .main) { [weak self] in
             self?.applySnapshot()
+            self?.view?.hideLoading()
         }
     }
     

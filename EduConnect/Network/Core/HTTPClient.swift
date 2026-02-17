@@ -117,7 +117,7 @@ final class HTTPClient: HTTPClientProtocol {
     private func validateHTTPStatus(_ statusCode: Int, data: Data) throws {
         guard (200...299).contains(statusCode) else {
             if let base = try? decoder.decode(EduConnectResponse.self, from: data),
-               !base.success {
+               !(base.success ?? false) {
                 throw APIError.custom(
                     message: base.message ?? "Ошибка запроса",
                     errors: base.errors

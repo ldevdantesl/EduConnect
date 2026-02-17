@@ -28,6 +28,10 @@ final class EmbeddedYouTubeView: UIView {
         setupWebView()
     }
     
+    deinit {
+        stopAndCleanup()
+    }
+    
     private func setupWebView() {
         let config = WKWebViewConfiguration()
         config.allowsInlineMediaPlayback = true
@@ -77,6 +81,12 @@ final class EmbeddedYouTubeView: UIView {
         request.setValue("https://educonnect.kz/", forHTTPHeaderField: "Referer")
         
         webView.load(request)
+    }
+    
+    func stopAndCleanup() {
+        webView?.stopLoading()
+        webView?.loadHTMLString("", baseURL: nil)
+        webView?.navigationDelegate = nil
     }
 }
 

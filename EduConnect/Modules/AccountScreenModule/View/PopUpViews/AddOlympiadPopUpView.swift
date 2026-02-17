@@ -11,8 +11,19 @@ import SnapKit
 import UniformTypeIdentifiers
 
 struct AddOlympiadPopUpViewModel: PopUpViewModel {
+    var subjects: [ENTSubject]
     var onClose: (() -> Void)?
-    var didAddNewOlympiad: ((String, String, String?, [ECAttachedFile]) -> Void)?
+    var didAddNewOlympiad: ((Int, Int, String?) -> Void)?
+    
+    init(
+        subjects: [ENTSubject] = [],
+        onClose: (() -> Void)? = nil,
+        didAddNewOlympiad: ((Int, Int, String?) -> Void)? = nil
+    ) {
+        self.subjects = subjects
+        self.onClose = onClose
+        self.didAddNewOlympiad = didAddNewOlympiad
+    }
 }
 
 final class AddOlympiadPopUpView: PopUpView {
@@ -114,11 +125,9 @@ final class AddOlympiadPopUpView: PopUpView {
     }()
     
     private lazy var olympiadMenu: UIMenu = {
-        let subjects = ENTSubject.allSubjects
-        let actions = subjects.map { subject in
-            let subjectTitle = subject.localizedName(lang: SharedConstants.currentLangugage)
-            return UIAction(title: subjectTitle) { [weak self] _ in
-                var title = AttributedString(subjectTitle)
+        let actions = viewModel.subjects.map { subject in
+            UIAction(title: subject.name.ru) { [weak self] _ in
+                var title = AttributedString(subject.name.ru)
                 title.font = ECFont.font(.semiBold, size: 14)
                 title.foregroundColor = .label
                 

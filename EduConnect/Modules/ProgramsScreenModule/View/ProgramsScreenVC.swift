@@ -101,6 +101,6 @@ extension ProgramsScreenVC: ProgramsScreenViewProtocol {
     }
     
     func showError(errorMessage: String) {
-        self.showError(message: errorMessage) /// Added from Extensions
+        self.showToastedError(message: errorMessage) /// Added from Extensions
     }
 }
