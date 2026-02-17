@@ -9,8 +9,15 @@ import UIKit
 import SnapKit
 
 struct AddENTSubjectPopUpViewModel: PopUpViewModel {
+    var entSubjects: [ENTSubject]
     var onClose: (() -> Void)?
-    var didAddNewSubject: ((String, String?) -> Void)?
+    var didAddNewSubject: ((Int, String?) -> Void)?
+    
+    init(entSubjects: [ENTSubject] = [], onClose: (() -> Void)? = nil, didAddNewSubject: ((Int, String?) -> Void)? = nil) {
+        self.onClose = onClose
+        self.entSubjects = entSubjects
+        self.didAddNewSubject = didAddNewSubject
+    }
 }
 
 final class AddENTSubjectPopUpView: PopUpView {
@@ -25,6 +32,7 @@ final class AddENTSubjectPopUpView: PopUpView {
     
     // MARK: - PROPERTIES
     private let viewModel: AddENTSubjectPopUpViewModel
+    private var selectedSubject: ENTSubject?
     
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
@@ -84,22 +92,25 @@ final class AddENTSubjectPopUpView: PopUpView {
     
     private lazy var addButton: ECButton = {
         let button = ECButton(text: ConstantLocalizedStrings.Common.add)
+        button.setAction { [weak self] in
+            guard let self, let subject = self.selectedSubject else { return }
+            let score = self.scoreField.text
+            self.viewModel.didAddNewSubject?(subject.id, score)
+        }
         return button
     }()
     
     private lazy var subjectMenu: UIMenu = {
-        let subjects = ENTSubject.allSubjects
-        let actions = subjects.map { subject in
-            let subjectTitle = subject.localizedName(lang: SharedConstants.currentLangugage)
-            return UIAction(title: subjectTitle) { [weak self] _ in
-                var title = AttributedString(subjectTitle)
+        let actions = viewModel.entSubjects.map { subject in
+            UIAction(title: subject.name.ru) { [weak self] _ in
+                self?.selectedSubject = subject
+
+                var title = AttributedString(subject.name.ru)
                 title.font = ECFont.font(.semiBold, size: 14)
                 title.foregroundColor = .label
-                
                 self?.chooseSubjectButton.configuration?.attributedTitle = title
             }
         }
-        
         return UIMenu(title: ConstantLocalizedStrings.Common.subject, children: actions)
     }()
     

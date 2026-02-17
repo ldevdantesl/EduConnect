@@ -12,9 +12,9 @@ import Kingfisher
 struct MainScreenCareersItemViewModel: CellViewModelProtocol {
     var cellIdentifier: String = MainScreenCareersItem.identifier
     let university: ECUniversity
-    let onTapAction: (() -> Void)?
+    let onTapAction: ((ECUniversity) -> Void)?
     
-    init(university: ECUniversity, onTapAction: (() -> Void)? = nil) {
+    init(university: ECUniversity, onTapAction: ((ECUniversity) -> Void)? = nil) {
         self.university = university
         self.onTapAction = onTapAction
     }
@@ -100,6 +100,9 @@ final class MainScreenCareersItem: UICollectionViewCell, ConfigurableCellProtoco
     
     // MARK: - OBJC
     @objc private func didTapAction() {
-        self.animateTap(onCompletion: viewModel?.onTapAction)
+        self.animateTap { [weak self] in
+            guard let self = self, let viewModel = self.viewModel else { return }
+            viewModel.onTapAction?(viewModel.university)
+        }
     }
 }

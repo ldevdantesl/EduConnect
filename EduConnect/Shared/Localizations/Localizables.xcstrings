@@ -698,6 +698,23 @@
         }
       }
     },
+    "common_loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Загрузка"
+          }
+        }
+      }
+    },
     "common_max" : {
       "extractionState" : "manual",
       "localizations" : {

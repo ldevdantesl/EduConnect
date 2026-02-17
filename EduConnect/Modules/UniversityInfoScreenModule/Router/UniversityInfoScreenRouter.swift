@@ -16,16 +16,14 @@ protocol UniversityInfoScreenRouterProtocol {
 
 final class UniversityInfoScreenRouter: UniversityInfoScreenRouterProtocol {
     weak var viewController: UniversityInfoScreenVC?
-    private let sidebarService: SidebarServiceProtocol
     private let appRouter: AppRoutingProtocol
     
-    init(sidebarService: SidebarServiceProtocol, appRouter: AppRoutingProtocol) {
-        self.sidebarService = sidebarService
+    init(appRouter: AppRoutingProtocol) {
         self.appRouter = appRouter
     }
     
     func openSidebar() {
-        sidebarService.open()
+        appRouter.openSidebar()
     }
     
     func openAccount() {

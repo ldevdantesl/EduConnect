@@ -13,6 +13,10 @@ protocol AccountScreenViewProtocol: AnyObject {
     func reconfigureItems(items: [AccountScreenItem])
     func showPopup(_ popUp: PopUpView)
     func dismissPopup()
+    
+    func showError(error: UserFacingError)
+    func showLoading()
+    func hideLoading()
 }
 
 final class AccountScreenVC: UIViewController {
@@ -134,5 +138,17 @@ extension AccountScreenVC: AccountScreenViewProtocol {
     func dismissPopup() {
         popUpView?.dismiss()
         self.popUpView = nil
+    }
+    
+    func showError(error: UserFacingError) {
+        self.showToastedError(userError: error)
+    }
+    
+    func showLoading() {
+        self.showHoverLoading()
+    }
+    
+    func hideLoading() {
+        self.hideHoverLoading()
     }
 }

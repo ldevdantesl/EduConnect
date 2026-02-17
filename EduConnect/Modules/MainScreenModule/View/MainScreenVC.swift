@@ -12,6 +12,8 @@ protocol MainScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [MainScreenSection], itemsBySection: [MainScreenSection : [MainScreenItem]])
     func reconfigureItems(items: [MainScreenItem])
     func showError(errorMessage: String)
+    func showLoading()
+    func hideLoading()
 }
 
 final class MainScreenVC: UIViewController {
@@ -34,6 +36,7 @@ final class MainScreenVC: UIViewController {
         )
         cv.registerCell(MainScreenProgramsCell.self, reuseID: MainScreenProgramsCell.identifier)
         cv.registerCell(MainScreenHeaderCell.self, reuseID: MainScreenHeaderCell.identifier)
+        cv.registerCell(MainScreenStepsCell.self, reuseID: MainScreenStepsCell.identifier)
         cv.registerCell(MainScreenCareersCell.self, reuseID: MainScreenCareersCell.identifier)
         cv.registerCell(MainScreenAcademicCell.self, reuseID: MainScreenAcademicCell.identifier)
         cv.registerCell(MainScreenAcademicProgramCell.self, reuseID: MainScreenAcademicProgramCell.identifier)
@@ -105,6 +108,11 @@ final class MainScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
+            case .stepsItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenStepsCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
             case .servicesItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenServicesCell
                 cell?.configure(withVM: item.viewModel)
@@ -149,6 +157,14 @@ extension MainScreenVC: MainScreenViewProtocol {
     }
     
     func showError(errorMessage: String) {
-        self.showError(message: errorMessage) /// Added from Extensions
+        self.showToastedError(message: errorMessage) /// Added from Extensions
+    }
+    
+    func showLoading() {
+        self.showHoverLoading()
+    }
+    
+    func hideLoading() {
+        self.hideHoverLoading()
     }
 }

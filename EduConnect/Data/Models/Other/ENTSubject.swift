@@ -9,19 +9,7 @@ import Foundation
 
 struct ENTSubject: Codable {
     let id: Int
-    let name: ENTSubjectName
-
-    func localizedName(lang: AppLanguage) -> String {
-        switch lang {
-        case .en: return name.en
-        case .ru: return name.ru
-        case .kz: return name.kz
-        }
-    }
-}
-
-struct ENTSubjectName: Codable {
-    let ru, kz, en: String
+    let name: ECLocalizedString
 }
 
 extension ENTSubject {

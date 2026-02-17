@@ -91,7 +91,7 @@ extension LoginScreenVC:LoginScreenViewProtocol {
     }
     
     func showError(errorMessage: String) {
-        self.showError(message: errorMessage)
+        self.showToastedError(message: errorMessage)
     }
     
     func scrollToNextItem() {

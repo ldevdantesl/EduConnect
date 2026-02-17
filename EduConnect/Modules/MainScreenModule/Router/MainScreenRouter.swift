@@ -11,20 +11,22 @@ protocol MainScreenRouterProtocol {
     func openSidebar()
     func openAccount()
     func goBack()
+    func navigateToUniversities()
+    func navigateToProfessions()
+    func navigateToPrograms()
+    func navigateToUniversity(university: ECUniversity)
 }
 
 final class MainScreenRouter: MainScreenRouterProtocol {
     weak var viewController: MainScreenVC?
-    private let sidebarService: SidebarServiceProtocol
     private let appRouter: AppRoutingProtocol
     
-    init(sidebarService: SidebarServiceProtocol, appRouter: AppRoutingProtocol) {
-        self.sidebarService = sidebarService
+    init(appRouter: AppRoutingProtocol) {
         self.appRouter = appRouter
     }
     
     func openSidebar() {
-        sidebarService.open()
+        appRouter.openSidebar()
     }
     
     func openAccount() {
@@ -33,5 +35,25 @@ final class MainScreenRouter: MainScreenRouterProtocol {
     
     func goBack() {
         viewController?.navigationController?.popViewController(animated: true)
+    }
+    
+    func navigateToUniversity(university: ECUniversity) {
+        let vc = UniversityInfoScreenAssembler.assemble(appRouter: appRouter, university: university)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func navigateToPrograms() {
+        let vc = ProgramsScreenAssembler.assemble(appRouter: appRouter)
+        viewController?.navigationController?.setViewControllers([vc], animated: true)
+    }
+    
+    func navigateToProfessions() {
+        let vc = ProfessionsScreenAssembler.assemble(appRouter: appRouter)
+        viewController?.navigationController?.setViewControllers([vc], animated: true)
+    }
+    
+    func navigateToUniversities() {
+        let vc = UniversityScreenAssembler.assemble(appRouter: appRouter)
+        viewController?.navigationController?.setViewControllers([vc], animated: true)
     }
 }

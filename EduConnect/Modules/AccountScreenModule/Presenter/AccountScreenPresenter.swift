@@ -13,6 +13,10 @@ protocol AccountScreenPresenterProtocol: AnyObject {
     func didTapAppLogo()
     var selectedTab: AccountScreenTab { get set }
     var headerMenuViewModel: AccountScreenSegmentedReusableMenuViewModel { get }
+    
+    func didReceiveENTSubjects(entSubjects: [ENTSubject])
+    func didReceiveExtracurricularActivities(activities: [ECExtracurricularActivity])
+    func didReceiveError(error: any Error)
 }
 
 final class AccountScreenPresenter {
@@ -21,9 +25,15 @@ final class AccountScreenPresenter {
     weak var view: AccountScreenViewProtocol?
     private let router: AccountScreenRouterProtocol
     private let interactor: AccountScreenInteractorProtocol
+    private let errorService: ErrorServiceProtocol
 
     // MARK: - STATE
     var selectedTab: AccountScreenTab = .main
+    
+    // MARK: - PROPERTIES
+    private let dispatchGroup = DispatchGroup()
+    private(set) var extracurricularActivities: [ECExtracurricularActivity] = []
+    private(set) var entSubjects: [ENTSubject] = []
 
     // MARK: - EXPANDABLE PROVIDER
     private lazy var expandableProvider: ExpandableViewModelsProvider = {
@@ -31,6 +41,7 @@ final class AccountScreenPresenter {
             didTapAddActivity: { [weak self] in
                 guard let self else { return }
                 let vm = AddExtracurricularActivityPopUpViewModel(
+                    activities: self.extracurricularActivities,
                     onClose: self.view?.dismissPopup,
                     didAddNewActivity: nil
                 )
@@ -39,6 +50,7 @@ final class AccountScreenPresenter {
             didTapAddOlympiad: { [weak self] in
                 guard let self else { return }
                 let vm = AddOlympiadPopUpViewModel(
+                    subjects: self.entSubjects,
                     onClose: self.view?.dismissPopup,
                     didAddNewOlympiad: nil
                 )
@@ -47,6 +59,7 @@ final class AccountScreenPresenter {
             didTapAddENTSubject: { [weak self] in
                 guard let self else { return }
                 let vm = AddENTSubjectPopUpViewModel(
+                    entSubjects: self.entSubjects,
                     onClose: self.view?.dismissPopup,
                     didAddNewSubject: nil
                 )
@@ -67,19 +80,19 @@ final class AccountScreenPresenter {
     var headerMenuViewModel: AccountScreenSegmentedReusableMenuViewModel {
         AccountScreenSegmentedReusableMenuViewModel(
             currentTab: selectedTab,
-            didSelectTab: { [weak self] in
-                self?.didSelectAnotherTab(newTab: $0)
-            }
+            didSelectTab: { [weak self] in self?.didSelectAnotherTab(newTab: $0) }
         )
     }
 
     // MARK: - INIT
     init(
         interactor: AccountScreenInteractorProtocol,
-        router: AccountScreenRouterProtocol
+        router: AccountScreenRouterProtocol,
+        errorService: ErrorServiceProtocol
     ) {
         self.interactor = interactor
         self.router = router
+        self.errorService = errorService
     }
 
     // MARK: - SNAPSHOT DISPATCH
@@ -168,7 +181,18 @@ final class AccountScreenPresenter {
 // MARK: - PROTOCOL
 extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     func viewDidLoad() {
-        didSelectAnotherTab(newTab: .myUniversities)
+        self.view?.showLoading()
+        
+        dispatchGroup.enter()
+        interactor.getEntSubjects()
+        
+        dispatchGroup.enter()
+        interactor.getExtracurricularActivities()
+        
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            self?.view?.hideLoading()
+            self?.didSelectAnotherTab(newTab: .myUniversities)
+        }
     }
 
     func didTapAppLogo() {
@@ -177,5 +201,20 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     
     func didTapTabBar() {
         router.showSidebar()
+    }
+    
+    func didReceiveENTSubjects(entSubjects: [ENTSubject]) {
+        self.entSubjects = entSubjects
+        dispatchGroup.leave()
+    }
+    
+    func didReceiveExtracurricularActivities(activities: [ECExtracurricularActivity]) {
+        self.extracurricularActivities = activities
+        dispatchGroup.leave()
+    }
+    
+    func didReceiveError(error: any Error) {
+        let userFacingError = errorService.handle(error)
+        self.view?.showError(error: userFacingError)
     }
 }

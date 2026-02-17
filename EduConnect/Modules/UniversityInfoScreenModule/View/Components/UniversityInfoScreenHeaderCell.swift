@@ -129,6 +129,11 @@ final class UniversityInfoScreenHeaderCell: UICollectionViewCell, ConfigurableCe
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        youtubeView.stopAndCleanup()
+    }
+    
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? UniversityInfoScreenHeaderCellViewModel else { return }

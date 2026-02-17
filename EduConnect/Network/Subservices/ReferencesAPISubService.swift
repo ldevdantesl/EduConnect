@@ -16,8 +16,8 @@ protocol ReferencesAPISubServiceProtocol {
     func getSpecialConditions() async throws -> [ECSpecialCondition]
     func getOlympiadTypes() async throws -> [ECOlympiadType]
     func getOlympiadPlaces() async throws -> [ECOlympiadPlace]
-    func getSubjects() async throws -> [ECSubject]
-    func getExtracurricularActivities() async throws -> [ECSubject]
+    func getSubjects() async throws -> [ENTSubject]
+    func getExtracurricularActivities() async throws -> [ECExtracurricularActivity]
 }
 
 final class ReferencesAPISubService: ReferencesAPISubServiceProtocol {
@@ -59,11 +59,11 @@ final class ReferencesAPISubService: ReferencesAPISubServiceProtocol {
         try await httpClient.request(ReferencesEndpoints.getOlympiadPlaces)
     }
     
-    func getSubjects() async throws -> [ECSubject] {
+    func getSubjects() async throws -> [ENTSubject] {
         try await httpClient.request(ReferencesEndpoints.getSubjects)
     }
     
-    func getExtracurricularActivities() async throws -> [ECSubject] {
+    func getExtracurricularActivities() async throws -> [ECExtracurricularActivity] {
         try await httpClient.request(ReferencesEndpoints.getExtracurricularActivities)
     }
 }

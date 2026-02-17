@@ -8,7 +8,7 @@
 import Foundation
 
 struct EduConnectResponse: Decodable {
-    let success: Bool
+    let success: Bool?
     let message: String?
     let errors: [String: [String]]?
 }
@@ -17,5 +17,12 @@ struct EduConnectDataResponse<T: Decodable>: Decodable {
     let success: Bool?
     let message: String?
     let data: T
+    let errors: [String: [String]]?
+}
+
+struct EduConnectOptionalDataResponse<T:Decodable>: Decodable {
+    let success: Bool?
+    let message: String?
+    let data: T?
     let errors: [String: [String]]?
 }

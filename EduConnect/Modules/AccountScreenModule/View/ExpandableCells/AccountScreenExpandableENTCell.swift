@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class AccountScreenExpandableENTCellViewModel: ExpandableCellViewModel {
-    private(set) var cellIdentifier: String = "AccountScreenExpandableENTCell"
+    private(set) var cellIdentifier: String = AccountScreenExpandableENTCell.identifier
     var isExpanded: Bool
     var didTapExpand: (() -> Void)?
     var didTapAddNewSubject: (() -> Void)?

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 struct SectionHeaderCellViewModel: CellViewModelProtocol, Hashable {
-    var cellIdentifier: String = "SectionHeaderCell"
+    var cellIdentifier: String = SectionHeaderCell.identifier
     let title: String
     let titleFamily: ECFont.Family
     let titleSize: CGFloat
@@ -30,6 +30,11 @@ struct SectionHeaderCellViewModel: CellViewModelProtocol, Hashable {
 }
 
 final class SectionHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
+    
+    // MARK: - CONSTANTS
+    fileprivate enum Constants {
+        static let spacing = 10
+    }
 
     // MARK: - PROPERTIES
     private var viewModel: SectionHeaderCellViewModel?
@@ -65,7 +70,8 @@ final class SectionHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
     private func setupUI() {
         self.contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.verticalEdges.equalToSuperview().inset(Constants.spacing)
+            $0.horizontalEdges.equalToSuperview()
         }
     }
 }

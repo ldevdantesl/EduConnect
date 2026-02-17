@@ -8,13 +8,10 @@
 import UIKit
 
 final class AccountScreenAssembler {
-    static func assemble(
-        appRouter: AppRoutingProtocol, sidebarService: SidebarServiceProtocol,
-        networkService: NetworkServiceProtocol, errorService: ErrorServiceProtocol
-    ) -> AccountScreenVC {
-        let interactor = AccountScreenInteractor()
-        let router = AccountScreenRouter(sidebarService: sidebarService, appRouter: appRouter, networkService: networkService, errorService: errorService)
-        let presenter = AccountScreenPresenter(interactor: interactor, router: router)
+    static func assemble(appRouter: AppRoutingProtocol) -> AccountScreenVC {
+        let interactor = AccountScreenInteractor(networkService: appRouter.diContainer.networkService)
+        let router = AccountScreenRouter(appRouter: appRouter)
+        let presenter = AccountScreenPresenter(interactor: interactor, router: router, errorService: appRouter.diContainer.errorService)
         let viewController = AccountScreenVC()
         presenter.view  = viewController
         viewController.presenter = presenter

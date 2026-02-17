@@ -19,6 +19,7 @@ enum MainScreenSection: Hashable {
 
 enum MainScreenItem: Hashable {
     case headerItem(DiffableItem<MainScreenHeaderCellViewModel>)
+    case stepsItem(DiffableItem<MainScreenStepsCellViewModel>)
     case careersItem(DiffableItem<MainScreenCareersCellViewModel>)
     case programItem(DiffableItem<MainScreenProgramsCellViewModel>)
     

@@ -11,9 +11,11 @@ import SnapKit
 struct MainScreenCareersCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = MainScreenCareersCell.identifier
     let universities: [ECUniversity]
+    let didTapUniversity: ((ECUniversity) -> Void)?
     
-    init(universities: [ECUniversity]) {
+    init(universities: [ECUniversity], didTapUniversity: ((ECUniversity) -> Void)? = nil) {
         self.universities = universities
+        self.didTapUniversity = didTapUniversity
     }
 }
 
@@ -129,7 +131,7 @@ extension MainScreenCareersCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainScreenCareersItem.identifier, for: indexPath) as? MainScreenCareersItem else { return UICollectionViewCell() }
         let item = viewModel?.universities[safe: indexPath.row] ?? ECUniversity.sample
-        let vm = MainScreenCareersItemViewModel(university: item)
+        let vm = MainScreenCareersItemViewModel(university: item) { [weak self] in self?.viewModel?.didTapUniversity?($0) }
         cell.configure(withVM: vm)
         return cell
     }
