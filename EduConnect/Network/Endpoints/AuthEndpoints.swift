@@ -12,8 +12,8 @@ enum AuthEndpoints: Endpoint {
     case verifyCode(email: String, code: String?)
     case register(email: String, password: String?, passwordConfirmation: String?)
     case login(email: String?, password: String?)
-    case logOut(token: String?)
-    case me(token: String?)
+    case logOut
+    case me
     
     var path: String {
         switch self {
@@ -35,9 +35,8 @@ enum AuthEndpoints: Endpoint {
     
     var auth: EndpointAuth {
         switch self {
-        case .logOut(let token): return .bearer(token: token)
-        case .me(let token): return .bearer(token: token)
-        default: return .none
+        case .logOut, .me: .bearer
+        default: .none
         }
     }
     

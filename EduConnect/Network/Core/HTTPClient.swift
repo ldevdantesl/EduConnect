@@ -8,7 +8,10 @@
 import Foundation
 
 protocol HTTPClientProtocol {
+    @discardableResult
     func request<T: Decodable>(_ endpoint: Endpoint) async throws -> T
+    
+    @discardableResult
     func request(_ endpoint: Endpoint) async throws -> Data
 }
 
@@ -19,18 +22,21 @@ final class HTTPClient: HTTPClientProtocol {
     private let decoder: JSONDecoder
     private let logger: NetworkLoggerProtocol?
     private let timeout: TimeInterval
+    private let tokenStorage: TokenStorageProtocol?
     
     // MARK: - Init
     init(
         session: URLSession = .shared,
         decoder: JSONDecoder = .init(),
         timeout: TimeInterval = 30,
-        logger: NetworkLoggerProtocol? = nil
+        logger: NetworkLoggerProtocol? = nil,
+        tokenStorage: TokenStorageProtocol? = nil
     ) {
         self.session = session
         self.decoder = decoder
         self.timeout = timeout
         self.logger = logger
+        self.tokenStorage = tokenStorage
     }
     
     // MARK: - Public
@@ -107,10 +113,14 @@ final class HTTPClient: HTTPClientProtocol {
         endpoint.headers?.forEach { key, value in
             request.setValue(value, forHTTPHeaderField: key)
         }
+        
         switch endpoint.auth {
-        case .apiKey(let apiKey): request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
-        case .bearer(let token): request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
-        case .none: break
+        case .bearer:
+            if let token = tokenStorage?.token {
+                request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+        case .none:
+            break
         }
         
         request.httpBody = endpoint.body

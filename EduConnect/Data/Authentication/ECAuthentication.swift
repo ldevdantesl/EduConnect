@@ -26,6 +26,7 @@ final class ECAuthentication: AuthenticationProtocol {
     init(networkService: NetworkServiceProtocol, tokenStorage: TokenStorageProtocol) {
         self.networkService = networkService
         self.tokenStorage = tokenStorage
+        print("token: ", tokenStorage.token ?? "")
     }
     
     var isLoggedIn: Bool {
@@ -53,12 +54,12 @@ final class ECAuthentication: AuthenticationProtocol {
     }
     
     func logOut() async throws {
-        try await networkService.authentication.logOut(token: tokenStorage.token)
+        try await networkService.authentication.logOut()
         tokenStorage.clear()
     }
     
     func me() async throws -> AuthUser {
-        let response: AuthUserAndTokenData = try await networkService.authentication.me(token: tokenStorage.token)
+        let response: AuthUserAndTokenData = try await networkService.authentication.me()
         return response.user
     }
 }

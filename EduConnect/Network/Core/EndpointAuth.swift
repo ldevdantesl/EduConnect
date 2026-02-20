@@ -8,7 +8,6 @@
 import Foundation
 
 enum EndpointAuth {
-    case apiKey(apiKey: String?)
-    case bearer(token: String?)
+    case bearer
     case none
 }
