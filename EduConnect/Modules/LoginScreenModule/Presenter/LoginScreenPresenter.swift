@@ -10,6 +10,7 @@ protocol LoginScreenPresenterProtocol: AnyObject {
     func didReceiveError(erorr: any Error)
     func didSendCode(email: String?)
     func didVerifyCode()
+    func didLogin(user: AuthUser)
     func didRegister(user: AuthUser)
 }
 
@@ -26,6 +27,12 @@ final class LoginScreenPresenter {
         self.interactor = interactor
         self.router = router
         self.errorService = errorService
+    }
+    
+    private func didPressLogin(email: String?, password: String?) {
+        self.view?.removeKeyboard()
+        self.view?.showLoading()
+        interactor.login(email: email, password: password)
     }
     
     private func didTapSendCode(email: String?) {
@@ -52,7 +59,16 @@ final class LoginScreenPresenter {
 extension LoginScreenPresenter: LoginScreenPresenterProtocol {
     func viewDidLoad() {
         var items: [LoginScreenItem] = []
+        let loginVM = LoginScreenLoginCellViewModel { [weak self] in
+            self?.didPressLogin(email: $0, password: $1)
+        } didPressRegister: {
+            self.view?.scrollToNextItem()
+        }
+        items.append(.loginItem(.init(id: "login", viewModel: loginVM)))
+        
         let registrationVM = LoginScreenRegistrationCellViewModel { [weak self] in
+            self?.view?.scrollToPreviousItem()
+        } didTapSendCode: { [weak self] in
             self?.didTapSendCode(email: $0)
         }
         items.append(.registrationItem(.init(id: "registration", viewModel: registrationVM)))
@@ -114,6 +130,12 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
     func didRegister(user: AuthUser) {
         self.view?.hideLoading()
         self.view?.scrollToNextItem()
+        self.user = user
+    }
+    
+    func didLogin(user: AuthUser) {
+        self.view?.hideLoading()
+        self.router.routeToMainScreen()
         self.user = user
     }
 }

@@ -10,6 +10,7 @@ import SnapKit
 
 struct LoginScreenRegistrationCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = "LoginScreenRegistrationCell"
+    let didPressBack: (() -> Void)?
     let didTapSendCode: ((String?) -> Void)?
 }
 
@@ -38,6 +39,15 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCellP
         label.numberOfLines = 1
         label.textAlignment = .center
         return label
+    }()
+    
+    private let backButton: ECIconButton = {
+        let backButtonVM = ECIconButtonVM(
+            systemImage: ImageConstants.SystemImages.chevronLeft.rawValue,
+            style: .title3, weight: .semibold
+        )
+        let button = ECIconButton(viewModel: backButtonVM)
+        return button
     }()
     
     private let enterEmailLabel: UILabel = {
@@ -88,6 +98,7 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCellP
         guard let vm = vm as? LoginScreenRegistrationCellViewModel else { return }
         self.viewModel = vm
         self.sendCodeButton.setAction { [weak self] in vm.didTapSendCode?(self?.emailTextField.text) }
+        self.backButton.setAction(action: vm.didPressBack)
         layoutIfNeeded()
     }
     
@@ -120,10 +131,18 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCellP
             $0.height.equalTo(SharedConstants.buttonHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
+        
         vStack.addArrangedSubview(bottomSpacer)
         topSpacer.snp.makeConstraints {
             $0.height.equalTo(bottomSpacer.snp.height).multipliedBy(0.6)
         }
+        
+        vStack.addSubview(backButton)
+        backButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(Constants.hSpacing)
+            $0.leading.equalToSuperview().offset(Constants.spacing)
+        }
+        
         
         contentView.addSubview(vStack)
         vStack.snp.makeConstraints {

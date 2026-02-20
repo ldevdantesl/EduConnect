@@ -40,6 +40,11 @@ public enum ConstantLocalizedStrings {
             static let goToAccountButton = String(localized: .Localizables.registrationGoToAccountButton)
             static let goToMainButton = String(localized: .Localizables.registrationGoToMainButton)
         }
+        
+        enum Words {
+            static let login = String(localized: .Localizables.registrationLogin)
+            static let register = String(localized: .Localizables.registrationRegister)
+        }
     }
     
     /// For __Common__ words

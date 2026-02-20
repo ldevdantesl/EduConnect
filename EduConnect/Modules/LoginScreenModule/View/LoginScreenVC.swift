@@ -30,6 +30,7 @@ final class LoginScreenVC: UIViewController {
         collectionView.registerCell(LoginScreenConfirmRegistrationCell.self, reuseID: LoginScreenConfirmRegistrationCell.identifier)
         collectionView.registerCell(LoginScreenSetPasswordCell.self, reuseID: LoginScreenSetPasswordCell.identifier)
         collectionView.registerCell(LoginScreenCompleteRegistrationCell.self, reuseID: LoginScreenCompleteRegistrationCell.identifier)
+        collectionView.registerCell(LoginScreenLoginCell.self, reuseID: LoginScreenLoginCell.identifier)
         collectionView.backgroundColor = .systemBlue
         collectionView.collectionView.backgroundColor = .systemBlue
         collectionView.collectionView.isPagingEnabled = true
@@ -56,6 +57,11 @@ final class LoginScreenVC: UIViewController {
     private func configureDataSource() {
         collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
+            case .loginItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoginScreenLoginCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
             case .completeRegisterItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoginScreenCompleteRegistrationCell
                 cell?.configure(withVM: item.viewModel)

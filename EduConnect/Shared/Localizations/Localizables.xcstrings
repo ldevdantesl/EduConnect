@@ -709,7 +709,7 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Загрузка"
           }
         }
@@ -987,6 +987,23 @@
         }
       }
     },
+    "registration_login" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log in"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Войти"
+          }
+        }
+      }
+    },
     "registration_re-enterPasswordTextField" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1000,6 +1017,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Повторите пароль"
+          }
+        }
+      }
+    },
+    "registration_register" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Register"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Зарегистрироваться"
           }
         }
       }
