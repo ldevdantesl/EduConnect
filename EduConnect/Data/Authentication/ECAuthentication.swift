@@ -20,7 +20,6 @@ protocol AuthenticationProtocol: AnyObject {
 
 
 final class ECAuthentication: AuthenticationProtocol {
-    private(set) var isLoggedInKey = "isLoggedInKey"
     private let networkService: NetworkServiceProtocol
     private let tokenStorage: TokenStorageProtocol
     
@@ -30,7 +29,7 @@ final class ECAuthentication: AuthenticationProtocol {
     }
     
     var isLoggedIn: Bool {
-        ECUserDefaults.get(Bool.self, forKey: isLoggedInKey) ?? false
+        tokenStorage.token != nil
     }
     
     func sendVerificationCode(email: String?) async throws {
@@ -43,29 +42,23 @@ final class ECAuthentication: AuthenticationProtocol {
     
     func register(email: String, password: String?, passwordConfirmation: String?) async throws -> AuthUser {
         let response: AuthUserAndTokenData = try await networkService.authentication.register(email: email, password: password, confirmPassword: passwordConfirmation)
-        if let token = response.token {
-            tokenStorage.save(token: token)
-            try ECUserDefaults.save(true, forKey: isLoggedInKey)
-        }
+        if let token = response.token { tokenStorage.save(token: token) }
         return response.user
     }
     
     func logIn(email: String?, password: String?) async throws -> AuthUser {
         let response: AuthUserAndTokenData = try await networkService.authentication.login(email: email, password: password)
-        if let token = response.token {
-            tokenStorage.save(token: token)
-            try ECUserDefaults.save(false, forKey: isLoggedInKey)
-        }
+        if let token = response.token { tokenStorage.save(token: token) }
         return response.user
     }
     
     func logOut() async throws {
-        try await networkService.authentication.logOut()
-        try ECUserDefaults.save(false, forKey: isLoggedInKey)
+        try await networkService.authentication.logOut(token: tokenStorage.token)
+        tokenStorage.clear()
     }
     
     func me() async throws -> AuthUser {
-        let response: AuthUserAndTokenData = try await networkService.authentication.me()
+        let response: AuthUserAndTokenData = try await networkService.authentication.me(token: tokenStorage.token)
         return response.user
     }
 }

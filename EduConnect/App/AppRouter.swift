@@ -106,6 +106,20 @@ final class AppRouter: AppRoutingProtocol {
             let vc = ProfessionsScreenAssembler.assemble(appRouter: self)
             navController.setViewControllers([vc], animated: true)
             
+        case .logout:
+            Task { [weak self] in
+                guard let self else { return }
+                self.sidebarService.container?.showHoverLoading()
+                do {
+                    try await authState.logOut()
+                    self.routeToAuthentication()
+                    self.sidebarService.container?.hideHoverLoading()
+                } catch {
+                    let userFacingError = self.errorService.handle(error)
+                    self.sidebarService.container?.showToastedError(userError: userFacingError)
+                }
+            }
+            
         case .none: print("Not navigating")
         }
     }

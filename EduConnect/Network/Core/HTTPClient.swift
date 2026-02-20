@@ -107,6 +107,11 @@ final class HTTPClient: HTTPClientProtocol {
         endpoint.headers?.forEach { key, value in
             request.setValue(value, forHTTPHeaderField: key)
         }
+        switch endpoint.auth {
+        case .apiKey(let apiKey): request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
+        case .bearer(let token): request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
+        case .none: break
+        }
         
         request.httpBody = endpoint.body
         

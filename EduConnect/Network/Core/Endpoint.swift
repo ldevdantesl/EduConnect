@@ -13,6 +13,7 @@ protocol Endpoint {
     var method: HTTPMethod { get }
     var headers: [String: String]? { get }
     var queryItems: [URLQueryItem]? { get }
+    var auth: EndpointAuth { get }
     var body: Data? { get }
 }
 
@@ -20,5 +21,6 @@ extension Endpoint {
     var baseURL: String { APIConstants.baseURL }
     var headers: [String: String]? { nil }
     var queryItems: [URLQueryItem]? { nil }
+    var auth: EndpointAuth { .none }
     var body: Data? { nil }
 }

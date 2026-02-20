@@ -11,13 +11,15 @@ protocol AuthAPISubServiceProtocol {
     func login(email: String?, password: String?) async throws -> AuthUserAndTokenData
     
     @discardableResult
-    func logOut() async throws -> EduConnectResponse
+    func logOut(token: String?) async throws -> EduConnectResponse
+    func me(token: String?) async throws -> AuthUserAndTokenData
+    
     @discardableResult
     func sendCode(email: String?) async throws -> EduConnectResponse
+    
     @discardableResult
     func verifyCode(email: String, code: String?) async throws -> EduConnectResponse
     
-    func me() async throws -> AuthUserAndTokenData
     func register(email: String, password: String?, confirmPassword: String?) async throws -> AuthUserAndTokenData
 }
 
@@ -51,11 +53,11 @@ final class AuthAPISubService: AuthAPISubServiceProtocol {
     }
     
     @discardableResult
-    func logOut() async throws -> EduConnectResponse {
-        try await httpClient.request(AuthEndpoints.logOut)
+    func logOut(token: String?) async throws -> EduConnectResponse {
+        try await httpClient.request(AuthEndpoints.logOut(token: token))
     }
     
-    func me() async throws -> AuthUserAndTokenData {
-        try await httpClient.request(AuthEndpoints.me)
+    func me(token: String?) async throws -> AuthUserAndTokenData {
+        try await httpClient.request(AuthEndpoints.me(token: token))
     }
 }

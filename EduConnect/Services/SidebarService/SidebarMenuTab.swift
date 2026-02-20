@@ -12,6 +12,7 @@ enum SidebarMenuTab: CaseIterable {
     case universities
     case programs
     case professions
+    case logout
     case none
     
     var title: String {
@@ -20,6 +21,7 @@ enum SidebarMenuTab: CaseIterable {
         case .programs:     return ConstantLocalizedStrings.Sidebar.programs
         case .professions:  return ConstantLocalizedStrings.Sidebar.professions
         case .main:         return ConstantLocalizedStrings.Sidebar.main
+        case .logout:       return ConstantLocalizedStrings.Sidebar.logOut
         case .none:         return ""
         }
     }

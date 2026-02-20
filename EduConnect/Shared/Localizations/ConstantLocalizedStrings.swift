@@ -148,5 +148,6 @@ public enum ConstantLocalizedStrings {
         static let tests = String(localized: .Localizables.sidebarTests)
         static let articles = String(localized: .Localizables.sidebarArticles)
         static let calendar = String(localized: .Localizables.sidebarCalendar)
+        static let logOut = String(localized: .Localizables.sidebarLogout)
     }
 }
