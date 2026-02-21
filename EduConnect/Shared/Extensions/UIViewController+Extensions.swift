@@ -88,7 +88,7 @@ extension UIViewController {
         
         let overlay = UIView()
         overlay.tag = hoverLoadingTag
-        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.15)
+        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         overlay.alpha = 0
         
         let logoImageView = UIImageView()

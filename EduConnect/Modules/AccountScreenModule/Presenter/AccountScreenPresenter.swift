@@ -13,19 +13,28 @@ protocol AccountScreenPresenterProtocol: AnyObject {
     func didTapAppLogo()
     var selectedTab: AccountScreenTab { get set }
     var headerMenuViewModel: AccountScreenSegmentedReusableMenuViewModel { get }
-    
+
+    func didPerformTask(message: String?, refreshReason: AccountScreenPresenter.RefreshReason)
+    func didReceiveProfile(_ profile: Profile)
+    func didReceiveProfileApplications(_ applications: [Application])
     func didReceiveENTSubjects(entSubjects: [ENTSubject])
     func didReceiveExtracurricularActivities(activities: [ECExtracurricularActivity])
     func didReceiveError(error: any Error)
 }
 
 final class AccountScreenPresenter {
-
+    
+    enum RefreshReason {
+        case initial
+        case entChanged
+    }
+    
     // MARK: - VIPER
     weak var view: AccountScreenViewProtocol?
     private let router: AccountScreenRouterProtocol
     private let interactor: AccountScreenInteractorProtocol
     private let errorService: ErrorServiceProtocol
+    private var refreshReason: RefreshReason = .initial
 
     // MARK: - STATE
     var selectedTab: AccountScreenTab = .main
@@ -34,10 +43,51 @@ final class AccountScreenPresenter {
     private let dispatchGroup = DispatchGroup()
     private(set) var extracurricularActivities: [ECExtracurricularActivity] = []
     private(set) var entSubjects: [ENTSubject] = []
+    private var profile: Profile?
+    private var applications: [Application] = []
 
     // MARK: - EXPANDABLE PROVIDER
     private lazy var expandableProvider: ExpandableViewModelsProvider = {
-        let actions = ExpandableActions(
+        let view = ExpandableViewModelsProvider()
+        view.onCellToggled = { [weak self] item in
+            self?.view?.reconfigureItems(items: [item])
+        }
+        return view
+    }()
+
+    // MARK: - HEADER MENUVM
+    var headerMenuViewModel: AccountScreenSegmentedReusableMenuViewModel {
+        AccountScreenSegmentedReusableMenuViewModel(
+            currentTab: selectedTab,
+            didSelectTab: { [weak self] in self?.didSelectAnotherTab(newTab: $0) }
+        )
+    }
+
+    // MARK: - INIT
+    init(
+        interactor: AccountScreenInteractorProtocol,
+        router: AccountScreenRouterProtocol,
+        errorService: ErrorServiceProtocol
+    ) {
+        self.interactor = interactor
+        self.router = router
+        self.errorService = errorService
+    }
+
+    // MARK: - EXPANDABLE PROVIDER
+    private func configureExpandableProvider() {
+        guard let profile else { return }
+        
+        expandableProvider.configure(profile: profile, actions: makeActions())
+    }
+
+    private func makeActions() -> ExpandableActions {
+        ExpandableActions(
+            didTapSaveEntYear: { [weak self] in
+                guard let self else { return }
+                self.view?.showLoading()
+                self.interactor.setENTYear(year: $0)
+            },
             didTapAddActivity: { [weak self] in
                 guard let self else { return }
                 let vm = AddExtracurricularActivityPopUpViewModel(
@@ -61,40 +111,18 @@ final class AccountScreenPresenter {
                 let vm = AddENTSubjectPopUpViewModel(
                     entSubjects: self.entSubjects,
                     onClose: self.view?.dismissPopup,
-                    didAddNewSubject: nil
+                    didAddNewSubject: self.didTapAddEntSubject
                 )
                 self.router.showAddEntSubjectPopUp(viewModel: vm)
+            },
+            didTapDeleteENTSubject: { [weak self] in
+                guard let self = self else { return }
+                self.view?.showLoading()
+                self.interactor.deleteENTSubject(subject: $0)
             }
         )
-
-        let provider = ExpandableViewModelsProvider(actions: actions)
-
-        provider.onCellToggled = { [weak self] item in
-            self?.view?.reconfigureItems(items: [item])
-        }
-
-        return provider
-    }()
-
-    // MARK: - HEADER MENU VM
-    var headerMenuViewModel: AccountScreenSegmentedReusableMenuViewModel {
-        AccountScreenSegmentedReusableMenuViewModel(
-            currentTab: selectedTab,
-            didSelectTab: { [weak self] in self?.didSelectAnotherTab(newTab: $0) }
-        )
     }
-
-    // MARK: - INIT
-    init(
-        interactor: AccountScreenInteractorProtocol,
-        router: AccountScreenRouterProtocol,
-        errorService: ErrorServiceProtocol
-    ) {
-        self.interactor = interactor
-        self.router = router
-        self.errorService = errorService
-    }
-
+    
     // MARK: - SNAPSHOT DISPATCH
     private func didSelectAnotherTab(newTab: AccountScreenTab) {
         guard selectedTab != newTab else { return }
@@ -102,17 +130,18 @@ final class AccountScreenPresenter {
 
         switch newTab {
         case .myUniversities:
-            showUniversities(tab: newTab)
+            showUniversities()
         case .application:
-            showApplication(tab: newTab)
+            view?.showLoading()
+            interactor.getProfile()
         case .main:
-            showMain(tab: newTab)
+            showMain()
         }
     }
 
     // MARK: - SNAPSHOTS
-    private func showUniversities(tab: AccountScreenTab) {
-        let headerVM = makeHeaderVM(for: tab)
+    private func showUniversities() {
+        let headerVM = makeHeaderVM(for: .myUniversities)
         let university = ECUniversity.sample
         let universityVM = UniversityCellViewModel(university: university) { [weak self] in
             self?.router.routeToUniversityInfo($0)
@@ -129,8 +158,8 @@ final class AccountScreenPresenter {
         )
     }
 
-    private func showApplication(tab: AccountScreenTab) {
-        let headerVM = makeHeaderVM(for: tab)
+    private func showApplication() {
+        let headerVM = makeHeaderVM(for: .application)
 
         var items: [AccountScreenItem] = [
             .headerItem(.init(id: "header", viewModel: headerVM))
@@ -154,8 +183,8 @@ final class AccountScreenPresenter {
         )
     }
 
-    private func showMain(tab: AccountScreenTab) {
-        let headerVM = makeHeaderVM(for: tab)
+    private func showMain() {
+        let headerVM = makeHeaderVM(for: .main)
         let infoVM = AccountScreenMainTabInfoCellViewModel()
 
         view?.applySnapshot(
@@ -175,6 +204,12 @@ final class AccountScreenPresenter {
             title: tab.tabTitles,
             titleSize: 30
         )
+    }
+    
+    // MARK: - ACTIONS
+    private func didTapAddEntSubject(subject: ENTSubject, score: String) {
+        self.view?.showLoading()
+        self.interactor.addENTSubject(subject: subject, score: score)
     }
 }
 
@@ -203,6 +238,35 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
         router.showSidebar()
     }
     
+    func didPerformTask(message: String?, refreshReason: AccountScreenPresenter.RefreshReason) {
+        interactor.getProfile()
+        if let message {
+            self.view?.showMessage(message: message)
+        }
+        self.refreshReason = refreshReason
+    }
+    
+    func didReceiveProfile(_ profile: Profile) {
+        self.profile = profile
+        configureExpandableProvider()
+        self.view?.hideLoading()
+        
+        switch refreshReason {
+        case .initial:
+            showApplication()
+        case .entChanged:
+            showApplication()
+            if let item = expandableProvider.makeExpandableItem(for: .ENT) {
+                view?.reconfigureItems(items: [item])
+            }
+            self.view?.dismissPopup()
+        }
+    }
+    
+    func didReceiveProfileApplications(_ applications: [Application]) {
+        self.applications = applications
+    }
+    
     func didReceiveENTSubjects(entSubjects: [ENTSubject]) {
         self.entSubjects = entSubjects
         dispatchGroup.leave()
@@ -216,5 +280,6 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     func didReceiveError(error: any Error) {
         let userFacingError = errorService.handle(error)
         self.view?.showError(error: userFacingError)
+        self.view?.hideLoading()
     }
 }

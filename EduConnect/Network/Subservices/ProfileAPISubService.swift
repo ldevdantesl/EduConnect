@@ -8,6 +8,14 @@
 import Foundation
 
 protocol ProfileAPISubServiceProtocol {
+    
+    func getProfile() async throws -> Profile
+    func getEducation() async throws -> ProfileEducation
+    func getETH() async throws -> ProfileETH
+    func getFamilyMembers() async throws -> [ProfileFamilyContact]
+    func getOlympiads() async throws -> [ProfileOlympiad]
+    func getExtracurricular() async throws -> [ProfileExtracurricular]
+    
     @discardableResult
     func updatePersonal(surname: String?, name: String?, patronymic: String?, phoneNumber: String?) async throws -> EduConnectResponse
     
@@ -31,6 +39,7 @@ protocol ProfileAPISubServiceProtocol {
     
     @discardableResult
     func addOlympiad(olympiadTypeID: Int, olympiadPlaceID: Int, year: String) async throws -> EduConnectResponse
+    
     @discardableResult
     func deleteOlympiad(olympiadID: Int) async throws -> EduConnectResponse
     
@@ -46,6 +55,36 @@ final class ProfileAPISubService: ProfileAPISubServiceProtocol {
     
     init(httpClient: HTTPClientProtocol) {
         self.httpClient = httpClient
+    }
+    
+    func getProfile() async throws -> Profile {
+        let response: EduConnectDataResponse<ProfileResponse> = try await httpClient.request(ProfileEndpoints.getProfile)
+        return response.data.user
+    }
+
+    func getEducation() async throws -> ProfileEducation {
+        let response: EduConnectDataResponse<ProfileEducation> = try await httpClient.request(ProfileEndpoints.getEducation)
+        return response.data
+    }
+
+    func getETH() async throws -> ProfileETH {
+        let response: EduConnectDataResponse<ProfileETH> = try await httpClient.request(ProfileEndpoints.getETH)
+        return response.data
+    }
+
+    func getFamilyMembers() async throws -> [ProfileFamilyContact] {
+        let response: EduConnectDataResponse<[ProfileFamilyContact]> = try await httpClient.request(ProfileEndpoints.getFamilyMembers)
+        return response.data
+    }
+
+    func getOlympiads() async throws -> [ProfileOlympiad] {
+        let response: EduConnectDataResponse<[ProfileOlympiad]> = try await httpClient.request(ProfileEndpoints.getOlympiads)
+        return response.data
+    }
+
+    func getExtracurricular() async throws -> [ProfileExtracurricular] {
+        let response: EduConnectDataResponse<[ProfileExtracurricular]> = try await httpClient.request(ProfileEndpoints.getExtracurricular)
+        return response.data
     }
     
     func updatePersonal(surname: String?, name: String?, patronymic: String?, phoneNumber: String?) async throws -> EduConnectResponse {

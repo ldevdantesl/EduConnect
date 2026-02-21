@@ -9,12 +9,14 @@ import UIKit
 import SnapKit
 
 final class AccountScreenExpandableEducationCellViewModel: ExpandableCellViewModel {
-    private(set) var cellIdentifier: String = "AccountScreenExpandableEducationCell"
+    private(set) var cellIdentifier: String = AccountScreenExpandableEducationCell.identifier
+    let profile: Profile
     var isExpanded: Bool
     let didTapExpand: (() -> Void)?
     let didTapSave: ((String?, String?, String?) -> Void)?
     
-    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?, String?) -> Void)? = nil) {
+    init(profile: Profile, isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?, String?) -> Void)? = nil) {
+        self.profile = profile
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
         self.didTapSave = didTapSave
@@ -154,6 +156,9 @@ final class AccountScreenExpandableEducationCell: UICollectionViewCell, Configur
         guard let vm = vm as? AccountScreenExpandableEducationCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()
+        schoolField.text = vm.profile.education.educationalInstitution
+        finalClassField.text = vm.profile.education.educationClass
+        averageField.text = vm.profile.education.averageScore
     }
     
     // MARK: - PRIVATE FUNC

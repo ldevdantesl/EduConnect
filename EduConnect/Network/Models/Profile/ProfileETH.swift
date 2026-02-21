@@ -28,7 +28,7 @@ struct ProfileETH: Decodable {
         let id: Int
         let studentEthID: Int
         let subjectID: Int
-        let score: Int
+        let score: Int?
         let createdAt: String
         let updatedAt: String
         let subject: InnerSubject
@@ -46,7 +46,7 @@ struct ProfileETH: Decodable {
     
     let id: Int
     let studentID: Int?
-    let year: Int
+    let year: Int?
     let createdAt: String?
     let updatedAt: String?
     let subjects: [Subject]

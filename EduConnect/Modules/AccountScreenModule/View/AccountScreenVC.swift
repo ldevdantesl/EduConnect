@@ -11,10 +11,13 @@ import SnapKit
 protocol AccountScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [AccountScreenSection], itemsBySection: [AccountScreenSection : [AccountScreenItem]])
     func reconfigureItems(items: [AccountScreenItem])
+    func reloadSection(section: AccountScreenSection)
+    
     func showPopup(_ popUp: PopUpView)
     func dismissPopup()
     
     func showError(error: UserFacingError)
+    func showMessage(message: String)
     func showLoading()
     func hideLoading()
 }
@@ -130,6 +133,10 @@ extension AccountScreenVC: AccountScreenViewProtocol {
         collectionContainer.reconfigureItems(items)
     }
     
+    func reloadSection(section: AccountScreenSection) {
+        collectionContainer.reloadSection(section: section)
+    }
+    
     func showPopup(_ popUp: PopUpView) {
         self.popUpView = popUp
         popUp.show(in: view)
@@ -142,6 +149,10 @@ extension AccountScreenVC: AccountScreenViewProtocol {
     
     func showError(error: UserFacingError) {
         self.showToastedError(userError: error)
+    }
+    
+    func showMessage(message: String) {
+        self.showToastedMessage(message: message)
     }
     
     func showLoading() {

@@ -375,6 +375,23 @@
         }
       }
     },
+    "account_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Имя"
+          }
+        }
+      }
+    },
     "account_olympiad" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -443,6 +460,23 @@
         }
       }
     },
+    "account_patronymic" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Patronymic"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отчество"
+          }
+        }
+      }
+    },
     "account_personalInfoName" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -507,6 +541,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Личная Информация"
+          }
+        }
+      }
+    },
+    "account_surname" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Surname"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фамилия"
           }
         }
       }

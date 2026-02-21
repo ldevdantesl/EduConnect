@@ -8,6 +8,7 @@
 import UIKit
 
 protocol NetworkServiceProtocol {
+    var application: ApplicationAPISubServiceProtocol { get }
     var authentication: AuthAPISubServiceProtocol { get }
     var references: ReferencesAPISubServiceProtocol { get }
     var news: NewsAPISubServiceProtocol { get }

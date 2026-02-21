@@ -83,6 +83,18 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
         snapshot.reloadSections(snapshot.sectionIdentifiers)
         diffableDataSource.apply(snapshot, animatingDifferences: false)
     }
+    
+    func reloadData() {
+        var snapshot = diffableDataSource.snapshot()
+        snapshot.reloadSections(snapshot.sectionIdentifiers)
+        diffableDataSource.apply(snapshot, animatingDifferences: false)
+    }
+    
+    func reloadSection(section: Section) {
+        var snapshot = diffableDataSource.snapshot()
+        snapshot.reloadSections([section])
+        diffableDataSource.apply(snapshot, animatingDifferences: true)
+    }
 
     func applySnapshot(
         sections: [Section],

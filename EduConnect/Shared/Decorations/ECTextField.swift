@@ -25,6 +25,7 @@ open class ECTextField: UITextField, UITextFieldDelegate {
     // MARK: - LIFECYCLE
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.font = ECFont.font(.medium, size: 14)
     }
     
     convenience init(placeHolder: String, showsBorder: Bool = true, cornerRadius: CGFloat = 15) {

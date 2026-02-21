@@ -9,15 +9,20 @@ import UIKit
 import SnapKit
 
 final class AccountScreenExpandablePersonalInfoCellViewModel: ExpandableCellViewModel {
-    var cellIdentifier: String = "AccountScreenExpandablePersonalInfoCell"
+    var cellIdentifier: String = AccountScreenExpandablePersonalInfoCell.identifier
     var isExpanded: Bool
+    let profile: Profile?
     let didTapExpand: (() -> Void)?
     let didTapSave: ((String?, String?, String?) -> Void)?
     
-    init(isExpanded: Bool = false, didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?, String?) -> Void)? = nil) {
+    init(
+        profile: Profile?, isExpanded: Bool = false,
+        didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?, String?) -> Void)? = nil
+    ) {
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
         self.didTapSave = didTapSave
+        self.profile = profile
     }
 }
 
@@ -155,6 +160,10 @@ final class AccountScreenExpandablePersonalInfoCell: UICollectionViewCell, Confi
         guard let vm = vm as? AccountScreenExpandablePersonalInfoCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()
+        guard let profile = vm.profile else { return }
+        nameField.text = profile.name
+        surnameField.text = profile.surname
+        patronymicField.text = profile.patronymic
     }
     
     // MARK: - PRIVATE FUNC

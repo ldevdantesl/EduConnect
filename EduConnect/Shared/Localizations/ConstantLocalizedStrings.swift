@@ -137,6 +137,12 @@ public enum ConstantLocalizedStrings {
                 static let chooseOlympiad = String(localized: .Localizables.accountOlympiadChooseOlympiad)
             }
         }
+        
+        enum Words {
+            static let name = String(localized: .Localizables.accountName)
+            static let surname = String(localized: .Localizables.accountSurname)
+            static let patronymic = String(localized: .Localizables.accountPatronymic)
+        }
     }
     
     /// For __Sidebar__ Container

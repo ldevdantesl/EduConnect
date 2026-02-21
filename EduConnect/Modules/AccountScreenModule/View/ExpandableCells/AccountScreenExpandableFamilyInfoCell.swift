@@ -9,12 +9,14 @@ import UIKit
 import SnapKit
 
 final class AccountScreenExpandableFamilyInfoCellViewModel: ExpandableCellViewModel {
-    var cellIdentifier: String = "AccountScreenExpandableFamilyInfoCell"
+    let cellIdentifier: String = AccountScreenExpandableFamilyInfoCell.identifier
+    let profile: Profile
     var isExpanded: Bool
     let didTapExpand: (() -> Void)?
     let didTapSave: ((String?, String?) -> Void)?
     
-    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?) -> Void)? = nil) {
+    init(profile: Profile, isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?) -> Void)? = nil) {
+        self.profile = profile
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
         self.didTapSave = didTapSave
@@ -134,6 +136,12 @@ final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, Configu
         guard let vm = vm as? AccountScreenExpandableFamilyInfoCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()
+        
+        let father = vm.profile.familyContacts.indices.contains(0) ? vm.profile.familyContacts[0] : nil
+        let mother = vm.profile.familyContacts.indices.contains(1) ? vm.profile.familyContacts[1] : nil
+
+        fathersPhoneNumberField.text = father?.phoneNumber
+        momsPhoneNumberField.text = mother?.phoneNumber
     }
     
     // MARK: - PRIVATE FUNC

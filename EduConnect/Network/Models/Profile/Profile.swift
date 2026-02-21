@@ -23,10 +23,10 @@ struct Profile: Decodable {
     
     let id: Int
     let name: String
-    let surname: String
-    let patronymic: String
-    let email: String
-    let phone: String
+    let surname: String?
+    let patronymic: String?
+    let email: String?
+    let phone: String?
     let isActive: Bool
     let createdAt: String
     let updatedAt: String
@@ -34,7 +34,7 @@ struct Profile: Decodable {
     let eth: ProfileETH
     let familyContacts: [ProfileFamilyContact]
     let olympiads: [ProfileOlympiad]
-    let extracurricularActivities: [ProfileExtracurricularActivity]
+    let extracurricularActivities: [ProfileExtracurricular]
 
     enum CodingKeys: String, CodingKey {
         case id, name, surname, patronymic, email, phone

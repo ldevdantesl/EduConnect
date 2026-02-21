@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProfileExtracurricularActivity: Decodable {
+struct ProfileExtracurricular: Decodable {
     let id: Int
     let extracurricularActivityID: Int?
     let name: String
