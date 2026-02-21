@@ -111,8 +111,7 @@ open class ECTextField: UITextField, UITextFieldDelegate {
     private func updateInputAccessoryIfNeeded() {
         switch keyboardType {
         case .numberPad, .phonePad:
-            let toolbar = UIToolbar()
-            toolbar.sizeToFit()
+            let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: SharedConstants.screenWidth, height: 44))
 
             let flex = UIBarButtonItem(
                 barButtonSystemItem: .flexibleSpace,

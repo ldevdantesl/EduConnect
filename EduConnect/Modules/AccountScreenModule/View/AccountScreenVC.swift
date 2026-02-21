@@ -45,6 +45,7 @@ final class AccountScreenVC: UIViewController {
         let cv = DiffableCollectionViewContainer<AccountScreenSection, AccountScreenItem>(
             layout: AccountLayoutFactory.make()
         )
+        cv.adjustsForKeyboard = true
         cv.resignsFirstResponderOnScroll = true
         cv.registerCell(UniversityCell.self, reuseID: UniversityCell.identifier)
         cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
