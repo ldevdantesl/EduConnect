@@ -9,15 +9,29 @@ import UIKit
 import SnapKit
 
 final class AccountScreenExpandableExtracurricularCellViewModel: ExpandableCellViewModel {
-    private(set) var cellIdentifier: String = "AccountScreenExpandableExtracurricularCell"
+    private(set) var cellIdentifier: String = AccountScreenExpandableExtracurricularCell.identifier
     var isExpanded: Bool
+    let profile: Profile
     let didTapExpand: (() -> Void)?
     let didTapAddActivity: (() -> Void)?
+    let didTapDeleteActivity: ((ProfileExtracurricular) -> Void)?
     
-    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapAddActivity: (() -> Void)? = nil) {
+    var extracurricularActivities: [ProfileExtracurricular] {
+        profile.extracurricularActivities
+    }
+    
+    init(
+        profile: Profile,
+        isExpanded: Bool,
+        didTapExpand: (() -> Void)? = nil,
+        didTapAddActivity: (() -> Void)? = nil,
+        didTapDeleteActivity: ((ProfileExtracurricular) -> Void)? = nil
+    ) {
+        self.profile = profile
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
         self.didTapAddActivity = didTapAddActivity
+        self.didTapDeleteActivity = didTapDeleteActivity
     }
 }
 
@@ -25,7 +39,6 @@ final class AccountScreenExpandableExtracurricularCell: UICollectionViewCell, Co
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
-        
         static let plusImageName = "plus"
         static let expandImageSize = 20.0
         static let chevronDownImage = "chevron.down"
@@ -35,7 +48,6 @@ final class AccountScreenExpandableExtracurricularCell: UICollectionViewCell, Co
     // MARK: - PROPERTIES
     private var viewModel: AccountScreenExpandableExtracurricularCellViewModel?
     private var expandableHeightConstraint: Constraint?
-    private var isEditing: Bool = false
     
     // MARK: - VIEW PROPERTIES
     private var headerContainer: UIView = {
@@ -67,7 +79,15 @@ final class AccountScreenExpandableExtracurricularCell: UICollectionViewCell, Co
         return label
     }()
     
-    private lazy var addExtraCurricularActivityView: UIView = makeExtraCurricularButton()
+    private let activitiesStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8
+        stack.alignment = .fill
+        return stack
+    }()
+    
+    private lazy var addActivityButton: UIView = makeAddActivityButton()
     
     // MARK: - LIFECYCLE
     override init(frame: CGRect) {
@@ -94,6 +114,7 @@ final class AccountScreenExpandableExtracurricularCell: UICollectionViewCell, Co
     override func prepareForReuse() {
         super.prepareForReuse()
         collapseCell()
+        activitiesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     // MARK: - PUBLIC FUNC
@@ -101,12 +122,13 @@ final class AccountScreenExpandableExtracurricularCell: UICollectionViewCell, Co
         guard let vm = vm as? AccountScreenExpandableExtracurricularCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()
+        populateActivities()
     }
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapExpand))
-        self.headerContainer.addGestureRecognizer(tap)
+        headerContainer.addGestureRecognizer(tap)
         
         contentView.addSubview(headerContainer)
         headerContainer.snp.makeConstraints {
@@ -135,10 +157,16 @@ final class AccountScreenExpandableExtracurricularCell: UICollectionViewCell, Co
             expandableHeightConstraint = $0.height.equalTo(0).priority(.required).constraint
         }
         
-        expandableContainer.addSubview(addExtraCurricularActivityView)
-        addExtraCurricularActivityView.snp.makeConstraints {
+        expandableContainer.addSubview(activitiesStackView)
+        activitiesStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Constants.spacing).priority(.high)
-            $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
+            $0.horizontalEdges.equalToSuperview()
+        }
+        
+        expandableContainer.addSubview(addActivityButton)
+        addActivityButton.snp.makeConstraints {
+            $0.top.equalTo(activitiesStackView.snp.bottom).offset(Constants.spacing)
+            $0.leading.equalToSuperview().offset(Constants.spacing)
             $0.bottom.equalToSuperview().offset(-Constants.spacing).priority(.high)
         }
     }
@@ -155,29 +183,48 @@ final class AccountScreenExpandableExtracurricularCell: UICollectionViewCell, Co
         layoutIfNeeded()
     }
     
-    private func makeExtraCurricularButton() -> UIView {
+    private func populateActivities() {
+        activitiesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        viewModel?.extracurricularActivities.forEach { activity in
+            let fileURLs = activity.files.compactMap { $0.fileURL }
+            let vm = DeletableFileViewModel(
+                title: activity.name,
+                subtitle: activity.description,
+                imageURLs: fileURLs,
+                onDelete: { [weak self] in
+                    self?.viewModel?.didTapDeleteActivity?(activity)
+                }
+            )
+            let fileView = DeletableFileView(viewModel: vm)
+            activitiesStackView.addArrangedSubview(fileView)
+        }
+    }
+    
+    private func makeAddActivityButton() -> UIView {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: Constants.plusImageName)
         imageView.tintColor = .systemBlue
         
-        let addSubjectTextLabel = UILabel()
-        addSubjectTextLabel.text = ConstantLocalizedStrings.Account.Expandable.ExtraActivity.addActivity
-        addSubjectTextLabel.textColor = .systemBlue
-        addSubjectTextLabel.font = ECFont.font(.regular, size: 14)
+        let label = UILabel()
+        label.text = ConstantLocalizedStrings.Account.Expandable.ExtraActivity.addActivity
+        label.textColor = .systemBlue
+        label.font = ECFont.font(.regular, size: 14)
         
         let view = UIView()
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAddActivity)))
+        
         view.addSubview(imageView)
         imageView.snp.makeConstraints {
             $0.leading.centerY.equalToSuperview()
             $0.size.equalTo(Constants.expandImageSize)
         }
         
-        view.addSubview(addSubjectTextLabel)
-        addSubjectTextLabel.snp.makeConstraints {
+        view.addSubview(label)
+        label.snp.makeConstraints {
             $0.leading.equalTo(imageView.snp.trailing).offset(Constants.spacing)
-            $0.trailing.equalToSuperview().offset(Constants.spacing)
+            $0.trailing.equalToSuperview()
             $0.centerY.equalTo(imageView)
             $0.bottom.equalToSuperview().offset(-Constants.spacing)
         }

@@ -46,6 +46,7 @@ public enum ImageConstants: String {
         case chevronLeft = "chevron.left"
         case trash = "trash.fill"
         case xmarkCircle = "xmark.circle.fill"
+        case folder = "folder.fill"
         
         var image: UIImage? {
             UIImage(systemName: rawValue)

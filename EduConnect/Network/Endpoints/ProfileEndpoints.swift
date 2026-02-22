@@ -20,7 +20,7 @@ enum ProfileEndpoints: Endpoint {
     case deleteETHSubject(subjectID: Int)
     
     case getFamilyMembers
-    case addFamilyMember(familyMemberID: Int, fullName: String, phoneNumber: String)
+    case addFamilyMember(familyMemberID: Int, fullName: String?, phoneNumber: String?)
     case deleteFamilyMember(familyMemberID: Int)
     
     case getOlympiads

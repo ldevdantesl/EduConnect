@@ -14,8 +14,14 @@ protocol AccountScreenInteractorProtocol: AnyObject {
     func getProfileApplications()
     
     func addENTSubject(subject: ENTSubject, score: String)
-    func setENTYear(year: Int)
     func deleteENTSubject(subject: ProfileETH.Subject)
+    
+    func deleteOlympiad(olympiad: ProfileOlympiad)
+    func deleteExtracurricular(activity: ProfileExtracurricular)
+    func setPersonalInfo(name: String?, surname: String?, patronymic: String?, phoneNumber: String?)
+    func setEducation(school: String?, finalClass: String?, score: Double?)
+    func setFamilyInfo(momPhoneNumber: String?, fatherPhoneNumber: String?)
+    func setENTYear(year: Int)
 }
 
 final class AccountScreenInteractor: AccountScreenInteractorProtocol {
@@ -75,7 +81,7 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
         Task {
             do {
                 let response = try await networkService.profile.deleteETHSubject(subjectID: subject.id)
-                presenter?.didPerformTask(message: response.message, refreshReason: .entChanged)
+                presenter?.didPerformTask(message: response.message, refreshID: .ENT)
             } catch {
                 presenter?.didReceiveError(error: error)
             }
@@ -86,9 +92,43 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
         Task {
             do {
                 let response = try await networkService.profile.addETHSubjects(subjectID: subject.id, score: score)
-                presenter?.didPerformTask(message: response.message, refreshReason: .entChanged)
+                presenter?.didPerformTask(message: response.message, refreshID: .ENT)
             } catch {
-                presenter?.didReceiveError(error: error)
+                presenter?.didReceiveErrorInApplication(error: error, refreshID: .ENT)
+            }
+        }
+    }
+    
+    func setPersonalInfo(name: String?, surname: String?, patronymic: String?, phoneNumber: String?) {
+        Task {
+            do {
+                let response = try await networkService.profile.updatePersonal(surname: surname, name: name, patronymic: patronymic, phoneNumber: phoneNumber)
+                presenter?.didPerformTask(message: response.message, refreshID: .personalInfo)
+            } catch {
+                presenter?.didReceiveErrorInApplication(error: error, refreshID: .personalInfo)
+            }
+        }
+    }
+    
+    func setEducation(school: String?, finalClass: String?, score: Double?) {
+        Task {
+            do {
+                let response = try await networkService.profile.updateEducation(institution: school, finalClass: finalClass, score: score)
+                presenter?.didPerformTask(message: response.message, refreshID: .education)
+            } catch {
+                presenter?.didReceiveErrorInApplication(error: error, refreshID: .education)
+            }
+        }
+    }
+    
+    func setFamilyInfo(momPhoneNumber: String?, fatherPhoneNumber: String?) {
+        Task {
+            do {
+                let response = try await networkService.profile.addFamilyMember(familyMemberID: 6, fullName: "", phoneNumber: momPhoneNumber)
+                let response2 = try await networkService.profile.addFamilyMember(familyMemberID: 7, fullName: "", phoneNumber: fatherPhoneNumber)
+                presenter?.didPerformTask(message: "\(response.message ?? "")\n\(response2.message ?? "")", refreshID: .familyInfo)
+            } catch {
+                presenter?.didReceiveErrorInApplication(error: error, refreshID: .familyInfo)
             }
         }
     }
@@ -97,9 +137,31 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
         Task {
             do {
                 let response = try await networkService.profile.updateETHYear(year: year)
-                presenter?.didPerformTask(message: response.message, refreshReason: .entChanged)
+                presenter?.didPerformTask(message: response.message, refreshID: .ENT)
             } catch {
-                presenter?.didReceiveError(error: error)
+                presenter?.didReceiveErrorInApplication(error: error, refreshID: .ENT)
+            }
+        }
+    }
+    
+    func deleteOlympiad(olympiad: ProfileOlympiad) {
+        Task {
+            do {
+                let response = try await networkService.profile.deleteOlympiad(olympiadID: olympiad.id)
+                presenter?.didPerformTask(message: response.message, refreshID: .olympiads)
+            } catch {
+                presenter?.didReceiveErrorInApplication(error: error, refreshID: .olympiads)
+            }
+        }
+    }
+    
+    func deleteExtracurricular(activity: ProfileExtracurricular) {
+        Task {
+            do {
+                let response = try await networkService.profile.deleteExtracurricular(activityID: activity.id)
+                presenter?.didPerformTask(message: response.message, refreshID: .extracurricular)
+            } catch {
+                presenter?.didReceiveErrorInApplication(error: error, refreshID: .extracurricular)
             }
         }
     }

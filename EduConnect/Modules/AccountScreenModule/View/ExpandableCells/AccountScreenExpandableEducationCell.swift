@@ -13,9 +13,9 @@ final class AccountScreenExpandableEducationCellViewModel: ExpandableCellViewMod
     let profile: Profile
     var isExpanded: Bool
     let didTapExpand: (() -> Void)?
-    let didTapSave: ((String?, String?, String?) -> Void)?
+    let didTapSave: ((String?, String?, Double?) -> Void)?
     
-    init(profile: Profile, isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?, String?) -> Void)? = nil) {
+    init(profile: Profile, isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?, Double?) -> Void)? = nil) {
         self.profile = profile
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
@@ -266,7 +266,7 @@ final class AccountScreenExpandableEducationCell: UICollectionViewCell, Configur
             finalClassField.isEnabled = false
             averageField.reconfigure(showsBorder: false)
             averageField.isEnabled = false
-            self.viewModel?.didTapSave?(schoolField.text, finalClassField.text, averageField.text)
+            self.viewModel?.didTapSave?(schoolField.text, finalClassField.text, Double(averageField.text ?? ""))
         }
         isEditing.toggle()
     }

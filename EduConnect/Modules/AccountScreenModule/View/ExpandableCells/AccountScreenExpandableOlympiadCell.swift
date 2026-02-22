@@ -9,15 +9,29 @@ import UIKit
 import SnapKit
 
 final class AccountScreenExpandableOlympiadCellViewModel: ExpandableCellViewModel {
-    private(set) var cellIdentifier: String = "AccountScreenExpandableOlympiadCell"
+    private(set) var cellIdentifier: String = AccountScreenExpandableOlympiadCell.identifier
     var isExpanded: Bool
+    let profile: Profile
     let didTapExpand: (() -> Void)?
     let didTapAddOlympiad: (() -> Void)?
+    let didTapDeleteOlympiad: ((ProfileOlympiad) -> Void)?
     
-    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapAddOlympiad: (() -> Void)? = nil) {
+    var olympiads: [ProfileOlympiad] {
+        profile.olympiads
+    }
+    
+    init(
+        profile: Profile,
+        isExpanded: Bool,
+        didTapExpand: (() -> Void)? = nil,
+        didTapAddOlympiad: (() -> Void)? = nil,
+        didTapDeleteOlympiad: ((ProfileOlympiad) -> Void)? = nil
+    ) {
+        self.profile = profile
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
         self.didTapAddOlympiad = didTapAddOlympiad
+        self.didTapDeleteOlympiad = didTapDeleteOlympiad
     }
 }
 
@@ -25,7 +39,6 @@ final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, Configura
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
-        
         static let plusImageName = "plus"
         static let expandImageSize = 20.0
         static let chevronDownImage = "chevron.down"
@@ -35,7 +48,6 @@ final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, Configura
     // MARK: - PROPERTIES
     private var viewModel: AccountScreenExpandableOlympiadCellViewModel?
     private var expandableHeightConstraint: Constraint?
-    private var isEditing: Bool = false
     
     // MARK: - VIEW PROPERTIES
     private var headerContainer: UIView = {
@@ -67,6 +79,14 @@ final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, Configura
         return label
     }()
     
+    private let olympiadsStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8
+        stack.alignment = .fill
+        return stack
+    }()
+    
     private lazy var addOlympiadButton: UIView = makeAddOlympiadButton()
     
     // MARK: - LIFECYCLE
@@ -94,6 +114,7 @@ final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, Configura
     override func prepareForReuse() {
         super.prepareForReuse()
         collapseCell()
+        olympiadsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     // MARK: - PUBLIC FUNC
@@ -101,12 +122,14 @@ final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, Configura
         guard let vm = vm as? AccountScreenExpandableOlympiadCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()
+        populateOlympiads()
     }
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapExpand))
-        self.headerContainer.addGestureRecognizer(tap)
+        headerContainer.addGestureRecognizer(tap)
+        
         contentView.addSubview(headerContainer)
         headerContainer.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -134,10 +157,16 @@ final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, Configura
             expandableHeightConstraint = $0.height.equalTo(0).priority(.required).constraint
         }
         
+        expandableContainer.addSubview(olympiadsStackView)
+        olympiadsStackView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(Constants.spacing).priority(.high)
+            $0.horizontalEdges.equalToSuperview()
+        }
+        
         expandableContainer.addSubview(addOlympiadButton)
         addOlympiadButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(Constants.spacing).priority(.high)
-            $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
+            $0.top.equalTo(olympiadsStackView.snp.bottom).offset(Constants.spacing)
+            $0.leading.equalToSuperview().offset(Constants.spacing)
             $0.bottom.equalToSuperview().offset(-Constants.spacing).priority(.high)
         }
     }
@@ -154,29 +183,48 @@ final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, Configura
         layoutIfNeeded()
     }
     
+    private func populateOlympiads() {
+        olympiadsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        viewModel?.olympiads.forEach { olympiad in
+            let fileURLs = olympiad.files.compactMap { $0.fileURL }
+            let vm = DeletableFileViewModel(
+                title: olympiad.olympiadTypeName,
+                subtitle: "\(olympiad.olympiadPlaceName) - \(olympiad.year.description)",
+                imageURLs: fileURLs,
+                onDelete: { [weak self] in
+                    self?.viewModel?.didTapDeleteOlympiad?(olympiad)
+                }
+            )
+            let fileView = DeletableFileView(viewModel: vm)
+            olympiadsStackView.addArrangedSubview(fileView)
+        }
+    }
+    
     private func makeAddOlympiadButton() -> UIView {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: Constants.plusImageName)
         imageView.tintColor = .systemBlue
         
-        let addSubjectTextLabel = UILabel()
-        addSubjectTextLabel.text = ConstantLocalizedStrings.Account.Expandable.Olympiad.add
-        addSubjectTextLabel.textColor = .systemBlue
-        addSubjectTextLabel.font = ECFont.font(.regular, size: 14)
+        let label = UILabel()
+        label.text = ConstantLocalizedStrings.Account.Expandable.Olympiad.add
+        label.textColor = .systemBlue
+        label.font = ECFont.font(.regular, size: 14)
         
         let view = UIView()
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAdd)))
+        
         view.addSubview(imageView)
         imageView.snp.makeConstraints {
             $0.leading.centerY.equalToSuperview()
             $0.size.equalTo(Constants.expandImageSize)
         }
         
-        view.addSubview(addSubjectTextLabel)
-        addSubjectTextLabel.snp.makeConstraints {
+        view.addSubview(label)
+        label.snp.makeConstraints {
             $0.leading.equalTo(imageView.snp.trailing).offset(Constants.spacing)
-            $0.trailing.equalToSuperview().offset(Constants.spacing)
+            $0.trailing.equalToSuperview()
             $0.centerY.equalTo(imageView)
             $0.bottom.equalToSuperview().offset(-Constants.spacing)
         }
@@ -193,4 +241,3 @@ final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, Configura
         viewModel?.didTapExpand?()
     }
 }
-

@@ -32,7 +32,7 @@ protocol ProfileAPISubServiceProtocol {
     func deleteETHSubject(subjectID: Int) async throws -> EduConnectResponse
     
     @discardableResult
-    func addFamilyMember(familyMemberID: Int, fullName: String, phoneNumber: String) async throws -> EduConnectResponse
+    func addFamilyMember(familyMemberID: Int, fullName: String?, phoneNumber: String?) async throws -> EduConnectResponse
     
     @discardableResult
     func deleteFamilyMember(familyMemberID: Int) async throws -> EduConnectResponse
@@ -107,7 +107,7 @@ final class ProfileAPISubService: ProfileAPISubServiceProtocol {
         try await httpClient.request(ProfileEndpoints.deleteETHSubject(subjectID: subjectID))
     }
     
-    func addFamilyMember(familyMemberID: Int, fullName: String, phoneNumber: String) async throws -> EduConnectResponse {
+    func addFamilyMember(familyMemberID: Int, fullName: String?, phoneNumber: String?) async throws -> EduConnectResponse {
         try await httpClient.request(ProfileEndpoints.addFamilyMember(familyMemberID: familyMemberID, fullName: fullName, phoneNumber: phoneNumber))
     }
     

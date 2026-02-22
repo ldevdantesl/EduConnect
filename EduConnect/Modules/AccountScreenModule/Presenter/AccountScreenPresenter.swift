@@ -14,27 +14,22 @@ protocol AccountScreenPresenterProtocol: AnyObject {
     var selectedTab: AccountScreenTab { get set }
     var headerMenuViewModel: AccountScreenSegmentedReusableMenuViewModel { get }
 
-    func didPerformTask(message: String?, refreshReason: AccountScreenPresenter.RefreshReason)
+    func didPerformTask(message: String?, refreshID: ExpandableCellID?)
     func didReceiveProfile(_ profile: Profile)
     func didReceiveProfileApplications(_ applications: [Application])
     func didReceiveENTSubjects(entSubjects: [ENTSubject])
     func didReceiveExtracurricularActivities(activities: [ECExtracurricularActivity])
     func didReceiveError(error: any Error)
+    func didReceiveErrorInApplication(error: any Error, refreshID: ExpandableCellID?)
 }
 
 final class AccountScreenPresenter {
-    
-    enum RefreshReason {
-        case initial
-        case entChanged
-    }
-    
     // MARK: - VIPER
     weak var view: AccountScreenViewProtocol?
     private let router: AccountScreenRouterProtocol
     private let interactor: AccountScreenInteractorProtocol
     private let errorService: ErrorServiceProtocol
-    private var refreshReason: RefreshReason = .initial
+    private var refreshID: ExpandableCellID?
 
     // MARK: - STATE
     var selectedTab: AccountScreenTab = .main
@@ -83,6 +78,21 @@ final class AccountScreenPresenter {
 
     private func makeActions() -> ExpandableActions {
         ExpandableActions(
+            didTapSavePersonalInfo: { [weak self] in
+                guard let self = self else { return }
+                self.view?.showLoading()
+                self.interactor.setPersonalInfo(name: $0, surname: $1, patronymic: $2, phoneNumber: nil)
+            },
+            didTapSaveFamilyInfo: { [weak self] in
+                guard let self = self else { return }
+                self.view?.showLoading()
+                self.interactor.setFamilyInfo(momPhoneNumber: $0, fatherPhoneNumber: $1)
+            },
+            didTapSaveEducation: { [weak self] in
+                guard let self = self else { return }
+                self.view?.showLoading()
+                self.interactor.setEducation(school: $0, finalClass: $1, score: $2)
+            },
             didTapSaveEntYear: { [weak self] in
                 guard let self else { return }
                 self.view?.showLoading()
@@ -119,6 +129,18 @@ final class AccountScreenPresenter {
                 guard let self = self else { return }
                 self.view?.showLoading()
                 self.interactor.deleteENTSubject(subject: $0)
+            },
+            
+            didTapDeleteActivity: { [weak self] in
+                guard let self = self else { return }
+                self.view?.showLoading()
+                self.interactor.deleteExtracurricular(activity: $0)
+            },
+            
+            didTapDeleteOlympiad: { [weak self] in
+                guard let self = self else { return }
+                self.view?.showLoading()
+                self.interactor.deleteOlympiad(olympiad: $0)
             }
         )
     }
@@ -238,28 +260,23 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
         router.showSidebar()
     }
     
-    func didPerformTask(message: String?, refreshReason: AccountScreenPresenter.RefreshReason) {
+    func didPerformTask(message: String?, refreshID: ExpandableCellID?) {
         interactor.getProfile()
         if let message {
             self.view?.showMessage(message: message)
         }
-        self.refreshReason = refreshReason
+        self.refreshID = refreshID
     }
     
     func didReceiveProfile(_ profile: Profile) {
         self.profile = profile
         configureExpandableProvider()
         self.view?.hideLoading()
+        showApplication()
         
-        switch refreshReason {
-        case .initial:
-            showApplication()
-        case .entChanged:
-            showApplication()
-            if let item = expandableProvider.makeExpandableItem(for: .ENT) {
-                view?.reconfigureItems(items: [item])
-            }
-            self.view?.dismissPopup()
+        if let refreshID, let item = expandableProvider.makeExpandableItem(for: refreshID) {
+            view?.reconfigureItems(items: [item])
+            view?.dismissPopup()
         }
     }
     
@@ -281,5 +298,16 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
         let userFacingError = errorService.handle(error)
         self.view?.showError(error: userFacingError)
         self.view?.hideLoading()
+    }
+    
+    func didReceiveErrorInApplication(error: any Error, refreshID: ExpandableCellID?) {
+        let userFacingError = errorService.handle(error)
+        self.view?.showError(error: userFacingError)
+        self.view?.hideLoading()
+        
+        if let refreshID, let item = expandableProvider.makeExpandableItem(for: refreshID) {
+            view?.reconfigureItems(items: [item])
+            view?.dismissPopup()
+        }
     }
 }
