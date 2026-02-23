@@ -25,16 +25,20 @@ enum ExpandableCellID: String, CaseIterable {
 
 struct ExpandableActions {
     var didTapSavePersonalInfo: ((String?, String?, String?) -> Void)?
-    var didTapSaveFamilyInfo: ((String?, String?) -> Void)?
     var didTapSaveEducation: ((String?, String?, Double?) -> Void)?
     var didTapSaveEntYear: ((Int) -> Void)?
     
+    var didTapAddFamilyMember: (() -> Void)?
+    var didTapDeleteFamilyMember: ((ProfileFamilyContact) -> Void)?
+    
     var didTapAddActivity: (() -> Void)?
+    var didTapDeleteActivity: ((ProfileExtracurricular) -> Void)?
+    
     var didTapAddOlympiad: (() -> Void)?
+    var didTapDeleteOlympiad: ((ProfileOlympiad) -> Void)?
+    
     var didTapAddENTSubject: (() -> Void)?
     var didTapDeleteENTSubject: ((ProfileETH.Subject) -> Void)?
-    var didTapDeleteActivity: ((ProfileExtracurricular) -> Void)?
-    var didTapDeleteOlympiad: ((ProfileOlympiad) -> Void)?
 }
 
 // MARK: - Provider Protocol
@@ -94,7 +98,8 @@ final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
                 profile: profile,
                 isExpanded: isExpanded,
                 didTapExpand: { [weak self] in self?.toggleExpandableCell(id: id) },
-                didTapSave: { actions.didTapSaveFamilyInfo?($0, $1) }
+                didTapAddFamily: { actions.didTapAddFamilyMember?() },
+                didTapDeleteFamily: { actions.didTapDeleteFamilyMember?($0) }
             )
             
         case .education:

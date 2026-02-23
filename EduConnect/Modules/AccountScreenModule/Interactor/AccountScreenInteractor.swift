@@ -12,8 +12,13 @@ protocol AccountScreenInteractorProtocol: AnyObject {
     func getExtracurricularActivities()
     func getOlympiadTypes()
     func getOlympiadPlaces()
+    func getFamilyContacts()
+    
     func getProfile()
     func getProfileApplications()
+    
+    func addFamilyMember(id: Int?, name: String?, phoneNumber: String?)
+    func deleteFamilyMember(id: Int)
     
     func addENTSubject(subject: ENTSubject, score: String)
     func deleteENTSubject(subject: ProfileETH.Subject)
@@ -83,6 +88,17 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
         }
     }
     
+    func getFamilyContacts() {
+        Task {
+            do {
+                let response = try await networkService.references.getFamilyMembers()
+                presenter?.didReceiveFamilyContacts(contacts: response)
+            } catch {
+                presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
     func getProfile() {
         Task {
             do {
@@ -101,6 +117,28 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
                 presenter?.didReceiveProfileApplications(applications)
             } catch {
                 presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
+    func addFamilyMember(id: Int?, name: String?, phoneNumber: String?) {
+        Task {
+            do {
+                let response = try await networkService.profile.addFamilyMember(familyMemberID: id, fullName: name, phoneNumber: phoneNumber)
+                presenter?.didPerformTask(message: response.message, refreshID: .familyInfo)
+            } catch {
+                presenter?.didReceiveErrorInApplication(error: error, refreshID: .familyInfo)
+            }
+        }
+    }
+    
+    func deleteFamilyMember(id: Int) {
+        Task {
+            do {
+                let response = try await networkService.profile.deleteFamilyMember(familyMemberID: id)
+                presenter?.didPerformTask(message: response.message, refreshID: .familyInfo)
+            } catch {
+                presenter?.didReceiveErrorInApplication(error: error, refreshID: .familyInfo)
             }
         }
     }

@@ -256,6 +256,57 @@
         }
       }
     },
+    "account_familyAddContact" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Family Contact"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить Контакт"
+          }
+        }
+      }
+    },
+    "account_familyContact" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Family Contact"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Контакт"
+          }
+        }
+      }
+    },
+    "account_familyInfoChooseContact" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose Contact"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбрать Контакт"
+          }
+        }
+      }
+    },
     "account_familyInfoFather" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1373,7 +1424,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Университеты"
+            "value" : "Вузы"
           }
         }
       }

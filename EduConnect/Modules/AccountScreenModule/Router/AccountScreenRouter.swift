@@ -8,9 +8,7 @@
 import UIKit
 
 protocol AccountScreenRouterProtocol {
-    func showAddExtracurricularPopUp(viewModel: AddExtracurricularActivityPopUpViewModel)
-    func showAddEntSubjectPopUp(viewModel: AddENTSubjectPopUpViewModel)
-    func showAddNewOlympiadPopUp(viewModel: AddOlympiadPopUpViewModel)
+    func showPopUp(viewModel: PopUpViewModel)
     func showSidebar()
     func routeToMain()
     func routeToUniversityInfo(_ university: ECUniversity)
@@ -24,19 +22,22 @@ final class AccountScreenRouter: AccountScreenRouterProtocol {
         self.appRouter = appRouter
     }
     
-    func showAddExtracurricularPopUp(viewModel: AddExtracurricularActivityPopUpViewModel) {
-        let popUpView = AddExtracurricularActivityPopUpView(viewModel: viewModel)
-        viewController?.showPopup(popUpView)
-    }
-    
-    func showAddEntSubjectPopUp(viewModel: AddENTSubjectPopUpViewModel) {
-        let popUpView = AddENTSubjectPopUpView(viewModel: viewModel)
-        viewController?.showPopup(popUpView)
-    }
-    
-    func showAddNewOlympiadPopUp(viewModel: AddOlympiadPopUpViewModel) {
-        let popUpView = AddOlympiadPopUpView(viewModel: viewModel)
-        viewController?.showPopup(popUpView)
+    func showPopUp(viewModel: any PopUpViewModel) {
+        switch viewModel {
+        case let vm as AddExtracurricularActivityPopUpViewModel:
+            let view = AddExtracurricularActivityPopUpView(viewModel: vm)
+            viewController?.showPopup(view)
+        case let vm as AddENTSubjectPopUpViewModel:
+            let view = AddENTSubjectPopUpView(viewModel: vm)
+            viewController?.showPopup(view)
+        case let vm as AddENTSubjectPopUpViewModel:
+            let view = AddENTSubjectPopUpView(viewModel: vm)
+            viewController?.showPopup(view)
+        case let vm as AddFamilyMemberPopUpViewModel:
+            let view = AddFamilyMemberPopUpView(viewModel: vm)
+            viewController?.showPopup(view)
+        default: break
+        }
     }
     
     func showSidebar() {

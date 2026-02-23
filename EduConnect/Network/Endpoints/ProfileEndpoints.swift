@@ -21,7 +21,7 @@ enum ProfileEndpoints: Endpoint {
     case deleteETHSubject(subjectID: Int)
     
     case getFamilyMembers
-    case addFamilyMember(familyMemberID: Int, fullName: String?, phoneNumber: String?)
+    case addFamilyMember(familyMemberID: Int?, fullName: String?, phoneNumber: String?)
     case deleteFamilyMember(familyMemberID: Int)
     
     case getOlympiads
@@ -143,7 +143,7 @@ enum ProfileEndpoints: Endpoint {
             
         case .addFamilyMember(let familyMemberID, let fullName, let phoneNumber):
             return [
-                .init(name: "family_member_id", value: familyMemberID.description),
+                .init(name: "family_member_id", value: familyMemberID?.description),
                 .init(name: "full_name", value: fullName),
                 .init(name: "phone_number", value: phoneNumber)
             ]

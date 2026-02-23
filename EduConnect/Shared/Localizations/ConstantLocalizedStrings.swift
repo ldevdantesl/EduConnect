@@ -100,6 +100,9 @@ public enum ConstantLocalizedStrings {
                 static let title = String(localized: .Localizables.accountFamilyInfoTitle)
                 static let father = String(localized: .Localizables.accountFamilyInfoFather)
                 static let mother = String(localized: .Localizables.accountFamilyInfoMother)
+                static let addContact = String(localized: .Localizables.accountFamilyAddContact)
+                static let popupTitle = addContact
+                static let contact = String(localized: .Localizables.accountFamilyContact)
             }
             
             enum Education {

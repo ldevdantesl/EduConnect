@@ -20,6 +20,7 @@ protocol AccountScreenPresenterProtocol: AnyObject {
     func didReceiveENTSubjects(entSubjects: [ENTSubject])
     func didReceiveOlympiadPlaces(places: [ECOlympiadPlace])
     func didReceiveOlympiadTypes(types: [ECOlympiadType])
+    func didReceiveFamilyContacts(contacts: [ECFamilyMember])
     func didReceiveExtracurricularActivities(activities: [ECExtracurricularActivity])
     func didReceiveError(error: any Error)
     func didReceiveErrorInApplication(error: any Error, refreshID: ExpandableCellID?)
@@ -39,6 +40,7 @@ final class AccountScreenPresenter {
     // MARK: - PROPERTIES
     private let dispatchGroup = DispatchGroup()
     private(set) var extracurricularActivities: [ECExtracurricularActivity] = []
+    private(set) var familyContacts: [ECFamilyMember] = []
     private(set) var entSubjects: [ENTSubject] = []
     private(set) var olympiadTypes: [ECOlympiadType] = []
     private(set) var olympiadPlaces: [ECOlympiadPlace] = []
@@ -88,12 +90,6 @@ final class AccountScreenPresenter {
                 self.interactor.setPersonalInfo(name: $0, surname: $1, patronymic: $2, phoneNumber: nil)
             },
             
-            didTapSaveFamilyInfo: { [weak self] in
-                guard let self = self else { return }
-                self.view?.showLoading()
-                self.interactor.setFamilyInfo(momPhoneNumber: $0, fatherPhoneNumber: $1)
-            },
-            
             didTapSaveEducation: { [weak self] in
                 guard let self = self else { return }
                 self.view?.showLoading()
@@ -106,6 +102,22 @@ final class AccountScreenPresenter {
                 self.interactor.setENTYear(year: $0)
             },
             
+            didTapAddFamilyMember: { [weak self] in
+                guard let self = self else { return }
+                let vm = AddFamilyMemberPopUpViewModel(
+                    familyMembers: self.familyContacts,
+                    onClose: self.view?.dismissPopup,
+                    didAddNewFamilyMember: self.didTapAddFamilyMember,
+                )
+                self.router.showPopUp(viewModel: vm)
+            },
+            
+            didTapDeleteFamilyMember: { [weak self] in
+                guard let self = self else { return }
+                self.view?.showLoading()
+                self.interactor.deleteFamilyMember(id: $0.id)
+            },
+            
             didTapAddActivity: { [weak self] in
                 guard let self else { return }
                 let vm = AddExtracurricularActivityPopUpViewModel(
@@ -113,7 +125,13 @@ final class AccountScreenPresenter {
                     onClose: self.view?.dismissPopup,
                     didAddNewActivity: self.didTapAddExtracurricular
                 )
-                self.router.showAddExtracurricularPopUp(viewModel: vm)
+                self.router.showPopUp(viewModel: vm)
+            },
+            
+            didTapDeleteActivity: { [weak self] in
+                guard let self = self else { return }
+                self.view?.showLoading()
+                self.interactor.deleteExtracurricular(activity: $0)
             },
             
             didTapAddOlympiad: { [weak self] in
@@ -124,7 +142,13 @@ final class AccountScreenPresenter {
                     onClose: self.view?.dismissPopup,
                     didAddNewOlympiad: self.didTapAddOlympiad
                 )
-                self.router.showAddNewOlympiadPopUp(viewModel: vm)
+                self.router.showPopUp(viewModel: vm)
+            },
+            
+            didTapDeleteOlympiad: { [weak self] in
+                guard let self = self else { return }
+                self.view?.showLoading()
+                self.interactor.deleteOlympiad(olympiad: $0)
             },
             
             didTapAddENTSubject: { [weak self] in
@@ -134,25 +158,13 @@ final class AccountScreenPresenter {
                     onClose: self.view?.dismissPopup,
                     didAddNewSubject: self.didTapAddEntSubject
                 )
-                self.router.showAddEntSubjectPopUp(viewModel: vm)
+                self.router.showPopUp(viewModel: vm)
             },
             
             didTapDeleteENTSubject: { [weak self] in
                 guard let self = self else { return }
                 self.view?.showLoading()
                 self.interactor.deleteENTSubject(subject: $0)
-            },
-            
-            didTapDeleteActivity: { [weak self] in
-                guard let self = self else { return }
-                self.view?.showLoading()
-                self.interactor.deleteExtracurricular(activity: $0)
-            },
-            
-            didTapDeleteOlympiad: { [weak self] in
-                guard let self = self else { return }
-                self.view?.showLoading()
-                self.interactor.deleteOlympiad(olympiad: $0)
             }
         )
     }
@@ -241,6 +253,11 @@ final class AccountScreenPresenter {
     }
     
     // MARK: - ACTIONS
+    private func didTapAddFamilyMember(id: Int?, name: String?, phoneNumber: String?) {
+        self.view?.showLoading()
+        self.interactor.addFamilyMember(id: id, name: name, phoneNumber: phoneNumber)
+    }
+    
     private func didTapAddEntSubject(subject: ENTSubject, score: String) {
         self.view?.showLoading()
         self.interactor.addENTSubject(subject: subject, score: score)
@@ -273,6 +290,9 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
         
         dispatchGroup.enter()
         interactor.getOlympiadPlaces()
+        
+        dispatchGroup.enter()
+        interactor.getFamilyContacts()
         
         dispatchGroup.notify(queue: .main) { [weak self] in
             self?.view?.hideLoading()
@@ -324,6 +344,11 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     
     func didReceiveOlympiadPlaces(places: [ECOlympiadPlace]) {
         self.olympiadPlaces = places
+        dispatchGroup.leave()
+    }
+    
+    func didReceiveFamilyContacts(contacts: [ECFamilyMember]) {
+        self.familyContacts = contacts
         dispatchGroup.leave()
     }
     
