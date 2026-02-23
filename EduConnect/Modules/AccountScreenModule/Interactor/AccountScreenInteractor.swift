@@ -10,14 +10,20 @@ import UIKit
 protocol AccountScreenInteractorProtocol: AnyObject {
     func getEntSubjects()
     func getExtracurricularActivities()
+    func getOlympiadTypes()
+    func getOlympiadPlaces()
     func getProfile()
     func getProfileApplications()
     
     func addENTSubject(subject: ENTSubject, score: String)
     func deleteENTSubject(subject: ProfileETH.Subject)
     
+    func addOlympiad(olympiadTypeID: Int?, olympiadPlaceID: Int?, year: String?, files: [ECAttachedFile])
     func deleteOlympiad(olympiad: ProfileOlympiad)
+    
+    func addExtracurricular(id: Int?, description: String?, files: [ECAttachedFile])
     func deleteExtracurricular(activity: ProfileExtracurricular)
+    
     func setPersonalInfo(name: String?, surname: String?, patronymic: String?, phoneNumber: String?)
     func setEducation(school: String?, finalClass: String?, score: Double?)
     func setFamilyInfo(momPhoneNumber: String?, fatherPhoneNumber: String?)
@@ -55,6 +61,28 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
         }
     }
     
+    func getOlympiadTypes() {
+        Task {
+            do {
+                let response = try await networkService.references.getOlympiadTypes()
+                presenter?.didReceiveOlympiadTypes(types: response)
+            } catch {
+                presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
+    func getOlympiadPlaces() {
+        Task {
+            do {
+                let response = try await networkService.references.getOlympiadPlaces()
+                presenter?.didReceiveOlympiadPlaces(places: response)
+            } catch {
+                presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
     func getProfile() {
         Task {
             do {
@@ -77,17 +105,6 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
         }
     }
     
-    func deleteENTSubject(subject: ProfileETH.Subject) {
-        Task {
-            do {
-                let response = try await networkService.profile.deleteETHSubject(subjectID: subject.id)
-                presenter?.didPerformTask(message: response.message, refreshID: .ENT)
-            } catch {
-                presenter?.didReceiveError(error: error)
-            }
-        }
-    }
-    
     func addENTSubject(subject: ENTSubject, score: String) {
         Task {
             do {
@@ -95,6 +112,17 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
                 presenter?.didPerformTask(message: response.message, refreshID: .ENT)
             } catch {
                 presenter?.didReceiveErrorInApplication(error: error, refreshID: .ENT)
+            }
+        }
+    }
+    
+    func deleteENTSubject(subject: ProfileETH.Subject) {
+        Task {
+            do {
+                let response = try await networkService.profile.deleteETHSubject(subjectID: subject.id)
+                presenter?.didPerformTask(message: response.message, refreshID: .ENT)
+            } catch {
+                presenter?.didReceiveError(error: error)
             }
         }
     }
@@ -144,6 +172,17 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
         }
     }
     
+    func addOlympiad(olympiadTypeID: Int?, olympiadPlaceID: Int?, year: String?, files: [ECAttachedFile]) {
+        Task {
+            do {
+                let response = try await networkService.profile.addOlympiad(olympiadTypeID: olympiadTypeID, olympiadPlaceID: olympiadPlaceID, year: year, files: files)
+                presenter?.didPerformTask(message: response.message, refreshID: .olympiads)
+            } catch {
+                presenter?.didReceiveErrorInApplication(error: error, refreshID: .olympiads)
+            }
+        }
+    }
+    
     func deleteOlympiad(olympiad: ProfileOlympiad) {
         Task {
             do {
@@ -151,6 +190,17 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
                 presenter?.didPerformTask(message: response.message, refreshID: .olympiads)
             } catch {
                 presenter?.didReceiveErrorInApplication(error: error, refreshID: .olympiads)
+            }
+        }
+    }
+    
+    func addExtracurricular(id: Int?, description: String?, files: [ECAttachedFile]) {
+        Task {
+            do {
+                let response = try await networkService.profile.addExtracurricular(activityID: id, description: description, files: files)
+                presenter?.didPerformTask(message: response.message, refreshID: .extracurricular)
+            } catch {
+                presenter?.didReceiveErrorInApplication(error: error, refreshID: .extracurricular)
             }
         }
     }

@@ -38,13 +38,13 @@ protocol ProfileAPISubServiceProtocol {
     func deleteFamilyMember(familyMemberID: Int) async throws -> EduConnectResponse
     
     @discardableResult
-    func addOlympiad(olympiadTypeID: Int, olympiadPlaceID: Int, year: String) async throws -> EduConnectResponse
+    func addOlympiad(olympiadTypeID: Int?, olympiadPlaceID: Int?, year: String?, files: [ECAttachedFile]) async throws -> EduConnectResponse
     
     @discardableResult
     func deleteOlympiad(olympiadID: Int) async throws -> EduConnectResponse
     
     @discardableResult
-    func addExtracurricular(activityID: Int, description: String?) async throws -> EduConnectResponse
+    func addExtracurricular(activityID: Int?, description: String?, files: [ECAttachedFile]) async throws -> EduConnectResponse
     
     @discardableResult
     func deleteExtracurricular(activityID: Int) async throws -> EduConnectResponse
@@ -115,16 +115,16 @@ final class ProfileAPISubService: ProfileAPISubServiceProtocol {
         try await httpClient.request(ProfileEndpoints.deleteFamilyMember(familyMemberID: familyMemberID))
     }
     
-    func addOlympiad(olympiadTypeID: Int, olympiadPlaceID: Int, year: String) async throws -> EduConnectResponse {
-        try await httpClient.request(ProfileEndpoints.addOlympiad(olympiadTypeID: olympiadTypeID, olympiadPlaceID: olympiadPlaceID, year: year))
+    func addOlympiad(olympiadTypeID: Int?, olympiadPlaceID: Int?, year: String?, files: [ECAttachedFile]) async throws -> EduConnectResponse {
+        try await httpClient.request(ProfileEndpoints.addOlympiad(olympiadTypeID: olympiadTypeID, olympiadPlaceID: olympiadPlaceID, year: year, files: files))
     }
     
     func deleteOlympiad(olympiadID: Int) async throws -> EduConnectResponse {
         try await httpClient.request(ProfileEndpoints.deleteOlympiad(olympiadID: olympiadID))
     }
     
-    func addExtracurricular(activityID: Int, description: String?) async throws -> EduConnectResponse {
-        try await httpClient.request(ProfileEndpoints.addExtracurricular(activityID: activityID, description: description))
+    func addExtracurricular(activityID: Int?, description: String?, files: [ECAttachedFile]) async throws -> EduConnectResponse {
+        try await httpClient.request(ProfileEndpoints.addExtracurricular(activityID: activityID, description: description, files: files))
     }
     
     func deleteExtracurricular(activityID: Int) async throws -> EduConnectResponse {

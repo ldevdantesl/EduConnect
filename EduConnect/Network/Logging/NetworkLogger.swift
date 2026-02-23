@@ -20,6 +20,7 @@ final class ECNetworkLogger: NetworkLoggerProtocol {
         case basic
         case headers
         case body
+        case showAll
     }
     
     private let level: LogLevel
@@ -36,14 +37,19 @@ final class ECNetworkLogger: NetworkLoggerProtocol {
         
         print("➡️ [\(method)] \(url)")
         
-        if level == .headers || level == .body {
+        if level == .headers || level == .body || level == .showAll {
             request.allHTTPHeaderFields?.forEach { key, value in
                 print("   📋 \(key): \(value)")
             }
         }
         
-        if level == .body, let body = request.httpBody {
+        if level == .body || level == .showAll, let body = request.httpBody {
             printBody(body, prefix: "   📦 Request")
+            
+            if level == .showAll {
+                let raw = String(data: body, encoding: .utf8) ?? "<\(body.count) bytes, non-utf8>"
+                print("   📄 Raw Request Body (\(body.count) bytes):\n\(String(raw.prefix(2000)))")
+            }
         }
     }
     
@@ -57,14 +63,19 @@ final class ECNetworkLogger: NetworkLoggerProtocol {
         
         print("\(emoji) [\(statusCode)] \(url) - \(time)")
         
-        if level == .headers || level == .body {
+        if level == .headers || level == .body || level == .showAll {
             response.allHeaderFields.forEach { key, value in
                 print("   📋 \(key): \(value)")
             }
         }
         
-        if level == .body {
+        if level == .body || level == .showAll {
             printBody(data, prefix: "   📦 Response")
+        }
+        
+        if level == .showAll {
+            let raw = String(data: data, encoding: .utf8) ?? "<\(data.count) bytes, non-utf8>"
+            print("   📄 Raw Response (\(data.count) bytes):\n\(String(raw.prefix(2000)))")
         }
     }
     
@@ -73,6 +84,10 @@ final class ECNetworkLogger: NetworkLoggerProtocol {
         
         let time = String(format: "%.2fms", duration * 1000)
         print("🔴 [ERROR] \(error.localizedDescription) - \(time)")
+        
+        if level == .showAll {
+            print("   🔍 Error detail: \(error)")
+        }
     }
     
     // MARK: - Private
@@ -85,7 +100,7 @@ final class ECNetworkLogger: NetworkLoggerProtocol {
                 print("   \(line)")
             }
         } else if let string = String(data: data, encoding: .utf8) {
-            print("\(prefix): \(string)")
+            print("\(prefix): \(string.prefix(1000))")
         } else {
             print("\(prefix): \(data.count) bytes")
         }

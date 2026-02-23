@@ -11,7 +11,7 @@ struct ProfileExtracurricular: Decodable {
     let id: Int
     let extracurricularActivityID: Int?
     let name: String
-    let description: String
+    let description: String?
     let files: [Profile.File]
 
     enum CodingKeys: String, CodingKey {

@@ -9,5 +9,5 @@ import Foundation
 
 struct ECOlympiadType: Decodable {
     let id: Int
-    let name: String
+    let name: ECLocalizedString
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UniformTypeIdentifiers
 
 enum ProfileEndpoints: Endpoint {
     // MARK: - PROFILE
@@ -24,11 +25,11 @@ enum ProfileEndpoints: Endpoint {
     case deleteFamilyMember(familyMemberID: Int)
     
     case getOlympiads
-    case addOlympiad(olympiadTypeID: Int, olympiadPlaceID: Int, year: String)
+    case addOlympiad(olympiadTypeID: Int?, olympiadPlaceID: Int?, year: String?, files: [ECAttachedFile])
     case deleteOlympiad(olympiadID: Int)
     
     case getExtracurricular
-    case addExtracurricular(activityID: Int, description: String?)
+    case addExtracurricular(activityID: Int?, description: String?, files: [ECAttachedFile])
     case deleteExtracurricular(activityID: Int)
     
     case updatePersonal(surname: String?, name: String?, patronymic: String?, phoneNumber: String?)
@@ -39,6 +40,51 @@ enum ProfileEndpoints: Endpoint {
         case .updatePersonal, .updateEducation, .updateETHYear: return .put
         case .addETHSubjects, .addFamilyMember, .addOlympiad, .addExtracurricular: return .post
         case .deleteETHSubject, .deleteFamilyMember, .deleteOlympiad, .deleteExtracurricular: return .delete
+        }
+    }
+    
+    var contentType: ContentType {
+        switch self {
+        case .addOlympiad, .addExtracurricular: return .multipart
+        default: return .urlEncoded
+        }
+    }
+    
+    var multipartFields: [MultipartField]? {
+        switch self {
+        case .addExtracurricular(let activityID, let description, let files):
+            var fields: [MultipartField] = [
+                .init(name: "extracurricular_activity_id", value: .text(activityID?.description))
+            ]
+            if let description, !description.isEmpty {
+                fields.append(.init(name: "description", value: .text(description)))
+            }
+            for file in files {
+                guard file.url.startAccessingSecurityScopedResource() else { continue }
+                defer { file.url.stopAccessingSecurityScopedResource() }
+                if let data = try? Data(contentsOf: file.url) {
+                    let mime = file.type?.preferredMIMEType ?? "application/octet-stream"
+                    fields.append(.init(name: "files[]", value: .file(data: data, fileName: file.name, mimeType: mime)))
+                }
+            }
+            return fields
+            
+        case .addOlympiad(let olympiadTypeID, let olympiadPlaceID, let year, let files):
+            var fields: [MultipartField] = [
+                .init(name: "olympiad_type_id", value: .text(olympiadTypeID?.description)),
+                .init(name: "olympiad_place_id", value: .text(olympiadPlaceID?.description)),
+                .init(name: "year", value: .text(year?.description))
+            ]
+            for file in files {
+                guard file.url.startAccessingSecurityScopedResource() else { continue }
+                defer { file.url.stopAccessingSecurityScopedResource() }
+                if let data = try? Data(contentsOf: file.url) {
+                    let mime = file.type?.preferredMIMEType ?? "application/octet-stream"
+                    fields.append(.init(name: "files[]", value: .file(data: data, fileName: file.name, mimeType: mime)))
+                }
+            }
+            return fields
+        default: return nil
         }
     }
     
@@ -100,19 +146,6 @@ enum ProfileEndpoints: Endpoint {
                 .init(name: "family_member_id", value: familyMemberID.description),
                 .init(name: "full_name", value: fullName),
                 .init(name: "phone_number", value: phoneNumber)
-            ]
-            
-        case .addOlympiad(let olympiadTypeID, let olympiadPlaceID, let year):
-            return [
-                .init(name: "olympiad_type_id", value: olympiadTypeID.description),
-                .init(name: "olympiad_place_id", value: olympiadPlaceID.description),
-                .init(name: "year", value: year)
-            ]
-            
-        case .addExtracurricular(let activityID, let description):
-            return [
-                .init(name: "extracurricular_activity_id", value: activityID.description),
-                .init(name: "description", value: description)
             ]
             
         default: return .none

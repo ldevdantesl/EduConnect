@@ -18,6 +18,8 @@ protocol AccountScreenPresenterProtocol: AnyObject {
     func didReceiveProfile(_ profile: Profile)
     func didReceiveProfileApplications(_ applications: [Application])
     func didReceiveENTSubjects(entSubjects: [ENTSubject])
+    func didReceiveOlympiadPlaces(places: [ECOlympiadPlace])
+    func didReceiveOlympiadTypes(types: [ECOlympiadType])
     func didReceiveExtracurricularActivities(activities: [ECExtracurricularActivity])
     func didReceiveError(error: any Error)
     func didReceiveErrorInApplication(error: any Error, refreshID: ExpandableCellID?)
@@ -38,6 +40,8 @@ final class AccountScreenPresenter {
     private let dispatchGroup = DispatchGroup()
     private(set) var extracurricularActivities: [ECExtracurricularActivity] = []
     private(set) var entSubjects: [ENTSubject] = []
+    private(set) var olympiadTypes: [ECOlympiadType] = []
+    private(set) var olympiadPlaces: [ECOlympiadPlace] = []
     private var profile: Profile?
     private var applications: [Application] = []
 
@@ -83,39 +87,46 @@ final class AccountScreenPresenter {
                 self.view?.showLoading()
                 self.interactor.setPersonalInfo(name: $0, surname: $1, patronymic: $2, phoneNumber: nil)
             },
+            
             didTapSaveFamilyInfo: { [weak self] in
                 guard let self = self else { return }
                 self.view?.showLoading()
                 self.interactor.setFamilyInfo(momPhoneNumber: $0, fatherPhoneNumber: $1)
             },
+            
             didTapSaveEducation: { [weak self] in
                 guard let self = self else { return }
                 self.view?.showLoading()
                 self.interactor.setEducation(school: $0, finalClass: $1, score: $2)
             },
+            
             didTapSaveEntYear: { [weak self] in
                 guard let self else { return }
                 self.view?.showLoading()
                 self.interactor.setENTYear(year: $0)
             },
+            
             didTapAddActivity: { [weak self] in
                 guard let self else { return }
                 let vm = AddExtracurricularActivityPopUpViewModel(
                     activities: self.extracurricularActivities,
                     onClose: self.view?.dismissPopup,
-                    didAddNewActivity: nil
+                    didAddNewActivity: self.didTapAddExtracurricular
                 )
                 self.router.showAddExtracurricularPopUp(viewModel: vm)
             },
+            
             didTapAddOlympiad: { [weak self] in
                 guard let self else { return }
                 let vm = AddOlympiadPopUpViewModel(
-                    subjects: self.entSubjects,
+                    olympiadTypes: self.olympiadTypes,
+                    olympiadPlaces: self.olympiadPlaces,
                     onClose: self.view?.dismissPopup,
-                    didAddNewOlympiad: nil
+                    didAddNewOlympiad: self.didTapAddOlympiad
                 )
                 self.router.showAddNewOlympiadPopUp(viewModel: vm)
             },
+            
             didTapAddENTSubject: { [weak self] in
                 guard let self else { return }
                 let vm = AddENTSubjectPopUpViewModel(
@@ -125,6 +136,7 @@ final class AccountScreenPresenter {
                 )
                 self.router.showAddEntSubjectPopUp(viewModel: vm)
             },
+            
             didTapDeleteENTSubject: { [weak self] in
                 guard let self = self else { return }
                 self.view?.showLoading()
@@ -233,6 +245,16 @@ final class AccountScreenPresenter {
         self.view?.showLoading()
         self.interactor.addENTSubject(subject: subject, score: score)
     }
+    
+    private func didTapAddOlympiad(typeID: Int?, placeID: Int?, year: String?, files: [ECAttachedFile]) {
+        self.view?.showLoading()
+        self.interactor.addOlympiad(olympiadTypeID: typeID, olympiadPlaceID: placeID, year: year, files: files)
+    }
+    
+    private func didTapAddExtracurricular(id: Int?, description: String?, files: [ECAttachedFile]) {
+        self.view?.showLoading()
+        self.interactor.addExtracurricular(id: id, description: description, files: files)
+    }
 }
 
 // MARK: - PROTOCOL
@@ -245,6 +267,12 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
         
         dispatchGroup.enter()
         interactor.getExtracurricularActivities()
+        
+        dispatchGroup.enter()
+        interactor.getOlympiadTypes()
+        
+        dispatchGroup.enter()
+        interactor.getOlympiadPlaces()
         
         dispatchGroup.notify(queue: .main) { [weak self] in
             self?.view?.hideLoading()
@@ -286,6 +314,16 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     
     func didReceiveENTSubjects(entSubjects: [ENTSubject]) {
         self.entSubjects = entSubjects
+        dispatchGroup.leave()
+    }
+    
+    func didReceiveOlympiadTypes(types: [ECOlympiadType]) {
+        self.olympiadTypes = types
+        dispatchGroup.leave()
+    }
+    
+    func didReceiveOlympiadPlaces(places: [ECOlympiadPlace]) {
+        self.olympiadPlaces = places
         dispatchGroup.leave()
     }
     

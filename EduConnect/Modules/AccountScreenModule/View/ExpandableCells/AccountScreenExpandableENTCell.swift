@@ -316,7 +316,7 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
         subjectsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         viewModel?.ethSubjects.forEach { subject in
             let vm = DeletableChipViewModel(title: "\(subject.subject.name.ru) - \(subject.score ?? 0)")
-            let chip = DeletableChipView(viewModel: vm)
+            let chip = DeletableChipCell(viewModel: vm)
             chip.setDeleteAction { [weak self] in
                 self?.viewModel?.didTapDeleteSubject?(subject)
             }

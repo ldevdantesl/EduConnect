@@ -12,12 +12,12 @@ import UniformTypeIdentifiers
 struct AddExtracurricularActivityPopUpViewModel: PopUpViewModel {
     var activities: [ECExtracurricularActivity]
     var onClose: (() -> Void)?
-    var didAddNewActivity: ((Int, String?) -> Void)?
+    var didAddNewActivity: ((Int?, String?, [ECAttachedFile]) -> Void)?
     
     init(
         activities: [ECExtracurricularActivity] = [],
         onClose: (() -> Void)? = nil,
-        didAddNewActivity: ((Int, String?) -> Void)? = nil
+        didAddNewActivity: ((Int?, String?, [ECAttachedFile]) -> Void)? = nil
     ) {
         self.activities = activities
         self.onClose = onClose
@@ -113,12 +113,19 @@ final class AddExtracurricularActivityPopUpView: PopUpView {
     
     private lazy var addButton: ECButton = {
         let button = ECButton(text: ConstantLocalizedStrings.Common.add)
+        button.setAction { [weak self] in
+            let id = self?.selectedActivity?.id
+            let text = self?.descriptionTextView.text
+            let files = self?.addFilesAttachmentView.files
+            self?.viewModel.didAddNewActivity?(id, text, files ?? [])
+        }
         return button
     }()
     
     private lazy var activityMenu: UIMenu = {
         let actions = viewModel.activities.map { activity in
             UIAction(title: activity.name.ru) { [weak self] _ in
+                self?.selectedActivity = activity
                 var title = AttributedString(activity.name.ru)
                 title.font = ECFont.font(.semiBold, size: 14)
                 title.foregroundColor = .label
