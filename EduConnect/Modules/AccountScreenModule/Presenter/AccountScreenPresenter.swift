@@ -194,12 +194,18 @@ final class AccountScreenPresenter {
             .headerItem(.init(id: "header", viewModel: headerVM)),
         ]
         
-        let universities: [AccountScreenItem] = applications.map {
-            let vm = ApplicationCellViewModel(application: $0)
-            return .university(.init(item: $0, prefix: "application-", viewModel: vm))
+        if !applications.isEmpty {
+            let universities: [AccountScreenItem] = applications.map {
+                let vm = ApplicationCellViewModel(application: $0)
+                return .university(.init(item: $0, prefix: "application-", viewModel: vm))
+            }
+            
+            applicationItems.append(contentsOf: universities)
+        } else {
+            let notFoundVm = NotFoundCellViewModel(systemImage: "questionmark.circle", title: "Ничего не найдено", subtitle: "Попробуйте найти где нибудь еще")
+            applicationItems.append(.notFoundItem(.init(viewModel: notFoundVm)))
         }
         
-        applicationItems.append(contentsOf: universities)
 
         view?.applySnapshot(
             sections: [.universities],

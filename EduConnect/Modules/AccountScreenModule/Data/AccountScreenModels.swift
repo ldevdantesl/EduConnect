@@ -18,6 +18,7 @@ enum AccountScreenItem: Hashable {
     case university(DiffableItem<ApplicationCellViewModel>)
     case expandableCell(DiffableItem<any ExpandableCellViewModel>)
     case mainTabInfo(DiffableItem<AccountScreenMainTabInfoCellViewModel>)
+    case notFoundItem(DiffableItem<NotFoundCellViewModel>)
 }
 
 enum AccountScreenTab: Int {
