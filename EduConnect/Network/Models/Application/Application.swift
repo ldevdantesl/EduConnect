@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Application: Decodable {
+struct Application: Decodable, Identifiable {
     struct University: Decodable {
         struct City: Decodable {
             let id: Int

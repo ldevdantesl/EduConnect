@@ -47,7 +47,7 @@ final class AccountScreenVC: UIViewController {
         )
         cv.adjustsForKeyboard = true
         cv.resignsFirstResponderOnScroll = true
-        cv.registerCell(UniversityCell.self, reuseID: UniversityCell.identifier)
+        cv.registerCell(ApplicationCell.self, reuseID: ApplicationCell.identifier)
         cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
         cv.registerCell(AccountScreenExpandablePersonalInfoCell.self, reuseID: AccountScreenExpandablePersonalInfoCell.identifier)
         cv.registerCell(AccountScreenExpandableFamilyInfoCell.self, reuseID: AccountScreenExpandableFamilyInfoCell.identifier)
@@ -96,7 +96,7 @@ final class AccountScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
             case .university(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? ApplicationCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             case .expandableCell(let item):

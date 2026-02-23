@@ -15,7 +15,7 @@ enum AccountScreenSection: Hashable {
 
 enum AccountScreenItem: Hashable {
     case headerItem(DiffableItem<SectionHeaderCellViewModel>)
-    case university(DiffableItem<UniversityCellViewModel>)
+    case university(DiffableItem<ApplicationCellViewModel>)
     case expandableCell(DiffableItem<any ExpandableCellViewModel>)
     case mainTabInfo(DiffableItem<AccountScreenMainTabInfoCellViewModel>)
 }

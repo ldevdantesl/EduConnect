@@ -176,7 +176,8 @@ final class AccountScreenPresenter {
 
         switch newTab {
         case .myUniversities:
-            showUniversities()
+            view?.showLoading()
+            interactor.getProfileApplications()
         case .application:
             view?.showLoading()
             interactor.getProfile()
@@ -188,18 +189,22 @@ final class AccountScreenPresenter {
     // MARK: - SNAPSHOTS
     private func showUniversities() {
         let headerVM = makeHeaderVM(for: .myUniversities)
-        let university = ECUniversity.sample
-        let universityVM = UniversityCellViewModel(university: university) { [weak self] in
-            self?.router.routeToUniversityInfo($0)
+        
+        var applicationItems: [AccountScreenItem] = [
+            .headerItem(.init(id: "header", viewModel: headerVM)),
+        ]
+        
+        let universities: [AccountScreenItem] = applications.map {
+            let vm = ApplicationCellViewModel(application: $0)
+            return .university(.init(item: $0, prefix: "application-", viewModel: vm))
         }
+        
+        applicationItems.append(contentsOf: universities)
 
         view?.applySnapshot(
             sections: [.universities],
             itemsBySection: [
-                .universities: [
-                    .headerItem(.init(id: "header", viewModel: headerVM)),
-                    .university(.init(id: university.id, viewModel: universityVM))
-                ]
+                .universities: applicationItems
             ]
         )
     }
@@ -295,8 +300,8 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
         interactor.getFamilyContacts()
         
         dispatchGroup.notify(queue: .main) { [weak self] in
+            self?.showMain()
             self?.view?.hideLoading()
-            self?.didSelectAnotherTab(newTab: .myUniversities)
         }
     }
 
@@ -330,6 +335,8 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     
     func didReceiveProfileApplications(_ applications: [Application]) {
         self.applications = applications
+        view?.hideLoading()
+        showUniversities()
     }
     
     func didReceiveENTSubjects(entSubjects: [ENTSubject]) {
