@@ -8,6 +8,7 @@
 import UIKit
 
 protocol NetworkServiceProtocol {
+    var application: ApplicationAPISubServiceProtocol { get }
     var authentication: AuthAPISubServiceProtocol { get }
     var references: ReferencesAPISubServiceProtocol { get }
     var news: NewsAPISubServiceProtocol { get }
@@ -25,6 +26,7 @@ final class ECNetworkService: NetworkServiceProtocol {
     let programs: ProgramsAPISubServiceProtocol
     let professions: ProfessionsAPISubServiceProtocol
     let profile: ProfileAPISubServiceProtocol
+    let application: ApplicationAPISubServiceProtocol
     
     init(httpClient: HTTPClientProtocol) {
         self.authentication = AuthAPISubService(httpClient: httpClient)
@@ -34,5 +36,6 @@ final class ECNetworkService: NetworkServiceProtocol {
         self.professions = ProfessionsAPISubService(httpClient: httpClient)
         self.news = NewsAPISubService(httpClient: httpClient)
         self.profile = ProfileAPISubService(httpClient: httpClient)
+        self.application = ApplicationAPISubService(httpClient: httpClient)
     }
 }

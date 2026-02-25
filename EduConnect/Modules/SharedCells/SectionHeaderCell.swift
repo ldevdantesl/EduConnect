@@ -42,7 +42,7 @@ final class SectionHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
     // MARK: - VIEW PROPERTIES
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
+        label.numberOfLines = 0
         return label
     }()
     

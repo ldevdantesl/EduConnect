@@ -13,6 +13,11 @@ protocol UniversityInfoScreenPresenterProtocol: AnyObject {
     func didTapAccount()
     func didTapAppLogo()
     func didTapBack()
+    func didGetApplicationStatus(application: Application)
+    func didFailToGetApplicationStatus()
+    func didApplyOrDeleteApplication(message: String?)
+    func didReceiveUniversity(university: ECUniversity)
+    func didReceieveError(error: any Error)
 }
 
 final class UniversityInfoScreenPresenter {
@@ -21,72 +26,84 @@ final class UniversityInfoScreenPresenter {
     var interactor: UniversityInfoScreenInteractorProtocol
     
     private let errorService: ErrorServiceProtocol
-    private let university: ECUniversity
+    private let universityID: Int
+    private var university: ECUniversity?
+    private var application: Application?
+    
+    private var applied: Bool { application != nil }
+    
+    private let dispatchGroup = DispatchGroup()
+    
+    // MARK: - SNAPSHOTING
+    private let snapshotBuilder = UniversityInfoScreenSnapshotBuilder()
+    
+    private lazy var actions = UniversityInfoScreenSnapshotBuilder.Actions(
+        didTapAboutFaculty: { [weak self] in self?.view?.scrollToSection(section: .faculties) },
+        didTapAboutProgram: { [weak self] in self?.view?.scrollToSection(section: .programs) },
+        didTapAboutProfession: { [weak self] in self?.view?.scrollToSection(section: .professions) },
+        didTapApply: { [weak self] in self?.didTapApply() },
+        didTapRemoveApplication: { [weak self] in self?.didTapRemoveApplication() }
+    )
 
     init(
         interactor: UniversityInfoScreenInteractorProtocol,
         router: UniversityInfoScreenRouterProtocol,
-        errorService: ErrorServiceProtocol, university: ECUniversity
+        errorService: ErrorServiceProtocol,
+        university: ECUniversity
     ) {
         self.interactor = interactor
         self.errorService = errorService
         self.router = router
+        self.universityID = university.id
         self.university = university
+    }
+    
+    init(
+        interactor: UniversityInfoScreenInteractorProtocol,
+        router: UniversityInfoScreenRouterProtocol,
+        errorService: ErrorServiceProtocol,
+        universityID: Int
+    ) {
+        self.interactor = interactor
+        self.errorService = errorService
+        self.router = router
+        self.universityID = universityID
+    }
+    
+    private func applySnapshot() {
+        guard let university else { return }
+        let result = snapshotBuilder.build(university: university, applied: applied, actions: actions)
+        view?.applySnapshot(sections: result.sections, itemsBySection: result.items)
+    }
+    
+    private func didTapApply() {
+        self.view?.showLoading()
+        self.interactor.applyToUniversity(id: self.universityID)
+    }
+    
+    private func didTapRemoveApplication() {
+        guard let application else { return }
+        self.view?.showLoading()
+        self.interactor.removeApplication(applicationID: application.id)
     }
 }
 
 extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
     func viewDidLoad() {
-        let headerVM = UniversityInfoScreenHeaderCellViewModel(university: university)
-        let entScoresVM = UniversityInfoScreenAverageEntCellViewModel(entScores: university.entScores ?? [])
-        let aboutVM = UniversityInfoScreenAboutCellViewModel(university: university)
-        let contactsVM = UniversityInfoScreenContactsCellViewModel(university: university)
+        self.view?.showLoading()
         
-        let facultiesHeaderVM = SectionHeaderCellViewModel(title: "Факультеты", titleSize: 22, titleAlignment: .center)
-        var facultyItems: [UniversityInfoScreenItem] = []
-        facultyItems.append(.sectionHeaderItem(.init(id: "facultiesHeader", viewModel: facultiesHeaderVM)))
-        
-        university.faculties.forEach {
-            let vm = CardWithImageCellViewModel(imageURL: $0.imageURL, title: $0.name)
-            facultyItems.append(.cardItem(.init(id: "faculty-\($0.id)", viewModel: vm)))
+        if university == nil {
+            dispatchGroup.enter()
+            self.interactor.getUniversityByID(id: universityID)
         }
         
-        let programsHeaderVM = SectionHeaderCellViewModel(title: "Программы образования", titleSize: 22, titleAlignment: .center)
-        var programItems: [UniversityInfoScreenItem] = []
-        programItems.append(.sectionHeaderItem(.init(id: "programsHeader", viewModel: programsHeaderVM)))
-        university.programs.forEach {
-            let vm = CardWithImageCellViewModel(
-                imageURL: university.logoURL,
-                imageContentMode: .scaleAspectFit, title: $0.name,
-                subtitle: "\($0.budgetPlaces) бюджет. мест, \($0.paidPlaces) платн. мест, \($0.studyTypeName) обучение"
-            )
-            programItems.append(.cardItem(.init(id: "program-\($0.id)", viewModel: vm)))
+        dispatchGroup.enter()
+        interactor.getApplicationStatus(id: universityID)
+        
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            self?.applySnapshot()
+            self?.view?.hideLoading()
         }
-        
-        let professionsHeaderVM = SectionHeaderCellViewModel(title: "Профессии", titleSize: 22, titleAlignment: .center)
-        var professionItems: [UniversityInfoScreenItem] = []
-        professionItems.append(.sectionHeaderItem(.init(id: "professionsHeader", viewModel: professionsHeaderVM)))
-        
-        university.professions.forEach {
-            let vm = CardWithImageCellViewModel(imageURL: $0.imageURL, title: $0.name)
-            professionItems.append(.cardItem(.init(id: "profession-\($0.id)", viewModel: vm)))
-        }
-        
-        // let articlesHeaderVM = SectionHeaderCellViewModel(title: "Новости", titleSize: 22, titleAlignment: .center)
-        view?.applySnapshot(
-            sections: [.header, .main, .faculties, .programs, .professions],
-            itemsBySection: [
-                .header : [.headerItem(.init(id: "header", viewModel: headerVM))],
-                .main : [
-                    .averageENTScoreItem(.init(id: "averageENTCells", viewModel: entScoresVM)),
-                    .aboutItem(.init(id: "about", viewModel: aboutVM)),
-                    .contactsItem(.init(id: "contacts", viewModel: contactsVM))
-                ],
-                .faculties : facultyItems,
-                .programs : programItems,
-                .professions : professionItems,
-            ]
-        )
     }
     
     func didTapTabBar() {
@@ -103,5 +120,38 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
     
     func didTapAppLogo() {
         router.routeToMain()
+    }
+    
+    func didGetApplicationStatus(application: Application) {
+        self.application = application
+        dispatchGroup.leave()
+    }
+    
+    func didFailToGetApplicationStatus() {
+        self.application = nil
+        dispatchGroup.leave()
+    }
+    
+    func didApplyOrDeleteApplication(message: String?) {
+        dispatchGroup.enter()
+        interactor.getApplicationStatus(id: universityID)
+        
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            self?.view?.hideLoading()
+            self?.applySnapshot()
+            guard let message else { return }
+            self?.view?.showMessage(message: message)
+        }
+    }
+    
+    func didReceiveUniversity(university: ECUniversity) {
+        self.university = university
+        dispatchGroup.leave()
+    }
+    
+    func didReceieveError(error: any Error) {
+        let userError = errorService.handle(error)
+        self.view?.showError(userError: userError)
+        self.view?.hideLoading()
     }
 }

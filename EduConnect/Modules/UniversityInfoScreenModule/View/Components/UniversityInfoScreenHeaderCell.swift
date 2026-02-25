@@ -140,7 +140,7 @@ final class UniversityInfoScreenHeaderCell: UICollectionViewCell, ConfigurableCe
         self.viewModel = vm
         nameLabel.text = "\(vm.university.name)"
         programsLabel.text = "\(vm.university.programsCount)\nпрограмм"
-        minPriceLabel.text = "от \(ECNumberFormatter.toDecimalFromString(number: vm.university.minContractPrice))\nтенге в год"
+        minPriceLabel.text = "от \(ECNumberFormatter.toDecimalFromString(number: vm.university.minContractPrice ?? "0"))\nтенге в год"
         budgetPlacesLabel.text = "\(vm.university.budgetPlaces)\nбюджет. мест"
         paidPlacesLabel.text = "\(vm.university.paidPlaces)\nплатных. мест"
         var advantagesText: String = "\(vm.university.universityTypeName.capitalized)"

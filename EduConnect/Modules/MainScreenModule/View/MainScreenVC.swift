@@ -14,6 +14,7 @@ protocol MainScreenViewProtocol: AnyObject {
     func showError(errorMessage: String)
     func showLoading()
     func hideLoading()
+    func scrollToSection(section: MainScreenSection, onCompletion: (() -> Void)?)
 }
 
 final class MainScreenVC: UIViewController {
@@ -47,6 +48,7 @@ final class MainScreenVC: UIViewController {
         cv.registerCell(UnderlineButtonCell.self, reuseID: UnderlineButtonCell.identifier)
         cv.registerCell(CardWithImageCell.self, reuseID: CardWithImageCell.identifier)
         cv.registerCell(LoadingCell.self, reuseID: LoadingCell.identifier)
+        cv.registerCell(NotFoundCell.self, reuseID: NotFoundCell.identifier)
         cv.resignsFirstResponderOnScroll = true
         return cv
     }()
@@ -133,6 +135,11 @@ final class MainScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
+            case .notFoundItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? NotFoundCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
             case .footerItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenFooterCell
                 cell?.configure(withVM: item.viewModel)
@@ -166,5 +173,9 @@ extension MainScreenVC: MainScreenViewProtocol {
     
     func hideLoading() {
         self.hideHoverLoading()
+    }
+    
+    func scrollToSection(section: MainScreenSection, onCompletion: (() -> Void)?) {
+        self.collectionContainer.scrollToSection(section, onCompletion: onCompletion)
     }
 }

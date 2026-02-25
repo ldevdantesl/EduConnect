@@ -6,43 +6,116 @@
 //
 
 import Foundation
+import UniformTypeIdentifiers
 
 enum ProfileEndpoints: Endpoint {
-    case updatePersonal(surname: String?, name: String?, patronymic: String?, phoneNumber: String?)
+    // MARK: - PROFILE
+    case getProfile
+    
+    case getEducation
     case updateEducation(institution: String?, finalClass: String?, score: Double?)
-    case updateETHYear(year: Int)
+    
+    case getETH
     case addETHSubjects(subjectID: Int, score: String)
+    case updateETHYear(year: Int)
     case deleteETHSubject(subjectID: Int)
-    case addFamilyMember(familyMemberID: Int, fullName: String, phoneNumber: String)
+    
+    case getFamilyMembers
+    case addFamilyMember(familyMemberID: Int?, fullName: String?, phoneNumber: String?)
     case deleteFamilyMember(familyMemberID: Int)
-    case addOlympiad(olympiadTypeID: Int, olympiadPlaceID: Int, year: String)
+    
+    case getOlympiads
+    case addOlympiad(olympiadTypeID: Int?, olympiadPlaceID: Int?, year: String?, files: [ECAttachedFile])
     case deleteOlympiad(olympiadID: Int)
-    case addExtracurricular(activityID: Int, description: String?)
+    
+    case getExtracurricular
+    case addExtracurricular(activityID: Int?, description: String?, files: [ECAttachedFile])
     case deleteExtracurricular(activityID: Int)
+    
+    case updatePersonal(surname: String?, name: String?, patronymic: String?, phoneNumber: String?)
     
     var method: HTTPMethod {
         switch self {
+        case .getProfile, .getEducation, .getETH, .getFamilyMembers, .getOlympiads, .getExtracurricular: return .get
         case .updatePersonal, .updateEducation, .updateETHYear: return .put
         case .addETHSubjects, .addFamilyMember, .addOlympiad, .addExtracurricular: return .post
         case .deleteETHSubject, .deleteFamilyMember, .deleteOlympiad, .deleteExtracurricular: return .delete
         }
     }
     
+    var contentType: ContentType {
+        switch self {
+        case .addOlympiad, .addExtracurricular: return .multipart
+        default: return .urlEncoded
+        }
+    }
+    
+    var multipartFields: [MultipartField]? {
+        switch self {
+        case .addExtracurricular(let activityID, let description, let files):
+            var fields: [MultipartField] = [
+                .init(name: "extracurricular_activity_id", value: .text(activityID?.description))
+            ]
+            if let description, !description.isEmpty {
+                fields.append(.init(name: "description", value: .text(description)))
+            }
+            for file in files {
+                guard file.url.startAccessingSecurityScopedResource() else { continue }
+                defer { file.url.stopAccessingSecurityScopedResource() }
+                if let data = try? Data(contentsOf: file.url) {
+                    let mime = file.type?.preferredMIMEType ?? "application/octet-stream"
+                    fields.append(.init(name: "files[]", value: .file(data: data, fileName: file.name, mimeType: mime)))
+                }
+            }
+            return fields
+            
+        case .addOlympiad(let olympiadTypeID, let olympiadPlaceID, let year, let files):
+            var fields: [MultipartField] = [
+                .init(name: "olympiad_type_id", value: .text(olympiadTypeID?.description)),
+                .init(name: "olympiad_place_id", value: .text(olympiadPlaceID?.description)),
+                .init(name: "year", value: .text(year?.description))
+            ]
+            for file in files {
+                guard file.url.startAccessingSecurityScopedResource() else { continue }
+                defer { file.url.stopAccessingSecurityScopedResource() }
+                if let data = try? Data(contentsOf: file.url) {
+                    let mime = file.type?.preferredMIMEType ?? "application/octet-stream"
+                    fields.append(.init(name: "files[]", value: .file(data: data, fileName: file.name, mimeType: mime)))
+                }
+            }
+            return fields
+        default: return nil
+        }
+    }
+    
     var path: String {
         switch self {
+        case .getProfile: return "/profile"
         case .updatePersonal: return "/profile/personal"
+            
+        case .getEducation: return "/profile/education"
         case .updateEducation: return "/profile/education"
+            
+        case .getETH: return "/profile/eth"
         case .updateETHYear: return "/profile/eth-year"
         case .addETHSubjects: return "/profile/eth-subjects"
         case .deleteETHSubject(let subjectID): return "/profile/eth-subjects/\(subjectID)"
+            
+        case .getFamilyMembers: return "/profile/family-contacts"
         case .addFamilyMember: return "/profile/family-contacts"
         case .deleteFamilyMember(let familyMemberID): return "/profile/family-contacts/\(familyMemberID)"
+            
+        case .getOlympiads: return "/profile/olympiads"
         case .addOlympiad: return "/profile/olympiads"
         case .deleteOlympiad(let olympiadID): return "/profile/olympiads/\(olympiadID)"
+            
+        case .getExtracurricular: return "/profile/extracurricular"
         case .addExtracurricular: return "/profile/extracurricular"
         case .deleteExtracurricular(let activityID): return "/profile/extracurricular/\(activityID)"
         }
     }
+    
+    var auth: EndpointAuth { .bearer }
     
     var queryItems: [URLQueryItem]? {
         switch self {
@@ -61,28 +134,20 @@ enum ProfileEndpoints: Endpoint {
             ]
         case .updateETHYear(let year):
             return [.init(name: "year", value: year.description)]
+            
         case .addETHSubjects(let subjectID, let score):
             return [
                 .init(name: "subject_id", value: subjectID.description),
                 .init(name: "score", value: score)
             ]
+            
         case .addFamilyMember(let familyMemberID, let fullName, let phoneNumber):
             return [
-                .init(name: "family_member_id", value: familyMemberID.description),
+                .init(name: "family_member_id", value: familyMemberID?.description),
                 .init(name: "full_name", value: fullName),
                 .init(name: "phone_number", value: phoneNumber)
             ]
-        case .addOlympiad(let olympiadTypeID, let olympiadPlaceID, let year):
-            return [
-                .init(name: "olympiad_type_id", value: olympiadTypeID.description),
-                .init(name: "olympiad_place_id", value: olympiadPlaceID.description),
-                .init(name: "year", value: year)
-            ]
-        case .addExtracurricular(let activityID, let description):
-            return [
-                .init(name: "extracurricular_activity_id", value: activityID.description),
-                .init(name: "description", value: description)
-            ]
+            
         default: return .none
         }
     }

@@ -222,7 +222,7 @@ final class MainScreenStepsCell: UICollectionViewCell, ConfigurableCellProtocol 
             $0.bottom.equalToSuperview().offset(-Constants.vSpacing)
         }
 
-        container.onTap = onTap
+        container.setAction(action: onTap)
         return container
     }
 }

@@ -16,7 +16,6 @@ protocol SidebarServiceProtocol: AnyObject {
     func setSidebarEnabled(_ enabled: Bool)
 }
 
-
 final class ECSidebarService: SidebarServiceProtocol {
     
     // MARK: - PROPERTIES

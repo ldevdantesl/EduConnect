@@ -119,7 +119,7 @@ final class ProgramsScreenProgramCell: UICollectionViewCell, ConfigurableCellPro
            let url = URL(string: urlString) {
             programImageView.kf.setImage(with: url)
         } else {
-            programImageView.image = ImageConstants.SystemImages.questionMarkSystemImage.image
+            programImageView.image = ImageConstants.SystemImages.questionMark.image
         }
     }
     

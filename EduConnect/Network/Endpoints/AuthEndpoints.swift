@@ -33,6 +33,13 @@ enum AuthEndpoints: Endpoint {
         }
     }
     
+    var auth: EndpointAuth {
+        switch self {
+        case .logOut, .me: .bearer
+        default: .none
+        }
+    }
+    
     var queryItems: [URLQueryItem]? {
         switch self {
         case .sendCode(let email):

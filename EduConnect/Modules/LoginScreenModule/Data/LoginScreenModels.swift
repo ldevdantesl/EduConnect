@@ -12,6 +12,7 @@ enum LoginScreenSection: Hashable {
 }
 
 enum LoginScreenItem: Hashable {
+    case loginItem(DiffableItem<LoginScreenLoginCellViewModel>)
     case registrationItem(DiffableItem<LoginScreenRegistrationCellViewModel>)
     case confirmRegisterItem(DiffableItem<LoginScreenConfirmRegistrationCellVM>)
     case setPasswordItem(DiffableItem<LoginScreenSetPasswordCellViewModel>)

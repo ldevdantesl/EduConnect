@@ -9,20 +9,32 @@ import UIKit
 import SnapKit
 
 final class AccountScreenExpandableENTCellViewModel: ExpandableCellViewModel {
-    private(set) var cellIdentifier: String = AccountScreenExpandableENTCell.identifier
+    let cellIdentifier: String = AccountScreenExpandableENTCell.identifier
+    let profile: Profile
     var isExpanded: Bool
-    var didTapExpand: (() -> Void)?
-    var didTapAddNewSubject: (() -> Void)?
-    var didSetNewENTYear: ((String?) -> Void)?
+    let didTapExpand: (() -> Void)?
+    let didTapAddNewSubject: (() -> Void)?
+    let didSetNewENTYear: ((Int) -> Void)?
+    let didTapDeleteSubject: ((ProfileETH.Subject) -> Void)?
+    
+    var ethSubjects: [ProfileETH.Subject] {
+        profile.eth.subjects
+    }
     
     init(
-        isExpanded: Bool, didTapExpand: (() -> Void)? = nil,
-        didTapAddNewSubject: (() -> Void)? = nil, didSetNewENTYear: ((String?) -> Void)? = nil
+        profile: Profile,
+        isExpanded: Bool,
+        didTapExpand: (() -> Void)? = nil,
+        didTapAddNewSubject: (() -> Void)? = nil,
+        didSetNewENTYear: ((Int) -> Void)? = nil,
+        didTapDeleteSubject: ((ProfileETH.Subject) -> Void)? = nil
     ) {
+        self.profile = profile
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
         self.didTapAddNewSubject = didTapAddNewSubject
         self.didSetNewENTYear = didSetNewENTYear
+        self.didTapDeleteSubject = didTapDeleteSubject
     }
 }
 
@@ -35,6 +47,7 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
         static let expandImageSize = 20.0
         static let chevronDownImage = "chevron.down"
         static let chevronUpImage = "chevron.up"
+        static let chipsHeight = 50.0
     }
     
     // MARK: - PROPERTIES
@@ -103,8 +116,27 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
         return label
     }()
     
-    private lazy var addSubjectButtonView: UIView = makeAddSubjectButton()
+    private let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        return scroll
+    }()
     
+    private let subjectsScrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.showsHorizontalScrollIndicator = false
+        return scroll
+    }()
+    
+    private let subjectsStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 8
+        stack.alignment = .center
+        return stack
+    }()
+    
+    private lazy var addSubjectButton: UIView = makeAddSubjectButton()
+
     // MARK: - LIFECYCLE
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -130,6 +162,7 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
     override func prepareForReuse() {
         super.prepareForReuse()
         collapseCell()
+        subjectsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     // MARK: - PUBLIC FUNC
@@ -137,6 +170,9 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
         guard let vm = vm as? AccountScreenExpandableENTCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()
+        
+        yearOfENTField.text = vm.profile.eth.year?.description
+        populateSubjects()
     }
     
     // MARK: - PRIVATE FUNC
@@ -196,11 +232,24 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
         }
         
-        expandableContainer.addSubview(addSubjectButtonView)
-        addSubjectButtonView.snp.makeConstraints {
+        expandableContainer.addSubview(subjectsScrollView)
+        subjectsScrollView.snp.makeConstraints {
             $0.top.equalTo(subjectsENTLabel.snp.bottom).offset(Constants.spacing).priority(.high)
+            $0.horizontalEdges.equalToSuperview()
+        }
+
+        subjectsScrollView.addSubview(subjectsStackView)
+        subjectsStackView.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
-            $0.bottom.equalToSuperview().offset(-Constants.spacing).priority(.high)
+            $0.height.equalToSuperview()
+        }
+        
+        expandableContainer.addSubview(addSubjectButton)
+        addSubjectButton.snp.makeConstraints {
+            $0.top.equalTo(subjectsScrollView.snp.bottom).offset(Constants.spacing)
+            $0.leading.equalToSuperview().offset(Constants.spacing)
+            $0.bottom.equalToSuperview().offset(-Constants.spacing)
         }
     }
     
@@ -225,7 +274,9 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
             yearOfENTField.reconfigure(showsBorder: false)
             yearOfENTField.isEnabled = false
             setYearButton.reconfigure(text: ConstantLocalizedStrings.Common.set)
-            self.viewModel?.didSetNewENTYear?(yearOfENTField.text)
+            if let year = Int(yearOfENTField.text ?? "0") {
+                self.viewModel?.didSetNewENTYear?(year)
+            }
         }
         isEditing.toggle()
     }
@@ -259,6 +310,18 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ConfigurableCe
         }
         
         return view
+    }
+    
+    private func populateSubjects() {
+        subjectsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        viewModel?.ethSubjects.forEach { subject in
+            let vm = DeletableChipViewModel(title: "\(subject.subject.name.ru) - \(subject.score ?? 0)")
+            let chip = DeletableChipView(viewModel: vm)
+            chip.setDeleteAction { [weak self] in
+                self?.viewModel?.didTapDeleteSubject?(subject)
+            }
+            subjectsStackView.addArrangedSubview(chip)
+        }
     }
     
     // MARK: - OBJC FUNC

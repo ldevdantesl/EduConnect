@@ -12,12 +12,14 @@ protocol AuthAPISubServiceProtocol {
     
     @discardableResult
     func logOut() async throws -> EduConnectResponse
+    func me() async throws -> AuthUserAndTokenData
+    
     @discardableResult
     func sendCode(email: String?) async throws -> EduConnectResponse
+    
     @discardableResult
     func verifyCode(email: String, code: String?) async throws -> EduConnectResponse
     
-    func me() async throws -> AuthUserAndTokenData
     func register(email: String, password: String?, confirmPassword: String?) async throws -> AuthUserAndTokenData
 }
 

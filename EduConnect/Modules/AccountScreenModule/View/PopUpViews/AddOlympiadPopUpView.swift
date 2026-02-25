@@ -11,16 +11,19 @@ import SnapKit
 import UniformTypeIdentifiers
 
 struct AddOlympiadPopUpViewModel: PopUpViewModel {
-    var subjects: [ENTSubject]
+    var olympiadTypes: [ECOlympiadType]
+    var olympiadPlaces: [ECOlympiadPlace]
     var onClose: (() -> Void)?
-    var didAddNewOlympiad: ((Int, Int, String?) -> Void)?
+    var didAddNewOlympiad: ((Int?, Int?, String?, [ECAttachedFile]) -> Void)?
     
     init(
-        subjects: [ENTSubject] = [],
+        olympiadTypes: [ECOlympiadType],
+        olympiadPlaces: [ECOlympiadPlace],
         onClose: (() -> Void)? = nil,
-        didAddNewOlympiad: ((Int, Int, String?) -> Void)? = nil
+        didAddNewOlympiad: ((Int?, Int?, String?, [ECAttachedFile]) -> Void)? = nil
     ) {
-        self.subjects = subjects
+        self.olympiadPlaces = olympiadPlaces
+        self.olympiadTypes = olympiadTypes
         self.onClose = onClose
         self.didAddNewOlympiad = didAddNewOlympiad
     }
@@ -38,7 +41,8 @@ final class AddOlympiadPopUpView: PopUpView {
     
     // MARK: - PROPERTIES
     private let viewModel: AddOlympiadPopUpViewModel
-    private var typeOfOlympiad: Int = 0
+    private var selectedType: ECOlympiadType?
+    private var selectedPlace: ECOlympiadPlace?
     
     // MARK: - VIEW PROPERTIES
     private let addOlympiadTitleLabel: UILabel = {
@@ -121,20 +125,27 @@ final class AddOlympiadPopUpView: PopUpView {
     
     private lazy var addButton: ECButton = {
         let button = ECButton(text: ConstantLocalizedStrings.Common.add)
+        button.setAction { [weak self] in
+            let typeID = self?.selectedType?.id
+            let placeID = self?.selectedPlace?.id
+            let year = self?.yearField.text
+            let files = self?.addFilesAttachmentView.files
+            self?.viewModel.didAddNewOlympiad?(typeID, placeID, year, files ?? [])
+        }
         return button
     }()
     
     private lazy var olympiadMenu: UIMenu = {
-        let actions = viewModel.subjects.map { subject in
-            UIAction(title: subject.name.ru) { [weak self] _ in
-                var title = AttributedString(subject.name.ru)
+        let actions = viewModel.olympiadTypes.map { type in
+            UIAction(title: type.name.ru) { [weak self] _ in
+                self?.selectedType = type
+                
+                var title = AttributedString(type.name.ru)
                 title.font = ECFont.font(.semiBold, size: 14)
                 title.foregroundColor = .label
-                
                 self?.chooseOlympiadButton.configuration?.attributedTitle = title
             }
         }
-        
         return UIMenu(title: ConstantLocalizedStrings.Account.Expandable.Olympiad.olympiad, children: actions)
     }()
     
@@ -146,7 +157,6 @@ final class AddOlympiadPopUpView: PopUpView {
         var config = UIButton.Configuration.plain()
         config.attributedTitle = title
         config.titleAlignment = .leading
-        
         config.baseForegroundColor = .label
         config.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
 
@@ -157,33 +167,10 @@ final class AddOlympiadPopUpView: PopUpView {
         return button
     }()
     
-    /// Olympiad Type
+    // MARK: - Place buttons (dynamic)
+    private var placeButtons: [ECButton] = []
     
-    private lazy var internationalButton: ECButton = {
-        let button = ECButton(text: ConstantLocalizedStrings.Common.international, backgroundColor: .systemBackground, textColor: .blue)
-        button.setAction { [weak self] in self?.chooseType(type: 1) }
-        button.borderColor = .systemBlue
-        button.borderWidth = 1
-        return button
-    }()
-    
-    private lazy var stateButton: ECButton = {
-        let button = ECButton(text: ConstantLocalizedStrings.Common.state, backgroundColor: .systemBackground, textColor: .blue)
-        button.setAction { [weak self] in self?.chooseType(type: 2) }
-        button.borderColor = .systemBlue
-        button.borderWidth = 1
-        return button
-    }()
-    
-    private lazy var cityButton: ECButton = {
-        let button = ECButton(text: ConstantLocalizedStrings.Common.city, backgroundColor: .systemBackground, textColor: .blue)
-        button.setAction { [weak self] in self?.chooseType(type: 3) }
-        button.borderColor = .systemBlue
-        button.borderWidth = 1
-        return button
-    }()
-    
-    private lazy var olympiadScrollView: UIScrollView = {
+    private lazy var placesScrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.backgroundColor = .clear
         scroll.showsHorizontalScrollIndicator = false
@@ -191,8 +178,8 @@ final class AddOlympiadPopUpView: PopUpView {
         return scroll
     }()
     
-    private lazy var olympiadTypeStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [internationalButton, stateButton, cityButton])
+    private lazy var placesStack: UIStackView = {
+        let stack = UIStackView()
         stack.axis = .horizontal
         stack.isUserInteractionEnabled = true
         stack.distribution = .fill
@@ -204,6 +191,7 @@ final class AddOlympiadPopUpView: PopUpView {
     init(viewModel: AddOlympiadPopUpViewModel, closesOnBackgroundTap: Bool = true, animationDuration: TimeInterval = 0.5) {
         self.viewModel = viewModel
         super.init(viewModel: viewModel, closesOnBackgroundTap: closesOnBackgroundTap, animationDuration: animationDuration)
+        buildPlaceButtons()
         setupUI()
     }
     
@@ -215,6 +203,38 @@ final class AddOlympiadPopUpView: PopUpView {
     }
     
     // MARK: - PRIVATE FUNC
+    private func buildPlaceButtons() {
+        placeButtons = viewModel.olympiadPlaces.map { place in
+            let button = ECButton(
+                text: place.name.ru,
+                backgroundColor: .systemBackground,
+                textColor: .blue
+            )
+            button.borderColor = .systemBlue
+            button.borderWidth = 1
+            button.setAction { [weak self] in
+                self?.selectPlace(place)
+            }
+            return button
+        }
+        
+        placeButtons.forEach { placesStack.addArrangedSubview($0) }
+    }
+    
+    private func selectPlace(_ place: ECOlympiadPlace) {
+        selectedPlace = place
+        
+        for (index, button) in placeButtons.enumerated() {
+            let isSelected = viewModel.olympiadPlaces[index].id == place.id
+            UIView.animate(withDuration: 0.25) {
+                button.reconfigure(
+                    backgroundColor: isSelected ? .systemBlue : .systemBackground,
+                    textColor: isSelected ? .systemBackground : .blue
+                )
+            }
+        }
+    }
+    
     private func setupUI() {
         contentView.addSubview(addOlympiadTitleLabel)
         addOlympiadTitleLabel.snp.makeConstraints {
@@ -254,22 +274,22 @@ final class AddOlympiadPopUpView: PopUpView {
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
         }
         
-        contentView.addSubview(olympiadScrollView)
-        olympiadScrollView.snp.makeConstraints {
+        contentView.addSubview(placesScrollView)
+        placesScrollView.snp.makeConstraints {
             $0.top.equalTo(olympiadTypeLabel.snp.bottom).offset(Constants.spacing)
             $0.horizontalEdges.equalToSuperview()
         }
 
-        olympiadScrollView.addSubview(olympiadTypeStack)
-        olympiadTypeStack.snp.makeConstraints {
+        placesScrollView.addSubview(placesStack)
+        placesStack.snp.makeConstraints {
             $0.verticalEdges.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
-            $0.height.equalTo(olympiadScrollView.snp.height)
+            $0.height.equalTo(placesScrollView.snp.height)
         }
         
         contentView.addSubview(yearLabel)
         yearLabel.snp.makeConstraints {
-            $0.top.equalTo(olympiadScrollView.snp.bottom).offset(Constants.spacing)
+            $0.top.equalTo(placesScrollView.snp.bottom).offset(Constants.spacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
         }
         
@@ -315,25 +335,6 @@ final class AddOlympiadPopUpView: PopUpView {
         }
         
         addFilesAttachmentView.delegate = self
-    }
-    
-    private func chooseType(type: Int) {
-        switch type {
-        case 1:
-            internationalButton.reconfigure(backgroundColor: .systemBlue, textColor: .systemBackground)
-            cityButton.reconfigure(backgroundColor: .systemBackground, textColor: .blue)
-            stateButton.reconfigure(backgroundColor: .systemBackground, textColor: .blue)
-        case 2:
-            stateButton.reconfigure(backgroundColor: .systemBlue, textColor: .systemBackground)
-            cityButton.reconfigure(backgroundColor: .systemBackground, textColor: .blue)
-            internationalButton.reconfigure(backgroundColor: .systemBackground, textColor: .blue)
-        case 3:
-            cityButton.reconfigure(backgroundColor: .systemBlue, textColor: .systemBackground)
-            internationalButton.reconfigure(backgroundColor: .systemBackground, textColor: .blue)
-            stateButton.reconfigure(backgroundColor: .systemBackground, textColor: .blue)
-        default:
-            break
-        }
     }
     
     @objc private func didTapCloseButton() {

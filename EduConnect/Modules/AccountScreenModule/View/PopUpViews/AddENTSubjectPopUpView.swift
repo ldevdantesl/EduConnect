@@ -11,9 +11,9 @@ import SnapKit
 struct AddENTSubjectPopUpViewModel: PopUpViewModel {
     var entSubjects: [ENTSubject]
     var onClose: (() -> Void)?
-    var didAddNewSubject: ((Int, String?) -> Void)?
+    var didAddNewSubject: ((ENTSubject, String) -> Void)?
     
-    init(entSubjects: [ENTSubject] = [], onClose: (() -> Void)? = nil, didAddNewSubject: ((Int, String?) -> Void)? = nil) {
+    init(entSubjects: [ENTSubject] = [], onClose: (() -> Void)? = nil, didAddNewSubject: ((ENTSubject, String) -> Void)? = nil) {
         self.onClose = onClose
         self.entSubjects = entSubjects
         self.didAddNewSubject = didAddNewSubject
@@ -95,7 +95,7 @@ final class AddENTSubjectPopUpView: PopUpView {
         button.setAction { [weak self] in
             guard let self, let subject = self.selectedSubject else { return }
             let score = self.scoreField.text
-            self.viewModel.didAddNewSubject?(subject.id, score)
+            self.viewModel.didAddNewSubject?(subject, score ?? "0")
         }
         return button
     }()

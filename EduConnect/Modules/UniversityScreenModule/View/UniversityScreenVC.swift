@@ -19,6 +19,7 @@ final class UniversityScreenVC: UIViewController {
 
     // MARK: - VIPER
     var presenter: UniversityScreenPresenterProtocol?
+    private let sectionStore = ECDiffableSectionStore<UniversityScreenSection>()
 
     // MARK: - VIEW PROPERTIES
     private lazy var headerView: ECHeaderView = {
@@ -30,16 +31,16 @@ final class UniversityScreenVC: UIViewController {
         return header
     }()
     
-    private let collectionContainer: DiffableCollectionViewContainer = {
-        let cv = DiffableCollectionViewContainer<UniversityScreenSection, UniversityScreenItem>(
-            layout: UniversityScreenLayoutFactory.make()
-        )
+    private lazy var collectionContainer: DiffableCollectionViewContainer = {
+        let layout = UniversityScreenLayoutFactory.make(sectionStore: self.sectionStore)
+        let cv = DiffableCollectionViewContainer<UniversityScreenSection, UniversityScreenItem>(layout: layout)
         cv.registerCell(LoadingCell.self, reuseID: LoadingCell.identifier)
         cv.registerCell(UniversityScreenHeaderCell.self, reuseID: UniversityScreenHeaderCell.identifier)
         cv.registerCell(UniversityScreenFilterCell.self, reuseID: UniversityScreenFilterCell.identifier)
         cv.registerCell(UniversityCell.self, reuseID: UniversityCell.identifier)
         cv.registerCell(PageIndicatorCell.self, reuseID: PageIndicatorCell.identifier)
         cv.registerCell(TabsFooterCell.self, reuseID: TabsFooterCell.identifier)
+        cv.registerCell(NotFoundCell.self, reuseID: NotFoundCell.identifier)
         cv.backgroundColor = .clear
         cv.resignsFirstResponderOnScroll = true
         return cv
@@ -97,6 +98,11 @@ final class UniversityScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
+            case .notFoundItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? NotFoundCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
             case .loadingItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoadingCell
                 cell?.configure(withVM: item.viewModel)
@@ -108,6 +114,7 @@ final class UniversityScreenVC: UIViewController {
 
 extension UniversityScreenVC: UniversityScreenViewProtocol {
     func applySnapshot(sections: [UniversityScreenSection], itemsBySection: [UniversityScreenSection : [UniversityScreenItem]]) {
+        sectionStore.update(sections)
         collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
     }
     

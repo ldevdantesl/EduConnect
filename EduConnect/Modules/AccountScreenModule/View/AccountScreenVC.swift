@@ -11,10 +11,13 @@ import SnapKit
 protocol AccountScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [AccountScreenSection], itemsBySection: [AccountScreenSection : [AccountScreenItem]])
     func reconfigureItems(items: [AccountScreenItem])
+    func reloadSection(section: AccountScreenSection)
+    
     func showPopup(_ popUp: PopUpView)
     func dismissPopup()
     
     func showError(error: UserFacingError)
+    func showMessage(message: String)
     func showLoading()
     func hideLoading()
 }
@@ -42,8 +45,10 @@ final class AccountScreenVC: UIViewController {
         let cv = DiffableCollectionViewContainer<AccountScreenSection, AccountScreenItem>(
             layout: AccountLayoutFactory.make()
         )
+        cv.adjustsForKeyboard = true
         cv.resignsFirstResponderOnScroll = true
-        cv.registerCell(UniversityCell.self, reuseID: UniversityCell.identifier)
+        cv.registerCell(ApplicationCell.self, reuseID: ApplicationCell.identifier)
+        cv.registerCell(NotFoundCell.self, reuseID: NotFoundCell.identifier)
         cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
         cv.registerCell(AccountScreenExpandablePersonalInfoCell.self, reuseID: AccountScreenExpandablePersonalInfoCell.identifier)
         cv.registerCell(AccountScreenExpandableFamilyInfoCell.self, reuseID: AccountScreenExpandableFamilyInfoCell.identifier)
@@ -66,6 +71,11 @@ final class AccountScreenVC: UIViewController {
         setupUI()
         configureCollectionView()
         presenter?.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presenter?.viewDidAppear()
     }
     
     // MARK: - PRIVATE FUNC
@@ -92,10 +102,14 @@ final class AccountScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
             case .university(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? ApplicationCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             case .expandableCell(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath)
+                (cell as? ConfigurableCellProtocol)?.configure(withVM: item.viewModel)
+                return cell
+            case .notFoundItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath)
                 (cell as? ConfigurableCellProtocol)?.configure(withVM: item.viewModel)
                 return cell
@@ -130,6 +144,10 @@ extension AccountScreenVC: AccountScreenViewProtocol {
         collectionContainer.reconfigureItems(items)
     }
     
+    func reloadSection(section: AccountScreenSection) {
+        collectionContainer.reloadSection(section: section)
+    }
+    
     func showPopup(_ popUp: PopUpView) {
         self.popUpView = popUp
         popUp.show(in: view)
@@ -142,6 +160,10 @@ extension AccountScreenVC: AccountScreenViewProtocol {
     
     func showError(error: UserFacingError) {
         self.showToastedError(userError: error)
+    }
+    
+    func showMessage(message: String) {
+        self.showToastedMessage(message: message)
     }
     
     func showLoading() {

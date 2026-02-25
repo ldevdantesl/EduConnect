@@ -79,7 +79,7 @@ final class MainScreenCareersItem: UICollectionViewCell, ConfigurableCellProtoco
         self.viewModel = vm
         universityNameLabel.text = vm.university.name
         guard let url = URL(string: vm.university.logoURL ?? "") else { return }
-        imageView.kf.setImage(with: url, placeholder: ImageConstants.SystemImages.questionMarkSystemImage.image)
+        imageView.kf.setImage(with: url, placeholder: ImageConstants.SystemImages.questionMark.image)
     }
     
     // MARK: - PRIVATE FUNC

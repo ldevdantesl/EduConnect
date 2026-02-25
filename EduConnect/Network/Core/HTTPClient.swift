@@ -8,7 +8,10 @@
 import Foundation
 
 protocol HTTPClientProtocol {
+    @discardableResult
     func request<T: Decodable>(_ endpoint: Endpoint) async throws -> T
+    
+    @discardableResult
     func request(_ endpoint: Endpoint) async throws -> Data
 }
 
@@ -19,18 +22,21 @@ final class HTTPClient: HTTPClientProtocol {
     private let decoder: JSONDecoder
     private let logger: NetworkLoggerProtocol?
     private let timeout: TimeInterval
+    private let tokenStorage: TokenStorageProtocol?
     
     // MARK: - Init
     init(
         session: URLSession = .shared,
         decoder: JSONDecoder = .init(),
         timeout: TimeInterval = 30,
-        logger: NetworkLoggerProtocol? = nil
+        logger: NetworkLoggerProtocol? = nil,
+        tokenStorage: TokenStorageProtocol? = nil
     ) {
         self.session = session
         self.decoder = decoder
         self.timeout = timeout
         self.logger = logger
+        self.tokenStorage = tokenStorage
     }
     
     // MARK: - Public
@@ -89,7 +95,8 @@ final class HTTPClient: HTTPClientProtocol {
             throw APIError.invalidURL
         }
         
-        if let queryItems = endpoint.queryItems, !queryItems.isEmpty {
+        if endpoint.contentType == .urlEncoded,
+           let queryItems = endpoint.queryItems, !queryItems.isEmpty {
             components.queryItems = queryItems
         }
         
@@ -100,17 +107,61 @@ final class HTTPClient: HTTPClientProtocol {
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
         request.timeoutInterval = timeout
+        request.setValue("XMLHttpRequest", forHTTPHeaderField: "X-Requested-With")
         
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        switch endpoint.auth {
+        case .bearer:
+            if let token = tokenStorage?.token {
+                request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+        case .none:
+            break
+        }
         
         endpoint.headers?.forEach { key, value in
             request.setValue(value, forHTTPHeaderField: key)
         }
         
-        request.httpBody = endpoint.body
+        switch endpoint.contentType {
+        case .urlEncoded:
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
+            request.httpBody = endpoint.body
+            
+        case .multipart:
+            let boundary = "Boundary-\(UUID().uuidString)"
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            request.setValue("*/*", forHTTPHeaderField: "Accept")
+
+            if let fields = endpoint.multipartFields {
+                request.httpBody = buildMultipartBody(fields: fields, boundary: boundary)
+            }
+        }
         
         return request
+    }
+    
+    private func buildMultipartBody(fields: [MultipartField], boundary: String) -> Data {
+        var body = Data()
+        
+        for field in fields {
+            switch field.value {
+            case .text(let text):
+                body.append("--\(boundary)\r\n")
+                body.append("Content-Disposition: form-data; name=\"\(field.name)\"\r\n\r\n")
+                body.append("\(text ?? "")\r\n")
+                
+            case .file(let data, let fileName, let mimeType):
+                body.append("--\(boundary)\r\n")
+                body.append("Content-Disposition: form-data; name=\"\(field.name)\"; filename=\"\(fileName)\"\r\n")
+                body.append("Content-Type: \(mimeType)\r\n\r\n")
+                body.append(data)
+                body.append("\r\n")
+            }
+        }
+        
+        body.append("--\(boundary)--\r\n")
+        return body
     }
     
     // MARK: - Private: Validation

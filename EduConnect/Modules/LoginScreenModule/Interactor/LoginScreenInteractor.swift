@@ -9,6 +9,7 @@ protocol LoginScreenInteractorProtocol: AnyObject {
     func sendVerificationCode(email: String?)
     func verifyCode(email: String, code: String?)
     func register(email: String, password: String?, confirmPassword: String?)
+    func login(email: String?, password: String?)
 }
 
 final class LoginScreenInteractor: LoginScreenInteractorProtocol {
@@ -17,6 +18,17 @@ final class LoginScreenInteractor: LoginScreenInteractorProtocol {
     
     init(authentication: AuthenticationProtocol) {
         self.authentication = authentication
+    }
+    
+    func login(email: String?, password: String?) {
+        Task {
+            do {
+                let user = try await authentication.logIn(email: email, password: password)
+                presenter?.didLogin(user: user)
+            } catch {
+                presenter?.didReceiveError(erorr: error)
+            }
+        }
     }
     
     func sendVerificationCode(email: String?) {

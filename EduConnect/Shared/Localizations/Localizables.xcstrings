@@ -256,6 +256,57 @@
         }
       }
     },
+    "account_familyAddContact" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Family Contact"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить Контакт"
+          }
+        }
+      }
+    },
+    "account_familyContact" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Family Contact"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Контакт"
+          }
+        }
+      }
+    },
+    "account_familyInfoChooseContact" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose Contact"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбрать Контакт"
+          }
+        }
+      }
+    },
     "account_familyInfoFather" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -375,6 +426,23 @@
         }
       }
     },
+    "account_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Имя"
+          }
+        }
+      }
+    },
     "account_olympiad" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -443,6 +511,23 @@
         }
       }
     },
+    "account_patronymic" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Patronymic"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отчество"
+          }
+        }
+      }
+    },
     "account_personalInfoName" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -507,6 +592,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Личная Информация"
+          }
+        }
+      }
+    },
+    "account_surname" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Surname"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фамилия"
           }
         }
       }
@@ -709,7 +811,7 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Загрузка"
           }
         }
@@ -987,6 +1089,23 @@
         }
       }
     },
+    "registration_login" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log in"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Войти"
+          }
+        }
+      }
+    },
     "registration_re-enterPasswordTextField" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1000,6 +1119,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Повторите пароль"
+          }
+        }
+      }
+    },
+    "registration_register" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Register"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зарегистрироваться"
           }
         }
       }
@@ -1191,6 +1327,23 @@
         }
       }
     },
+    "sidebar_logout" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log Out"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выйти"
+          }
+        }
+      }
+    },
     "sidebar_main" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1271,7 +1424,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Университеты"
+            "value" : "Вузы"
           }
         }
       }

@@ -88,7 +88,7 @@ open class ECIconButton: UIButton {
         setup()
     }
     
-    public func setAction(action: @escaping (() -> Void)) {
+    public func setAction(action: (() -> Void)?) {
         self.action = action
     }
     

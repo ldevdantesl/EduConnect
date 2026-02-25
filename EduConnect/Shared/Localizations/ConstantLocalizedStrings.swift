@@ -40,6 +40,11 @@ public enum ConstantLocalizedStrings {
             static let goToAccountButton = String(localized: .Localizables.registrationGoToAccountButton)
             static let goToMainButton = String(localized: .Localizables.registrationGoToMainButton)
         }
+        
+        enum Words {
+            static let login = String(localized: .Localizables.registrationLogin)
+            static let register = String(localized: .Localizables.registrationRegister)
+        }
     }
     
     /// For __Common__ words
@@ -95,6 +100,9 @@ public enum ConstantLocalizedStrings {
                 static let title = String(localized: .Localizables.accountFamilyInfoTitle)
                 static let father = String(localized: .Localizables.accountFamilyInfoFather)
                 static let mother = String(localized: .Localizables.accountFamilyInfoMother)
+                static let addContact = String(localized: .Localizables.accountFamilyAddContact)
+                static let popupTitle = addContact
+                static let contact = String(localized: .Localizables.accountFamilyContact)
             }
             
             enum Education {
@@ -132,6 +140,12 @@ public enum ConstantLocalizedStrings {
                 static let chooseOlympiad = String(localized: .Localizables.accountOlympiadChooseOlympiad)
             }
         }
+        
+        enum Words {
+            static let name = String(localized: .Localizables.accountName)
+            static let surname = String(localized: .Localizables.accountSurname)
+            static let patronymic = String(localized: .Localizables.accountPatronymic)
+        }
     }
     
     /// For __Sidebar__ Container
@@ -143,5 +157,6 @@ public enum ConstantLocalizedStrings {
         static let tests = String(localized: .Localizables.sidebarTests)
         static let articles = String(localized: .Localizables.sidebarArticles)
         static let calendar = String(localized: .Localizables.sidebarCalendar)
+        static let logOut = String(localized: .Localizables.sidebarLogout)
     }
 }

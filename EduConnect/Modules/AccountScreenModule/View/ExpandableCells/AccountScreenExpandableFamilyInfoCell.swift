@@ -9,15 +9,19 @@ import UIKit
 import SnapKit
 
 final class AccountScreenExpandableFamilyInfoCellViewModel: ExpandableCellViewModel {
-    var cellIdentifier: String = "AccountScreenExpandableFamilyInfoCell"
+    let cellIdentifier: String = AccountScreenExpandableFamilyInfoCell.identifier
+    let profile: Profile
     var isExpanded: Bool
     let didTapExpand: (() -> Void)?
-    let didTapSave: ((String?, String?) -> Void)?
+    let didTapAddFamily: (() -> Void)?
+    let didTapDeleteFamily: ((ProfileFamilyContact) -> Void)?
     
-    init(isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapSave: ((String?, String?) -> Void)? = nil) {
+    init(profile: Profile, isExpanded: Bool, didTapExpand: (() -> Void)? = nil, didTapAddFamily: (() -> Void)? = nil, didTapDeleteFamily: ((ProfileFamilyContact) -> Void)? = nil) {
+        self.profile = profile
         self.isExpanded = isExpanded
         self.didTapExpand = didTapExpand
-        self.didTapSave = didTapSave
+        self.didTapAddFamily = didTapAddFamily
+        self.didTapDeleteFamily = didTapDeleteFamily
     }
 }
 
@@ -65,42 +69,15 @@ final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, Configu
         return label
     }()
     
-    private let fathersPhoneNumberLabel: UILabel = {
-        let label = UILabel()
-        label.text = "\(ConstantLocalizedStrings.Common.phoneNumber) (\(ConstantLocalizedStrings.Account.Expandable.FamilyInfo.father))"
-        label.font = ECFont.font(.medium, size: 14)
-        return label
+    private let familyStack: UIStackView = {
+        let stack = UIStackView()
+        stack.alignment = .center
+        stack.spacing = 10
+        stack.axis = .vertical
+        return stack
     }()
     
-    private let fathersPhoneNumberField: ECTextField = {
-        let field = ECTextField(placeHolder: "+52", showsBorder: false)
-        field.keyboardType = .phonePad
-        field.isEnabled = false
-        return field
-    }()
-    
-    private let momsPhoneNumberLabel: UILabel = {
-        let label = UILabel()
-        label.text = "\(ConstantLocalizedStrings.Common.phoneNumber) (\(ConstantLocalizedStrings.Account.Expandable.FamilyInfo.mother))"
-        label.font = ECFont.font(.medium, size: 14)
-        return label
-    }()
-    
-    private let momsPhoneNumberField: ECTextField = {
-        let field = ECTextField(placeHolder: "+52", showsBorder: false)
-        field.keyboardType = .phonePad
-        field.isEnabled = false
-        return field
-    }()
-    
-    private lazy var editButton: ECButton = {
-        let button = ECButton(text: ConstantLocalizedStrings.Common.edit)
-        button.setAction { [weak self] in
-            guard let self = self else { return }
-            self.didPressEditButton()
-        }
-        return button
-    }()
+    private lazy var addButton: UIView = makeAddFamilyButton()
     
     // MARK: - LIFECYCLE
     override init(frame: CGRect) {
@@ -134,6 +111,7 @@ final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, Configu
         guard let vm = vm as? AccountScreenExpandableFamilyInfoCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()
+        populateFamilies()
     }
     
     // MARK: - PRIVATE FUNC
@@ -167,35 +145,17 @@ final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, Configu
             $0.bottom.equalToSuperview()
             expandableHeightConstraint = $0.height.equalTo(0).priority(.required).constraint
         }
-        
-        expandableContainer.addSubview(momsPhoneNumberLabel)
-        momsPhoneNumberLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(Constants.spacing).priority(.high)
+
+        expandableContainer.addSubview(familyStack)
+        familyStack.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(Constants.spacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
         }
-        
-        expandableContainer.addSubview(momsPhoneNumberField)
-        momsPhoneNumberField.snp.makeConstraints {
-            $0.top.equalTo(momsPhoneNumberLabel.snp.bottom).offset(Constants.spacing).priority(.high)
-            $0.horizontalEdges.equalToSuperview()
-        }
-        
-        expandableContainer.addSubview(fathersPhoneNumberLabel)
-        fathersPhoneNumberLabel.snp.makeConstraints {
-            $0.top.equalTo(momsPhoneNumberField.snp.bottom).offset(Constants.spacing).priority(.high)
-            $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
-        }
-        
-        expandableContainer.addSubview(fathersPhoneNumberField)
-        fathersPhoneNumberField.snp.makeConstraints {
-            $0.top.equalTo(fathersPhoneNumberLabel.snp.bottom).offset(Constants.spacing).priority(.high)
-            $0.horizontalEdges.equalToSuperview()
-        }
-        
-        expandableContainer.addSubview(editButton)
-        editButton.snp.makeConstraints {
-            $0.top.equalTo(fathersPhoneNumberField.snp.bottom).offset(Constants.spacing).priority(.high)
-            $0.leading.equalToSuperview().inset(Constants.spacing)
+
+        expandableContainer.addSubview(addButton)
+        addButton.snp.makeConstraints {
+            $0.top.equalTo(familyStack.snp.bottom).offset(Constants.spacing)
+            $0.leading.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-Constants.spacing).priority(.high)
         }
     }
@@ -212,26 +172,58 @@ final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, Configu
         layoutIfNeeded()
     }
     
-    private func didPressEditButton() {
-        if !isEditing {
-            editButton.reconfigure(text: ConstantLocalizedStrings.Common.save)
-            fathersPhoneNumberField.reconfigure(showsBorder: true)
-            fathersPhoneNumberField.isEnabled = true
-            momsPhoneNumberField.reconfigure(showsBorder: true)
-            momsPhoneNumberField.isEnabled = true
-        } else {
-            self.viewModel?.didTapSave?(momsPhoneNumberField.text, fathersPhoneNumberField.text)
-            editButton.reconfigure(text: ConstantLocalizedStrings.Common.edit)
-            fathersPhoneNumberField.reconfigure(showsBorder: false)
-            fathersPhoneNumberField.isEnabled = false
-            momsPhoneNumberField.reconfigure(showsBorder: false)
-            momsPhoneNumberField.isEnabled = false
+    private func makeAddFamilyButton() -> UIView {
+        let imageView = UIImageView()
+        imageView.image = ImageConstants.SystemImages.plus.image
+        imageView.tintColor = .systemBlue
+        
+        let label = UILabel()
+        label.text = ConstantLocalizedStrings.Account.Expandable.FamilyInfo.addContact
+        label.textColor = .systemBlue
+        label.font = ECFont.font(.regular, size: 14)
+        
+        let view = UIView()
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAddFamilyMember)))
+        
+        view.addSubview(imageView)
+        imageView.snp.makeConstraints {
+            $0.leading.centerY.equalToSuperview()
+            $0.size.equalTo(Constants.expandImageSize)
         }
-        isEditing.toggle()
+        
+        view.addSubview(label)
+        label.snp.makeConstraints {
+            $0.leading.equalTo(imageView.snp.trailing).offset(Constants.spacing)
+            $0.trailing.equalToSuperview()
+            $0.centerY.equalTo(imageView)
+            $0.bottom.equalToSuperview().offset(-Constants.spacing)
+        }
+        
+        return view
+    }
+    
+    private func populateFamilies() {
+        familyStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        viewModel?.profile.familyContacts.forEach { family in
+            let vm = DeletableFamilyMemberViewModel(name: family.fullName, phoneNumber: family.phoneNumber, typeName: "Семья")
+            let view = DeletableFamilyMemberView(viewModel: vm)
+            view.setDeleteAction { [weak self] in
+                self?.viewModel?.didTapDeleteFamily?(family)
+            }
+            familyStack.addArrangedSubview(view)
+            view.snp.makeConstraints {
+                $0.width.equalToSuperview()
+            }
+        }
     }
     
     // MARK: - OBJC FUNC
     @objc private func didTapExpand() {
         viewModel?.didTapExpand?()
+    }
+    
+    @objc private func didTapAddFamilyMember() {
+        viewModel?.didTapAddFamily?()
     }
 }

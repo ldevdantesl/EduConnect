@@ -80,7 +80,7 @@ struct ECUniversity: Identifiable, Codable {
     let universityTypeName: String
     let isActive: Bool
     let sortOrder: Int
-    let minContractPrice: String
+    let minContractPrice: String?
     let city: City
     let professions: [ImagedEntity]
     let faculties: [ImagedEntity]
