@@ -41,7 +41,7 @@ public enum ImageConstants: String {
     
     // SystemImage
     enum SystemImages: String {
-        case questionMarkSystemImage = "questionmark.circle"
+        case questionMark = "questionmark.circle"
         case chevronRight = "chevron.right"
         case chevronLeft = "chevron.left"
         case trash = "trash.fill"

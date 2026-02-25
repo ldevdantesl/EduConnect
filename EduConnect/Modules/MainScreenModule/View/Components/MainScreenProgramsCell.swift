@@ -108,7 +108,7 @@ final class MainScreenProgramsCell: UICollectionViewCell, ConfigurableCellProtoc
     func configure(withVM vm: any CellViewModelProtocol) {
         guard let vm = vm as? MainScreenProgramsCellViewModel else { return }
         self.viewModel = vm
-        showAllItem.onTap = vm.didTapShowAll
+        showAllItem.setAction(action: vm.didTapShowAll)
         
         gridStack?.removeFromSuperview()
         
@@ -172,7 +172,7 @@ final class MainScreenProgramsCell: UICollectionViewCell, ConfigurableCellProtoc
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         if let url = URL(string: programCategory.iconURL ?? "") {
-            image.kf.setImage(with: url, placeholder: ImageConstants.SystemImages.questionMarkSystemImage.image)
+            image.kf.setImage(with: url, placeholder: ImageConstants.SystemImages.questionMark.image)
         }
         
         let label = UILabel()
@@ -201,7 +201,7 @@ final class MainScreenProgramsCell: UICollectionViewCell, ConfigurableCellProtoc
             $0.bottom.equalToSuperview().offset(-Constants.bigSpacing)
         }
         
-        view.onTap = { [weak self] in
+        view.setAction { [weak self] in
             self?.viewModel?.didTapProgram?(programCategory)
         }
         

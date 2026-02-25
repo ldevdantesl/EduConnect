@@ -9,6 +9,7 @@ import UIKit
 
 protocol AccountScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
+    func viewDidAppear()
     func didTapTabBar()
     func didTapAppLogo()
     var selectedTab: AccountScreenTab { get set }
@@ -16,6 +17,7 @@ protocol AccountScreenPresenterProtocol: AnyObject {
 
     func didPerformTask(message: String?, refreshID: ExpandableCellID?)
     func didReceiveProfile(_ profile: Profile)
+    func didFetchProfile(_ profile: Profile)
     func didReceiveProfileApplications(_ applications: [Application])
     func didReceiveENTSubjects(entSubjects: [ENTSubject])
     func didReceiveOlympiadPlaces(places: [ECOlympiadPlace])
@@ -180,7 +182,7 @@ final class AccountScreenPresenter {
             interactor.getProfileApplications()
         case .application:
             view?.showLoading()
-            interactor.getProfile()
+            interactor.refetchProfile()
         case .main:
             showMain()
         }
@@ -204,10 +206,15 @@ final class AccountScreenPresenter {
             
             applicationItems.append(contentsOf: universities)
         } else {
-            let notFoundVm = NotFoundCellViewModel(systemImage: "questionmark.circle", title: "Ничего не найдено", subtitle: "Попробуйте найти где нибудь еще")
+            let notFoundVm = NotFoundCellViewModel(
+                systemImage: ImageConstants.SystemImages.questionMark.rawValue,
+                title: "Ничего не найдено",
+                subtitle: "Попробуйте подать заявку в вуз и вернитесь обратно\n(Нажмите чтоб открыть вузы)"
+            ) { [weak self] in
+                self?.router.routeToUniversities()
+            }
             applicationItems.append(.notFoundItem(.init(viewModel: notFoundVm)))
         }
-        
 
         view?.applySnapshot(
             sections: [.universities],
@@ -259,10 +266,11 @@ final class AccountScreenPresenter {
 
     // MARK: - HELPERS
     private func makeHeaderVM(for tab: AccountScreenTab) -> SectionHeaderCellViewModel {
-        SectionHeaderCellViewModel(
-            title: tab.tabTitles,
-            titleSize: 30
-        )
+        var title = tab.tabTitles
+        if tab == .main, let name = profile?.name {
+            title.append(", \(name)")
+        }
+        return SectionHeaderCellViewModel(title: title, titleSize: 26)
     }
     
     // MARK: - ACTIONS
@@ -307,9 +315,21 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
         dispatchGroup.enter()
         interactor.getFamilyContacts()
         
+        dispatchGroup.enter()
+        interactor.getProfile()
+        
         dispatchGroup.notify(queue: .main) { [weak self] in
             self?.showMain()
             self?.view?.hideLoading()
+        }
+    }
+    
+    func viewDidAppear() {
+        switch selectedTab {
+        case .myUniversities:
+            view?.showLoading()
+            interactor.getProfileApplications()
+        default: break
         }
     }
 
@@ -322,7 +342,7 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     }
     
     func didPerformTask(message: String?, refreshID: ExpandableCellID?) {
-        interactor.getProfile()
+        interactor.refetchProfile()
         if let message {
             self.view?.showMessage(message: message)
         }
@@ -330,6 +350,11 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     }
     
     func didReceiveProfile(_ profile: Profile) {
+        self.profile = profile
+        dispatchGroup.leave()
+    }
+    
+    func didFetchProfile(_ profile: Profile) {
         self.profile = profile
         configureExpandableProvider()
         self.view?.hideLoading()

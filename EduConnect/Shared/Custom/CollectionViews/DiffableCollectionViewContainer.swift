@@ -20,6 +20,7 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
     // MARK: - PRIVATE VAR
     private(set) var diffableDataSource: DataSource!
     private var didSelectHandler: ((IndexPath) -> Void)?
+    private var scrollCompletion: (() -> Void)?
     
     // MARK: - LIFECYCLE
     init(
@@ -61,16 +62,24 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
             completion?()
             return
         }
-        if animated {
-            UIView.animate(withDuration: animationDuration) { [weak self] in
-                self?.collectionView.setContentOffset(.zero, animated: false)
-            } completion: { _ in
-                completion?()
-            }
-        } else {
-            collectionView.setContentOffset(.zero, animated: false)
-            completion?()
-        }
+        self.collectionView.setContentOffset(.zero, animated: true)
+        scrollCompletion = completion
+    }
+    
+    func scrollToSection(_ section: Section, onCompletion: (() -> Void)? = nil) {
+        guard let sectionIndex = diffableDataSource.snapshot().sectionIdentifiers.firstIndex(of: section) else { return }
+        guard collectionView.numberOfItems(inSection: sectionIndex) > 0 else { return }
+        
+        let indexPath = IndexPath(item: 0, section: sectionIndex)
+        scrollCompletion = onCompletion
+        collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+    }
+
+    func scrollToItem(_ item: Item, onCompletion: (() -> Void)? = nil) {
+        guard let indexPath = diffableDataSource.indexPath(for: item) else { return }
+        
+        scrollCompletion = onCompletion
+        collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
     }
     
     func getSnapshot() -> NSDiffableDataSourceSnapshot<Section, Item> {
@@ -116,24 +125,6 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
         diffableDataSource.apply(snapshot, animatingDifferences: animated)
     }
     
-    func scrollToSection(_ section: Section, animated: Bool = true, animationDuration: TimeInterval = 0.3, onCompletion: (() -> Void)? = nil) {
-        guard let sectionIndex = diffableDataSource.snapshot().sectionIdentifiers.firstIndex(of: section) else { return }
-        
-        let indexPath = IndexPath(item: 0, section: sectionIndex)
-        
-        guard collectionView.numberOfItems(inSection: sectionIndex) > 0 else { return }
-        
-        if animated {
-            UIView.animate(withDuration: animationDuration) { [weak self] in
-                self?.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-            } completion: { _ in
-                onCompletion?()
-            }
-        } else {
-            collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-        }
-    }
-    
     func reconfigureItems(_ items: [Item], animated: Bool = true) {
         guard var snapshot = diffableDataSource?.snapshot() else { return }
         snapshot.reconfigureItems(items)
@@ -172,6 +163,14 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         guard resignsFirstResponderOnScroll else { return }
         scrollView.endEditing(true)
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        guard let completion = scrollCompletion else { return }
+        scrollCompletion = nil
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            completion()
+        }
     }
     
     // MARK: - Keyboard

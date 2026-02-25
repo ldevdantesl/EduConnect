@@ -71,7 +71,7 @@ class ECDashedBorderView: UIView {
         didSet { layer.shadowOffset = shadowOffset }
     }
     
-    var onTap: (() -> Void)?
+    private(set) var onTap: (() -> Void)?
     
     // MARK: - VIEW PROPERTIES
     let contentView: UIView = {
@@ -115,7 +115,7 @@ class ECDashedBorderView: UIView {
         }
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        addGestureRecognizer(tap)
+        contentView.addGestureRecognizer(tap)
     }
     
     private func updateBorderPath() {
@@ -141,8 +141,13 @@ class ECDashedBorderView: UIView {
         ).cgPath
     }
     
+    // MARK: - PUBLIC FUNC
+    func setAction(action: (() -> Void)?) {
+        self.onTap = action
+    }
+    
     // MARK: - OBJC FUNC
     @objc private func handleTap() {
-        self.animateTap(onCompletion: onTap)
+        self.contentView.animateTap(onCompletion: onTap)
     }
 }

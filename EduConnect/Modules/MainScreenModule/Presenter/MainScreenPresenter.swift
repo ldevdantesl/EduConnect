@@ -47,7 +47,7 @@ final class MainScreenPresenter {
     
     // MARK: - SNAPSHOTING
     private let snapshotBuilder = MainScreenSnapshotBuilder()
-    private lazy var actions = MainScreenSnapshotActions(
+    private lazy var actions = MainScreenSnapshotBuilder.Actions(
         didTapStepsENT: { [weak self] in self?.router.navigateToUniversities() },
         didTapStepsProfession: { [weak self] in self?.router.navigateToProfessions() },
         didTapStepsUniversity: { [weak self] in self?.router.navigateToUniversities() },
@@ -62,8 +62,8 @@ final class MainScreenPresenter {
         didSelectAcademicTab: { [weak self] in self?.didSelectAcademicTab($0) },
         didSelectJournalType: { [weak self] in self?.didSelectJournalType($0) }
     )
-    private var currentState: MainScreenSnapshotState {
-        MainScreenSnapshotState(
+    private var currentState: MainScreenSnapshotBuilder.State {
+        MainScreenSnapshotBuilder.State(
             showingAllSteps: showingAllSteps,
             selectedAcademicTab: selectedAcademicTab,
             selectedJournalTab: selectedJournalTab,

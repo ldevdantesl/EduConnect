@@ -12,17 +12,19 @@ enum ApplicationEndpoints: Endpoint {
     case postApplication(universityID: Int)
     case applicationDetails(applicationID: Int)
     case deleteApplication(applicationID: Int)
+    case getApplicationStatus(universityID: Int)
     
     var path: String {
         switch self {
         case .getApplications, .postApplication: return "/applications"
         case .applicationDetails(let applicationID), .deleteApplication(let applicationID): return "/applications/\(applicationID)"
+        case .getApplicationStatus(let universityID): return "/applications/by-university/\(universityID)"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .getApplications, .applicationDetails: return .get
+        case .getApplications, .applicationDetails, .getApplicationStatus: return .get
         case .postApplication: return .post
         case .deleteApplication: return .delete
         }

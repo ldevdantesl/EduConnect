@@ -11,9 +11,15 @@ import SnapKit
 struct UniversityInfoScreenContactsCellViewModel: CellViewModelProtocol {
     private(set) var cellIdentifier: String = UniversityInfoScreenContactsCell.identifier
     let university: ECUniversity
+    let applied: Bool
+    let didTapApply: (() -> Void)?
+    let didTapRemove: (() -> Void)?
     
-    init(university: ECUniversity) {
+    init(university: ECUniversity, applied: Bool, didTapApply: (() -> Void)? = nil, didTapRemove: (() -> Void)? = nil) {
+        self.applied = applied
         self.university = university
+        self.didTapApply = didTapApply
+        self.didTapRemove = didTapRemove
     }
 }
 
@@ -87,6 +93,7 @@ final class UniversityInfoScreenContactsCell: UICollectionViewCell, Configurable
         label.font = ECFont.font(.medium, size: 18)
         label.numberOfLines = 1
         label.textColor = .label
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -103,21 +110,23 @@ final class UniversityInfoScreenContactsCell: UICollectionViewCell, Configurable
         return stack
     }()
     
-    private let chooseUniversityButton: UIView = {
+    private let chooseUniversityLabel: UILabel = {
         let label = UILabel()
-        label.text = "Выбрать\nвуз для \nпоступления"
         label.font = ECFont.font(.semiBold, size: 14)
         label.numberOfLines = 3
         label.textColor = .white
-        
+        return label
+    }()
+
+    private lazy var chooseUniversityButton: UIView = {
         let iv = UIImageView()
         iv.image = UIImage(systemName: Constants.buttonImage)
         iv.contentMode = .scaleAspectFit
         iv.tintColor = .white
         
         let view = UIView()
-        view.addSubview(label)
-        label.snp.makeConstraints {
+        view.addSubview(chooseUniversityLabel)
+        chooseUniversityLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
         }
@@ -128,7 +137,7 @@ final class UniversityInfoScreenContactsCell: UICollectionViewCell, Configurable
             $0.size.equalTo(Constants.imageSize)
             $0.trailing.equalToSuperview().offset(-Constants.spacing)
         }
-        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTap)))
         view.backgroundColor = .systemBlue
         return view
     }()
@@ -156,6 +165,7 @@ final class UniversityInfoScreenContactsCell: UICollectionViewCell, Configurable
         self.phoneLabel.text = vm.university.phone
         self.mailsLabel.text = vm.university.email
         self.locationLabel.text = vm.university.address
+        configureButton(applied: vm.applied)
     }
     
     // MARK: - PRIVATE FUNC
@@ -190,6 +200,25 @@ final class UniversityInfoScreenContactsCell: UICollectionViewCell, Configurable
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
             $0.height.equalTo(Constants.buttonHeight)
             $0.bottom.equalToSuperview().offset(-Constants.spacing)
+        }
+    }
+    
+    private func configureButton(applied: Bool) {
+        if applied {
+            chooseUniversityLabel.text = "Удалить\nнынешнюю\nзаявку"
+            chooseUniversityButton.backgroundColor = .systemRed
+        } else {
+            chooseUniversityLabel.text = "Выбрать\nвуз для\nпоступления"
+            chooseUniversityButton.backgroundColor = .systemBlue
+        }
+    }
+    
+    // MARK: - OBJC FUNC
+    @objc private func didTap() {
+        guard let viewModel else { return }
+        self.chooseUniversityButton.animateTap {
+            viewModel.applied ?
+            viewModel.didTapRemove?() : viewModel.didTapApply?()
         }
     }
 }

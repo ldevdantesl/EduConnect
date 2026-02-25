@@ -73,6 +73,11 @@ final class AccountScreenVC: UIViewController {
         presenter?.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presenter?.viewDidAppear()
+    }
+    
     // MARK: - PRIVATE FUNC
     private func setupUI() {
         self.view.addSubview(headerView)

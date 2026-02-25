@@ -10,6 +10,7 @@ import Foundation
 enum UniversityInfoScreenSection: Hashable {
     case header
     case main
+    case contacts
     case faculties
     case programs
     case professions

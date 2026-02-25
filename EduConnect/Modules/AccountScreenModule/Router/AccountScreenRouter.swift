@@ -11,6 +11,7 @@ protocol AccountScreenRouterProtocol {
     func showPopUp(viewModel: PopUpViewModel)
     func showSidebar()
     func routeToMain()
+    func routeToUniversities()
     func routeToUniversityByID(id: Int)
 }
 
@@ -42,6 +43,10 @@ final class AccountScreenRouter: AccountScreenRouterProtocol {
     
     func showSidebar() {
         appRouter.openSidebar()
+    }
+    
+    func routeToUniversities() {
+        appRouter.diContainer.sidebarService.switchTo(tab: .universities)
     }
     
     func routeToMain() {

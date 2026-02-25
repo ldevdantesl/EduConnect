@@ -9,9 +9,10 @@ import Foundation
 
 protocol ApplicationAPISubServiceProtocol {
     func getApplications() async throws -> [Application]
-    func apply(universityID: Int) async throws    
+    func apply(universityID: Int) async throws -> EduConnectResponse
     func details(applicationID: Int) async throws -> ApplicationDetails
-    func delete(applicationID: Int) async throws
+    func delete(applicationID: Int) async throws -> EduConnectResponse
+    func applicationStatus(universityID: Int) async throws -> Application
 }
 
 final class ApplicationAPISubService: ApplicationAPISubServiceProtocol {
@@ -26,7 +27,7 @@ final class ApplicationAPISubService: ApplicationAPISubServiceProtocol {
         return response.data
     }
     
-    func apply(universityID: Int) async throws {
+    func apply(universityID: Int) async throws -> EduConnectResponse {
         try await httpClient.request(ApplicationEndpoints.postApplication(universityID: universityID))
     }
     
@@ -34,7 +35,12 @@ final class ApplicationAPISubService: ApplicationAPISubServiceProtocol {
         try await httpClient.request(ApplicationEndpoints.applicationDetails(applicationID: applicationID))
     }
     
-    func delete(applicationID: Int) async throws {
+    func delete(applicationID: Int) async throws -> EduConnectResponse {
         try await httpClient.request(ApplicationEndpoints.deleteApplication(applicationID: applicationID))
+    }
+    
+    func applicationStatus(universityID: Int) async throws -> Application {
+        let response: EduConnectDataResponse<Application> = try await httpClient.request(ApplicationEndpoints.getApplicationStatus(universityID: universityID))
+        return response.data
     }
 }

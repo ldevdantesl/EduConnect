@@ -104,7 +104,7 @@ final class UniversityScreenPresenter {
         var universityItems: [UniversityScreenItem] = []
         
         if universities.isEmpty {
-            let vm = NotFoundCellViewModel(systemImage: ImageConstants.SystemImages.questionMarkSystemImage.rawValue, title: "Ничего не найдено", subtitle: "Попробуйте другой поиск")
+            let vm = NotFoundCellViewModel(systemImage: ImageConstants.SystemImages.questionMark.rawValue, title: "Ничего не найдено", subtitle: "Попробуйте другой поиск")
             universityItems.append(.notFoundItem(.init(viewModel: vm)))
         } else {
             let universities = universities.map {

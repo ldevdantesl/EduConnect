@@ -11,7 +11,10 @@ import SnapKit
 protocol UniversityInfoScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [UniversityInfoScreenSection], itemsBySection: [UniversityInfoScreenSection : [UniversityInfoScreenItem]])
     func reconfigureItems(items: [UniversityInfoScreenItem])
-    func showError(errorMessage: String)
+    func reloadSection(section: UniversityInfoScreenSection)
+    func showError(userError: UserFacingError)
+    func showMessage(message: String)
+    func scrollToSection(section: UniversityInfoScreenSection)
     func showLoading()
     func hideLoading()
 }
@@ -116,8 +119,12 @@ extension UniversityInfoScreenVC: UniversityInfoScreenViewProtocol {
         collectionContainer.reconfigureItems(items)
     }
     
-    func showError(errorMessage: String) {
-        self.showToastedError(message: errorMessage) /// Added from Extensions
+    func showError(userError: UserFacingError) {
+        self.showToastedError(userError: userError)
+    }
+    
+    func showMessage(message: String) {
+        self.showToastedMessage(message: message)
     }
     
     func showLoading() {
@@ -126,5 +133,13 @@ extension UniversityInfoScreenVC: UniversityInfoScreenViewProtocol {
     
     func hideLoading() {
         self.hideHoverLoading()
+    }
+    
+    func scrollToSection(section: UniversityInfoScreenSection) {
+        self.collectionContainer.scrollToSection(section)
+    }
+    
+    func reloadSection(section: UniversityInfoScreenSection) {
+        self.collectionContainer.reloadSection(section: section)
     }
 }

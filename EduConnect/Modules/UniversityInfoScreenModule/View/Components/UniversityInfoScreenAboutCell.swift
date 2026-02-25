@@ -11,9 +11,20 @@ import SnapKit
 struct UniversityInfoScreenAboutCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = UniversityInfoScreenAboutCell.identifier
     let university: ECUniversity
+    let didTapProgram: (() -> Void)?
+    let didTapProfession: (() -> Void)?
+    let didTapNews: (() -> Void)?
     
-    init(university: ECUniversity) {
+    init(
+        university: ECUniversity,
+        didTapProgram: (() -> Void)? = nil,
+        didTapProfession: (() -> Void)? = nil,
+        didTapNews: (() -> Void)? = nil
+    ) {
         self.university = university
+        self.didTapProgram = didTapProgram
+        self.didTapProfession = didTapProfession
+        self.didTapNews = didTapNews
     }
 }
 
@@ -113,6 +124,9 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell, ConfigurableCel
         professionsButton.subtitleText = "(\(vm.university.professions.count))"
         articlesButton.subtitleText = "(0)"
         aboutUniversityLabel.text = vm.university.description
+        programsButton.setAction(action: vm.didTapProgram)
+        professionsButton.setAction(action: vm.didTapProfession)
+        articlesButton.setAction(action: vm.didTapNews)
     }
     
     // MARK: - PRIVATE FUNC
