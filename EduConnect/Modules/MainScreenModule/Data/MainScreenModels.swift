@@ -33,6 +33,7 @@ enum MainScreenItem: Hashable {
     case cardWithImageItem(DiffableItem<CardWithImageCellViewModel>)
     case loadingItem(DiffableItem<LoadingCellViewModel>)
     case underlineButtonItem(DiffableItem<UnderlineButtonCellViewModel>)
+    case notFoundItem(DiffableItem<NotFoundCellViewModel>)
     
     case footerItem(DiffableItem<MainScreenFooterCellViewModel>)
 }

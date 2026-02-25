@@ -40,7 +40,7 @@ final class MainScreenProgramsCell: UICollectionViewCell, ConfigurableCellProtoc
     
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
-        let text = "Программы высшего\nобразования в Казахстане"
+        let text = "Направления высшего\nобразования в Казахстане"
         let attributed = NSMutableAttributedString(
             string: text,
             attributes: [.font: ECFont.font(.bold, size: 24)]

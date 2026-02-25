@@ -108,7 +108,7 @@ final class UniversityScreenPresenter {
             universityItems.append(.notFoundItem(.init(viewModel: vm)))
         } else {
             let universities = universities.map {
-                let vm = UniversityCellViewModel(university: $0, horizontallySpaced: true) { [weak self] in
+                let vm = UniversityCellViewModel(university: $0) { [weak self] in
                     guard let self = self else { return }
                     self.router.routeToUniversityInfo($0)
                 }

@@ -107,6 +107,8 @@ final class MainScreenPresenter {
         guard tab != selectedAcademicTab else { return }
         selectedAcademicTab = tab
         applySnapshot()
+        let headerItem = self.snapshotBuilder.buildAcademicHeader(state: currentState, actions: actions)
+        self.view?.reconfigureItems(items: [headerItem])
     }
     
     private func didTapShowAllSteps() {

@@ -19,6 +19,7 @@ final class UniversityScreenVC: UIViewController {
 
     // MARK: - VIPER
     var presenter: UniversityScreenPresenterProtocol?
+    private let sectionStore = ECDiffableSectionStore<UniversityScreenSection>()
 
     // MARK: - VIEW PROPERTIES
     private lazy var headerView: ECHeaderView = {
@@ -30,10 +31,9 @@ final class UniversityScreenVC: UIViewController {
         return header
     }()
     
-    private let collectionContainer: DiffableCollectionViewContainer = {
-        let cv = DiffableCollectionViewContainer<UniversityScreenSection, UniversityScreenItem>(
-            layout: UniversityScreenLayoutFactory.make()
-        )
+    private lazy var collectionContainer: DiffableCollectionViewContainer = {
+        let layout = UniversityScreenLayoutFactory.make(sectionStore: self.sectionStore)
+        let cv = DiffableCollectionViewContainer<UniversityScreenSection, UniversityScreenItem>(layout: layout)
         cv.registerCell(LoadingCell.self, reuseID: LoadingCell.identifier)
         cv.registerCell(UniversityScreenHeaderCell.self, reuseID: UniversityScreenHeaderCell.identifier)
         cv.registerCell(UniversityScreenFilterCell.self, reuseID: UniversityScreenFilterCell.identifier)
@@ -114,6 +114,7 @@ final class UniversityScreenVC: UIViewController {
 
 extension UniversityScreenVC: UniversityScreenViewProtocol {
     func applySnapshot(sections: [UniversityScreenSection], itemsBySection: [UniversityScreenSection : [UniversityScreenItem]]) {
+        sectionStore.update(sections)
         collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
     }
     

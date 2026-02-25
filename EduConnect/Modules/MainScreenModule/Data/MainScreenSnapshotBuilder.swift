@@ -64,6 +64,15 @@ final class MainScreenSnapshotBuilder {
         return .journalItem(.init(id: "journal-header", viewModel: headerVM))
     }
 
+    
+    func buildAcademicHeader(state: MainScreenSnapshotState, actions: MainScreenSnapshotActions) -> MainScreenItem {
+        let headerVM = MainScreenAcademicCellViewModel(
+            selectedTab: state.selectedAcademicTab,
+            didSelectTab: actions.didSelectAcademicTab
+        )
+        return .academicItem(.init(id: "academic-header",viewModel: headerVM))
+    }
+    
     // MARK: - Private builders
     private func buildHeader(state: MainScreenSnapshotState, actions: MainScreenSnapshotActions) -> [MainScreenItem] {
         let headerVM = MainScreenHeaderCellViewModel()
@@ -103,7 +112,7 @@ final class MainScreenSnapshotBuilder {
             selectedTab: state.selectedAcademicTab,
             didSelectTab: actions.didSelectAcademicTab
         )
-        items.append(.academicItem(.init(viewModel: headerVM)))
+        items.append(.academicItem(.init(id: "academic-header", viewModel: headerVM)))
 
         switch state.selectedAcademicTab {
         case .universities:
@@ -181,8 +190,17 @@ final class MainScreenSnapshotBuilder {
         } else {
             newsToShow = state.allNews
         }
-
-        newsToShow.prefix(5).forEach { news in
+        
+        let prefixedNews = newsToShow.prefix(5)
+        guard !prefixedNews.isEmpty else {
+            let vm = NotFoundCellViewModel(
+                systemImage: ImageConstants.SystemImages.questionMarkSystemImage.rawValue,
+                title: "Ничего не найдено", subtitle: "Нет новостей в этой категории"
+            )
+            items.append(.notFoundItem(.init(viewModel: vm)))
+            return items
+        }
+        prefixedNews.forEach { news in
             let vm = CardWithImageCellViewModel(
                 imageURL: news.previewImageURL, preTitle: news.newsType.name.ru,
                 title: news.title.ru, subtitle: news.shortDescription.ru, showsArrowRight: true
