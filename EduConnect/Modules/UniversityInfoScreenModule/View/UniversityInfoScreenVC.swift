@@ -12,6 +12,8 @@ protocol UniversityInfoScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [UniversityInfoScreenSection], itemsBySection: [UniversityInfoScreenSection : [UniversityInfoScreenItem]])
     func reconfigureItems(items: [UniversityInfoScreenItem])
     func showError(errorMessage: String)
+    func showLoading()
+    func hideLoading()
 }
 
 final class UniversityInfoScreenVC: UIViewController {
@@ -116,5 +118,13 @@ extension UniversityInfoScreenVC: UniversityInfoScreenViewProtocol {
     
     func showError(errorMessage: String) {
         self.showToastedError(message: errorMessage) /// Added from Extensions
+    }
+    
+    func showLoading() {
+        self.showHoverLoading()
+    }
+    
+    func hideLoading() {
+        self.hideHoverLoading()
     }
 }

@@ -15,7 +15,7 @@ enum UniversityEndpoints: Endpoint {
     var path: String {
         switch self {
         case .getUniversities: return "/universities"
-        case .getUniversity(let id): return "/university/\(id)"
+        case .getUniversity(let id): return "/universities/\(id)"
         }
     }
     

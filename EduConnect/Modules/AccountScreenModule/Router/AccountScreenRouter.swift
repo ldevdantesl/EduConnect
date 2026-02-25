@@ -11,7 +11,7 @@ protocol AccountScreenRouterProtocol {
     func showPopUp(viewModel: PopUpViewModel)
     func showSidebar()
     func routeToMain()
-    func routeToUniversityInfo(_ university: ECUniversity)
+    func routeToUniversityByID(id: Int)
 }
 
 final class AccountScreenRouter: AccountScreenRouterProtocol {
@@ -48,8 +48,8 @@ final class AccountScreenRouter: AccountScreenRouterProtocol {
         appRouter.routeToMain()
     }
     
-    func routeToUniversityInfo(_ university: ECUniversity) {
-        let vc = UniversityInfoScreenAssembler.assemble(appRouter: appRouter, university: university)
+    func routeToUniversityByID(id: Int) {
+        let vc = UniversityInfoScreenAssembler.assemble(appRouter: appRouter, universityID: id)
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

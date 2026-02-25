@@ -13,6 +13,8 @@ protocol UniversityInfoScreenPresenterProtocol: AnyObject {
     func didTapAccount()
     func didTapAppLogo()
     func didTapBack()
+    func didReceiveUniversity(university: ECUniversity)
+    func didReceieveError(error: any Error)
 }
 
 final class UniversityInfoScreenPresenter {
@@ -21,22 +23,36 @@ final class UniversityInfoScreenPresenter {
     var interactor: UniversityInfoScreenInteractorProtocol
     
     private let errorService: ErrorServiceProtocol
-    private let university: ECUniversity
+    private let universityID: Int
+    private var university: ECUniversity?
 
     init(
         interactor: UniversityInfoScreenInteractorProtocol,
         router: UniversityInfoScreenRouterProtocol,
-        errorService: ErrorServiceProtocol, university: ECUniversity
+        errorService: ErrorServiceProtocol,
+        university: ECUniversity
     ) {
         self.interactor = interactor
         self.errorService = errorService
         self.router = router
+        self.universityID = university.id
         self.university = university
     }
-}
-
-extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
-    func viewDidLoad() {
+    
+    init(
+        interactor: UniversityInfoScreenInteractorProtocol,
+        router: UniversityInfoScreenRouterProtocol,
+        errorService: ErrorServiceProtocol,
+        universityID: Int
+    ) {
+        self.interactor = interactor
+        self.errorService = errorService
+        self.router = router
+        self.universityID = universityID
+    }
+    
+    private func applySnapshot() {
+        guard let university = university else { return }
         let headerVM = UniversityInfoScreenHeaderCellViewModel(university: university)
         let entScoresVM = UniversityInfoScreenAverageEntCellViewModel(entScores: university.entScores ?? [])
         let aboutVM = UniversityInfoScreenAboutCellViewModel(university: university)
@@ -72,7 +88,6 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
             professionItems.append(.cardItem(.init(id: "profession-\($0.id)", viewModel: vm)))
         }
         
-        // let articlesHeaderVM = SectionHeaderCellViewModel(title: "Новости", titleSize: 22, titleAlignment: .center)
         view?.applySnapshot(
             sections: [.header, .main, .faculties, .programs, .professions],
             itemsBySection: [
@@ -87,6 +102,18 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
                 .professions : professionItems,
             ]
         )
+    }
+}
+
+extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
+    func viewDidLoad() {
+        if university == nil {
+            self.view?.showLoading()
+            self.interactor.getUniversityByID(id: universityID)
+            return
+        } else {
+            applySnapshot()
+        }
     }
     
     func didTapTabBar() {
@@ -103,5 +130,17 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
     
     func didTapAppLogo() {
         router.routeToMain()
+    }
+    
+    
+    func didReceiveUniversity(university: ECUniversity) {
+        self.university = university
+        applySnapshot()
+        self.view?.hideLoading()
+    }
+    
+    func didReceieveError(error: any Error) {
+        let userError = errorService.handle(error)
+        self.view?.showError(errorMessage: userError.message)
     }
 }

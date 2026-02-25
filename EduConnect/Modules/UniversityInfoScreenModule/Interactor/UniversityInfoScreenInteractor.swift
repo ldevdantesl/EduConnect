@@ -8,7 +8,7 @@
 import UIKit
 
 protocol UniversityInfoScreenInteractorProtocol: AnyObject {
-    
+    func getUniversityByID(id: Int)
 }
 
 final class UniversityInfoScreenInteractor: UniversityInfoScreenInteractorProtocol {
@@ -17,5 +17,16 @@ final class UniversityInfoScreenInteractor: UniversityInfoScreenInteractorProtoc
     
     init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
+    }
+    
+    func getUniversityByID(id: Int) {
+        Task {
+            do {
+                let university = try await networkService.university.getUniversity(id: id)
+                presenter?.didReceiveUniversity(university: university)
+            } catch {
+                presenter?.didReceieveError(error: error)
+            }
+        }
     }
 }

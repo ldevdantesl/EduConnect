@@ -196,7 +196,9 @@ final class AccountScreenPresenter {
         
         if !applications.isEmpty {
             let universities: [AccountScreenItem] = applications.map {
-                let vm = ApplicationCellViewModel(application: $0)
+                let vm = ApplicationCellViewModel(application: $0) { [weak self] application in
+                    self?.router.routeToUniversityByID(id: application.university.id)
+                }
                 return .university(.init(item: $0, prefix: "application-", viewModel: vm))
             }
             
