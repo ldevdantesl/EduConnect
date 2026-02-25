@@ -8,11 +8,17 @@
 import UIKit
 
 struct MainScreenSnapshotActions {
+    let didTapStepsENT: () -> Void
+    let didTapStepsProfession: () -> Void
+    let didTapStepsUniversity: () -> Void
     let didTapShowAllSteps: () -> Void
     let didTapUniversity: (ECUniversity) -> Void
     let didTapShowAllPrograms: () -> Void
     let didTapShowAllProfessions: () -> Void
     let didTapShowAllUniversities: () -> Void
+    let didTapServicesProfession: () -> Void
+    let didTapServicesUniversity: () -> Void
+    let didTapServicesCalendar: () -> Void
     let didSelectAcademicTab: (MainScreenAcademicCellViewModel.AcademicTab) -> Void
     let didSelectJournalType: (ECNewsType?) -> Void
 }
@@ -42,11 +48,20 @@ final class MainScreenSnapshotBuilder {
             .careers: buildCareers(state: state, actions: actions),
             .programs: buildPrograms(state: state, actions: actions),
             .academic: buildAcademic(state: state, actions: actions),
-            .services: [.servicesItem(.init(id: "services", viewModel: MainScreenServicesCellViewModel()))],
+            .services: buildServices(state: state, actions: actions),
             .journal: buildJournal(state: state, actions: actions, isLoading: isLoadingOnJournals),
             .footer: [.footerItem(.init(id: "footer", viewModel: MainScreenFooterCellViewModel()))]
         ]
         return (sections, items)
+    }
+    
+    func buildJournalHeader(state: MainScreenSnapshotState, actions: MainScreenSnapshotActions) -> MainScreenItem {
+        let headerVM = MainScreenJournalCellViewModel(
+            selectedType: state.selectedJournalTab,
+            allTypes: state.newsTypes,
+            didSelectType: actions.didSelectJournalType
+        )
+        return .journalItem(.init(id: "journal-header", viewModel: headerVM))
     }
 
     // MARK: - Private builders
@@ -54,6 +69,9 @@ final class MainScreenSnapshotBuilder {
         let headerVM = MainScreenHeaderCellViewModel()
         let stepsVM = MainScreenStepsCellViewModel(
             showingAllItems: state.showingAllSteps,
+            didTapChooseProfession: actions.didTapStepsProfession,
+            didTapChooseENT: actions.didTapStepsENT,
+            didTapChooseUniversity: actions.didTapStepsUniversity,
             didTapShowAllItems: actions.didTapShowAllSteps
         )
         return [
@@ -132,6 +150,15 @@ final class MainScreenSnapshotBuilder {
 
         return items
     }
+    
+    private func buildServices(state: MainScreenSnapshotState, actions: MainScreenSnapshotActions) -> [MainScreenItem] {
+        let vm = MainScreenServicesCellViewModel(
+            didTapProfession: actions.didTapServicesProfession,
+            didTapUniversity: actions.didTapServicesUniversity,
+            didTapCalendar: actions.didTapServicesCalendar
+        )
+        return [.servicesItem(.init(id: "services", viewModel: vm))]
+    }
 
     private func buildJournal(state: MainScreenSnapshotState, actions: MainScreenSnapshotActions, isLoading: Bool) -> [MainScreenItem] {
         var items: [MainScreenItem] = []
@@ -141,7 +168,7 @@ final class MainScreenSnapshotBuilder {
             allTypes: state.newsTypes,
             didSelectType: actions.didSelectJournalType
         )
-        items.append(.journalItem(.init(viewModel: headerVM)))
+        items.append(.journalItem(.init(id: "journal-header",viewModel: headerVM)))
 
         guard !isLoading else {
             items.append(.loadingItem(.init(viewModel: LoadingCellViewModel())))

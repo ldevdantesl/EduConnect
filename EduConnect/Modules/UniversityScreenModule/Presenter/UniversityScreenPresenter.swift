@@ -101,12 +101,20 @@ final class UniversityScreenPresenter {
             didTapFilters: { [weak self] in self?.openFilters() }
         )
         
-        var universityItems = universities.map {
-            let vm = UniversityCellViewModel(university: $0, horizontallySpaced: true) { [weak self] in
-                guard let self = self else { return }
-                self.router.routeToUniversityInfo($0)
+        var universityItems: [UniversityScreenItem] = []
+        
+        if universities.isEmpty {
+            let vm = NotFoundCellViewModel(systemImage: ImageConstants.SystemImages.questionMarkSystemImage.rawValue, title: "Ничего не найдено", subtitle: "Попробуйте другой поиск")
+            universityItems.append(.notFoundItem(.init(viewModel: vm)))
+        } else {
+            let universities = universities.map {
+                let vm = UniversityCellViewModel(university: $0, horizontallySpaced: true) { [weak self] in
+                    guard let self = self else { return }
+                    self.router.routeToUniversityInfo($0)
+                }
+                return UniversityScreenItem.universityItem(.init(viewModel: vm))
             }
-            return UniversityScreenItem.universityItem(.init(viewModel: vm))
+            universityItems.append(contentsOf: universities)
         }
         
         if totalPages > 1 {

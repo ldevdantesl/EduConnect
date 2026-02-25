@@ -11,13 +11,11 @@ import SnapKit
 struct MainScreenServicesCellViewModel: CellViewModelProtocol {
     var cellIdentifier: String = MainScreenServicesCell.identifier
     let didTapProfession: (() -> Void)?
-    let didTapTests: (() -> Void)?
     let didTapUniversity: (() -> Void)?
     let didTapCalendar: (() -> Void)?
     
-    init(didTapProfession: (() -> Void)? = nil, didTapTests: (() -> Void)? = nil, didTapUniversity: (() -> Void)? = nil, didTapCalendar: (() -> Void)? = nil) {
+    init(didTapProfession: (() -> Void)? = nil, didTapUniversity: (() -> Void)? = nil, didTapCalendar: (() -> Void)? = nil) {
         self.didTapProfession = didTapProfession
-        self.didTapTests = didTapTests
         self.didTapUniversity = didTapUniversity
         self.didTapCalendar = didTapCalendar
     }

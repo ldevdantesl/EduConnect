@@ -48,11 +48,17 @@ final class MainScreenPresenter {
     // MARK: - SNAPSHOTING
     private let snapshotBuilder = MainScreenSnapshotBuilder()
     private lazy var actions = MainScreenSnapshotActions(
+        didTapStepsENT: { [weak self] in self?.router.navigateToUniversities() },
+        didTapStepsProfession: { [weak self] in self?.router.navigateToProfessions() },
+        didTapStepsUniversity: { [weak self] in self?.router.navigateToUniversities() },
         didTapShowAllSteps: { [weak self] in self?.didTapShowAllSteps() },
         didTapUniversity: { [weak self] in self?.didTapUniversity(university: $0) },
         didTapShowAllPrograms: { [weak self] in self?.didTapShowAllPrograms() },
         didTapShowAllProfessions: { [weak self] in self?.didTapShowAllProfessions() },
         didTapShowAllUniversities: { [weak self] in self?.didTapShowAllUniversities() },
+        didTapServicesProfession: { [weak self] in self?.router.navigateToProfessions() },
+        didTapServicesUniversity: { [weak self] in self?.router.navigateToUniversities() },
+        didTapServicesCalendar: { [weak self] in self?.didTapCalendar() },
         didSelectAcademicTab: { [weak self] in self?.didSelectAcademicTab($0) },
         didSelectJournalType: { [weak self] in self?.didSelectJournalType($0) }
     )
@@ -123,6 +129,13 @@ final class MainScreenPresenter {
     private func didTapUniversity(university: ECUniversity) {
         self.router.navigateToUniversity(university: university)
     }
+    
+    private func didTapCalendar() {
+        self.view?.scrollToSection(section: .journal) { [weak self] in
+            let calendar = self?.newsTypes.first { $0.name.ru == "Календарь" }
+            self?.didSelectJournalType(calendar)
+        }
+    }
 }
 
 extension MainScreenPresenter: MainScreenPresenterProtocol {
@@ -190,6 +203,8 @@ extension MainScreenPresenter: MainScreenPresenterProtocol {
     func didReceiveNewsForType(news: [ECNews], typeID: Int?) {
         newsByTypeId[typeID] = news
         applySnapshot()
+        let headerItem = self.snapshotBuilder.buildJournalHeader(state: self.currentState, actions: self.actions)
+        self.view?.reconfigureItems(items: [headerItem])
     }
     
     // MARK: - ERROR

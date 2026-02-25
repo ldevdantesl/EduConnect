@@ -14,6 +14,7 @@ protocol MainScreenViewProtocol: AnyObject {
     func showError(errorMessage: String)
     func showLoading()
     func hideLoading()
+    func scrollToSection(section: MainScreenSection, onCompletion: (() -> Void)?)
 }
 
 final class MainScreenVC: UIViewController {
@@ -166,5 +167,9 @@ extension MainScreenVC: MainScreenViewProtocol {
     
     func hideLoading() {
         self.hideHoverLoading()
+    }
+    
+    func scrollToSection(section: MainScreenSection, onCompletion: (() -> Void)?) {
+        self.collectionContainer.scrollToSection(section, onCompletion: onCompletion)
     }
 }

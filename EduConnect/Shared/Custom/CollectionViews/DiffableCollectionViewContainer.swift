@@ -116,6 +116,24 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
         diffableDataSource.apply(snapshot, animatingDifferences: animated)
     }
     
+    func scrollToSection(_ section: Section, animated: Bool = true, animationDuration: TimeInterval = 0.3, onCompletion: (() -> Void)? = nil) {
+        guard let sectionIndex = diffableDataSource.snapshot().sectionIdentifiers.firstIndex(of: section) else { return }
+        
+        let indexPath = IndexPath(item: 0, section: sectionIndex)
+        
+        guard collectionView.numberOfItems(inSection: sectionIndex) > 0 else { return }
+        
+        if animated {
+            UIView.animate(withDuration: animationDuration) { [weak self] in
+                self?.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+            } completion: { _ in
+                onCompletion?()
+            }
+        } else {
+            collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+        }
+    }
+    
     func reconfigureItems(_ items: [Item], animated: Bool = true) {
         guard var snapshot = diffableDataSource?.snapshot() else { return }
         snapshot.reconfigureItems(items)
