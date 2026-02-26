@@ -19,7 +19,7 @@ struct ProfessionDetailsHeaderCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class ProfessionDetailsHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class ProfessionDetailsHeaderCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -111,10 +111,8 @@ final class ProfessionDetailsHeaderCell: UICollectionViewCell, ConfigurableCellP
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? ProfessionDetailsHeaderCellViewModel else { return }
+    func configure(withVM vm: ProfessionDetailsHeaderCellViewModel) {
         self.viewModel = vm
-        
         titleLabel.text = "Профессия \(vm.profession.name.ru)"
         universityView.firstLineLabel.text = vm.profession.universitiesCount.description
         programView.firstLineLabel.text = vm.profession.programsCount.description

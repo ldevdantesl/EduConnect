@@ -15,6 +15,7 @@ struct UniversityInfoScreenSnapshotBuilder {
         let didTapAboutProfession: () -> Void
         let didTapApply: () -> Void
         let didTapRemoveApplication: () -> Void
+        let didTapProfession: (Int) -> Void
     }
     
     func build(
@@ -29,7 +30,7 @@ struct UniversityInfoScreenSnapshotBuilder {
             .contacts: [buildContacts(university: university, applied: applied, actions: actions)],
             .faculties: buildFaculties(university: university),
             .programs: buildPrograms(university: university),
-            .professions: buildProfessions(university: university),
+            .professions: buildProfessions(university: university, actions: actions),
         ]
         return (sections, items)
     }
@@ -93,14 +94,16 @@ struct UniversityInfoScreenSnapshotBuilder {
         return items
     }
     
-    private func buildProfessions(university: ECUniversity) -> [UniversityInfoScreenItem] {
+    private func buildProfessions(university: ECUniversity, actions: Actions) -> [UniversityInfoScreenItem] {
         guard university.professions.count > 0 else { return [] }
         var items: [UniversityInfoScreenItem] = []
         let headerVM = SectionHeaderCellViewModel(title: "Профессии", titleSize: 22, titleAlignment: .center)
         items.append(.sectionHeaderItem(.init(id: "professionsHeader", viewModel: headerVM)))
-        university.professions.forEach {
-            let vm = CardWithImageCellViewModel(imageURL: $0.imageURL, title: $0.name)
-            items.append(.cardItem(.init(id: "profession-\($0.id)", viewModel: vm)))
+        university.professions.forEach { profession in
+            let vm = CardWithImageCellViewModel(imageURL: profession.imageURL, title: profession.name) {
+                actions.didTapProfession(profession.id)
+            }
+            items.append(.cardItem(.init(id: "profession-\(profession.id)", viewModel: vm)))
         }
         return items
     }
