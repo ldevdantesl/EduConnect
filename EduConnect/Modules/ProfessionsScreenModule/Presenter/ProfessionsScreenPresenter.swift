@@ -6,9 +6,9 @@
 //
 
 protocol ProfessionsScreenPresenterProtocol: AnyObject {
+    func viewDidLoad()
     func didTapTabBar()
     func didTapAccount()
-    func viewDidLoad()
     func didTapAppLogo()
     
     func didReceiveError(error: any Error)
@@ -46,15 +46,13 @@ final class ProfessionsScreenPresenter {
             """
         )
         
-        var professionItems: [ProfessionScreenItem] = professions.map {
+        var professionItems: [ProfessionScreenItem] = professions.map { profession in
             let vm = CardWithImageCellViewModel(
-                imageURL: $0.imageURL,
-                preTitle: "\($0.programsCount) программ, \($0.universitiesCount) вузов",
-                title: $0.name.ru,
-                subtitle: $0.description.ru,
-                showsArrowRight: false
-            )
-            return ProfessionScreenItem.cardWithImageItem(.init(id: $0.id, viewModel: vm))
+                imageURL: profession.imageURL,
+                preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
+                title: profession.name.ru, subtitle: profession.description.ru, showsArrowRight: false
+            ) { [weak self] in self?.router.routeToProfession(professionID: profession.id) }
+            return ProfessionScreenItem.cardWithImageItem(.init(id: profession.id, viewModel: vm))
         }
         
         if totalPages > 1 {

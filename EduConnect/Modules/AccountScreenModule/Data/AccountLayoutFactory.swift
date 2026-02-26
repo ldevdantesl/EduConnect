@@ -8,7 +8,6 @@
 import UIKit
 
 enum AccountLayoutFactory {
-
     static func make() -> UICollectionViewLayout {
         let item = NSCollectionLayoutItem(
             layoutSize: .init(

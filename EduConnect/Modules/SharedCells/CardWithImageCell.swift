@@ -18,10 +18,12 @@ struct CardWithImageCellViewModel: CellViewModelProtocol {
     let title: String
     let subtitle: String?
     let showsArrowRight: Bool
+    let didTap: (() -> Void)?
     
     init(
         imageURL: String?, imageContentMode: UIImageView.ContentMode = .scaleAspectFill,
-        preTitle: String? = nil, title: String, subtitle: String? = nil, showsArrowRight: Bool = false
+        preTitle: String? = nil, title: String, subtitle: String? = nil, showsArrowRight: Bool = false,
+        didTap: (() -> Void)? = nil
     ) {
         self.imageURL = imageURL
         self.image = nil
@@ -30,11 +32,13 @@ struct CardWithImageCellViewModel: CellViewModelProtocol {
         self.preTitle = preTitle
         self.subtitle = subtitle
         self.showsArrowRight = showsArrowRight
+        self.didTap = didTap
     }
     
     init(
         image: UIImage, imageContentMode: UIImageView.ContentMode = .scaleAspectFill,
-        preTitle: String? = nil, title: String, subtitle: String? = nil, showsArrowRight: Bool = false
+        preTitle: String? = nil, title: String, subtitle: String? = nil, showsArrowRight: Bool = false,
+        didTap: (() -> Void)? = nil
     ) {
         self.imageURL = nil
         self.image = image
@@ -43,6 +47,7 @@ struct CardWithImageCellViewModel: CellViewModelProtocol {
         self.subtitle = subtitle
         self.preTitle = preTitle
         self.showsArrowRight = showsArrowRight
+        self.didTap = didTap
     }
 }
 
@@ -235,6 +240,7 @@ final class CardWithImageCell: UICollectionViewCell, ConfigurableCellProtocol {
     
     // MARK: - OBJC FUNC
     @objc private func tapAction() {
-        animateTap()
+        guard let vm = viewModel else { return }
+        animateTap(onCompletion: vm.didTap)
     }
 }

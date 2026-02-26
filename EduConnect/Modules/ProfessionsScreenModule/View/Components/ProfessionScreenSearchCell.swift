@@ -59,11 +59,7 @@ final class ProfessionScreenSearchCell: UICollectionViewCell, ConfigurableCellPr
     
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? ProfessionScreenSearchCellViewModel else {
-            print("❌ Wrong VM type: \(type(of: vm))")
-            return
-        }
-        print("✅ ProfessionScreenSearchCell configured, didTapSearch is \(vm.didTapSearch == nil ? "nil" : "set")")
+        guard let vm = vm as? ProfessionScreenSearchCellViewModel else { return}
     
         self.viewModel = vm
         
