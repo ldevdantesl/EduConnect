@@ -8,15 +8,15 @@
 import UIKit
 import SnapKit
 
-struct UniversityScreenFilterModalOptionCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = "UniversityScreenFilterModalOptionCell"
+struct UniversityScreenFilterModalOptionCellViewModel {
+    let cellIdentifier: String = UniversityScreenFilterModalOptionCell.identifier
     let filterType: UniversityFilterOption
     var selectedValue: String? = nil
     var subItems: [String] = []
     var onSelectOption: ((String) -> Void)?
 }
 
-final class UniversityScreenFilterModalOptionCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class UniversityScreenFilterModalOptionCell: UICollectionViewCell {
     
     // MARK: - CONSTANTS
     fileprivate enum Constants {
@@ -70,8 +70,7 @@ final class UniversityScreenFilterModalOptionCell: UICollectionViewCell, Configu
     }
     
     // MARK: - Public
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? UniversityScreenFilterModalOptionCellViewModel else { return }
+    func configure(withVM vm: UniversityScreenFilterModalOptionCellViewModel) {
         self.viewModel = vm
         
         if let selected = vm.selectedValue {

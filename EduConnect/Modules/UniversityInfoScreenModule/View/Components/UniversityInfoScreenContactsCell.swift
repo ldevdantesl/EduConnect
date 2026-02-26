@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct UniversityInfoScreenContactsCellViewModel: CellViewModelProtocol {
-    private(set) var cellIdentifier: String = UniversityInfoScreenContactsCell.identifier
+struct UniversityInfoScreenContactsCellViewModel {
     let university: ECUniversity
     let applied: Bool
     let didTapApply: (() -> Void)?
@@ -23,7 +22,7 @@ struct UniversityInfoScreenContactsCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class UniversityInfoScreenContactsCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class UniversityInfoScreenContactsCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let imageSize = 30.0
@@ -159,8 +158,7 @@ final class UniversityInfoScreenContactsCell: UICollectionViewCell, Configurable
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? UniversityInfoScreenContactsCellViewModel else { return }
+    func configure(withVM vm: UniversityInfoScreenContactsCellViewModel) {
         self.viewModel = vm
         self.phoneLabel.text = vm.university.phone
         self.mailsLabel.text = vm.university.email

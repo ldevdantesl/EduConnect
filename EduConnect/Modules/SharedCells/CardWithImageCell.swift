@@ -9,8 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-struct CardWithImageCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = CardWithImageCell.identifier
+struct CardWithImageCellViewModel {
     let imageURL: String?
     let image: UIImage?
     let imageContentMode: UIImageView.ContentMode
@@ -51,7 +50,7 @@ struct CardWithImageCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class CardWithImageCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class CardWithImageCell: UICollectionViewCell {
     
     // MARK: - CONSTANTS
     private enum Constants {
@@ -145,8 +144,7 @@ final class CardWithImageCell: UICollectionViewCell, ConfigurableCellProtocol {
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? CardWithImageCellViewModel else { return }
+    func configure(withVM vm: CardWithImageCellViewModel) {
         self.viewModel = vm
         
         if let preTitle = vm.preTitle {

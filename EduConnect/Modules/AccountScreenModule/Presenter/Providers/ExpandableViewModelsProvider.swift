@@ -8,7 +8,8 @@
 import Foundation
 
 // MARK: - Protocol
-public protocol ExpandableCellViewModel: CellViewModelProtocol, AnyObject {
+public protocol ExpandableCellViewModel: AnyObject {
+    var cellIdentifier: String { get }
     var isExpanded: Bool { get set }
     var didTapExpand: (() -> Void)? { get }
 }

@@ -9,8 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-struct UniversityCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = "UniversityCell"
+struct UniversityCellViewModel {
     let university: ECUniversity
     let horizontallySpaced: Bool
     let didTap: ((ECUniversity) -> Void)?
@@ -22,7 +21,7 @@ struct UniversityCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class UniversityCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // other
@@ -256,8 +255,7 @@ final class UniversityCell: UICollectionViewCell, ConfigurableCellProtocol {
     }
     
     // MARK: - PUBLIC FUNC
-    public func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? UniversityCellViewModel else { return }
+    public func configure(withVM vm: UniversityCellViewModel) {
         self.viewModel = vm
         self.backgroundImage.kf.indicatorType = .activity
         if let indicator = backgroundImage.kf.indicator as? UIActivityIndicatorView {

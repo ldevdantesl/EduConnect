@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct UniversityInfoScreenAboutCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = UniversityInfoScreenAboutCell.identifier
+struct UniversityInfoScreenAboutCellViewModel {
     let university: ECUniversity
     let didTapProgram: (() -> Void)?
     let didTapProfession: (() -> Void)?
@@ -28,7 +27,7 @@ struct UniversityInfoScreenAboutCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class UniversityInfoScreenAboutCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class UniversityInfoScreenAboutCell: UICollectionViewCell {
     
     // MARK: - CONSTANTS
     private enum Constants {
@@ -116,8 +115,7 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell, ConfigurableCel
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? UniversityInfoScreenAboutCellViewModel else { return }
+    func configure(withVM vm: UniversityInfoScreenAboutCellViewModel) {
         self.viewModel = vm
         configureFeatures()
         programsButton.subtitleText = "(\(vm.university.programsCount))"

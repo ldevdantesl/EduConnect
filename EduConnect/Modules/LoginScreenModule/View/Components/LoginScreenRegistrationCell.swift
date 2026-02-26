@@ -8,13 +8,12 @@
 import UIKit
 import SnapKit
 
-struct LoginScreenRegistrationCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = "LoginScreenRegistrationCell"
+struct LoginScreenRegistrationCellViewModel {
     let didPressBack: (() -> Void)?
     let didTapSendCode: ((String?) -> Void)?
 }
 
-final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class LoginScreenRegistrationCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         //Spacings
@@ -94,12 +93,10 @@ final class LoginScreenRegistrationCell: UICollectionViewCell, ConfigurableCellP
     }
     
     // MARK: - PUBLIC FUNX
-    public func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? LoginScreenRegistrationCellViewModel else { return }
+    public func configure(withVM vm: LoginScreenRegistrationCellViewModel) {
         self.viewModel = vm
         self.sendCodeButton.setAction { [weak self] in vm.didTapSendCode?(self?.emailTextField.text) }
         self.backButton.setAction(action: vm.didPressBack)
-        layoutIfNeeded()
     }
     
     // MARK: - PRIVATE FUNC

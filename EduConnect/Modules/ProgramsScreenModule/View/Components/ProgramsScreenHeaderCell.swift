@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct ProgramsScreenHeaderCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = "ProgramsScreenHeaderCell"
+struct ProgramsScreenHeaderCellViewModel {
     let totalFields: Int
     let totalSpecializationsBachelor: Int
     let totalSpecializations: Int
@@ -23,7 +22,7 @@ struct ProgramsScreenHeaderCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class ProgramsScreenHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class ProgramsScreenHeaderCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let contentViewBackground = UIColor.hex("#795CED")
@@ -155,8 +154,7 @@ final class ProgramsScreenHeaderCell: UICollectionViewCell, ConfigurableCellProt
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? ProgramsScreenHeaderCellViewModel else { return }
+    func configure(withVM vm: ProgramsScreenHeaderCellViewModel) {
         self.viewModel = vm
         self.fieldsTotalLabel.text = "\(vm.totalFields)\nнаправлений"
         self.bachelorTotalLabel.text = "\(vm.totalSpecializationsBachelor)\nспециальностей бакалавриата"

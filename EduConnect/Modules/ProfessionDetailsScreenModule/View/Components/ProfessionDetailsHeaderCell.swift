@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct ProfessionDetailsHeaderCellViewModel: CellViewModelProtocol {
-    let cellIdentifier: String = ProfessionDetailsHeaderCell.identifier
+struct ProfessionDetailsHeaderCellViewModel {
     let profession: ECProfession
     let didTapSetENT: (() -> Void)?
     

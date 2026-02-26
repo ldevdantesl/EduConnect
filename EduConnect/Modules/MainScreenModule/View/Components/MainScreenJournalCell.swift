@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct MainScreenJournalCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = MainScreenJournalCell.identifier
+struct MainScreenJournalCellViewModel {
     let selectedType: ECNewsType?
     let allTypes: [ECNewsType]
     var didSelectType: ((ECNewsType?) -> Void)?
@@ -21,7 +20,7 @@ struct MainScreenJournalCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class MainScreenJournalCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class MainScreenJournalCell: UICollectionViewCell {
     
     // MARK: - CONSTANTS
     private enum Constants {
@@ -86,8 +85,7 @@ final class MainScreenJournalCell: UICollectionViewCell, ConfigurableCellProtoco
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? MainScreenJournalCellViewModel else { return }
+    func configure(withVM vm: MainScreenJournalCellViewModel) {
         self.viewModel = vm
         setupTabs(types: vm.allTypes)
         updateTabSelection(selectedType: vm.selectedType)

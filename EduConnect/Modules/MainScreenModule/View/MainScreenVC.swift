@@ -81,72 +81,72 @@ final class MainScreenVC: UIViewController {
         collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
             case .headerItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenHeaderCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainScreenHeaderCell.identifier, for: indexPath) as? MainScreenHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .careersItem(let item) :
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenCareersCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainScreenCareersCell.identifier, for: indexPath) as? MainScreenCareersCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .programItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenProgramsCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainScreenProgramsCell.identifier, for: indexPath) as? MainScreenProgramsCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .academicItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenAcademicCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainScreenAcademicCell.identifier, for: indexPath) as? MainScreenAcademicCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .academicProgram(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenAcademicProgramCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainScreenAcademicProgramCell.identifier, for: indexPath) as? MainScreenAcademicProgramCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .academicShowAll(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenAcademicShowAllCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainScreenAcademicShowAllCell.identifier, for: indexPath) as? MainScreenAcademicShowAllCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .stepsItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenStepsCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainScreenStepsCell.identifier, for: indexPath) as? MainScreenStepsCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .servicesItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenServicesCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainScreenServicesCell.identifier, for: indexPath) as? MainScreenServicesCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .journalItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenJournalCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainScreenJournalCell.identifier, for: indexPath) as? MainScreenJournalCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .cardWithImageItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? CardWithImageCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardWithImageCell.identifier, for: indexPath) as? CardWithImageCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .loadingItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoadingCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoadingCell.identifier, for: indexPath) as? LoadingCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .notFoundItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? NotFoundCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NotFoundCell.identifier, for: indexPath) as? NotFoundCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .footerItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? MainScreenFooterCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainScreenFooterCell.identifier, for: indexPath) as? MainScreenFooterCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .underlineButtonItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UnderlineButtonCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UnderlineButtonCell.identifier, for: indexPath) as? UnderlineButtonCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             }

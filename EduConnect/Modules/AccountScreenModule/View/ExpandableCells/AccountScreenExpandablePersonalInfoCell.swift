@@ -26,7 +26,7 @@ final class AccountScreenExpandablePersonalInfoCellViewModel: ExpandableCellView
     }
 }
 
-final class AccountScreenExpandablePersonalInfoCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class AccountScreenExpandablePersonalInfoCell: UICollectionViewCell, ExpandableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -156,7 +156,7 @@ final class AccountScreenExpandablePersonalInfoCell: UICollectionViewCell, Confi
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
+    func configure(withVM vm: any ExpandableCellViewModel) {
         guard let vm = vm as? AccountScreenExpandablePersonalInfoCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()

@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct UniversityScreenFilterCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = "UniversityScreenFilterCell"
+struct UniversityScreenFilterCellViewModel {
     var currentFilters: UniversityFilters
     var searchText: String?
     var didTapChances: (() -> Void)?
@@ -18,7 +17,7 @@ struct UniversityScreenFilterCellViewModel: CellViewModelProtocol {
     var didTapFilters: (() -> Void)?
 }
 
-final class UniversityScreenFilterCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class UniversityScreenFilterCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -70,8 +69,7 @@ final class UniversityScreenFilterCell: UICollectionViewCell, ConfigurableCellPr
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? UniversityScreenFilterCellViewModel else { return }
+    func configure(withVM vm: UniversityScreenFilterCellViewModel) {
         self.viewModel = vm
         
         if let searchText = vm.searchText {

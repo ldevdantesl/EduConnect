@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class AccountScreenExpandableEducationCellViewModel: ExpandableCellViewModel {
-    private(set) var cellIdentifier: String = AccountScreenExpandableEducationCell.identifier
+    let cellIdentifier: String = AccountScreenExpandableEducationCell.identifier
     let profile: Profile
     var isExpanded: Bool
     let didTapExpand: (() -> Void)?
@@ -23,7 +23,7 @@ final class AccountScreenExpandableEducationCellViewModel: ExpandableCellViewMod
     }
 }
 
-final class AccountScreenExpandableEducationCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class AccountScreenExpandableEducationCell: UICollectionViewCell, ExpandableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -152,7 +152,7 @@ final class AccountScreenExpandableEducationCell: UICollectionViewCell, Configur
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
+    func configure(withVM vm: any ExpandableCellViewModel) {
         guard let vm = vm as? AccountScreenExpandableEducationCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()

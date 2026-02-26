@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct ProfessionScreenSearchCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = ProfessionScreenSearchCell.identifier
+struct ProfessionScreenSearchCellViewModel {
     var searchText: String?
     var didTapSearch: ((String) -> Void)?
     var didTapSort: (() -> Void)?
@@ -21,7 +20,7 @@ struct ProfessionScreenSearchCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class ProfessionScreenSearchCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class ProfessionScreenSearchCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -58,9 +57,7 @@ final class ProfessionScreenSearchCell: UICollectionViewCell, ConfigurableCellPr
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? ProfessionScreenSearchCellViewModel else { return}
-    
+    func configure(withVM vm: ProfessionScreenSearchCellViewModel) {
         self.viewModel = vm
         
         if let searchText = vm.searchText {

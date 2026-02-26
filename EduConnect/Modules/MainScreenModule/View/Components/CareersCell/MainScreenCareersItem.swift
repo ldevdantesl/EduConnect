@@ -9,8 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-struct MainScreenCareersItemViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = MainScreenCareersItem.identifier
+struct MainScreenCareersItemViewModel {
     let university: ECUniversity
     let onTapAction: ((ECUniversity) -> Void)?
     
@@ -20,7 +19,7 @@ struct MainScreenCareersItemViewModel: CellViewModelProtocol {
     }
 }
 
-final class MainScreenCareersItem: UICollectionViewCell, ConfigurableCellProtocol {
+final class MainScreenCareersItem: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -74,8 +73,7 @@ final class MainScreenCareersItem: UICollectionViewCell, ConfigurableCellProtoco
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? MainScreenCareersItemViewModel else { return }
+    func configure(withVM vm: MainScreenCareersItemViewModel) {
         self.viewModel = vm
         universityNameLabel.text = vm.university.name
         guard let url = URL(string: vm.university.logoURL ?? "") else { return }

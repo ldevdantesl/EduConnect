@@ -76,17 +76,17 @@ final class ProfessionDetailsScreenVC: UIViewController {
         collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
             case .headerItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? ProfessionDetailsHeaderCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfessionDetailsHeaderCell.identifier, for: indexPath) as? ProfessionDetailsHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .underlineItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UnderlineButtonCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UnderlineButtonCell.identifier, for: indexPath) as? UnderlineButtonCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .cardWithImageItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? CardWithImageCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardWithImageCell.identifier, for: indexPath) as? CardWithImageCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             }

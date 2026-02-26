@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct NotFoundCellViewModel: CellViewModelProtocol {
-    let cellIdentifier: String = NotFoundCell.identifier
+struct NotFoundCellViewModel {
     let image: UIImage?
     let title: String
     let subtitle: String?
@@ -30,7 +29,7 @@ struct NotFoundCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class NotFoundCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class NotFoundCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -94,8 +93,7 @@ final class NotFoundCell: UICollectionViewCell, ConfigurableCellProtocol {
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? NotFoundCellViewModel else { return }
+    func configure(withVM vm: NotFoundCellViewModel) {
         self.viewModel = vm
         self.imageView.image = vm.image
         self.titleLabel.text = vm.title

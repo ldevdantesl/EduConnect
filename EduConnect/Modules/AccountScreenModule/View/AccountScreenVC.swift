@@ -98,23 +98,23 @@ final class AccountScreenVC: UIViewController {
         collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
             case .headerItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? SectionHeaderCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionHeaderCell.identifier, for: indexPath) as? SectionHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             case .university(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? ApplicationCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ApplicationCell.identifier, for: indexPath) as? ApplicationCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             case .expandableCell(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath)
-                (cell as? ConfigurableCellProtocol)?.configure(withVM: item.viewModel)
+                (cell as? ExpandableCellProtocol)?.configure(withVM: item.viewModel)
                 return cell
             case .notFoundItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath)
-                (cell as? ConfigurableCellProtocol)?.configure(withVM: item.viewModel)
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NotFoundCell.identifier, for: indexPath) as? NotFoundCell
+                cell?.configure(withVM: item.viewModel)
                 return cell
             case .mainTabInfo(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? AccountScreenMainTabInfoCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccountScreenMainTabInfoCell.identifier, for: indexPath) as? AccountScreenMainTabInfoCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             }

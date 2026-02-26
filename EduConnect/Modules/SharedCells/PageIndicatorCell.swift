@@ -8,15 +8,14 @@
 import UIKit
 import SnapKit
 
-struct PageIndicatorCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = "PageIndicatorCell"
+struct PageIndicatorCellViewModel {
     var totalPages: Int = 1
     var currentPage: Int = 1
     var didPressNextPage: (() -> Void)?
     var didPressPage: ((Int) -> Void)?
 }
 
-final class PageIndicatorCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class PageIndicatorCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -57,8 +56,7 @@ final class PageIndicatorCell: UICollectionViewCell, ConfigurableCellProtocol {
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? PageIndicatorCellViewModel else { return }
+    func configure(withVM vm: PageIndicatorCellViewModel) {
         self.viewModel = vm
         makeStacK()
     }

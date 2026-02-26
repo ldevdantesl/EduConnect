@@ -8,11 +8,9 @@
 import UIKit
 import SnapKit
 
-struct ProfessionScreenProgsAndUnisCellViewModel: CellViewModelProtocol {
-    let cellIdentifier: String = ProfessionScreenProgsAndUnisCell.identifier
-}
+struct ProfessionScreenProgsAndUnisCellViewModel { }
 
-final class ProfessionScreenProgsAndUnisCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class ProfessionScreenProgsAndUnisCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants { }
     
@@ -31,8 +29,7 @@ final class ProfessionScreenProgsAndUnisCell: UICollectionViewCell, Configurable
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? ProfessionScreenProgsAndUnisCellViewModel else { return }
+    func configure(withVM vm: ProfessionScreenProgsAndUnisCellViewModel) {
         self.viewModel = vm
     }
     

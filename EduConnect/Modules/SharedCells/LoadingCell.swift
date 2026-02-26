@@ -8,11 +8,9 @@
 import UIKit
 import SnapKit
 
-struct LoadingCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = LoadingCell.identifier
-}
+struct LoadingCellViewModel { }
 
-final class LoadingCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class LoadingCell: UICollectionViewCell {
     
     // MARK: - VIEW PROPERTIES
     private let logoImageView: UIImageView = {
@@ -55,8 +53,7 @@ final class LoadingCell: UICollectionViewCell, ConfigurableCellProtocol {
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard vm is LoadingCellViewModel else { return }
+    func configure(withVM vm: LoadingCellViewModel) {
         startShimmer()
     }
     

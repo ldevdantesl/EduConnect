@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct MainScreenServicesCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = MainScreenServicesCell.identifier
+struct MainScreenServicesCellViewModel {
     let didTapProfession: (() -> Void)?
     let didTapUniversity: (() -> Void)?
     let didTapCalendar: (() -> Void)?
@@ -21,7 +20,7 @@ struct MainScreenServicesCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class MainScreenServicesCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class MainScreenServicesCell: UICollectionViewCell {
     
     // MARK: - CONSTANTS
     fileprivate enum Constants {
@@ -87,8 +86,7 @@ final class MainScreenServicesCell: UICollectionViewCell, ConfigurableCellProtoc
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? MainScreenServicesCellViewModel else { return }
+    func configure(withVM vm: MainScreenServicesCellViewModel) {
         self.viewModel = vm
         self.items = [
             .init(title: "Выбор профессии", image: .mainServicesProfessionImage, onTapAction: vm.didTapProfession),

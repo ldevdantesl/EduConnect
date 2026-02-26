@@ -8,12 +8,9 @@
 import UIKit
 import SnapKit
 
-struct ProfessionScreenHeaderCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = ProfessionScreenHeaderCell.identifier
-    init() { }
-}
+struct ProfessionScreenHeaderCellViewModel { }
 
-final class ProfessionScreenHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class ProfessionScreenHeaderCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let contentViewBackground = UIColor.hex("#795CED")
@@ -92,8 +89,7 @@ final class ProfessionScreenHeaderCell: UICollectionViewCell, ConfigurableCellPr
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? ProfessionScreenHeaderCellViewModel else { return }
+    func configure(withVM vm: ProfessionScreenHeaderCellViewModel) {
         self.viewModel = vm
     }
 }

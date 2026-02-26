@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct LoginScreenSetPasswordCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = "LoginScreenSetPasswordCell"
+struct LoginScreenSetPasswordCellViewModel {
     let savePasswordAction: ((String?, String?) -> Void)?
     let backButtonAction: (() -> Void)?
     
@@ -19,7 +18,7 @@ struct LoginScreenSetPasswordCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class LoginScreenSetPasswordCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // Spacing
@@ -101,8 +100,7 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell, ConfigurableCellPr
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? LoginScreenSetPasswordCellViewModel else { return }
+    func configure(withVM vm: LoginScreenSetPasswordCellViewModel) {
         self.viewModel = vm
         self.savePasswordButton.setAction { [weak self] in
             vm.savePasswordAction?(self?.passwordField.text, self?.reenterPasswordField.text)

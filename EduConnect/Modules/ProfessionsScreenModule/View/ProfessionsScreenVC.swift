@@ -68,32 +68,32 @@ final class ProfessionsScreenVC: UIViewController {
         collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
             case .headerItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? ProfessionScreenHeaderCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfessionScreenHeaderCell.identifier, for: indexPath) as? ProfessionScreenHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .cardWithImageItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? CardWithImageCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardWithImageCell.identifier, for: indexPath) as? CardWithImageCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .searchItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? ProfessionScreenSearchCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfessionScreenSearchCell.identifier, for: indexPath) as? ProfessionScreenSearchCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .loadingItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoadingCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoadingCell.identifier, for: indexPath) as? LoadingCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .pageIndicatorItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? PageIndicatorCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PageIndicatorCell.identifier, for: indexPath) as? PageIndicatorCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .footerItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? TabsFooterCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TabsFooterCell.identifier, for: indexPath) as? TabsFooterCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             }

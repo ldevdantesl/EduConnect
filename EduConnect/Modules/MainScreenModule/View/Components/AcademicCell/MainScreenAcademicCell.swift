@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct MainScreenAcademicCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = MainScreenAcademicCell.identifier
+struct MainScreenAcademicCellViewModel {
     let selectedTab: AcademicTab
     var didSelectTab: ((AcademicTab) -> Void)?
     
@@ -28,7 +27,7 @@ struct MainScreenAcademicCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class MainScreenAcademicCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class MainScreenAcademicCell: UICollectionViewCell {
     
     // MARK: - CONSTANTS
     private enum Constants {
@@ -88,8 +87,7 @@ final class MainScreenAcademicCell: UICollectionViewCell, ConfigurableCellProtoc
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? MainScreenAcademicCellViewModel else { return }
+    func configure(withVM vm: MainScreenAcademicCellViewModel) {
         self.viewModel = vm
         updateTabSelection(selectedTab: vm.selectedTab)
     }
