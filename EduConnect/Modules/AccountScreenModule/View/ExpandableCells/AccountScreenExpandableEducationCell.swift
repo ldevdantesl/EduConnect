@@ -156,9 +156,9 @@ final class AccountScreenExpandableEducationCell: UICollectionViewCell, Configur
         guard let vm = vm as? AccountScreenExpandableEducationCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()
-        schoolField.text = vm.profile.education.educationalInstitution
-        finalClassField.text = vm.profile.education.educationClass
-        averageField.text = vm.profile.education.averageScore
+        schoolField.text = vm.profile.education?.educationalInstitution
+        finalClassField.text = vm.profile.education?.educationClass
+        averageField.text = vm.profile.education?.averageScore
     }
     
     // MARK: - PRIVATE FUNC

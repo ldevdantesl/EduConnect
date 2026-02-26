@@ -30,8 +30,8 @@ struct Profile: Decodable {
     let isActive: Bool
     let createdAt: String
     let updatedAt: String
-    let education: ProfileEducation
-    let eth: ProfileETH
+    let education: ProfileEducation?
+    let eth: ProfileETH?
     let familyContacts: [ProfileFamilyContact]
     let olympiads: [ProfileOlympiad]
     let extracurricularActivities: [ProfileExtracurricular]
