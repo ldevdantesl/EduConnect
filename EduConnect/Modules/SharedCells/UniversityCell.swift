@@ -180,9 +180,10 @@ final class UniversityCell: UICollectionViewCell {
         
         imageOverlayView.addSubview(universityAdmissionInfo)
         universityAdmissionInfo.snp.makeConstraints {
-            $0.top.equalTo(universityCapIconImage.snp.bottom).offset(Constants.semiBigSpacing)
+            $0.top.lessThanOrEqualTo(universityCapIconImage.snp.bottom).offset(Constants.semiBigSpacing)
             $0.leading.equalTo(universityCapIconImage.snp.leading)
             $0.trailing.equalToSuperview().inset(Constants.bigSpacing)
+            $0.bottom.equalToSuperview().offset(-Constants.semiBigSpacing)
         }
         
         containerView.addSubview(locationAndOwnershipLabel)
@@ -224,7 +225,6 @@ final class UniversityCell: UICollectionViewCell {
             $0.leading.lessThanOrEqualTo(programsButton.snp.trailing).offset(Constants.hugeSpacing)
             $0.trailing.equalToSuperview().offset(-Constants.hugeSpacing)
         }
-        layoutIfNeeded()
     }
     
     private func validatedProfessionsText(professions: [ECUniversity.ImagedEntity]) -> String {
@@ -270,19 +270,25 @@ final class UniversityCell: UICollectionViewCell {
         )
         self.locationAndOwnershipLabel.text = "\(vm.university.city.name) / \(vm.university.universityTypeName)"
         self.nameLabel.text = vm.university.name
-        self.priceLabel.text = "от \(ECNumberFormatter.toDecimalFromString(number: vm.university.minContractPrice ?? "0"))₸ / год"
-        let admissionText = """
-        от \(ECNumberFormatter.toDecimalFromString(number: vm.university.minContractPrice ?? "0")) бал бюджет
-        от \(ECNumberFormatter.toDecimalFromString(number: vm.university.minContractPrice ?? "0")) бал платно
-        \(vm.university.budgetPlaces) места бюджет
-        \(vm.university.paidPlaces) места платно
-        """
-        self.universityAdmissionInfo.attributedText = decoratedAdmissionInfoText(admissionText)
-        
         self.professionsLabel.text = validatedProfessionsText(professions: vm.university.professions)
         self.programsButton.configure(text: "\(vm.university.programsCount) программ")
         self.facultyButton.configure(text: "\(vm.university.facultiesCount) факультета")
         
+        if let price = vm.university.minContractPrice {
+            self.priceLabel.text = "от \(ECNumberFormatter.toDecimalFromString(number: price))₸ / год"
+        } else {
+            self.priceLabel.text = "Цена не указана"
+        }
+        
+        var admissionText: String = ""
+        if let entScore = vm.university.entScores?.first {
+            admissionText.append("от \(ECNumberFormatter.toDecimalFromString(number: entScore.budgetScore)) бал бюджет\n")
+            admissionText.append("от \(ECNumberFormatter.toDecimalFromString(number: entScore.contractScore)) бал платно\n")
+        }
+        admissionText.append("\(vm.university.budgetPlaces) места бюджет\n")
+        admissionText.append("\(vm.university.paidPlaces) места платно")
+        
+        self.universityAdmissionInfo.attributedText = decoratedAdmissionInfoText(admissionText)
         makeConstraints()
     }
     

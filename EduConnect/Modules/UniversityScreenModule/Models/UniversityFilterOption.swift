@@ -51,7 +51,8 @@ enum UniversityFilterOption: String, CaseIterable {
     func selectedValue(from filters: UniversityFilters, cities: [ECCity], professions: [ECReferenceProfession]) -> String? {
         switch self {
         case .city:
-            guard let firstID = filters.cityIDs.first,
+            guard let cityIDs = filters.cityIDs,
+                  let firstID = cityIDs.first,
                   let city = cities.first(where: { $0.id == firstID }) else { return nil }
             return city.name.ru
             
@@ -82,11 +83,11 @@ enum UniversityFilterOption: String, CaseIterable {
         case .city:
             if let city = cities.first(where: { $0.name.ru == value }) {
                 filters.cityIDs = [city.id]
-            }
+            } else { filters.cityIDs = nil }
         case .profession:
             if let profession = professions.first(where: { $0.name.ru == value }) {
                 filters.professionID = profession.id
-            }
+            } else { filters.professionID = nil }
         case .universityType:
             filters.universityType = (value == noneTitle) ? nil :
                 ECUniversity.UniversityType.allCases.first { $0.title == value }
