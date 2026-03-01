@@ -28,10 +28,10 @@ struct Application: Decodable, Identifiable {
     
     let id: Int
     let university: University
-    let surname: String
+    let surname: String?
     let name: String
-    let patronymic: String
-    let phone: String
+    let patronymic: String?
+    let phone: String?
     let email: String
     let status: Int
     let statusName: String

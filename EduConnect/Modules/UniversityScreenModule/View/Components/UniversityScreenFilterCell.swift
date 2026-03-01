@@ -28,22 +28,8 @@ final class UniversityScreenFilterCell: UICollectionViewCell {
     private var viewModel: UniversityScreenFilterCellViewModel?
     
     // MARK: - VIEW PROPERTIES
-    private lazy var chancesButton: ECButton = {
-        let button = ECButton()
-        button.configure(text: "Оценить шансы", backgroundColor: UIColor.hex("#427FF6"))
-        button.setAction { [weak self] in self?.viewModel?.didTapChances?() }
-        return button
-    }()
-    
-    private lazy var chooseCityButton: ECButton = {
-        let button = ECButton()
-        button.configure(text: "Выбрать город", backgroundColor: UIColor.hex("#333399"))
-        button.setAction { [weak self] in self?.viewModel?.didTapCity?() }
-        return button
-    }()
-    
     private lazy var searchField: ECSearchField = {
-        let field = ECSearchField(placeholder: "Search")
+        let field = ECSearchField(placeholder: ConstantLocalizedStrings.Common.browse)
         field.setAction { [weak self] in self?.viewModel?.didTapSearch?($0) }
         return field
     }()
@@ -88,25 +74,9 @@ final class UniversityScreenFilterCell: UICollectionViewCell {
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
-        contentView.addSubview(chancesButton)
-        chancesButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(Constants.spacing)
-            $0.trailing.equalToSuperview().multipliedBy(0.5)
-            $0.height.equalTo(SharedConstants.buttonHeight)
-        }
-        
-        contentView.addSubview(chooseCityButton)
-        chooseCityButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.equalTo(chancesButton.snp.trailing).offset(Constants.spacing)
-            $0.trailing.equalToSuperview().offset(-Constants.spacing)
-            $0.height.equalTo(SharedConstants.buttonHeight)
-        }
-        
         contentView.addSubview(searchField)
         searchField.snp.makeConstraints {
-            $0.top.equalTo(chancesButton.snp.bottom).offset(Constants.spacing)
+            $0.top.equalToSuperview().offset(Constants.spacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
         }
         

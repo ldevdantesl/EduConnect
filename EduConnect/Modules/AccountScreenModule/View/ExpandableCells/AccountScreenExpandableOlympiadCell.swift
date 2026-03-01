@@ -121,8 +121,8 @@ final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, Expandabl
     func configure(withVM vm: any ExpandableCellViewModel) {
         guard let vm = vm as? AccountScreenExpandableOlympiadCellViewModel else { return }
         self.viewModel = vm
-        vm.isExpanded ? expandCell() : collapseCell()
         populateOlympiads()
+        vm.isExpanded ? expandCell() : collapseCell()
     }
     
     // MARK: - PRIVATE FUNC

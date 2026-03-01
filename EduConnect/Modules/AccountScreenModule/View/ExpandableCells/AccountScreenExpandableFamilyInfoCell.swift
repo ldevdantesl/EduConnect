@@ -206,7 +206,7 @@ final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, Expanda
     private func populateFamilies() {
         familyStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         viewModel?.profile.familyContacts.forEach { family in
-            let vm = DeletableFamilyMemberViewModel(name: family.fullName, phoneNumber: family.phoneNumber, typeName: "Семья")
+            let vm = DeletableFamilyMemberViewModel(name: family.fullName, phoneNumber: family.phoneNumber, typeName: family.familyMemberName)
             let view = DeletableFamilyMemberView(viewModel: vm)
             view.setDeleteAction { [weak self] in
                 self?.viewModel?.didTapDeleteFamily?(family)

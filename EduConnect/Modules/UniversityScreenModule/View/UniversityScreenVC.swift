@@ -41,6 +41,7 @@ final class UniversityScreenVC: UIViewController {
         cv.registerCell(PageIndicatorCell.self, reuseID: PageIndicatorCell.identifier)
         cv.registerCell(TabsFooterCell.self, reuseID: TabsFooterCell.identifier)
         cv.registerCell(NotFoundCell.self, reuseID: NotFoundCell.identifier)
+        cv.adjustsForKeyboard = true
         cv.backgroundColor = .clear
         cv.resignsFirstResponderOnScroll = true
         return cv

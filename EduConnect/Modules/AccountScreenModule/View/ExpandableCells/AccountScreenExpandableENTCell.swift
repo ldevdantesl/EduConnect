@@ -169,10 +169,9 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ExpandableCell
     func configure(withVM vm: any ExpandableCellViewModel) {
         guard let vm = vm as? AccountScreenExpandableENTCellViewModel else { return }
         self.viewModel = vm
-        vm.isExpanded ? expandCell() : collapseCell()
-        
         yearOfENTField.text = vm.profile.eth?.year?.description
         populateSubjects()
+        vm.isExpanded ? expandCell() : collapseCell()
     }
     
     // MARK: - PRIVATE FUNC

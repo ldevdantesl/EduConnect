@@ -137,7 +137,7 @@ final class AccountScreenPresenter {
             },
             
             didTapAddOlympiad: { [weak self] in
-                guard let self else { return }
+                guard let self = self else { return }
                 let vm = AddOlympiadPopUpViewModel(
                     olympiadTypes: self.olympiadTypes,
                     olympiadPlaces: self.olympiadPlaces,
@@ -181,8 +181,7 @@ final class AccountScreenPresenter {
             view?.showLoading()
             interactor.getProfileApplications()
         case .application:
-            view?.showLoading()
-            interactor.refetchProfile()
+            showApplication()
         case .main:
             showMain()
         }
@@ -225,6 +224,7 @@ final class AccountScreenPresenter {
     }
 
     private func showApplication() {
+        expandableProvider.collapseAll()
         let headerVM = makeHeaderVM(for: .application)
 
         var items: [AccountScreenItem] = [
@@ -319,6 +319,7 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
         interactor.getProfile()
         
         dispatchGroup.notify(queue: .main) { [weak self] in
+            self?.configureExpandableProvider()
             self?.showMain()
             self?.view?.hideLoading()
         }
@@ -358,11 +359,18 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
         self.profile = profile
         configureExpandableProvider()
         self.view?.hideLoading()
-        showApplication()
         
-        if let refreshID, let item = expandableProvider.makeExpandableItem(for: refreshID) {
-            view?.reconfigureItems(items: [item])
+        if selectedTab == .application {
+            showApplication()
+        }
+        
+        if let refreshID {
+            expandableProvider.expand(refreshID)
+            if let item = expandableProvider.makeExpandableItem(for: refreshID) {
+                view?.reconfigureItems(items: [item])
+            }
             view?.dismissPopup()
+            self.refreshID = nil
         }
     }
     

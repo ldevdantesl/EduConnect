@@ -121,8 +121,8 @@ final class AccountScreenExpandableExtracurricularCell: UICollectionViewCell, Ex
     func configure(withVM vm: any ExpandableCellViewModel) {
         guard let vm = vm as? AccountScreenExpandableExtracurricularCellViewModel else { return }
         self.viewModel = vm
-        vm.isExpanded ? expandCell() : collapseCell()
         populateActivities()
+        vm.isExpanded ? expandCell() : collapseCell()
     }
     
     // MARK: - PRIVATE FUNC
