@@ -11,6 +11,7 @@ protocol ProfessionDetailsScreenRouterProtocol {
     func openAccount()
     func routeToMain()
     func goBack()
+    func routeToProfession(profession: ECProfession)
 }
 
 final class ProfessionDetailsScreenRouter: ProfessionDetailsScreenRouterProtocol {
@@ -27,6 +28,11 @@ final class ProfessionDetailsScreenRouter: ProfessionDetailsScreenRouterProtocol
     
     func routeToMain() {
         appRouter.routeToMain()
+    }
+    
+    func routeToProfession(profession: ECProfession) {
+        let vc = ProfessionDetailsScreenAssembler.assemble(appRouter: appRouter, professionID: profession.id)
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
     func goBack() {

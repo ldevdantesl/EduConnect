@@ -43,6 +43,8 @@ final class ProfessionDetailsScreenVC: UIViewController {
         )
         cv.registerCell(ProfessionDetailsHeaderCell.self, reuseID: ProfessionDetailsHeaderCell.identifier)
         cv.registerCell(ProfessionDetailsProgsAndUnisCell.self, reuseID: ProfessionDetailsProgsAndUnisCell.identifier)
+        cv.registerCell(ProfessionDetailsAboutCell.self, reuseID: ProfessionDetailsAboutCell.identifier)
+        cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
         cv.registerCell(UnderlineButtonCell.self, reuseID: UnderlineButtonCell.identifier)
         cv.registerCell(CardWithImageCell.self, reuseID: CardWithImageCell.identifier)
         cv.resignsFirstResponderOnScroll = true
@@ -86,8 +88,18 @@ final class ProfessionDetailsScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
+            case .aboutItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfessionDetailsAboutCell.identifier, for: indexPath) as? ProfessionDetailsAboutCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
             case .underlineItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UnderlineButtonCell.identifier, for: indexPath) as? UnderlineButtonCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .sectionHeaderItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionHeaderCell.identifier, for: indexPath) as? SectionHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 

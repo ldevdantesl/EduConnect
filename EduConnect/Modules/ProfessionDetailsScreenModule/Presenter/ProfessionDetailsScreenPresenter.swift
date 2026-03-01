@@ -30,6 +30,8 @@ final class ProfessionDetailsScreenPresenter {
     private let professionID: Int
     private var profession: ECProfession?
     private var related: [ECProfession] = []
+    
+    private var showingAllRelated: Bool = false
 
     init(interactor: ProfessionDetailsScreenInteractorProtocol, router: ProfessionDetailsScreenRouterProtocol, errorService: ErrorServiceProtocol, professionID: Int) {
         self.interactor = interactor
@@ -42,12 +44,41 @@ final class ProfessionDetailsScreenPresenter {
         guard let profession else { return }
         let headerVM = ProfessionDetailsHeaderCellViewModel(profession: profession)
         let progsVM = ProfessionDetailsProgsAndUnisCellViewModel(profession: profession)
+        let aboutVM = ProfessionDetailsAboutCellViewModel(profession: profession)
+        var relatedItems: [ProfessionDetailsItem] = []
+        
+        if !related.isEmpty {
+            let relatedHeaderVM = SectionHeaderCellViewModel(title: "Похожие профессии", titleSize: 22, titleAlignment: .center)
+            relatedItems.append(.sectionHeaderItem(.init(id: "related-header", viewModel: relatedHeaderVM)))
+            let neededItems: [ECProfession] = showingAllRelated ? related : Array(related.prefix(1))
+            
+            neededItems.forEach { profession in
+                let vm = CardWithImageCellViewModel(
+                    imageURL: profession.imageURL,
+                    preTitle: "\(profession.universitiesCount) вуза \(profession.programsCount) программ",
+                    title: profession.name.ru, subtitle: profession.description.ru, showsArrowRight: true,
+                    didTap: { [weak self] in self?.router.routeToProfession(profession: profession) }
+                )
+                relatedItems.append(.cardWithImageItem(.init(item: profession, prefix: "professions-", viewModel: vm)))
+            }
+            
+            let underlineVM = UnderlineButtonCellViewModel(
+                titleName: showingAllRelated ? "Свернуть" : "Развернуть",
+                titleColor: .blue
+            ) { [weak self] in
+                self?.showingAllRelated.toggle()
+                self?.applySnapshot()
+            }
+            relatedItems.append(.underlineItem(.init(viewModel: underlineVM)))
+        }
         
         view?.applySnapshot(
-            sections: [.header, .programsAndUniversities],
+            sections: [.header, .programsAndUniversities, .about, .related],
             itemsBySection: [
                 .header : [.headerItem(.init(id: "header", viewModel: headerVM))],
-                .programsAndUniversities : [.progsAndUnisItem(.init(id: "progsAndUnis", viewModel: progsVM))]
+                .programsAndUniversities : [.progsAndUnisItem(.init(id: "progsAndUnis", viewModel: progsVM))],
+                .about : [.aboutItem(.init(id: "about", viewModel: aboutVM))],
+                .related : relatedItems
             ]
         )
     }

@@ -11,6 +11,7 @@ import SnapKit
 struct UnderlineButtonCellViewModel {
     let titleName: String
     let titleSize: CGFloat
+    
     let titleColor: UIColor
     let onTapAction: (() -> Void)?
     
