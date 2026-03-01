@@ -33,12 +33,14 @@ final class ProfessionDetailsHeaderCell: UICollectionViewCell {
         let image = UIImageView()
         image.image = ImageConstants.professionDetailsHeaderImage.image
         image.contentMode = .scaleToFill
+        image.isUserInteractionEnabled = true
         return image
     }()
     
     private let imageOverlayView: UIView = {
         let view = UIView()
         view.backgroundColor = .black.withAlphaComponent(0.2)
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -92,11 +94,16 @@ final class ProfessionDetailsHeaderCell: UICollectionViewCell {
         return stack
     }()
     
-    private let setENTButton: ECButton = ECButton(
-        text: "Укажите ЕНТ", textSize: 14,
-        backgroundColor: .white, textColor: .systemBlue,
-        cornerRadius: 10
-    )
+    private let setENTButton: ECButton = {
+        let button = ECButton()
+        button.configure(
+            text: "Укажите ЕНТ", textSize: 14,
+            backgroundColor: .white, textColor: .systemBlue,
+            cornerRadius: 20
+        )
+        button.setContentInsets(insets: .init(top: 5, leading: 40, bottom: 5, trailing: 40))
+        return button
+    }()
     
     // MARK: - LIFECYCLE
     override init(frame: CGRect) {

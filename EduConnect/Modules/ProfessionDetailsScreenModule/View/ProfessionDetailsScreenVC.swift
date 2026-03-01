@@ -42,6 +42,7 @@ final class ProfessionDetailsScreenVC: UIViewController {
             layout: ProfessionScreenLayoutFactory.make()
         )
         cv.registerCell(ProfessionDetailsHeaderCell.self, reuseID: ProfessionDetailsHeaderCell.identifier)
+        cv.registerCell(ProfessionDetailsProgsAndUnisCell.self, reuseID: ProfessionDetailsProgsAndUnisCell.identifier)
         cv.registerCell(UnderlineButtonCell.self, reuseID: UnderlineButtonCell.identifier)
         cv.registerCell(CardWithImageCell.self, reuseID: CardWithImageCell.identifier)
         cv.resignsFirstResponderOnScroll = true
@@ -77,6 +78,11 @@ final class ProfessionDetailsScreenVC: UIViewController {
             switch itemIdentifier {
             case .headerItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfessionDetailsHeaderCell.identifier, for: indexPath) as? ProfessionDetailsHeaderCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .progsAndUnisItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfessionDetailsProgsAndUnisCell.identifier, for: indexPath) as? ProfessionDetailsProgsAndUnisCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 

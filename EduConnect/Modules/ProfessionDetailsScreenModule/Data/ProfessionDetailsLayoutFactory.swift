@@ -22,6 +22,7 @@ enum ProfessionDetailsLayoutFactory {
             ),
             subitems: [item]
         )
+        group.interItemSpacing = .fixed(10)
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 15

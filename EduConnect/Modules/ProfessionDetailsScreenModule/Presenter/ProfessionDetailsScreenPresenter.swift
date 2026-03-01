@@ -41,11 +41,13 @@ final class ProfessionDetailsScreenPresenter {
     private func applySnapshot() {
         guard let profession else { return }
         let headerVM = ProfessionDetailsHeaderCellViewModel(profession: profession)
+        let progsVM = ProfessionDetailsProgsAndUnisCellViewModel(profession: profession)
         
         view?.applySnapshot(
-            sections: [.header],
+            sections: [.header, .programsAndUniversities],
             itemsBySection: [
-                .header : [.headerItem(.init(id: "header", viewModel: headerVM))]
+                .header : [.headerItem(.init(id: "header", viewModel: headerVM))],
+                .programsAndUniversities : [.progsAndUnisItem(.init(id: "progsAndUnis", viewModel: progsVM))]
             ]
         )
     }

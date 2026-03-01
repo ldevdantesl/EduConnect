@@ -19,6 +19,7 @@ enum ProfessionDetailsSection: Hashable {
 
 enum ProfessionDetailsItem: Hashable {
     case headerItem(DiffableItem<ProfessionDetailsHeaderCellViewModel>)
+    case progsAndUnisItem(DiffableItem<ProfessionDetailsProgsAndUnisCellViewModel>)
     case underlineItem(DiffableItem<UnderlineButtonCellViewModel>)
     case cardWithImageItem(DiffableItem<CardWithImageCellViewModel>)
 }

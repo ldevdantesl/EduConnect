@@ -37,6 +37,7 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell {
         static let itemSpacing = 12.0
         static let columnSpacing = 30.0
         static let buttonsHeight = 120
+        static let buttonsCornerRadius = 60.0
     }
     
     // MARK: - PROPERTIES
@@ -62,7 +63,7 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell {
     private let programsButton: ECDashedBorderButton = {
         let button = ECDashedBorderButton()
         button.titleText = "Программы"
-        button.cornerRadius = 50.0
+        button.cornerRadius = Constants.buttonsCornerRadius
         button.titleFont = ECFont.font(.semiBold, size: 14)
         button.subtitleFont = ECFont.font(.semiBold, size: 14)
         button.image = ImageConstants.programsImage.image
@@ -72,7 +73,7 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell {
     private let professionsButton: ECDashedBorderButton = {
         let button = ECDashedBorderButton()
         button.titleText = "Профессии"
-        button.cornerRadius = 50
+        button.cornerRadius = Constants.buttonsCornerRadius
         button.titleFont = ECFont.font(.semiBold, size: 14)
         button.subtitleFont = ECFont.font(.semiBold, size: 14)
         button.image = ImageConstants.professionsImage.image
@@ -82,7 +83,7 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell {
     private let articlesButton: ECDashedBorderButton = {
         let button = ECDashedBorderButton()
         button.titleText = "Новости"
-        button.cornerRadius = 50
+        button.cornerRadius = Constants.buttonsCornerRadius
         button.titleFont = ECFont.font(.semiBold, size: 14)
         button.subtitleFont = ECFont.font(.semiBold, size: 14)
         button.image = ImageConstants.articlesImage.image
