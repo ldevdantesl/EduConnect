@@ -12,6 +12,7 @@ protocol ProfessionDetailsScreenRouterProtocol {
     func routeToMain()
     func goBack()
     func routeToProfession(profession: ECProfession)
+    func routeToUniversities(filteredProfession: ECProfession)
 }
 
 final class ProfessionDetailsScreenRouter: ProfessionDetailsScreenRouterProtocol {
@@ -37,5 +38,11 @@ final class ProfessionDetailsScreenRouter: ProfessionDetailsScreenRouterProtocol
     
     func goBack() {
         self.viewController?.navigationController?.popViewController(animated: true)
+    }
+    
+    func routeToUniversities(filteredProfession: ECProfession) {
+        let filters = UniversityFilters(professionID: filteredProfession.id)
+        let vc = UniversityScreenAssembler.assemble(appRouter: appRouter, filters: filters)
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

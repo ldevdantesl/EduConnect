@@ -30,6 +30,14 @@ struct ECHeaderViewModel {
         self.didTapBar = nil
         self.showsBackInsteadOfBar = true
     }
+    
+    init(showsBackInsteadOfBar: Bool, didTapAccount: (() -> Void)? = nil, didTapImage: (() -> Void)? = nil, didTapBar: (() -> Void)? = nil, didTapBack: (() -> Void)? = nil) {
+        self.showsBackInsteadOfBar = showsBackInsteadOfBar
+        self.didTapImage = didTapImage
+        self.didTapBack = didTapBack
+        self.didTapAccount = didTapAccount
+        self.didTapBack = didTapBack
+    }
 }
 
 final class ECHeaderView: UIView {

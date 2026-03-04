@@ -43,7 +43,9 @@ final class ProfessionDetailsScreenPresenter {
     private func applySnapshot() {
         guard let profession else { return }
         let headerVM = ProfessionDetailsHeaderCellViewModel(profession: profession)
-        let progsVM = ProfessionDetailsProgsAndUnisCellViewModel(profession: profession)
+        let progsVM = ProfessionDetailsProgsAndUnisCellViewModel(profession: profession) { } didTapUniversities: { [weak self] in
+            self?.router.routeToUniversities(filteredProfession: profession)
+        }
         let aboutVM = ProfessionDetailsAboutCellViewModel(profession: profession)
         var relatedItems: [ProfessionDetailsItem] = []
         
