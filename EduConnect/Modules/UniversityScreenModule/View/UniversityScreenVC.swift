@@ -23,12 +23,14 @@ final class UniversityScreenVC: UIViewController {
 
     // MARK: - VIEW PROPERTIES
     private lazy var headerView: ECHeaderView = {
-        let vm = ECHeaderViewModel(showsBackInsteadOfBar: !self.isFirstVC) { [weak self] in self?.presenter?.didTapAccount() }
-        didTapImage: { [weak self] in self?.presenter?.didTapAppLogo() }
-        didTapBar: { [weak self] in self?.presenter?.didTapTabBar() }
-        didTapBack: { [weak self] in self?.presenter?.didTapBack() }
-        let header = ECHeaderView()
-        header.configure(vm: vm)
+        let vm = ECHeaderViewModel(
+            showsBackInsteadOfBar: !self.isFirstVC,
+            didTapAccount: { [weak self] in self?.presenter?.didTapAccount() },
+            didTapImage: { [weak self] in self?.presenter?.didTapAppLogo() },
+            didTapBar: { [weak self] in self?.presenter?.didTapTabBar() },
+            didTapBack: { [weak self] in self?.presenter?.didTapBack() }
+        )
+        let header = ECHeaderView(viewModel: vm)
         return header
     }()
     
@@ -49,7 +51,7 @@ final class UniversityScreenVC: UIViewController {
     }()
     
     private var isFirstVC: Bool {
-        navigationController?.viewControllers.count == 1
+        navigationController?.viewControllers.count == 2
     }
     
     // MARK: - LIFECYCLE

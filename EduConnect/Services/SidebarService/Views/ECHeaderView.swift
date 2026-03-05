@@ -34,9 +34,9 @@ struct ECHeaderViewModel {
     init(showsBackInsteadOfBar: Bool, didTapAccount: (() -> Void)? = nil, didTapImage: (() -> Void)? = nil, didTapBar: (() -> Void)? = nil, didTapBack: (() -> Void)? = nil) {
         self.showsBackInsteadOfBar = showsBackInsteadOfBar
         self.didTapImage = didTapImage
+        self.didTapBar = didTapBar
         self.didTapBack = didTapBack
         self.didTapAccount = didTapAccount
-        self.didTapBack = didTapBack
     }
 }
 
@@ -97,6 +97,11 @@ final class ECHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+    }
+    
+    convenience init(viewModel: ECHeaderViewModel) {
+        self.init(frame: .zero)
+        self.configure(vm: viewModel)
     }
     
     @available(*, unavailable)
