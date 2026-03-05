@@ -134,9 +134,9 @@ final class AddENTSubjectPopUpView: PopUpView {
     }()
     
     // MARK: - LIFECYCLE
-    init(viewModel: AddENTSubjectPopUpViewModel, closesOnBackgroundTap: Bool = true, animationDuration: TimeInterval = 0.5) {
+    init(viewModel: AddENTSubjectPopUpViewModel) {
         self.viewModel = viewModel
-        super.init(viewModel: viewModel, closesOnBackgroundTap: closesOnBackgroundTap, animationDuration: animationDuration)
+        super.init(viewModel: viewModel)
         setupUI()
     }
     

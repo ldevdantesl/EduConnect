@@ -13,6 +13,7 @@ protocol ProfessionDetailsScreenRouterProtocol {
     func goBack()
     func routeToProfession(profession: ECProfession)
     func routeToUniversities(filteredProfession: ECProfession)
+    func openSetENT(subjects: [ENTSubject])
 }
 
 final class ProfessionDetailsScreenRouter: ProfessionDetailsScreenRouterProtocol {
@@ -44,5 +45,11 @@ final class ProfessionDetailsScreenRouter: ProfessionDetailsScreenRouterProtocol
         let filters = UniversityFilters(professionID: filteredProfession.id)
         let vc = UniversityScreenAssembler.assemble(appRouter: appRouter, filters: filters)
         self.viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func openSetENT(subjects: [ENTSubject]) {
+        let vm = ShowENTPopupViewModel(subjects: subjects, onClose: self.viewController?.dismissPopup)
+        let popup = ShowENTPopupView(viewModel: vm)
+        self.viewController?.showPopup(popup)
     }
 }

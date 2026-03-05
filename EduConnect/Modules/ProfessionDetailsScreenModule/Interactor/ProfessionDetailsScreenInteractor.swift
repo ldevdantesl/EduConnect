@@ -10,6 +10,7 @@ import UIKit
 protocol ProfessionDetailsScreenInteractorProtocol: AnyObject {
     func getProfession(id: Int)
     func getRelatedProfessions(id: Int)
+    func getSubjects()
 }
 
 final class ProfessionDetailsScreenInteractor: ProfessionDetailsScreenInteractorProtocol {
@@ -36,6 +37,17 @@ final class ProfessionDetailsScreenInteractor: ProfessionDetailsScreenInteractor
             do {
                 let professions = try await networkService.professions.getRelatedForProfession(professionID: id, limit: 3)
                 presenter?.didReceiveRelated(professions: professions)
+            } catch {
+                presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
+    func getSubjects() {
+        Task {
+            do {
+                let subjects = try await networkService.references.getSubjects()
+                presenter?.didReceiveSubjects(subjects: subjects)
             } catch {
                 presenter?.didReceiveError(error: error)
             }

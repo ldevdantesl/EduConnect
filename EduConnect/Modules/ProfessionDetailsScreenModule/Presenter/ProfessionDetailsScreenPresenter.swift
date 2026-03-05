@@ -15,6 +15,7 @@ protocol ProfessionDetailsScreenPresenterProtocol: AnyObject {
     
     func didReceiveProfession(profession: ECProfession)
     func didReceiveRelated(professions: [ECProfession])
+    func didReceiveSubjects(subjects: [ENTSubject])
     func didReceiveError(error: any Error)
 }
 
@@ -30,6 +31,7 @@ final class ProfessionDetailsScreenPresenter {
     private let professionID: Int
     private var profession: ECProfession?
     private var related: [ECProfession] = []
+    private var subjects: [ENTSubject] = []
     
     private var showingAllRelated: Bool = false
 
@@ -42,7 +44,10 @@ final class ProfessionDetailsScreenPresenter {
     
     private func applySnapshot() {
         guard let profession else { return }
-        let headerVM = ProfessionDetailsHeaderCellViewModel(profession: profession)
+        let headerVM = ProfessionDetailsHeaderCellViewModel(profession: profession) { [weak self] in
+            guard let self = self else { return }
+            self.router.openSetENT(subjects: self.subjects)
+        }
         let progsVM = ProfessionDetailsProgsAndUnisCellViewModel(profession: profession) { } didTapUniversities: { [weak self] in
             self?.router.routeToUniversities(filteredProfession: profession)
         }
@@ -96,6 +101,9 @@ extension ProfessionDetailsScreenPresenter: ProfessionDetailsScreenPresenterProt
         dispatchGroup.enter()
         interactor.getRelatedProfessions(id: professionID)
         
+        dispatchGroup.enter()
+        interactor.getSubjects()
+        
         dispatchGroup.notify(queue: .main) { [weak self] in
             self?.view?.hideLoading()
             self?.applySnapshot()
@@ -121,6 +129,11 @@ extension ProfessionDetailsScreenPresenter: ProfessionDetailsScreenPresenterProt
     
     func didReceiveRelated(professions: [ECProfession]) {
         self.related = professions
+        dispatchGroup.leave()
+    }
+    
+    func didReceiveSubjects(subjects: [ENTSubject]) {
+        self.subjects = subjects
         dispatchGroup.leave()
     }
     
