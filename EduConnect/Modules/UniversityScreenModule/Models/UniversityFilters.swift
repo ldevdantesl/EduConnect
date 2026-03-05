@@ -116,4 +116,15 @@ struct UniversityFilters {
         
         return items
     }
+    
+    mutating func clearAll() {
+        cityIDs = nil
+        professionID = nil
+        universityType = nil
+        hasMilitary = nil
+        hasDormitory = nil
+        priceMin = nil
+        priceMax = nil
+        sorting = .default
+    }
 }

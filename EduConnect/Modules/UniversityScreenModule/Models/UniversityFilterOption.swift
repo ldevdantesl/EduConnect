@@ -30,7 +30,7 @@ enum UniversityFilterOption: String, CaseIterable {
     
     var noneTitle: String { return "Любой" }
     
-    var isSlider: Bool { self == .price }
+    var isPrice: Bool { self == .price }
     
     var staticSubItems: [String]? {
         switch self {
