@@ -26,6 +26,7 @@ final class ProfessionsScreenPresenter {
     private var totalPages: Int = 1
     private var currentPage: Int = 1
     private var currentSearchText: String? = ""
+    private var sortOption: ProfessionSortOption?
 
     init(interactor: ProfessionsScreenInteractorProtocol, router: ProfessionsScreenRouterProtocol, errorService: ErrorServiceProtocol) {
         self.interactor = interactor
@@ -35,10 +36,10 @@ final class ProfessionsScreenPresenter {
     
     private func applySnapshot() {
         let headerVM = ProfessionScreenHeaderCellViewModel()
-        let searchVM = ProfessionScreenSearchCellViewModel(didTapSearch: { [weak self] in
-            print("Search text: \($0)")
-            self?.didTapSearch(searchText: $0)
-        })
+        let searchVM = ProfessionScreenSearchCellViewModel(
+            didTapSearch: { [weak self] in self?.didTapSearch(searchText: $0) },
+            didTapSortOption: { [weak self] in self?.didTapSortOption(option: $0) }
+        )
         let footerVM = TabsFooterCellViewModel(
             titleLabelText: "Выбор профессии в справочнике",
             subtitleLabelText: """
@@ -77,7 +78,10 @@ final class ProfessionsScreenPresenter {
     
     private func applyLoadingSnapshot() {
         let headerVM = ProfessionScreenHeaderCellViewModel()
-        let searchVM = ProfessionScreenSearchCellViewModel(didTapSearch: { [weak self] in self?.didTapSearch(searchText: $0)})
+        let searchVM = ProfessionScreenSearchCellViewModel(
+            didTapSearch: { [weak self] in self?.didTapSearch(searchText: $0) },
+            didTapSortOption: { [weak self] in self?.didTapSortOption(option: $0) }
+        )
         let footerVM = TabsFooterCellViewModel(
             titleLabelText: "Выбор профессии в справочнике",
             subtitleLabelText: """
@@ -100,20 +104,25 @@ final class ProfessionsScreenPresenter {
     private func didTapSearch(searchText: String) {
         self.currentSearchText = searchText
         applyLoadingSnapshot()
-        interactor.getProfessions(searchText: searchText, page: 1)
+        interactor.getProfessions(searchText: searchText, sortOption: sortOption, page: 1)
+    }
+    
+    private func didTapSortOption(option: ProfessionSortOption?) {
+        self.sortOption = option
+        applyLoadingSnapshot()
+        interactor.getProfessions(searchText: currentSearchText, sortOption: sortOption, page: currentPage)
     }
     
     private func showPage(_ page: Int) {
         applyLoadingSnapshot()
-        interactor.getProfessions(searchText: currentSearchText, page: page)
-        currentPage += 1
+        interactor.getProfessions(searchText: currentSearchText, sortOption: sortOption, page: page)
     }
 }
 
 extension ProfessionsScreenPresenter: ProfessionsScreenPresenterProtocol {
     func viewDidLoad() {
         applyLoadingSnapshot()
-        interactor.getProfessions(searchText: nil, page: 1)
+        interactor.getProfessions(searchText: nil, sortOption: nil, page: 1)
     }
     
     func didTapTabBar() {

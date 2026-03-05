@@ -69,6 +69,8 @@ public enum ConstantLocalizedStrings {
         static let international = String(localized: .Localizables.commonInternational)
         static let phoneNumber = String(localized: .Localizables.commonPhoneNumber)
         static let loading = String(localized: .Localizables.commonLoading)
+        static let search = String(localized: .Localizables.commonSearch)
+        static let sort = String(localized: .Localizables.commonSort)
     }
     
     /// For __Account__ Tab

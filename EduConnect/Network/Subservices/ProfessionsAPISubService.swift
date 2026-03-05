@@ -8,8 +8,8 @@
 import Foundation
 
 protocol ProfessionsAPISubServiceProtocol {
-    func getProfessions(searchText: String?, page: Int) async throws -> [ECProfession]
-    func getProfessions(searchText: String?, page: Int) async throws -> PaginatedResponse<ECProfession>
+    func getProfessions(searchText: String?, sortOption: ProfessionSortOption?, page: Int) async throws -> [ECProfession]
+    func getProfessions(searchText: String?, sortOption: ProfessionSortOption?, page: Int) async throws -> PaginatedResponse<ECProfession>
     func getProfessionDetails(professionID: Int) async throws -> ECProfession
     func getRelatedForProfession(professionID: Int, limit: Int) async throws -> [ECProfession]
     func getUniversitiesForProfession(professionID: Int, itemsPerPage: Int) async throws -> [ECUniversity]
@@ -23,13 +23,13 @@ final class ProfessionsAPISubService: ProfessionsAPISubServiceProtocol {
         self.httpClient = httpClient
     }
     
-    func getProfessions(searchText: String?, page: Int) async throws -> [ECProfession] {
-        let profession: EduConnectDataResponse<[ECProfession]> = try await httpClient.request(ProfessionEndpoints.getProfessions(searchText: searchText, page: page))
+    func getProfessions(searchText: String?, sortOption: ProfessionSortOption?, page: Int) async throws -> [ECProfession] {
+        let profession: EduConnectDataResponse<[ECProfession]> = try await httpClient.request(ProfessionEndpoints.getProfessions(searchText: searchText, sortOption: sortOption, page: page))
         return profession.data
     }
     
-    func getProfessions(searchText: String?, page: Int) async throws -> PaginatedResponse<ECProfession> {
-        let response: PaginatedResponse<ECProfession> = try await httpClient.request(ProfessionEndpoints.getProfessions(searchText: searchText, page: page))
+    func getProfessions(searchText: String?, sortOption: ProfessionSortOption?, page: Int) async throws -> PaginatedResponse<ECProfession> {
+        let response: PaginatedResponse<ECProfession> = try await httpClient.request(ProfessionEndpoints.getProfessions(searchText: searchText, sortOption: sortOption, page: page))
         return response
     }
     

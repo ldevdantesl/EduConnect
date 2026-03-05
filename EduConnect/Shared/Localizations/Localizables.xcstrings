@@ -902,6 +902,23 @@
         }
       }
     },
+    "common_search" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск"
+          }
+        }
+      }
+    },
     "common_set" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -915,6 +932,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Установить"
+          }
+        }
+      }
+    },
+    "common_sort" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sort"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сортировка"
           }
         }
       }

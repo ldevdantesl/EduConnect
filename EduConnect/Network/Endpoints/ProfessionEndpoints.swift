@@ -8,7 +8,7 @@
 import Foundation
 
 enum ProfessionEndpoints: Endpoint {
-    case getProfessions(searchText: String?, page: Int)
+    case getProfessions(searchText: String?, sortOption: ProfessionSortOption?, page: Int)
     case getProfessionDetails(professionID: Int)
     case getRelatedForProfession(professionID: Int, limit: Int)
     case getUniversitiesForProfession(professionID: Int, itemsPerPage: Int)
@@ -28,9 +28,10 @@ enum ProfessionEndpoints: Endpoint {
     
     var queryItems: [URLQueryItem]? {
         switch self {
-        case .getProfessions(let searchText, let page):
+        case .getProfessions(let searchText, let sortOption, let page):
             var items: [URLQueryItem] = [.init(name: "page", value: page.description)]
-            guard let searchText else { return .none }
+            if let sortOption { items.append(.init(name: "sort", value: sortOption.queryTitle)) }
+            guard let searchText else { return items }
             items.append(.init(name: "search", value: searchText))
             return items
         case .getRelatedForProfession(_, let limit):

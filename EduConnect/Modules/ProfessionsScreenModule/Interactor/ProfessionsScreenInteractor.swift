@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ProfessionsScreenInteractorProtocol: AnyObject {
-    func getProfessions(searchText: String?, page: Int)
+    func getProfessions(searchText: String?, sortOption: ProfessionSortOption?, page: Int)
 }
 
 final class ProfessionsScreenInteractor: ProfessionsScreenInteractorProtocol {
@@ -20,10 +20,10 @@ final class ProfessionsScreenInteractor: ProfessionsScreenInteractorProtocol {
         self.networkService = networkService
     }
     
-    func getProfessions(searchText: String?, page: Int) {
+    func getProfessions(searchText: String?, sortOption: ProfessionSortOption?, page: Int) {
         Task {
             do {
-                let response: PaginatedResponse<ECProfession> = try await networkService.professions.getProfessions(searchText: searchText, page: page)
+                let response: PaginatedResponse<ECProfession> = try await networkService.professions.getProfessions(searchText: searchText, sortOption: sortOption, page: page)
                 presenter?.didReceiveProfessions(response.data, currentPage: response.meta.currentPage, totalPages: response.meta.lastPage)
             } catch {
                 presenter?.didReceiveError(error: error)
