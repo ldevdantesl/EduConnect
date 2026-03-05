@@ -47,12 +47,11 @@ final class ProfessionsScreenPresenter {
         )
         
         var professionItems: [ProfessionScreenItem] = professions.map { profession in
-            let vm = CardWithImageCellViewModel(
-                imageURL: profession.imageURL,
+            let vm = CardCellViewModel(
                 preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
-                title: profession.name.ru, subtitle: profession.description.ru, showsArrowRight: false
+                title: profession.name.ru, subtitle: profession.description.ru, showsArrowRight: true
             ) { [weak self] in self?.router.routeToProfession(professionID: profession.id) }
-            return ProfessionScreenItem.cardWithImageItem(.init(id: profession.id, viewModel: vm))
+            return ProfessionScreenItem.cardItem(.init(id: profession.id, viewModel: vm))
         }
         
         if totalPages > 1 {

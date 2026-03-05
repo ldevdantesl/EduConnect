@@ -26,6 +26,7 @@ enum ProfessionScreenLayoutFactory {
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 15
+        section.contentInsets.bottom = 10
         return UICollectionViewCompositionalLayout(section: section)
     }
 }

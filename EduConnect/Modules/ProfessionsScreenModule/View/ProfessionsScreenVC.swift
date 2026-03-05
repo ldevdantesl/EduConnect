@@ -36,7 +36,7 @@ final class ProfessionsScreenVC: UIViewController {
         cv.registerCell(ProfessionScreenSearchCell.self, reuseID: ProfessionScreenSearchCell.identifier)
         cv.registerCell(PageIndicatorCell.self, reuseID: PageIndicatorCell.identifier)
         cv.registerCell(TabsFooterCell.self, reuseID: TabsFooterCell.identifier)
-        cv.registerCell(CardWithImageCell.self, reuseID: CardWithImageCell.identifier)
+        cv.registerCell(CardCell.self, reuseID: CardCell.identifier)
         cv.registerCell(LoadingCell.self, reuseID: LoadingCell.identifier)
         cv.resignsFirstResponderOnScroll = true
         return cv
@@ -72,8 +72,8 @@ final class ProfessionsScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
-            case .cardWithImageItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardWithImageCell.identifier, for: indexPath) as? CardWithImageCell
+            case .cardItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardCell.identifier, for: indexPath) as? CardCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
