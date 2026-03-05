@@ -18,6 +18,7 @@ protocol AccountScreenPresenterProtocol: AnyObject {
     func didPerformTask(message: String?, refreshID: ExpandableCellID?)
     func didReceiveProfile(_ profile: Profile)
     func didFetchProfile(_ profile: Profile)
+    func didFetchProfileApplications(_ applications: [Application], tab: AccountScreenTab)
     func didReceiveProfileApplications(_ applications: [Application])
     func didReceiveENTSubjects(entSubjects: [ENTSubject])
     func didReceiveOlympiadPlaces(places: [ECOlympiadPlace])
@@ -179,11 +180,12 @@ final class AccountScreenPresenter {
         switch newTab {
         case .myUniversities:
             view?.showLoading()
-            interactor.getProfileApplications()
+            interactor.refetchApplications(tab: .myUniversities)
         case .application:
             showApplication()
         case .main:
-            showMain()
+            view?.showLoading()
+            interactor.refetchApplications(tab: .main)
         }
     }
 
@@ -250,16 +252,28 @@ final class AccountScreenPresenter {
     }
 
     private func showMain() {
+        var items: [AccountScreenItem] = []
         let headerVM = makeHeaderVM(for: .main)
         let infoVM = AccountScreenMainTabInfoCellViewModel()
+        items.append(.headerItem(.init(id: "header", viewModel: headerVM)))
+        items.append(.mainTabInfo(.init(id: "info", viewModel: infoVM)))
+        
+        if !applications.isEmpty {
+            let applicationsHeader = HeaderWithSubtitleCellViewModel(
+                title: "Последние заявки", subtitle: "Вот список ваших последних заявок в вузы:"
+            )
+            items.append(.headerWithSubtitleItem(.init(id: "applications-header", viewModel: applicationsHeader)))
+            
+            applications.forEach {
+                let vm = AccountPendingApplicationsCellViewModel(application: $0, didTapUniversity: router.routeToUniversityByID)
+                items.append(.pendingApplicationItem(.init(item: $0, prefix: "main-application-", viewModel: vm)))
+            }
+        }
 
         view?.applySnapshot(
             sections: [.main],
             itemsBySection: [
-                .main: [
-                    .headerItem(.init(id: "header", viewModel: headerVM)),
-                    .mainTabInfo(.init(id: "info", viewModel: infoVM))
-                ]
+                .main: items
             ]
         )
     }
@@ -318,10 +332,12 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
         dispatchGroup.enter()
         interactor.getProfile()
         
+        dispatchGroup.enter()
+        interactor.getProfileApplications()
+        
         dispatchGroup.notify(queue: .main) { [weak self] in
             self?.configureExpandableProvider()
-            self?.showMain()
-            self?.view?.hideLoading()
+            self?.didSelectAnotherTab(newTab: .main)
         }
     }
     
@@ -329,7 +345,10 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
         switch selectedTab {
         case .myUniversities:
             view?.showLoading()
-            interactor.getProfileApplications()
+            interactor.refetchApplications(tab: .myUniversities)
+        case .main:
+            view?.showLoading()
+            interactor.refetchApplications(tab: .main)
         default: break
         }
     }
@@ -376,8 +395,13 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     
     func didReceiveProfileApplications(_ applications: [Application]) {
         self.applications = applications
+        dispatchGroup.leave()
+    }
+    
+    func didFetchProfileApplications(_ applications: [Application], tab: AccountScreenTab) {
+        self.applications = applications
         view?.hideLoading()
-        showUniversities()
+        tab == .myUniversities ? showUniversities() : showMain()
     }
     
     func didReceiveENTSubjects(entSubjects: [ENTSubject]) {

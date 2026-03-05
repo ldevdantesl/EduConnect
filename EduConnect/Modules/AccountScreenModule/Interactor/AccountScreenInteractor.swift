@@ -17,6 +17,7 @@ protocol AccountScreenInteractorProtocol: AnyObject {
     func getProfile()
     func refetchProfile()
     func getProfileApplications()
+    func refetchApplications(tab: AccountScreenTab)
     
     func addFamilyMember(id: Int?, name: String?, phoneNumber: String?)
     func deleteFamilyMember(id: Int)
@@ -127,6 +128,17 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
             do {
                 let applications = try await networkService.application.getApplications()
                 presenter?.didReceiveProfileApplications(applications)
+            } catch {
+                presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
+    func refetchApplications(tab: AccountScreenTab) {
+        Task {
+            do {
+                let applications = try await networkService.application.getApplications()
+                presenter?.didFetchProfileApplications(applications, tab: tab)
             } catch {
                 presenter?.didReceiveError(error: error)
             }
