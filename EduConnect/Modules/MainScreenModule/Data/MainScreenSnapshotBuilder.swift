@@ -30,6 +30,7 @@ struct MainScreenSnapshotBuilder {
         let didTapShowAllPrograms: () -> Void
         let didTapShowAllProfessions: () -> Void
         let didTapShowAllUniversities: () -> Void
+        let didTapShowAllArticles: () -> Void
         let didTapServicesProfession: () -> Void
         let didTapServicesUniversity: () -> Void
         let didTapServicesCalendar: () -> Void
@@ -211,7 +212,7 @@ struct MainScreenSnapshotBuilder {
         let vm = UnderlineButtonCellViewModel(
             titleName: "Посмотреть все новости",
             titleSize: 14, titleColor: .darkGray,
-            onTapAction: nil
+            onTapAction: actions.didTapShowAllArticles
         )
         items.append(.underlineButtonItem(.init(id: "underlineButton", viewModel: vm)))
 
