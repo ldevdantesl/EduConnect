@@ -139,6 +139,8 @@ extension ProfessionDetailsScreenPresenter: ProfessionDetailsScreenPresenterProt
     
     func didReceiveError(error: any Error) {
         let userError = errorService.handle(error)
+        self.dispatchGroup.leave()
         self.view?.showError(error: userError)
+        self.view?.hideLoading()
     }
 }

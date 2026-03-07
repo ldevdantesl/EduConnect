@@ -178,7 +178,8 @@ struct MainScreenSnapshotBuilder {
         guard !newsToShow.isEmpty else {
             let vm = NotFoundCellViewModel(
                 systemImage: ImageConstants.SystemImages.questionMark.rawValue,
-                title: "Ничего не найдено", subtitle: "Нет новостей в этой категории"
+                title: "Ничего не найдено", subtitle: "Нет новостей в этой категории",
+                horizontallySpaced: true
             )
             items.append(.notFoundItem(.init(viewModel: vm)))
             return items

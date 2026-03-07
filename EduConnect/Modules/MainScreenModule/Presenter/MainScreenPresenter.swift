@@ -211,6 +211,8 @@ extension MainScreenPresenter: MainScreenPresenterProtocol {
     // MARK: - ERROR
     func didReceiveError(error: any Error) {
         let userError = errorService.handle(error)
+        dispatchGroup.leave()
+        view?.hideLoading()
         view?.showError(errorMessage: userError.message)
     }
 }

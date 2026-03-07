@@ -170,6 +170,8 @@ extension ArticlesScreenPresenter: ArticlesScreenPresenterProtocol {
     
     func didReceiveError(error: any Error) {
         let userError = errorService.handle(error)
+        self.dispatchGroup.leave()
         self.view?.showError(userError: userError)
+        self.view?.hideLoading()
     }
 }

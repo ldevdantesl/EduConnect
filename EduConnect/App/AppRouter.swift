@@ -117,6 +117,7 @@ final class AppRouter: AppRoutingProtocol {
                 } catch {
                     let userFacingError = self.errorService.handle(error)
                     self.sidebarService.container?.showToastedError(userError: userFacingError)
+                    self.sidebarContainer?.hideHoverLoading()
                 }
             }
             
