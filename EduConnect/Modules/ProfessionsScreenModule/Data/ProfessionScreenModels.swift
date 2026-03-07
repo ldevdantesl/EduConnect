@@ -22,4 +22,5 @@ enum ProfessionScreenItem: Hashable {
     case pageIndicatorItem(DiffableItem<PageIndicatorCellViewModel>)
     case cardItem(DiffableItem<CardCellViewModel>)
     case loadingItem(DiffableItem<LoadingCellViewModel>)
+    case notFoundItem(DiffableItem<NotFoundCellViewModel>)
 }

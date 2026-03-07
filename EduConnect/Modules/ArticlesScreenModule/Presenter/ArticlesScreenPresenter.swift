@@ -53,7 +53,8 @@ final class ArticlesScreenPresenter {
         if newsToShow.isEmpty {
             let vm = NotFoundCellViewModel(
                 systemImage: ImageConstants.SystemImages.questionMark.rawValue,
-                title: "Ничего не найдено", subtitle: "Нет новостей в этой категории"
+                title: "Ничего не найдено", subtitle: "Нет новостей в этой категории",
+                horizontallySpaced: true
             )
             items.append(.notFoundItem(.init(viewModel: vm)))
         } else {

@@ -37,6 +37,7 @@ final class ProfessionsScreenVC: UIViewController {
         cv.registerCell(PageIndicatorCell.self, reuseID: PageIndicatorCell.identifier)
         cv.registerCell(TabsFooterCell.self, reuseID: TabsFooterCell.identifier)
         cv.registerCell(CardCell.self, reuseID: CardCell.identifier)
+        cv.registerCell(NotFoundCell.self, reuseID: NotFoundCell.identifier)
         cv.registerCell(LoadingCell.self, reuseID: LoadingCell.identifier)
         cv.resignsFirstResponderOnScroll = true
         return cv
@@ -84,6 +85,11 @@ final class ProfessionsScreenVC: UIViewController {
                 
             case .loadingItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoadingCell.identifier, for: indexPath) as? LoadingCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .notFoundItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NotFoundCell.identifier, for: indexPath) as? NotFoundCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 

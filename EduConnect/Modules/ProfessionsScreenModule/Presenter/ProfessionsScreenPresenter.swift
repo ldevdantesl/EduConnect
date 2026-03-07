@@ -47,12 +47,21 @@ final class ProfessionsScreenPresenter {
             """
         )
         
-        var professionItems: [ProfessionScreenItem] = professions.map { profession in
-            let vm = CardCellViewModel(
-                preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
-                title: profession.name.ru, subtitle: profession.description.ru, showsArrowRight: true
-            ) { [weak self] in self?.router.routeToProfession(professionID: profession.id) }
-            return ProfessionScreenItem.cardItem(.init(id: profession.id, viewModel: vm))
+        var professionItems: [ProfessionScreenItem] = []
+        if !professions.isEmpty {
+            professionItems = professions.map { profession in
+                let vm = CardCellViewModel(
+                    preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
+                    title: profession.name.ru, subtitle: profession.description.ru, showsArrowRight: true
+                ) { [weak self] in self?.router.routeToProfession(professionID: profession.id) }
+                return ProfessionScreenItem.cardItem(.init(id: profession.id, viewModel: vm))
+            }
+        } else {
+            let notFoundItem = NotFoundCellViewModel(
+                systemImage: ImageConstants.SystemImages.questionMark.rawValue,
+                title: "Ничего не найдено", subtitle: "Попробуйте еще раз", horizontallySpaced: true
+            )
+            professionItems = [ProfessionScreenItem.notFoundItem(.init(viewModel: notFoundItem))]
         }
         
         if totalPages > 1 {
