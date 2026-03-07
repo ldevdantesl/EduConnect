@@ -8,7 +8,7 @@
 import Foundation
 
 enum NewsEndpoints: Endpoint {
-    case getNews(newsTypeID: String?, universityID: Int?, itemsPerPage: Int?)
+    case getNews(newsTypeID: String?, universityID: Int?, itemsPerPage: Int?, page: Int?)
     case getNewsDetails(newsID: Int)
     case getNewsTypes
     case getRelatedForNews(newsID: Int, limit: Int?)
@@ -26,7 +26,7 @@ enum NewsEndpoints: Endpoint {
     
     var queryItems: [URLQueryItem]? {
         switch self {
-        case .getNews(let newsTypeID, let universityID, let itemsPerPage):
+        case .getNews(let newsTypeID, let universityID, let itemsPerPage, let page):
             var items: [URLQueryItem] = []
             if let newsTypeID {
                 items.append(.init(name: "news_type_id", value: newsTypeID))
@@ -36,6 +36,9 @@ enum NewsEndpoints: Endpoint {
             }
             if let itemsPerPage {
                 items.append(.init(name: "per_page", value: "\(itemsPerPage)"))
+            }
+            if let page {
+                items.append(.init(name: "page", value: "\(page)"))
             }
             return items
         case .getRelatedForNews(_, let limit):

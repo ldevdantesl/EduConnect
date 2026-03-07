@@ -222,7 +222,7 @@ extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
     
     func didReceiveUniversities(paginatedUniversities: PaginatedResponse<ECUniversity>) {
         self.universities = paginatedUniversities.data
-        self.totalPages = paginatedUniversities.meta.total
+        self.totalPages = paginatedUniversities.meta.lastPage
         self.currentPage = paginatedUniversities.meta.currentPage
         dispatchGroup.leave()
     }

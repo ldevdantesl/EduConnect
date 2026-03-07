@@ -111,6 +111,24 @@ final class DiffableCollectionViewContainer<Section: Hashable, Item: Hashable>: 
         snapshot.reloadSections([section])
         diffableDataSource.apply(snapshot, animatingDifferences: true)
     }
+
+    func replaceItems(
+        in section: Section,
+        with items: [Item],
+        animated: Bool = true
+    ) {
+        var snapshot = diffableDataSource.snapshot()
+
+        if !snapshot.sectionIdentifiers.contains(section) {
+            snapshot.appendSections([section])
+        }
+
+        let existingItems = snapshot.itemIdentifiers(inSection: section)
+        snapshot.deleteItems(existingItems)
+
+        snapshot.appendItems(items, toSection: section)
+        diffableDataSource.apply(snapshot, animatingDifferences: animated)
+    }
     
     func applySnapshot(
         sections: [Section],

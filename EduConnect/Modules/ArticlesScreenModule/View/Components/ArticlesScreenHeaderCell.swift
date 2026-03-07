@@ -27,7 +27,7 @@ final class ArticlesScreenHeaderCell: UICollectionViewCell {
     private let headerImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = ImageConstants.articlesHeaderImage.image
-        iv.contentMode = .scaleAspectFill
+        iv.contentMode = .scaleAspectFit
         iv.layer.opacity = 0.6
         return iv
     }()
@@ -47,6 +47,7 @@ final class ArticlesScreenHeaderCell: UICollectionViewCell {
         label.text = "Навигатор поступления для абитуриентов вузов"
         label.font = ECFont.font(.regular, size: 16)
         label.textColor = .white
+        label.numberOfLines = 0
         return label
     }()
     
@@ -76,7 +77,7 @@ final class ArticlesScreenHeaderCell: UICollectionViewCell {
         
         containerView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(-Constants.bigSpacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.bigSpacing)
         }
         

@@ -97,7 +97,7 @@ final class MainScreenPresenter {
         guard type?.id != selectedJournalTab?.id else { return }
         selectedJournalTab = type
         if let news = newsByTypeId[type?.id], news.count > 0 {
-            self.didReceiveNewsForType(news: news, typeID: type?.id)
+            applySnapshot()
         } else {
             applySnapshot(isLoadingOnJournals: true)
             interactor.getNewsForNewsType(typeID: type?.id)
@@ -108,8 +108,6 @@ final class MainScreenPresenter {
         guard tab != selectedAcademicTab else { return }
         selectedAcademicTab = tab
         applySnapshot()
-        let headerItem = self.snapshotBuilder.buildAcademicHeader(state: currentState, actions: actions)
-        self.view?.reconfigureItems(items: [headerItem])
     }
     
     private func didTapShowAllSteps() {
@@ -200,14 +198,13 @@ extension MainScreenPresenter: MainScreenPresenterProtocol {
     
     func didReceiveAllNews(news: [ECNews]) {
         self.allNews = news
+        self.newsByTypeId[nil] = news
         dispatchGroup.leave()
     }
 
     func didReceiveNewsForType(news: [ECNews], typeID: Int?) {
         newsByTypeId[typeID] = news
         applySnapshot()
-        let headerItem = self.snapshotBuilder.buildJournalHeader(state: self.currentState, actions: self.actions)
-        self.view?.reconfigureItems(items: [headerItem])
     }
     
     // MARK: - ERROR

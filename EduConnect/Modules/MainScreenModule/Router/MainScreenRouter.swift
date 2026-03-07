@@ -44,22 +44,19 @@ final class MainScreenRouter: MainScreenRouterProtocol {
     }
     
     func navigateToPrograms() {
-        let vc = ProgramsScreenAssembler.assemble(appRouter: appRouter)
-        viewController?.navigationController?.setViewControllers([vc], animated: true)
+        appRouter.diContainer.sidebarService.switchTo(tab: .programs)
     }
     
     func navigateToProfessions() {
-        let vc = ProfessionsScreenAssembler.assemble(appRouter: appRouter)
-        viewController?.navigationController?.setViewControllers([vc], animated: true)
+        appRouter.diContainer.sidebarService.switchTo(tab: .professions)
     }
     
     func navigateToUniversities() {
-        let vc = UniversityScreenAssembler.assemble(appRouter: appRouter)
-        viewController?.navigationController?.setViewControllers([vc], animated: true)
+        appRouter.diContainer.sidebarService.switchTo(tab: .universities)
     }
     
     func navigateToAllArticles() {
         let vc = ArticlesScreenAssembler.assemble(appRouter: appRouter)
-        viewController?.navigationController?.setViewControllers([vc], animated: true)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

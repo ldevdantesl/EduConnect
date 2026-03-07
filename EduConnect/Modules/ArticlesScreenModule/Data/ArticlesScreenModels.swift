@@ -9,16 +9,15 @@ import Foundation
 
 enum ArticlesScreenSection: Hashable {
     case header
-    case all
+    case segmentedControl
     case news
-    case calendar
-    case footer
 }
 
 enum ArticlesScreenItem: Hashable {
     case headerItem(DiffableItem<ArticlesScreenHeaderCellViewModel>)
     case pageIndicatorItem(DiffableItem<PageIndicatorCellViewModel>)
     case cardWithImageItem(DiffableItem<CardWithImageCellViewModel>)
+    case segmentedItem(DiffableItem<ArticlesScreenSegmentedCellViewModel>)
     case notFoundItem(DiffableItem<NotFoundCellViewModel>)
     case loadingItem(DiffableItem<LoadingCellViewModel>)
 }

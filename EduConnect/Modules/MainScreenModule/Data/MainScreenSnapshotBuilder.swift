@@ -113,7 +113,7 @@ struct MainScreenSnapshotBuilder {
             selectedTab: state.selectedAcademicTab,
             didSelectTab: actions.didSelectAcademicTab
         )
-        items.append(.academicItem(.init(id: "academic-header", viewModel: headerVM)))
+        items.append(.academicItem(.init(id: "academic-header", viewModel: headerVM, version: state.selectedAcademicTab.rawValue)))
 
         switch state.selectedAcademicTab {
         case .universities:
@@ -178,7 +178,7 @@ struct MainScreenSnapshotBuilder {
             allTypes: state.newsTypes,
             didSelectType: actions.didSelectJournalType
         )
-        items.append(.journalItem(.init(id: "journal-header",viewModel: headerVM)))
+        items.append(.journalItem(.init(id: "journal-header",viewModel: headerVM, version: state.selectedJournalTab?.id ?? -1)))
 
         guard !isLoading else {
             items.append(.loadingItem(.init(viewModel: LoadingCellViewModel())))
@@ -192,8 +192,7 @@ struct MainScreenSnapshotBuilder {
             newsToShow = state.allNews
         }
         
-        let prefixedNews = newsToShow.prefix(5)
-        guard !prefixedNews.isEmpty else {
+        guard !newsToShow.isEmpty else {
             let vm = NotFoundCellViewModel(
                 systemImage: ImageConstants.SystemImages.questionMark.rawValue,
                 title: "Ничего не найдено", subtitle: "Нет новостей в этой категории"
@@ -201,7 +200,7 @@ struct MainScreenSnapshotBuilder {
             items.append(.notFoundItem(.init(viewModel: vm)))
             return items
         }
-        prefixedNews.forEach { news in
+        newsToShow.forEach { news in
             let vm = CardWithImageCellViewModel(
                 imageURL: news.previewImageURL, preTitle: news.newsType.name.ru,
                 title: news.title.ru, subtitle: news.shortDescription.ru, showsArrowRight: true

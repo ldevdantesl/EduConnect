@@ -11,8 +11,12 @@ import SnapKit
 protocol ArticlesScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [ArticlesScreenSection], itemsBySection: [ArticlesScreenSection : [ArticlesScreenItem]])
     func reconfigureItems(items: [ArticlesScreenItem])
-    func showError(errorMessage: String)
+    func replaceItems(in section: ArticlesScreenSection, items: [ArticlesScreenItem])
+    func reloadSection(section: ArticlesScreenSection)
+    func showError(userError: UserFacingError)
     func scrollToTop(onCompletion: (() -> Void)?)
+    func showLoading()
+    func hideLoading()
 }
 
 final class ArticlesScreenVC: UIViewController {
@@ -35,6 +39,7 @@ final class ArticlesScreenVC: UIViewController {
         let layout = ArticlesScreenLayoutFactory.make()
         let cv = DiffableCollectionViewContainer<ArticlesScreenSection, ArticlesScreenItem>(layout: layout)
         cv.registerCell(ArticlesScreenHeaderCell.self, reuseID: ArticlesScreenHeaderCell.identifier)
+        cv.registerCell(ArticlesScreenSegmentedCell.self, reuseID: ArticlesScreenSegmentedCell.identifier)
         cv.registerCell(LoadingCell.self, reuseID: LoadingCell.identifier)
         cv.registerCell(PageIndicatorCell.self, reuseID: PageIndicatorCell.identifier)
         cv.registerCell(NotFoundCell.self, reuseID: NotFoundCell.identifier)
@@ -73,6 +78,11 @@ final class ArticlesScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticlesScreenHeaderCell.identifier, for: indexPath) as? ArticlesScreenHeaderCell
                 return cell
                 
+            case .segmentedItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticlesScreenSegmentedCell.identifier, for: indexPath) as? ArticlesScreenSegmentedCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
             case .pageIndicatorItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PageIndicatorCell.identifier, for: indexPath) as? PageIndicatorCell
                 cell?.configure(withVM: item.viewModel)
@@ -102,15 +112,31 @@ extension ArticlesScreenVC: ArticlesScreenViewProtocol {
         collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
     }
     
+    func replaceItems(in section: ArticlesScreenSection, items: [ArticlesScreenItem]) {
+        collectionContainer.replaceItems(in: section, with: items)
+    }
+    
     func reconfigureItems(items: [ArticlesScreenItem]) {
         collectionContainer.reconfigureItems(items)
+    }
+    
+    func reloadSection(section: ArticlesScreenSection) {
+        collectionContainer.reloadSection(section: section)
     }
     
     func scrollToTop(onCompletion: (() -> Void)?) {
         collectionContainer.scrollToTop(completion: onCompletion)
     }
     
-    func showError(errorMessage: String) {
-        self.showToastedError(message: errorMessage) /// Added from Extensions
+    func showError(userError: UserFacingError) {
+        self.showToastedError(userError: userError)
+    }
+    
+    func showLoading() {
+        self.showHoverLoading()
+    }
+    
+    func hideLoading() {
+        self.hideHoverLoading()
     }
 }
