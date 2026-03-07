@@ -27,6 +27,7 @@ struct MainScreenSnapshotBuilder {
         let didTapStepsUniversity: () -> Void
         let didTapShowAllSteps: () -> Void
         let didTapUniversity: (ECUniversity) -> Void
+        let didTapArticle: (ECNews) -> Void
         let didTapShowAllPrograms: () -> Void
         let didTapShowAllProfessions: () -> Void
         let didTapShowAllUniversities: () -> Void
@@ -54,24 +55,6 @@ struct MainScreenSnapshotBuilder {
             .footer: [.footerItem(.init(id: "footer", viewModel: MainScreenFooterCellViewModel()))]
         ]
         return (sections, items)
-    }
-    
-    func buildJournalHeader(state: State, actions: Actions) -> MainScreenItem {
-        let headerVM = MainScreenJournalCellViewModel(
-            selectedType: state.selectedJournalTab,
-            allTypes: state.newsTypes,
-            didSelectType: actions.didSelectJournalType
-        )
-        return .journalItem(.init(id: "journal-header", viewModel: headerVM))
-    }
-
-    
-    func buildAcademicHeader(state: State, actions: Actions) -> MainScreenItem {
-        let headerVM = MainScreenAcademicCellViewModel(
-            selectedTab: state.selectedAcademicTab,
-            didSelectTab: actions.didSelectAcademicTab
-        )
-        return .academicItem(.init(id: "academic-header",viewModel: headerVM))
     }
     
     // MARK: - Private builders
@@ -204,7 +187,7 @@ struct MainScreenSnapshotBuilder {
             let vm = CardWithImageCellViewModel(
                 imageURL: news.previewImageURL, preTitle: news.newsType.name.ru,
                 title: news.title.ru, subtitle: news.shortDescription.ru, showsArrowRight: true
-            )
+            ) { actions.didTapArticle(news) }
             items.append(.cardWithImageItem(.init(item: news, prefix: "journal-news", viewModel: vm)))
         }
         

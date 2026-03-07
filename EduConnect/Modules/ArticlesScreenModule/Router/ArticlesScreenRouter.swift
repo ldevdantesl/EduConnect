@@ -11,6 +11,7 @@ protocol ArticlesScreenRouterProtocol {
     func routeToMain()
     func openAccount()
     func goBack()
+    func routeToArticleDetails(article: ECNews)
 }
 
 final class ArticlesScreenRouter: ArticlesScreenRouterProtocol {
@@ -31,5 +32,10 @@ final class ArticlesScreenRouter: ArticlesScreenRouterProtocol {
     
     func goBack() {
         self.viewController?.navigationController?.popViewController(animated: true)
+    }
+    
+    func routeToArticleDetails(article: ECNews) {
+        let vc = ArticleDetailsScreenAssembler.assemble(appRouter: appRouter, article: article)
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -62,7 +62,7 @@ final class ArticlesScreenPresenter {
                 let vm = CardWithImageCellViewModel(
                     imageURL: news.previewImageURL, preTitle: news.newsType.name.ru,
                     title: news.title.ru, subtitle: news.shortDescription.ru, showsArrowRight: true
-                )
+                ) { [weak self] in self?.router.routeToArticleDetails(article: news) }
                 items.append(.cardWithImageItem(.init(item: news, prefix: "article-", viewModel: vm)))
             }
             
