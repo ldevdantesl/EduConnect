@@ -431,7 +431,6 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     
     func didReceiveError(error: any Error) {
         let userFacingError = errorService.handle(error)
-        self.dispatchGroup.leave()
         self.view?.showError(error: userFacingError)
         self.view?.hideLoading()
     }

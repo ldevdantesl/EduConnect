@@ -11,6 +11,7 @@ struct ECNews: Identifiable, Decodable {
     struct University: Decodable {
         let id: Int
         let name: ECLocalizedString
+        let logoURL: String?
     }
     
     let id: Int

@@ -32,6 +32,7 @@ final class MainScreenPresenter {
     // MARK: - PROPERTIES
     private let errorService: ErrorServiceProtocol
     private let dispatchGroup = DispatchGroup()
+    private var isInitialLoading: Bool = true
     
     private var selectedAcademicTab: MainScreenAcademicCellViewModel.AcademicTab = .programs
     private var selectedJournalTab: ECNewsType? = nil
@@ -85,6 +86,7 @@ final class MainScreenPresenter {
         self.errorService = errorService
     }
     
+    // MARK: - PRIVATE FUNC
     private func applySnapshot(isLoadingOnJournals: Bool = false) {
         let result = snapshotBuilder.build(
             state: currentState,
@@ -157,14 +159,12 @@ extension MainScreenPresenter: MainScreenPresenterProtocol {
         interactor.getNewsTypes()
         
         dispatchGroup.enter()
-        interactor.getNewsTypes()
-        
-        dispatchGroup.enter()
         interactor.getAllNews()
         
         dispatchGroup.notify(queue: .main) { [weak self] in
             self?.applySnapshot()
             self?.view?.hideLoading()
+            self?.isInitialLoading = false
         }
     }
     
@@ -211,8 +211,9 @@ extension MainScreenPresenter: MainScreenPresenterProtocol {
     // MARK: - ERROR
     func didReceiveError(error: any Error) {
         let userError = errorService.handle(error)
-        dispatchGroup.leave()
         view?.hideLoading()
         view?.showError(errorMessage: userError.message)
+        guard isInitialLoading else { return }
+        dispatchGroup.leave()
     }
 }
