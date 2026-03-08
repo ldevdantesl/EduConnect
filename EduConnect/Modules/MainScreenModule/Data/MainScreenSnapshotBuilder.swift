@@ -27,6 +27,7 @@ struct MainScreenSnapshotBuilder {
         let didTapStepsUniversity: () -> Void
         let didTapShowAllSteps: () -> Void
         let didTapUniversity: (ECUniversity) -> Void
+        let didTapProfession: (ECProfession) -> Void
         let didTapArticle: (ECNews) -> Void
         let didTapShowAllPrograms: () -> Void
         let didTapShowAllProfessions: () -> Void
@@ -105,7 +106,7 @@ struct MainScreenSnapshotBuilder {
                     imageURL: university.mainImageURL,
                     preTitle: "\(university.city.name) / \(university.programsCount) программ",
                     title: university.name, showsArrowRight: true
-                )
+                ) { actions.didTapUniversity(university) }
                 items.append(.cardWithImageItem(.init(item: university, prefix: "academic-uni", viewModel: vm)))
             }
             let vm = MainScreenAcademicShowAllCellViewModel(
@@ -131,7 +132,7 @@ struct MainScreenSnapshotBuilder {
                     imageURL: profession.imageURL,
                     preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
                     title: profession.name.ru, subtitle: profession.description.ru, showsArrowRight: true
-                )
+                ) { actions.didTapProfession(profession) }
                 items.append(.cardWithImageItem(.init(item: profession, prefix: "academic-profession-", viewModel: vm)))
             }
             let vm = MainScreenAcademicShowAllCellViewModel(

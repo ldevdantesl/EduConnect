@@ -54,6 +54,7 @@ final class MainScreenPresenter {
         didTapStepsUniversity: { [weak self] in self?.router.navigateToUniversities() },
         didTapShowAllSteps: { [weak self] in self?.didTapShowAllSteps() },
         didTapUniversity: { [weak self] in self?.didTapUniversity(university: $0) },
+        didTapProfession: { [weak self] in self?.router.navigateToProfession(profession: $0) },
         didTapArticle: { [weak self] in self?.router.routeToArticleDetails(article: $0) },
         didTapShowAllPrograms: { [weak self] in self?.didTapShowAllPrograms() },
         didTapShowAllProfessions: { [weak self] in self?.didTapShowAllProfessions() },
