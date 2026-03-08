@@ -15,6 +15,9 @@ protocol MainScreenRouterProtocol {
     func navigateToProfessions()
     func navigateToPrograms()
     func navigateToUniversity(university: ECUniversity)
+    func navigateToProfession(profession: ECProfession)
+    func navigateToAllArticles()
+    func routeToArticleDetails(article: ECNews)
 }
 
 final class MainScreenRouter: MainScreenRouterProtocol {
@@ -43,17 +46,29 @@ final class MainScreenRouter: MainScreenRouterProtocol {
     }
     
     func navigateToPrograms() {
-        let vc = ProgramsScreenAssembler.assemble(appRouter: appRouter)
-        viewController?.navigationController?.setViewControllers([vc], animated: true)
+        appRouter.diContainer.sidebarService.switchTo(tab: .programs)
     }
     
     func navigateToProfessions() {
-        let vc = ProfessionsScreenAssembler.assemble(appRouter: appRouter)
-        viewController?.navigationController?.setViewControllers([vc], animated: true)
+        appRouter.diContainer.sidebarService.switchTo(tab: .professions)
     }
     
     func navigateToUniversities() {
-        let vc = UniversityScreenAssembler.assemble(appRouter: appRouter)
-        viewController?.navigationController?.setViewControllers([vc], animated: true)
+        appRouter.diContainer.sidebarService.switchTo(tab: .universities)
+    }
+    
+    func navigateToAllArticles() {
+        let vc = ArticlesScreenAssembler.assemble(appRouter: appRouter)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func routeToArticleDetails(article: ECNews) {
+        let vc = ArticleDetailsScreenAssembler.assemble(appRouter: appRouter, article: article)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func navigateToProfession(profession: ECProfession) {
+        let vc = ProfessionDetailsScreenAssembler.assemble(appRouter: appRouter, professionID: profession.id)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

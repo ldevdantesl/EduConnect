@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct LoginScreenLoginCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = LoginScreenLoginCell.identifier
+struct LoginScreenLoginCellViewModel {
     let didPressLogin: ((String?, String?) -> Void)?
     let didPressRegister: (() -> Void)?
     
@@ -19,7 +18,7 @@ struct LoginScreenLoginCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class LoginScreenLoginCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class LoginScreenLoginCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let hSpacing = 15.0
@@ -94,8 +93,7 @@ final class LoginScreenLoginCell: UICollectionViewCell, ConfigurableCellProtocol
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? LoginScreenLoginCellViewModel else { return }
+    func configure(withVM vm: LoginScreenLoginCellViewModel) {
         self.viewModel = vm
         loginButton.setAction { [weak self] in vm.didPressLogin?(self?.emailField.text, self?.passwordField.text) }
         registerButton.setAction(action: vm.didPressRegister)

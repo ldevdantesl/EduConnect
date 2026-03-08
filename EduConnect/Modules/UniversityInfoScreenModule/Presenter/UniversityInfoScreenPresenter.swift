@@ -9,7 +9,6 @@ import UIKit
 
 protocol UniversityInfoScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
-    func didTapTabBar()
     func didTapAccount()
     func didTapAppLogo()
     func didTapBack()
@@ -42,7 +41,8 @@ final class UniversityInfoScreenPresenter {
         didTapAboutProgram: { [weak self] in self?.view?.scrollToSection(section: .programs) },
         didTapAboutProfession: { [weak self] in self?.view?.scrollToSection(section: .professions) },
         didTapApply: { [weak self] in self?.didTapApply() },
-        didTapRemoveApplication: { [weak self] in self?.didTapRemoveApplication() }
+        didTapRemoveApplication: { [weak self] in self?.didTapRemoveApplication() },
+        didTapProfession: { [weak self] in self?.router.routeToProfession(professionID: $0) }
     )
 
     init(
@@ -106,10 +106,6 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
         }
     }
     
-    func didTapTabBar() {
-        router.openSidebar()
-    }
-    
     func didTapAccount() {
         router.openAccount()
     }
@@ -151,6 +147,7 @@ extension UniversityInfoScreenPresenter: UniversityInfoScreenPresenterProtocol {
     
     func didReceieveError(error: any Error) {
         let userError = errorService.handle(error)
+        self.dispatchGroup.leave()
         self.view?.showError(userError: userError)
         self.view?.hideLoading()
     }

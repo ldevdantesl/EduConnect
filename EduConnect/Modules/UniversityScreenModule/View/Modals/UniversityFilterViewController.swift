@@ -45,7 +45,7 @@ final class UniversityScreenFilterModalControllerViewModel {
         onFiltersChanged?()
     }
     
-    func selectPriceRange(min: Int, max: Int) {
+    func selectPriceRange(min: Int?, max: Int?) {
         selectedFilters.priceMin = min
         selectedFilters.priceMax = max
     }
@@ -61,6 +61,9 @@ final class UniversityScreenFilterModalController: UIViewController {
     fileprivate enum Constants {
         static let containerCornerRadius = 20.0
         static let spacing = 20.0
+        static let semiSpacing = 10.0
+        
+        static let clearButtonImageName = "arrow.counterclockwise.circle.fill"
     }
     
     // MARK: - PROPERTIES
@@ -74,14 +77,24 @@ final class UniversityScreenFilterModalController: UIViewController {
         return label
     }()
     
+    private lazy var clearFiltersIconButton: ECIconButton = {
+        let vm = ECIconButtonVM(systemImage: Constants.clearButtonImageName, color: .red, style: .title3, weight: .bold)
+        let icon = ECIconButton(viewModel: vm)
+        icon.setAction { [weak self] in
+            self?.viewModel.selectedFilters.clearAll()
+            self?.collectionView.reloadData()
+        }
+        return icon
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let cv = KeyboardAdjustableCollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(UniversityScreenFilterModalOptionCell.self, forCellWithReuseIdentifier: UniversityScreenFilterModalOptionCell.identifier)
-        cv.register(UniversityScreenFilterModalSliderCell.self, forCellWithReuseIdentifier: UniversityScreenFilterModalSliderCell.identifier)
+        cv.register(UniversityScreenFilterModalPriceCell.self, forCellWithReuseIdentifier: UniversityScreenFilterModalPriceCell.identifier)
         cv.backgroundColor = .clear
         cv.showsVerticalScrollIndicator = false
         cv.delegate = self
@@ -130,6 +143,12 @@ final class UniversityScreenFilterModalController: UIViewController {
             $0.leading.equalToSuperview().offset(Constants.spacing)
         }
         
+        view.addSubview(clearFiltersIconButton)
+        clearFiltersIconButton.snp.makeConstraints {
+            $0.centerY.equalTo(titleLabel.snp.centerY)
+            $0.trailing.equalToSuperview().offset(-Constants.semiSpacing)
+        }
+        
         view.addSubview(collectionView)
         view.addSubview(applyButton)
         collectionView.snp.makeConstraints {
@@ -154,13 +173,17 @@ extension UniversityScreenFilterModalController: UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let option = viewModel.filterOptions[indexPath.item]
         
-        if option.isSlider {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UniversityScreenFilterModalSliderCell.identifier, for: indexPath) as! UniversityScreenFilterModalSliderCell
-            let cellVM = UniversityScreenFilterModalSliderCellViewModel(
-                filterType: option,
-                currentMinValue: CGFloat(viewModel.selectedFilters.priceMin ?? 0),
-                currentMaxValue: CGFloat(viewModel.selectedFilters.priceMax ?? 5_000_000),
-                onValueChanged: { [weak self] min, max in self?.viewModel.selectPriceRange(min: Int(min), max: Int(max)) }
+        if option.isPrice {
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: UniversityScreenFilterModalPriceCell.identifier,
+                for: indexPath
+            ) as! UniversityScreenFilterModalPriceCell
+            
+            let cellVM = UniversityScreenFilterModalPriceCellViewModel(
+                title: option.title,
+                currentMinValue: viewModel.selectedFilters.priceMin,
+                currentMaxValue: viewModel.selectedFilters.priceMax,
+                onValueChanged: { [weak self] in self?.viewModel.selectPriceRange(min: $0, max: $1) }
             )
             cell.configure(withVM: cellVM)
             return cell
@@ -181,7 +204,7 @@ extension UniversityScreenFilterModalController: UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let option = viewModel.filterOptions[indexPath.item]
-        let height: CGFloat = option.isSlider ? 160 : 50
+        let height: CGFloat = option.isPrice ? 100 : 50
         return CGSize(width: collectionView.bounds.width, height: height)
     }
 }

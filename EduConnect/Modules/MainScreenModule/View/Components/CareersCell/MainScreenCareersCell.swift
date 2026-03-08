@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct MainScreenCareersCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = MainScreenCareersCell.identifier
+struct MainScreenCareersCellViewModel {
     let universities: [ECUniversity]
     let didTapUniversity: ((ECUniversity) -> Void)?
     
@@ -19,7 +18,7 @@ struct MainScreenCareersCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class MainScreenCareersCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class MainScreenCareersCell: UICollectionViewCell {
     
     // MARK: - CONSTANTS
     fileprivate enum Constants {
@@ -83,8 +82,7 @@ final class MainScreenCareersCell: UICollectionViewCell, ConfigurableCellProtoco
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? MainScreenCareersCellViewModel else { return }
+    func configure(withVM vm: MainScreenCareersCellViewModel) {
         self.viewModel = vm
         collectionView.reloadData()
         

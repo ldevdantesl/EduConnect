@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct MainScreenAcademicShowAllCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = MainScreenAcademicShowAllCell.identifier
+struct MainScreenAcademicShowAllCellViewModel {
     let title: String
     let didTapAction: (() -> Void)?
     
@@ -19,7 +18,7 @@ struct MainScreenAcademicShowAllCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class MainScreenAcademicShowAllCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class MainScreenAcademicShowAllCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let smallSpacing = 10.0
@@ -76,8 +75,7 @@ final class MainScreenAcademicShowAllCell: UICollectionViewCell, ConfigurableCel
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? MainScreenAcademicShowAllCellViewModel else { return }
+    func configure(withVM vm: MainScreenAcademicShowAllCellViewModel) {
         self.viewModel = vm
         titleLabel.text = vm.title
     }

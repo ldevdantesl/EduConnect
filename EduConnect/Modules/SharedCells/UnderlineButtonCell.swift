@@ -8,10 +8,10 @@
 import UIKit
 import SnapKit
 
-struct UnderlineButtonCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = UnderlineButtonCell.identifier
+struct UnderlineButtonCellViewModel {
     let titleName: String
     let titleSize: CGFloat
+    
     let titleColor: UIColor
     let onTapAction: (() -> Void)?
     
@@ -23,7 +23,7 @@ struct UnderlineButtonCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class UnderlineButtonCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class UnderlineButtonCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -47,8 +47,7 @@ final class UnderlineButtonCell: UICollectionViewCell, ConfigurableCellProtocol 
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? UnderlineButtonCellViewModel else { return }
+    func configure(withVM vm: UnderlineButtonCellViewModel) {
         self.viewModel = vm
         underlineButton.configure(text: vm.titleName, textSize: vm.titleSize, textColor: vm.titleColor)
         underlineButton.setAction(action: vm.onTapAction)

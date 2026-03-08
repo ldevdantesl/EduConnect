@@ -8,29 +8,31 @@
 import UIKit
 import SnapKit
 
-struct NotFoundCellViewModel: CellViewModelProtocol {
-    let cellIdentifier: String = NotFoundCell.identifier
+struct NotFoundCellViewModel {
     let image: UIImage?
     let title: String
     let subtitle: String?
     let onTapAction: (() -> Void)?
+    let horizontallySpaced: Bool
     
-    init(image: UIImage? = nil, title: String, subtitle: String? = nil, onTapAction: (() -> Void)? = nil) {
+    init(image: UIImage? = nil, title: String, subtitle: String? = nil, horizontallySpaced: Bool = false, onTapAction: (() -> Void)? = nil) {
         self.image = image
         self.title = title
         self.subtitle = subtitle
         self.onTapAction = onTapAction
+        self.horizontallySpaced = horizontallySpaced
     }
     
-    init(systemImage: String, title: String, subtitle: String? = nil, onTapAction: (() -> Void)? = nil) {
+    init(systemImage: String, title: String, subtitle: String? = nil, horizontallySpaced: Bool = false, onTapAction: (() -> Void)? = nil) {
         self.image = UIImage(systemName: systemImage)
         self.title = title
         self.subtitle = subtitle
         self.onTapAction = onTapAction
+        self.horizontallySpaced = horizontallySpaced
     }
 }
 
-final class NotFoundCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class NotFoundCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -94,20 +96,17 @@ final class NotFoundCell: UICollectionViewCell, ConfigurableCellProtocol {
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? NotFoundCellViewModel else { return }
+    func configure(withVM vm: NotFoundCellViewModel) {
         self.viewModel = vm
         self.imageView.image = vm.image
         self.titleLabel.text = vm.title
         self.subtitleLabel.text = vm.subtitle
+        setupConstraints(horizontallySpaced: vm.horizontallySpaced)
     }
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
         contentView.addSubview(containerView)
-        containerView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
         
         containerView.addSubview(imageView)
         imageView.snp.makeConstraints {
@@ -127,6 +126,13 @@ final class NotFoundCell: UICollectionViewCell, ConfigurableCellProtocol {
             $0.top.equalTo(titleLabel.snp.bottom).offset(Constants.spacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
             $0.bottom.equalToSuperview().offset(-Constants.bigSpacing)
+        }
+    }
+    
+    private func setupConstraints(horizontallySpaced: Bool) {
+        containerView.snp.remakeConstraints {
+            $0.verticalEdges.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(horizontallySpaced ? Constants.spacing : 0)
         }
     }
     

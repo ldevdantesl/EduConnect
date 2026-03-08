@@ -6,9 +6,9 @@
 //
 
 protocol ProfessionsScreenPresenterProtocol: AnyObject {
+    func viewDidLoad()
     func didTapTabBar()
     func didTapAccount()
-    func viewDidLoad()
     func didTapAppLogo()
     
     func didReceiveError(error: any Error)
@@ -26,6 +26,7 @@ final class ProfessionsScreenPresenter {
     private var totalPages: Int = 1
     private var currentPage: Int = 1
     private var currentSearchText: String? = ""
+    private var sortOption: ProfessionSortOption?
 
     init(interactor: ProfessionsScreenInteractorProtocol, router: ProfessionsScreenRouterProtocol, errorService: ErrorServiceProtocol) {
         self.interactor = interactor
@@ -35,10 +36,10 @@ final class ProfessionsScreenPresenter {
     
     private func applySnapshot() {
         let headerVM = ProfessionScreenHeaderCellViewModel()
-        let searchVM = ProfessionScreenSearchCellViewModel(didTapSearch: { [weak self] in
-            print("Search text: \($0)")
-            self?.didTapSearch(searchText: $0)
-        })
+        let searchVM = ProfessionScreenSearchCellViewModel(
+            didTapSearch: { [weak self] in self?.didTapSearch(searchText: $0) },
+            didTapSortOption: { [weak self] in self?.didTapSortOption(option: $0) }
+        )
         let footerVM = TabsFooterCellViewModel(
             titleLabelText: "Выбор профессии в справочнике",
             subtitleLabelText: """
@@ -46,15 +47,21 @@ final class ProfessionsScreenPresenter {
             """
         )
         
-        var professionItems: [ProfessionScreenItem] = professions.map {
-            let vm = CardWithImageCellViewModel(
-                imageURL: $0.imageURL,
-                preTitle: "\($0.programsCount) программ, \($0.universitiesCount) вузов",
-                title: $0.name.ru,
-                subtitle: $0.description.ru,
-                showsArrowRight: false
+        var professionItems: [ProfessionScreenItem] = []
+        if !professions.isEmpty {
+            professionItems = professions.map { profession in
+                let vm = CardCellViewModel(
+                    preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
+                    title: profession.name.ru, subtitle: profession.description.ru, showsArrowRight: true
+                ) { [weak self] in self?.router.routeToProfession(professionID: profession.id) }
+                return ProfessionScreenItem.cardItem(.init(id: profession.id, viewModel: vm))
+            }
+        } else {
+            let notFoundItem = NotFoundCellViewModel(
+                systemImage: ImageConstants.SystemImages.questionMark.rawValue,
+                title: "Ничего не найдено", subtitle: "Попробуйте еще раз", horizontallySpaced: true
             )
-            return ProfessionScreenItem.cardWithImageItem(.init(id: $0.id, viewModel: vm))
+            professionItems = [ProfessionScreenItem.notFoundItem(.init(viewModel: notFoundItem))]
         }
         
         if totalPages > 1 {
@@ -80,7 +87,10 @@ final class ProfessionsScreenPresenter {
     
     private func applyLoadingSnapshot() {
         let headerVM = ProfessionScreenHeaderCellViewModel()
-        let searchVM = ProfessionScreenSearchCellViewModel(didTapSearch: { [weak self] in self?.didTapSearch(searchText: $0)})
+        let searchVM = ProfessionScreenSearchCellViewModel(
+            didTapSearch: { [weak self] in self?.didTapSearch(searchText: $0) },
+            didTapSortOption: { [weak self] in self?.didTapSortOption(option: $0) }
+        )
         let footerVM = TabsFooterCellViewModel(
             titleLabelText: "Выбор профессии в справочнике",
             subtitleLabelText: """
@@ -103,20 +113,25 @@ final class ProfessionsScreenPresenter {
     private func didTapSearch(searchText: String) {
         self.currentSearchText = searchText
         applyLoadingSnapshot()
-        interactor.getProfessions(searchText: searchText, page: 1)
+        interactor.getProfessions(searchText: searchText, sortOption: sortOption, page: 1)
+    }
+    
+    private func didTapSortOption(option: ProfessionSortOption?) {
+        self.sortOption = option
+        applyLoadingSnapshot()
+        interactor.getProfessions(searchText: currentSearchText, sortOption: sortOption, page: currentPage)
     }
     
     private func showPage(_ page: Int) {
         applyLoadingSnapshot()
-        interactor.getProfessions(searchText: currentSearchText, page: page)
-        currentPage += 1
+        interactor.getProfessions(searchText: currentSearchText, sortOption: sortOption, page: page)
     }
 }
 
 extension ProfessionsScreenPresenter: ProfessionsScreenPresenterProtocol {
     func viewDidLoad() {
         applyLoadingSnapshot()
-        interactor.getProfessions(searchText: nil, page: 1)
+        interactor.getProfessions(searchText: nil, sortOption: nil, page: 1)
     }
     
     func didTapTabBar() {

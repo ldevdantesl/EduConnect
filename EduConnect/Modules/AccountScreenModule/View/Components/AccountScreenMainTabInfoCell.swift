@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-struct AccountScreenMainTabInfoCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = "AccountScreenMainTabInfoCell"
+struct AccountScreenMainTabInfoCellViewModel {
+    let cellIdentifier: String = AccountScreenMainTabInfoCell.identifier
 }
 
-final class AccountScreenMainTabInfoCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class AccountScreenMainTabInfoCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -72,8 +72,7 @@ final class AccountScreenMainTabInfoCell: UICollectionViewCell, ConfigurableCell
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? AccountScreenMainTabInfoCellViewModel else { return }
+    func configure(withVM vm: AccountScreenMainTabInfoCellViewModel) {
         self.viewModel = vm
     }
     

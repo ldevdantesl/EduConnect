@@ -9,8 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-struct ApplicationCellViewModel: CellViewModelProtocol {
-    let cellIdentifier: String = ApplicationCell.identifier
+struct ApplicationCellViewModel {
     let application: Application
     let didTap: ((Application) -> Void)?
     
@@ -20,7 +19,7 @@ struct ApplicationCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class ApplicationCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class ApplicationCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // other
@@ -147,8 +146,7 @@ final class ApplicationCell: UICollectionViewCell, ConfigurableCellProtocol {
     }
     
     // MARK: - PUBLIC FUNC
-    public func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? ApplicationCellViewModel else { return }
+    public func configure(withVM vm: ApplicationCellViewModel) {
         self.viewModel = vm
         self.backgroundImage.kf.indicatorType = .activity
         self.backgroundImage.kf.setImage(

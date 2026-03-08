@@ -47,7 +47,7 @@ final class MainScreenInteractor: MainScreenInteractorProtocol {
     func getProfessions() {
         Task {
             do {
-                let response: [ECProfession] = try await networkService.professions.getProfessions(searchText: nil, page: 1) 
+                let response: [ECProfession] = try await networkService.professions.getProfessions(searchText: nil, sortOption: nil, page: 1) 
                 presenter?.didReceiveProfessions(professions: response)
             } catch {
                 presenter?.didReceiveError(error: error)
@@ -69,7 +69,7 @@ final class MainScreenInteractor: MainScreenInteractorProtocol {
     func getNewsForNewsType(typeID: Int?) {
         Task {
             do {
-                let response = try await networkService.news.getNews(newsTypeID: typeID?.description, universityID: nil, itemsPerPage: 3)
+                let response: [ECNews] = try await networkService.news.getNews(newsTypeID: typeID?.description, universityID: nil, itemsPerPage: 3, page: nil)
                 presenter?.didReceiveNewsForType(news: response, typeID: typeID)
             } catch {
                 presenter?.didReceiveError(error: error)
@@ -80,7 +80,7 @@ final class MainScreenInteractor: MainScreenInteractorProtocol {
     func getAllNews() {
         Task {
             do {
-                let response = try await networkService.news.getNews(newsTypeID: nil, universityID: nil, itemsPerPage: 3)
+                let response: [ECNews] = try await networkService.news.getNews(newsTypeID: nil, universityID: nil, itemsPerPage: 3, page: nil)
                 presenter?.didReceiveAllNews(news: response)
             } catch {
                 presenter?.didReceiveError(error: error)

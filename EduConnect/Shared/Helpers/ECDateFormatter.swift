@@ -8,7 +8,20 @@
 import Foundation
 
 struct ECDateFormatter {
-    static func formatISODate(_ date: String) -> String {
+    
+    enum FormatType {
+        case onlyDate
+        case dateWithTime
+        
+        var template: String {
+            switch self {
+            case .onlyDate: return "d MMM yyyy"
+            case .dateWithTime: return "d MMM yyyy HH:mm"
+            }
+        }
+    }
+    
+    static func formatISODate(_ date: String, formatType: FormatType = .onlyDate) -> String {
         let isoString = date
         let isoFormatter = ISO8601DateFormatter()
         isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
@@ -18,7 +31,7 @@ struct ECDateFormatter {
         let formatter = DateFormatter()
         formatter.locale = .current
         formatter.timeZone = .current
-        formatter.setLocalizedDateFormatFromTemplate("d MMM yyyy")
+        formatter.setLocalizedDateFormatFromTemplate(formatType.template)
 
         let formattedDate = formatter.string(from: date)
         return formattedDate

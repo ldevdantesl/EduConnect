@@ -8,12 +8,11 @@
 import UIKit
 import SnapKit
 
-struct UniversityInfoScreenHeaderCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = UniversityInfoScreenHeaderCell.identifier
+struct UniversityInfoScreenHeaderCellViewModel {
     let university: ECUniversity
 }
 
-final class UniversityInfoScreenHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class UniversityInfoScreenHeaderCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -135,8 +134,7 @@ final class UniversityInfoScreenHeaderCell: UICollectionViewCell, ConfigurableCe
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? UniversityInfoScreenHeaderCellViewModel else { return }
+    func configure(withVM vm: UniversityInfoScreenHeaderCellViewModel) {
         self.viewModel = vm
         nameLabel.text = "\(vm.university.name)"
         programsLabel.text = "\(vm.university.programsCount)\nпрограмм"

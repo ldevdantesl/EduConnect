@@ -77,31 +77,31 @@ final class UniversityInfoScreenVC: UIViewController {
         collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
             case .headerItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityInfoScreenHeaderCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UniversityInfoScreenHeaderCell.identifier, for: indexPath) as? UniversityInfoScreenHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             case .averageENTScoreItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityInfoScreenAverageEntCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UniversityInfoScreenAverageEntCell.identifier, for: indexPath) as? UniversityInfoScreenAverageEntCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .aboutItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityInfoScreenAboutCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UniversityInfoScreenAboutCell.identifier, for: indexPath) as? UniversityInfoScreenAboutCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .contactsItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? UniversityInfoScreenContactsCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UniversityInfoScreenContactsCell.identifier, for: indexPath) as? UniversityInfoScreenContactsCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .sectionHeaderItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? SectionHeaderCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionHeaderCell.identifier, for: indexPath) as? SectionHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .cardItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? CardWithImageCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardWithImageCell.identifier, for: indexPath) as? CardWithImageCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             }

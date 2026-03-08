@@ -37,6 +37,9 @@ final class AccountScreenRouter: AccountScreenRouterProtocol {
         case let vm as AddFamilyMemberPopUpViewModel:
             let view = AddFamilyMemberPopUpView(viewModel: vm)
             viewController?.showPopup(view)
+        case let vm as AddOlympiadPopUpViewModel:
+            let view = AddOlympiadPopUpView(viewModel: vm)
+            viewController?.showPopup(view)
         default: break
         }
     }

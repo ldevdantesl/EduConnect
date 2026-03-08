@@ -58,32 +58,32 @@ final class LoginScreenVC: UIViewController {
         collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
             case .loginItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoginScreenLoginCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoginScreenLoginCell.identifier, for: indexPath) as? LoginScreenLoginCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .completeRegisterItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoginScreenCompleteRegistrationCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoginScreenCompleteRegistrationCell.identifier, for: indexPath) as? LoginScreenCompleteRegistrationCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .registrationItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoginScreenRegistrationCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoginScreenRegistrationCell.identifier, for: indexPath) as? LoginScreenRegistrationCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .setPasswordItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoginScreenSetPasswordCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoginScreenSetPasswordCell.identifier, for: indexPath) as? LoginScreenSetPasswordCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .confirmRegisterItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoginScreenConfirmRegistrationCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoginScreenConfirmRegistrationCell.identifier, for: indexPath) as? LoginScreenConfirmRegistrationCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .loadingItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoadingCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoadingCell.identifier, for: indexPath) as? LoadingCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             }

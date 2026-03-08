@@ -9,8 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-struct MainScreenProgramsCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = MainScreenProgramsCell.identifier
+struct MainScreenProgramsCellViewModel {
     let programs: [ECProgramCategory]
     var didTapProgram: ((ECProgramCategory) -> Void)?
     var didTapShowAll: (() -> Void)?
@@ -22,7 +21,7 @@ struct MainScreenProgramsCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class MainScreenProgramsCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class MainScreenProgramsCell: UICollectionViewCell {
     
     // MARK: - CONSTANTS
     private enum Constants {
@@ -105,8 +104,7 @@ final class MainScreenProgramsCell: UICollectionViewCell, ConfigurableCellProtoc
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? MainScreenProgramsCellViewModel else { return }
+    func configure(withVM vm: MainScreenProgramsCellViewModel) {
         self.viewModel = vm
         showAllItem.setAction(action: vm.didTapShowAll)
         

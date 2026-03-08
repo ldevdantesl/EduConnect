@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct UniversityScreenFilterCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = "UniversityScreenFilterCell"
+struct UniversityScreenFilterCellViewModel {
     var currentFilters: UniversityFilters
     var searchText: String?
     var didTapChances: (() -> Void)?
@@ -18,7 +17,7 @@ struct UniversityScreenFilterCellViewModel: CellViewModelProtocol {
     var didTapFilters: (() -> Void)?
 }
 
-final class UniversityScreenFilterCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class UniversityScreenFilterCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -29,22 +28,8 @@ final class UniversityScreenFilterCell: UICollectionViewCell, ConfigurableCellPr
     private var viewModel: UniversityScreenFilterCellViewModel?
     
     // MARK: - VIEW PROPERTIES
-    private lazy var chancesButton: ECButton = {
-        let button = ECButton()
-        button.configure(text: "Оценить шансы", backgroundColor: UIColor.hex("#427FF6"))
-        button.setAction { [weak self] in self?.viewModel?.didTapChances?() }
-        return button
-    }()
-    
-    private lazy var chooseCityButton: ECButton = {
-        let button = ECButton()
-        button.configure(text: "Выбрать город", backgroundColor: UIColor.hex("#333399"))
-        button.setAction { [weak self] in self?.viewModel?.didTapCity?() }
-        return button
-    }()
-    
     private lazy var searchField: ECSearchField = {
-        let field = ECSearchField(placeholder: "Search")
+        let field = ECSearchField(placeholder: ConstantLocalizedStrings.Common.browse)
         field.setAction { [weak self] in self?.viewModel?.didTapSearch?($0) }
         return field
     }()
@@ -70,8 +55,7 @@ final class UniversityScreenFilterCell: UICollectionViewCell, ConfigurableCellPr
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? UniversityScreenFilterCellViewModel else { return }
+    func configure(withVM vm: UniversityScreenFilterCellViewModel) {
         self.viewModel = vm
         
         if let searchText = vm.searchText {
@@ -90,25 +74,9 @@ final class UniversityScreenFilterCell: UICollectionViewCell, ConfigurableCellPr
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
-        contentView.addSubview(chancesButton)
-        chancesButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(Constants.spacing)
-            $0.trailing.equalToSuperview().multipliedBy(0.5)
-            $0.height.equalTo(SharedConstants.buttonHeight)
-        }
-        
-        contentView.addSubview(chooseCityButton)
-        chooseCityButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.equalTo(chancesButton.snp.trailing).offset(Constants.spacing)
-            $0.trailing.equalToSuperview().offset(-Constants.spacing)
-            $0.height.equalTo(SharedConstants.buttonHeight)
-        }
-        
         contentView.addSubview(searchField)
         searchField.snp.makeConstraints {
-            $0.top.equalTo(chancesButton.snp.bottom).offset(Constants.spacing)
+            $0.top.equalToSuperview().offset(Constants.spacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.spacing)
         }
         

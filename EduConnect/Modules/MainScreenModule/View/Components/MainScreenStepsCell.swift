@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct MainScreenStepsCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = MainScreenStepsCell.identifier
+struct MainScreenStepsCellViewModel {
     var didTapChooseProfession: (() -> Void)?
     var didTapChooseENT: (() -> Void)?
     var didTapChooseUniversity: (() -> Void)?
@@ -29,7 +28,7 @@ struct MainScreenStepsCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class MainScreenStepsCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class MainScreenStepsCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 20.0
@@ -103,8 +102,7 @@ final class MainScreenStepsCell: UICollectionViewCell, ConfigurableCellProtocol 
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? MainScreenStepsCellViewModel else { return }
+    func configure(withVM vm: MainScreenStepsCellViewModel) {
         self.viewModel = vm
 
         let showingAll = vm.showingAllItems

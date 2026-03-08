@@ -52,14 +52,6 @@ final class ECDashedBorderButton: ECDashedBorderView {
         didSet { iconImageView.image = image }
     }
     
-    var imageSize: CGFloat = Constants.defaultImageSize {
-        didSet {
-            iconImageView.snp.updateConstraints {
-                $0.size.equalTo(imageSize)
-            }
-        }
-    }
-    
     var gradientColors: [UIColor] = [
         UIColor(red: 108/255, green: 92/255, blue: 231/255, alpha: 1),
         UIColor(red: 90/255, green: 170/255, blue: 255/255, alpha: 1)
@@ -87,7 +79,7 @@ final class ECDashedBorderButton: ECDashedBorderView {
     
     private let iconImageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
     }()
@@ -122,9 +114,10 @@ final class ECDashedBorderButton: ECDashedBorderView {
         
         contentView.addSubview(iconImageView)
         iconImageView.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(10)
-            $0.centerY.equalToSuperview()
-            $0.size.equalTo(imageSize)
+            $0.top.equalToSuperview().offset(10)
+            $0.bottom.equalToSuperview().offset(-10)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.width.equalTo(iconImageView.snp.height).multipliedBy(1.3)
         }
         
         contentView.addSubview(labelsStack)

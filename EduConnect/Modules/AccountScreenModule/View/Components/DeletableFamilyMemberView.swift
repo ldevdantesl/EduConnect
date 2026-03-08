@@ -38,7 +38,7 @@ final class DeletableFamilyMemberView: UIView {
     // MARK: - VIEW PROPERTIES
     private let typeLabel: UILabel = {
         let label = UILabel()
-        label.font = ECFont.font(.medium, size: 16)
+        label.font = ECFont.font(.regular, size: 12)
         label.textColor = .label
         return label
     }()
@@ -52,7 +52,7 @@ final class DeletableFamilyMemberView: UIView {
     
     private let phoneLabel: UILabel = {
         let label = UILabel()
-        label.font = ECFont.font(.semiBold, size: 12)
+        label.font = ECFont.font(.regular, size: 14)
         label.textColor = .label
         return label
     }()
@@ -69,7 +69,7 @@ final class DeletableFamilyMemberView: UIView {
     private lazy var vStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [typeLabel, nameLabel, phoneLabel])
         stack.axis = .vertical
-        stack.spacing = Constants.hSpacing
+        stack.spacing = 5
         stack.alignment = .leading
         return stack
     }()

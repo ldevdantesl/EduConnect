@@ -8,12 +8,11 @@
 import UIKit
 import SnapKit
 
-struct UniversityInfoScreenAverageEntCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = UniversityInfoScreenAverageEntCell.identifier
+struct UniversityInfoScreenAverageEntCellViewModel {
     var entScores: [ECUniversity.EntScores]
 }
 
-final class UniversityInfoScreenAverageEntCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class UniversityInfoScreenAverageEntCell: UICollectionViewCell {
     
     // MARK: - CONSTANTS
     private enum Constants {
@@ -96,8 +95,7 @@ final class UniversityInfoScreenAverageEntCell: UICollectionViewCell, Configurab
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? UniversityInfoScreenAverageEntCellViewModel else { return }
+    func configure(withVM vm: UniversityInfoScreenAverageEntCellViewModel) {
         self.scores = vm.entScores.sorted { $0.year > $1.year }
         setupTableContent()
     }

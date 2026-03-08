@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct LoginScreenCompleteRegistrationCellVM: CellViewModelProtocol {
-    var cellIdentifier: String = "LoginScreenCompleteRegistrationCell"
+struct LoginScreenCompleteRegistrationCellVM {
     let goToAccountAction: (() -> Void)?
     let goToMainAction: (() -> Void)?
     
@@ -19,7 +18,7 @@ struct LoginScreenCompleteRegistrationCellVM: CellViewModelProtocol {
     }
 }
 
-final class LoginScreenCompleteRegistrationCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class LoginScreenCompleteRegistrationCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // Spacing
@@ -87,12 +86,10 @@ final class LoginScreenCompleteRegistrationCell: UICollectionViewCell, Configura
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? LoginScreenCompleteRegistrationCellVM else { return }
+    func configure(withVM vm: LoginScreenCompleteRegistrationCellVM) {
         self.viewModel = vm
         self.goToAccountButton.setAction(action: vm.goToAccountAction)
         self.goToMainButton.setAction(action: vm.goToMainAction)
-        layoutIfNeeded()
     }
     
     // MARK: - PRIVATE FUNC

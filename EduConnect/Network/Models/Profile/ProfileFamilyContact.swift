@@ -11,6 +11,8 @@ struct ProfileFamilyContact: Decodable {
     let id: Int
     let studentID: Int
     let familyMemberID: Int
+    let familyMemberName: String
+    let familyMember: ECFamilyMember
     let fullName: String?
     let phoneNumber: String
     let createdAt: String
@@ -20,6 +22,8 @@ struct ProfileFamilyContact: Decodable {
         case id
         case studentID = "student_id"
         case familyMemberID = "family_member_id"
+        case familyMemberName = "family_member_name"
+        case familyMember = "family_member"
         case fullName = "full_name"
         case phoneNumber = "phone_number"
         case createdAt = "created_at"

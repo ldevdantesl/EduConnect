@@ -9,8 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-struct MainScreenAcademicProgramCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = MainScreenAcademicProgramCell.identifier
+struct MainScreenAcademicProgramCellViewModel {
     let program: ECProgramCategory
     let didTapProgram: ((ECProgramCategory) -> Void)?
     
@@ -20,7 +19,7 @@ struct MainScreenAcademicProgramCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class MainScreenAcademicProgramCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class MainScreenAcademicProgramCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -112,8 +111,7 @@ final class MainScreenAcademicProgramCell: UICollectionViewCell, ConfigurableCel
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? MainScreenAcademicProgramCellViewModel else { return }
+    func configure(withVM vm: MainScreenAcademicProgramCellViewModel) {
         self.viewModel = vm
         if let url = URL(string: vm.program.iconURL ?? "") {
             self.imageView.kf.setImage(with: url, placeholder: ImageConstants.appLogo.image)

@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct MainScreenServicesItemViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = MainScreenServicesItem.identifier
+struct MainScreenServicesItemViewModel {
     let title: String
     let image: ImageConstants
     let onTapAction: (() -> Void)?
@@ -21,7 +20,7 @@ struct MainScreenServicesItemViewModel: CellViewModelProtocol {
     }
 }
 
-final class MainScreenServicesItem: UICollectionViewCell, ConfigurableCellProtocol {
+final class MainScreenServicesItem: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -58,8 +57,7 @@ final class MainScreenServicesItem: UICollectionViewCell, ConfigurableCellProtoc
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? MainScreenServicesItemViewModel else { return }
+    func configure(withVM vm: MainScreenServicesItemViewModel) {
         self.viewModel = vm
         imageView.image = vm.image.image
         titleLabel.attributedText = NSAttributedString(

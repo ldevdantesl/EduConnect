@@ -69,20 +69,20 @@ final class ProgramsScreenVC: UIViewController {
         collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
             case .headerItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? ProgramsScreenHeaderCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProgramsScreenHeaderCell.identifier, for: indexPath) as? ProgramsScreenHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             case .footerItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? TabsFooterCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TabsFooterCell.identifier, for: indexPath) as? TabsFooterCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             case .programItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? ProgramsScreenProgramCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProgramsScreenProgramCell.identifier, for: indexPath) as? ProgramsScreenProgramCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
             case .loadingItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? LoadingCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoadingCell.identifier, for: indexPath) as? LoadingCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             }

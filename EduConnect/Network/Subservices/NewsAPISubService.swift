@@ -8,7 +8,8 @@
 import Foundation
 
 protocol NewsAPISubServiceProtocol {
-    func getNews(newsTypeID: String?, universityID: Int?, itemsPerPage: Int?) async throws -> [ECNews]
+    func getNews(newsTypeID: String?, universityID: Int?, itemsPerPage: Int?, page: Int?) async throws -> [ECNews]
+    func getNews(newsTypeID: String?, universityID: Int?, itemsPerPage: Int?, page: Int?) async throws -> PaginatedResponse<ECNews>
     func getNewsDetails(newsID: Int) async throws -> ECNews
     func getNewsTypes() async throws -> [ECNewsType]
     func getRelatedForNews(newsID: Int, limit: Int?) async throws -> [ECNews]
@@ -21,9 +22,14 @@ final class NewsAPISubService: NewsAPISubServiceProtocol {
         self.httpClient = httpClient
     }
  
-    func getNews(newsTypeID: String?, universityID: Int?, itemsPerPage: Int?) async throws -> [ECNews] {
-        let response: EduConnectDataResponse<[ECNews]> = try await httpClient.request(NewsEndpoints.getNews(newsTypeID: newsTypeID, universityID: universityID, itemsPerPage: itemsPerPage))
+    func getNews(newsTypeID: String?, universityID: Int?, itemsPerPage: Int?, page: Int?) async throws -> [ECNews] {
+        let response: EduConnectDataResponse<[ECNews]> = try await httpClient.request(NewsEndpoints.getNews(newsTypeID: newsTypeID, universityID: universityID, itemsPerPage: itemsPerPage, page: page))
         return response.data
+    }
+    
+    func getNews(newsTypeID: String?, universityID: Int?, itemsPerPage: Int?, page: Int?) async throws -> PaginatedResponse<ECNews> {
+        let response: PaginatedResponse<ECNews> = try await httpClient.request(NewsEndpoints.getNews(newsTypeID: newsTypeID, universityID: universityID, itemsPerPage: itemsPerPage, page: page))
+        return response
     }
     
     func getNewsDetails(newsID: Int) async throws -> ECNews {

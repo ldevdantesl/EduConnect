@@ -9,8 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-struct ProgramsScreenProgramCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = "ProgramsScreenProgramCell"
+struct ProgramsScreenProgramCellViewModel {
     let programTitle: String
     var programImageURL: String?
     
@@ -20,7 +19,7 @@ struct ProgramsScreenProgramCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class ProgramsScreenProgramCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class ProgramsScreenProgramCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -111,8 +110,7 @@ final class ProgramsScreenProgramCell: UICollectionViewCell, ConfigurableCellPro
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? ProgramsScreenProgramCellViewModel else { return }
+    func configure(withVM vm: ProgramsScreenProgramCellViewModel) {
         self.viewModel = vm
         self.programTitleLabel.text = vm.programTitle
         if let urlString = vm.programImageURL,

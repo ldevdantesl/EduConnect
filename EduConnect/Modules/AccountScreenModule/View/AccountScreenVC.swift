@@ -57,6 +57,8 @@ final class AccountScreenVC: UIViewController {
         cv.registerCell(AccountScreenExpandableOlympiadCell.self, reuseID: AccountScreenExpandableOlympiadCell.identifier)
         cv.registerCell(AccountScreenExpandableExtracurricularCell.self, reuseID: AccountScreenExpandableExtracurricularCell.identifier)
         cv.registerCell(AccountScreenMainTabInfoCell.self, reuseID: AccountScreenMainTabInfoCell.identifier)
+        cv.registerCell(AccountPendingApplicationsCell.self, reuseID: AccountPendingApplicationsCell.identifier)
+        cv.registerCell(HeaderWithSubtitleCell.self, reuseID: HeaderWithSubtitleCell.identifier)
         cv.registerSupplementary(
             AccountScreenSegmentedReusableMenu.self,
             kind: UICollectionView.elementKindSectionHeader,
@@ -98,23 +100,34 @@ final class AccountScreenVC: UIViewController {
         collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
             case .headerItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? SectionHeaderCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionHeaderCell.identifier, for: indexPath) as? SectionHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             case .university(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? ApplicationCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ApplicationCell.identifier, for: indexPath) as? ApplicationCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             case .expandableCell(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath)
-                (cell as? ConfigurableCellProtocol)?.configure(withVM: item.viewModel)
+                (cell as? ExpandableCellProtocol)?.configure(withVM: item.viewModel)
                 return cell
             case .notFoundItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath)
-                (cell as? ConfigurableCellProtocol)?.configure(withVM: item.viewModel)
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NotFoundCell.identifier, for: indexPath) as? NotFoundCell
+                cell?.configure(withVM: item.viewModel)
                 return cell
+                
+            case .headerWithSubtitleItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderWithSubtitleCell.identifier, for: indexPath) as? HeaderWithSubtitleCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .pendingApplicationItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccountPendingApplicationsCell.identifier, for: indexPath) as? AccountPendingApplicationsCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
             case .mainTabInfo(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath) as? AccountScreenMainTabInfoCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccountScreenMainTabInfoCell.identifier, for: indexPath) as? AccountScreenMainTabInfoCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             }

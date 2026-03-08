@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class AccountScreenExpandableOlympiadCellViewModel: ExpandableCellViewModel {
-    private(set) var cellIdentifier: String = AccountScreenExpandableOlympiadCell.identifier
+    let cellIdentifier: String = AccountScreenExpandableOlympiadCell.identifier
     var isExpanded: Bool
     let profile: Profile
     let didTapExpand: (() -> Void)?
@@ -35,7 +35,7 @@ final class AccountScreenExpandableOlympiadCellViewModel: ExpandableCellViewMode
     }
 }
 
-final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, ExpandableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -118,11 +118,11 @@ final class AccountScreenExpandableOlympiadCell: UICollectionViewCell, Configura
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
+    func configure(withVM vm: any ExpandableCellViewModel) {
         guard let vm = vm as? AccountScreenExpandableOlympiadCellViewModel else { return }
         self.viewModel = vm
-        vm.isExpanded ? expandCell() : collapseCell()
         populateOlympiads()
+        vm.isExpanded ? expandCell() : collapseCell()
     }
     
     // MARK: - PRIVATE FUNC

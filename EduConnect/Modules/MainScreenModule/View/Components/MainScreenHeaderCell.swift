@@ -8,13 +8,9 @@
 import UIKit
 import SnapKit
 
-struct MainScreenHeaderCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = MainScreenHeaderCell.identifier
-    
-    init() { }
-}
+struct MainScreenHeaderCellViewModel { }
 
-final class MainScreenHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class MainScreenHeaderCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 20.0
@@ -75,8 +71,7 @@ final class MainScreenHeaderCell: UICollectionViewCell, ConfigurableCellProtocol
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? MainScreenHeaderCellViewModel else { return }
+    func configure(withVM vm: MainScreenHeaderCellViewModel) {
         self.viewModel = vm
     }
     

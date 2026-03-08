@@ -8,10 +8,10 @@
 import UIKit
 
 protocol UniversityInfoScreenRouterProtocol {
-    func openSidebar()
     func openAccount()
     func goBack()
     func routeToMain()
+    func routeToProfession(professionID: Int)
 }
 
 final class UniversityInfoScreenRouter: UniversityInfoScreenRouterProtocol {
@@ -20,10 +20,6 @@ final class UniversityInfoScreenRouter: UniversityInfoScreenRouterProtocol {
     
     init(appRouter: AppRoutingProtocol) {
         self.appRouter = appRouter
-    }
-    
-    func openSidebar() {
-        appRouter.openSidebar()
     }
     
     func openAccount() {
@@ -36,5 +32,10 @@ final class UniversityInfoScreenRouter: UniversityInfoScreenRouterProtocol {
     
     func routeToMain() {
         appRouter.routeToMain()
+    }
+    
+    func routeToProfession(professionID: Int) {
+        let vc = ProfessionDetailsScreenAssembler.assemble(appRouter: appRouter, professionID: professionID)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

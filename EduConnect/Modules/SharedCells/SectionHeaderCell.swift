@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct SectionHeaderCellViewModel: CellViewModelProtocol, Hashable {
-    var cellIdentifier: String = SectionHeaderCell.identifier
+struct SectionHeaderCellViewModel: Hashable {
     let title: String
     let titleFamily: ECFont.Family
     let titleSize: CGFloat
@@ -29,7 +28,7 @@ struct SectionHeaderCellViewModel: CellViewModelProtocol, Hashable {
     }
 }
 
-final class SectionHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class SectionHeaderCell: UICollectionViewCell {
     
     // MARK: - CONSTANTS
     fileprivate enum Constants {
@@ -58,8 +57,7 @@ final class SectionHeaderCell: UICollectionViewCell, ConfigurableCellProtocol {
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? SectionHeaderCellViewModel else { return }
+    func configure(withVM vm: SectionHeaderCellViewModel) {
         titleLabel.text = vm.title
         titleLabel.font = ECFont.font(vm.titleFamily, size: vm.titleSize)
         titleLabel.textColor = vm.titleColor

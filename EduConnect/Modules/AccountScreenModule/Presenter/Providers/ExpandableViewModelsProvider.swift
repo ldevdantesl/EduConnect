@@ -8,7 +8,8 @@
 import Foundation
 
 // MARK: - Protocol
-public protocol ExpandableCellViewModel: CellViewModelProtocol, AnyObject {
+public protocol ExpandableCellViewModel: AnyObject {
+    var cellIdentifier: String { get }
     var isExpanded: Bool { get set }
     var didTapExpand: (() -> Void)? { get }
 }
@@ -45,6 +46,8 @@ struct ExpandableActions {
 protocol ExpandableViewModelsProviderProtocol {
     func makeExpandableItem(for id: ExpandableCellID) -> AccountScreenItem?
     func toggleExpandableCell(id: ExpandableCellID) -> AccountScreenItem?
+    func expand(_ id: ExpandableCellID)
+    func collapseAll()
 }
 
 final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
@@ -66,6 +69,14 @@ final class ExpandableViewModelsProvider: ExpandableViewModelsProviderProtocol {
         ExpandableCellID.allCases.forEach {
             expandableViewModels[$0] = makeExpandableVM(id: $0, profile: profile, actions: actions, isExpanded: previousStates[$0] ?? false)
         }
+    }
+    
+    func collapseAll() {
+        expandableViewModels.values.forEach { $0.isExpanded = false }
+    }
+    
+    func expand(_ id: ExpandableCellID) {
+        expandableViewModels[id]?.isExpanded = true
     }
     
     @discardableResult

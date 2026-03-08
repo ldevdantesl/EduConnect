@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-struct TabsFooterCellViewModel: CellViewModelProtocol {
-    var cellIdentifier: String = "TabsFooterCell"
+struct TabsFooterCellViewModel {
     let titleLabelText: String
     let subtitleLabelText: String
     
@@ -19,7 +18,7 @@ struct TabsFooterCellViewModel: CellViewModelProtocol {
     }
 }
 
-final class TabsFooterCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class TabsFooterCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -58,8 +57,7 @@ final class TabsFooterCell: UICollectionViewCell, ConfigurableCellProtocol {
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
-        guard let vm = vm as? TabsFooterCellViewModel else { return }
+    func configure(withVM vm: TabsFooterCellViewModel) {
         self.viewModel = vm
         titleLabel.text = vm.titleLabelText
         subtitleLabel.text = vm.subtitleLabelText

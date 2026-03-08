@@ -27,9 +27,12 @@ struct MainScreenSnapshotBuilder {
         let didTapStepsUniversity: () -> Void
         let didTapShowAllSteps: () -> Void
         let didTapUniversity: (ECUniversity) -> Void
+        let didTapProfession: (ECProfession) -> Void
+        let didTapArticle: (ECNews) -> Void
         let didTapShowAllPrograms: () -> Void
         let didTapShowAllProfessions: () -> Void
         let didTapShowAllUniversities: () -> Void
+        let didTapShowAllArticles: () -> Void
         let didTapServicesProfession: () -> Void
         let didTapServicesUniversity: () -> Void
         let didTapServicesCalendar: () -> Void
@@ -53,24 +56,6 @@ struct MainScreenSnapshotBuilder {
             .footer: [.footerItem(.init(id: "footer", viewModel: MainScreenFooterCellViewModel()))]
         ]
         return (sections, items)
-    }
-    
-    func buildJournalHeader(state: State, actions: Actions) -> MainScreenItem {
-        let headerVM = MainScreenJournalCellViewModel(
-            selectedType: state.selectedJournalTab,
-            allTypes: state.newsTypes,
-            didSelectType: actions.didSelectJournalType
-        )
-        return .journalItem(.init(id: "journal-header", viewModel: headerVM))
-    }
-
-    
-    func buildAcademicHeader(state: State, actions: Actions) -> MainScreenItem {
-        let headerVM = MainScreenAcademicCellViewModel(
-            selectedTab: state.selectedAcademicTab,
-            didSelectTab: actions.didSelectAcademicTab
-        )
-        return .academicItem(.init(id: "academic-header",viewModel: headerVM))
     }
     
     // MARK: - Private builders
@@ -112,7 +97,7 @@ struct MainScreenSnapshotBuilder {
             selectedTab: state.selectedAcademicTab,
             didSelectTab: actions.didSelectAcademicTab
         )
-        items.append(.academicItem(.init(id: "academic-header", viewModel: headerVM)))
+        items.append(.academicItem(.init(id: "academic-header", viewModel: headerVM, version: state.selectedAcademicTab.rawValue)))
 
         switch state.selectedAcademicTab {
         case .universities:
@@ -121,7 +106,7 @@ struct MainScreenSnapshotBuilder {
                     imageURL: university.mainImageURL,
                     preTitle: "\(university.city.name) / \(university.programsCount) программ",
                     title: university.name, showsArrowRight: true
-                )
+                ) { actions.didTapUniversity(university) }
                 items.append(.cardWithImageItem(.init(item: university, prefix: "academic-uni", viewModel: vm)))
             }
             let vm = MainScreenAcademicShowAllCellViewModel(
@@ -147,7 +132,7 @@ struct MainScreenSnapshotBuilder {
                     imageURL: profession.imageURL,
                     preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
                     title: profession.name.ru, subtitle: profession.description.ru, showsArrowRight: true
-                )
+                ) { actions.didTapProfession(profession) }
                 items.append(.cardWithImageItem(.init(item: profession, prefix: "academic-profession-", viewModel: vm)))
             }
             let vm = MainScreenAcademicShowAllCellViewModel(
@@ -177,7 +162,7 @@ struct MainScreenSnapshotBuilder {
             allTypes: state.newsTypes,
             didSelectType: actions.didSelectJournalType
         )
-        items.append(.journalItem(.init(id: "journal-header",viewModel: headerVM)))
+        items.append(.journalItem(.init(id: "journal-header",viewModel: headerVM, version: state.selectedJournalTab?.id ?? -1)))
 
         guard !isLoading else {
             items.append(.loadingItem(.init(viewModel: LoadingCellViewModel())))
@@ -191,27 +176,27 @@ struct MainScreenSnapshotBuilder {
             newsToShow = state.allNews
         }
         
-        let prefixedNews = newsToShow.prefix(5)
-        guard !prefixedNews.isEmpty else {
+        guard !newsToShow.isEmpty else {
             let vm = NotFoundCellViewModel(
                 systemImage: ImageConstants.SystemImages.questionMark.rawValue,
-                title: "Ничего не найдено", subtitle: "Нет новостей в этой категории"
+                title: "Ничего не найдено", subtitle: "Нет новостей в этой категории",
+                horizontallySpaced: true
             )
             items.append(.notFoundItem(.init(viewModel: vm)))
             return items
         }
-        prefixedNews.forEach { news in
+        newsToShow.forEach { news in
             let vm = CardWithImageCellViewModel(
                 imageURL: news.previewImageURL, preTitle: news.newsType.name.ru,
                 title: news.title.ru, subtitle: news.shortDescription.ru, showsArrowRight: true
-            )
+            ) { actions.didTapArticle(news) }
             items.append(.cardWithImageItem(.init(item: news, prefix: "journal-news", viewModel: vm)))
         }
         
         let vm = UnderlineButtonCellViewModel(
             titleName: "Посмотреть все новости",
             titleSize: 14, titleColor: .darkGray,
-            onTapAction: nil
+            onTapAction: actions.didTapShowAllArticles
         )
         items.append(.underlineButtonItem(.init(id: "underlineButton", viewModel: vm)))
 

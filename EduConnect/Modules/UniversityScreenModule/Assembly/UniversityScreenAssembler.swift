@@ -8,10 +8,10 @@
 import UIKit
 
 final class UniversityScreenAssembler {
-    static func assemble(appRouter: AppRoutingProtocol) -> UniversityScreenVC {
+    static func assemble(appRouter: AppRoutingProtocol, filters: UniversityFilters? = nil) -> UniversityScreenVC {
         let interactor = UniversityScreenInteractor(networkService: appRouter.diContainer.networkService)
         let router = UniversityScreenRouter(appRouter: appRouter)
-        let presenter = UniversityScreenPresenter(interactor: interactor, router: router, errorService: appRouter.diContainer.errorService)
+        let presenter = UniversityScreenPresenter(interactor: interactor, router: router, errorService: appRouter.diContainer.errorService, filters: filters)
         let viewController = UniversityScreenVC()
         presenter.view  = viewController
         viewController.presenter = presenter

@@ -12,6 +12,7 @@ protocol UniversityScreenPresenterProtocol: AnyObject {
     func didTapTabBar()
     func didTapAccount()
     func didTapAppLogo()
+    func didTapBack()
     func didGetCities(cities: [ECCity])
     func didGetProfessions(professions: [ECReferenceProfession])
     func didReceiveUniversities(paginatedUniversities: PaginatedResponse<ECUniversity>)
@@ -33,7 +34,7 @@ final class UniversityScreenPresenter {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in self?.showUniversities() }
     }
     
-    private var currentFilters: UniversityFilters = UniversityFilters()
+    private var currentFilters: UniversityFilters
     private var searchText: String? = nil
     
     private var universities: [ECUniversity] = []
@@ -49,10 +50,12 @@ final class UniversityScreenPresenter {
         subtitleLabelText: "С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования. "
     )
    
-    init(interactor: UniversityScreenInteractorProtocol, router: UniversityScreenRouterProtocol, errorService: ErrorServiceProtocol) {
+    init(interactor: UniversityScreenInteractorProtocol, router: UniversityScreenRouterProtocol, errorService: ErrorServiceProtocol, filters: UniversityFilters? = nil) {
         self.interactor = interactor
         self.router = router
         self.errorService = errorService
+        guard let filters else { self.currentFilters = UniversityFilters(); return }
+        self.currentFilters = filters
     }
     
     // MARK: - PRIVATE FUNC
@@ -180,7 +183,7 @@ extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
         showInitialView()
         
         dispatchGroup.enter()
-        interactor.getUniversities(page: 1, searchKey: nil, filters: nil)
+        interactor.getUniversities(page: 1, searchKey: nil, filters: currentFilters)
         
         dispatchGroup.enter()
         interactor.getAllCities()
@@ -203,6 +206,10 @@ extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
         router.routeToMain()
     }
     
+    func didTapBack() {
+        router.goBack()
+    }
+    
     func didGetCities(cities: [ECCity]) {
         self.cities = cities
         dispatchGroup.leave()
@@ -215,7 +222,7 @@ extension UniversityScreenPresenter: UniversityScreenPresenterProtocol {
     
     func didReceiveUniversities(paginatedUniversities: PaginatedResponse<ECUniversity>) {
         self.universities = paginatedUniversities.data
-        self.totalPages = paginatedUniversities.meta.total
+        self.totalPages = paginatedUniversities.meta.lastPage
         self.currentPage = paginatedUniversities.meta.currentPage
         dispatchGroup.leave()
     }

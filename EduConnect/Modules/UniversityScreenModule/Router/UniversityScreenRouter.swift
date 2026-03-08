@@ -13,10 +13,10 @@ protocol UniversityScreenRouterProtocol {
         currentFilters: UniversityFilters, cities: [ECCity],
         professions: [ECReferenceProfession], onApply: ((UniversityFilters) -> Void)?
     )
-    
     func routeToUniversityInfo(_ university: ECUniversity)
     func routeToMain()
     func openAccount()
+    func goBack()
 }
 
 final class UniversityScreenRouter: UniversityScreenRouterProtocol {
@@ -61,5 +61,9 @@ final class UniversityScreenRouter: UniversityScreenRouterProtocol {
     
     func routeToMain() {
         appRouter.routeToMain()
+    }
+    
+    func goBack() {
+        self.viewController?.navigationController?.popViewController(animated: true)
     }
 }

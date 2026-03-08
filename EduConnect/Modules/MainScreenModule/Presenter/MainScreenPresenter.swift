@@ -32,6 +32,7 @@ final class MainScreenPresenter {
     // MARK: - PROPERTIES
     private let errorService: ErrorServiceProtocol
     private let dispatchGroup = DispatchGroup()
+    private var isInitialLoading: Bool = true
     
     private var selectedAcademicTab: MainScreenAcademicCellViewModel.AcademicTab = .programs
     private var selectedJournalTab: ECNewsType? = nil
@@ -53,9 +54,12 @@ final class MainScreenPresenter {
         didTapStepsUniversity: { [weak self] in self?.router.navigateToUniversities() },
         didTapShowAllSteps: { [weak self] in self?.didTapShowAllSteps() },
         didTapUniversity: { [weak self] in self?.didTapUniversity(university: $0) },
+        didTapProfession: { [weak self] in self?.router.navigateToProfession(profession: $0) },
+        didTapArticle: { [weak self] in self?.router.routeToArticleDetails(article: $0) },
         didTapShowAllPrograms: { [weak self] in self?.didTapShowAllPrograms() },
         didTapShowAllProfessions: { [weak self] in self?.didTapShowAllProfessions() },
         didTapShowAllUniversities: { [weak self] in self?.didTapShowAllUniversities() },
+        didTapShowAllArticles: { [weak self] in self?.router.navigateToAllArticles() },
         didTapServicesProfession: { [weak self] in self?.router.navigateToProfessions() },
         didTapServicesUniversity: { [weak self] in self?.router.navigateToUniversities() },
         didTapServicesCalendar: { [weak self] in self?.didTapCalendar() },
@@ -83,6 +87,7 @@ final class MainScreenPresenter {
         self.errorService = errorService
     }
     
+    // MARK: - PRIVATE FUNC
     private func applySnapshot(isLoadingOnJournals: Bool = false) {
         let result = snapshotBuilder.build(
             state: currentState,
@@ -96,7 +101,7 @@ final class MainScreenPresenter {
         guard type?.id != selectedJournalTab?.id else { return }
         selectedJournalTab = type
         if let news = newsByTypeId[type?.id], news.count > 0 {
-            self.didReceiveNewsForType(news: news, typeID: type?.id)
+            applySnapshot()
         } else {
             applySnapshot(isLoadingOnJournals: true)
             interactor.getNewsForNewsType(typeID: type?.id)
@@ -107,8 +112,6 @@ final class MainScreenPresenter {
         guard tab != selectedAcademicTab else { return }
         selectedAcademicTab = tab
         applySnapshot()
-        let headerItem = self.snapshotBuilder.buildAcademicHeader(state: currentState, actions: actions)
-        self.view?.reconfigureItems(items: [headerItem])
     }
     
     private func didTapShowAllSteps() {
@@ -157,14 +160,12 @@ extension MainScreenPresenter: MainScreenPresenterProtocol {
         interactor.getNewsTypes()
         
         dispatchGroup.enter()
-        interactor.getNewsTypes()
-        
-        dispatchGroup.enter()
         interactor.getAllNews()
         
         dispatchGroup.notify(queue: .main) { [weak self] in
             self?.applySnapshot()
             self?.view?.hideLoading()
+            self?.isInitialLoading = false
         }
     }
     
@@ -199,19 +200,21 @@ extension MainScreenPresenter: MainScreenPresenterProtocol {
     
     func didReceiveAllNews(news: [ECNews]) {
         self.allNews = news
+        self.newsByTypeId[nil] = news
         dispatchGroup.leave()
     }
 
     func didReceiveNewsForType(news: [ECNews], typeID: Int?) {
         newsByTypeId[typeID] = news
         applySnapshot()
-        let headerItem = self.snapshotBuilder.buildJournalHeader(state: self.currentState, actions: self.actions)
-        self.view?.reconfigureItems(items: [headerItem])
     }
     
     // MARK: - ERROR
     func didReceiveError(error: any Error) {
         let userError = errorService.handle(error)
+        view?.hideLoading()
         view?.showError(errorMessage: userError.message)
+        guard isInitialLoading else { return }
+        dispatchGroup.leave()
     }
 }

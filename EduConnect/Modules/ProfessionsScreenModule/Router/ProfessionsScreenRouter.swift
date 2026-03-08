@@ -5,10 +5,13 @@
 //  Created by Buzurg Rakhimzoda on 14.02.2026
 //
 
+import UIKit
+
 protocol ProfessionsScreenRouterProtocol {
     func openSidebar()
     func openAccount()
     func routeToMain()
+    func routeToProfession(professionID: Int)
 }
 
 final class ProfessionsScreenRouter: ProfessionsScreenRouterProtocol {
@@ -30,5 +33,10 @@ final class ProfessionsScreenRouter: ProfessionsScreenRouterProtocol {
     
     func routeToMain() {
         appRouter.routeToMain()
+    }
+    
+    func routeToProfession(professionID: Int) {
+        let vc = ProfessionDetailsScreenAssembler.assemble(appRouter: appRouter, professionID: professionID)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -25,7 +25,7 @@ final class AccountScreenExpandableFamilyInfoCellViewModel: ExpandableCellViewMo
     }
 }
 
-final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, ConfigurableCellProtocol {
+final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, ExpandableCellProtocol {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let spacing = 10.0
@@ -107,7 +107,7 @@ final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, Configu
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: any CellViewModelProtocol) {
+    func configure(withVM vm: any ExpandableCellViewModel) {
         guard let vm = vm as? AccountScreenExpandableFamilyInfoCellViewModel else { return }
         self.viewModel = vm
         vm.isExpanded ? expandCell() : collapseCell()
@@ -206,7 +206,7 @@ final class AccountScreenExpandableFamilyInfoCell: UICollectionViewCell, Configu
     private func populateFamilies() {
         familyStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         viewModel?.profile.familyContacts.forEach { family in
-            let vm = DeletableFamilyMemberViewModel(name: family.fullName, phoneNumber: family.phoneNumber, typeName: "Семья")
+            let vm = DeletableFamilyMemberViewModel(name: family.fullName, phoneNumber: family.phoneNumber, typeName: family.familyMemberName)
             let view = DeletableFamilyMemberView(viewModel: vm)
             view.setDeleteAction { [weak self] in
                 self?.viewModel?.didTapDeleteFamily?(family)
