@@ -10,10 +10,14 @@ import Foundation
 enum ArticleDetailsSection: Hashable {
     case header
     case body
-    case footer
+    case related
 }
 
 enum ArticleDetailsItem: Hashable {
     case headerItem(DiffableItem<ArticleDetailsHeaderCellViewModel>)
+    case universityItem(DiffableItem<ArticleDetailsUniversityCardCellViewModel>)
     case cardWithImageItem(DiffableItem<CardWithImageCellViewModel>)
+    case sectionHeaderItem(DiffableItem<SectionHeaderCellViewModel>)
+    case loadingItem(DiffableItem<LoadingCellViewModel>)
+    case plainTextItem(DiffableItem<PlainTextCellViewModel>)
 }

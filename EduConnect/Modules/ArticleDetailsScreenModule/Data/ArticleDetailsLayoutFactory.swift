@@ -25,6 +25,7 @@ enum ArticlesDetailsLayoutFactory {
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 15
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 10, trailing: 0)
         return UICollectionViewCompositionalLayout(section: section)
     }
 }

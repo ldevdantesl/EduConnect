@@ -36,7 +36,11 @@ final class ArticleDetailsScreenVC: UIViewController {
         let layout = ArticlesDetailsLayoutFactory.make()
         let cv = DiffableCollectionViewContainer<ArticleDetailsSection, ArticleDetailsItem>(layout: layout)
         cv.registerCell(ArticleDetailsHeaderCell.self, reuseID: ArticleDetailsHeaderCell.identifier)
+        cv.registerCell(ArticleDetailsUniversityCardCell.self, reuseID: ArticleDetailsUniversityCardCell.identifier)
         cv.registerCell(CardWithImageCell.self, reuseID: CardWithImageCell.identifier)
+        cv.registerCell(LoadingCell.self, reuseID: LoadingCell.identifier)
+        cv.registerCell(PlainTextCell.self, reuseID: PlainTextCell.identifier)
+        cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
         cv.backgroundColor = .clear
         return cv
     }()
@@ -72,6 +76,25 @@ final class ArticleDetailsScreenVC: UIViewController {
                 cell?.configure(withVM: item.viewModel)
                 return cell
                 
+            case .universityItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleDetailsUniversityCardCell.identifier, for: indexPath) as? ArticleDetailsUniversityCardCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .sectionHeaderItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionHeaderCell.identifier, for: indexPath) as? SectionHeaderCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .plainTextItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlainTextCell.identifier, for: indexPath) as? PlainTextCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .loadingItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoadingCell.identifier, for: indexPath) as? LoadingCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
                 
             case .cardWithImageItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardWithImageCell.identifier, for: indexPath) as? CardWithImageCell

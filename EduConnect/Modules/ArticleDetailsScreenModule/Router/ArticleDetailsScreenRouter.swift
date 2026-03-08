@@ -11,6 +11,8 @@ protocol ArticleDetailsScreenRouterProtocol {
     func routeToMain()
     func openAccount()
     func goBack()
+    func routeToAnotherNews(news: ECNews)
+    func routeToUniversity(universityID: Int)
 }
 
 final class ArticleDetailsScreenRouter: ArticleDetailsScreenRouterProtocol {
@@ -32,5 +34,15 @@ final class ArticleDetailsScreenRouter: ArticleDetailsScreenRouterProtocol {
     
     func goBack() {
         self.viewController?.navigationController?.popViewController(animated: true)
+    }
+    
+    func routeToAnotherNews(news: ECNews) {
+        let vc = ArticleDetailsScreenAssembler.assemble(appRouter: appRouter, article: news)
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func routeToUniversity(universityID: Int) {
+        let vc = UniversityInfoScreenAssembler.assemble(appRouter: appRouter, universityID: universityID)
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

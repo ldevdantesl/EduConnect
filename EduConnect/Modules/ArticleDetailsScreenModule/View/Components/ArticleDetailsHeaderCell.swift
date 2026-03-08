@@ -96,6 +96,7 @@ final class ArticleDetailsHeaderCell: UICollectionViewCell {
         headerImageView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
             $0.height.equalTo(headerImageView.snp.width).multipliedBy(0.6)
+            $0.bottom.equalToSuperview()
         }
         
         headerImageView.addSubview(containerView)

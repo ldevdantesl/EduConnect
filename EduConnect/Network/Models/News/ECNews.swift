@@ -12,6 +12,11 @@ struct ECNews: Identifiable, Decodable {
         let id: Int
         let name: ECLocalizedString
         let logoURL: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case id, name
+            case logoURL = "logo_url"
+        }
     }
     
     let id: Int

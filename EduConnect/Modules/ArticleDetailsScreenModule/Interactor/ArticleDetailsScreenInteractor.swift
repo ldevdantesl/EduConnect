@@ -8,6 +8,7 @@
 import UIKit
 
 protocol ArticleDetailsScreenInteractorProtocol: AnyObject {
+    func getRelated(article: ECNews)
 }
 
 final class ArticleDetailsScreenInteractor: ArticleDetailsScreenInteractorProtocol {
@@ -16,5 +17,16 @@ final class ArticleDetailsScreenInteractor: ArticleDetailsScreenInteractorProtoc
     
     init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
+    }
+    
+    func getRelated(article: ECNews) {
+        Task {
+            do {
+                let related = try await networkService.news.getRelatedForNews(newsID: article.id, limit: nil)
+                presenter?.didReceiveRelatedNews(related)
+            } catch {
+                presenter?.didReceiveError(error: error)
+            }
+        }
     }
 }
