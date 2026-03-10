@@ -117,9 +117,9 @@ final class AddFamilyMemberPopUpView: PopUpView {
     
     private lazy var familyMenu: UIMenu = {
         let actions = viewModel.familyMembers.map { family in
-            UIAction(title: family.name.ru) { [weak self] _ in
+            UIAction(title: family.name.toCurrentLanguage()) { [weak self] _ in
                 self?.selectedFamily = family
-                var title = AttributedString(family.name.ru)
+                var title = AttributedString(family.name.toCurrentLanguage())
                 title.font = ECFont.font(.semiBold, size: 14)
                 title.foregroundColor = .label
                 self?.chooseFamilyButton.configuration?.attributedTitle = title

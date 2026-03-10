@@ -54,7 +54,7 @@ final class ProgramsScreenPresenter {
     private func applyProgramsToView() {
         let programItems = programs.map {
             ProgramsScreenItem.programItem(
-                .init(id: $0.id, viewModel: ProgramsScreenProgramCellViewModel(programTitle: $0.name.ru, programImageURL: $0.iconURL))
+                .init(id: $0.id, viewModel: ProgramsScreenProgramCellViewModel(programTitle: $0.name.toCurrentLanguage(), programImageURL: $0.iconURL))
             )
         }
         

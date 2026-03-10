@@ -131,7 +131,7 @@ struct MainScreenSnapshotBuilder {
                 let vm = CardWithImageCellViewModel(
                     imageURL: profession.imageURL,
                     preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
-                    title: profession.name.ru, subtitle: profession.description.ru, showsArrowRight: true
+                    title: profession.name.toCurrentLanguage(), subtitle: profession.description.toCurrentLanguage(), showsArrowRight: true
                 ) { actions.didTapProfession(profession) }
                 items.append(.cardWithImageItem(.init(item: profession, prefix: "academic-profession-", viewModel: vm)))
             }
@@ -187,8 +187,8 @@ struct MainScreenSnapshotBuilder {
         }
         newsToShow.forEach { news in
             let vm = CardWithImageCellViewModel(
-                imageURL: news.previewImageURL, preTitle: news.newsType.name.ru,
-                title: news.title.ru, subtitle: news.shortDescription.ru, showsArrowRight: true
+                imageURL: news.previewImageURL, preTitle: news.newsType.name.toCurrentLanguage(),
+                title: news.title.toCurrentLanguage(), subtitle: news.shortDescription.toCurrentLanguage(), showsArrowRight: true
             ) { actions.didTapArticle(news) }
             items.append(.cardWithImageItem(.init(item: news, prefix: "journal-news", viewModel: vm)))
         }

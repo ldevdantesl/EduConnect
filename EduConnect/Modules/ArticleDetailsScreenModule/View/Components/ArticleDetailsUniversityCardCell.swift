@@ -70,8 +70,8 @@ final class ArticleDetailsUniversityCardCell: UICollectionViewCell {
     // MARK: - PUBLIC FUNC
     public func configure(withVM vm: ArticleDetailsUniversityCardCellViewModel) {
         self.viewModel = vm
-        self.nameLabel.text = vm.university.name.ru
-        self.pretitleLabel.text = vm.newsType.name.ru
+        self.nameLabel.text = vm.university.name.toCurrentLanguage()
+        self.pretitleLabel.text = vm.newsType.name.toCurrentLanguage()
         
         guard let url = URL(string: vm.university.logoURL ?? "") else {
             imageView.image = ImageConstants.SystemImages.questionMark.image

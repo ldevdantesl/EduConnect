@@ -52,7 +52,7 @@ final class ProfessionsScreenPresenter {
             professionItems = professions.map { profession in
                 let vm = CardCellViewModel(
                     preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
-                    title: profession.name.ru, subtitle: profession.description.ru, showsArrowRight: true
+                    title: profession.name.toCurrentLanguage(), subtitle: profession.description.toCurrentLanguage(), showsArrowRight: true
                 ) { [weak self] in self?.router.routeToProfession(professionID: profession.id) }
                 return ProfessionScreenItem.cardItem(.init(id: profession.id, viewModel: vm))
             }

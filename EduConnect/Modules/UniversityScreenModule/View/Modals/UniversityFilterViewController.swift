@@ -30,8 +30,8 @@ final class UniversityScreenFilterModalControllerViewModel {
         }
         
         switch option {
-        case .city: return [option.noneTitle] + cities.map { $0.name.ru }
-        case .profession: return [option.noneTitle] + professions.map { $0.name.ru }
+        case .city: return [option.noneTitle] + cities.map { $0.name.toCurrentLanguage() }
+        case .profession: return [option.noneTitle] + professions.map { $0.name.toCurrentLanguage() }
         default: return []
         }
     }

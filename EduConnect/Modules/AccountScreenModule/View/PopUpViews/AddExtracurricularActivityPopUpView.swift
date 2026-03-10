@@ -124,9 +124,9 @@ final class AddExtracurricularActivityPopUpView: PopUpView {
     
     private lazy var activityMenu: UIMenu = {
         let actions = viewModel.activities.map { activity in
-            UIAction(title: activity.name.ru) { [weak self] _ in
+            UIAction(title: activity.name.toCurrentLanguage()) { [weak self] _ in
                 self?.selectedActivity = activity
-                var title = AttributedString(activity.name.ru)
+                var title = AttributedString(activity.name.toCurrentLanguage())
                 title.font = ECFont.font(.semiBold, size: 14)
                 title.foregroundColor = .label
                 

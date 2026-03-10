@@ -137,10 +137,10 @@ final class AddOlympiadPopUpView: PopUpView {
     
     private lazy var olympiadMenu: UIMenu = {
         let actions = viewModel.olympiadTypes.map { type in
-            UIAction(title: type.name.ru) { [weak self] _ in
+            UIAction(title: type.name.toCurrentLanguage()) { [weak self] _ in
                 self?.selectedType = type
                 
-                var title = AttributedString(type.name.ru)
+                var title = AttributedString(type.name.toCurrentLanguage())
                 title.font = ECFont.font(.semiBold, size: 14)
                 title.foregroundColor = .label
                 self?.chooseOlympiadButton.configuration?.attributedTitle = title
@@ -206,7 +206,7 @@ final class AddOlympiadPopUpView: PopUpView {
     private func buildPlaceButtons() {
         placeButtons = viewModel.olympiadPlaces.map { place in
             let button = ECButton(
-                text: place.name.ru,
+                text: place.name.toCurrentLanguage(),
                 backgroundColor: .systemBackground,
                 textColor: .blue
             )

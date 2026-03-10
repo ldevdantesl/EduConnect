@@ -174,7 +174,7 @@ final class MainScreenProgramsCell: UICollectionViewCell {
         }
         
         let label = UILabel()
-        label.text = programCategory.name.ru
+        label.text = programCategory.name.toCurrentLanguage()
         label.font = ECFont.font(.semiBold, size: 14)
         label.textAlignment = .center
         label.numberOfLines = 0

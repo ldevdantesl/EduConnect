@@ -10,4 +10,6 @@ import Foundation
 struct ECLocalizedString: Codable {
     let ru: String
     let kz: String
+    
+    func toCurrentLanguage() -> String { AppLanguage.localize(self) }
 }

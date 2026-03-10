@@ -71,6 +71,7 @@ public enum ConstantLocalizedStrings {
         static let loading = String(localized: .Localizables.commonLoading)
         static let search = String(localized: .Localizables.commonSearch)
         static let sort = String(localized: .Localizables.commonSort)
+        static let attention = String(localized: .Localizables.commonAttention)
     }
     
     /// For __Account__ Tab
@@ -159,6 +160,8 @@ public enum ConstantLocalizedStrings {
         static let tests = String(localized: .Localizables.sidebarTests)
         static let articles = String(localized: .Localizables.sidebarArticles)
         static let calendar = String(localized: .Localizables.sidebarCalendar)
+        static let changeLanguage = String(localized: .Localizables.sidebarChangeLanguage)
+        static let changeLanguageNotice = String(localized: .Localizables.sidebarChangeLanguageNotice)
         static let logOut = String(localized: .Localizables.sidebarLogout)
     }
 }

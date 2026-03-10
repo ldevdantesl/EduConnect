@@ -119,7 +119,7 @@ final class ProfessionDetailsHeaderCell: UICollectionViewCell {
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: ProfessionDetailsHeaderCellViewModel) {
         self.viewModel = vm
-        titleLabel.text = "Профессия \(vm.profession.name.ru)"
+        titleLabel.text = "Профессия \(vm.profession.name.toCurrentLanguage())"
         universityView.firstLineLabel.text = vm.profession.universitiesCount.description
         programView.firstLineLabel.text = vm.profession.programsCount.description
         setENTButton.setAction(action: vm.didTapSetENT)

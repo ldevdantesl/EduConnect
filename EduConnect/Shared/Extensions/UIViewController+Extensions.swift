@@ -145,6 +145,20 @@ extension UIViewController {
         }
     }
     
+    func showAlert(title: String = ConstantLocalizedStrings.Common.attention, message: String, confirmButtonName: String = "OK", confirmAction: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        let cancel = UIAlertAction(title: ConstantLocalizedStrings.Common.cancel, style: .cancel)
+        alert.addAction(cancel)
+        
+        let okAction = UIAlertAction(title: confirmButtonName, style: .default) { _ in
+            confirmAction?()
+        }
+        
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+    
     private func startFloatingAnimation(on view: UIView) {
         let float = CAKeyframeAnimation(keyPath: "transform.translation.y")
         float.values = [0, -8, 0, -8, 0]

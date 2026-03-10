@@ -21,7 +21,7 @@ final class SidebarContainerViewController: UIViewController {
     private let sidebarService: ECSidebarService
     private let rootViewController: UIViewController
     private var isSidebarOpen = false
-    private var isSidebarEnabled = true  // Add this
+    private var isSidebarEnabled = true
     private var sidebarLeadingConstraint: Constraint?
     
     // MARK: - VIEW PROPERTIES

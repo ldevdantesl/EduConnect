@@ -63,7 +63,7 @@ final class ProfessionDetailsScreenPresenter {
                 let vm = CardWithImageCellViewModel(
                     imageURL: profession.imageURL,
                     preTitle: "\(profession.universitiesCount) вуза \(profession.programsCount) программ",
-                    title: profession.name.ru, subtitle: profession.description.ru, showsArrowRight: true,
+                    title: profession.name.toCurrentLanguage(), subtitle: profession.description.toCurrentLanguage(), showsArrowRight: true,
                     didTap: { [weak self] in self?.router.routeToProfession(profession: profession) }
                 )
                 relatedItems.append(.cardWithImageItem(.init(item: profession, prefix: "professions-", viewModel: vm)))

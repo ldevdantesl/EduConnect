@@ -119,7 +119,7 @@ final class MainScreenAcademicProgramCell: UICollectionViewCell {
             self.imageView.image = ImageConstants.appLogo.image
         }
         
-        nameLabel.text = vm.program.name.ru
+        nameLabel.text = vm.program.name.toCurrentLanguage()
         programsLabel.text = "\(vm.program.programsCount) Программ"
         budgetPlaces.text = "0 Бюджетных мест"
         paidPlaces.text = "0 Платных мест"
