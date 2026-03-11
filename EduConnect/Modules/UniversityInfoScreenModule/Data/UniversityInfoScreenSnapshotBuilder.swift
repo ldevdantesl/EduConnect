@@ -57,7 +57,7 @@ struct UniversityInfoScreenSnapshotBuilder {
             university: university,
             didTapProgram: actions.didTapAboutProgram,
             didTapProfession: actions.didTapAboutProfession,
-            didTapNews: actions.didTapAboutFaculty
+            didTapFaculties: actions.didTapAboutFaculty
         )
         return [
             .averageENTScoreItem(.init(id: "averageENTCells", viewModel: entScoresVM)),
