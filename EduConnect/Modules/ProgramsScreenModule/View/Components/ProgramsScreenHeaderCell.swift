@@ -10,14 +10,10 @@ import SnapKit
 
 struct ProgramsScreenHeaderCellViewModel {
     let totalFields: Int
-    let totalSpecializationsBachelor: Int
-    let totalSpecializations: Int
     let totalEducationPrograms: Int
     
-    init(totalFields: Int = 38, totalSpecializationsBachelor: Int = 109, totalSpecializations: Int = 38, totalEducationPrograms: Int = 1202) {
+    init(totalFields: Int = 38, totalEducationPrograms: Int = 1202) {
         self.totalFields = totalFields
-        self.totalSpecializationsBachelor = totalSpecializationsBachelor
-        self.totalSpecializations = totalSpecializations
         self.totalEducationPrograms = totalEducationPrograms
     }
 }
@@ -65,24 +61,6 @@ final class ProgramsScreenHeaderCell: UICollectionViewCell {
         return label
     }()
     
-    private let bachelorTotalLabel: UILabel = {
-        let label = UILabel()
-        label.font = ECFont.font(.regular, size: 16)
-        label.numberOfLines = 3
-        label.textAlignment = .left
-        label.textColor = .systemGray4
-        return label
-    }()
-    
-    private let specializationsTotalLabel: UILabel = {
-        let label = UILabel()
-        label.font = ECFont.font(.regular, size: 16)
-        label.numberOfLines = 3
-        label.textAlignment = .left
-        label.textColor = .systemGray4
-        return label
-    }()
-    
     private let programsTotalLabel: UILabel = {
         let label = UILabel()
         label.font = ECFont.font(.regular, size: 16)
@@ -92,16 +70,8 @@ final class ProgramsScreenHeaderCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var firstTotalsHStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [fieldsTotalLabel, bachelorTotalLabel])
-        stack.axis = .horizontal
-        stack.alignment = .top
-        stack.distribution = .fill
-        return stack
-    }()
-    
-    private lazy var secondTotalsHStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [specializationsTotalLabel, programsTotalLabel])
+    private lazy var hStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [fieldsTotalLabel, programsTotalLabel])
         stack.axis = .horizontal
         stack.alignment = .top
         stack.distribution = .fill
@@ -117,6 +87,13 @@ final class ProgramsScreenHeaderCell: UICollectionViewCell {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - PUBLIC FUNC
+    func configure(withVM vm: ProgramsScreenHeaderCellViewModel) {
+        self.viewModel = vm
+        self.fieldsTotalLabel.text = "\(vm.totalFields)\nнаправлений"
+        self.programsTotalLabel.text = "\(vm.totalEducationPrograms)\nпрограммы обучения"
     }
     
     // MARK: - PRIVATE FUNC
@@ -139,26 +116,11 @@ final class ProgramsScreenHeaderCell: UICollectionViewCell {
             $0.horizontalEdges.equalToSuperview().inset(Constants.bigSpacing)
         }
         
-        containerView.addSubview(firstTotalsHStack)
-        firstTotalsHStack.snp.makeConstraints {
+        containerView.addSubview(hStack)
+        hStack.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(Constants.bigSpacing + Constants.spacing)
-            $0.horizontalEdges.equalToSuperview().inset(Constants.bigSpacing)
-        }
-        
-        containerView.addSubview(secondTotalsHStack)
-        secondTotalsHStack.snp.makeConstraints {
-            $0.top.equalTo(firstTotalsHStack.snp.bottom).offset(Constants.bigSpacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.bigSpacing)
             $0.bottom.equalToSuperview().offset(-Constants.bigSpacing)
         }
-    }
-    
-    // MARK: - PUBLIC FUNC
-    func configure(withVM vm: ProgramsScreenHeaderCellViewModel) {
-        self.viewModel = vm
-        self.fieldsTotalLabel.text = "\(vm.totalFields)\nнаправлений"
-        self.bachelorTotalLabel.text = "\(vm.totalSpecializationsBachelor)\nспециальностей бакалавриата"
-        self.specializationsTotalLabel.text = "\(vm.totalSpecializations)\nспециальностей специалитета"
-        self.programsTotalLabel.text = "\(vm.totalEducationPrograms)\nпрограммы обучения"
     }
 }

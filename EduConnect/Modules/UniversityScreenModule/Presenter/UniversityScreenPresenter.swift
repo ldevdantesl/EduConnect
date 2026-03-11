@@ -44,11 +44,28 @@ final class UniversityScreenPresenter {
     private var totalPages: Int = 1
     private var currentPage: Int = 1
     
-    private let headerVM = UniversityScreenHeaderCellViewModel()
+    private lazy var headerVM = UniversityScreenHeaderCellViewModel(
+        totalUniversities: totalUnis,
+        totalCities: totalCities,
+        totalBudgetSpaces: totalBudgetPlaces
+    )
     private let footerVM = TabsFooterCellViewModel(
         titleLabelText: "Список вузов Казахстана по среднему баллу, стоимости обучения",
         subtitleLabelText: "С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования. "
     )
+    
+    // MARK: - COMPUTED PROPERTIES
+    private var totalUnis: Int {
+        universities.count
+    }
+    
+    private var totalCities: Int {
+        cities.count
+    }
+    
+    private var totalBudgetPlaces: Int {
+        universities.reduce(0) { $0 + $1.budgetPlaces }
+    }
    
     init(interactor: UniversityScreenInteractorProtocol, router: UniversityScreenRouterProtocol, errorService: ErrorServiceProtocol, filters: UniversityFilters? = nil) {
         self.interactor = interactor
@@ -62,13 +79,12 @@ final class UniversityScreenPresenter {
     private func showInitialView() {
         let loadingVM = LoadingCellViewModel()
         view?.applySnapshot(
-            sections: [.header, .footer],
+            sections: [.footer],
             itemsBySection: [
-                .header: [
-                    .headerItem(.init(id: "header", viewModel: headerVM)),
-                    .loadingItem(.init(viewModel: loadingVM))
-                ],
-                .footer: [.footerItem(.init(id: "footer", viewModel: footerVM))]
+                .footer: [
+                    .loadingItem(.init(viewModel: loadingVM)),
+                    .footerItem(.init(id: "footer", viewModel: footerVM))
+                ]
             ]
         )
     }

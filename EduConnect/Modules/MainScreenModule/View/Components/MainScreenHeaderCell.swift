@@ -8,7 +8,15 @@
 import UIKit
 import SnapKit
 
-struct MainScreenHeaderCellViewModel { }
+struct MainScreenHeaderCellViewModel {
+    let programsCount: Int
+    let universitiesCount: Int
+    let bugdetplacesCount: Int
+    
+    private var total: Int {
+        programsCount + universitiesCount + bugdetplacesCount
+    }
+}
 
 final class MainScreenHeaderCell: UICollectionViewCell {
     // MARK: - CONSTANTS
@@ -47,11 +55,8 @@ final class MainScreenHeaderCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var statsStack: UIStackView = {
-        let programsStack = makeStack(titleText: "6731", subtitleText: "программ")
-        let unisStack = makeStack(titleText: "1143", subtitleText: "вузов")
-        let budgetStack = makeStack(titleText: "441343", subtitleText: "бюджетных мест")
-        let stack = UIStackView(arrangedSubviews: [programsStack, unisStack, budgetStack])
+    private let statsStack: UIStackView = {
+        let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 10
         stack.distribution = .fillEqually
@@ -70,9 +75,20 @@ final class MainScreenHeaderCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        statsStack.arrangedSubviews.forEach { $0.removeFromSuperview(); statsStack.removeArrangedSubview($0) }
+    }
+    
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: MainScreenHeaderCellViewModel) {
         self.viewModel = vm
+        let programsStack = makeStack(titleText: vm.programsCount.description, subtitleText: "Программы")
+        let universitiesStack = makeStack(titleText: vm.universitiesCount.description, subtitleText: "Вузы")
+        let budgetStack = makeStack(titleText: vm.bugdetplacesCount.description, subtitleText: "Бюджетных мест")
+        statsStack.addArrangedSubview(programsStack)
+        statsStack.addArrangedSubview(universitiesStack)
+        statsStack.addArrangedSubview(budgetStack)
     }
     
     // MARK: - PRIVATE FUNC

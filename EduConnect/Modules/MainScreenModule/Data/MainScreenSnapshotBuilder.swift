@@ -19,6 +19,9 @@ struct MainScreenSnapshotBuilder {
         let newsTypes: [ECNewsType]
         let allNews: [ECNews]
         let newsByTypeId: [Int?: [ECNews]]
+        let programsCount: Int
+        let universitiesCount: Int
+        let budgetPlacesCount: Int
     }
     
     struct Actions {
@@ -53,14 +56,14 @@ struct MainScreenSnapshotBuilder {
             .academic: buildAcademic(state: state, actions: actions),
             .services: buildServices(state: state, actions: actions),
             .journal: buildJournal(state: state, actions: actions, isLoading: isLoadingOnJournals),
-            .footer: [.footerItem(.init(id: "footer", viewModel: MainScreenFooterCellViewModel()))]
+            .footer: buildFooter(state: state)
         ]
         return (sections, items)
     }
     
     // MARK: - Private builders
     private func buildHeader(state: State, actions: Actions) -> [MainScreenItem] {
-        let headerVM = MainScreenHeaderCellViewModel()
+        let headerVM = MainScreenHeaderCellViewModel(programsCount: state.programsCount, universitiesCount: state.universitiesCount, bugdetplacesCount: state.budgetPlacesCount)
         let stepsVM = MainScreenStepsCellViewModel(
             showingAllItems: state.showingAllSteps,
             didTapChooseProfession: actions.didTapStepsProfession,
@@ -72,6 +75,11 @@ struct MainScreenSnapshotBuilder {
             .headerItem(.init(id: "header", viewModel: headerVM)),
             .stepsItem(.init(viewModel: stepsVM))
         ]
+    }
+    
+    private func buildFooter(state: State) -> [MainScreenItem] {
+        let footerVM = MainScreenFooterCellViewModel(programsCount: state.programsCount, universitiesCount: state.universitiesCount, budgetPlacesCount: state.budgetPlacesCount)
+        return [.footerItem(.init(id: "footer", viewModel: footerVM))]
     }
 
     private func buildCareers(state: State, actions: Actions) -> [MainScreenItem] {

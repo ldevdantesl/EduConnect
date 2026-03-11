@@ -46,6 +46,18 @@ final class MainScreenPresenter {
     private var allNews: [ECNews] = []
     private var newsByTypeId: [Int?: [ECNews]] = [:]
     
+    private var programsCount: Int {
+        programCategories.reduce(0) { $0 + $1.programsCount }
+    }
+    
+    private var universitiesCount: Int {
+        universities.count
+    }
+    
+    private var budgetPlacesCount: Int {
+        universities.reduce(0) { $0 + $1.budgetPlaces }
+    }
+    
     // MARK: - SNAPSHOTING
     private let snapshotBuilder = MainScreenSnapshotBuilder()
     private lazy var actions = MainScreenSnapshotBuilder.Actions(
@@ -76,7 +88,10 @@ final class MainScreenPresenter {
             professions: professions,
             newsTypes: newsTypes,
             allNews: allNews,
-            newsByTypeId: newsByTypeId
+            newsByTypeId: newsByTypeId,
+            programsCount: programsCount,
+            universitiesCount: universitiesCount,
+            budgetPlacesCount: budgetPlacesCount
         )
     }
     
