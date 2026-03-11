@@ -7,17 +7,17 @@
 
 import UIKit
 import SnapKit
-import UniformTypeIdentifiers
+import PhotosUI
 
 struct AddExtracurricularActivityPopUpViewModel: PopUpViewModel {
     var activities: [ECExtracurricularActivity]
     var onClose: (() -> Void)?
-    var didAddNewActivity: ((Int?, String?, [ECAttachedFile]) -> Void)?
+    var didAddNewActivity: ((Int?, String?, [ECAttachedImage]) -> Void)?
     
     init(
         activities: [ECExtracurricularActivity] = [],
         onClose: (() -> Void)? = nil,
-        didAddNewActivity: ((Int?, String?, [ECAttachedFile]) -> Void)? = nil
+        didAddNewActivity: ((Int?, String?, [ECAttachedImage]) -> Void)? = nil
     ) {
         self.activities = activities
         self.onClose = onClose
@@ -84,10 +84,9 @@ final class AddExtracurricularActivityPopUpView: PopUpView {
         return label
     }()
     
-    private let addFilesAttachmentView: ECFileAttachmentView = {
-        let view = ECFileAttachmentView()
-        view.cellsWidth = 200.0
-        view.maxFiles = 3
+    private let addFilesAttachmentView: ECImageAttachmentView = {
+        let view = ECImageAttachmentView()
+        view.maxImages = 3
         return view
     }()
     
@@ -116,7 +115,7 @@ final class AddExtracurricularActivityPopUpView: PopUpView {
         button.setAction { [weak self] in
             let id = self?.selectedActivity?.id
             let text = self?.descriptionTextView.text
-            let files = self?.addFilesAttachmentView.files
+            let files = self?.addFilesAttachmentView.images
             self?.viewModel.didAddNewActivity?(id, text, files ?? [])
         }
         return button
@@ -259,19 +258,20 @@ final class AddExtracurricularActivityPopUpView: PopUpView {
     }
 }
 
-extension AddExtracurricularActivityPopUpView: ECFileAttachmentViewDelegate {
-    func fileAttachmentViewDidTapAdd(_ view: ECFileAttachmentView) {
-        guard view.files.count < addFilesAttachmentView.maxFiles else { return }
-        guard let viewController = findViewController() else { return }
+extension AddExtracurricularActivityPopUpView: ECImageAttachmentViewDelegate {
+    func imageAttachmentViewDidTapAdd(_ view: ECImageAttachmentView) {
+        guard let vc = findViewController() else { return }
         
-        let picker = UIDocumentPickerViewController(forOpeningContentTypes: view.allowedTypes)
+        var config = PHPickerConfiguration()
+        config.selectionLimit = view.maxImages - view.images.count
+        config.filter = .images
+        
+        let picker = PHPickerViewController(configuration: config)
         picker.delegate = self
-        picker.allowsMultipleSelection = false
-        
-        viewController.present(picker, animated: true)
+        vc.present(picker, animated: true)
     }
     
-    func fileAttachmentView(_ view: ECFileAttachmentView, didRemoveFile file: ECAttachedFile) { }
+    func imageAttachmentView(_ view: ECImageAttachmentView, didRemoveImage image: ECAttachedImage) { }
     
     private func findViewController() -> UIViewController? {
         var responder: UIResponder? = self
@@ -285,24 +285,23 @@ extension AddExtracurricularActivityPopUpView: ECFileAttachmentViewDelegate {
     }
 }
 
-extension AddExtracurricularActivityPopUpView: UIDocumentPickerDelegate {
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        let availableSlots = addFilesAttachmentView.maxFiles - addFilesAttachmentView.files.count
-        guard availableSlots > 0 else { return }
-        
-        for url in urls.prefix(availableSlots) {
-            guard url.startAccessingSecurityScopedResource() else { continue }
-            defer { url.stopAccessingSecurityScopedResource() }
-            
-            let resources = try? url.resourceValues(forKeys: [.fileSizeKey])
-            let file = ECAttachedFile(
-                name: url.lastPathComponent,
-                size: Int64(resources?.fileSize ?? 0),
-                url: url,
-                type: UTType(filenameExtension: url.pathExtension)
-            )
-            
-            addFilesAttachmentView.addFile(file)
+extension AddExtracurricularActivityPopUpView: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+
+        for result in results {
+            guard result.itemProvider.canLoadObject(ofClass: UIImage.self) else { continue }
+
+            result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
+                guard let image = object as? UIImage else { return }
+
+                let name = (result.itemProvider.suggestedName ?? UUID().uuidString) + ".jpg"
+                let attachedImage = ECAttachedImage(image: image, name: name)
+
+                DispatchQueue.main.async {
+                    self?.addFilesAttachmentView.addImage(attachedImage)
+                }
+            }
         }
     }
 }

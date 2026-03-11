@@ -8,19 +8,19 @@
 
 import UIKit
 import SnapKit
-import UniformTypeIdentifiers
+import PhotosUI
 
 struct AddOlympiadPopUpViewModel: PopUpViewModel {
     var olympiadTypes: [ECOlympiadType]
     var olympiadPlaces: [ECOlympiadPlace]
     var onClose: (() -> Void)?
-    var didAddNewOlympiad: ((Int?, Int?, String?, [ECAttachedFile]) -> Void)?
+    var didAddNewOlympiad: ((Int?, Int?, String?, [ECAttachedImage]) -> Void)?
     
     init(
         olympiadTypes: [ECOlympiadType],
         olympiadPlaces: [ECOlympiadPlace],
         onClose: (() -> Void)? = nil,
-        didAddNewOlympiad: ((Int?, Int?, String?, [ECAttachedFile]) -> Void)? = nil
+        didAddNewOlympiad: ((Int?, Int?, String?, [ECAttachedImage]) -> Void)? = nil
     ) {
         self.olympiadPlaces = olympiadPlaces
         self.olympiadTypes = olympiadTypes
@@ -96,10 +96,10 @@ final class AddOlympiadPopUpView: PopUpView {
         return label
     }()
     
-    private let addFilesAttachmentView: ECFileAttachmentView = {
-        let view = ECFileAttachmentView()
-        view.cellsWidth = 200.0
-        view.maxFiles = 3
+    private lazy var addFilesAttachmentView: ECImageAttachmentView = {
+        let view = ECImageAttachmentView()
+        view.maxImages = 3
+        view.delegate = self
         return view
     }()
     
@@ -129,7 +129,7 @@ final class AddOlympiadPopUpView: PopUpView {
             let typeID = self?.selectedType?.id
             let placeID = self?.selectedPlace?.id
             let year = self?.yearField.text
-            let files = self?.addFilesAttachmentView.files
+            let files = self?.addFilesAttachmentView.images
             self?.viewModel.didAddNewOlympiad?(typeID, placeID, year, files ?? [])
         }
         return button
@@ -333,8 +333,6 @@ final class AddOlympiadPopUpView: PopUpView {
             $0.bottom.equalToSuperview().offset(-Constants.spacing)
             $0.width.equalToSuperview().multipliedBy(0.4)
         }
-        
-        addFilesAttachmentView.delegate = self
     }
     
     @objc private func didTapCloseButton() {
@@ -342,19 +340,20 @@ final class AddOlympiadPopUpView: PopUpView {
     }
 }
 
-extension AddOlympiadPopUpView: ECFileAttachmentViewDelegate {
-    func fileAttachmentViewDidTapAdd(_ view: ECFileAttachmentView) {
-        guard view.files.count < addFilesAttachmentView.maxFiles else { return }
-        guard let viewController = findViewController() else { return }
+extension AddOlympiadPopUpView: ECImageAttachmentViewDelegate {
+    func imageAttachmentViewDidTapAdd(_ view: ECImageAttachmentView) {
+        guard let vc = findViewController() else { return }
         
-        let picker = UIDocumentPickerViewController(forOpeningContentTypes: view.allowedTypes)
+        var config = PHPickerConfiguration()
+        config.selectionLimit = view.maxImages - view.images.count
+        config.filter = .images
+        
+        let picker = PHPickerViewController(configuration: config)
         picker.delegate = self
-        picker.allowsMultipleSelection = false
-        
-        viewController.present(picker, animated: true)
+        vc.present(picker, animated: true)
     }
     
-    func fileAttachmentView(_ view: ECFileAttachmentView, didRemoveFile file: ECAttachedFile) { }
+    func imageAttachmentView(_ view: ECImageAttachmentView, didRemoveImage image: ECAttachedImage) { }
     
     private func findViewController() -> UIViewController? {
         var responder: UIResponder? = self
@@ -368,25 +367,23 @@ extension AddOlympiadPopUpView: ECFileAttachmentViewDelegate {
     }
 }
 
-extension AddOlympiadPopUpView: UIDocumentPickerDelegate {
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        let availableSlots = addFilesAttachmentView.maxFiles - addFilesAttachmentView.files.count
-        guard availableSlots > 0 else { return }
-        
-        for url in urls.prefix(availableSlots) {
-            guard url.startAccessingSecurityScopedResource() else { continue }
-            defer { url.stopAccessingSecurityScopedResource() }
-            
-            let resources = try? url.resourceValues(forKeys: [.fileSizeKey])
-            let file = ECAttachedFile(
-                name: url.lastPathComponent,
-                size: Int64(resources?.fileSize ?? 0),
-                url: url,
-                type: UTType(filenameExtension: url.pathExtension)
-            )
-            
-            addFilesAttachmentView.addFile(file)
+extension AddOlympiadPopUpView: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+
+        for result in results {
+            guard result.itemProvider.canLoadObject(ofClass: UIImage.self) else { continue }
+
+            result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
+                guard let image = object as? UIImage else { return }
+
+                let name = (result.itemProvider.suggestedName ?? UUID().uuidString) + ".jpg"
+                let attachedImage = ECAttachedImage(image: image, name: name)
+
+                DispatchQueue.main.async {
+                    self?.addFilesAttachmentView.addImage(attachedImage)
+                }
+            }
         }
     }
 }
-

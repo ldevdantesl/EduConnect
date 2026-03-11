@@ -298,12 +298,12 @@ final class AccountScreenPresenter {
         self.interactor.addENTSubject(subject: subject, score: score)
     }
     
-    private func didTapAddOlympiad(typeID: Int?, placeID: Int?, year: String?, files: [ECAttachedFile]) {
+    private func didTapAddOlympiad(typeID: Int?, placeID: Int?, year: String?, files: [ECAttachedImage]) {
         self.view?.showLoading()
         self.interactor.addOlympiad(olympiadTypeID: typeID, olympiadPlaceID: placeID, year: year, files: files)
     }
     
-    private func didTapAddExtracurricular(id: Int?, description: String?, files: [ECAttachedFile]) {
+    private func didTapAddExtracurricular(id: Int?, description: String?, files: [ECAttachedImage]) {
         self.view?.showLoading()
         self.interactor.addExtracurricular(id: id, description: description, files: files)
     }

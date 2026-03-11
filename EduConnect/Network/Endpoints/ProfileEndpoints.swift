@@ -25,11 +25,11 @@ enum ProfileEndpoints: Endpoint {
     case deleteFamilyMember(familyMemberID: Int)
     
     case getOlympiads
-    case addOlympiad(olympiadTypeID: Int?, olympiadPlaceID: Int?, year: String?, files: [ECAttachedFile])
+    case addOlympiad(olympiadTypeID: Int?, olympiadPlaceID: Int?, year: String?, files: [ECAttachedImage])
     case deleteOlympiad(olympiadID: Int)
     
     case getExtracurricular
-    case addExtracurricular(activityID: Int?, description: String?, files: [ECAttachedFile])
+    case addExtracurricular(activityID: Int?, description: String?, files: [ECAttachedImage])
     case deleteExtracurricular(activityID: Int)
     
     case updatePersonal(surname: String?, name: String?, patronymic: String?, phoneNumber: String?)
@@ -60,11 +60,8 @@ enum ProfileEndpoints: Endpoint {
                 fields.append(.init(name: "description", value: .text(description)))
             }
             for file in files {
-                guard file.url.startAccessingSecurityScopedResource() else { continue }
-                defer { file.url.stopAccessingSecurityScopedResource() }
-                if let data = try? Data(contentsOf: file.url) {
-                    let mime = file.type?.preferredMIMEType ?? "application/octet-stream"
-                    fields.append(.init(name: "files[]", value: .file(data: data, fileName: file.name, mimeType: mime)))
+                if let data = file.jpegData {
+                    fields.append(.init(name: "files[]", value: .file(data: data, fileName: file.name, mimeType: "image/jpeg")))
                 }
             }
             return fields
@@ -76,11 +73,8 @@ enum ProfileEndpoints: Endpoint {
                 .init(name: "year", value: .text(year?.description))
             ]
             for file in files {
-                guard file.url.startAccessingSecurityScopedResource() else { continue }
-                defer { file.url.stopAccessingSecurityScopedResource() }
-                if let data = try? Data(contentsOf: file.url) {
-                    let mime = file.type?.preferredMIMEType ?? "application/octet-stream"
-                    fields.append(.init(name: "files[]", value: .file(data: data, fileName: file.name, mimeType: mime)))
+                if let data = file.jpegData {
+                    fields.append(.init(name: "files[]", value: .file(data: data, fileName: file.name, mimeType: "image/jpeg")))
                 }
             }
             return fields
