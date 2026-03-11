@@ -121,8 +121,8 @@ final class MainScreenAcademicProgramCell: UICollectionViewCell {
         
         nameLabel.text = vm.program.name.toCurrentLanguage()
         programsLabel.text = "\(vm.program.programsCount) Программ"
-        budgetPlaces.text = "0 Бюджетных мест"
-        paidPlaces.text = "0 Платных мест"
+        budgetPlaces.text = "34 Бюджетных мест"
+        paidPlaces.text = "31 Платных мест"
     }
     
     // MARK: - PRIVATE FUNC

@@ -49,6 +49,7 @@ final class ApplicationCell: UICollectionViewCell {
         let image = UIImageView()
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
+        image.kf.indicatorType = .activity
         return image
     }()
     
@@ -90,16 +91,6 @@ final class ApplicationCell: UICollectionViewCell {
         label.textColor = .white
         label.backgroundColor = .systemBlue
         label.font = ECFont.font(.bold, size: 14)
-        label.layer.cornerRadius = 15
-        label.clipsToBounds = true
-        return label
-    }()
-    
-    private let statusNameLabel: ECPaddedLabel = {
-        let label = ECPaddedLabel()
-        label.font = ECFont.font(.semiBold, size: 14)
-        label.textColor = .white
-        label.backgroundColor = .systemYellow
         label.layer.cornerRadius = 15
         label.clipsToBounds = true
         return label
@@ -148,7 +139,6 @@ final class ApplicationCell: UICollectionViewCell {
     // MARK: - PUBLIC FUNC
     public func configure(withVM vm: ApplicationCellViewModel) {
         self.viewModel = vm
-        self.backgroundImage.kf.indicatorType = .activity
         self.backgroundImage.kf.setImage(
             with: URL(string: vm.application.university.logoURL),
             options: [
@@ -159,8 +149,19 @@ final class ApplicationCell: UICollectionViewCell {
         self.locationLabel.text = "\(vm.application.university.city.name)"
         self.nameLabel.text = vm.application.university.name
         self.dateLabel.text = ECDateFormatter.formatISODate(vm.application.updatedAt)
-        self.statusNameLabel.text = vm.application.statusName
-        self.inReviewLabel.text = "На рассмотрении"
+        if let _ = vm.application.rejectedAt {
+            self.inReviewLabel.text = ConstantLocalizedStrings.Status.rejected
+            self.inReviewLabel.backgroundColor = .systemRed
+        } else if let _ = vm.application.acceptedAt {
+            self.inReviewLabel.text = ConstantLocalizedStrings.Status.accepted
+            self.inReviewLabel.backgroundColor = .systemYellow
+        } else if let _ = vm.application.reviewedAt {
+            self.inReviewLabel.text = ConstantLocalizedStrings.Status.reviewed
+            self.inReviewLabel.backgroundColor = .systemBlue
+        } else {
+            self.inReviewLabel.text = ConstantLocalizedStrings.Status.inReview
+            self.inReviewLabel.backgroundColor = .systemBlue
+        }
     }
     
     
@@ -183,12 +184,6 @@ final class ApplicationCell: UICollectionViewCell {
         backgroundImage.addSubview(imageOverlayView)
         imageOverlayView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-        }
-        
-        imageOverlayView.addSubview(statusNameLabel)
-        statusNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(Constants.midSpacing)
-            $0.trailing.equalToSuperview().offset(-Constants.midSpacing)
         }
         
         containerView.addSubview(locationLabel)

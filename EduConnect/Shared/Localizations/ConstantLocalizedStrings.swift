@@ -164,4 +164,11 @@ public enum ConstantLocalizedStrings {
         static let changeLanguageNotice = String(localized: .Localizables.sidebarChangeLanguageNotice)
         static let logOut = String(localized: .Localizables.sidebarLogout)
     }
+    
+    enum Status {
+        static let accepted = String(localized: .Localizables.statusAccepted)
+        static let rejected = String(localized: .Localizables.statusRejected)
+        static let inReview = String(localized: .Localizables.statusInReview)
+        static let reviewed = String(localized: .Localizables.statusReviewed)
+    }
 }
