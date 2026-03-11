@@ -23,7 +23,6 @@ struct LoginScreenConfirmRegistrationCellVM {
 final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
-        // Spacing
         static let hSpacing = 15.0
         static let spacing = 5.0
         static let verticalStackSpacing = 25.0
@@ -57,7 +56,11 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
     
     private let backButton: ECIconButton = ECIconButton()
     
-    private let codeField: ECTextField = ECTextField(placeHolder: ConstantLocalizedStrings.Registration.Page2.confirmCodeTextField)
+    private let codeField: ECTextField = {
+        let field = ECTextField(placeHolder: ConstantLocalizedStrings.Registration.Page2.confirmCodeTextField)
+        field.textContentType = .oneTimeCode
+        return field
+    }()
     
     private let confirmButton: ECButton = ECButton(text: ConstantLocalizedStrings.Common.confirm)
     
@@ -111,40 +114,33 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
-        topSpacer.backgroundColor = .clear
-        topSpacer.setContentHuggingPriority(.defaultLow, for: .vertical)
-        topSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        
-        bottomSpacer.backgroundColor = .clear
-        bottomSpacer.setContentHuggingPriority(.defaultLow, for: .vertical)
-        bottomSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        contentView.addSubview(vStack)
+        vStack.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview().inset(Constants.verticalStackSpacing)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
+        }
 
-        vStack.addArrangedSubview(topSpacer)
-        vStack.addArrangedSubview(confirmSignInLabel)
-        vStack.setCustomSpacing(10, after: confirmSignInLabel)
-        vStack.addArrangedSubview(checkEmailLabel)
-        vStack.setCustomSpacing(20, after: checkEmailLabel)
+        [topSpacer, confirmSignInLabel, checkEmailLabel, codeField, confirmButton, resendCodeButton, bottomSpacer].forEach { vStack.addArrangedSubview($0) }
         
-        vStack.addArrangedSubview(codeField)
+        vStack.setCustomSpacing(10, after: confirmSignInLabel)
+        vStack.setCustomSpacing(20, after: checkEmailLabel)
+        vStack.setCustomSpacing(20, after: codeField)
+        vStack.setCustomSpacing(20, after: confirmButton)
+        
         codeField.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.textFieldsHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
-        vStack.setCustomSpacing(20, after: codeField)
         
-        vStack.addArrangedSubview(confirmButton)
         confirmButton.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.buttonHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
-        vStack.setCustomSpacing(20, after: confirmButton)
         
-        vStack.addArrangedSubview(resendCodeButton)
         resendCodeButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
         }
         
-        vStack.addArrangedSubview(bottomSpacer)
         topSpacer.snp.makeConstraints {
             $0.height.equalTo(bottomSpacer.snp.height).multipliedBy(0.6)
         }
@@ -154,13 +150,5 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
             $0.top.equalToSuperview().offset(Constants.hSpacing)
             $0.leading.equalToSuperview().offset(Constants.spacing)
         }
-        
-        self.contentView.addSubview(vStack)
-        vStack.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(Constants.verticalStackSpacing)
-            $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
-        }
-        vStack.addArrangedSubview(bottomSpacer)
-        layoutIfNeeded()
     }
 }

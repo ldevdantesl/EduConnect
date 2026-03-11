@@ -16,6 +16,8 @@ public enum ConstantLocalizedStrings {
             static let signInTitle = String(localized: .Localizables.registrationSignInTitle)
             static let enterEmailSubtitle = String(localized: .Localizables.registrationEnterEmailSubtitle)
             static let enterEmailTextField = String(localized: .Localizables.registrationEnterEmailTextField)
+            static let enterPhoneTextField = String(localized: .Localizables.registrationEnterPhone)
+            static let enterPasswordTextField = String(localized: .Localizables.registrationEnterPasswordTextField)
             static let sendCodeButton = String(localized: .Localizables.registrationSendCodeButton)
         }
         
@@ -44,6 +46,8 @@ public enum ConstantLocalizedStrings {
         enum Words {
             static let login = String(localized: .Localizables.registrationLogin)
             static let register = String(localized: .Localizables.registrationRegister)
+            static let phone = String(localized: .Localizables.registrationPhone)
+            static let email = String(localized: .Localizables.registrationEmail)
         }
     }
     

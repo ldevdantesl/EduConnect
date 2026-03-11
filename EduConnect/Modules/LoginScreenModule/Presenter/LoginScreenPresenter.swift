@@ -67,6 +67,7 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
         items.append(.loginItem(.init(id: "login", viewModel: loginVM)))
         
         let registrationVM = LoginScreenRegistrationCellViewModel { [weak self] in
+            self?.view?.removeKeyboard()
             self?.view?.scrollToPreviousItem()
         } didTapSendCode: { [weak self] in
             self?.didTapSendCode(email: $0)
@@ -80,6 +81,7 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
             self.view?.showError(errorMessage: "Для бета теста используйте код 123456")
             #endif
         } backButtonAction: { [weak self] in
+            self?.view?.removeKeyboard()
             self?.view?.scrollToPreviousItem()
         }
 
@@ -90,6 +92,7 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
             self.didTapSavePassword(password: $0, confirmPassword: $1)
         } backButtonAction: { [weak self] in
             guard let self = self else { return }
+            self.view?.removeKeyboard()
             self.view?.scrollToPreviousItem()
         }
         items.append(.setPasswordItem(.init(id: "setPassword", viewModel: setPasswordVM)))
