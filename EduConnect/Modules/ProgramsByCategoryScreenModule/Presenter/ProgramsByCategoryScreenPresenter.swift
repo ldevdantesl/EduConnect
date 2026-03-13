@@ -5,6 +5,8 @@
 //  Created by Buzurg Rakhimzoda on 13.03.2026
 //
 
+import UIKit
+
 protocol ProgramsByCategoryScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
     func didTapBack()
@@ -44,11 +46,43 @@ final class ProgramsByCategoryScreenPresenter {
     
     private func applySnapshot() {
         let headerVM = ProgramsByCategoryHeaderCellViewModel(totalPrograms: totalPrograms, totalUnis: totalUnis, programCategory: category)
+        let headerSubtitleVM = HeaderWithSubtitleCellViewModel(
+            title: "Программы категории",
+            subtitle: category.name.toCurrentLanguage(),
+            subtitleSize: 20, subtitleColor: .black, alignment: .center
+        )
+        let footerVM = TabsFooterCellViewModel(
+            titleLabelText: category.name.toCurrentLanguage(),
+            subtitleLabelText: "Выбери интересную тебе программу обучения и получи список университетов с этой программой. Ты узнаешь в каких вузах есть соответствующие программы, какие требуются экзамены, минимальные и проходные баллы, стоимость обучения."
+        )
+        
+        let bodyItems: [ProgramsByCategoryItem] = programs.map { program in
+            let vm = DashedProgramCellViewModel(program: program) { [weak self] in self?.router.routeToDetails(program: program)}
+            return .dashedProgramItem(.init(item: program, prefix: "program-", viewModel: vm))
+        }
+        
+        var footerItems: [ProgramsByCategoryItem] = []
+        
+        if programs.isEmpty {
+            let notFoundVM = NotFoundCellViewModel(
+                image: ImageConstants.SystemImages.questionMark.image,
+                title: "Ничего не найдено",
+                subtitle: "Программ в этой категории нету. Вы можете попробовать поискать в других категориях.",
+                horizontallySpaced: true)
+            footerItems.append(.notFoundItem(.init(viewModel: notFoundVM)))
+        }
+        
+        footerItems.append(.footerItem(.init(id: "footer", viewModel: footerVM)))
         
         view?.applySnapshot(
-            sections: [.header],
+            sections: [.header, .body, .footer],
             itemsBySection: [
-                .header : [.headerItem(.init(id: "header", viewModel: headerVM))]
+                .header : [
+                    .headerItem(.init(id: "header", viewModel: headerVM)),
+                    .headerWithSubtitleItem(.init(id: "categoryHeader", viewModel: headerSubtitleVM))
+                ],
+                .body : bodyItems,
+                .footer : footerItems
             ]
         )
     }

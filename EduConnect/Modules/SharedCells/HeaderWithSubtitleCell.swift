@@ -16,11 +16,14 @@ struct HeaderWithSubtitleCellViewModel {
     let subtitle: String
     let subtitleSize: CGFloat
     let subtitleColor: UIColor
+    
+    let alignment: NSTextAlignment
 
     init(
         title: String, titleSize: CGFloat = 20,
         titleColor: UIColor = .black, subtitle: String,
-        subtitleSize: CGFloat = 16, subtitleColor: UIColor = .gray
+        subtitleSize: CGFloat = 16, subtitleColor: UIColor = .gray,
+        alignment: NSTextAlignment = .left
     ) {
         self.title = title
         self.titleColor = titleColor
@@ -29,6 +32,7 @@ struct HeaderWithSubtitleCellViewModel {
         self.subtitle = subtitle
         self.subtitleSize = subtitleSize
         self.subtitleColor = subtitleColor
+        self.alignment = alignment
     }
 }
 
@@ -44,7 +48,6 @@ final class HeaderWithSubtitleCell: UICollectionViewCell {
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
         label.numberOfLines = 0
         return label
     }()
@@ -53,7 +56,6 @@ final class HeaderWithSubtitleCell: UICollectionViewCell {
         let label = UILabel()
         label.font = ECFont.font(.regular, size: 14)
         label.textColor = .systemGray
-        label.textAlignment = .left
         label.numberOfLines = 0
         return label
     }()
@@ -75,9 +77,12 @@ final class HeaderWithSubtitleCell: UICollectionViewCell {
         titleLabel.text = vm.title
         titleLabel.textColor = vm.titleColor
         titleLabel.font = ECFont.font(.bold, size: vm.titleSize)
+        titleLabel.textAlignment = vm.alignment
+        
         subtitleLabel.text = vm.subtitle
         subtitleLabel.textColor = vm.subtitleColor
         subtitleLabel.font = ECFont.font(.regular, size: vm.subtitleSize)
+        subtitleLabel.textAlignment = vm.alignment
     }
     
     // MARK: - PRIVATE FUNC

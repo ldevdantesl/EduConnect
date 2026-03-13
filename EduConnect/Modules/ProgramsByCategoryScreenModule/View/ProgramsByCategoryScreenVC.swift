@@ -20,6 +20,9 @@ final class ProgramsByCategoryScreenVC: UIViewController {
     // MARK: - VIPER
     var presenter: ProgramsByCategoryScreenPresenterProtocol?
     
+    // MARK: - PROPERTIES
+    private let sectionStore = ECDiffableSectionStore<ProgramsByCategorySection>()
+    
     // MARK: - VIEW PROPERTIES
     private lazy var headerView: ECHeaderView = {
         let vm = ECHeaderViewModel { [weak self] in self?.presenter?.didTapAccount() }
@@ -30,12 +33,14 @@ final class ProgramsByCategoryScreenVC: UIViewController {
         return header
     }()
     
-    private let collectionContainer: DiffableCollectionViewContainer = {
-        let cv = DiffableCollectionViewContainer<ProgramsByCategorySection, ProgramsByCategoryItem>(
-            layout: ProgramsByCategoryLayoutFactory.make()
-        )
+    private lazy var collectionContainer: DiffableCollectionViewContainer = {
+        let layout = ProgramsByCategoryLayoutFactory.make(sectionStore: sectionStore)
+        let cv = DiffableCollectionViewContainer<ProgramsByCategorySection, ProgramsByCategoryItem>(layout: layout)
         cv.registerCell(NotFoundCell.self, reuseID: NotFoundCell.identifier)
         cv.registerCell(ProgramsByCategoryHeaderCell.self, reuseID: ProgramsByCategoryHeaderCell.identifier)
+        cv.registerCell(HeaderWithSubtitleCell.self, reuseID: HeaderWithSubtitleCell.identifier)
+        cv.registerCell(DashedProgramCell.self, reuseID: DashedProgramCell.identifier)
+        cv.registerCell(TabsFooterCell.self, reuseID: TabsFooterCell.identifier)
         cv.resignsFirstResponderOnScroll = true
         return cv
     }()
@@ -76,6 +81,22 @@ final class ProgramsByCategoryScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProgramsByCategoryHeaderCell.identifier, for: indexPath) as? ProgramsByCategoryHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
+                
+            case .headerWithSubtitleItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderWithSubtitleCell.identifier, for: indexPath) as? HeaderWithSubtitleCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .dashedProgramItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DashedProgramCell.identifier, for: indexPath) as? DashedProgramCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .footerItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TabsFooterCell.identifier, for: indexPath) as? TabsFooterCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
             }
         }
     }
@@ -83,6 +104,7 @@ final class ProgramsByCategoryScreenVC: UIViewController {
 
 extension ProgramsByCategoryScreenVC: ProgramsByCategoryScreenViewProtocol {
     func applySnapshot(sections: [ProgramsByCategorySection], itemsBySection: [ProgramsByCategorySection : [ProgramsByCategoryItem]]) {
+        sectionStore.update(sections)
         collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
     }
     

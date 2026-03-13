@@ -11,6 +11,7 @@ protocol ProgramsByCategoryScreenRouterProtocol {
     func openAccount()
     func routeToMain()
     func goBack()
+    func routeToDetails(program: ECProgram)
 }
 
 final class ProgramsByCategoryScreenRouter: ProgramsByCategoryScreenRouterProtocol {
@@ -31,5 +32,10 @@ final class ProgramsByCategoryScreenRouter: ProgramsByCategoryScreenRouterProtoc
     
     func goBack() {
         self.viewController?.navigationController?.popViewController(animated: true)
+    }
+    
+    func routeToDetails(program: ECProgram) {
+        let vc = ProgramDetailsScreenAssembler.assemble(appRouter: appRouter, programID: program.id)
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

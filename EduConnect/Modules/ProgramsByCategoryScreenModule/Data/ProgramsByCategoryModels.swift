@@ -16,4 +16,7 @@ enum ProgramsByCategorySection: Hashable {
 enum ProgramsByCategoryItem: Hashable {
     case notFoundItem(DiffableItem<NotFoundCellViewModel>)
     case headerItem(DiffableItem<ProgramsByCategoryHeaderCellViewModel>)
+    case headerWithSubtitleItem(DiffableItem<HeaderWithSubtitleCellViewModel>)
+    case dashedProgramItem(DiffableItem<DashedProgramCellViewModel>)
+    case footerItem(DiffableItem<TabsFooterCellViewModel>)
 }

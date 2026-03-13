@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ECProgram: Decodable {
+struct ECProgram: Identifiable, Decodable {
     
     struct University: Decodable {
         let id: Int
