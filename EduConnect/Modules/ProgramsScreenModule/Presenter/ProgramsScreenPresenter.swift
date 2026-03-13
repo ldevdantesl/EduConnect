@@ -37,7 +37,7 @@ final class ProgramsScreenPresenter {
     }
     
     private var totalPrograms: Int {
-        programs.reduce(0) { $0 + $1.programsCount }
+        programs.reduce(0) { $0 + ($1.programsCount ?? 0) }
     }
 
     init(interactor: ProgramsScreenInteractorProtocol, router: ProgramsScreenRouterProtocol, errorService: ErrorServiceProtocol) {
@@ -60,9 +60,12 @@ final class ProgramsScreenPresenter {
     }
 
     private func applyProgramsToView() {
-        let programItems = programs.map {
-            ProgramsScreenItem.programItem(
-                .init(id: $0.id, viewModel: ProgramsScreenProgramCellViewModel(programTitle: $0.name.toCurrentLanguage(), programImageURL: $0.iconURL))
+        let programItems = programs.map { category in
+            let itemVM = ProgramsScreenProgramCellViewModel(programCategory: category) { [weak self] in
+                self?.router.routeToCategory(category: $0)
+            }
+            return ProgramsScreenItem.programItem(
+                .init(id: category.id, viewModel: itemVM)
             )
         }
         
@@ -81,11 +84,9 @@ extension ProgramsScreenPresenter: ProgramsScreenPresenterProtocol {
     func viewDidLoad() {
         initialSnapshot()
         interactor.getPrograms()
-        print("Loading")
     }
     
     func didReceivePrograms(_ programs: [ECProgramCategory]) {
-        print("Got programs")
         self.programs = programs
         applyProgramsToView()
     }

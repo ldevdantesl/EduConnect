@@ -14,7 +14,8 @@ struct ECProgramCategory: Identifiable, Decodable {
     let icon: String
     let iconURL: String?
     let isActive: Bool
-    let sortOrder, programsCount: Int
+    let sortOrder: Int
+    let programsCount: Int?
 
     enum CodingKeys: String, CodingKey {
         case id, code, name, icon

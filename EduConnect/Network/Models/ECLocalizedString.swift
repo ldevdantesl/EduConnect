@@ -11,5 +11,8 @@ struct ECLocalizedString: Codable {
     let ru: String
     let kz: String
     
-    func toCurrentLanguage() -> String { AppLanguage.localize(self) }
+    func toCurrentLanguage() -> String {
+        let localized = AppLanguage.localize(self)
+        return localized.isEmpty ? self.ru : localized
+    }
 }

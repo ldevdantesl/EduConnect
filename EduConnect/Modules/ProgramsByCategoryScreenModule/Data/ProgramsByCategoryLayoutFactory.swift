@@ -1,5 +1,5 @@
 //
-//  ProgramDetailsLayoutFactory.swift
+//  ProgramsByCategoryLayoutFactory.swift
 //  EduConnect
 //
 //  Created by Buzurg Rakhimzoda on 13.03.2026.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum ProgramDetailsLayoutFactory {
+enum ProgramsByCategoryLayoutFactory {
     static func make() -> UICollectionViewLayout {
         let item = NSCollectionLayoutItem(
             layoutSize: .init(

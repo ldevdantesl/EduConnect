@@ -47,7 +47,7 @@ final class MainScreenPresenter {
     private var newsByTypeId: [Int?: [ECNews]] = [:]
     
     private var programsCount: Int {
-        programCategories.reduce(0) { $0 + $1.programsCount }
+        programCategories.reduce(0) { $0 + ($1.programsCount ?? 0) }
     }
     
     private var universitiesCount: Int {

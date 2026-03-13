@@ -10,12 +10,12 @@ import SnapKit
 import Kingfisher
 
 struct ProgramsScreenProgramCellViewModel {
-    let programTitle: String
-    var programImageURL: String?
+    let programCategory: ECProgramCategory
+    let didTapAction: ((ECProgramCategory) -> Void)?
     
-    init(programTitle: String, programImageURL: String? = nil) {
-        self.programTitle = programTitle
-        self.programImageURL = programImageURL
+    init(programCategory: ECProgramCategory, didTapAction: ((ECProgramCategory) -> Void)? = nil) {
+        self.programCategory = programCategory
+        self.didTapAction = didTapAction
     }
 }
 
@@ -112,8 +112,8 @@ final class ProgramsScreenProgramCell: UICollectionViewCell {
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: ProgramsScreenProgramCellViewModel) {
         self.viewModel = vm
-        self.programTitleLabel.text = vm.programTitle
-        if let urlString = vm.programImageURL,
+        self.programTitleLabel.text = vm.programCategory.name.toCurrentLanguage()
+        if let urlString = vm.programCategory.iconURL,
            let url = URL(string: urlString) {
             programImageView.kf.setImage(with: url)
         } else {
@@ -125,6 +125,7 @@ final class ProgramsScreenProgramCell: UICollectionViewCell {
     private func setupUI() {
         contentView.backgroundColor = .clear
         contentView.layer.addSublayer(dasherBorderLayer)
+        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAction)))
         
         contentView.addSubview(shadowContainerView)
         shadowContainerView.snp.makeConstraints {
@@ -139,6 +140,14 @@ final class ProgramsScreenProgramCell: UICollectionViewCell {
         
         programImageView.snp.makeConstraints {
             $0.size.equalTo(Constants.imageSize)
+        }
+    }
+    
+    // MARK: - OBJC FUNC
+    @objc private func didTapAction() {
+        guard let vm = viewModel else { return }
+        animateTap {
+            vm.didTapAction?(vm.programCategory)
         }
     }
 }

@@ -120,7 +120,7 @@ final class MainScreenAcademicProgramCell: UICollectionViewCell {
         }
         
         nameLabel.text = vm.program.name.toCurrentLanguage()
-        programsLabel.text = "\(vm.program.programsCount) Программ"
+        programsLabel.text = "\(vm.program.programsCount ?? 0) Программ"
         budgetPlaces.text = "34 Бюджетных мест"
         paidPlaces.text = "31 Платных мест"
     }
