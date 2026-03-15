@@ -79,8 +79,8 @@ final class ArticleDetailsHeaderCell: UICollectionViewCell {
     public func configure(withVM vm: ArticleDetailsHeaderCellViewModel) {
         self.viewModel = vm
         pretitleLabel.text = ECDateFormatter.formatISODate(vm.article.createdAt)
-        titleLabel.text = vm.article.title.ru
-        subtitleLabel.text = vm.article.shortDescription.ru
+        titleLabel.text = vm.article.title.toCurrentLanguage()
+        subtitleLabel.text = vm.article.shortDescription.toCurrentLanguage()
         
         guard let url = URL(string: vm.article.previewImageURL) else {
             headerImageView.image = ImageConstants.appLogo.image

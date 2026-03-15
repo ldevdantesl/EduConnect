@@ -11,6 +11,7 @@ protocol ProgramsScreenRouterProtocol {
     func openSidebar() 
     func openAccount()
     func routeToMain()
+    func routeToCategory(category: ECProgramCategory)
 }
 
 final class ProgramsScreenRouter: ProgramsScreenRouterProtocol {
@@ -31,5 +32,10 @@ final class ProgramsScreenRouter: ProgramsScreenRouterProtocol {
     
     func routeToMain() {
         appRouter.routeToMain()
+    }
+    
+    func routeToCategory(category: ECProgramCategory) {
+        let vc = ProgramsByCategoryScreenAssembler.assemble(appRouter: appRouter, category: category)
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -25,10 +25,10 @@ protocol AccountScreenInteractorProtocol: AnyObject {
     func addENTSubject(subject: ENTSubject, score: String)
     func deleteENTSubject(subject: ProfileETH.Subject)
     
-    func addOlympiad(olympiadTypeID: Int?, olympiadPlaceID: Int?, year: String?, files: [ECAttachedFile])
+    func addOlympiad(olympiadTypeID: Int?, olympiadPlaceID: Int?, year: String?, files: [ECAttachedImage])
     func deleteOlympiad(olympiad: ProfileOlympiad)
     
-    func addExtracurricular(id: Int?, description: String?, files: [ECAttachedFile])
+    func addExtracurricular(id: Int?, description: String?, files: [ECAttachedImage])
     func deleteExtracurricular(activity: ProfileExtracurricular)
     
     func setPersonalInfo(name: String?, surname: String?, patronymic: String?, phoneNumber: String?)
@@ -234,7 +234,7 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
         }
     }
     
-    func addOlympiad(olympiadTypeID: Int?, olympiadPlaceID: Int?, year: String?, files: [ECAttachedFile]) {
+    func addOlympiad(olympiadTypeID: Int?, olympiadPlaceID: Int?, year: String?, files: [ECAttachedImage]) {
         Task {
             do {
                 let response = try await networkService.profile.addOlympiad(olympiadTypeID: olympiadTypeID, olympiadPlaceID: olympiadPlaceID, year: year, files: files)
@@ -256,7 +256,7 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
         }
     }
     
-    func addExtracurricular(id: Int?, description: String?, files: [ECAttachedFile]) {
+    func addExtracurricular(id: Int?, description: String?, files: [ECAttachedImage]) {
         Task {
             do {
                 let response = try await networkService.profile.addExtracurricular(activityID: id, description: description, files: files)

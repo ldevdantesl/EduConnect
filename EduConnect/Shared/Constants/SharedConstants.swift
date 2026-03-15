@@ -17,4 +17,6 @@ enum SharedConstants {
     static let screenWidth = UIScreen.main.bounds.width
     
     static let currentLangugage: AppLanguage = .current()
+    
+    static let appVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0"
 }

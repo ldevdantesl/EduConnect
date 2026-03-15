@@ -102,10 +102,10 @@ final class AddENTSubjectPopUpView: PopUpView {
     
     private lazy var subjectMenu: UIMenu = {
         let actions = viewModel.entSubjects.map { subject in
-            UIAction(title: subject.name.ru) { [weak self] _ in
+            UIAction(title: subject.name.toCurrentLanguage()) { [weak self] _ in
                 self?.selectedSubject = subject
 
-                var title = AttributedString(subject.name.ru)
+                var title = AttributedString(subject.name.toCurrentLanguage())
                 title.font = ECFont.font(.semiBold, size: 14)
                 title.foregroundColor = .label
                 self?.chooseSubjectButton.configuration?.attributedTitle = title

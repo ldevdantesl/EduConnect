@@ -21,7 +21,7 @@ final class SidebarContainerViewController: UIViewController {
     private let sidebarService: ECSidebarService
     private let rootViewController: UIViewController
     private var isSidebarOpen = false
-    private var isSidebarEnabled = true  // Add this
+    private var isSidebarEnabled = true
     private var sidebarLeadingConstraint: Constraint?
     
     // MARK: - VIEW PROPERTIES
@@ -38,7 +38,7 @@ final class SidebarContainerViewController: UIViewController {
     }()
     
     private lazy var sidebarMenuView: SidebarMenuView = {
-        let vm = SidebarMenuViewModel(selectedItem: .none) { [weak self] in self?.sidebarService.switchTo(tab: $0) }
+        let vm = SidebarMenuViewModel { [weak self] in self?.sidebarService.switchTo(tab: $0) }
         let menu = SidebarMenuView(viewModel: vm)
         return menu
     }()

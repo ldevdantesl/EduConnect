@@ -26,7 +26,6 @@ final class ECAuthentication: AuthenticationProtocol {
     init(networkService: NetworkServiceProtocol, tokenStorage: TokenStorageProtocol) {
         self.networkService = networkService
         self.tokenStorage = tokenStorage
-        print("token: ", tokenStorage.token ?? "")
     }
     
     var isLoggedIn: Bool {

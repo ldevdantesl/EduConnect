@@ -9,10 +9,18 @@ import Foundation
 
 struct ECProgramDetails: Decodable {
     
-    struct Faculty: Decodable {
+    struct Faculty: Identifiable, Decodable {
         let id: Int
         let name: ECLocalizedString
         let code: String
+        let imageURL: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case id
+            case name
+            case code
+            case imageURL = "image_url"
+        }
     }
     
     let id, universityID: Int
@@ -22,7 +30,7 @@ struct ECProgramDetails: Decodable {
     let name: ECLocalizedString
     let type: Int
     let typeName: String
-    let studyType: String?
+    let studyType: Int?
     let studyTypeName, price: String
     let totalPlaces, budgetPlaces, paidPlaces, occupiedPlaces: Int
     let freePlaces: Int

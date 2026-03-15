@@ -10,6 +10,12 @@
             "value" : "Application"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сауалнама"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25,6 +31,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Application"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сауалнама"
           }
         },
         "ru" : {
@@ -44,6 +56,12 @@
             "value" : "Average Score"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Орташа балл"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -59,6 +77,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Final Class"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Соңғы сынып"
           }
         },
         "ru" : {
@@ -78,6 +102,12 @@
             "value" : "School (Education Center)"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мектеп"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -93,6 +123,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Education"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оқу"
           }
         },
         "ru" : {
@@ -112,6 +148,12 @@
             "value" : "Add Subject"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пән қосу"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -127,6 +169,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Score"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Балл"
           }
         },
         "ru" : {
@@ -146,6 +194,12 @@
             "value" : "ENT Subjects"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ҰБТ пәндері"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -161,6 +215,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ENT"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ҰБТ"
           }
         },
         "ru" : {
@@ -180,6 +240,12 @@
             "value" : "Choose Activity"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Белсенділікті таңдаңыз"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -195,6 +261,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Describe Activity"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Белсенділікті сипаттаңыз"
           }
         },
         "ru" : {
@@ -214,6 +286,12 @@
             "value" : "Add Extracurricular Activity"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сыныптан тыс белсенділікті қосу"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -229,6 +307,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Extracurricular Activity"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сыныптан тыс белсенділік"
           }
         },
         "ru" : {
@@ -248,6 +332,12 @@
             "value" : "Type of Activity"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Белсенділік түрі"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -263,6 +353,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Add Family Contact"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отбасы байланысын қосу"
           }
         },
         "ru" : {
@@ -282,6 +378,12 @@
             "value" : "Family Contact"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отбасы байланысы"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -297,6 +399,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Choose Contact"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Байланысты таңдаңыз"
           }
         },
         "ru" : {
@@ -316,6 +424,12 @@
             "value" : "Father"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Әке"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -331,6 +445,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mother"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ана"
           }
         },
         "ru" : {
@@ -350,6 +470,12 @@
             "value" : "Family Information"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отбасы туралы ақпарат"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -365,6 +491,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Main"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Негізгі"
           }
         },
         "ru" : {
@@ -384,6 +516,12 @@
             "value" : "Welcome"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қош келдіңіз"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -399,6 +537,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "My unis"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мои вузы"
           }
         },
         "ru" : {
@@ -418,6 +562,12 @@
             "value" : "My Universities"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мои вузы"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -433,6 +583,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Name"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аты"
           }
         },
         "ru" : {
@@ -452,6 +608,12 @@
             "value" : "Olympiad"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Олимпиада"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -467,6 +629,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Choose Olympiad"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Олимпиаданы таңдаңыз"
           }
         },
         "ru" : {
@@ -486,6 +654,12 @@
             "value" : "Add Olympiad"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Олимпиада қосу"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -501,6 +675,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Olympiads"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Олимпиадалар"
           }
         },
         "ru" : {
@@ -520,6 +700,12 @@
             "value" : "Patronymic"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Әкесінің аты"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -535,6 +721,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Name"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аты"
           }
         },
         "ru" : {
@@ -554,6 +746,12 @@
             "value" : "Patronymic"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Әкесінің аты"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -569,6 +767,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Surname"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тегі"
           }
         },
         "ru" : {
@@ -588,6 +792,12 @@
             "value" : "Personal Information"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жеке ақпарат"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -603,6 +813,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Surname"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тегі"
           }
         },
         "ru" : {
@@ -622,6 +838,12 @@
             "value" : "Year of Submission"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тапсыру жылы"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -639,10 +861,39 @@
             "value" : "Add"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қосу"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Добавить"
+          }
+        }
+      }
+    },
+    "common_attention" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attention"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назар аударыңыз"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Внимание"
           }
         }
       }
@@ -654,6 +905,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Browse"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қарау"
           }
         },
         "ru" : {
@@ -673,6 +930,12 @@
             "value" : "Cancel"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бас тарту"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -688,6 +951,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Choose"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Таңдау"
           }
         },
         "ru" : {
@@ -707,6 +976,12 @@
             "value" : "City"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қала"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -722,6 +997,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Confirm"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Растау"
           }
         },
         "ru" : {
@@ -741,6 +1022,12 @@
             "value" : "Description"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сипаттама"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -756,6 +1043,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edit"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Өңдеу"
           }
         },
         "ru" : {
@@ -775,6 +1068,12 @@
             "value" : "Files"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Файлдар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -790,6 +1089,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "International"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Халықаралық"
           }
         },
         "ru" : {
@@ -809,6 +1114,12 @@
             "value" : "Loading"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жүктелуде"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -824,6 +1135,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Max"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Макс"
           }
         },
         "ru" : {
@@ -843,6 +1160,12 @@
             "value" : "No file selected"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Файл таңдалмаған"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -858,6 +1181,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Okay"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жарайды"
           }
         },
         "ru" : {
@@ -877,6 +1206,12 @@
             "value" : "Phone Number"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Телефон нөмірі"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -892,6 +1227,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сақтау"
           }
         },
         "ru" : {
@@ -911,6 +1252,12 @@
             "value" : "Search"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Іздеу"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -926,6 +1273,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Set"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Орнату"
           }
         },
         "ru" : {
@@ -945,6 +1298,12 @@
             "value" : "Sort"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сұрыптау"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -960,6 +1319,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "State"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аймақ"
           }
         },
         "ru" : {
@@ -979,6 +1344,12 @@
             "value" : "Subject"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пән"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -994,6 +1365,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Type"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Түрі"
           }
         },
         "ru" : {
@@ -1013,6 +1390,12 @@
             "value" : "Please enter the 6-digit code sent to your email address. If you didn’t receive the message, check your «Spam» folder or request a resend."
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Электрондық поштаңызға жіберілген 6 таңбалы кодты енгізіңіз. Егер хабарлама келмесе, «Спам» қалтасын тексеріңіз немесе қайта жіберуді сұраңыз."
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1028,6 +1411,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Confirm Code"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кодты растау"
           }
         },
         "ru" : {
@@ -1047,6 +1436,12 @@
             "value" : "Confirm Sign In"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кіруді растау"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1064,10 +1459,62 @@
             "value" : "Create a secure password to access your personal account.\nThe password must contain at least 8 characters."
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жеке аккаунтыңызға кіру үшін қауіпсіз құпиясөз жасаңыз.\nҚұпиясөз кемінде 8 таңбадан тұруы керек."
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Придумайте надежный пароль для входа в личный кабинет. Пароль должен содержать не менее 8 символов."
+          }
+        }
+      }
+    },
+    "registration_email" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пошта"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Почта"
+          }
+        }
+      }
+    },
+    "registration_enterEmail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter Email"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Электрондық поштаны енгізіңіз"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите email"
           }
         }
       }
@@ -1079,6 +1526,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter your active email address.\nA one-time code will be sent to it to confirm your registration"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Белсенді электрондық пошта мекенжайыңызды енгізіңіз.\nТіркелуіңізді растау үшін оған бір реттік код жіберіледі."
           }
         },
         "ru" : {
@@ -1098,10 +1551,62 @@
             "value" : "Enter your email"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Электрондық поштаңызды енгізіңіз"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Введите email"
+          }
+        }
+      }
+    },
+    "registration_enterPasswordTextField" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter password"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Құпиясөзді енгізіңіз"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите пароль"
+          }
+        }
+      }
+    },
+    "registration_enterPhone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter phone number"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Телефон нөмірін енгізіңіз"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите номер телефона"
           }
         }
       }
@@ -1113,6 +1618,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Go to Account"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аккаунтқа өту"
           }
         },
         "ru" : {
@@ -1132,10 +1643,39 @@
             "value" : "Log in"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кіру"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Войти"
+          }
+        }
+      }
+    },
+    "registration_phone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phone"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Телефон"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Телефон"
           }
         }
       }
@@ -1147,6 +1687,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Re-enter new password"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жаңа құпиясөзді қайта енгізіңіз"
           }
         },
         "ru" : {
@@ -1166,6 +1712,12 @@
             "value" : "Register"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тіркелу"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1181,6 +1733,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Resend Code"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кодты қайта жіберу"
           }
         },
         "ru" : {
@@ -1200,6 +1758,12 @@
             "value" : "Save Password"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Құпиясөзді сақтау"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1215,6 +1779,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Send Code"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Код жіберу"
           }
         },
         "ru" : {
@@ -1234,6 +1804,12 @@
             "value" : "New Password"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жаңа құпиясөз"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1249,6 +1825,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Set Password"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Құпиясөзді орнату"
           }
         },
         "ru" : {
@@ -1268,6 +1850,12 @@
             "value" : "You have successfully registered in the system.\nYou can now log in to your personal account using your email and password."
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сіз жүйеде сәтті тіркелдіңіз.\nЕнді жеке аккаунтыңызға email және құпиясөз арқылы кіре аласыз."
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1283,6 +1871,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Registration Completed"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тіркелу аяқталды"
           }
         },
         "ru" : {
@@ -1302,6 +1896,12 @@
             "value" : "Sign In"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кіру"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1317,6 +1917,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Go to Main"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Басты бетке өту"
           }
         },
         "ru" : {
@@ -1336,6 +1942,12 @@
             "value" : "Articles"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мақалалар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1353,10 +1965,62 @@
             "value" : "Calendar"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Күнтізбе"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Календарь"
+          }
+        }
+      }
+    },
+    "sidebar_changeLanguage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тіл"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Язык"
+          }
+        }
+      }
+    },
+    "sidebar_changeLanguageNotice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change language from settings"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тілді баптаулардан өзгерту"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Измените язык в настройках"
           }
         }
       }
@@ -1368,6 +2032,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Log Out"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шығу"
           }
         },
         "ru" : {
@@ -1387,6 +2057,12 @@
             "value" : "Main"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Басты"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1402,6 +2078,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Professions"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандықтар"
           }
         },
         "ru" : {
@@ -1421,6 +2103,12 @@
             "value" : "Programs"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бағдарламалар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1436,6 +2124,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tests"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тесттер"
           }
         },
         "ru" : {
@@ -1455,10 +2149,108 @@
             "value" : "Universities"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттер"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Вузы"
+          }
+        }
+      }
+    },
+    "status_accepted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accepted"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қабылданды"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Принята"
+          }
+        }
+      }
+    },
+    "status_inReview" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In Review"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тексерілуде"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "На рассмотрении"
+          }
+        }
+      }
+    },
+    "status_rejected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rejected"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қабылданбады"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отказана"
+          }
+        }
+      }
+    },
+    "status_reviewed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reviewed"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қаралды"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рассмотрена"
           }
         }
       }

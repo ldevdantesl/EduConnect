@@ -8,7 +8,11 @@
 import UIKit
 import SnapKit
 
-struct MainScreenFooterCellViewModel { }
+struct MainScreenFooterCellViewModel {
+    let programsCount: Int
+    let universitiesCount: Int
+    let budgetPlacesCount: Int
+}
 
 final class MainScreenFooterCell: UICollectionViewCell {
     // MARK: - CONSTANTS
@@ -40,91 +44,9 @@ final class MainScreenFooterCell: UICollectionViewCell {
         return stack
     }()
     
-    private let programsStatView: UIView = {
-        let container = UIView()
-        
-        let numberLabel = UILabel()
-        numberLabel.text = "929"
-        numberLabel.font = ECFont.font(.bold, size: 18)
-        numberLabel.textColor = .label
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "программы"
-        titleLabel.font = ECFont.font(.regular, size: 14)
-        titleLabel.textColor = .secondaryLabel
-        
-        container.addSubview(numberLabel)
-        numberLabel.snp.makeConstraints {
-            $0.top.leading.equalToSuperview()
-        }
-        
-        container.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(numberLabel.snp.bottom).offset(4)
-            $0.leading.bottom.equalToSuperview()
-        }
-        
-        return container
-    }()
-    
-    private let privateUnisStatView: UIView = {
-        let container = UIView()
-        
-        let numberLabel = UILabel()
-        numberLabel.text = "305"
-        numberLabel.font = ECFont.font(.bold, size: 18)
-        numberLabel.textColor = .label
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "частных\nвузов"
-        titleLabel.font = ECFont.font(.regular, size: 14)
-        titleLabel.textColor = .secondaryLabel
-        titleLabel.numberOfLines = 2
-        
-        container.addSubview(numberLabel)
-        numberLabel.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
-        }
-        
-        container.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(numberLabel.snp.bottom).offset(4)
-            $0.horizontalEdges.bottom.equalToSuperview()
-        }
-        
-        return container
-    }()
-    
-    private let studentsStatView: UIView = {
-        let container = UIView()
-        
-        let numberLabel = UILabel()
-        numberLabel.text = "4 458 343"
-        numberLabel.font = ECFont.font(.bold, size: 18)
-        numberLabel.textColor = .label
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "студента"
-        titleLabel.font = ECFont.font(.regular, size: 14)
-        titleLabel.textColor = .secondaryLabel
-        
-        container.addSubview(numberLabel)
-        numberLabel.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
-        }
-        
-        container.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(numberLabel.snp.bottom).offset(4)
-            $0.horizontalEdges.bottom.equalToSuperview()
-        }
-        
-        return container
-    }()
-    
     private let percentageTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "62,09% учатся очно"
+        label.text = "Образование в Казахстане"
         label.font = ECFont.font(.semiBold, size: 16)
         label.textColor = .systemGray
         return label
@@ -132,7 +54,7 @@ final class MainScreenFooterCell: UICollectionViewCell {
     
     private let percentageSubtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "89,6% в государственных вузах 10,4% в частных вузах"
+        label.text = "Доступное качественное образование для всех"
         label.font = ECFont.font(.regular, size: 14)
         label.textColor = .secondaryLabel
         label.numberOfLines = 2
@@ -162,22 +84,57 @@ final class MainScreenFooterCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        statsStack.arrangedSubviews.forEach { $0.removeFromSuperview(); statsStack.removeArrangedSubview($0) }
+    }
+    
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: MainScreenFooterCellViewModel) {
         self.viewModel = vm
+        let programsStatView = makeStatView(number: vm.programsCount, subtitle: "программы")
+        let privateUnisStatView = makeStatView(number: vm.universitiesCount, subtitle: "частных вузов")
+        let budgetPlacesCount = makeStatView(number: vm.budgetPlacesCount, subtitle: "бюджетных мест")
+        statsStack.addArrangedSubview(programsStatView)
+        statsStack.addArrangedSubview(privateUnisStatView)
+        statsStack.addArrangedSubview(budgetPlacesCount)
     }
     
     // MARK: - PRIVATE FUNC
+    private func makeStatView(number: Int, subtitle: String) -> UIView {
+        let container = UIView()
+
+        let numberLabel = UILabel()
+        numberLabel.text = "\(number)"
+        numberLabel.font = ECFont.font(.bold, size: 18)
+        numberLabel.textColor = .label
+
+        let titleLabel = UILabel()
+        titleLabel.text = subtitle
+        titleLabel.font = ECFont.font(.regular, size: 14)
+        titleLabel.textColor = .secondaryLabel
+        titleLabel.numberOfLines = 0
+
+        container.addSubview(numberLabel)
+        numberLabel.snp.makeConstraints {
+            $0.top.horizontalEdges.equalToSuperview()
+        }
+
+        container.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(numberLabel.snp.bottom).offset(4)
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
+
+        return container
+    }
+    
     private func setupUI() {
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Constants.hugeSpacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.bigSpacing)
         }
-        
-        statsStack.addArrangedSubview(programsStatView)
-        statsStack.addArrangedSubview(privateUnisStatView)
-        statsStack.addArrangedSubview(studentsStatView)
         
         contentView.addSubview(statsStack)
         statsStack.snp.makeConstraints {

@@ -12,18 +12,18 @@ struct UniversityInfoScreenAboutCellViewModel {
     let university: ECUniversity
     let didTapProgram: (() -> Void)?
     let didTapProfession: (() -> Void)?
-    let didTapNews: (() -> Void)?
+    let didTapFaculties: (() -> Void)?
     
     init(
         university: ECUniversity,
         didTapProgram: (() -> Void)? = nil,
         didTapProfession: (() -> Void)? = nil,
-        didTapNews: (() -> Void)? = nil
+        didTapFaculties: (() -> Void)? = nil
     ) {
         self.university = university
         self.didTapProgram = didTapProgram
         self.didTapProfession = didTapProfession
-        self.didTapNews = didTapNews
+        self.didTapFaculties = didTapFaculties
     }
 }
 
@@ -82,7 +82,7 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell {
     
     private let articlesButton: ECDashedBorderButton = {
         let button = ECDashedBorderButton()
-        button.titleText = "Новости"
+        button.titleText = "Факультеты"
         button.cornerRadius = Constants.buttonsCornerRadius
         button.titleFont = ECFont.font(.semiBold, size: 14)
         button.subtitleFont = ECFont.font(.semiBold, size: 14)
@@ -121,11 +121,11 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell {
         configureFeatures()
         programsButton.subtitleText = "(\(vm.university.programsCount))"
         professionsButton.subtitleText = "(\(vm.university.professions.count))"
-        articlesButton.subtitleText = "(0)"
+        articlesButton.subtitleText = "(\(vm.university.facultiesCount))"
         aboutUniversityLabel.text = vm.university.description
         programsButton.setAction(action: vm.didTapProgram)
         professionsButton.setAction(action: vm.didTapProfession)
-        articlesButton.setAction(action: vm.didTapNews)
+        articlesButton.setAction(action: vm.didTapFaculties)
     }
     
     // MARK: - PRIVATE FUNC

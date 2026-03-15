@@ -121,7 +121,10 @@ final class AppRouter: AppRoutingProtocol {
                 }
             }
             
-        case .none: print("Not navigating")
+        case .changeLanguage:
+            self.sidebarService.container?.showAlert(message: ConstantLocalizedStrings.Sidebar.changeLanguageNotice) {
+                ECAppOpener.openSettings()
+            }
         }
     }
 }

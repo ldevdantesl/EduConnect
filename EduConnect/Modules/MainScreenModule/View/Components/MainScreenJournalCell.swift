@@ -123,7 +123,7 @@ final class MainScreenJournalCell: UICollectionViewCell {
         tabsStack.addArrangedSubview(allButton)
         
         types.enumerated().forEach { index, type in
-            let button = makeTabButton(title: type.name.ru, tag: index)
+            let button = makeTabButton(title: type.name.toCurrentLanguage(), tag: index)
             tabButtons.append(button)
             tabsStack.addArrangedSubview(button)
         }

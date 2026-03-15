@@ -18,6 +18,7 @@ protocol MainScreenRouterProtocol {
     func navigateToProfession(profession: ECProfession)
     func navigateToAllArticles()
     func routeToArticleDetails(article: ECNews)
+    func routeToProgramCategory(category: ECProgramCategory)
 }
 
 final class MainScreenRouter: MainScreenRouterProtocol {
@@ -69,6 +70,11 @@ final class MainScreenRouter: MainScreenRouterProtocol {
     
     func navigateToProfession(profession: ECProfession) {
         let vc = ProfessionDetailsScreenAssembler.assemble(appRouter: appRouter, professionID: profession.id)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func routeToProgramCategory(category: ECProgramCategory) {
+        let vc = ProgramsByCategoryScreenAssembler.assemble(appRouter: appRouter, category: category)
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

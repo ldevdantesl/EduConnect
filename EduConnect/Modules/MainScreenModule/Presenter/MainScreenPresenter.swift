@@ -46,6 +46,18 @@ final class MainScreenPresenter {
     private var allNews: [ECNews] = []
     private var newsByTypeId: [Int?: [ECNews]] = [:]
     
+    private var programsCount: Int {
+        programCategories.reduce(0) { $0 + ($1.programsCount ?? 0) }
+    }
+    
+    private var universitiesCount: Int {
+        universities.count
+    }
+    
+    private var budgetPlacesCount: Int {
+        universities.reduce(0) { $0 + $1.budgetPlaces }
+    }
+    
     // MARK: - SNAPSHOTING
     private let snapshotBuilder = MainScreenSnapshotBuilder()
     private lazy var actions = MainScreenSnapshotBuilder.Actions(
@@ -55,6 +67,7 @@ final class MainScreenPresenter {
         didTapShowAllSteps: { [weak self] in self?.didTapShowAllSteps() },
         didTapUniversity: { [weak self] in self?.didTapUniversity(university: $0) },
         didTapProfession: { [weak self] in self?.router.navigateToProfession(profession: $0) },
+        didTapProgramCategory: { [weak self] in self?.router.routeToProgramCategory(category: $0) },
         didTapArticle: { [weak self] in self?.router.routeToArticleDetails(article: $0) },
         didTapShowAllPrograms: { [weak self] in self?.didTapShowAllPrograms() },
         didTapShowAllProfessions: { [weak self] in self?.didTapShowAllProfessions() },
@@ -76,7 +89,10 @@ final class MainScreenPresenter {
             professions: professions,
             newsTypes: newsTypes,
             allNews: allNews,
-            newsByTypeId: newsByTypeId
+            newsByTypeId: newsByTypeId,
+            programsCount: programsCount,
+            universitiesCount: universitiesCount,
+            budgetPlacesCount: budgetPlacesCount
         )
     }
     

@@ -40,6 +40,16 @@ final class LoginScreenRegistrationCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var loginTypeSwitcher: UISegmentedControl = {
+        let control = UISegmentedControl(items: [ConstantLocalizedStrings.Registration.Words.email, ConstantLocalizedStrings.Registration.Words.phone])
+        control.selectedSegmentIndex = 0
+        control.selectedSegmentTintColor = .systemBlue
+        control.setTitleTextAttributes([.foregroundColor: UIColor.white, .font: ECFont.font(.semiBold, size: 14)], for: .selected)
+        control.setTitleTextAttributes([.foregroundColor: UIColor.label, .font: ECFont.font(.medium, size: 14)], for: .normal)
+        control.addTarget(self, action: #selector(loginTypeChanged(_:)), for: .valueChanged)
+        return control
+    }()
+    
     private let backButton: ECIconButton = {
         let backButtonVM = ECIconButtonVM(
             systemImage: ImageConstants.SystemImages.chevronLeft.rawValue,
@@ -59,7 +69,12 @@ final class LoginScreenRegistrationCell: UICollectionViewCell {
         return label
     }()
     
-    private let emailTextField: ECTextField = ECTextField(placeHolder: ConstantLocalizedStrings.Registration.Page1.enterEmailTextField)
+    private let emailTextField: ECTextField = {
+        let field = ECTextField(placeHolder: ConstantLocalizedStrings.Registration.Page1.enterEmailTextField)
+        field.keyboardType = .emailAddress
+        field.textContentType = .username
+        return field
+    }()
     
     private let sendCodeButton: ECButton = ECButton(text: ConstantLocalizedStrings.Registration.Page1.sendCodeButton)
     
@@ -101,35 +116,31 @@ final class LoginScreenRegistrationCell: UICollectionViewCell {
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
-        emailTextField.keyboardType = .emailAddress
-        topSpacer.backgroundColor = .clear
-        topSpacer.setContentHuggingPriority(.defaultLow, for: .vertical)
-        topSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        contentView.addSubview(vStack)
+        vStack.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview().inset(Constants.verticalStackSpacing)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
+        }
         
-        bottomSpacer.backgroundColor = .clear
-        bottomSpacer.setContentHuggingPriority(.defaultLow, for: .vertical)
-        bottomSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-
-        vStack.addArrangedSubview(topSpacer)
-        vStack.addArrangedSubview(signInTitleLabel)
+        [topSpacer, signInTitleLabel, enterEmailLabel, loginTypeSwitcher, emailTextField, sendCodeButton, bottomSpacer].forEach {
+            vStack.addArrangedSubview($0)
+        }
+        
         vStack.setCustomSpacing(10, after: signInTitleLabel)
-        vStack.addArrangedSubview(enterEmailLabel)
-        vStack.setCustomSpacing(30, after: enterEmailLabel)
+        vStack.setCustomSpacing(20, after: enterEmailLabel)
+        vStack.setCustomSpacing(20, after: loginTypeSwitcher)
+        vStack.setCustomSpacing(20, after: emailTextField)
         
-        vStack.addArrangedSubview(emailTextField)
         emailTextField.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.textFieldsHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
-        vStack.setCustomSpacing(20, after: emailTextField)
         
-        vStack.addArrangedSubview(sendCodeButton)
         sendCodeButton.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.buttonHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
         
-        vStack.addArrangedSubview(bottomSpacer)
         topSpacer.snp.makeConstraints {
             $0.height.equalTo(bottomSpacer.snp.height).multipliedBy(0.6)
         }
@@ -140,11 +151,21 @@ final class LoginScreenRegistrationCell: UICollectionViewCell {
             $0.leading.equalToSuperview().offset(Constants.spacing)
         }
         
-        
-        contentView.addSubview(vStack)
-        vStack.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(Constants.verticalStackSpacing)
-            $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
+        topSpacer.snp.makeConstraints {
+            $0.height.equalTo(bottomSpacer.snp.height).multipliedBy(0.6)
+        }
+    }
+    
+    // MARK: - OBJC FUNC
+    @objc private func loginTypeChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            emailTextField.placeholder = ConstantLocalizedStrings.Registration.Page1.enterEmailTextField
+            emailTextField.keyboardType = .emailAddress
+            emailTextField.textContentType = .username
+        } else {
+            emailTextField.placeholder = ConstantLocalizedStrings.Registration.Page1.enterPhoneTextField
+            emailTextField.keyboardType = .phonePad
+            emailTextField.textContentType = .telephoneNumber
         }
     }
 }

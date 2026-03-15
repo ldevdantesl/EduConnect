@@ -19,6 +19,9 @@ struct MainScreenSnapshotBuilder {
         let newsTypes: [ECNewsType]
         let allNews: [ECNews]
         let newsByTypeId: [Int?: [ECNews]]
+        let programsCount: Int
+        let universitiesCount: Int
+        let budgetPlacesCount: Int
     }
     
     struct Actions {
@@ -28,6 +31,7 @@ struct MainScreenSnapshotBuilder {
         let didTapShowAllSteps: () -> Void
         let didTapUniversity: (ECUniversity) -> Void
         let didTapProfession: (ECProfession) -> Void
+        let didTapProgramCategory: (ECProgramCategory) -> Void
         let didTapArticle: (ECNews) -> Void
         let didTapShowAllPrograms: () -> Void
         let didTapShowAllProfessions: () -> Void
@@ -53,14 +57,14 @@ struct MainScreenSnapshotBuilder {
             .academic: buildAcademic(state: state, actions: actions),
             .services: buildServices(state: state, actions: actions),
             .journal: buildJournal(state: state, actions: actions, isLoading: isLoadingOnJournals),
-            .footer: [.footerItem(.init(id: "footer", viewModel: MainScreenFooterCellViewModel()))]
+            .footer: buildFooter(state: state)
         ]
         return (sections, items)
     }
     
     // MARK: - Private builders
     private func buildHeader(state: State, actions: Actions) -> [MainScreenItem] {
-        let headerVM = MainScreenHeaderCellViewModel()
+        let headerVM = MainScreenHeaderCellViewModel(programsCount: state.programsCount, universitiesCount: state.universitiesCount, bugdetplacesCount: state.budgetPlacesCount)
         let stepsVM = MainScreenStepsCellViewModel(
             showingAllItems: state.showingAllSteps,
             didTapChooseProfession: actions.didTapStepsProfession,
@@ -72,6 +76,11 @@ struct MainScreenSnapshotBuilder {
             .headerItem(.init(id: "header", viewModel: headerVM)),
             .stepsItem(.init(viewModel: stepsVM))
         ]
+    }
+    
+    private func buildFooter(state: State) -> [MainScreenItem] {
+        let footerVM = MainScreenFooterCellViewModel(programsCount: state.programsCount, universitiesCount: state.universitiesCount, budgetPlacesCount: state.budgetPlacesCount)
+        return [.footerItem(.init(id: "footer", viewModel: footerVM))]
     }
 
     private func buildCareers(state: State, actions: Actions) -> [MainScreenItem] {
@@ -85,6 +94,7 @@ struct MainScreenSnapshotBuilder {
     private func buildPrograms(state: State, actions: Actions) -> [MainScreenItem] {
         let vm = MainScreenProgramsCellViewModel(
             programs: state.programCategories,
+            didTapProgram: actions.didTapProgramCategory,
             didTapShowAll: actions.didTapShowAllPrograms
         )
         return [.programItem(.init(id: "programs", viewModel: vm))]
@@ -117,7 +127,7 @@ struct MainScreenSnapshotBuilder {
 
         case .programs:
             state.programCategories.prefix(3).forEach { program in
-                let vm = MainScreenAcademicProgramCellViewModel(program: program)
+                let vm = MainScreenAcademicProgramCellViewModel(program: program, didTapProgram: actions.didTapProgramCategory)
                 items.append(.academicProgram(.init(item: program, prefix: "academic-program", viewModel: vm)))
             }
             let vm = MainScreenAcademicShowAllCellViewModel(
@@ -131,7 +141,7 @@ struct MainScreenSnapshotBuilder {
                 let vm = CardWithImageCellViewModel(
                     imageURL: profession.imageURL,
                     preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
-                    title: profession.name.ru, subtitle: profession.description.ru, showsArrowRight: true
+                    title: profession.name.toCurrentLanguage(), subtitle: profession.description.toCurrentLanguage(), showsArrowRight: true
                 ) { actions.didTapProfession(profession) }
                 items.append(.cardWithImageItem(.init(item: profession, prefix: "academic-profession-", viewModel: vm)))
             }
@@ -187,8 +197,8 @@ struct MainScreenSnapshotBuilder {
         }
         newsToShow.forEach { news in
             let vm = CardWithImageCellViewModel(
-                imageURL: news.previewImageURL, preTitle: news.newsType.name.ru,
-                title: news.title.ru, subtitle: news.shortDescription.ru, showsArrowRight: true
+                imageURL: news.previewImageURL, preTitle: news.newsType.name.toCurrentLanguage(),
+                title: news.title.toCurrentLanguage(), subtitle: news.shortDescription.toCurrentLanguage(), showsArrowRight: true
             ) { actions.didTapArticle(news) }
             items.append(.cardWithImageItem(.init(item: news, prefix: "journal-news", viewModel: vm)))
         }

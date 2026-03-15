@@ -11,14 +11,20 @@ enum AppLanguage: String {
     case en, ru, kz
 
     static func current() -> AppLanguage {
-        let code = Locale.preferredLanguages.first?
-            .components(separatedBy: "-")
-            .first
-
+        let code = Bundle.main.preferredLocalizations.first
+        
         switch code {
         case "ru": return .ru
         case "kk": return .kz
         default: return .en
+        }
+    }
+    
+    static func localize(_ localizedString: ECLocalizedString) -> String {
+        let current = current()
+        switch current {
+        case .kz: return localizedString.kz
+        default: return localizedString.ru
         }
     }
 }

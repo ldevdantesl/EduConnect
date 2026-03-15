@@ -68,7 +68,7 @@ final class ShowENTPopupCell: UICollectionViewCell {
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: ShowENTPopupCellViewModel) {
         self.viewModel = vm
-        self.nameLabel.text = vm.subject.name.ru
+        self.nameLabel.text = vm.subject.name.toCurrentLanguage()
         self.selectedRangeIndex = vm.selectedRangeIndex
         updateAllButtonStates()
     }

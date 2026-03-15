@@ -94,44 +94,30 @@ final class LoginScreenCompleteRegistrationCell: UICollectionViewCell {
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
-        topSpacer.backgroundColor = .clear
-        topSpacer.setContentHuggingPriority(.defaultLow, for: .vertical)
-        topSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        contentView.addSubview(vStack)
+        vStack.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview().inset(Constants.verticalStackSpacing)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
+        }
         
-        bottomSpacer.backgroundColor = .clear
-        bottomSpacer.setContentHuggingPriority(.defaultLow, for: .vertical)
-        bottomSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-
-        vStack.addArrangedSubview(topSpacer)
-        vStack.addArrangedSubview(signInCompletedTitle)
+        [topSpacer, signInCompletedTitle, signInCompletedSubtitle, goToAccountButton, goToMainButton, bottomSpacer].forEach { vStack.addArrangedSubview($0) }
+        
         vStack.setCustomSpacing(10, after: signInCompletedTitle)
-        vStack.addArrangedSubview(signInCompletedSubtitle)
         vStack.setCustomSpacing(20, after: signInCompletedSubtitle)
+        vStack.setCustomSpacing(20, after: goToAccountButton)
         
-        vStack.addArrangedSubview(goToAccountButton)
         goToAccountButton.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.buttonHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
-        vStack.setCustomSpacing(20, after: goToAccountButton)
         
-        vStack.addArrangedSubview(goToMainButton)
         goToMainButton.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.buttonHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
         
-        vStack.addArrangedSubview(bottomSpacer)
         topSpacer.snp.makeConstraints {
             $0.height.equalTo(bottomSpacer.snp.height).multipliedBy(0.6)
         }
-        
-        self.contentView.addSubview(vStack)
-        vStack.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(Constants.verticalStackSpacing)
-            $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
-        }
-        vStack.addArrangedSubview(bottomSpacer)
-        layoutIfNeeded()
     }
 }

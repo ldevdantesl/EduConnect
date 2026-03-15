@@ -59,9 +59,15 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell {
             returnKeyType: .next,
             returnAction: self.makeReenterFieldFirstResponder
         )
+        field.textContentType = .newPassword
         return field
     }()
-    private let reenterPasswordField: ECTextField = ECSecureTextField(placeHolder: ConstantLocalizedStrings.Registration.Page3.reenterPasswordTextField)
+    
+    private let reenterPasswordField: ECTextField = {
+        let field = ECSecureTextField(placeHolder: ConstantLocalizedStrings.Registration.Page3.reenterPasswordTextField)
+        field.textContentType = .newPassword
+        return field
+    }()
     
     private let savePasswordButton: ECButton = ECButton(text: ConstantLocalizedStrings.Registration.Page3.savePasswordButton)
     
@@ -116,42 +122,36 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell {
     
     // MARK: - PRIVATE FUNC
     private func setupUI() {
-        topSpacer.backgroundColor = .clear
-        topSpacer.setContentHuggingPriority(.defaultLow, for: .vertical)
-        topSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        contentView.addSubview(vStack)
+        vStack.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview().inset(Constants.verticalStackSpacing)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
+        }
         
-        bottomSpacer.backgroundColor = .clear
-        bottomSpacer.setContentHuggingPriority(.defaultLow, for: .vertical)
-        bottomSpacer.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        [topSpacer, setPasswordLabel, setPasswordSubtitle, passwordField, reenterPasswordField, savePasswordButton, bottomSpacer].forEach { vStack.addArrangedSubview($0) }
+        
 
-        vStack.addArrangedSubview(topSpacer)
-        vStack.addArrangedSubview(setPasswordLabel)
         vStack.setCustomSpacing(10, after: setPasswordLabel)
-        vStack.addArrangedSubview(setPasswordSubtitle)
         vStack.setCustomSpacing(20, after: setPasswordSubtitle)
+        vStack.setCustomSpacing(20, after: passwordField)
+        vStack.setCustomSpacing(20, after: reenterPasswordField)
+        vStack.setCustomSpacing(20, after: savePasswordButton)
         
-        vStack.addArrangedSubview(passwordField)
         passwordField.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.textFieldsHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
-        vStack.setCustomSpacing(20, after: passwordField)
         
-        vStack.addArrangedSubview(reenterPasswordField)
         reenterPasswordField.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.textFieldsHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
-        vStack.setCustomSpacing(20, after: reenterPasswordField)
         
-        vStack.addArrangedSubview(savePasswordButton)
         savePasswordButton.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.buttonHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
-        vStack.setCustomSpacing(20, after: savePasswordButton)
         
-        vStack.addArrangedSubview(bottomSpacer)
         topSpacer.snp.makeConstraints {
             $0.height.equalTo(bottomSpacer.snp.height).multipliedBy(0.5)
         }
@@ -162,13 +162,9 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell {
             $0.leading.equalToSuperview().offset(Constants.spacing)
         }
         
-        self.contentView.addSubview(vStack)
-        vStack.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(Constants.verticalStackSpacing)
-            $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
+        topSpacer.snp.makeConstraints {
+            $0.height.equalTo(bottomSpacer.snp.height).multipliedBy(0.6)
         }
-        vStack.addArrangedSubview(bottomSpacer)
-        layoutIfNeeded()
     }
     
     private func makeReenterFieldFirstResponder() {

@@ -314,7 +314,7 @@ final class AccountScreenExpandableENTCell: UICollectionViewCell, ExpandableCell
     private func populateSubjects() {
         subjectsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         viewModel?.ethSubjects.forEach { subject in
-            let vm = DeletableChipViewModel(title: "\(subject.subject.name.ru) - \(subject.score ?? 0)")
+            let vm = DeletableChipViewModel(title: "\(subject.subject.name.toCurrentLanguage()) - \(subject.score ?? 0)")
             let chip = DeletableChipView(viewModel: vm)
             chip.setDeleteAction { [weak self] in
                 self?.viewModel?.didTapDeleteSubject?(subject)

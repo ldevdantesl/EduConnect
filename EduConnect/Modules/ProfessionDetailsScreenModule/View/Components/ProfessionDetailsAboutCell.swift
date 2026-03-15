@@ -54,8 +54,8 @@ final class ProfessionDetailsAboutCell: UICollectionViewCell {
     // MARK: - PUBLIC FUNC
     public func configure(withVM vm: ProfessionDetailsAboutCellViewModel) {
         self.viewModel = vm
-        headerLabel.text = "О профессии \(vm.profession.name.ru)"
-        aboutLabel.text = vm.profession.description.ru
+        headerLabel.text = "О профессии \(vm.profession.name.toCurrentLanguage())"
+        aboutLabel.text = vm.profession.description.toCurrentLanguage()
     }
     
     // MARK: - PRIVATE FUNC

@@ -12,7 +12,7 @@ protocol ProgramsAPISubServiceProtocol {
     func getProgramsOfCategory(categoryID: Int) async throws -> [ECProgram]
     func getAllPrograms() async throws  -> [ECProgram]
     func getProgramDetails(programID: Int) async throws -> ECProgramDetails
-    func getRelatedProgramsForProgramID(programID: Int, limit: Int) async throws -> [ECProgram]
+    func getRelatedProgramsForProgramID(programID: Int, limit: Int?) async throws -> [ECProgram]
 }
 
 final class ProgramsAPISubService: ProgramsAPISubServiceProtocol {
@@ -42,7 +42,7 @@ final class ProgramsAPISubService: ProgramsAPISubServiceProtocol {
         return response.data
     }
     
-    func getRelatedProgramsForProgramID(programID: Int, limit: Int) async throws -> [ECProgram] {
+    func getRelatedProgramsForProgramID(programID: Int, limit: Int?) async throws -> [ECProgram] {
         let response: EduConnectDataResponse<[ECProgram]> = try await httpClient.request(ProgramEndpoints.getRelatedProgramsForProgramID(programID: programID, limit: limit))
         return response.data
     }

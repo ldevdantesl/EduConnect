@@ -25,11 +25,20 @@ final class ProgramsScreenPresenter {
     
     // MARK: - PROPERTIES
     private var programs: [ECProgramCategory] = []
-    private lazy var headerVM = ProgramsScreenHeaderCellViewModel()
+    private lazy var headerVM = ProgramsScreenHeaderCellViewModel(totalFields: totalFields, totalEducationPrograms: totalPrograms)
     private lazy var footerVM = TabsFooterCellViewModel(
         titleLabelText: "Направления обучения в бакалавриате и специалитете",
         subtitleLabelText: "Выбери интересное тебе направление образования в вузе и получи список программ бакалавриата и специалитета по требуемому направлению обучения. Ты узнаешь в каких вузах есть соответствующие программы по направлению подготовки, какие требуются экзамены, минимальные и проходные баллы, стоимость обучения. В этом списке ты можешь найти интересную сферу деятельности, отрасль, направление обучения и узнать детали поступления в вуз."
     )
+    
+    // MARK: - COMPUTED PROPERTIES
+    private var totalFields: Int {
+        programs.count
+    }
+    
+    private var totalPrograms: Int {
+        programs.reduce(0) { $0 + ($1.programsCount ?? 0) }
+    }
 
     init(interactor: ProgramsScreenInteractorProtocol, router: ProgramsScreenRouterProtocol, errorService: ErrorServiceProtocol) {
         self.interactor = interactor
@@ -40,21 +49,23 @@ final class ProgramsScreenPresenter {
     // MARK: - PRIVATE FUNC
     private func initialSnapshot() {
         view?.applySnapshot(
-            sections: [.header, .footer],
+            sections: [.footer],
             itemsBySection: [
-                .header: [
-                    .headerItem(.init(id: "header", viewModel: headerVM)),
-                    .loadingItem(.init(id: "loading", viewModel: LoadingCellViewModel()))
-                ],
-                .footer: [.footerItem(.init(id: "footer", viewModel: footerVM))]
+                .footer: [
+                    .loadingItem(.init(id: "loading", viewModel: LoadingCellViewModel())),
+                    .footerItem(.init(id: "footer", viewModel: footerVM))
+                ]
             ]
         )
     }
 
     private func applyProgramsToView() {
-        let programItems = programs.map {
-            ProgramsScreenItem.programItem(
-                .init(id: $0.id, viewModel: ProgramsScreenProgramCellViewModel(programTitle: $0.name.ru, programImageURL: $0.iconURL))
+        let programItems = programs.map { category in
+            let itemVM = ProgramsScreenProgramCellViewModel(programCategory: category) { [weak self] in
+                self?.router.routeToCategory(category: $0)
+            }
+            return ProgramsScreenItem.programItem(
+                .init(id: category.id, viewModel: itemVM)
             )
         }
         
@@ -73,11 +84,9 @@ extension ProgramsScreenPresenter: ProgramsScreenPresenterProtocol {
     func viewDidLoad() {
         initialSnapshot()
         interactor.getPrograms()
-        print("Loading")
     }
     
     func didReceivePrograms(_ programs: [ECProgramCategory]) {
-        print("Got programs")
         self.programs = programs
         applyProgramsToView()
     }

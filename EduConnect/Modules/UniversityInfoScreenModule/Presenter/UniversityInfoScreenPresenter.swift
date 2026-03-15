@@ -42,7 +42,8 @@ final class UniversityInfoScreenPresenter {
         didTapAboutProfession: { [weak self] in self?.view?.scrollToSection(section: .professions) },
         didTapApply: { [weak self] in self?.didTapApply() },
         didTapRemoveApplication: { [weak self] in self?.didTapRemoveApplication() },
-        didTapProfession: { [weak self] in self?.router.routeToProfession(professionID: $0) }
+        didTapProfession: { [weak self] in self?.router.routeToProfession(professionID: $0) },
+        didTapProgram: { [weak self] in self?.router.routeToProgram(programID: $0) } 
     )
 
     init(

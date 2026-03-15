@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ECProgram: Decodable {
+struct ECProgram: Identifiable, Decodable {
     
     struct University: Decodable {
         let id: Int
@@ -20,9 +20,16 @@ struct ECProgram: Decodable {
         }
     }
     
-    struct Profession: Decodable {
+    struct Profession: Identifiable, Decodable {
         let id: Int
         let name: ECLocalizedString
+        let imageURL: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case id
+            case name
+            case imageURL = "image_url"
+        }
     }
     
     let id: Int

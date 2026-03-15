@@ -36,7 +36,7 @@ final class ArticleDetailsScreenPresenter {
     
     private func applySnapshot() {
         let headerVM = ArticleDetailsHeaderCellViewModel(article: article)
-        let plainTextVM = PlainTextCellViewModel(text: article.description.ru, horizontallySpaced: true)
+        let plainTextVM = PlainTextCellViewModel(text: article.description.toCurrentLanguage(), horizontallySpaced: true)
         let relatedHeaderVM = SectionHeaderCellViewModel(title: "Читай также", titleSize: 20, titleAlignment: .center)
         let universityCardVM = ArticleDetailsUniversityCardCellViewModel(newsType: article.newsType, university: article.university) { [weak self] in
             self?.router.routeToUniversity(universityID: $0)
@@ -46,8 +46,8 @@ final class ArticleDetailsScreenPresenter {
         if !related.isEmpty {
             relatedItems = related.map { news in
                 let vm = CardWithImageCellViewModel(
-                    imageURL: news.previewImageURL, preTitle: news.newsType.name.ru,
-                    title: news.title.ru, subtitle: news.shortDescription.ru, showsArrowRight: true
+                    imageURL: news.previewImageURL, preTitle: news.newsType.name.toCurrentLanguage(),
+                    title: news.title.toCurrentLanguage(), subtitle: news.shortDescription.toCurrentLanguage(), showsArrowRight: true
                 ) { [weak self] in self?.router.routeToAnotherNews(news: news) }
                 return ArticleDetailsItem.cardWithImageItem(.init(item: news, prefix: "article-", viewModel: vm))
             }
