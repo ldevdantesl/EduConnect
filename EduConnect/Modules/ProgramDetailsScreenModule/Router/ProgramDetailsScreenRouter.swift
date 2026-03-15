@@ -13,6 +13,7 @@ protocol ProgramDetailsScreenRouterProtocol {
     func goBack()
     func routeToUniversity(university: ECUniversity)
     func routeToProgram(program: ECProgram)
+    func routeToProfession(professionID: Int)
 }
 
 final class ProgramDetailsScreenRouter: ProgramDetailsScreenRouterProtocol {
@@ -42,6 +43,11 @@ final class ProgramDetailsScreenRouter: ProgramDetailsScreenRouterProtocol {
     
     func routeToProgram(program: ECProgram) {
         let vc = ProgramDetailsScreenAssembler.assemble(appRouter: appRouter, programID: program.id)
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func routeToProfession(professionID: Int) {
+        let vc = ProfessionDetailsScreenAssembler.assemble(appRouter: appRouter, professionID: professionID)
         self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

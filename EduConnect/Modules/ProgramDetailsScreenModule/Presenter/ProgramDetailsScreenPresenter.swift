@@ -58,7 +58,7 @@ final class ProgramDetailsScreenPresenter {
             let professionsHeader = SectionHeaderCellViewModel(title: "Связанные Профессии", titleSize: 20, titleAlignment: .center)
             professionItems.append(.sectionHeaderItem(.init(id: "professionHeader", viewModel: professionsHeader)))
             let professionSubItems: [ProgramDetailsItem] = programDetails.professions.map { profession in
-                let cardVM = CardWithImageCellViewModel(imageURL: profession.imageURL, title: profession.name.toCurrentLanguage(), showsArrowRight: true)
+                let cardVM = CardWithImageCellViewModel(imageURL: profession.imageURL, title: profession.name.toCurrentLanguage(), showsArrowRight: true) { [weak self] in self?.router.routeToProfession(professionID: profession.id) }
                 return .cardWithImageItem(.init(item: profession, prefix: "profession-", viewModel: cardVM))
             }
             professionItems.append(contentsOf: professionSubItems)
