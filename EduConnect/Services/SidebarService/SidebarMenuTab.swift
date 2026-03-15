@@ -5,7 +5,7 @@
 //  Created by Buzurg Rakhimzoda on 22.01.2026.
 //
 
-import Foundation
+import UIKit
 
 enum SidebarMenuTab: CaseIterable {
     case main
@@ -14,7 +14,6 @@ enum SidebarMenuTab: CaseIterable {
     case professions
     case changeLanguage
     case logout
-    case none
     
     var title: String {
         switch self {
@@ -24,7 +23,6 @@ enum SidebarMenuTab: CaseIterable {
         case .main:             return ConstantLocalizedStrings.Sidebar.main
         case .logout:           return ConstantLocalizedStrings.Sidebar.logOut
         case .changeLanguage:   return ConstantLocalizedStrings.Sidebar.changeLanguage
-        case .none:         	return ""
         }
     }
 }

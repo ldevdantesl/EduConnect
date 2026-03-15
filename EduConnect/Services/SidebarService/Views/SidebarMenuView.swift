@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 
 struct SidebarMenuViewModel {
-    let selectedItem: SidebarMenuTab
+    let selectedItem: SidebarMenuTab?
     let onItemTapped: ((SidebarMenuTab) -> Void)?
     
-    init(selectedItem: SidebarMenuTab = .universities, onItemTapped: ((SidebarMenuTab) -> Void)? = nil) {
+    init(selectedItem: SidebarMenuTab? = nil, onItemTapped: ((SidebarMenuTab) -> Void)? = nil) {
         self.selectedItem = selectedItem
         self.onItemTapped = onItemTapped
     }
@@ -23,6 +23,7 @@ final class SidebarMenuView: UIView {
     fileprivate enum Constants {
         static let imageSize = 40.0
         static let spacing = 10.0
+        static let bigSpacing = 20.0
     }
     
     // MARK: - PROPERTIES
@@ -43,6 +44,15 @@ final class SidebarMenuView: UIView {
         stack.distribution = .fill
         stack.spacing = Constants.spacing
         return stack
+    }()
+    
+    private let versionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Version: \(SharedConstants.appVersion)"
+        label.textColor = .darkGray
+        label.textAlignment = .center
+        label.font = ECFont.font(.semiBold, size: 14)
+        return label
     }()
     
     // MARK: - LIFECYCLE
@@ -70,14 +80,19 @@ final class SidebarMenuView: UIView {
         
         addSubview(tabsStackView)
         tabsStackView.snp.makeConstraints {
-            $0.top.equalTo(logoImageView.snp.bottom).offset(Constants.spacing * 2)
+            $0.top.equalTo(logoImageView.snp.bottom).offset(Constants.bigSpacing)
             $0.horizontalEdges.equalToSuperview()
+        }
+        
+        addSubview(versionLabel)
+        versionLabel.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-Constants.bigSpacing)
         }
     }
     
     private func makeTabs() {
         SidebarMenuTab.allCases.enumerated().forEach { index, item in
-            guard item != .none else { return }
             let label = UILabel()
             label.text = item.title
             label.textAlignment = .center
