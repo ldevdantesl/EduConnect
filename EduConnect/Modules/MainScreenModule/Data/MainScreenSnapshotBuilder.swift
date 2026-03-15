@@ -31,6 +31,7 @@ struct MainScreenSnapshotBuilder {
         let didTapShowAllSteps: () -> Void
         let didTapUniversity: (ECUniversity) -> Void
         let didTapProfession: (ECProfession) -> Void
+        let didTapProgramCategory: (ECProgramCategory) -> Void
         let didTapArticle: (ECNews) -> Void
         let didTapShowAllPrograms: () -> Void
         let didTapShowAllProfessions: () -> Void
@@ -93,6 +94,7 @@ struct MainScreenSnapshotBuilder {
     private func buildPrograms(state: State, actions: Actions) -> [MainScreenItem] {
         let vm = MainScreenProgramsCellViewModel(
             programs: state.programCategories,
+            didTapProgram: actions.didTapProgramCategory,
             didTapShowAll: actions.didTapShowAllPrograms
         )
         return [.programItem(.init(id: "programs", viewModel: vm))]
@@ -125,7 +127,7 @@ struct MainScreenSnapshotBuilder {
 
         case .programs:
             state.programCategories.prefix(3).forEach { program in
-                let vm = MainScreenAcademicProgramCellViewModel(program: program)
+                let vm = MainScreenAcademicProgramCellViewModel(program: program, didTapProgram: actions.didTapProgramCategory)
                 items.append(.academicProgram(.init(item: program, prefix: "academic-program", viewModel: vm)))
             }
             let vm = MainScreenAcademicShowAllCellViewModel(

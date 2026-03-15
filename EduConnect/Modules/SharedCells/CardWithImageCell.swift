@@ -172,6 +172,8 @@ final class CardWithImageCell: UICollectionViewCell {
                 placeholder: ImageConstants.appLogo.image,
                 options: [.transition(.fade(0.2))]
             )
+        } else {
+            cardImageView.image = ImageConstants.appLogo.image
         }
         
         arrowRightImage.isHidden = !vm.showsArrowRight

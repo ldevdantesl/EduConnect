@@ -123,6 +123,10 @@ final class MainScreenAcademicProgramCell: UICollectionViewCell {
         programsLabel.text = "\(vm.program.programsCount ?? 0) Программ"
         budgetPlaces.text = "34 Бюджетных мест"
         paidPlaces.text = "31 Платных мест"
+        
+        dashedView.setAction {
+            vm.didTapProgram?(vm.program)
+        }
     }
     
     // MARK: - PRIVATE FUNC
@@ -143,14 +147,6 @@ final class MainScreenAcademicProgramCell: UICollectionViewCell {
             $0.top.equalTo(titleStack.snp.bottom).offset(Constants.bigSpacing)
             $0.horizontalEdges.equalToSuperview().inset(Constants.bigSpacing)
             $0.bottom.equalToSuperview().offset(-Constants.bigSpacing * 3)
-        }
-    }
-    
-    // MARK: - OBJC PRIVATE FUNC
-    @objc private func didTapAction() {
-        animateTap { [weak self] in
-            guard let viewModel = self?.viewModel else { return }
-            viewModel.didTapProgram?(viewModel.program)
         }
     }
 }

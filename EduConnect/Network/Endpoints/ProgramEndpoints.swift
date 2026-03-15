@@ -12,7 +12,7 @@ enum ProgramEndpoints: Endpoint {
     case getProgramsOfCategory(categorieID: Int)
     case getAllPrograms
     case getProgramDetails(programID: Int)
-    case getRelatedProgramsForProgramID(programID: Int, limit: Int = 8)
+    case getRelatedProgramsForProgramID(programID: Int, limit: Int?)
     
     var path: String {
         switch self {
@@ -28,7 +28,10 @@ enum ProgramEndpoints: Endpoint {
     
     var queryItems: [URLQueryItem]? {
         switch self {
-        case .getRelatedProgramsForProgramID(_, let limit): return [URLQueryItem.init(name: "limit", value: "\(limit)")]
+        case .getRelatedProgramsForProgramID(_, let limit):
+            if let limit {
+                return [URLQueryItem.init(name: "limit", value: "\(limit)")]
+            } else { return .none }
         default: return .none
         }
     }

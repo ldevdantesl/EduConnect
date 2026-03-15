@@ -19,6 +19,9 @@ final class ProgramDetailsScreenVC: UIViewController {
 
     // MARK: - VIPER
     var presenter: ProgramDetailsScreenPresenterProtocol?
+    
+    // MARK: - PROPERTIES
+    private let sectionStore = ECDiffableSectionStore<ProgramDetailsSection>()
 
     // MARK: - VIEW PROPERTIES
     private lazy var headerView: ECHeaderView = {
@@ -30,11 +33,15 @@ final class ProgramDetailsScreenVC: UIViewController {
         return header
     }()
     
-    private let collectionContainer: DiffableCollectionViewContainer = {
-        let cv = DiffableCollectionViewContainer<ProgramDetailsSection, ProgramDetailsItem>(
-            layout: ProgramDetailsLayoutFactory.make()
-        )
+    private lazy var collectionContainer: DiffableCollectionViewContainer = {
+        let layout = ProgramDetailsLayoutFactory.make(sectionStore: sectionStore)
+        let cv = DiffableCollectionViewContainer<ProgramDetailsSection, ProgramDetailsItem>(layout: layout)
         cv.registerCell(ProgramDetailsHeaderCell.self, reuseID: ProgramDetailsHeaderCell.identifier)
+        cv.registerCell(ProgramDetailsUniversityCardCell.self, reuseID: ProgramDetailsUniversityCardCell.identifier)
+        cv.registerCell(ProgramDetailsAboutCell.self, reuseID: ProgramDetailsAboutCell.identifier)
+        cv.registerCell(DashedProgramCell.self, reuseID: DashedProgramCell.identifier)
+        cv.registerCell(CardWithImageCell.self, reuseID: CardWithImageCell.identifier)
+        cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
         cv.resignsFirstResponderOnScroll = true
         return cv
     }()
@@ -70,6 +77,31 @@ final class ProgramDetailsScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProgramDetailsHeaderCell.identifier, for: indexPath) as? ProgramDetailsHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
+                
+            case .sectionHeaderItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionHeaderCell.identifier, for: indexPath) as? SectionHeaderCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .cardWithImageItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardWithImageCell.identifier, for: indexPath) as? CardWithImageCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .aboutItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProgramDetailsAboutCell.identifier, for: indexPath) as? ProgramDetailsAboutCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .programItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DashedProgramCell.identifier, for: indexPath) as? DashedProgramCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .universityItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProgramDetailsUniversityCardCell.identifier, for: indexPath) as? ProgramDetailsUniversityCardCell
+                cell?.configure(withVM: item.viewModel)
+                return cell
             }
         }
     }
@@ -77,6 +109,7 @@ final class ProgramDetailsScreenVC: UIViewController {
 
 extension ProgramDetailsScreenVC: ProgramDetailsScreenViewProtocol {
     func applySnapshot(sections: [ProgramDetailsSection], itemsBySection: [ProgramDetailsSection : [ProgramDetailsItem]]) {
+        sectionStore.update(sections)
         collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
     }
     

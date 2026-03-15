@@ -20,9 +20,16 @@ struct ECProgram: Identifiable, Decodable {
         }
     }
     
-    struct Profession: Decodable {
+    struct Profession: Identifiable, Decodable {
         let id: Int
         let name: ECLocalizedString
+        let imageURL: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case id
+            case name
+            case imageURL = "image_url"
+        }
     }
     
     let id: Int

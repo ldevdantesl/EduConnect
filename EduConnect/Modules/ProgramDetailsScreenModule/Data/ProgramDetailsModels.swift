@@ -10,9 +10,17 @@ import Foundation
 enum ProgramDetailsSection: Hashable {
     case header
     case body
-    case footer
+    case professions
+    case facutlies
+    case related
+    case relatedHeader
 }
 
 enum ProgramDetailsItem: Hashable {
     case headerItem(DiffableItem<ProgramDetailsHeaderCellViewModel>)
+    case universityItem(DiffableItem<ProgramDetailsUniversityCardCellViewModel>)
+    case aboutItem(DiffableItem<ProgramDetailsAboutCellViewModel>)
+    case cardWithImageItem(DiffableItem<CardWithImageCellViewModel>)
+    case programItem(DiffableItem<DashedProgramCellViewModel>)
+    case sectionHeaderItem(DiffableItem<SectionHeaderCellViewModel>)
 }

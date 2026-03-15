@@ -8,7 +8,20 @@
 import UIKit
 
 enum ProgramDetailsLayoutFactory {
-    static func make() -> UICollectionViewLayout {
+    
+    static func make(sectionStore: ECDiffableSectionStore<ProgramDetailsSection>) -> UICollectionViewLayout {
+        UICollectionViewCompositionalLayout { sectionIndex, env in
+            guard let section = sectionStore.section(at: sectionIndex) else { return makeDefaultSection() }
+            
+            switch section {
+            case .header: return makeHeaderSection()
+            case .related: return makeRelatedSection()
+            default: return makeDefaultSection()
+            }
+        }
+    }
+    
+    static func makeDefaultSection() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(1),
@@ -26,6 +39,51 @@ enum ProgramDetailsLayoutFactory {
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 15
-        return UICollectionViewCompositionalLayout(section: section)
+        section.contentInsets = .init(top: 10, leading: 0, bottom: 0, trailing: 0)
+        return section
+    }
+    
+    static func makeRelatedSection() -> NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(0.5),
+                heightDimension: .fractionalHeight(1)
+            )
+        )
+        
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .absolute(220)
+            ),
+            subitems: [item]
+        )
+        group.interItemSpacing = .fixed(10)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 15
+        section.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
+        return section
+    }
+    
+    static func makeHeaderSection() -> NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .estimated(1000))
+        )
+        
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: .init(
+                widthDimension: item.layoutSize.widthDimension,
+                heightDimension: item.layoutSize.heightDimension
+            ),
+            subitems: [item]
+        )
+        group.interItemSpacing = .fixed(10)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 15
+        return section
     }
 }
