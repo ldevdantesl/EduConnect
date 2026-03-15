@@ -53,7 +53,9 @@ open class PopUpView: UIView {
     }
     
     deinit {
+        #if DEBUG
         print("\(String(describing: type(of: self))) deinited")
+        #endif
     }
     
     @available(*, unavailable)
