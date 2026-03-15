@@ -34,7 +34,7 @@ final class ProgramDetailsScreenVC: UIViewController {
         let cv = DiffableCollectionViewContainer<ProgramDetailsSection, ProgramDetailsItem>(
             layout: ProgramDetailsLayoutFactory.make()
         )
-        cv.registerCell(NotFoundCell.self, reuseID: NotFoundCell.identifier)
+        cv.registerCell(ProgramDetailsHeaderCell.self, reuseID: ProgramDetailsHeaderCell.identifier)
         cv.resignsFirstResponderOnScroll = true
         return cv
     }()
@@ -66,8 +66,8 @@ final class ProgramDetailsScreenVC: UIViewController {
     private func configureCollectionView() {
         collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
-            case .notFoundItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NotFoundCell.identifier, for: indexPath) as? NotFoundCell
+            case .headerItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProgramDetailsHeaderCell.identifier, for: indexPath) as? ProgramDetailsHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
             }

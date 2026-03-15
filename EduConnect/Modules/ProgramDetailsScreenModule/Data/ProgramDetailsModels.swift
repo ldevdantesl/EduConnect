@@ -14,6 +14,5 @@ enum ProgramDetailsSection: Hashable {
 }
 
 enum ProgramDetailsItem: Hashable {
-    case notFoundItem(DiffableItem<NotFoundCellViewModel>)
-    
+    case headerItem(DiffableItem<ProgramDetailsHeaderCellViewModel>)
 }

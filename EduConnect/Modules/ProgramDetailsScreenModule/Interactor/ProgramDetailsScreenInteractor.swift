@@ -9,6 +9,7 @@ import UIKit
 
 protocol ProgramDetailsScreenInteractorProtocol: AnyObject {
     func getProgramDetails(programID: Int)
+    func getUniversity(universityID: Int)
 }
 
 final class ProgramDetailsScreenInteractor: ProgramDetailsScreenInteractorProtocol {
@@ -24,6 +25,17 @@ final class ProgramDetailsScreenInteractor: ProgramDetailsScreenInteractorProtoc
             do {
                 let details = try await networkService.programs.getProgramDetails(programID: programID)
                 self.presenter?.didReceiveProgramDetails(details: details)
+            } catch {
+                self.presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
+    func getUniversity(universityID: Int) {
+        Task {
+            do {
+                let university = try await networkService.university.getUniversity(id: universityID)
+                self.presenter?.didReceiveUniversity(university: university)
             } catch {
                 self.presenter?.didReceiveError(error: error)
             }

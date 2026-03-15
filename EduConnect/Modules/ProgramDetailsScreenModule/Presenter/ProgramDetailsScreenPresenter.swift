@@ -12,6 +12,8 @@ protocol ProgramDetailsScreenPresenterProtocol: AnyObject {
     func didTapBack()
     func didTapAccount()
     func didTapAppLogo()
+    
+    func didReceiveUniversity(university: ECUniversity)
     func didReceiveProgramDetails(details: ECProgramDetails)
     func didReceiveError(error: any Error)
 }
@@ -27,6 +29,7 @@ final class ProgramDetailsScreenPresenter {
     private let programID: Int
     private let errorService: ErrorServiceProtocol
     private var programDetails: ECProgramDetails?
+    private var university: ECUniversity?
     
     init(interactor: ProgramDetailsScreenInteractorProtocol, router: ProgramDetailsScreenRouterProtocol, errorService: ErrorServiceProtocol, programID: Int) {
         self.interactor = interactor
@@ -36,7 +39,15 @@ final class ProgramDetailsScreenPresenter {
     }
     
     private func applySnapshot() {
+        guard let programDetails, let university else { return }
+        let headerVM = ProgramDetailsHeaderCellViewModel(programDetails: programDetails, university: university)
         
+        view?.applySnapshot(
+            sections: [.header],
+            itemsBySection: [
+                .header : [.headerItem(.init(id: "header", viewModel: headerVM))]
+            ]
+        )
     }
 }
 
@@ -60,8 +71,13 @@ extension ProgramDetailsScreenPresenter: ProgramDetailsScreenPresenterProtocol {
     
     func didReceiveProgramDetails(details: ECProgramDetails) {
         self.programDetails = details
-        view?.hideLoading()
-        applySnapshot()
+        interactor.getUniversity(universityID: details.universityID)
+    }
+    
+    func didReceiveUniversity(university: ECUniversity) {
+        self.university = university
+        self.applySnapshot()
+        self.view?.hideLoading()
     }
     
     func didReceiveError(error: any Error) {
