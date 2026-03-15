@@ -16,6 +16,7 @@ struct UniversityInfoScreenSnapshotBuilder {
         let didTapApply: () -> Void
         let didTapRemoveApplication: () -> Void
         let didTapProfession: (Int) -> Void
+        let didTapProgram: (Int) -> Void
     }
     
     func build(
@@ -29,7 +30,7 @@ struct UniversityInfoScreenSnapshotBuilder {
             .main: buildMain(university: university, actions: actions),
             .contacts: [buildContacts(university: university, applied: applied, actions: actions)],
             .faculties: buildFaculties(university: university),
-            .programs: buildPrograms(university: university),
+            .programs: buildPrograms(university: university, actions: actions),
             .professions: buildProfessions(university: university, actions: actions),
         ]
         return (sections, items)
@@ -77,19 +78,19 @@ struct UniversityInfoScreenSnapshotBuilder {
         return items
     }
     
-    private func buildPrograms(university: ECUniversity) -> [UniversityInfoScreenItem] {
+    private func buildPrograms(university: ECUniversity, actions: Actions) -> [UniversityInfoScreenItem] {
         guard university.programsCount > 0 else { return [] }
         var items: [UniversityInfoScreenItem] = []
         let headerVM = SectionHeaderCellViewModel(title: "Программы образования", titleSize: 22, titleAlignment: .center)
         items.append(.sectionHeaderItem(.init(id: "programsHeader", viewModel: headerVM)))
-        university.programs.forEach {
+        university.programs.forEach { program in
             let vm = CardWithImageCellViewModel(
                 imageURL: university.logoURL,
                 imageContentMode: .scaleAspectFit,
-                title: $0.name,
-                subtitle: "\($0.budgetPlaces) бюджет. мест, \($0.paidPlaces) платн. мест, \($0.studyTypeName) обучение"
-            )
-            items.append(.cardItem(.init(id: "program-\($0.id)", viewModel: vm)))
+                title: program .name,
+                subtitle: "\(program .budgetPlaces) бюджет. мест, \(program .paidPlaces) платн. мест, \(program .studyTypeName) обучение"
+            ) { actions.didTapProgram(program.id) }
+            items.append(.cardItem(.init(id: "program-\(program.id)", viewModel: vm)))
         }
         return items
     }
