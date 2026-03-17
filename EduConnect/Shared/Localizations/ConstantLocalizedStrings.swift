@@ -195,6 +195,14 @@ public enum ConstantLocalizedStrings {
         static let showAllUniversities = String(localized: .Localizables.mainShowAllUniversities)
         static let showAllProfessions = String(localized: .Localizables.mainShowAllProfessions)
         
+        enum Header {
+            static let titleMain = String(localized: .Localizables.mainHeaderTitleMain)
+            static let titleSecondary = String(localized: .Localizables.mainHeaderTitleSecondary)
+            static let programs = String(localized: .Localizables.mainHeaderPrograms)
+            static let unis = String(localized: .Localizables.mainHeaderUnis)
+            static let budgetPlaces = String(localized: .Localizables.wordsBudgetPlaces)
+        }
+        
         enum AcademicTab {
             static let titleMain = String(localized: .Localizables.mainAcademicTabTitleMain)
             static let titleCountry = String(localized: .Localizables.mainAcademicTabTitleCountry)
@@ -208,6 +216,11 @@ public enum ConstantLocalizedStrings {
             static let titleCountry = String(localized: .Localizables.mainAcademicTabTitleCountry)
         }
         
+        enum JournalTab {
+            static let titleMain = String(localized: .Localizables.mainJournalTitleMain)
+            static let titleSecondary = String(localized: .Localizables.mainJournalTitleSecondary)
+        }
+        
         enum ServicesTab {
             static let title = String(localized: .Localizables.mainServicesTabTitle)
             static let professionsOptions = String(localized: .Localizables.mainServicesTabProfessionOptions)
@@ -218,6 +231,11 @@ public enum ConstantLocalizedStrings {
         enum Footer {
             static let title = String(localized: .Localizables.mainFooterTitle)
             static let percentageLabel = String(localized: .Localizables.mainFooterPercentageLabel)
+            static let percentageSubtitle = String(localized: .Localizables.mainFooterPercentageSubtitle)
+            static let description = String(localized: .Localizables.mainFooterDescription)
+            static let programs = String(localized: .Localizables.wordsProgramPlural)
+            static let privateUnis = String(localized: .Localizables.mainFooterPrivateUnis)
+            static let budgetPlaces = String(localized: .Localizables.wordsBudgetPlaces)
         }
     }
     

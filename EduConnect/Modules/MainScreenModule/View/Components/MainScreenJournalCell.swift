@@ -36,12 +36,14 @@ final class MainScreenJournalCell: UICollectionViewCell {
     
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
-        let text = "Журнал Educonnect\nдля абитуриента"
+        let main = ConstantLocalizedStrings.Main.JournalTab.titleMain
+        let secondary = ConstantLocalizedStrings.Main.JournalTab.titleSecondary
+        let text = main + secondary
         let attributed = NSMutableAttributedString(
             string: text,
             attributes: [.font: ECFont.font(.bold, size: 24)]
         )
-        if let range = text.range(of: "для абитуриента") {
+        if let range = text.range(of: secondary) {
             let nsRange = NSRange(range, in: text)
             attributed.addAttributes([.font: ECFont.font(.regular, size: 20)], range: nsRange)
         }

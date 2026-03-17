@@ -1603,6 +1603,17 @@
         }
       }
     },
+    "main_footerDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Казахстан — страна потрясающих возможностей для получения высшего образования. По состоянию\n        на 2025 год в Казахстане насчитывается более 130 вузов. Это 40 государственных учебных заведений, из которых 15 — университеты, 10 — академии, и 5 — институтов. Также есть около 90 частных образовательных организаций. В казахстанских вузах обучается порядка 500 тысяч студентов. В 2025 году в университетах Казахстана предусмотрено более 70 тыс. бюджетных мест для приема. Сайт предоставляет абитуриенту 2025 возможность сравнить и выбрать вузы, программы образования, пройти профориентацию и оценить свои шансы поступить. Полный справочник абитуриента для поступающих в вузы Казахстана."
+          }
+        }
+      }
+    },
     "main_footerPercentageLabel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1614,6 +1625,28 @@
         }
       }
     },
+    "main_footerPercentageSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доступное качественное образование для всех"
+          }
+        }
+      }
+    },
+    "main_footerPrivateUnis" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "частных вузов"
+          }
+        }
+      }
+    },
     "main_footerTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1621,6 +1654,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Высшее образование\\nв Казахстане"
+          }
+        }
+      }
+    },
+    "main_headerPrograms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Программы"
+          }
+        }
+      }
+    },
+    "main_headerTitleMain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Траектория поступления"
+          }
+        }
+      }
+    },
+    "main_headerTitleSecondary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "в вузы Казахстана"
+          }
+        }
+      }
+    },
+    "main_headerUnis" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вузы"
+          }
+        }
+      }
+    },
+    "main_journalTitleMain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Журнал Educonnect\\n"
+          }
+        }
+      }
+    },
+    "main_journalTitleSecondary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "для абитуриента"
           }
         }
       }
