@@ -14,8 +14,8 @@ struct ECUniversity: Identifiable, Codable {
         
         var title: String {
             switch self {
-            case .state: return "Государственный"
-            case .private: return "Частный"
+            case .state: return ConstantLocalizedStrings.Words.governmentalKey
+            case .private: return ConstantLocalizedStrings.Words.privateKey
             }
         }
     }

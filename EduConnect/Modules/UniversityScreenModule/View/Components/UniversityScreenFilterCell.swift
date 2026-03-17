@@ -36,7 +36,7 @@ final class UniversityScreenFilterCell: UICollectionViewCell {
     
     private lazy var filtersButton: ECButton = {
         let button = ECButton()
-        button.configure(text: "Фильтр", backgroundColor: .systemBackground, textColor: .blue)
+        button.configure(text: ConstantLocalizedStrings.Common.filter, backgroundColor: .systemBackground, textColor: .blue)
         button.setAction { [weak self] in self?.viewModel?.didTapFilters?() }
         button.borderColor = .blue
         button.borderWidth = 2
@@ -63,10 +63,10 @@ final class UniversityScreenFilterCell: UICollectionViewCell {
         }
 
         if vm.currentFilters.appliedCount > 0 {
-            filtersButton.reconfigure(text: "Добавленные фильтры: \(vm.currentFilters.appliedCount)", backgroundColor: .systemBlue, textColor: .white)
+            filtersButton.reconfigure(text: "\(ConstantLocalizedStrings.University.Filter.addedFilters) \(vm.currentFilters.appliedCount)", backgroundColor: .systemBlue, textColor: .white)
             filtersButton.borderWidth = 0
         } else {
-            filtersButton.reconfigure(text: "Фильтр", backgroundColor: .systemBackground, textColor: .blue)
+            filtersButton.reconfigure(text: ConstantLocalizedStrings.University.Filter.filter, backgroundColor: .systemBackground, textColor: .blue)
             filtersButton.borderColor = .blue
             filtersButton.borderWidth = 2
         }

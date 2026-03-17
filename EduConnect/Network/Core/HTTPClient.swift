@@ -170,7 +170,7 @@ final class HTTPClient: HTTPClientProtocol {
             if let base = try? decoder.decode(EduConnectResponse.self, from: data),
                !(base.success ?? false) {
                 throw APIError.custom(
-                    message: base.message ?? "Ошибка запроса",
+                    message: base.message ?? ConstantLocalizedStrings.DEBUG.requestError,
                     errors: base.errors
                 )
             }
@@ -189,7 +189,7 @@ final class HTTPClient: HTTPClientProtocol {
         
         if !base.success {
             throw APIError.custom(
-                message: base.message ?? "Ошибка запроса",
+                message: base.message ?? ConstantLocalizedStrings.DEBUG.requestError,
                 errors: base.errors
             )
         }

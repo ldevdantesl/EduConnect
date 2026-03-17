@@ -24,7 +24,7 @@ final class ECErrorService: ErrorServiceProtocol {
         
         guard let apiError = error as? APIError else {
             return UserFacingError(
-                title: "Ошибка",
+                title: ConstantLocalizedStrings.DEBUG.error,
                 message: error.localizedDescription,
                 isRetryable: false
             )
@@ -34,30 +34,30 @@ final class ECErrorService: ErrorServiceProtocol {
         switch apiError {
         case .noConnection:
             return UserFacingError(
-                title: "Нет соединения",
-                message: "Проверьте подключение к интернету",
+                title: ConstantLocalizedStrings.DEBUG.noConnection,
+                message: ConstantLocalizedStrings.DEBUG.networkLost,
                 isRetryable: true
             )
             
         case .timeout:
             return UserFacingError(
-                title: "Превышено время ожидания",
-                message: "Сервер не отвечает. Попробуйте позже",
+                title: ConstantLocalizedStrings.DEBUG.limitPassed,
+                message: ConstantLocalizedStrings.DEBUG.noResponseTryLater,
                 isRetryable: true
             )
             
         case .statusCode(let code, _) where code == 401:
             onUnauthorized?()
             return UserFacingError(
-                title: "Сессия истекла",
-                message: "Войдите снова",
+                title: ConstantLocalizedStrings.DEBUG.sessionExpired,
+                message: ConstantLocalizedStrings.DEBUG.logInAgain,
                 isRetryable: false
             )
             
         case .statusCode(let code, _) where code >= 500:
             return UserFacingError(
-                title: "Ошибка сервера",
-                message: "Попробуйте позже",
+                title: ConstantLocalizedStrings.DEBUG.serverError,
+                message: ConstantLocalizedStrings.DEBUG.tryLater,
                 isRetryable: true
             )
             
@@ -65,7 +65,7 @@ final class ECErrorService: ErrorServiceProtocol {
             let fieldDetails = errors?.values.flatMap { $0 }.joined(separator: "\n")
             let fullMessage = [message, fieldDetails].compactMap { $0 }.joined(separator: "\n")
             return UserFacingError(
-                title: "Ошибка",
+                title: ConstantLocalizedStrings.DEBUG.error,
                 message: fullMessage,
                 isRetryable: false
             )

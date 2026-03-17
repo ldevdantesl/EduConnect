@@ -1020,6 +1020,17 @@
         }
       }
     },
+    "common_apply" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Применить"
+          }
+        }
+      }
+    },
     "common_attention" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1223,6 +1234,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Файлы"
+          }
+        }
+      }
+    },
+    "common_filter" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фильтр"
           }
         }
       }
@@ -1522,6 +1544,116 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Тип"
+          }
+        }
+      }
+    },
+    "debug_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка"
+          }
+        }
+      }
+    },
+    "debug_limitPassed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Превышено время ожидания"
+          }
+        }
+      }
+    },
+    "debug_logInAgain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Войдите снова"
+          }
+        }
+      }
+    },
+    "debug_networkLost" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Проверьте подключение к интернету"
+          }
+        }
+      }
+    },
+    "debug_noConnection" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет соединения"
+          }
+        }
+      }
+    },
+    "debug_noResponseTryLater" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сервер не отвечает. Попробуйте позже"
+          }
+        }
+      }
+    },
+    "debug_requestError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка запроса"
+          }
+        }
+      }
+    },
+    "debug_serverError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка сервера"
+          }
+        }
+      }
+    },
+    "debug_sessionExpired" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сессия истекла"
+          }
+        }
+      }
+    },
+    "debug_tryLater" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Попробуйте позже"
           }
         }
       }
@@ -2565,6 +2697,72 @@
         }
       }
     },
+    "university_addedFilters" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавленные фильтры:"
+          }
+        }
+      }
+    },
+    "university_filterUnis" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фильтр по вузам"
+          }
+        }
+      }
+    },
+    "university_footerSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования. "
+          }
+        }
+      }
+    },
+    "university_footerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Список вузов Казахстана по среднему баллу, стоимости обучения"
+          }
+        }
+      }
+    },
+    "university_headerSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеты, институты, академии"
+          }
+        }
+      }
+    },
+    "university_headerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вузы Казахстана:"
+          }
+        }
+      }
+    },
     "words_budgetPlaces" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2594,6 +2792,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Календарь"
+          }
+        }
+      }
+    },
+    "words_governmentalKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Государственный"
           }
         }
       }
@@ -2637,6 +2846,17 @@
         }
       }
     },
+    "words_privateKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Частный"
+          }
+        }
+      }
+    },
     "words_programPlural" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2661,6 +2881,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Поищите где нибудь еше"
+          }
+        }
+      }
+    },
+    "words_tryOtherSearch" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Попробуйте другой поиск"
           }
         }
       }

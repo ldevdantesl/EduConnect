@@ -53,6 +53,7 @@ public enum ConstantLocalizedStrings {
     
     /// For __Common__ words
     enum Common {
+        static let apply = String(localized: .Localizables.commonApply)
         static let add = String(localized: .Localizables.commonAdd)
         static let ok = String(localized: .Localizables.commonOk)
         static let cancel = String(localized: .Localizables.commonCancel)
@@ -75,6 +76,7 @@ public enum ConstantLocalizedStrings {
         static let loading = String(localized: .Localizables.commonLoading)
         static let search = String(localized: .Localizables.commonSearch)
         static let sort = String(localized: .Localizables.commonSort)
+        static let filter = String(localized: .Localizables.commonFilter)
         static let attention = String(localized: .Localizables.commonAttention)
     }
     
@@ -184,8 +186,39 @@ public enum ConstantLocalizedStrings {
         static let showAllArticles = String(localized: .Localizables.articlesShowAllArticles)
     }
     
+    /// For __Universiry__flow
+    enum University {
+        static let filterUnis = String(localized: .Localizables.universityFilterUnis)
+        
+        enum Header {
+            static let subtitle = String(localized: .Localizables.universityHeaderSubtitle)
+            static let title = String(localized: .Localizables.universityHeaderTitle)
+        }
+        
+        enum Filter {
+            static let filter = String(localized: .Localizables.commonFilter)
+            static let addedFilters = String(localized: .Localizables.universityAddedFilters)
+        }
+        
+        enum Footer {
+            static let title = String(localized: .Localizables.universityFooterTitle)
+            static let subtitle = String(localized: .Localizables.universityFooterSubtitle)
+        }
+        
+    }
+    
     /// For __DEBUGGING__ purposes
     enum DEBUG {
+        static let requestError = String(localized: .Localizables.debugRequestError)
+        static let error = String(localized: .Localizables.debugError)
+        static let tryLater = String(localized: .Localizables.debugTryLater)
+        static let serverError = String(localized: .Localizables.debugServerError)
+        static let logInAgain = String(localized: .Localizables.debugLogInAgain)
+        static let sessionExpired = String(localized: .Localizables.debugSessionExpired)
+        static let noResponseTryLater = String(localized: .Localizables.debugNoResponseTryLater)
+        static let limitPassed = String(localized: .Localizables.debugLimitPassed)
+        static let networkLost = String(localized: .Localizables.debugNetworkLost)
+        static let noConnection = String(localized: .Localizables.debugNoConnection)
         static let useThisCode = String(localized: .Localizables.debugUseThisCode)
     }
     
@@ -223,6 +256,8 @@ public enum ConstantLocalizedStrings {
     
     /// For General Purpose
     enum Words {
+        static let privateKey = String(localized: .Localizables.wordsPrivateKey)
+        static let governmentalKey = String(localized: .Localizables.wordsGovernmentalKey)
         static let budgetPlaces = String(localized: .Localizables.wordsBudgetPlaces)
         static let budgetPlacesShort = String(localized: .Localizables.wordsBudgetPlacesShort)
         static let paidPlaces = String(localized: .Localizables.wordsPaidPlaces)
@@ -233,6 +268,7 @@ public enum ConstantLocalizedStrings {
         static let programPlural = String(localized: .Localizables.wordsProgramPlural)
         static let universityPlural = String(localized: .Localizables.wordsUniversityPlural)
         static let calendar = String(localized: .Localizables.wordsCalendar)
+        static let tryOtherSearch = String(localized: .Localizables.wordsTryOtherSearch)
     }
     
     /// For __Application Status__
