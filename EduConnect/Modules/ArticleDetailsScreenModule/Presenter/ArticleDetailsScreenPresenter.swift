@@ -37,7 +37,10 @@ final class ArticleDetailsScreenPresenter {
     private func applySnapshot() {
         let headerVM = ArticleDetailsHeaderCellViewModel(article: article)
         let plainTextVM = PlainTextCellViewModel(text: article.description.toCurrentLanguage(), horizontallySpaced: true)
-        let relatedHeaderVM = SectionHeaderCellViewModel(title: "Читай также", titleSize: 20, titleAlignment: .center)
+        let relatedHeaderVM = SectionHeaderCellViewModel(
+            title: ConstantLocalizedStrings.Article.moreToRead,
+            titleSize: 20, titleAlignment: .center
+        )
         let universityCardVM = ArticleDetailsUniversityCardCellViewModel(newsType: article.newsType, university: article.university) { [weak self] in
             self?.router.routeToUniversity(universityID: $0)
         }

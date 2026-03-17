@@ -114,13 +114,13 @@ struct MainScreenSnapshotBuilder {
             state.universities.prefix(3).forEach { university in
                 let vm = CardWithImageCellViewModel(
                     imageURL: university.mainImageURL,
-                    preTitle: "\(university.city.name) / \(university.programsCount) программ",
+                    preTitle: "\(university.city.name) / \(university.programsCount) \(ConstantLocalizedStrings.Words.programPlural)",
                     title: university.name, showsArrowRight: true
                 ) { actions.didTapUniversity(university) }
                 items.append(.cardWithImageItem(.init(item: university, prefix: "academic-uni", viewModel: vm)))
             }
             let vm = MainScreenAcademicShowAllCellViewModel(
-                title: "Показать все наши вузы",
+                title: ConstantLocalizedStrings.Main.showAllUniversities,
                 didTapAction: actions.didTapShowAllUniversities
             )
             items.append(.academicShowAll(.init(viewModel:vm)))
@@ -131,7 +131,7 @@ struct MainScreenSnapshotBuilder {
                 items.append(.academicProgram(.init(item: program, prefix: "academic-program", viewModel: vm)))
             }
             let vm = MainScreenAcademicShowAllCellViewModel(
-                title: "Показать все программы вузов",
+                title: ConstantLocalizedStrings.Main.showAllPrograms,
                 didTapAction: actions.didTapShowAllPrograms
             )
             items.append(.academicShowAll(.init(viewModel: vm)))
@@ -140,13 +140,13 @@ struct MainScreenSnapshotBuilder {
             state.professions.prefix(3).forEach { profession in
                 let vm = CardWithImageCellViewModel(
                     imageURL: profession.imageURL,
-                    preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
+                    preTitle: "\(profession.programsCount) \(ConstantLocalizedStrings.Words.programPlural), \(profession.universitiesCount) \(ConstantLocalizedStrings.Words.universityPlural)",
                     title: profession.name.toCurrentLanguage(), subtitle: profession.description.toCurrentLanguage(), showsArrowRight: true
                 ) { actions.didTapProfession(profession) }
                 items.append(.cardWithImageItem(.init(item: profession, prefix: "academic-profession-", viewModel: vm)))
             }
             let vm = MainScreenAcademicShowAllCellViewModel(
-                title: "Показать все профессии вузов",
+                title: ConstantLocalizedStrings.Main.showAllProfessions,
                 didTapAction: actions.didTapShowAllProfessions
             )
             items.append(.academicShowAll(.init(viewModel: vm)))
@@ -189,7 +189,7 @@ struct MainScreenSnapshotBuilder {
         guard !newsToShow.isEmpty else {
             let vm = NotFoundCellViewModel(
                 systemImage: ImageConstants.SystemImages.questionMark.rawValue,
-                title: "Ничего не найдено", subtitle: "Нет новостей в этой категории",
+                subtitle: ConstantLocalizedStrings.Article.noNewsInThisCategory,
                 horizontallySpaced: true
             )
             items.append(.notFoundItem(.init(viewModel: vm)))
@@ -204,7 +204,7 @@ struct MainScreenSnapshotBuilder {
         }
         
         let vm = UnderlineButtonCellViewModel(
-            titleName: "Посмотреть все новости",
+            titleName: ConstantLocalizedStrings.Article.showAllArticles,
             titleSize: 14, titleColor: .darkGray,
             onTapAction: actions.didTapShowAllArticles
         )

@@ -28,7 +28,7 @@ final class MainScreenFooterCell: UICollectionViewCell {
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Высшее образование\nв Казахстане"
+        label.text = ConstantLocalizedStrings.Main.Footer.title
         label.font = ECFont.font(.bold, size: 28)
         label.textColor = .label
         label.numberOfLines = 2
@@ -46,7 +46,7 @@ final class MainScreenFooterCell: UICollectionViewCell {
     
     private let percentageTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Образование в Казахстане"
+        label.text = ConstantLocalizedStrings.Main.Footer.percentageLabel
         label.font = ECFont.font(.semiBold, size: 16)
         label.textColor = .systemGray
         return label

@@ -83,11 +83,17 @@ public enum ConstantLocalizedStrings {
         enum MainTab {
             static let tab = String(localized: .Localizables.accountMainTab)
             static let title = String(localized: .Localizables.accountMainTitle)
+            static let lastApplications = String(localized: .Localizables.accountLastApplications)
+            static let lastApplicationsSubtitle = String(localized: .Localizables.accountLastApplicationsSubtitle)
+            static let welcomeMessage = String(localized: .Localizables.accountMainTabWelcomeMessage)
+            static let adviceSection = String(localized: .Localizables.accountMainTabAdviceSection)
+            static let adviceSubtitle = String(localized: .Localizables.accountMainTabAdviceSubtitle)
         }
         
         enum ApplicationTab {
             static let tab = String(localized: .Localizables.accountApplicationTab)
             static let title = String(localized: .Localizables.accountApplicationTitle)
+            static let applicationsNotFound = String(localized: .Localizables.accountApplicationsNotFound)
         }
         
         enum MyUniversityTab {
@@ -169,6 +175,67 @@ public enum ConstantLocalizedStrings {
         static let logOut = String(localized: .Localizables.sidebarLogout)
     }
     
+    /// For __Articles__
+    enum Article {
+        static let article = String(localized: .Localizables.articlesArticle)
+        static let articleNavigatorSubtitle = String(localized: .Localizables.articleArticleNavigatorSubtitle)
+        static let moreToRead = String(localized: .Localizables.articleMoreToRead)
+        static let noNewsInThisCategory = String(localized: .Localizables.articlesNoNewsInThisCategory)
+        static let showAllArticles = String(localized: .Localizables.articlesShowAllArticles)
+    }
+    
+    /// For __DEBUGGING__ purposes
+    enum DEBUG {
+        static let useThisCode = String(localized: .Localizables.debugUseThisCode)
+    }
+    
+    /// For __Main Screen__ page flow
+    enum Main {
+        static let showAllPrograms = String(localized: .Localizables.mainShowAllPrograms)
+        static let showAllUniversities = String(localized: .Localizables.mainShowAllUniversities)
+        static let showAllProfessions = String(localized: .Localizables.mainShowAllProfessions)
+        
+        enum AcademicTab {
+            static let titleMain = String(localized: .Localizables.mainAcademicTabTitleMain)
+            static let titleCountry = String(localized: .Localizables.mainAcademicTabTitleCountry)
+            static let universities = String(localized: .Localizables.mainAcademicTabUniversities)
+            static let professions = String(localized: .Localizables.mainAcademicTabProfessions)
+            static let programCategories = String(localized: .Localizables.mainAcademicTabProgramCategories)
+        }
+        
+        enum CareersTab {
+            static let titleMain = String(localized: .Localizables.mainCareersTabTitleMain)
+            static let titleCountry = String(localized: .Localizables.mainAcademicTabTitleCountry)
+        }
+        
+        enum ServicesTab {
+            static let title = String(localized: .Localizables.mainServicesTabTitle)
+            static let professionsOptions = String(localized: .Localizables.mainServicesTabProfessionOptions)
+            static let universityHelp = String(localized: .Localizables.mainServicesTabUniversityHelp)
+            static let calendar = String(localized: .Localizables.wordsCalendar)
+        }
+        
+        enum Footer {
+            static let title = String(localized: .Localizables.mainFooterTitle)
+            static let percentageLabel = String(localized: .Localizables.mainFooterPercentageLabel)
+        }
+    }
+    
+    /// For General Purpose
+    enum Words {
+        static let budgetPlaces = String(localized: .Localizables.wordsBudgetPlaces)
+        static let budgetPlacesShort = String(localized: .Localizables.wordsBudgetPlacesShort)
+        static let paidPlaces = String(localized: .Localizables.wordsPaidPlaces)
+        static let paidPlacesShort = String(localized: .Localizables.wordsPaidPlacesShort)
+        
+        static let notFound = String(localized: .Localizables.wordsNotFound)
+        static let searchSomwhereElse = String(localized: .Localizables.wordsSearchSomwhereElse)
+        static let programPlural = String(localized: .Localizables.wordsProgramPlural)
+        static let universityPlural = String(localized: .Localizables.wordsUniversityPlural)
+        static let calendar = String(localized: .Localizables.wordsCalendar)
+    }
+    
+    /// For __Application Status__
     enum Status {
         static let accepted = String(localized: .Localizables.statusAccepted)
         static let rejected = String(localized: .Localizables.statusRejected)

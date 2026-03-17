@@ -19,9 +19,9 @@ struct MainScreenAcademicCellViewModel {
         
         var title: String {
             switch self {
-            case .universities: return "Вузы"
-            case .programs: return "Программы вузов"
-            case .professions: return "Профессии вузов"
+            case .universities: return ConstantLocalizedStrings.Main.AcademicTab.universities
+            case .programs: return ConstantLocalizedStrings.Main.AcademicTab.programCategories
+            case .professions: return ConstantLocalizedStrings.Main.AcademicTab.professions
             }
         }
     }
@@ -42,15 +42,21 @@ final class MainScreenAcademicCell: UICollectionViewCell {
     
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
-        let text = "Высшие учебные\nзаведения Казахстана"
+        let mainText = ConstantLocalizedStrings.Main.AcademicTab.titleMain
+        let countryText = ConstantLocalizedStrings.Main.AcademicTab.titleCountry
+        
+        let fullText = "\(mainText) \(countryText)"
+        
         let attributed = NSMutableAttributedString(
-            string: text,
+            string: fullText,
             attributes: [.font: ECFont.font(.bold, size: 24)]
         )
-        if let range = text.range(of: "Казахстана") {
-            let nsRange = NSRange(range, in: text)
-            attributed.addAttributes([.font: ECFont.font(.regular, size: 20)], range: nsRange)
-        }
+        
+        let nsRange = (fullText as NSString).range(of: countryText)
+        attributed.addAttributes(
+            [.font: ECFont.font(.regular, size: 20)],
+            range: nsRange
+        )
         
         let label = UILabel()
         label.attributedText = attributed

@@ -43,7 +43,7 @@ final class MainScreenServicesCell: UICollectionViewCell {
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Сервисы для\nпоступающих"
+        label.text = ConstantLocalizedStrings.Main.ServicesTab.title
         label.font = ECFont.font(.bold, size: 22)
         label.textColor = .black
         label.numberOfLines = 2
@@ -89,10 +89,18 @@ final class MainScreenServicesCell: UICollectionViewCell {
     func configure(withVM vm: MainScreenServicesCellViewModel) {
         self.viewModel = vm
         self.items = [
-            .init(title: "Выбор профессии", image: .mainServicesProfessionImage, onTapAction: vm.didTapProfession),
-            //.init(title: "Тесты", image: .mainServicesTestImage, onTapAction: vm.didTapTests),
-            .init(title: "Помощь в выборе вуза", image: .mainServicesUniversityImage, onTapAction: vm.didTapUniversity),
-            .init(title: "Календарь", image: .mainServicesCalendarImage, onTapAction: vm.didTapCalendar)
+            .init(
+                title: ConstantLocalizedStrings.Main.ServicesTab.professionsOptions,
+                image: .mainServicesProfessionImage, onTapAction: vm.didTapProfession
+            ),
+            .init(
+                title: ConstantLocalizedStrings.Main.ServicesTab.universityHelp,
+                image: .mainServicesUniversityImage, onTapAction: vm.didTapUniversity
+            ),
+            .init(
+                title: ConstantLocalizedStrings.Main.ServicesTab.calendar,
+                image: .mainServicesCalendarImage, onTapAction: vm.didTapCalendar
+            )
         ]
         
         collectionView.reloadData()

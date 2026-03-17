@@ -15,7 +15,7 @@ struct NotFoundCellViewModel {
     let onTapAction: (() -> Void)?
     let horizontallySpaced: Bool
     
-    init(image: UIImage? = nil, title: String, subtitle: String? = nil, horizontallySpaced: Bool = false, onTapAction: (() -> Void)? = nil) {
+    init(image: UIImage? = nil, title: String = ConstantLocalizedStrings.Words.notFound, subtitle: String? = nil, horizontallySpaced: Bool = false, onTapAction: (() -> Void)? = nil) {
         self.image = image
         self.title = title
         self.subtitle = subtitle
@@ -23,7 +23,7 @@ struct NotFoundCellViewModel {
         self.horizontallySpaced = horizontallySpaced
     }
     
-    init(systemImage: String, title: String, subtitle: String? = nil, horizontallySpaced: Bool = false, onTapAction: (() -> Void)? = nil) {
+    init(systemImage: String, title: String = ConstantLocalizedStrings.Words.notFound, subtitle: String? = nil, horizontallySpaced: Bool = false, onTapAction: (() -> Void)? = nil) {
         self.image = UIImage(systemName: systemImage)
         self.title = title
         self.subtitle = subtitle

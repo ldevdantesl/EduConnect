@@ -78,7 +78,7 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
             self?.didTapVerifyCode(code: $0)
         } resendAction: {
             #if DEBUG
-            self.view?.showError(errorMessage: "Для бета теста используйте код 123456")
+            self.view?.showError(errorMessage: ConstantLocalizedStrings.DEBUG.useThisCode)
             #endif
         } backButtonAction: { [weak self] in
             self?.view?.removeKeyboard()

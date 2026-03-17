@@ -25,9 +25,7 @@ final class AccountScreenMainTabInfoCell: UICollectionViewCell {
     private let welcomeMessageLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = """
-        Поздравляем вас с первым шагом на пути к поступлению в один из лучших вузов Казахстана!\nЗдесь вы сможете выбрать учебное заведение,подать документы и отслеживать весь процесс поступления.
-        """
+        label.text = ConstantLocalizedStrings.Account.MainTab.welcomeMessage
         label.font = ECFont.font(.regular, size: 16)
         return label
     }()
@@ -35,7 +33,7 @@ final class AccountScreenMainTabInfoCell: UICollectionViewCell {
     private let adviceSectionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.text = "Вот несколько советов, чтобы начать:"
+        label.text = ConstantLocalizedStrings.Account.MainTab.adviceSection
         label.font = ECFont.font(.bold, size: 17)
         return label
     }()
@@ -43,11 +41,7 @@ final class AccountScreenMainTabInfoCell: UICollectionViewCell {
     private let adviceLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = """
-            * Этот раздел — ваша личная панель. После того как вы добавите вуз в список, вы сможете отслеживать прогресс своей заявки.
-            * Все вузы потребуют от вас ответов на общие вопросы в анкете. Для подачи заявки в вуз перейдите в раздел Поиск вузов.
-            * Как только вы добавите вуз, сможете завершить и отправить вашу заявку в разделе Мои вузы.\n\nМы всегда готовы помочь вам на каждом шаге! Если у вас возникнут вопросы, вы можете обратиться в наш Центр поддержки абитуриентов или связаться с нами в любое время.
-        """
+        label.text = ConstantLocalizedStrings.Account.MainTab.adviceSubtitle
         label.font = ECFont.font(.regular, size: 16)
         return label
     }()

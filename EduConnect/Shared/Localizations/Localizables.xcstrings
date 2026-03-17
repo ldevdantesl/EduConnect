@@ -1,6 +1,23 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "account_applicationsNotFound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Applications are not found, try applying first and come back (Tap to look for university)"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Попробуйте подать в вузы и вернуться обратно(Нажмите чтобы поискать вузы)"
+          }
+        }
+      }
+    },
     "account_applicationTab" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -484,6 +501,40 @@
         }
       }
     },
+    "account_lastApplications" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Applications"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Последние Заявки"
+          }
+        }
+      }
+    },
+    "account_lastApplicationsSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "List of the last applications:"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вот список ваших последних заявок в вузы:"
+          }
+        }
+      }
+    },
     "account_mainTab" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -503,6 +554,45 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Главная"
+          }
+        }
+      }
+    },
+    "account_mainTabAdviceSection" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вот несколько советов, чтобы начать:"
+          }
+        }
+      }
+    },
+    "account_mainTabAdviceSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "* Этот раздел — ваша личная панель. После того как вы добавите вуз в список, вы сможете отслеживать прогресс своей заявки.\\n* Все вузы потребуют от вас ответов на общие вопросы в анкете. Для подачи заявки в вуз перейдите в раздел Поиск вузов.\\n* Как только вы добавите вуз, сможете завершить и отправить вашу заявку в разделе Мои вузы.\\n\\nМы всегда готовы помочь вам на каждом шаге! Если у вас возникнут вопросы, вы можете обратиться в наш Центр поддержки абитуриентов или связаться с нами в любое время."
+          }
+        }
+      }
+    },
+    "account_mainTabWelcomeMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Congratulations on taking the first step toward admission to one of the best universities in Kazakhstan!\\nHere, you will be able to choose an educational institution, submit your application, and track the entire admission process."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поздравляем вас с первым шагом на пути к поступлению в один из лучших вузов Казахстана!\\nЗдесь вы сможете выбрать учебное заведение,подать документы и отслеживать весь процесс поступления."
           }
         }
       }
@@ -848,6 +938,61 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Год сдачи"
+          }
+        }
+      }
+    },
+    "article_articleNavigatorSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Навигатор поступления для абитуриентов вузов"
+          }
+        }
+      }
+    },
+    "article_moreToRead" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Читай так же"
+          }
+        }
+      }
+    },
+    "articles_article" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Статьи"
+          }
+        }
+      }
+    },
+    "articles_noNewsInThisCategory" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет новостей в этой категории"
+          }
+        }
+      }
+    },
+    "articles_showAllArticles" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать все новости"
           }
         }
       }
@@ -1377,6 +1522,171 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Тип"
+          }
+        }
+      }
+    },
+    "debug_useThisCode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Для бета теста используйте код 123456"
+          }
+        }
+      }
+    },
+    "main_academicTabProfessions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профессии вузов"
+          }
+        }
+      }
+    },
+    "main_academicTabProgramCategories" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Направления вузов"
+          }
+        }
+      }
+    },
+    "main_academicTabTitleCountry" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Казахстана"
+          }
+        }
+      }
+    },
+    "main_academicTabTitleMain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Высшие учебные\\nзаведения"
+          }
+        }
+      }
+    },
+    "main_academicTabUniversities" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вузы"
+          }
+        }
+      }
+    },
+    "main_careersTabTitleMain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поступи в вузы\\n"
+          }
+        }
+      }
+    },
+    "main_footerPercentageLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Образование в Казахстане"
+          }
+        }
+      }
+    },
+    "main_footerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Высшее образование\\nв Казахстане"
+          }
+        }
+      }
+    },
+    "main_servicesTabProfessionOptions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбор профессии"
+          }
+        }
+      }
+    },
+    "main_servicesTabTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сервисы для\\nпоступающих"
+          }
+        }
+      }
+    },
+    "main_servicesTabUniversityHelp" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помощь в выборе вуза"
+          }
+        }
+      }
+    },
+    "main_showAllProfessions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать все профессии вузов"
+          }
+        }
+      }
+    },
+    "main_showAllPrograms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать все программы вузов"
+          }
+        }
+      }
+    },
+    "main_showAllUniversities" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать все наши вузы"
           }
         }
       }
@@ -2251,6 +2561,117 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Рассмотрена"
+          }
+        }
+      }
+    },
+    "words_budgetPlaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бюджетных мест"
+          }
+        }
+      }
+    },
+    "words_budgetPlacesShort" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бюдж. мест"
+          }
+        }
+      }
+    },
+    "words_calendar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Календарь"
+          }
+        }
+      }
+    },
+    "words_notFound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Found"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ничего не найдено"
+          }
+        }
+      }
+    },
+    "words_paidPlaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Платных мест"
+          }
+        }
+      }
+    },
+    "words_paidPlacesShort" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Плат. мест"
+          }
+        }
+      }
+    },
+    "words_programPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Программ"
+          }
+        }
+      }
+    },
+    "words_searchSomwhereElse" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Somewhere Else"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поищите где нибудь еше"
+          }
+        }
+      }
+    },
+    "words_universityPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вузов"
           }
         }
       }
