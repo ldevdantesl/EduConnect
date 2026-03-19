@@ -42,7 +42,7 @@ final class MainScreenStepsCell: UICollectionViewCell {
     // MARK: - VIEW PROPERTIES
     private lazy var chooseProfessionButton: ECDashedBorderView = makeStepButton(
         number: "1",
-        title: "Выбери\nпрофессию",
+        title: ConstantLocalizedStrings.Main.Steps.chooseProfession,
         image: ImageConstants.mainChooseProfessionImage.image,
         backgroundColor: .blue,
         numberTextColor: .white.withAlphaComponent(0.8),
@@ -56,7 +56,7 @@ final class MainScreenStepsCell: UICollectionViewCell {
 
     private lazy var chooseENTButton: ECDashedBorderView = makeStepButton(
         number: "2",
-        title: "Выбери\nЕНТ",
+        title: ConstantLocalizedStrings.Main.Steps.chooseEnt,
         image: ImageConstants.mainChooseENTImage.image,
         backgroundColor: .white,
         numberTextColor: .purple.withAlphaComponent(0.8),
@@ -69,7 +69,7 @@ final class MainScreenStepsCell: UICollectionViewCell {
     
     private lazy var chooseUniversityButton: ECDashedBorderView = makeStepButton(
         number: "3",
-        title: "Выбери\nвуз",
+        title: ConstantLocalizedStrings.Main.Steps.chooseUni,
         image: ImageConstants.mainChooseUniversityImage.image,
         backgroundColor: .systemBlue,
         numberTextColor: .white.withAlphaComponent(0.8),
@@ -115,7 +115,7 @@ final class MainScreenStepsCell: UICollectionViewCell {
         }
 
         showAllUnderlineButton.configure(
-            text: showingAll ? "Скрыть все шаги" : "Развернуть все шаги",
+            text: showingAll ? ConstantLocalizedStrings.Main.Steps.hideSteps : ConstantLocalizedStrings.Main.Steps.showAllSteps,
             textSize: 14, textColor: .blue
         )
         showAllUnderlineButton.setAction(action: vm.didTapShowAllItems)

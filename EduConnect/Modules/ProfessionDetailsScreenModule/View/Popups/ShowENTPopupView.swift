@@ -30,7 +30,7 @@ final class ShowENTPopupView: PopUpView {
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Укажи ЕНТ"
+        label.text = ConstantLocalizedStrings.Profession.setEnt
         label.font = ECFont.font(.bold, size: 18)
         label.textAlignment = .center
         return label
@@ -38,7 +38,7 @@ final class ShowENTPopupView: PopUpView {
 
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Укажи результаты ЕНТ используя диапазоны"
+        label.text = ConstantLocalizedStrings.Profession.setEntSubtitle
         label.font = ECFont.font(.medium, size: 12)
         label.textColor = .secondaryLabel
         label.textAlignment = .center
@@ -63,7 +63,7 @@ final class ShowENTPopupView: PopUpView {
 
     private lazy var okButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("OK", for: .normal)
+        button.setTitle(ConstantLocalizedStrings.Common.ok, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.backgroundColor = Constants.selectedColor

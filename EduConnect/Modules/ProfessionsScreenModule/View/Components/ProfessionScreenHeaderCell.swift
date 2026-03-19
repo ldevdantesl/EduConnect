@@ -36,7 +36,7 @@ final class ProfessionScreenHeaderCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Профессии"
+        label.text = ConstantLocalizedStrings.Profession.professionPlural
         label.font = ECFont.font(.bold, size: 22)
         label.textColor = .white
         return label
@@ -44,7 +44,7 @@ final class ProfessionScreenHeaderCell: UICollectionViewCell {
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Полный каталог профессий от A до Я"
+        label.text = ConstantLocalizedStrings.Profession.headerSubtitle
         label.font = ECFont.font(.regular, size: 17)
         label.textColor = .white
         return label

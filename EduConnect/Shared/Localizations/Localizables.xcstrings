@@ -1227,6 +1227,17 @@
         }
       }
     },
+    "common_hide" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Свернуть"
+          }
+        }
+      }
+    },
     "common_international" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1315,6 +1326,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Не выбрано"
+          }
+        }
+      }
+    },
+    "common_none" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Любое"
           }
         }
       }
@@ -1434,6 +1456,17 @@
         }
       }
     },
+    "common_show" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Развернуть"
+          }
+        }
+      }
+    },
     "common_sort" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1453,6 +1486,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Сортировка"
+          }
+        }
+      }
+    },
+    "common_start" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начать"
           }
         }
       }
@@ -1724,6 +1768,39 @@
         }
       }
     },
+    "main_programsShowAll" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать все программы бакалавриата"
+          }
+        }
+      }
+    },
+    "main_programsTitleMain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Направления высшего\\n"
+          }
+        }
+      }
+    },
+    "main_programTitleSecondary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "образования в Казахстане"
+          }
+        }
+      }
+    },
     "main_servicesTabProfessionOptions" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1786,6 +1863,160 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Показать все наши вузы"
+          }
+        }
+      }
+    },
+    "main_stepsChooseENT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбери\\nЕНТ"
+          }
+        }
+      }
+    },
+    "main_stepsChooseProfession" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбери\\nпрофессию"
+          }
+        }
+      }
+    },
+    "main_stepsChooseUni" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбери\\nвуз"
+          }
+        }
+      }
+    },
+    "main_stepsHideSteps" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скрыть все шаги"
+          }
+        }
+      }
+    },
+    "main_stepsShowAllSteps" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Развернуть все шаги"
+          }
+        }
+      }
+    },
+    "profession_aboutProfession" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "О профессии"
+          }
+        }
+      }
+    },
+    "profession_footerSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования.  Если ты хочешь сфокусироваться на каком-то конкретном вузе, используй удобную функцию"
+          }
+        }
+      }
+    },
+    "profession_footerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбор профессии в справочнике"
+          }
+        }
+      }
+    },
+    "profession_headerSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Полный каталог профессий от A до Я"
+          }
+        }
+      }
+    },
+    "profession_profession" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профессия"
+          }
+        }
+      }
+    },
+    "profession_professionPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профессии"
+          }
+        }
+      }
+    },
+    "profession_relatedProf" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Похожие профессии"
+          }
+        }
+      }
+    },
+    "profession_setEnt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Укажите ЕНТ"
+          }
+        }
+      }
+    },
+    "profession_setEntSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Укажи результаты ЕНТ используя диапазоны"
           }
         }
       }
@@ -2697,6 +2928,39 @@
         }
       }
     },
+    "words_from" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "От"
+          }
+        }
+      }
+    },
+    "words_fromAtoZ" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "От А до Я"
+          }
+        }
+      }
+    },
+    "words_fromZtoA" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "От Я до А"
+          }
+        }
+      }
+    },
     "words_notFound" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2760,6 +3024,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Поищите где нибудь еше"
+          }
+        }
+      }
+    },
+    "words_to" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "До"
+          }
+        }
+      }
+    },
+    "words_tryAgain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Попробуйте еще раз"
           }
         }
       }

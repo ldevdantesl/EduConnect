@@ -53,6 +53,8 @@ public enum ConstantLocalizedStrings {
     
     /// For __Common__ words
     enum Common {
+        static let start = String(localized: .Localizables.commonStart)
+        static let none = String(localized: .Localizables.commonNone)
         static let add = String(localized: .Localizables.commonAdd)
         static let ok = String(localized: .Localizables.commonOk)
         static let cancel = String(localized: .Localizables.commonCancel)
@@ -75,6 +77,8 @@ public enum ConstantLocalizedStrings {
         static let loading = String(localized: .Localizables.commonLoading)
         static let search = String(localized: .Localizables.commonSearch)
         static let sort = String(localized: .Localizables.commonSort)
+        static let show = String(localized: .Localizables.commonShow)
+        static let hide = String(localized: .Localizables.commonHide)
         static let attention = String(localized: .Localizables.commonAttention)
     }
     
@@ -184,6 +188,20 @@ public enum ConstantLocalizedStrings {
         static let showAllArticles = String(localized: .Localizables.articlesShowAllArticles)
     }
     
+    enum Profession {
+        static let professionPlural = String(localized: .Localizables.professionProfessionPlural)
+        static let profession = String(localized: .Localizables.professionProfession)
+        static let headerSubtitle = String(localized: .Localizables.professionHeaderSubtitle)
+        static let relatedProf = String(localized: .Localizables.professionRelatedProf)
+        static let about = String(localized: .Localizables.professionAboutProfession)
+        static let setEnt = String(localized: .Localizables.professionSetEnt)
+        static let setEntSubtitle = String(localized: .Localizables.professionSetEntSubtitle)
+        static let footerTitle = String(localized: .Localizables.professionFooterTitle)
+        static let footerSubtitle = String(localized: .Localizables.professionFooterSubtitle)
+        static let programs = Words.programPlural
+        static let unis = Words.universityPlural
+    }
+    
     /// For __DEBUGGING__ purposes
     enum DEBUG {
         static let useThisCode = String(localized: .Localizables.debugUseThisCode)
@@ -221,6 +239,21 @@ public enum ConstantLocalizedStrings {
             static let titleSecondary = String(localized: .Localizables.mainJournalTitleSecondary)
         }
         
+        enum ProgramsTab {
+            static let titleMain = String(localized: .Localizables.mainProgramsTitleMain)
+            static let titleSecondary = String(localized: .Localizables.mainProgramTitleSecondary)
+            static let showAll = String(localized: .Localizables.mainProgramsShowAll)
+        }
+        
+        enum Steps {
+            static let chooseProfession = String(localized: .Localizables.mainStepsChooseProfession)
+            static let chooseEnt = String(localized: .Localizables.mainStepsChooseENT)
+            static let chooseUni = String(localized: .Localizables.mainStepsChooseUni)
+            static let showAllSteps = String(localized: .Localizables.mainStepsShowAllSteps)
+            static let hideSteps = String(localized: .Localizables.mainStepsHideSteps)
+            static let start = String(localized: .Localizables.commonStart)
+        }
+        
         enum ServicesTab {
             static let title = String(localized: .Localizables.mainServicesTabTitle)
             static let professionsOptions = String(localized: .Localizables.mainServicesTabProfessionOptions)
@@ -241,12 +274,17 @@ public enum ConstantLocalizedStrings {
     
     /// For General Purpose
     enum Words {
+        static let from = String(localized: .Localizables.wordsFrom)
+        static let to = String(localized: .Localizables.wordsTo)
         static let budgetPlaces = String(localized: .Localizables.wordsBudgetPlaces)
         static let budgetPlacesShort = String(localized: .Localizables.wordsBudgetPlacesShort)
         static let paidPlaces = String(localized: .Localizables.wordsPaidPlaces)
         static let paidPlacesShort = String(localized: .Localizables.wordsPaidPlacesShort)
+        static let fromAtoZ = String(localized: .Localizables.wordsFromAtoZ)
+        static let fromZtoA = String(localized: .Localizables.wordsFromZtoA)
         
         static let notFound = String(localized: .Localizables.wordsNotFound)
+        static let tryAgain = String(localized: .Localizables.wordsTryAgain)
         static let searchSomwhereElse = String(localized: .Localizables.wordsSearchSomwhereElse)
         static let programPlural = String(localized: .Localizables.wordsProgramPlural)
         static let universityPlural = String(localized: .Localizables.wordsUniversityPlural)
