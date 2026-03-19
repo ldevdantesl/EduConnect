@@ -34,7 +34,7 @@ final class ProfessionDetailsProgsAndUnisCell: UICollectionViewCell {
     // MARK: - VIEW PROPERTIES
     private let programsButton: ECDashedBorderButton = {
         let button = ECDashedBorderButton()
-        button.titleText = "Программы"
+        button.titleText = ConstantLocalizedStrings.Profession.programs
         button.titleFont = ECFont.font(.semiBold, size: 14)
         button.titleColor = .white
         button.subtitleFont = ECFont.font(.medium, size: 14)
@@ -46,7 +46,7 @@ final class ProfessionDetailsProgsAndUnisCell: UICollectionViewCell {
     
     private let unisButton: ECDashedBorderButton = {
         let button = ECDashedBorderButton()
-        button.titleText = "Вузы"
+        button.titleText = ConstantLocalizedStrings.Profession.unis
         button.titleFont = ECFont.font(.semiBold, size: 14)
         button.titleColor = .white
         button.subtitleFont = ECFont.font(.medium, size: 14)
@@ -70,8 +70,8 @@ final class ProfessionDetailsProgsAndUnisCell: UICollectionViewCell {
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: ProfessionDetailsProgsAndUnisCellViewModel) {
         self.viewModel = vm
-        self.unisButton.subtitleText = "(\(vm.profession.universitiesCount))"
-        self.programsButton.subtitleText = "(\(vm.profession.programsCount))"
+        self.unisButton.subtitleText = vm.profession.universitiesCount.description
+        self.programsButton.subtitleText = vm.profession.programsCount.description
         self.unisButton.setAction(action: vm.didTapUniversities)
         self.programsButton.setAction(action: vm.didTapPrograms)
     }

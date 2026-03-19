@@ -17,10 +17,10 @@ struct ShowENTPopupCellViewModel {
 final class ShowENTPopupCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     static let ranges: [(title: String, maxValue: Int)] = [
-        ("от 10 до 30", 30),
-        ("от 31 до 40", 40),
-        ("от 41 до 60", 60),
-        ("от 61 до 100", 100)
+        ("\(ConstantLocalizedStrings.Words.from) 10 \(ConstantLocalizedStrings.Words.to) 30", 30),
+        ("\(ConstantLocalizedStrings.Words.from) 31 \(ConstantLocalizedStrings.Words.to) 40", 40),
+        ("\(ConstantLocalizedStrings.Words.from) 41 \(ConstantLocalizedStrings.Words.to) 60", 60),
+        ("\(ConstantLocalizedStrings.Words.from) 61 \(ConstantLocalizedStrings.Words.to) 100", 100)
     ]
     private enum Constants {
         static let buttonHeight: CGFloat = 40

@@ -55,14 +55,17 @@ final class ProfessionDetailsScreenPresenter {
         var relatedItems: [ProfessionDetailsItem] = []
         
         if !related.isEmpty {
-            let relatedHeaderVM = SectionHeaderCellViewModel(title: "Похожие профессии", titleSize: 22, titleAlignment: .center)
+            let relatedHeaderVM = SectionHeaderCellViewModel(
+                title: ConstantLocalizedStrings.Profession.relatedProf,
+                titleSize: 22, titleAlignment: .center
+            )
             relatedItems.append(.sectionHeaderItem(.init(id: "related-header", viewModel: relatedHeaderVM)))
             let neededItems: [ECProfession] = showingAllRelated ? related : Array(related.prefix(1))
             
             neededItems.forEach { profession in
                 let vm = CardWithImageCellViewModel(
                     imageURL: profession.imageURL,
-                    preTitle: "\(profession.universitiesCount) вуза \(profession.programsCount) программ",
+                    preTitle: "\(profession.universitiesCount) \(ConstantLocalizedStrings.Profession.unis) \(profession.programsCount) \(ConstantLocalizedStrings.Profession.programs)",
                     title: profession.name.toCurrentLanguage(), subtitle: profession.description.toCurrentLanguage(), showsArrowRight: true,
                     didTap: { [weak self] in self?.router.routeToProfession(profession: profession) }
                 )
@@ -70,7 +73,7 @@ final class ProfessionDetailsScreenPresenter {
             }
             
             let underlineVM = UnderlineButtonCellViewModel(
-                titleName: showingAllRelated ? "Свернуть" : "Развернуть",
+                titleName: showingAllRelated ? ConstantLocalizedStrings.Common.hide : ConstantLocalizedStrings.Common.hide,
                 titleColor: .blue
             ) { [weak self] in
                 self?.showingAllRelated.toggle()
