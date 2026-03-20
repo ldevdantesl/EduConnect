@@ -1625,6 +1625,17 @@
         }
       }
     },
+    "common_year" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Год"
+          }
+        }
+      }
+    },
     "debug_error" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3203,6 +3214,17 @@
         }
       }
     },
+    "university_andMore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "И еще"
+          }
+        }
+      }
+    },
     "university_admission" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3210,6 +3232,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "поступления"
+          }
+        }
+      }
+    },
+
+    "university_budgetPlaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Места бюджет"
           }
         }
       }
@@ -3225,6 +3259,7 @@
         }
       }
     },
+
     "university_averageScoreENT" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3379,6 +3414,17 @@
         }
       }
     },
+    "university_paidPlaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Места платно"
+          }
+        }
+      }
+    },
     "university_militaryDepartmentCenterShort" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3390,6 +3436,17 @@
         }
       }
     },
+    "university_priceNotSet" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цена не указана"
+          }
+        }
+      }
+    },
     "university_militaryDepartmentShort" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3397,6 +3454,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Воен. уч."
+          }
+        }
+      }
+    },
+    "university_scoreBudget" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бал бюджет"
+          }
+        }
+      }
+    },
+    "university_scorePaid" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бал платно"
           }
         }
       }
@@ -3529,6 +3608,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "городов"
+          }
+        }
+      }
+    },
+    "words_education" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обучение"
           }
         }
       }

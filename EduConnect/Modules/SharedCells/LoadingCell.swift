@@ -22,7 +22,7 @@ final class LoadingCell: UICollectionViewCell {
     
     private let loadingLabel: UILabel = {
         let label = UILabel()
-        label.text = "Загрузка..."
+        label.text = ConstantLocalizedStrings.Common.loading
         label.font = ECFont.font(.medium, size: 14)
         label.textColor = .secondaryLabel
         label.textAlignment = .center

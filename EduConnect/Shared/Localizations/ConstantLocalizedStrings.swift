@@ -85,6 +85,7 @@ public enum ConstantLocalizedStrings {
         static let code = String(localized: .Localizables.commonCode)
         static let remove = String(localized: .Localizables.commonRemove)
         static let current = String(localized: .Localizables.commonCurrent)
+        static let year = String(localized: .Localizables.commonYear)
     }
     
     /// For __Account__ Tab
@@ -230,6 +231,15 @@ public enum ConstantLocalizedStrings {
     enum University {
         static let university = String(localized: .Localizables.universityUniversity)
         static let filterUnis = String(localized: .Localizables.universityFilterUnis)
+        static let andMore = String(localized: .Localizables.universityAndMore)
+        static let fields = Program.fields
+        static let paidPlaces = String(localized: .Localizables.universityPaidPlaces)
+        static let budgetPlaces = String(localized: .Localizables.universityBudgetPlaces)
+        static let scoreBudget = String(localized: .Localizables.universityScoreBudget)
+        static let scorePaid = String(localized: .Localizables.universityScorePaid)
+        static let priceNotSet = String(localized: .Localizables.universityPriceNotSet)
+
+        static let profession = Profession.professionPlural
         static let dormitory = String(localized: .Localizables.universityFilterWordsDormitory)
         static let militaryDepartmentShort = String(localized: .Localizables.universityMilitaryDepartmentShort)
         static let militaryDepartmentCenterShort = String(localized: .Localizables.universityMilitaryDepartmentCenterShort)
@@ -254,7 +264,6 @@ public enum ConstantLocalizedStrings {
             static let without = String(localized: .Localizables.universityFilterWithout)
             
             enum Words{
-                
                 static let city = String(localized: .Localizables.universityFilterWordsCity)
                 static let profession = String(localized: .Localizables.universityFilterWordsProfession)
                 static let typeOfUni = String(localized: .Localizables.universityFilterWordsTypeOfUni)
@@ -377,6 +386,7 @@ public enum ConstantLocalizedStrings {
         static let freePlaces = String(localized: .Localizables.wordsFreePlaces)
         static let fromAtoZ = String(localized: .Localizables.wordsFromAtoZ)
         static let fromZtoA = String(localized: .Localizables.wordsFromZtoA)
+        static let education = String(localized: .Localizables.wordsEducation)
         
         static let tengePerYear = String(localized: .Localizables.wordsTengePerYear)
         static let notFound = String(localized: .Localizables.wordsNotFound)
