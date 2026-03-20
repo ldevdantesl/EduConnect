@@ -1180,6 +1180,17 @@
         }
       }
     },
+    "common_current" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "нынешнюю"
+          }
+        }
+      }
+    },
     "common_description" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1416,6 +1427,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Номер Телефона"
+          }
+        }
+      }
+    },
+    "common_remove" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить"
           }
         }
       }
@@ -3159,6 +3181,17 @@
         }
       }
     },
+    "university_aboutUni" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Об Университете"
+          }
+        }
+      }
+    },
     "university_addedFilters" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3166,6 +3199,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Добавленные фильтры:"
+          }
+        }
+      }
+    },
+    "university_admission" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "поступления"
+          }
+        }
+      }
+    },
+    "university_application" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "заявку"
+          }
+        }
+      }
+    },
+    "university_averageScoreENT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Средний балл ЕНТ"
           }
         }
       }
@@ -3313,13 +3379,24 @@
         }
       }
     },
-    "university_university" : {
+    "university_militaryDepartmentCenterShort" : {
       "extractionState" : "manual",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Университет"
+            "value" : "Воен. уч. центр"
+          }
+        }
+      }
+    },
+    "university_militaryDepartmentShort" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Воен. уч."
           }
         }
       }
@@ -3379,6 +3456,28 @@
         }
       }
     },
+    "university_uniFor" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "вуз для"
+          }
+        }
+      }
+    },
+    "university_university" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет"
+          }
+        }
+      }
+    },
     "words_budgetPlaces" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3423,6 +3522,17 @@
         }
       }
     },
+    "words_cityPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "городов"
+          }
+        }
+      }
+    },
     "words_facultyPlural" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3441,17 +3551,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Свободных мест"
-          }
-        }
-      }
-    },
-    "words_cityPlural" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "городов"
           }
         }
       }

@@ -137,13 +137,13 @@ final class UniversityInfoScreenHeaderCell: UICollectionViewCell {
     func configure(withVM vm: UniversityInfoScreenHeaderCellViewModel) {
         self.viewModel = vm
         nameLabel.text = "\(vm.university.name)"
-        programsLabel.text = "\(vm.university.programsCount)\nпрограмм"
-        minPriceLabel.text = "от \(ECNumberFormatter.toDecimalFromString(number: vm.university.minContractPrice ?? "0"))\nтенге в год"
-        budgetPlacesLabel.text = "\(vm.university.budgetPlaces)\nбюджет. мест"
-        paidPlacesLabel.text = "\(vm.university.paidPlaces)\nплатных. мест"
+        programsLabel.text = "\(vm.university.programsCount)\n\(ConstantLocalizedStrings.Words.programPlural)"
+        minPriceLabel.text = "\(ConstantLocalizedStrings.Words.from) \(ECNumberFormatter.toDecimalFromString(number: vm.university.minContractPrice ?? "0"))\n\(ConstantLocalizedStrings.Words.tengePerYear)"
+        budgetPlacesLabel.text = "\(vm.university.budgetPlaces)\n\(ConstantLocalizedStrings.Words.budgetPlacesShort)"
+        paidPlacesLabel.text = "\(vm.university.paidPlaces)\n\(ConstantLocalizedStrings.Words.budgetPlacesShort)"
         var advantagesText: String = "\(vm.university.universityTypeName.capitalized)"
-        vm.university.hasDormitory ? advantagesText.append(", Общежитие") : ()
-        vm.university.hasMilitaryDepartment ? advantagesText.append(", Воен. уч.") : ()
+        vm.university.hasDormitory ? advantagesText.append(", \(ConstantLocalizedStrings.University.dormitory)") : ()
+        vm.university.hasMilitaryDepartment ? advantagesText.append(", \(ConstantLocalizedStrings.University.militaryDepartmentShort)") : ()
         self.advantagesLabel.text = advantagesText
         
         if let youtubeURL = vm.university.youtubeURL?.extractYouTubeID() {

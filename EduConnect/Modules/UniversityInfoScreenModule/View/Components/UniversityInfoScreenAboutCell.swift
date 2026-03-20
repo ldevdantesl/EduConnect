@@ -46,7 +46,7 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell {
     // MARK: - VIEW PROPERTIES
     private let aboutTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Об Университете"
+        label.text = ConstantLocalizedStrings.University.aboutUni
         label.font = ECFont.font(.bold, size: 20)
         label.textColor = .label
         return label
@@ -62,7 +62,7 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell {
     
     private let programsButton: ECDashedBorderButton = {
         let button = ECDashedBorderButton()
-        button.titleText = "Программы"
+        button.titleText = ConstantLocalizedStrings.University.programsPlural
         button.cornerRadius = Constants.buttonsCornerRadius
         button.titleFont = ECFont.font(.semiBold, size: 14)
         button.subtitleFont = ECFont.font(.semiBold, size: 14)
@@ -72,7 +72,7 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell {
     
     private let professionsButton: ECDashedBorderButton = {
         let button = ECDashedBorderButton()
-        button.titleText = "Профессии"
+        button.titleText = ConstantLocalizedStrings.University.professionPlural
         button.cornerRadius = Constants.buttonsCornerRadius
         button.titleFont = ECFont.font(.semiBold, size: 14)
         button.subtitleFont = ECFont.font(.semiBold, size: 14)
@@ -82,7 +82,7 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell {
     
     private let articlesButton: ECDashedBorderButton = {
         let button = ECDashedBorderButton()
-        button.titleText = "Факультеты"
+        button.titleText = ConstantLocalizedStrings.Words.facultyPlural
         button.cornerRadius = Constants.buttonsCornerRadius
         button.titleFont = ECFont.font(.semiBold, size: 14)
         button.subtitleFont = ECFont.font(.semiBold, size: 14)
@@ -180,11 +180,11 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell {
         features.append(uni.universityTypeName)
         
         if uni.hasDormitory {
-            features.append("Общежитие")
+            features.append(ConstantLocalizedStrings.University.dormitory)
         }
         
         if uni.hasMilitaryDepartment {
-            features.append("Воен. уч. центр")
+            features.append(ConstantLocalizedStrings.University.militaryDepartmentCenterShort)
         }
         
        

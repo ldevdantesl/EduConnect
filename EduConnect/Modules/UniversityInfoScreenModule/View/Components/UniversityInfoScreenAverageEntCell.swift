@@ -30,7 +30,7 @@ final class UniversityInfoScreenAverageEntCell: UICollectionViewCell {
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Средний балл ЕНТ"
+        label.text = ConstantLocalizedStrings.University.averageScoreENT
         label.font = ECFont.font(.bold, size: 20)
         label.textColor = .label
         return label

@@ -83,6 +83,8 @@ public enum ConstantLocalizedStrings {
         static let filter = String(localized: .Localizables.commonFilter)
         static let attention = String(localized: .Localizables.commonAttention)
         static let code = String(localized: .Localizables.commonCode)
+        static let remove = String(localized: .Localizables.commonRemove)
+        static let current = String(localized: .Localizables.commonCurrent)
     }
     
     /// For __Account__ Tab
@@ -228,6 +230,17 @@ public enum ConstantLocalizedStrings {
     enum University {
         static let university = String(localized: .Localizables.universityUniversity)
         static let filterUnis = String(localized: .Localizables.universityFilterUnis)
+        static let dormitory = String(localized: .Localizables.universityFilterWordsDormitory)
+        static let militaryDepartmentShort = String(localized: .Localizables.universityMilitaryDepartmentShort)
+        static let militaryDepartmentCenterShort = String(localized: .Localizables.universityMilitaryDepartmentCenterShort)
+        static let uniFor = String(localized: .Localizables.universityUniFor)
+        static let admission = String(localized: .Localizables.universityAdmission)
+        static let application = String(localized: .Localizables.universityApplication)
+        static let averageScoreENT = String(localized: .Localizables.universityAverageScoreENT)
+        static let aboutUni = String(localized: .Localizables.universityAboutUni)
+        static let programsPlural = Sidebar.programs
+        static let professionPlural = Profession.professionPlural
+        static let contact = Account.Expandable.FamilyInfo.contact
         
         enum Header {
             static let subtitle = String(localized: .Localizables.universityHeaderSubtitle)
@@ -246,7 +259,7 @@ public enum ConstantLocalizedStrings {
                 static let profession = String(localized: .Localizables.universityFilterWordsProfession)
                 static let typeOfUni = String(localized: .Localizables.universityFilterWordsTypeOfUni)
                 static let militaryDepartment = String(localized: .Localizables.universityFilterWordsMilitaryDepartment)
-                static let dormitory = String(localized: .Localizables.universityFilterWordsDormitory)
+                static let dormitory = University.dormitory
                 static let price = String(localized: .Localizables.universityFilterWordsPrice)
                 static let sort = Common.sort
             }

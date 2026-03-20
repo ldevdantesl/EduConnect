@@ -39,7 +39,7 @@ final class UniversityInfoScreenContactsCell: UICollectionViewCell {
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Контакты"
+        label.text = ConstantLocalizedStrings.University.contact
         label.font = ECFont.font(.bold, size: 20)
         label.textColor = .label
         return label
@@ -203,10 +203,10 @@ final class UniversityInfoScreenContactsCell: UICollectionViewCell {
     
     private func configureButton(applied: Bool) {
         if applied {
-            chooseUniversityLabel.text = "Удалить\nнынешнюю\nзаявку"
+            chooseUniversityLabel.text = "\(ConstantLocalizedStrings.Common.remove)\n\(ConstantLocalizedStrings.Common.current)\n\(ConstantLocalizedStrings.University.application)"
             chooseUniversityButton.backgroundColor = .systemRed
         } else {
-            chooseUniversityLabel.text = "Выбрать\nвуз для\nпоступления"
+            chooseUniversityLabel.text = "\(ConstantLocalizedStrings.Common.choose)\n\(ConstantLocalizedStrings.University.uniFor)\n\(ConstantLocalizedStrings.University.admission)"
             chooseUniversityButton.backgroundColor = .systemBlue
         }
     }
