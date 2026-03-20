@@ -50,12 +50,12 @@ final class ProgramDetailsAboutCell: UICollectionViewCell {
     public func configure(withVM vm: ProgramDetailsAboutCellViewModel) {
         self.viewModel = vm
         
-        let name = makeHStack(name: "Название", value: vm.details.name.toCurrentLanguage())
-        let category = makeHStack(name: "Категория", value: vm.details.programCategory.name.toCurrentLanguage())
-        let type = makeHStack(name: "Тип", value: vm.details.typeName)
-        let budget = makeHStack(name: "Бюджетных мест", value: vm.details.budgetPlaces.description)
-        let paid = makeHStack(name: "Платных мест", value: vm.details.paidPlaces.description)
-        let price = makeHStack(name: "Стоимость", value: vm.details.price)
+        let name = makeHStack(name: ConstantLocalizedStrings.Words.title, value: vm.details.name.toCurrentLanguage())
+        let category = makeHStack(name: ConstantLocalizedStrings.Words.category, value: vm.details.programCategory.name.toCurrentLanguage())
+        let type = makeHStack(name: ConstantLocalizedStrings.Words.type, value: vm.details.typeName)
+        let budget = makeHStack(name: ConstantLocalizedStrings.Words.budgetPlaces, value: vm.details.budgetPlaces.description)
+        let paid = makeHStack(name: ConstantLocalizedStrings.Words.paidPlaces, value: vm.details.paidPlaces.description)
+        let price = makeHStack(name: ConstantLocalizedStrings.Words.price, value: vm.details.price)
         
         [name, category, type, budget, paid, price].forEach { vStack.addArrangedSubview($0) }
     }

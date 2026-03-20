@@ -27,8 +27,8 @@ final class ProgramsScreenPresenter {
     private var programs: [ECProgramCategory] = []
     private lazy var headerVM = ProgramsScreenHeaderCellViewModel(totalFields: totalFields, totalEducationPrograms: totalPrograms)
     private lazy var footerVM = TabsFooterCellViewModel(
-        titleLabelText: "Направления обучения в бакалавриате и специалитете",
-        subtitleLabelText: "Выбери интересное тебе направление образования в вузе и получи список программ бакалавриата и специалитета по требуемому направлению обучения. Ты узнаешь в каких вузах есть соответствующие программы по направлению подготовки, какие требуются экзамены, минимальные и проходные баллы, стоимость обучения. В этом списке ты можешь найти интересную сферу деятельности, отрасль, направление обучения и узнать детали поступления в вуз."
+        titleLabelText: ConstantLocalizedStrings.Program.footerTitle,
+        subtitleLabelText: ConstantLocalizedStrings.Program.footerSubtitle
     )
     
     // MARK: - COMPUTED PROPERTIES

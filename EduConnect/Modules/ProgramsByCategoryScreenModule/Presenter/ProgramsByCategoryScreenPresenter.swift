@@ -47,13 +47,13 @@ final class ProgramsByCategoryScreenPresenter {
     private func applySnapshot() {
         let headerVM = ProgramsByCategoryHeaderCellViewModel(totalPrograms: totalPrograms, totalUnis: totalUnis, programCategory: category)
         let headerSubtitleVM = HeaderWithSubtitleCellViewModel(
-            title: "Программы категории",
+            title: ConstantLocalizedStrings.Program.ByCategory.title,
             subtitle: category.name.toCurrentLanguage(),
             subtitleSize: 20, subtitleColor: .black, alignment: .center
         )
         let footerVM = TabsFooterCellViewModel(
             titleLabelText: category.name.toCurrentLanguage(),
-            subtitleLabelText: "Выбери интересную тебе программу обучения и получи список университетов с этой программой. Ты узнаешь в каких вузах есть соответствующие программы, какие требуются экзамены, минимальные и проходные баллы, стоимость обучения."
+            subtitleLabelText: ConstantLocalizedStrings.Program.ByCategory.footerSubtitle
         )
         
         let bodyItems: [ProgramsByCategoryItem] = programs.map { program in
@@ -66,8 +66,7 @@ final class ProgramsByCategoryScreenPresenter {
         if programs.isEmpty {
             let notFoundVM = NotFoundCellViewModel(
                 image: ImageConstants.SystemImages.questionMark.image,
-                title: "Ничего не найдено",
-                subtitle: "Программ в этой категории нету. Вы можете попробовать поискать в других категориях.",
+                subtitle: ConstantLocalizedStrings.Program.ByCategory.error,
                 horizontallySpaced: true)
             footerItems.append(.notFoundItem(.init(viewModel: notFoundVM)))
         }
