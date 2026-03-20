@@ -82,6 +82,7 @@ public enum ConstantLocalizedStrings {
         static let hide = String(localized: .Localizables.commonHide)
         static let filter = String(localized: .Localizables.commonFilter)
         static let attention = String(localized: .Localizables.commonAttention)
+        static let code = String(localized: .Localizables.commonCode)
     }
     
     /// For __Account__ Tab
@@ -190,6 +191,7 @@ public enum ConstantLocalizedStrings {
         static let showAllArticles = String(localized: .Localizables.articlesShowAllArticles)
     }
     
+    /// For __Profession__ purposes
     enum Profession {
         static let professionPlural = String(localized: .Localizables.professionProfessionPlural)
         static let profession = String(localized: .Localizables.professionProfession)
@@ -204,8 +206,27 @@ public enum ConstantLocalizedStrings {
         static let unis = Words.universityPlural
     }
     
+    /// For __Program__ purposes
+    enum Program {
+        static let headerTitle = String(localized: .Localizables.programHeaderTitle)
+        static let educationalPrograms = String(localized: .Localizables.programEducationalPrograms)
+        static let fields = String(localized: .Localizables.programHeaderFields)
+        static let aboutProgram = String(localized: .Localizables.programAboutProgram)
+        static let relatedProfessions = String(localized: .Localizables.programRelatedProfessions)
+        static let similarPrograms = String(localized: .Localizables.programSimilarPrograms)
+        static let footerTitle = String(localized: .Localizables.programFooterTitle)
+        static let footerSubtitle = String(localized: .Localizables.programFooterSubtitle)
+        
+        enum ByCategory {
+            static let title = String(localized: .Localizables.programByCategoryTitle)
+            static let footerSubtitle = String(localized: .Localizables.programByCategoryFooterSubtitle)
+            static let error = String(localized: .Localizables.programByCategoryError)
+        }
+    }
+    
     /// For __Universiry__flow
     enum University {
+        static let university = String(localized: .Localizables.universityUniversity)
         static let filterUnis = String(localized: .Localizables.universityFilterUnis)
         
         enum Header {
@@ -328,6 +349,10 @@ public enum ConstantLocalizedStrings {
     
     /// For General Purpose
     enum Words {
+        static let title = String(localized: .Localizables.wordsTitle)
+        static let type = String(localized: .Localizables.wordsType)
+        static let category = String(localized: .Localizables.wordsCategory)
+        static let price = String(localized: .Localizables.wordsPrice)
         static let privateKey = String(localized: .Localizables.wordsPrivateKey)
         static let governmentalKey = String(localized: .Localizables.wordsGovernmentalKey)
         static let from = String(localized: .Localizables.wordsFrom)
@@ -336,9 +361,11 @@ public enum ConstantLocalizedStrings {
         static let budgetPlacesShort = String(localized: .Localizables.wordsBudgetPlacesShort)
         static let paidPlaces = String(localized: .Localizables.wordsPaidPlaces)
         static let paidPlacesShort = String(localized: .Localizables.wordsPaidPlacesShort)
+        static let freePlaces = String(localized: .Localizables.wordsFreePlaces)
         static let fromAtoZ = String(localized: .Localizables.wordsFromAtoZ)
         static let fromZtoA = String(localized: .Localizables.wordsFromZtoA)
         
+        static let tengePerYear = String(localized: .Localizables.wordsTengePerYear)
         static let notFound = String(localized: .Localizables.wordsNotFound)
         static let tryAgain = String(localized: .Localizables.wordsTryAgain)
         static let searchSomwhereElse = String(localized: .Localizables.wordsSearchSomwhereElse)
@@ -346,6 +373,7 @@ public enum ConstantLocalizedStrings {
         static let universityPlural = String(localized: .Localizables.wordsUniversityPlural)
         static let calendar = String(localized: .Localizables.wordsCalendar)
         static let tryOtherSearch = String(localized: .Localizables.wordsTryOtherSearch)
+        static let facultyPlural = String(localized: .Localizables.wordsFacultyPlural)
         static let cityPlural = String(localized: .Localizables.wordsCityPlural)
     }
     

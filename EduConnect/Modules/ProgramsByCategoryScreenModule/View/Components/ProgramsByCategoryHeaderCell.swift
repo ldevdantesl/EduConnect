@@ -89,8 +89,8 @@ final class ProgramsByCategoryHeaderCell: UICollectionViewCell {
     public func configure(withVM vm: ProgramsByCategoryHeaderCellViewModel) {
         self.viewModel = vm
         self.titleLabel.text = vm.programCategory.name.toCurrentLanguage()
-        self.programsTotalLabel.text = "\(vm.totalPrograms.description)\nпрограмм "
-        self.unisTotalLabel.text = "\(vm.totalUnis.description)\nвуза"
+        self.programsTotalLabel.text = "\(vm.totalPrograms.description)\n\(ConstantLocalizedStrings.Words.programPlural)"
+        self.unisTotalLabel.text = "\(vm.totalUnis.description)\n\(ConstantLocalizedStrings.Words.universityPlural)"
     }
     
     // MARK: - PRIVATE FUNC

@@ -103,8 +103,8 @@ final class DashedProgramCell: UICollectionViewCell {
         
         self.uniNameLabel.text = vm.program.university.name.toCurrentLanguage()
         self.programNameLabel.text = vm.program.name.toCurrentLanguage()
-        self.budgetPlacesLabel.text = "\(vm.program.budgetPlaces.description) Бюджетных мест"
-        self.paidPlacesLabel.text = "\(vm.program.paidPlaces.description) Платных мест"
+        self.budgetPlacesLabel.text = "\(vm.program.budgetPlaces.description) \(ConstantLocalizedStrings.Words.budgetPlaces)"
+        self.paidPlacesLabel.text = "\(vm.program.paidPlaces.description) \(ConstantLocalizedStrings.Words.paidPlaces)"
     }
     
     // MARK: - PRIVATE FUNC

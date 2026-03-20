@@ -128,10 +128,10 @@ final class ProgramDetailsHeaderCell: UICollectionViewCell {
             self.backgroundImageView.kf.setImage(with: url, placeholder: ImageConstants.appLogo.image)
         }
         
-        self.budgetPlacesLabel.text = "\(vm.programDetails.budgetPlaces)\nБюджетных мест"
-        self.paidPlacesLabel.text = "\(vm.programDetails.paidPlaces)\nПлатных мест"
-        self.priceInYearLabel.text = "\(ECNumberFormatter.toDecimalFromString(number: vm.programDetails.price))\nТенге в год"
-        self.freePlacesLabel.text = "\(vm.programDetails.freePlaces)\nСвободных мест"
+        self.budgetPlacesLabel.text = "\(vm.programDetails.budgetPlaces)\n\(ConstantLocalizedStrings.Words.budgetPlaces)"
+        self.paidPlacesLabel.text = "\(vm.programDetails.paidPlaces)\n\(ConstantLocalizedStrings.Words.paidPlaces)"
+        self.priceInYearLabel.text = "\(ECNumberFormatter.toDecimalFromString(number: vm.programDetails.price))\n\(ConstantLocalizedStrings.Words.tengePerYear)"
+        self.freePlacesLabel.text = "\(vm.programDetails.freePlaces)\n\(ConstantLocalizedStrings.Words.freePlaces)"
         
         self.titleLabel.text = vm.programDetails.name.toCurrentLanguage()
         self.subtitleLabel.text = vm.programDetails.programCategory.name.toCurrentLanguage()

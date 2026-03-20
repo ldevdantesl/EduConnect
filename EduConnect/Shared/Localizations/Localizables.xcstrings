@@ -1146,6 +1146,17 @@
         }
       }
     },
+    "common_code" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Код"
+          }
+        }
+      }
+    },
     "common_confirm" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2149,6 +2160,127 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Укажи результаты ЕНТ используя диапазоны"
+          }
+        }
+      }
+    },
+    "program_aboutProgram" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "О Программе"
+          }
+        }
+      }
+    },
+    "program_byCategoryError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Программ в этой категории нету. Вы можете попробовать поискать в других категориях."
+          }
+        }
+      }
+    },
+    "program_byCategoryFooterSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбери интересную тебе программу обучения и получи список университетов с этой программой. Ты узнаешь в каких вузах есть соответствующие программы, какие требуются экзамены, минимальные и проходные баллы, стоимость обучения."
+          }
+        }
+      }
+    },
+    "program_byCategoryTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Программы категории"
+          }
+        }
+      }
+    },
+    "program_educationalPrograms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Программы обучения"
+          }
+        }
+      }
+    },
+    "program_footerSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбери интересное тебе направление образования в вузе и получи список программ бакалавриата и специалитета по требуемому направлению обучения. Ты узнаешь в каких вузах есть соответствующие программы по направлению подготовки, какие требуются экзамены, минимальные и проходные баллы, стоимость обучения. В этом списке ты можешь найти интересную сферу деятельности, отрасль, направление обучения и узнать детали поступления в вуз."
+          }
+        }
+      }
+    },
+    "program_footerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Направления обучения в бакалавриате и специалитете"
+          }
+        }
+      }
+    },
+    "program_headerFields" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Направлений"
+          }
+        }
+      }
+    },
+    "program_headerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск программ бакалавриата и специалитета в вузах по направлениям образования: "
+          }
+        }
+      }
+    },
+    "program_relatedProfessions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Связанные Профессии"
+          }
+        }
+      }
+    },
+    "program_similarPrograms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Похожие программы"
           }
         }
       }
@@ -3181,6 +3313,17 @@
         }
       }
     },
+    "university_university" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет"
+          }
+        }
+      }
+    },
     "university_sortByDefault" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3265,6 +3408,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Календарь"
+          }
+        }
+      }
+    },
+    "words_category" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Категория"
+          }
+        }
+      }
+    },
+    "words_facultyPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Факультеты"
+          }
+        }
+      }
+    },
+    "words_freePlaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Свободных мест"
           }
         }
       }
@@ -3363,6 +3539,17 @@
         }
       }
     },
+    "words_price" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Стоимость"
+          }
+        }
+      }
+    },
     "words_privateKey" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3402,6 +3589,28 @@
         }
       }
     },
+    "words_tengePerYear" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тенге в год"
+          }
+        }
+      }
+    },
+    "words_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Название"
+          }
+        }
+      }
+    },
     "words_to" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3431,6 +3640,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Попробуйте другой поиск"
+          }
+        }
+      }
+    },
+    "words_type" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тип"
           }
         }
       }
