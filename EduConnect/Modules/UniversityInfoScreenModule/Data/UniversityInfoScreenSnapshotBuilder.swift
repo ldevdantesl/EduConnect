@@ -69,7 +69,7 @@ struct UniversityInfoScreenSnapshotBuilder {
     private func buildFaculties(university: ECUniversity) -> [UniversityInfoScreenItem] {
         guard university.facultiesCount > 0 else { return [] }
         var items: [UniversityInfoScreenItem] = []
-        let headerVM = SectionHeaderCellViewModel(title: "Факультеты", titleSize: 22, titleAlignment: .center)
+        let headerVM = SectionHeaderCellViewModel(title: ConstantLocalizedStrings.Words.facultyPlural, titleSize: 22, titleAlignment: .center)
         items.append(.sectionHeaderItem(.init(id: "facultiesHeader", viewModel: headerVM)))
         university.faculties.forEach {
             let vm = CardWithImageCellViewModel(imageURL: $0.imageURL, title: $0.name)
@@ -81,14 +81,14 @@ struct UniversityInfoScreenSnapshotBuilder {
     private func buildPrograms(university: ECUniversity, actions: Actions) -> [UniversityInfoScreenItem] {
         guard university.programsCount > 0 else { return [] }
         var items: [UniversityInfoScreenItem] = []
-        let headerVM = SectionHeaderCellViewModel(title: "Программы образования", titleSize: 22, titleAlignment: .center)
+        let headerVM = SectionHeaderCellViewModel(title: ConstantLocalizedStrings.Program.educationalPrograms, titleSize: 22, titleAlignment: .center)
         items.append(.sectionHeaderItem(.init(id: "programsHeader", viewModel: headerVM)))
         university.programs.forEach { program in
             let vm = CardWithImageCellViewModel(
                 imageURL: university.logoURL,
                 imageContentMode: .scaleAspectFit,
                 title: program .name,
-                subtitle: "\(program .budgetPlaces) бюджет. мест, \(program .paidPlaces) платн. мест, \(program .studyTypeName) обучение"
+                subtitle: "\(program .budgetPlaces) \(ConstantLocalizedStrings.Words.budgetPlacesShort), \(program .paidPlaces) \(ConstantLocalizedStrings.Words.budgetPlacesShort), \(program .studyTypeName) \(ConstantLocalizedStrings.Words.education)"
             ) { actions.didTapProgram(program.id) }
             items.append(.cardItem(.init(id: "program-\(program.id)", viewModel: vm)))
         }
@@ -98,7 +98,7 @@ struct UniversityInfoScreenSnapshotBuilder {
     private func buildProfessions(university: ECUniversity, actions: Actions) -> [UniversityInfoScreenItem] {
         guard university.professions.count > 0 else { return [] }
         var items: [UniversityInfoScreenItem] = []
-        let headerVM = SectionHeaderCellViewModel(title: "Профессии", titleSize: 22, titleAlignment: .center)
+        let headerVM = SectionHeaderCellViewModel(title: ConstantLocalizedStrings.University.profession, titleSize: 22, titleAlignment: .center)
         items.append(.sectionHeaderItem(.init(id: "professionsHeader", viewModel: headerVM)))
         university.professions.forEach { profession in
             let vm = CardWithImageCellViewModel(imageURL: profession.imageURL, title: profession.name) {

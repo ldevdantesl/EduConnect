@@ -230,7 +230,7 @@ final class UniversityCell: UICollectionViewCell {
     private func validatedProfessionsText(professions: [ECUniversity.ImagedEntity]) -> String {
         let professionNames = professions.map { $0.name }
         guard professionNames.count > 2 else { return professionNames.joined(separator: ";") }
-        return "\(professionNames[0]); \(professionNames[1]) и ещё \(professionNames.count - 2) направлений"
+        return "\(professionNames[0]); \(professionNames[1]) \(ConstantLocalizedStrings.University.andMore) \(professionNames.count - 2) \(ConstantLocalizedStrings.University.fields)"
     }
     
     private func decoratedAdmissionInfoText(_ text: String) -> NSAttributedString {
@@ -271,22 +271,22 @@ final class UniversityCell: UICollectionViewCell {
         self.locationAndOwnershipLabel.text = "\(vm.university.city.name) / \(vm.university.universityTypeName)"
         self.nameLabel.text = vm.university.name
         self.professionsLabel.text = validatedProfessionsText(professions: vm.university.professions)
-        self.programsButton.configure(text: "\(vm.university.programsCount) программ")
-        self.facultyButton.configure(text: "\(vm.university.facultiesCount) факультета")
+        self.programsButton.configure(text: "\(vm.university.programsCount) \(ConstantLocalizedStrings.Words.programPlural)")
+        self.facultyButton.configure(text: "\(vm.university.facultiesCount) \(ConstantLocalizedStrings.Words.facultyPlural)")
         
         if let price = vm.university.minContractPrice {
-            self.priceLabel.text = "от \(ECNumberFormatter.toDecimalFromString(number: price))₸ / год"
+            self.priceLabel.text = "\(ConstantLocalizedStrings.Words.from) \(ECNumberFormatter.toDecimalFromString(number: price))₸ / \(ConstantLocalizedStrings.Common.year)"
         } else {
-            self.priceLabel.text = "Цена не указана"
+            self.priceLabel.text = ConstantLocalizedStrings.University.priceNotSet
         }
         
         var admissionText: String = ""
         if let entScore = vm.university.entScores?.first {
-            admissionText.append("от \(ECNumberFormatter.toDecimalFromString(number: entScore.budgetScore)) бал бюджет\n")
-            admissionText.append("от \(ECNumberFormatter.toDecimalFromString(number: entScore.contractScore)) бал платно\n")
+            admissionText.append("\(ConstantLocalizedStrings.Words.from) \(ECNumberFormatter.toDecimalFromString(number: entScore.budgetScore)) \(ConstantLocalizedStrings.University.scoreBudget)\n")
+            admissionText.append("\(ConstantLocalizedStrings.Words.from) \(ECNumberFormatter.toDecimalFromString(number: entScore.contractScore)) \(ConstantLocalizedStrings.University.scorePaid)\n")
         }
-        admissionText.append("\(vm.university.budgetPlaces) места бюджет\n")
-        admissionText.append("\(vm.university.paidPlaces) места платно")
+        admissionText.append("\(vm.university.budgetPlaces) \(ConstantLocalizedStrings.University.budgetPlaces)\n")
+        admissionText.append("\(vm.university.paidPlaces) \(ConstantLocalizedStrings.University.paidPlaces)")
         
         self.universityAdmissionInfo.attributedText = decoratedAdmissionInfoText(admissionText)
         makeConstraints()

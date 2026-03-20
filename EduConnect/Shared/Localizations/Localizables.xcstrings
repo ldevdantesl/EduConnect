@@ -1603,6 +1603,17 @@
         }
       }
     },
+    "common_year" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Год"
+          }
+        }
+      }
+    },
     "debug_error" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3170,6 +3181,28 @@
         }
       }
     },
+    "university_andMore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "И еще"
+          }
+        }
+      }
+    },
+    "university_budgetPlaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Места бюджет"
+          }
+        }
+      }
+    },
     "university_filterUnis" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3313,13 +3346,46 @@
         }
       }
     },
-    "university_university" : {
+    "university_paidPlaces" : {
       "extractionState" : "manual",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Университет"
+            "value" : "Места платно"
+          }
+        }
+      }
+    },
+    "university_priceNotSet" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цена не указана"
+          }
+        }
+      }
+    },
+    "university_scoreBudget" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бал бюджет"
+          }
+        }
+      }
+    },
+    "university_scorePaid" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бал платно"
           }
         }
       }
@@ -3379,6 +3445,17 @@
         }
       }
     },
+    "university_university" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет"
+          }
+        }
+      }
+    },
     "words_budgetPlaces" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3423,6 +3500,28 @@
         }
       }
     },
+    "words_cityPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "городов"
+          }
+        }
+      }
+    },
+    "words_education" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обучение"
+          }
+        }
+      }
+    },
     "words_facultyPlural" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3441,17 +3540,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Свободных мест"
-          }
-        }
-      }
-    },
-    "words_cityPlural" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "городов"
           }
         }
       }
