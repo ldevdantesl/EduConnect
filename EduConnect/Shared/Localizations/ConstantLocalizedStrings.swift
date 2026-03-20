@@ -216,6 +216,27 @@ public enum ConstantLocalizedStrings {
         enum Filter {
             static let filter = String(localized: .Localizables.commonFilter)
             static let addedFilters = String(localized: .Localizables.universityAddedFilters)
+            static let with = String(localized: .Localizables.universityFilterWith)
+            static let without = String(localized: .Localizables.universityFilterWithout)
+            
+            enum Words{
+                
+                static let city = String(localized: .Localizables.universityFilterWordsCity)
+                static let profession = String(localized: .Localizables.universityFilterWordsProfession)
+                static let typeOfUni = String(localized: .Localizables.universityFilterWordsTypeOfUni)
+                static let militaryDepartment = String(localized: .Localizables.universityFilterWordsMilitaryDepartment)
+                static let dormitory = String(localized: .Localizables.universityFilterWordsDormitory)
+                static let price = String(localized: .Localizables.universityFilterWordsPrice)
+                static let sort = Common.sort
+            }
+        }
+        
+        enum Sort {
+            static let byDefault = String(localized: .Localizables.universitySortByDefault)
+            static let byNameFromAToZ = String(localized: .Localizables.universitySortByNameFromAToZ)
+            static let byNameFromZToA = String(localized: .Localizables.universitySortByNameFromZToA)
+            static let byPriceUp = String(localized: .Localizables.universitySortByPriceUp)
+            static let byPriceDown = String(localized: .Localizables.universitySortByPriceDown)
         }
         
         enum Footer {
@@ -325,6 +346,7 @@ public enum ConstantLocalizedStrings {
         static let universityPlural = String(localized: .Localizables.wordsUniversityPlural)
         static let calendar = String(localized: .Localizables.wordsCalendar)
         static let tryOtherSearch = String(localized: .Localizables.wordsTryOtherSearch)
+        static let cityPlural = String(localized: .Localizables.wordsCityPlural)
     }
     
     /// For __Application Status__

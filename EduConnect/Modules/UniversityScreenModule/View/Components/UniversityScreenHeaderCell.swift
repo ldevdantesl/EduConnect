@@ -143,8 +143,8 @@ final class UniversityScreenHeaderCell: UICollectionViewCell {
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: UniversityScreenHeaderCellViewModel) {
         self.viewModel = vm
-        self.universitiesTotalLabel.text = "\(vm.totalUniversities)\nвуза"
-        self.citiesTotalLabel.text = "\(vm.totalCities)\nгородов"
-        self.budgetSpacesTotalLabel.text = "\(vm.totalBudgetSpaces)\nбюджетных места"
+        self.universitiesTotalLabel.text = "\(vm.totalUniversities)\n\(ConstantLocalizedStrings.Words.universityPlural)"
+        self.citiesTotalLabel.text = "\(vm.totalCities)\n\(ConstantLocalizedStrings.Words.cityPlural)"
+        self.budgetSpacesTotalLabel.text = "\(vm.totalBudgetSpaces)\n\(ConstantLocalizedStrings.Words.budgetPlaces)"
     }
 }

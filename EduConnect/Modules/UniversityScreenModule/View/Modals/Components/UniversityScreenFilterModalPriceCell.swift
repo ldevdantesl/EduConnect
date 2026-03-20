@@ -36,7 +36,7 @@ final class UniversityScreenFilterModalPriceCell: UICollectionViewCell {
     
     private lazy var minTextField: ECTextField = {
         let tf = ECTextField()
-        tf.placeholder = "От"
+        tf.placeholder = ConstantLocalizedStrings.Words.from
         tf.keyboardType = .numberPad
         tf.cornerRadius = 12
         tf.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -45,7 +45,7 @@ final class UniversityScreenFilterModalPriceCell: UICollectionViewCell {
     
     private lazy var maxTextField: ECTextField = {
         let tf = ECTextField()
-        tf.placeholder = "До"
+        tf.placeholder = ConstantLocalizedStrings.Words.to
         tf.keyboardType = .numberPad
         tf.cornerRadius = 12
         tf.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)

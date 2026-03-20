@@ -1238,17 +1238,6 @@
         }
       }
     },
-    "common_hide" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Свернуть"
-          }
-        }
-      }
-    },
     "common_filter" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1256,6 +1245,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Фильтр"
+          }
+        }
+      }
+    },
+    "common_hide" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Свернуть"
           }
         }
       }
@@ -3049,6 +3049,94 @@
         }
       }
     },
+    "university_filterWith" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Есть"
+          }
+        }
+      }
+    },
+    "university_filterWithout" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет"
+          }
+        }
+      }
+    },
+    "university_filterWordsCity" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Город"
+          }
+        }
+      }
+    },
+    "university_filterWordsDormitory" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Общежитие"
+          }
+        }
+      }
+    },
+    "university_filterWordsMilitaryDepartment" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Военная кафедра"
+          }
+        }
+      }
+    },
+    "university_filterWordsPrice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цена"
+          }
+        }
+      }
+    },
+    "university_filterWordsProfession" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профессия"
+          }
+        }
+      }
+    },
+    "university_filterWordsTypeOfUni" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тип вуза"
+          }
+        }
+      }
+    },
     "university_footerSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3093,6 +3181,61 @@
         }
       }
     },
+    "university_sortByDefault" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По умолчанию"
+          }
+        }
+      }
+    },
+    "university_sortByNameFromAToZ" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По названию А-Я"
+          }
+        }
+      }
+    },
+    "university_sortByNameFromZToA" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По названию Я-А"
+          }
+        }
+      }
+    },
+    "university_sortByPriceDown" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По цене ↓"
+          }
+        }
+      }
+    },
+    "university_sortByPriceUp" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По цене ↑"
+          }
+        }
+      }
+    },
     "words_budgetPlaces" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3122,6 +3265,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Календарь"
+          }
+        }
+      }
+    },
+    "words_cityPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "городов"
           }
         }
       }
