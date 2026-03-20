@@ -49,6 +49,7 @@ final class UniversityInfoScreenHeaderCell: UICollectionViewCell {
         label.font = ECFont.font(.semiBold, size: 14)
         label.textColor = UIColor.hex("#DFD7FF")
         label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .left
         return label
     }()
@@ -140,8 +141,8 @@ final class UniversityInfoScreenHeaderCell: UICollectionViewCell {
         programsLabel.text = "\(vm.university.programsCount)\n\(ConstantLocalizedStrings.Words.programPlural)"
         minPriceLabel.text = "\(ConstantLocalizedStrings.Words.from) \(ECNumberFormatter.toDecimalFromString(number: vm.university.minContractPrice ?? "0"))\n\(ConstantLocalizedStrings.Words.tengePerYear)"
         budgetPlacesLabel.text = "\(vm.university.budgetPlaces)\n\(ConstantLocalizedStrings.Words.budgetPlacesShort)"
-        paidPlacesLabel.text = "\(vm.university.paidPlaces)\n\(ConstantLocalizedStrings.Words.budgetPlacesShort)"
-        var advantagesText: String = "\(vm.university.universityTypeName.capitalized)"
+        paidPlacesLabel.text = "\(vm.university.paidPlaces)\n\(ConstantLocalizedStrings.Words.paidPlacesShort)"
+        var advantagesText: String = "\(UniversityTypeConverter.toCurrentLanguage(name: vm.university.universityTypeName).capitalized)"
         vm.university.hasDormitory ? advantagesText.append(", \(ConstantLocalizedStrings.University.dormitory)") : ()
         vm.university.hasMilitaryDepartment ? advantagesText.append(", \(ConstantLocalizedStrings.University.militaryDepartmentShort)") : ()
         self.advantagesLabel.text = advantagesText

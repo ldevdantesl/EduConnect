@@ -561,6 +561,12 @@
     "account_mainTabAdviceSection" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Here are a few tips to get started:"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -572,6 +578,12 @@
     "account_mainTabAdviceSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This section is your personal dashboard. Once you add a university to your list, you will be able to track the progress of your application.\\n* All universities will require you to answer general questions in the application form. To apply to a university, go to the University Search section.\\n* Once you add a university, you will be able to complete and submit your application in the My Universities section.\\n\\nWe are always ready to help you at every step! If you have any questions, you can contact our Applicant Support Center or reach out to us at any time."
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -945,6 +957,12 @@
     "article_articleNavigatorSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Admission Navigator for University Applicants"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -956,9 +974,15 @@
     "article_moreToRead" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "More to Read"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Читай так же"
           }
         }
@@ -967,9 +991,15 @@
     "articles_article" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Article"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Статьи"
           }
         }
@@ -978,9 +1008,15 @@
     "articles_noNewsInThisCategory" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "No news in this category"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Нет новостей в этой категории"
           }
         }
@@ -989,9 +1025,15 @@
     "articles_showAllArticles" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Show All Articles"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Показать все новости"
           }
         }
@@ -1023,9 +1065,15 @@
     "common_apply" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Apply"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Применить"
           }
         }
@@ -1073,6 +1121,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Поиск"
+          }
+        }
+      }
+    },
+    "common_budget" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бюджет"
           }
         }
       }
@@ -1149,9 +1214,15 @@
     "common_code" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Code"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Код"
           }
         }
@@ -1180,12 +1251,52 @@
         }
       }
     },
-    "common_current" : {
+    "common_contacts" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contacts"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Контакты"
+          }
+        }
+      }
+    },
+    "common_contract" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contract"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Платное"
+          }
+        }
+      }
+    },
+    "common_current" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "нынешнюю"
           }
         }
@@ -1263,9 +1374,15 @@
     "common_filter" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Filter"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Фильтр"
           }
         }
@@ -1274,9 +1391,15 @@
     "common_hide" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Hide"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Свернуть"
           }
         }
@@ -1377,9 +1500,15 @@
     "common_none" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Любое"
           }
         }
@@ -1434,9 +1563,15 @@
     "common_remove" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Remove"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Удалить"
           }
         }
@@ -1514,9 +1649,15 @@
     "common_show" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Show"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Развернуть"
           }
         }
@@ -1548,9 +1689,15 @@
     "common_start" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Start"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Начать"
           }
         }
@@ -1628,9 +1775,15 @@
     "common_year" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Year"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Год"
           }
         }
@@ -1639,9 +1792,15 @@
     "debug_error" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Ошибка"
           }
         }
@@ -1650,9 +1809,15 @@
     "debug_limitPassed" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Request timed out"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Превышено время ожидания"
           }
         }
@@ -1661,9 +1826,15 @@
     "debug_logInAgain" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Log In again"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Войдите снова"
           }
         }
@@ -1672,9 +1843,15 @@
     "debug_networkLost" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Network Connection Lost"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Проверьте подключение к интернету"
           }
         }
@@ -1683,9 +1860,15 @@
     "debug_noConnection" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "No internet connection"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Нет соединения"
           }
         }
@@ -1694,9 +1877,15 @@
     "debug_noResponseTryLater" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "No Response try again later"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Сервер не отвечает. Попробуйте позже"
           }
         }
@@ -1705,9 +1894,15 @@
     "debug_requestError" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Request Error"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Ошибка запроса"
           }
         }
@@ -1716,9 +1911,15 @@
     "debug_serverError" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Server Error"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Ошибка сервера"
           }
         }
@@ -1727,9 +1928,15 @@
     "debug_sessionExpired" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Session has expired"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Сессия истекла"
           }
         }
@@ -1738,9 +1945,15 @@
     "debug_tryLater" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Try later"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Попробуйте позже"
           }
         }
@@ -1749,20 +1962,35 @@
     "debug_useThisCode" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Use code 123456 for beta testing"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Для бета теста используйте код 123456"
           }
         }
       }
     },
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "main_academicTabProfessions" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "University majors"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Профессии вузов"
           }
         }
@@ -1771,9 +1999,15 @@
     "main_academicTabProgramCategories" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "University Fields"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Направления вузов"
           }
         }
@@ -1782,9 +2016,15 @@
     "main_academicTabTitleCountry" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "of Kazakhstan"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Казахстана"
           }
         }
@@ -1793,9 +2033,15 @@
     "main_academicTabTitleMain" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Higher education\\ninstitutions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Высшие учебные\\nзаведения"
           }
         }
@@ -1804,9 +2050,15 @@
     "main_academicTabUniversities" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Universities"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Вузы"
           }
         }
@@ -1815,9 +2067,15 @@
     "main_careersTabTitleMain" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Apply to universities\\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Поступи в вузы\\n"
           }
         }
@@ -1826,9 +2084,15 @@
     "main_footerDescription" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Kazakhstan is a country of great opportunities for higher education. As of 2025, there are over 130 universities in Kazakhstan. These include 40 public institutions, of which 15 are universities, 10 are academies, and 5 are institutes. There are also around 90 private educational organizations. About 500,000 students study at universities across the country. In 2025, more than 70,000 government-funded spots are available for admission. The platform allows applicants of 2025 to compare and choose universities, explore academic programs, take career guidance tests, and assess their chances of admission. A complete guide for applicants applying to universities in Kazakhstan."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Казахстан — страна потрясающих возможностей для получения высшего образования. По состоянию\n        на 2025 год в Казахстане насчитывается более 130 вузов. Это 40 государственных учебных заведений, из которых 15 — университеты, 10 — академии, и 5 — институтов. Также есть около 90 частных образовательных организаций. В казахстанских вузах обучается порядка 500 тысяч студентов. В 2025 году в университетах Казахстана предусмотрено более 70 тыс. бюджетных мест для приема. Сайт предоставляет абитуриенту 2025 возможность сравнить и выбрать вузы, программы образования, пройти профориентацию и оценить свои шансы поступить. Полный справочник абитуриента для поступающих в вузы Казахстана."
           }
         }
@@ -1837,9 +2101,15 @@
     "main_footerPercentageLabel" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Education in Kazakhstan"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Образование в Казахстане"
           }
         }
@@ -1848,9 +2118,15 @@
     "main_footerPercentageSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Accessible quality education for all"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Доступное качественное образование для всех"
           }
         }
@@ -1859,9 +2135,15 @@
     "main_footerPrivateUnis" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Private Universities"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "частных вузов"
           }
         }
@@ -1870,9 +2152,15 @@
     "main_footerTitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Higher education\\nin Kazakhstan"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Высшее образование\\nв Казахстане"
           }
         }
@@ -1881,9 +2169,15 @@
     "main_headerPrograms" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Programs"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Программы"
           }
         }
@@ -1892,10 +2186,16 @@
     "main_headerTitleMain" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Траектория поступления"
+            "value" : "Admission pathway\\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Траектория поступления\\n"
           }
         }
       }
@@ -1903,9 +2203,15 @@
     "main_headerTitleSecondary" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "in Kazakhstan universities"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "в вузы Казахстана"
           }
         }
@@ -1914,9 +2220,15 @@
     "main_headerUnis" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Universities"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Вузы"
           }
         }
@@ -1925,9 +2237,15 @@
     "main_journalTitleMain" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Journal EduConnect\\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Журнал Educonnect\\n"
           }
         }
@@ -1936,9 +2254,15 @@
     "main_journalTitleSecondary" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "for applicants"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "для абитуриента"
           }
         }
@@ -1947,9 +2271,15 @@
     "main_programsShowAll" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Show all bachelor’s programs"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Показать все программы бакалавриата"
           }
         }
@@ -1958,9 +2288,15 @@
     "main_programsTitleMain" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Higher education\\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Направления высшего\\n"
           }
         }
@@ -1969,9 +2305,15 @@
     "main_programTitleSecondary" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "in Kazakhstan"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "образования в Казахстане"
           }
         }
@@ -1980,9 +2322,15 @@
     "main_servicesTabProfessionOptions" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Career choice"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Выбор профессии"
           }
         }
@@ -1991,9 +2339,15 @@
     "main_servicesTabTitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Services for\\nApplicants"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Сервисы для\\nпоступающих"
           }
         }
@@ -2002,9 +2356,15 @@
     "main_servicesTabUniversityHelp" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Help choosing a university"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Помощь в выборе вуза"
           }
         }
@@ -2013,9 +2373,15 @@
     "main_showAllProfessions" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Show all profession"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Показать все профессии вузов"
           }
         }
@@ -2024,9 +2390,15 @@
     "main_showAllPrograms" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Show All Programs"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Показать все программы вузов"
           }
         }
@@ -2035,9 +2407,15 @@
     "main_showAllUniversities" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Show All universities"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Показать все наши вузы"
           }
         }
@@ -2046,9 +2424,15 @@
     "main_stepsChooseENT" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Choose\\nENT"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Выбери\\nЕНТ"
           }
         }
@@ -2057,9 +2441,15 @@
     "main_stepsChooseProfession" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Choose\\nProfession"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Выбери\\nпрофессию"
           }
         }
@@ -2068,9 +2458,15 @@
     "main_stepsChooseUni" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Choose\\nUni"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Выбери\\nвуз"
           }
         }
@@ -2079,9 +2475,15 @@
     "main_stepsHideSteps" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Hide Steps"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Скрыть все шаги"
           }
         }
@@ -2090,9 +2492,15 @@
     "main_stepsShowAllSteps" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Show All Steps"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Развернуть все шаги"
           }
         }
@@ -2101,9 +2509,15 @@
     "profession_aboutProfession" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "About Profession"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "О профессии"
           }
         }
@@ -2112,9 +2526,15 @@
     "profession_footerSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Getting admitted is now easier — with the “Postupi Online Kazakhstan” platform! The service is powered by an AI-based recommendation system that analyzes your interests and suggests universities that match your field, level of preparation, and other criteria. All universities on the platform have a valid state license and are accredited for higher education programs.\n\nThe site provides detailed and up-to-date information about public and private universities in Kazakhstan — including universities, institutes, and academies across different regions, from Almaty and Astana to Shymkent and Ust-Kamenogorsk. You can sort universities by the average UNT score for 2025 to see where you have a better chance of admission. Historical data is also available: passing scores, competition, tuition fees, and the number of funded and paid spots. This helps you evaluate your chances and choose the best option for higher education.\n\nIf you want to focus on a specific university, use the convenient feature"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования.  Если ты хочешь сфокусироваться на каком-то конкретном вузе, используй удобную функцию"
           }
         }
@@ -2123,9 +2543,15 @@
     "profession_footerTitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Career selection in the guide"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Выбор профессии в справочнике"
           }
         }
@@ -2134,9 +2560,15 @@
     "profession_headerSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Complete A–Z catalog of professions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Полный каталог профессий от A до Я"
           }
         }
@@ -2145,9 +2577,15 @@
     "profession_profession" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Profession"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Профессия"
           }
         }
@@ -2156,9 +2594,15 @@
     "profession_professionPlural" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Professions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Профессии"
           }
         }
@@ -2167,9 +2611,15 @@
     "profession_relatedProf" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Related Professions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Похожие профессии"
           }
         }
@@ -2178,9 +2628,15 @@
     "profession_setEnt" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Set ENT"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Укажите ЕНТ"
           }
         }
@@ -2189,9 +2645,15 @@
     "profession_setEntSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Specify UNT results using ranges"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Укажи результаты ЕНТ используя диапазоны"
           }
         }
@@ -2200,9 +2662,15 @@
     "program_aboutProgram" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "About Program"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "О Программе"
           }
         }
@@ -2211,9 +2679,15 @@
     "program_byCategoryError" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "No programs in this category. You can try searching in other categories."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Программ в этой категории нету. Вы можете попробовать поискать в других категориях."
           }
         }
@@ -2222,9 +2696,15 @@
     "program_byCategoryFooterSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Choose a program that interests you and get a list of universities offering it. You’ll find out which universities have the program, what exams are required, the minimum and passing scores, and the tuition cost."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Выбери интересную тебе программу обучения и получи список университетов с этой программой. Ты узнаешь в каких вузах есть соответствующие программы, какие требуются экзамены, минимальные и проходные баллы, стоимость обучения."
           }
         }
@@ -2233,9 +2713,15 @@
     "program_byCategoryTitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Programs in this category"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Программы категории"
           }
         }
@@ -2244,9 +2730,15 @@
     "program_educationalPrograms" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Educational Programs"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Программы обучения"
           }
         }
@@ -2255,9 +2747,15 @@
     "program_footerSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Choose a field of study that interests you and get a list of bachelor’s and specialist programs in that area. You’ll find out which universities offer these programs, what exams are required, the minimum and passing scores, and the tuition cost. In this list, you can explore areas of activity, industries, and fields of study, and learn the details of admission."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Выбери интересное тебе направление образования в вузе и получи список программ бакалавриата и специалитета по требуемому направлению обучения. Ты узнаешь в каких вузах есть соответствующие программы по направлению подготовки, какие требуются экзамены, минимальные и проходные баллы, стоимость обучения. В этом списке ты можешь найти интересную сферу деятельности, отрасль, направление обучения и узнать детали поступления в вуз."
           }
         }
@@ -2266,9 +2764,15 @@
     "program_footerTitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Fields of study in bachelor’s and specialist programs"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Направления обучения в бакалавриате и специалитете"
           }
         }
@@ -2277,9 +2781,15 @@
     "program_headerFields" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Fields"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Направлений"
           }
         }
@@ -2288,9 +2798,15 @@
     "program_headerTitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Search for bachelor’s and specialist programs in universities by field of study:"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Поиск программ бакалавриата и специалитета в вузах по направлениям образования: "
           }
         }
@@ -2299,9 +2815,15 @@
     "program_relatedProfessions" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Related Professions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Связанные Профессии"
           }
         }
@@ -2310,9 +2832,15 @@
     "program_similarPrograms" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Similar Programs"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Похожие программы"
           }
         }
@@ -3195,9 +3723,15 @@
     "university_aboutUni" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "About University"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Об Университете"
           }
         }
@@ -3206,21 +3740,16 @@
     "university_addedFilters" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Добавленные фильтры:"
+            "value" : "Added Filters"
           }
-        }
-      }
-    },
-    "university_andMore" : {
-      "extractionState" : "manual",
-      "localizations" : {
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "И еще"
+            "state" : "needs_review",
+            "value" : "Добавленные фильтры:"
           }
         }
       }
@@ -3228,22 +3757,33 @@
     "university_admission" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Admission"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "поступления"
           }
         }
       }
     },
-
-    "university_budgetPlaces" : {
+    "university_andMore" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Места бюджет"
+            "value" : "And More"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "И еще"
           }
         }
       }
@@ -3251,22 +3791,50 @@
     "university_application" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Application"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "заявку"
           }
         }
       }
     },
-
     "university_averageScoreENT" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Average ENT Score"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Средний балл ЕНТ"
+          }
+        }
+      }
+    },
+    "university_budgetPlaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget Places"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Места бюджет"
           }
         }
       }
@@ -3274,9 +3842,15 @@
     "university_filterUnis" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Filter Universities"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Фильтр по вузам"
           }
         }
@@ -3285,9 +3859,15 @@
     "university_filterWith" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "With"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Есть"
           }
         }
@@ -3296,9 +3876,15 @@
     "university_filterWithout" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Without"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Нет"
           }
         }
@@ -3307,9 +3893,15 @@
     "university_filterWordsCity" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "City"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Город"
           }
         }
@@ -3318,9 +3910,15 @@
     "university_filterWordsDormitory" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Dormitory"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Общежитие"
           }
         }
@@ -3329,9 +3927,15 @@
     "university_filterWordsMilitaryDepartment" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Military Department"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Военная кафедра"
           }
         }
@@ -3340,9 +3944,15 @@
     "university_filterWordsPrice" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Price"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Цена"
           }
         }
@@ -3351,9 +3961,15 @@
     "university_filterWordsProfession" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Profession"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Профессия"
           }
         }
@@ -3362,9 +3978,15 @@
     "university_filterWordsTypeOfUni" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Type of University"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Тип вуза"
           }
         }
@@ -3373,9 +3995,15 @@
     "university_footerSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Getting admitted is now easier — with the “Postupi Online Kazakhstan” platform! The service is powered by an AI-based recommendation system that analyzes your interests and suggests universities that match your field, level of preparation, and other criteria. All universities on the platform have a valid state license and are accredited for higher education programs.\n\nThe platform provides detailed and up-to-date information about public and private universities in Kazakhstan — including universities, institutes, and academies across different regions, from Almaty and Astana to Shymkent and Ust-Kamenogorsk. You can sort universities by the average UNT score for 2025 to see where you have a better chance of admission. Historical data is also available: passing scores, competition, tuition fees, and the number of funded and paid spots. This helps you evaluate your chances and choose the most suitable option for higher education."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования. "
           }
         }
@@ -3384,9 +4012,15 @@
     "university_footerTitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "List of universities in Kazakhstan by average score and tuition"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Список вузов Казахстана по среднему баллу, стоимости обучения"
           }
         }
@@ -3395,9 +4029,15 @@
     "university_headerSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Universities, institutes, academies"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Университеты, институты, академии"
           }
         }
@@ -3406,21 +4046,16 @@
     "university_headerTitle" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Вузы Казахстана:"
+            "value" : "Kazakhstan universities:"
           }
-        }
-      }
-    },
-    "university_paidPlaces" : {
-      "extractionState" : "manual",
-      "localizations" : {
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Места платно"
+            "state" : "needs_review",
+            "value" : "Вузы Казахстана:"
           }
         }
       }
@@ -3428,21 +4063,16 @@
     "university_militaryDepartmentCenterShort" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Воен. уч. центр"
+            "value" : "Military Dep. Center"
           }
-        }
-      }
-    },
-    "university_priceNotSet" : {
-      "extractionState" : "manual",
-      "localizations" : {
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Цена не указана"
+            "state" : "needs_review",
+            "value" : "Воен. уч. центр"
           }
         }
       }
@@ -3450,10 +4080,50 @@
     "university_militaryDepartmentShort" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Military Dep."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Воен. уч."
+          }
+        }
+      }
+    },
+    "university_paidPlaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contract Places"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Места платно"
+          }
+        }
+      }
+    },
+    "university_priceNotSet" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Price not set"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Цена не указана"
           }
         }
       }
@@ -3461,9 +4131,15 @@
     "university_scoreBudget" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Budget Score"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Бал бюджет"
           }
         }
@@ -3472,9 +4148,15 @@
     "university_scorePaid" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Contract Score"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Бал платно"
           }
         }
@@ -3483,9 +4165,15 @@
     "university_sortByDefault" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "By Default"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "По умолчанию"
           }
         }
@@ -3494,9 +4182,15 @@
     "university_sortByNameFromAToZ" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "By name from A-Z"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "По названию А-Я"
           }
         }
@@ -3505,9 +4199,15 @@
     "university_sortByNameFromZToA" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "By name from Z-A"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "По названию Я-А"
           }
         }
@@ -3516,9 +4216,15 @@
     "university_sortByPriceDown" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "By Price ↓"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "По цене ↓"
           }
         }
@@ -3527,9 +4233,15 @@
     "university_sortByPriceUp" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "By Price ↑"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "По цене ↑"
           }
         }
@@ -3538,9 +4250,15 @@
     "university_uniFor" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "University For"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "вуз для"
           }
         }
@@ -3549,9 +4267,15 @@
     "university_university" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "University"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Университет"
           }
         }
@@ -3560,9 +4284,15 @@
     "words_budgetPlaces" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Budget Places"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Бюджетных мест"
           }
         }
@@ -3571,9 +4301,15 @@
     "words_budgetPlacesShort" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Budget P."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Бюдж. мест"
           }
         }
@@ -3582,9 +4318,15 @@
     "words_calendar" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Calendar"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Календарь"
           }
         }
@@ -3593,9 +4335,15 @@
     "words_category" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Category"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Категория"
           }
         }
@@ -3604,9 +4352,15 @@
     "words_cityPlural" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Cities"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "городов"
           }
         }
@@ -3615,9 +4369,15 @@
     "words_education" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Education"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Обучение"
           }
         }
@@ -3626,9 +4386,15 @@
     "words_facultyPlural" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Faculties"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Факультеты"
           }
         }
@@ -3637,9 +4403,15 @@
     "words_freePlaces" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Free Places"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Свободных мест"
           }
         }
@@ -3648,9 +4420,15 @@
     "words_from" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "From"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "От"
           }
         }
@@ -3659,9 +4437,15 @@
     "words_fromAtoZ" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "From A-Z"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "От А до Я"
           }
         }
@@ -3670,9 +4454,15 @@
     "words_fromZtoA" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "From Z-A"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "От Я до А"
           }
         }
@@ -3681,9 +4471,15 @@
     "words_governmentalKey" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Governmental"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Государственный"
           }
         }
@@ -3709,9 +4505,15 @@
     "words_paidPlaces" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Contract Places"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Платных мест"
           }
         }
@@ -3720,9 +4522,15 @@
     "words_paidPlacesShort" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Contract P."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Плат. мест"
           }
         }
@@ -3731,9 +4539,15 @@
     "words_price" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Price"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Стоимость"
           }
         }
@@ -3742,9 +4556,15 @@
     "words_privateKey" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Private"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Частный"
           }
         }
@@ -3753,9 +4573,15 @@
     "words_programPlural" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Programs"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Программ"
           }
         }
@@ -3781,9 +4607,15 @@
     "words_tengePerYear" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Tenge per year"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Тенге в год"
           }
         }
@@ -3792,9 +4624,15 @@
     "words_title" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Название"
           }
         }
@@ -3803,9 +4641,15 @@
     "words_to" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "To"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "До"
           }
         }
@@ -3814,9 +4658,15 @@
     "words_tryAgain" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Try Again"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Попробуйте еще раз"
           }
         }
@@ -3825,9 +4675,15 @@
     "words_tryOtherSearch" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Try Other Search"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Попробуйте другой поиск"
           }
         }
@@ -3836,9 +4692,15 @@
     "words_type" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Type"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Тип"
           }
         }
@@ -3847,9 +4709,15 @@
     "words_universityPlural" : {
       "extractionState" : "manual",
       "localizations" : {
-        "ru" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Universities"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
             "value" : "Вузов"
           }
         }

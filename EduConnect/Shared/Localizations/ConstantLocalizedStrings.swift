@@ -86,18 +86,21 @@ public enum ConstantLocalizedStrings {
         static let remove = String(localized: .Localizables.commonRemove)
         static let current = String(localized: .Localizables.commonCurrent)
         static let year = String(localized: .Localizables.commonYear)
+        static let contract = String(localized: .Localizables.commonContract)
+        static let budget = String(localized: .Localizables.commonBudget)
+        static let contacts = String(localized: .Localizables.commonContacts)
     }
     
     /// For __Account__ Tab
     enum Account {
         enum MainTab {
-            static let tab = String(localized: .Localizables.accountMainTab)
-            static let title = String(localized: .Localizables.accountMainTitle)
-            static let lastApplications = String(localized: .Localizables.accountLastApplications)
-            static let lastApplicationsSubtitle = String(localized: .Localizables.accountLastApplicationsSubtitle)
-            static let welcomeMessage = String(localized: .Localizables.accountMainTabWelcomeMessage)
-            static let adviceSection = String(localized: .Localizables.accountMainTabAdviceSection)
-            static let adviceSubtitle = String(localized: .Localizables.accountMainTabAdviceSubtitle)
+            static let tab = String(localized: .Localizables.accountMainTab).acceptingNewLines
+            static let title = String(localized: .Localizables.accountMainTitle).acceptingNewLines
+            static let lastApplications = String(localized: .Localizables.accountLastApplications).acceptingNewLines
+            static let lastApplicationsSubtitle = String(localized: .Localizables.accountLastApplicationsSubtitle).acceptingNewLines
+            static let welcomeMessage = String(localized: .Localizables.accountMainTabWelcomeMessage).acceptingNewLines
+            static let adviceSection = String(localized: .Localizables.accountMainTabAdviceSection).acceptingNewLines
+            static let adviceSubtitle = String(localized: .Localizables.accountMainTabAdviceSubtitle).acceptingNewLines
         }
         
         enum ApplicationTab {
@@ -187,104 +190,104 @@ public enum ConstantLocalizedStrings {
     
     /// For __Articles__
     enum Article {
-        static let article = String(localized: .Localizables.articlesArticle)
-        static let articleNavigatorSubtitle = String(localized: .Localizables.articleArticleNavigatorSubtitle)
-        static let moreToRead = String(localized: .Localizables.articleMoreToRead)
-        static let noNewsInThisCategory = String(localized: .Localizables.articlesNoNewsInThisCategory)
-        static let showAllArticles = String(localized: .Localizables.articlesShowAllArticles)
+        static let article = String(localized: .Localizables.articlesArticle).acceptingNewLines
+        static let articleNavigatorSubtitle = String(localized: .Localizables.articleArticleNavigatorSubtitle).acceptingNewLines
+        static let moreToRead = String(localized: .Localizables.articleMoreToRead).acceptingNewLines
+        static let noNewsInThisCategory = String(localized: .Localizables.articlesNoNewsInThisCategory).acceptingNewLines
+        static let showAllArticles = String(localized: .Localizables.articlesShowAllArticles).acceptingNewLines
     }
     
     /// For __Profession__ purposes
     enum Profession {
-        static let professionPlural = String(localized: .Localizables.professionProfessionPlural)
-        static let profession = String(localized: .Localizables.professionProfession)
-        static let headerSubtitle = String(localized: .Localizables.professionHeaderSubtitle)
-        static let relatedProf = String(localized: .Localizables.professionRelatedProf)
-        static let about = String(localized: .Localizables.professionAboutProfession)
-        static let setEnt = String(localized: .Localizables.professionSetEnt)
-        static let setEntSubtitle = String(localized: .Localizables.professionSetEntSubtitle)
-        static let footerTitle = String(localized: .Localizables.professionFooterTitle)
-        static let footerSubtitle = String(localized: .Localizables.professionFooterSubtitle)
-        static let programs = Words.programPlural
-        static let unis = Words.universityPlural
+        static let professionPlural = String(localized: .Localizables.professionProfessionPlural).acceptingNewLines
+        static let profession = String(localized: .Localizables.professionProfession).acceptingNewLines
+        static let headerSubtitle = String(localized: .Localizables.professionHeaderSubtitle).acceptingNewLines
+        static let relatedProf = String(localized: .Localizables.professionRelatedProf).acceptingNewLines
+        static let about = String(localized: .Localizables.professionAboutProfession).acceptingNewLines
+        static let setEnt = String(localized: .Localizables.professionSetEnt).acceptingNewLines
+        static let setEntSubtitle = String(localized: .Localizables.professionSetEntSubtitle).acceptingNewLines
+        static let footerTitle = String(localized: .Localizables.professionFooterTitle).acceptingNewLines
+        static let footerSubtitle = String(localized: .Localizables.professionFooterSubtitle).acceptingNewLines
+        static let programs = Words.programPlural.acceptingNewLines
+        static let unis = Words.universityPlural.acceptingNewLines
     }
     
     /// For __Program__ purposes
     enum Program {
-        static let headerTitle = String(localized: .Localizables.programHeaderTitle)
-        static let educationalPrograms = String(localized: .Localizables.programEducationalPrograms)
-        static let fields = String(localized: .Localizables.programHeaderFields)
-        static let aboutProgram = String(localized: .Localizables.programAboutProgram)
-        static let relatedProfessions = String(localized: .Localizables.programRelatedProfessions)
-        static let similarPrograms = String(localized: .Localizables.programSimilarPrograms)
-        static let footerTitle = String(localized: .Localizables.programFooterTitle)
-        static let footerSubtitle = String(localized: .Localizables.programFooterSubtitle)
+        static let headerTitle = String(localized: .Localizables.programHeaderTitle).acceptingNewLines
+        static let educationalPrograms = String(localized: .Localizables.programEducationalPrograms).acceptingNewLines
+        static let fields = String(localized: .Localizables.programHeaderFields).acceptingNewLines
+        static let aboutProgram = String(localized: .Localizables.programAboutProgram).acceptingNewLines
+        static let relatedProfessions = String(localized: .Localizables.programRelatedProfessions).acceptingNewLines
+        static let similarPrograms = String(localized: .Localizables.programSimilarPrograms).acceptingNewLines
+        static let footerTitle = String(localized: .Localizables.programFooterTitle).acceptingNewLines
+        static let footerSubtitle = String(localized: .Localizables.programFooterSubtitle).acceptingNewLines
         
         enum ByCategory {
-            static let title = String(localized: .Localizables.programByCategoryTitle)
-            static let footerSubtitle = String(localized: .Localizables.programByCategoryFooterSubtitle)
-            static let error = String(localized: .Localizables.programByCategoryError)
+            static let title = String(localized: .Localizables.programByCategoryTitle).acceptingNewLines
+            static let footerSubtitle = String(localized: .Localizables.programByCategoryFooterSubtitle).acceptingNewLines
+            static let error = String(localized: .Localizables.programByCategoryError).acceptingNewLines
         }
     }
     
     /// For __Universiry__flow
     enum University {
-        static let university = String(localized: .Localizables.universityUniversity)
-        static let filterUnis = String(localized: .Localizables.universityFilterUnis)
-        static let andMore = String(localized: .Localizables.universityAndMore)
-        static let fields = Program.fields
-        static let paidPlaces = String(localized: .Localizables.universityPaidPlaces)
-        static let budgetPlaces = String(localized: .Localizables.universityBudgetPlaces)
-        static let scoreBudget = String(localized: .Localizables.universityScoreBudget)
-        static let scorePaid = String(localized: .Localizables.universityScorePaid)
-        static let priceNotSet = String(localized: .Localizables.universityPriceNotSet)
+        static let university = String(localized: .Localizables.universityUniversity).acceptingNewLines
+        static let filterUnis = String(localized: .Localizables.universityFilterUnis).acceptingNewLines
+        static let andMore = String(localized: .Localizables.universityAndMore).acceptingNewLines
+        static let fields = Program.fields.acceptingNewLines
+        static let paidPlaces = String(localized: .Localizables.universityPaidPlaces).acceptingNewLines
+        static let budgetPlaces = String(localized: .Localizables.universityBudgetPlaces).acceptingNewLines
+        static let scoreBudget = String(localized: .Localizables.universityScoreBudget).acceptingNewLines
+        static let scorePaid = String(localized: .Localizables.universityScorePaid).acceptingNewLines
+        static let priceNotSet = String(localized: .Localizables.universityPriceNotSet).acceptingNewLines
 
-        static let profession = Profession.professionPlural
-        static let dormitory = String(localized: .Localizables.universityFilterWordsDormitory)
-        static let militaryDepartmentShort = String(localized: .Localizables.universityMilitaryDepartmentShort)
-        static let militaryDepartmentCenterShort = String(localized: .Localizables.universityMilitaryDepartmentCenterShort)
-        static let uniFor = String(localized: .Localizables.universityUniFor)
-        static let admission = String(localized: .Localizables.universityAdmission)
-        static let application = String(localized: .Localizables.universityApplication)
-        static let averageScoreENT = String(localized: .Localizables.universityAverageScoreENT)
-        static let aboutUni = String(localized: .Localizables.universityAboutUni)
-        static let programsPlural = Sidebar.programs
-        static let professionPlural = Profession.professionPlural
-        static let contact = Account.Expandable.FamilyInfo.contact
+        static let profession = Profession.professionPlural.acceptingNewLines
+        static let dormitory = String(localized: .Localizables.universityFilterWordsDormitory).acceptingNewLines
+        static let militaryDepartmentShort = String(localized: .Localizables.universityMilitaryDepartmentShort).acceptingNewLines
+        static let militaryDepartmentCenterShort = String(localized: .Localizables.universityMilitaryDepartmentCenterShort).acceptingNewLines
+        static let uniFor = String(localized: .Localizables.universityUniFor).acceptingNewLines
+        static let admission = String(localized: .Localizables.universityAdmission).acceptingNewLines
+        static let application = String(localized: .Localizables.universityApplication).acceptingNewLines
+        static let averageScoreENT = String(localized: .Localizables.universityAverageScoreENT).acceptingNewLines
+        static let aboutUni = String(localized: .Localizables.universityAboutUni).acceptingNewLines
+        static let programsPlural = Sidebar.programs.acceptingNewLines
+        static let professionPlural = Profession.professionPlural.acceptingNewLines
+        static let contact = Common.contacts
         
         enum Header {
-            static let subtitle = String(localized: .Localizables.universityHeaderSubtitle)
-            static let title = String(localized: .Localizables.universityHeaderTitle)
+            static let subtitle = String(localized: .Localizables.universityHeaderSubtitle).acceptingNewLines
+            static let title = String(localized: .Localizables.universityHeaderTitle).acceptingNewLines
         }
         
         enum Filter {
-            static let filter = String(localized: .Localizables.commonFilter)
-            static let addedFilters = String(localized: .Localizables.universityAddedFilters)
-            static let with = String(localized: .Localizables.universityFilterWith)
-            static let without = String(localized: .Localizables.universityFilterWithout)
+            static let filter = String(localized: .Localizables.commonFilter).acceptingNewLines
+            static let addedFilters = String(localized: .Localizables.universityAddedFilters).acceptingNewLines
+            static let with = String(localized: .Localizables.universityFilterWith).acceptingNewLines
+            static let without = String(localized: .Localizables.universityFilterWithout).acceptingNewLines
             
             enum Words{
-                static let city = String(localized: .Localizables.universityFilterWordsCity)
-                static let profession = String(localized: .Localizables.universityFilterWordsProfession)
-                static let typeOfUni = String(localized: .Localizables.universityFilterWordsTypeOfUni)
-                static let militaryDepartment = String(localized: .Localizables.universityFilterWordsMilitaryDepartment)
-                static let dormitory = University.dormitory
-                static let price = String(localized: .Localizables.universityFilterWordsPrice)
-                static let sort = Common.sort
+                static let city = String(localized: .Localizables.universityFilterWordsCity).acceptingNewLines
+                static let profession = String(localized: .Localizables.universityFilterWordsProfession).acceptingNewLines
+                static let typeOfUni = String(localized: .Localizables.universityFilterWordsTypeOfUni).acceptingNewLines
+                static let militaryDepartment = String(localized: .Localizables.universityFilterWordsMilitaryDepartment).acceptingNewLines
+                static let dormitory = University.dormitory.acceptingNewLines
+                static let price = String(localized: .Localizables.universityFilterWordsPrice).acceptingNewLines
+                static let sort = Common.sort.acceptingNewLines
             }
         }
         
         enum Sort {
-            static let byDefault = String(localized: .Localizables.universitySortByDefault)
-            static let byNameFromAToZ = String(localized: .Localizables.universitySortByNameFromAToZ)
-            static let byNameFromZToA = String(localized: .Localizables.universitySortByNameFromZToA)
-            static let byPriceUp = String(localized: .Localizables.universitySortByPriceUp)
-            static let byPriceDown = String(localized: .Localizables.universitySortByPriceDown)
+            static let byDefault = String(localized: .Localizables.universitySortByDefault).acceptingNewLines
+            static let byNameFromAToZ = String(localized: .Localizables.universitySortByNameFromAToZ).acceptingNewLines
+            static let byNameFromZToA = String(localized: .Localizables.universitySortByNameFromZToA).acceptingNewLines
+            static let byPriceUp = String(localized: .Localizables.universitySortByPriceUp).acceptingNewLines
+            static let byPriceDown = String(localized: .Localizables.universitySortByPriceDown).acceptingNewLines
         }
         
         enum Footer {
-            static let title = String(localized: .Localizables.universityFooterTitle)
-            static let subtitle = String(localized: .Localizables.universityFooterSubtitle)
+            static let title = String(localized: .Localizables.universityFooterTitle).acceptingNewLines
+            static let subtitle = String(localized: .Localizables.universityFooterSubtitle).acceptingNewLines
         }
         
     }
@@ -306,66 +309,66 @@ public enum ConstantLocalizedStrings {
     
     /// For __Main Screen__ page flow
     enum Main {
-        static let showAllPrograms = String(localized: .Localizables.mainShowAllPrograms)
-        static let showAllUniversities = String(localized: .Localizables.mainShowAllUniversities)
-        static let showAllProfessions = String(localized: .Localizables.mainShowAllProfessions)
+        static let showAllPrograms = String(localized: .Localizables.mainShowAllPrograms).acceptingNewLines
+        static let showAllUniversities = String(localized: .Localizables.mainShowAllUniversities).acceptingNewLines
+        static let showAllProfessions = String(localized: .Localizables.mainShowAllProfessions).acceptingNewLines
         
         enum Header {
-            static let titleMain = String(localized: .Localizables.mainHeaderTitleMain)
-            static let titleSecondary = String(localized: .Localizables.mainHeaderTitleSecondary)
-            static let programs = String(localized: .Localizables.mainHeaderPrograms)
-            static let unis = String(localized: .Localizables.mainHeaderUnis)
-            static let budgetPlaces = String(localized: .Localizables.wordsBudgetPlaces)
+            static let titleMain = String(localized: .Localizables.mainHeaderTitleMain).acceptingNewLines
+            static let titleSecondary = String(localized: .Localizables.mainHeaderTitleSecondary).acceptingNewLines
+            static let programs = String(localized: .Localizables.mainHeaderPrograms).acceptingNewLines
+            static let unis = String(localized: .Localizables.mainHeaderUnis).acceptingNewLines
+            static let budgetPlaces = String(localized: .Localizables.wordsBudgetPlaces).acceptingNewLines
         }
         
         enum AcademicTab {
-            static let titleMain = String(localized: .Localizables.mainAcademicTabTitleMain)
-            static let titleCountry = String(localized: .Localizables.mainAcademicTabTitleCountry)
-            static let universities = String(localized: .Localizables.mainAcademicTabUniversities)
-            static let professions = String(localized: .Localizables.mainAcademicTabProfessions)
-            static let programCategories = String(localized: .Localizables.mainAcademicTabProgramCategories)
+            static let titleMain = String(localized: .Localizables.mainAcademicTabTitleMain).acceptingNewLines
+            static let titleCountry = String(localized: .Localizables.mainAcademicTabTitleCountry).acceptingNewLines
+            static let universities = String(localized: .Localizables.mainAcademicTabUniversities).acceptingNewLines
+            static let professions = String(localized: .Localizables.mainAcademicTabProfessions).acceptingNewLines
+            static let programCategories = String(localized: .Localizables.mainAcademicTabProgramCategories).acceptingNewLines
         }
         
         enum CareersTab {
-            static let titleMain = String(localized: .Localizables.mainCareersTabTitleMain)
-            static let titleCountry = String(localized: .Localizables.mainAcademicTabTitleCountry)
+            static let titleMain = String(localized: .Localizables.mainCareersTabTitleMain).acceptingNewLines
+            static let titleCountry = String(localized: .Localizables.mainAcademicTabTitleCountry).acceptingNewLines
         }
         
         enum JournalTab {
-            static let titleMain = String(localized: .Localizables.mainJournalTitleMain)
-            static let titleSecondary = String(localized: .Localizables.mainJournalTitleSecondary)
+            static let titleMain = String(localized: .Localizables.mainJournalTitleMain).acceptingNewLines
+            static let titleSecondary = String(localized: .Localizables.mainJournalTitleSecondary).acceptingNewLines
         }
         
         enum ProgramsTab {
-            static let titleMain = String(localized: .Localizables.mainProgramsTitleMain)
-            static let titleSecondary = String(localized: .Localizables.mainProgramTitleSecondary)
-            static let showAll = String(localized: .Localizables.mainProgramsShowAll)
+            static let titleMain = String(localized: .Localizables.mainProgramsTitleMain).acceptingNewLines
+            static let titleSecondary = String(localized: .Localizables.mainProgramTitleSecondary).acceptingNewLines
+            static let showAll = String(localized: .Localizables.mainProgramsShowAll).acceptingNewLines
         }
         
         enum Steps {
-            static let chooseProfession = String(localized: .Localizables.mainStepsChooseProfession)
-            static let chooseEnt = String(localized: .Localizables.mainStepsChooseENT)
-            static let chooseUni = String(localized: .Localizables.mainStepsChooseUni)
-            static let showAllSteps = String(localized: .Localizables.mainStepsShowAllSteps)
-            static let hideSteps = String(localized: .Localizables.mainStepsHideSteps)
-            static let start = String(localized: .Localizables.commonStart)
+            static let chooseProfession = String(localized: .Localizables.mainStepsChooseProfession).acceptingNewLines
+            static let chooseEnt = String(localized: .Localizables.mainStepsChooseENT).acceptingNewLines
+            static let chooseUni = String(localized: .Localizables.mainStepsChooseUni).acceptingNewLines
+            static let showAllSteps = String(localized: .Localizables.mainStepsShowAllSteps).acceptingNewLines
+            static let hideSteps = String(localized: .Localizables.mainStepsHideSteps).acceptingNewLines
+            static let start = String(localized: .Localizables.commonStart).acceptingNewLines
         }
         
         enum ServicesTab {
-            static let title = String(localized: .Localizables.mainServicesTabTitle)
-            static let professionsOptions = String(localized: .Localizables.mainServicesTabProfessionOptions)
-            static let universityHelp = String(localized: .Localizables.mainServicesTabUniversityHelp)
-            static let calendar = String(localized: .Localizables.wordsCalendar)
+            static let title = String(localized: .Localizables.mainServicesTabTitle).acceptingNewLines
+            static let professionsOptions = String(localized: .Localizables.mainServicesTabProfessionOptions).acceptingNewLines
+            static let universityHelp = String(localized: .Localizables.mainServicesTabUniversityHelp).acceptingNewLines
+            static let calendar = String(localized: .Localizables.wordsCalendar).acceptingNewLines
         }
         
         enum Footer {
-            static let title = String(localized: .Localizables.mainFooterTitle)
-            static let percentageLabel = String(localized: .Localizables.mainFooterPercentageLabel)
-            static let percentageSubtitle = String(localized: .Localizables.mainFooterPercentageSubtitle)
-            static let description = String(localized: .Localizables.mainFooterDescription)
-            static let programs = String(localized: .Localizables.wordsProgramPlural)
-            static let privateUnis = String(localized: .Localizables.mainFooterPrivateUnis)
-            static let budgetPlaces = String(localized: .Localizables.wordsBudgetPlaces)
+            static let title = String(localized: .Localizables.mainFooterTitle).acceptingNewLines
+            static let percentageLabel = String(localized: .Localizables.mainFooterPercentageLabel).acceptingNewLines
+            static let percentageSubtitle = String(localized: .Localizables.mainFooterPercentageSubtitle).acceptingNewLines
+            static let description = String(localized: .Localizables.mainFooterDescription).acceptingNewLines
+            static let programs = String(localized: .Localizables.wordsProgramPlural).acceptingNewLines
+            static let privateUnis = String(localized: .Localizables.mainFooterPrivateUnis).acceptingNewLines
+            static let budgetPlaces = String(localized: .Localizables.wordsBudgetPlaces).acceptingNewLines
         }
     }
     

@@ -177,7 +177,7 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell {
         featuresStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         var features: [String] = []
-        features.append(uni.universityTypeName)
+        features.append(UniversityTypeConverter.toCurrentLanguage(name: uni.universityTypeName))
         
         if uni.hasDormitory {
             features.append(ConstantLocalizedStrings.University.dormitory)
@@ -229,6 +229,7 @@ final class UniversityInfoScreenAboutCell: UICollectionViewCell {
         label.font = ECFont.font(.medium, size: 16)
         label.textColor = .label
         label.numberOfLines = 1
+        label.adjustsFontSizeToFitWidth = true
         
         container.addArrangedSubview(imageView)
         container.addArrangedSubview(label)
