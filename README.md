@@ -1,7 +1,7 @@
 # EduConnect
 
-EduConnect is an iOS application that helps users explore universities, academic programs, and professions in one place.  
-The app provides structured educational information and helps users navigate through institutions, study programs, and related career paths.
+EduConnect is an iOS application that helps users explore universities, academic programs, and professions in Kazakhstan.  
+The app provides structured educational information and helps users navigate through institutions, study programs, and related career paths in one place.
 
 The project focuses on clean architecture, modular design, and scalable UI development.
 
