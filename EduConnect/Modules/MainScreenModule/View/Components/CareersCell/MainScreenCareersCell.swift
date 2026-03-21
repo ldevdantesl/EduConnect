@@ -33,13 +33,15 @@ final class MainScreenCareersCell: UICollectionViewCell {
     
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
-        let text = "Поступи в вузы\nКазахстана"
+        let mainText = ConstantLocalizedStrings.Main.CareersTab.titleMain
+        let countryText = ConstantLocalizedStrings.Main.CareersTab.titleCountry
+        let text = mainText + countryText
         let attributed = NSMutableAttributedString(
             string: text,
             attributes: [ .font: ECFont.font(.bold, size: 24) ]
         )
 
-        if let range = text.range(of: "Казахстана") {
+        if let range = text.range(of: countryText) {
             let nsRange = NSRange(range, in: text)
             attributed.addAttributes([.font: ECFont.font(.regular, size: 20)], range: nsRange)
         }

@@ -50,8 +50,8 @@ final class UniversityScreenPresenter {
         totalBudgetSpaces: totalBudgetPlaces
     )
     private let footerVM = TabsFooterCellViewModel(
-        titleLabelText: "Список вузов Казахстана по среднему баллу, стоимости обучения",
-        subtitleLabelText: "С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования. "
+        titleLabelText: ConstantLocalizedStrings.University.Footer.title,
+        subtitleLabelText: ConstantLocalizedStrings.University.Footer.subtitle
     )
     
     // MARK: - COMPUTED PROPERTIES
@@ -123,7 +123,7 @@ final class UniversityScreenPresenter {
         var universityItems: [UniversityScreenItem] = []
         
         if universities.isEmpty {
-            let vm = NotFoundCellViewModel(systemImage: ImageConstants.SystemImages.questionMark.rawValue, title: "Ничего не найдено", subtitle: "Попробуйте другой поиск")
+            let vm = NotFoundCellViewModel(systemImage: ImageConstants.SystemImages.questionMark.rawValue, title: ConstantLocalizedStrings.Words.notFound, subtitle: ConstantLocalizedStrings.Words.tryOtherSearch)
             universityItems.append(.notFoundItem(.init(viewModel: vm)))
         } else {
             let universities = universities.map {

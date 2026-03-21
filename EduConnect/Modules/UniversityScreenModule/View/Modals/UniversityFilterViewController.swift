@@ -72,7 +72,7 @@ final class UniversityScreenFilterModalController: UIViewController {
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Фильтр по вузам"
+        label.text = ConstantLocalizedStrings.University.filterUnis
         label.font = ECFont.font(.bold, size: 22)
         return label
     }()
@@ -103,7 +103,7 @@ final class UniversityScreenFilterModalController: UIViewController {
     }()
     
     private let applyButton: ECButton = {
-        let button = ECButton(text: "Применить")
+        let button = ECButton(text: ConstantLocalizedStrings.Common.apply)
         return button
     }()
     

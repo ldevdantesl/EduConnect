@@ -45,17 +45,26 @@ final class ProgramDetailsScreenPresenter {
     private func applySnapshot() {
         guard let programDetails, let university else { return }
         let headerVM = ProgramDetailsHeaderCellViewModel(programDetails: programDetails, university: university)
-        let universityHeader = SectionHeaderCellViewModel(title: "Университет", titleSize: 20, titleAlignment: .center)
+        let universityHeader = SectionHeaderCellViewModel(
+            title: ConstantLocalizedStrings.University.university,
+            titleSize: 20, titleAlignment: .center
+        )
         let universityItemVM = ProgramDetailsUniversityCardCellViewModel(university: university) { [weak self] _ in
             self?.router.routeToUniversity(university: university)
         }
         
-        let aboutHeader = SectionHeaderCellViewModel(title: "О Программе", titleSize: 20, titleAlignment: .center)
+        let aboutHeader = SectionHeaderCellViewModel(
+            title: ConstantLocalizedStrings.Program.aboutProgram,
+            titleSize: 20, titleAlignment: .center
+        )
         let aboutVM = ProgramDetailsAboutCellViewModel(details: programDetails)
         
         var professionItems: [ProgramDetailsItem] = []
         if !programDetails.professions.isEmpty {
-            let professionsHeader = SectionHeaderCellViewModel(title: "Связанные Профессии", titleSize: 20, titleAlignment: .center)
+            let professionsHeader = SectionHeaderCellViewModel(
+                title: ConstantLocalizedStrings.Program.relatedProfessions,
+                titleSize: 20, titleAlignment: .center
+            )
             professionItems.append(.sectionHeaderItem(.init(id: "professionHeader", viewModel: professionsHeader)))
             let professionSubItems: [ProgramDetailsItem] = programDetails.professions.map { profession in
                 let cardVM = CardWithImageCellViewModel(imageURL: profession.imageURL, title: profession.name.toCurrentLanguage(), showsArrowRight: true) { [weak self] in self?.router.routeToProfession(professionID: profession.id) }
@@ -66,16 +75,26 @@ final class ProgramDetailsScreenPresenter {
          
         var facultyItems: [ProgramDetailsItem] = []
         if !programDetails.faculties.isEmpty {
-            let facultyHeader = SectionHeaderCellViewModel(title: "Факультеты", titleSize: 20, titleAlignment: .center)
+            let facultyHeader = SectionHeaderCellViewModel(
+                title: ConstantLocalizedStrings.Words.facultyPlural,
+                titleSize: 20, titleAlignment: .center
+            )
             facultyItems.append(.sectionHeaderItem(.init(id: "faculty-header", viewModel: facultyHeader)))
             let facultySubItems: [ProgramDetailsItem] = programDetails.faculties.map { faculty in
-                let cardVM = CardWithImageCellViewModel(imageURL: faculty.imageURL, title: faculty.name.toCurrentLanguage(), subtitle: "Код: \(faculty.code)")
+                let cardVM = CardWithImageCellViewModel(
+                    imageURL: faculty.imageURL,
+                    title: faculty.name.toCurrentLanguage(),
+                    subtitle: "\(ConstantLocalizedStrings.Common.code): \(faculty.code)"
+                )
                 return .cardWithImageItem(.init(item: faculty, prefix: "faculty-", viewModel: cardVM))
             }
             facultyItems.append(contentsOf: facultySubItems)
         }
         
-        let relatedVM = SectionHeaderCellViewModel(title: "Похожие программы", titleSize: 20, titleAlignment: .center)
+        let relatedVM = SectionHeaderCellViewModel(
+            title: ConstantLocalizedStrings.Program.similarPrograms,
+            titleSize: 20, titleAlignment: .center
+        )
         let relatedHeaderItems: [ProgramDetailsItem] = relatedPrograms.isEmpty ? [] : [.sectionHeaderItem(.init(id: "related-header", viewModel: relatedVM))]
         
         var relatedItems: [ProgramDetailsItem] = []

@@ -61,7 +61,7 @@ final class ProfessionDetailsHeaderCell: UICollectionViewCell {
         
         view.secondLineLabel.textColor = .white
         view.secondLineLabel.font = ECFont.font(.semiBold, size: 14)
-        view.secondLineLabel.text = "вуза"
+        view.secondLineLabel.text = ConstantLocalizedStrings.Profession.unis
         view.secondLineLabel.numberOfLines = 2
         
         view.vStack.alignment = .leading
@@ -76,7 +76,7 @@ final class ProfessionDetailsHeaderCell: UICollectionViewCell {
         
         view.secondLineLabel.textColor = .white
         view.secondLineLabel.font = ECFont.font(.semiBold, size: 14)
-        view.secondLineLabel.text = "программ обучения"
+        view.secondLineLabel.text = ConstantLocalizedStrings.Profession.programs
         view.secondLineLabel.numberOfLines = 2
         
         view.vStack.alignment = .leading
@@ -97,7 +97,7 @@ final class ProfessionDetailsHeaderCell: UICollectionViewCell {
     private let setENTButton: ECButton = {
         let button = ECButton()
         button.configure(
-            text: "Укажите ЕНТ", textSize: 14,
+            text: ConstantLocalizedStrings.Profession.setEnt, textSize: 14,
             backgroundColor: .white, textColor: .systemBlue,
             cornerRadius: 20
         )
@@ -119,7 +119,7 @@ final class ProfessionDetailsHeaderCell: UICollectionViewCell {
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: ProfessionDetailsHeaderCellViewModel) {
         self.viewModel = vm
-        titleLabel.text = "Профессия \(vm.profession.name.toCurrentLanguage())"
+        titleLabel.text = "\(ConstantLocalizedStrings.Profession.profession) \(vm.profession.name.toCurrentLanguage())"
         universityView.firstLineLabel.text = vm.profession.universitiesCount.description
         programView.firstLineLabel.text = vm.profession.programsCount.description
         setENTButton.setAction(action: vm.didTapSetENT)

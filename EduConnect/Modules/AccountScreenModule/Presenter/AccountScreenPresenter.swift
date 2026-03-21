@@ -209,8 +209,8 @@ final class AccountScreenPresenter {
         } else {
             let notFoundVm = NotFoundCellViewModel(
                 systemImage: ImageConstants.SystemImages.questionMark.rawValue,
-                title: "Ничего не найдено",
-                subtitle: "Попробуйте подать заявку в вуз и вернитесь обратно\n(Нажмите чтоб открыть вузы)"
+                title: ConstantLocalizedStrings.Words.notFound,
+                subtitle: ConstantLocalizedStrings.Account.ApplicationTab.applicationsNotFound
             ) { [weak self] in
                 self?.router.routeToUniversities()
             }
@@ -260,7 +260,8 @@ final class AccountScreenPresenter {
         
         if !applications.isEmpty {
             let applicationsHeader = HeaderWithSubtitleCellViewModel(
-                title: "Последние заявки", subtitle: "Вот список ваших последних заявок в вузы:"
+                title: ConstantLocalizedStrings.Account.MainTab.lastApplications,
+                subtitle: ConstantLocalizedStrings.Account.MainTab.lastApplicationsSubtitle
             )
             items.append(.headerWithSubtitleItem(.init(id: "applications-header", viewModel: applicationsHeader)))
             

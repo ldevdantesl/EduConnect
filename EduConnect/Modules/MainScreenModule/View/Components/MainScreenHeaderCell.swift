@@ -30,7 +30,9 @@ final class MainScreenHeaderCell: UICollectionViewCell {
     
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
-        let text = "Траектория поступления\nв вузы Казахстана"
+        let main = ConstantLocalizedStrings.Main.Header.titleMain
+        let secondary = ConstantLocalizedStrings.Main.Header.titleSecondary
+        let text = main + secondary
         let attributed = NSMutableAttributedString(
             string: text,
             attributes: [
@@ -39,7 +41,7 @@ final class MainScreenHeaderCell: UICollectionViewCell {
             ]
         )
 
-        if let range = text.range(of: "в вузы Казахстана") {
+        if let range = text.range(of: secondary) {
             let nsRange = NSRange(range, in: text)
             attributed.addAttributes(
                 [.font: ECFont.font(.regular, size: 18)],
@@ -83,9 +85,12 @@ final class MainScreenHeaderCell: UICollectionViewCell {
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: MainScreenHeaderCellViewModel) {
         self.viewModel = vm
-        let programsStack = makeStack(titleText: vm.programsCount.description, subtitleText: "Программы")
-        let universitiesStack = makeStack(titleText: vm.universitiesCount.description, subtitleText: "Вузы")
-        let budgetStack = makeStack(titleText: vm.bugdetplacesCount.description, subtitleText: "Бюджетных мест")
+        let programsStack = makeStack(titleText: vm.programsCount.description, subtitleText: ConstantLocalizedStrings.Main.Header.programs)
+        let universitiesStack = makeStack(titleText: vm.universitiesCount.description, subtitleText: ConstantLocalizedStrings.Main.Header.unis)
+        let budgetStack = makeStack(
+            titleText: vm.bugdetplacesCount.description,
+            subtitleText: ConstantLocalizedStrings.Main.Header.budgetPlaces
+        )
         statsStack.addArrangedSubview(programsStack)
         statsStack.addArrangedSubview(universitiesStack)
         statsStack.addArrangedSubview(budgetStack)

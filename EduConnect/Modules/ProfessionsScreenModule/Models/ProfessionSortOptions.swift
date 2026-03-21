@@ -13,8 +13,8 @@ enum ProfessionSortOption: CaseIterable {
     
     var title: String {
         switch self {
-        case .fromAToZ: return "От А до Я"
-        case .fromZToA: return "От Я до А"
+        case .fromAToZ: return ConstantLocalizedStrings.Words.fromAtoZ
+        case .fromZToA: return ConstantLocalizedStrings.Words.fromZtoA
         }
     }
     

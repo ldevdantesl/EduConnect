@@ -18,11 +18,11 @@ struct UniversityFilters {
 
         var title: String {
             switch self {
-            case .default: return "По умолчанию"
-            case .nameAsc: return "По названию А-Я"
-            case .nameDesc: return "По названию Я-А"
-            case .priceAsc: return "По цене ↑"
-            case .priceDesc: return "По цене ↓"
+            case .default: return ConstantLocalizedStrings.University.Sort.byDefault
+            case .nameAsc: return ConstantLocalizedStrings.University.Sort.byNameFromAToZ
+            case .nameDesc: return ConstantLocalizedStrings.University.Sort.byNameFromZToA
+            case .priceAsc: return ConstantLocalizedStrings.University.Sort.byPriceUp
+            case .priceDesc: return ConstantLocalizedStrings.University.Sort.byPriceDown
             }
         }
         
@@ -38,10 +38,10 @@ struct UniversityFilters {
 
         static func from(_ value: String) -> UniversitySortOption {
             switch value {
-            case "По названию А-Я": return .nameAsc
-            case "По названию Я-А": return .nameDesc
-            case "По цене ↑": return .priceAsc
-            case "По цене ↓": return .priceDesc
+            case ConstantLocalizedStrings.University.Sort.byNameFromAToZ: return .nameAsc
+            case ConstantLocalizedStrings.University.Sort.byNameFromZToA: return .nameDesc
+            case ConstantLocalizedStrings.University.Sort.byPriceUp: return .priceAsc
+            case ConstantLocalizedStrings.University.Sort.byPriceDown: return .priceDesc
             default: return .default
             }
         }

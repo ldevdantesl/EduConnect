@@ -41,17 +41,15 @@ final class ProfessionsScreenPresenter {
             didTapSortOption: { [weak self] in self?.didTapSortOption(option: $0) }
         )
         let footerVM = TabsFooterCellViewModel(
-            titleLabelText: "Выбор профессии в справочнике",
-            subtitleLabelText: """
-            С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования.  Если ты хочешь сфокусироваться на каком-то конкретном вузе, используй удобную функцию
-            """
+            titleLabelText: ConstantLocalizedStrings.Profession.footerTitle,
+            subtitleLabelText: ConstantLocalizedStrings.Profession.footerSubtitle
         )
         
         var professionItems: [ProfessionScreenItem] = []
         if !professions.isEmpty {
             professionItems = professions.map { profession in
                 let vm = CardCellViewModel(
-                    preTitle: "\(profession.programsCount) программ, \(profession.universitiesCount) вузов",
+                    preTitle: "\(profession.programsCount) \(ConstantLocalizedStrings.Profession.programs), \(profession.universitiesCount) \(ConstantLocalizedStrings.Profession.unis)",
                     title: profession.name.toCurrentLanguage(), subtitle: profession.description.toCurrentLanguage(), showsArrowRight: true
                 ) { [weak self] in self?.router.routeToProfession(professionID: profession.id) }
                 return ProfessionScreenItem.cardItem(.init(id: profession.id, viewModel: vm))
@@ -59,7 +57,7 @@ final class ProfessionsScreenPresenter {
         } else {
             let notFoundItem = NotFoundCellViewModel(
                 systemImage: ImageConstants.SystemImages.questionMark.rawValue,
-                title: "Ничего не найдено", subtitle: "Попробуйте еще раз", horizontallySpaced: true
+                subtitle: ConstantLocalizedStrings.Words.tryAgain, horizontallySpaced: true
             )
             professionItems = [ProfessionScreenItem.notFoundItem(.init(viewModel: notFoundItem))]
         }
@@ -92,10 +90,8 @@ final class ProfessionsScreenPresenter {
             didTapSortOption: { [weak self] in self?.didTapSortOption(option: $0) }
         )
         let footerVM = TabsFooterCellViewModel(
-            titleLabelText: "Выбор профессии в справочнике",
-            subtitleLabelText: """
-            С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования.  Если ты хочешь сфокусироваться на каком-то конкретном вузе, используй удобную функцию
-            """
+            titleLabelText: ConstantLocalizedStrings.Profession.footerTitle,
+            subtitleLabelText: ConstantLocalizedStrings.Profession.footerSubtitle
         )
         let loadingVM = LoadingCellViewModel()
         

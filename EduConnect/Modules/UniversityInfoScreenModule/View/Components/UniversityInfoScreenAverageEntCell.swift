@@ -30,7 +30,7 @@ final class UniversityInfoScreenAverageEntCell: UICollectionViewCell {
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Средний балл ЕНТ"
+        label.text = ConstantLocalizedStrings.University.averageScoreENT
         label.font = ECFont.font(.bold, size: 20)
         label.textColor = .label
         return label
@@ -156,13 +156,13 @@ final class UniversityInfoScreenAverageEntCell: UICollectionViewCell {
         budgetStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         contractStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        let yearHeaderLabel = createTableLabel(text: "Год", isHeader: true)
+        let yearHeaderLabel = createTableLabel(text: ConstantLocalizedStrings.Common.year, isHeader: true)
         yearsStack.addArrangedSubview(yearHeaderLabel)
         
-        let budgetHeaderLabel = createTableLabel(text: "Бюджет", isHeader: true)
+        let budgetHeaderLabel = createTableLabel(text: ConstantLocalizedStrings.Common.budget, isHeader: true)
         budgetStack.addArrangedSubview(budgetHeaderLabel)
         
-        let contractHeaderLabel = createTableLabel(text: "Платное", isHeader: true)
+        let contractHeaderLabel = createTableLabel(text: ConstantLocalizedStrings.Common.contract, isHeader: true)
         contractStack.addArrangedSubview(contractHeaderLabel)
         
         let yearSpacer = UIView()

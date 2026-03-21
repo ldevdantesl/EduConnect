@@ -45,7 +45,7 @@ final class ProgramsScreenHeaderCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Поиск программ бакалавриата и специалитета в вузах по направлениям образования: "
+        label.text = ConstantLocalizedStrings.Program.headerTitle
         label.numberOfLines = 0
         label.font = ECFont.font(.bold, size: 22)
         label.textColor = .white
@@ -92,8 +92,8 @@ final class ProgramsScreenHeaderCell: UICollectionViewCell {
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: ProgramsScreenHeaderCellViewModel) {
         self.viewModel = vm
-        self.fieldsTotalLabel.text = "\(vm.totalFields)\nнаправлений"
-        self.programsTotalLabel.text = "\(vm.totalEducationPrograms)\nпрограммы обучения"
+        self.fieldsTotalLabel.text = "\(vm.totalFields)\n\(ConstantLocalizedStrings.Program.fields)"
+        self.programsTotalLabel.text = "\(vm.totalEducationPrograms)\n\(ConstantLocalizedStrings.Program.educationalPrograms)"
     }
     
     // MARK: - PRIVATE FUNC

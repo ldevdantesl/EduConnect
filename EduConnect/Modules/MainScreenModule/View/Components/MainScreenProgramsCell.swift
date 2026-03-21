@@ -39,12 +39,14 @@ final class MainScreenProgramsCell: UICollectionViewCell {
     
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
-        let text = "Направления высшего\nобразования в Казахстане"
+        let main = ConstantLocalizedStrings.Main.ProgramsTab.titleMain
+        let secondary = ConstantLocalizedStrings.Main.ProgramsTab.titleSecondary
+        let text = main+secondary
         let attributed = NSMutableAttributedString(
             string: text,
             attributes: [.font: ECFont.font(.bold, size: 24)]
         )
-        if let range = text.range(of: "в Казахстане") {
+        if let range = text.range(of: secondary) {
             let nsRange = NSRange(range, in: text)
             attributed.addAttributes([.font: ECFont.font(.regular, size: 20)], range: nsRange)
         }
@@ -64,7 +66,7 @@ final class MainScreenProgramsCell: UICollectionViewCell {
         iv.tintColor = .white
         
         let label = UILabel()
-        label.text = "Показать все программы бакалавриата"
+        label.text = ConstantLocalizedStrings.Main.ProgramsTab.showAll
         label.font = ECFont.font(.semiBold, size: 14)
         label.textColor = .white
         label.numberOfLines = 3

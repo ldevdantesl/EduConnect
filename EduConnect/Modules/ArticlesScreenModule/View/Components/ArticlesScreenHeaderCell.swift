@@ -36,7 +36,7 @@ final class ArticlesScreenHeaderCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Статьи"
+        label.text = ConstantLocalizedStrings.Article.article
         label.font = ECFont.font(.bold, size: 22)
         label.textColor = .white
         return label
@@ -44,7 +44,7 @@ final class ArticlesScreenHeaderCell: UICollectionViewCell {
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Навигатор поступления для абитуриентов вузов"
+        label.text = ConstantLocalizedStrings.Article.articleNavigatorSubtitle
         label.font = ECFont.font(.regular, size: 16)
         label.textColor = .white
         label.numberOfLines = 0

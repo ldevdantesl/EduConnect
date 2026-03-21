@@ -18,17 +18,17 @@ enum UniversityFilterOption: String, CaseIterable {
     
     var title: String {
         switch self {
-        case .city: return "Город"
-        case .profession: return "Профессия"
-        case .universityType: return "Тип вуза"
-        case .military: return "Военная кафедра"
-        case .dormitory: return "Общежитие"
-        case .sorting: return "Сортировка"
-        case .price: return "Цена"
+        case .city: return ConstantLocalizedStrings.University.Filter.Words.city
+        case .profession: return ConstantLocalizedStrings.University.Filter.Words.profession
+        case .universityType: return ConstantLocalizedStrings.University.Filter.Words.typeOfUni
+        case .military: return ConstantLocalizedStrings.University.Filter.Words.militaryDepartment
+        case .dormitory: return ConstantLocalizedStrings.University.Filter.Words.dormitory
+        case .sorting: return ConstantLocalizedStrings.University.Filter.Words.sort
+        case .price: return ConstantLocalizedStrings.University.Filter.Words.price
         }
     }
     
-    var noneTitle: String { return "Любой" }
+    var noneTitle: String { return ConstantLocalizedStrings.Common.none }
     
     var isPrice: Bool { self == .price }
     
@@ -38,7 +38,7 @@ enum UniversityFilterOption: String, CaseIterable {
             return [noneTitle] + ECUniversity.UniversityType.allCases.map { $0.title }
 
         case .military, .dormitory:
-            return [noneTitle, "Есть", "Нет"]
+            return [noneTitle, ConstantLocalizedStrings.University.Filter.with, ConstantLocalizedStrings.University.Filter.without]
 
         case .sorting:
             return [noneTitle] + UniversityFilters.UniversitySortOption.allCases.map { $0.title }
@@ -65,10 +65,13 @@ enum UniversityFilterOption: String, CaseIterable {
             return filters.universityType?.title
             
         case .military:
-            return filters.hasMilitary.map { $0 ? "Есть" : "Нет" }
+            return filters.hasMilitary.map { $0 ? ConstantLocalizedStrings.University.Filter.with : ConstantLocalizedStrings.University.Filter.without }
             
         case .dormitory:
-            return filters.hasDormitory.map { $0 ? "Есть" : "Нет" }
+            return filters.hasDormitory.map {
+                $0 ? ConstantLocalizedStrings.University.Filter.with :
+                ConstantLocalizedStrings.University.Filter.without
+            }
             
         case .sorting:
             return filters.sorting == .default ? nil : filters.sorting.title
@@ -93,10 +96,10 @@ enum UniversityFilterOption: String, CaseIterable {
                 ECUniversity.UniversityType.allCases.first { $0.title == value }
 
         case .military:
-            filters.hasMilitary = (value == noneTitle) ? nil : (value == "Есть")
+            filters.hasMilitary = (value == noneTitle) ? nil : (value == ConstantLocalizedStrings.University.Filter.with)
 
         case .dormitory:
-            filters.hasDormitory = (value == noneTitle) ? nil : (value == "Есть")
+            filters.hasDormitory = (value == noneTitle) ? nil : (value == ConstantLocalizedStrings.University.Filter.with)
 
         case .sorting:
             filters.sorting = (value == title) ? .default :

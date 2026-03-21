@@ -98,7 +98,7 @@ final class ProfessionScreenSearchCell: UICollectionViewCell {
         let didTapSortOption = viewModel?.didTapSortOption
         
         var actions: [UIAction] = []
-        let nilAction = UIAction(title: "Любой") { [weak self] _ in
+        let nilAction = UIAction(title: ConstantLocalizedStrings.Common.none) { [weak self] _ in
             guard let self else { return }
             var title = AttributedString(ConstantLocalizedStrings.Common.sort)
             title.font = ECFont.font(.bold, size: 16)

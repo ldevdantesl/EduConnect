@@ -28,7 +28,7 @@ final class MainScreenFooterCell: UICollectionViewCell {
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Высшее образование\nв Казахстане"
+        label.text = ConstantLocalizedStrings.Main.Footer.title
         label.font = ECFont.font(.bold, size: 28)
         label.textColor = .label
         label.numberOfLines = 2
@@ -46,7 +46,7 @@ final class MainScreenFooterCell: UICollectionViewCell {
     
     private let percentageTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Образование в Казахстане"
+        label.text = ConstantLocalizedStrings.Main.Footer.percentageLabel
         label.font = ECFont.font(.semiBold, size: 16)
         label.textColor = .systemGray
         return label
@@ -54,7 +54,7 @@ final class MainScreenFooterCell: UICollectionViewCell {
     
     private let percentageSubtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Доступное качественное образование для всех"
+        label.text = ConstantLocalizedStrings.Main.Footer.percentageSubtitle
         label.font = ECFont.font(.regular, size: 14)
         label.textColor = .secondaryLabel
         label.numberOfLines = 2
@@ -63,10 +63,7 @@ final class MainScreenFooterCell: UICollectionViewCell {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = """
-        Казахстан — страна потрясающих возможностей для получения высшего образования. По состоянию
-        на 2025 год в Казахстане насчитывается более 130 вузов. Это 40 государственных учебных заведений, из которых 15 — университеты, 10 — академии, и 5 — институтов. Также есть около 90 частных образовательных организаций. В казахстанских вузах обучается порядка 500 тысяч студентов. В 2025 году в университетах Казахстана предусмотрено более 70 тыс. бюджетных мест для приема. Сайт предоставляет абитуриенту 2025 возможность сравнить и выбрать вузы, программы образования, пройти профориентацию и оценить свои шансы поступить. Полный справочник абитуриента для поступающих в вузы Казахстана.
-        """
+        label.text = ConstantLocalizedStrings.Main.Footer.description
         label.font = ECFont.font(.regular, size: 14)
         label.textColor = .secondaryLabel
         label.numberOfLines = 0
@@ -92,9 +89,9 @@ final class MainScreenFooterCell: UICollectionViewCell {
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: MainScreenFooterCellViewModel) {
         self.viewModel = vm
-        let programsStatView = makeStatView(number: vm.programsCount, subtitle: "программы")
-        let privateUnisStatView = makeStatView(number: vm.universitiesCount, subtitle: "частных вузов")
-        let budgetPlacesCount = makeStatView(number: vm.budgetPlacesCount, subtitle: "бюджетных мест")
+        let programsStatView = makeStatView(number: vm.programsCount, subtitle: ConstantLocalizedStrings.Main.Footer.programs)
+        let privateUnisStatView = makeStatView(number: vm.universitiesCount, subtitle: ConstantLocalizedStrings.Main.Footer.privateUnis)
+        let budgetPlacesCount = makeStatView(number: vm.budgetPlacesCount, subtitle: ConstantLocalizedStrings.Main.Footer.budgetPlaces)
         statsStack.addArrangedSubview(programsStatView)
         statsStack.addArrangedSubview(privateUnisStatView)
         statsStack.addArrangedSubview(budgetPlacesCount)

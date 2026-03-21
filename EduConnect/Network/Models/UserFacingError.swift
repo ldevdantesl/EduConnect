@@ -14,7 +14,7 @@ struct UserFacingError {
     
     static func from(_ error: APIError) -> UserFacingError {
         UserFacingError(
-            title: "Error",
+            title: ConstantLocalizedStrings.DEBUG.error,
             message: error.errorDescription ?? "Something went wrong",
             isRetryable: false
         )

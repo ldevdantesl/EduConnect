@@ -120,9 +120,9 @@ final class MainScreenAcademicProgramCell: UICollectionViewCell {
         }
         
         nameLabel.text = vm.program.name.toCurrentLanguage()
-        programsLabel.text = "\(vm.program.programsCount ?? 0) Программ"
-        budgetPlaces.text = "34 Бюджетных мест"
-        paidPlaces.text = "31 Платных мест"
+        programsLabel.text = "\(vm.program.programsCount ?? 0) \(ConstantLocalizedStrings.Words.programPlural)"
+        budgetPlaces.text = "34 \(ConstantLocalizedStrings.Words.budgetPlaces)"
+        paidPlaces.text = "31 \(ConstantLocalizedStrings.Words.paidPlaces)"
         
         dashedView.setAction {
             vm.didTapProgram?(vm.program)

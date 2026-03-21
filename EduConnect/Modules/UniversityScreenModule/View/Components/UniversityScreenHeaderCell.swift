@@ -46,7 +46,7 @@ final class UniversityScreenHeaderCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Вузы Казахстана:"
+        label.text = ConstantLocalizedStrings.University.Header.title
         label.font = ECFont.font(.bold, size: 22)
         label.textColor = .white
         return label
@@ -54,7 +54,7 @@ final class UniversityScreenHeaderCell: UICollectionViewCell {
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "университеты, институты, академии"
+        label.text = ConstantLocalizedStrings.University.Header.subtitle
         label.font = ECFont.font(.regular, size: 17)
         label.textColor = .white
         return label
@@ -143,8 +143,8 @@ final class UniversityScreenHeaderCell: UICollectionViewCell {
     // MARK: - PUBLIC FUNC
     func configure(withVM vm: UniversityScreenHeaderCellViewModel) {
         self.viewModel = vm
-        self.universitiesTotalLabel.text = "\(vm.totalUniversities)\nвуза"
-        self.citiesTotalLabel.text = "\(vm.totalCities)\nгородов"
-        self.budgetSpacesTotalLabel.text = "\(vm.totalBudgetSpaces)\nбюджетных места"
+        self.universitiesTotalLabel.text = "\(vm.totalUniversities)\n\(ConstantLocalizedStrings.Words.universityPlural)"
+        self.citiesTotalLabel.text = "\(vm.totalCities)\n\(ConstantLocalizedStrings.Words.cityPlural)"
+        self.budgetSpacesTotalLabel.text = "\(vm.totalBudgetSpaces)\n\(ConstantLocalizedStrings.Words.budgetPlaces)"
     }
 }

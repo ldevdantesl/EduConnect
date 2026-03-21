@@ -26,4 +26,8 @@ extension String {
         
         return nil
     }
+    
+    var acceptingNewLines: String {
+        self.replacingOccurrences(of: "\\n", with: "\n")
+    }
 }

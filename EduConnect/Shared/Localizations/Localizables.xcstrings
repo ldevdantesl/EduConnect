@@ -1,6 +1,29 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "account_applicationsNotFound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Applications are not found, try applying first and come back (Tap to look for university)"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Өтінімдер табылмады. Алдымен өтінім беріп көріңіз, содан кейін қайта оралыңыз (университетті іздеу үшін басыңыз)."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Попробуйте подать в вузы и вернуться обратно(Нажмите чтобы поискать вузы)"
+          }
+        }
+      }
+    },
     "account_applicationTab" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -484,6 +507,52 @@
         }
       }
     },
+    "account_lastApplications" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Applications"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Соңғы өтінімдер"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Последние Заявки"
+          }
+        }
+      }
+    },
+    "account_lastApplicationsSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "List of the last applications:"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Соңғы өтінімдердің тізімі:"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вот список ваших последних заявок в вузы:"
+          }
+        }
+      }
+    },
     "account_mainTab" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -503,6 +572,75 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Главная"
+          }
+        }
+      }
+    },
+    "account_mainTabAdviceSection" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Here are a few tips to get started:"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бастау үшін бірнеше кеңес:"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вот несколько советов, чтобы начать:"
+          }
+        }
+      }
+    },
+    "account_mainTabAdviceSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This section is your personal dashboard. Once you add a university to your list, you will be able to track the progress of your application.\\n* All universities will require you to answer general questions in the application form. To apply to a university, go to the University Search section.\\n* Once you add a university, you will be able to complete and submit your application in the My Universities section.\\n\\nWe are always ready to help you at every step! If you have any questions, you can contact our Applicant Support Center or reach out to us at any time."
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бұл бөлім — сіздің жеке басқару тақтаңыз. Университетті тізіміңізге қосқаннан кейін, өтініміңіздің барысын бақылай аласыз.\\n• Барлық университеттер өтінім формасында жалпы сұрақтарға жауап беруді талап етеді. Университетке өтініш беру үшін Университеттерді іздеу бөліміне өтіңіз.\\n• Университетті қосқаннан кейін, Менің университеттерім бөлімінде өтініміңізді толтырып, жібере аласыз.\\n\\nБіз әр қадамда сізге көмектесуге дайынбыз! Егер сұрақтарыңыз болса, Өтініш берушілерді қолдау орталығы арқылы немесе кез келген уақытта бізбен байланыса аласыз."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "* Этот раздел — ваша личная панель. После того как вы добавите вуз в список, вы сможете отслеживать прогресс своей заявки.\\n* Все вузы потребуют от вас ответов на общие вопросы в анкете. Для подачи заявки в вуз перейдите в раздел Поиск вузов.\\n* Как только вы добавите вуз, сможете завершить и отправить вашу заявку в разделе Мои вузы.\\n\\nМы всегда готовы помочь вам на каждом шаге! Если у вас возникнут вопросы, вы можете обратиться в наш Центр поддержки абитуриентов или связаться с нами в любое время."
+          }
+        }
+      }
+    },
+    "account_mainTabWelcomeMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Congratulations on taking the first step toward admission to one of the best universities in Kazakhstan!\\nHere, you will be able to choose an educational institution, submit your application, and track the entire admission process."
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстандағы ең үздік университеттердің біріне түсу жолындағы алғашқы қадамыңызбен құттықтаймыз!\\nМұнда сіз оқу орнын таңдап, өтінім беріп, қабылдау процесінің толық барысын бақылай аласыз."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поздравляем вас с первым шагом на пути к поступлению в один из лучших вузов Казахстана!\\nЗдесь вы сможете выбрать учебное заведение,подать документы и отслеживать весь процесс поступления."
           }
         }
       }
@@ -852,6 +990,121 @@
         }
       }
     },
+    "article_articleNavigatorSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Admission Navigator for University Applicants"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университетке түсушілерге арналған қабылдау навигаторы"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Навигатор поступления для абитуриентов вузов"
+          }
+        }
+      }
+    },
+    "article_moreToRead" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More to Read"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қосымша оқу үшін"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Читай так же"
+          }
+        }
+      }
+    },
+    "articles_article" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Article"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мақала"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Статьи"
+          }
+        }
+      }
+    },
+    "articles_noNewsInThisCategory" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No news in this category"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бұл санатта жаңалықтар жоқ"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет новостей в этой категории"
+          }
+        }
+      }
+    },
+    "articles_showAllArticles" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show All Articles"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлық мақалаларды көрсету"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать все новости"
+          }
+        }
+      }
+    },
     "common_add" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -871,6 +1124,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Добавить"
+          }
+        }
+      }
+    },
+    "common_apply" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apply"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Өтініш беру"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Применить"
           }
         }
       }
@@ -917,6 +1193,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Поиск"
+          }
+        }
+      }
+    },
+    "common_budget" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бюджетный"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бюджет"
           }
         }
       }
@@ -990,6 +1289,29 @@
         }
       }
     },
+    "common_code" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Код"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Код"
+          }
+        }
+      }
+    },
     "common_confirm" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1009,6 +1331,75 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Подтвердить"
+          }
+        }
+      }
+    },
+    "common_contacts" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contacts"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Байланыстар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Контакты"
+          }
+        }
+      }
+    },
+    "common_contract" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contract"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ақылы"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Платное"
+          }
+        }
+      }
+    },
+    "common_current" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ағымдағы"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "нынешнюю"
           }
         }
       }
@@ -1078,6 +1469,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Файлы"
+          }
+        }
+      }
+    },
+    "common_filter" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сүзгі"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фильтр"
+          }
+        }
+      }
+    },
+    "common_hide" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жасыру"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Свернуть"
           }
         }
       }
@@ -1174,6 +1611,29 @@
         }
       }
     },
+    "common_none" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кез келген"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Любое"
+          }
+        }
+      }
+    },
     "common_ok" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1216,6 +1676,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Номер Телефона"
+          }
+        }
+      }
+    },
+    "common_remove" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жою"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить"
           }
         }
       }
@@ -1289,6 +1772,29 @@
         }
       }
     },
+    "common_show" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Көрсету"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Развернуть"
+          }
+        }
+      }
+    },
     "common_sort" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1308,6 +1814,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Сортировка"
+          }
+        }
+      }
+    },
+    "common_start" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бастау"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начать"
           }
         }
       }
@@ -1377,6 +1906,1455 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Тип"
+          }
+        }
+      }
+    },
+    "common_year" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Year"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жыл"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Год"
+          }
+        }
+      }
+    },
+    "debug_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қате"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка"
+          }
+        }
+      }
+    },
+    "debug_limitPassed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Request timed out"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сұраныс уақыты аяқталды"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Превышено время ожидания"
+          }
+        }
+      }
+    },
+    "debug_logInAgain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log In again"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қайта кіру"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Войдите снова"
+          }
+        }
+      }
+    },
+    "debug_networkLost" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network Connection Lost"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Желі байланысы үзілді"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Проверьте подключение к интернету"
+          }
+        }
+      }
+    },
+    "debug_noConnection" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No internet connection"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Интернетке қосылу жоқ"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет соединения"
+          }
+        }
+      }
+    },
+    "debug_noResponseTryLater" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Response try again later"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жауап жоқ, кейінірек қайта көріңіз"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сервер не отвечает. Попробуйте позже"
+          }
+        }
+      }
+    },
+    "debug_requestError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Request Error"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сұраныс қатесі"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка запроса"
+          }
+        }
+      }
+    },
+    "debug_serverError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server Error"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сервер қатесі"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка сервера"
+          }
+        }
+      }
+    },
+    "debug_sessionExpired" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Session has expired"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сессияның мерзімі аяқталды"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сессия истекла"
+          }
+        }
+      }
+    },
+    "debug_tryLater" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try later"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кейінірек көріңіз"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Попробуйте позже"
+          }
+        }
+      }
+    },
+    "debug_useThisCode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use code 123456 for beta testing"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бета тестілеу үшін 123456 кодын пайдаланыңыз"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Для бета теста используйте код 123456"
+          }
+        }
+      }
+    },
+    "main_academicTabProfessions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "University majors"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет мамандықтары"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профессии вузов"
+          }
+        }
+      }
+    },
+    "main_academicTabProgramCategories" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "University Fields"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет бағыттары"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Направления вузов"
+          }
+        }
+      }
+    },
+    "main_academicTabTitleCountry" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "of Kazakhstan"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстанның"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Казахстана"
+          }
+        }
+      }
+    },
+    "main_academicTabTitleMain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Higher education\\ninstitutions"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жоғары білім\\nмекемелері"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Высшие учебные\\nзаведения"
+          }
+        }
+      }
+    },
+    "main_academicTabUniversities" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Universities"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттер"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вузы"
+          }
+        }
+      }
+    },
+    "main_careersTabTitleMain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apply to universities\\n"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттерге өтініш беру\\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поступи в вузы\\n"
+          }
+        }
+      }
+    },
+    "main_footerDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kazakhstan is a country of great opportunities for higher education. As of 2025, there are over 130 universities in Kazakhstan. These include 40 public institutions, of which 15 are universities, 10 are academies, and 5 are institutes. There are also around 90 private educational organizations. About 500,000 students study at universities across the country. In 2025, more than 70,000 government-funded spots are available for admission. The platform allows applicants of 2025 to compare and choose universities, explore academic programs, take career guidance tests, and assess their chances of admission. A complete guide for applicants applying to universities in Kazakhstan."
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстан — жоғары білім алуға үлкен мүмкіндіктер елі. 2025 жылғы жағдай бойынша Қазақстанда 130-дан астам университет бар. Олардың ішінде 40 мемлекеттік оқу орны бар, оның ішінде 15 университет, 10 академия және 5 институт. Сонымен қатар шамамен 90 жеке білім беру ұйымы бар. Ел бойынша университеттерде шамамен 500 000 студент оқиды. 2025 жылы қабылдау үшін 70 000-нан астам мемлекеттік грант бөлінген.\\nПлатформа 2025 жылғы талапкерлерге университеттерді салыстырып, таңдауға, білім беру бағдарламаларын зерттеуге, кәсіби бағдар тесттерінен өтуге және оқуға түсу мүмкіндіктерін бағалауға мүмкіндік береді.\\nҚазақстан университеттеріне түсетін талапкерлерге арналған толық нұсқаулық."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Казахстан — страна потрясающих возможностей для получения высшего образования. По состоянию\n        на 2025 год в Казахстане насчитывается более 130 вузов. Это 40 государственных учебных заведений, из которых 15 — университеты, 10 — академии, и 5 — институтов. Также есть около 90 частных образовательных организаций. В казахстанских вузах обучается порядка 500 тысяч студентов. В 2025 году в университетах Казахстана предусмотрено более 70 тыс. бюджетных мест для приема. Сайт предоставляет абитуриенту 2025 возможность сравнить и выбрать вузы, программы образования, пройти профориентацию и оценить свои шансы поступить. Полный справочник абитуриента для поступающих в вузы Казахстана."
+          }
+        }
+      }
+    },
+    "main_footerPercentageLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Education in Kazakhstan"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстандағы білім беру"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Образование в Казахстане"
+          }
+        }
+      }
+    },
+    "main_footerPercentageSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accessible quality education for all"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлығы үшін қолжетімді сапалы білім"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доступное качественное образование для всех"
+          }
+        }
+      }
+    },
+    "main_footerPrivateUnis" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Private Universities"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жеке университеттер"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "частных вузов"
+          }
+        }
+      }
+    },
+    "main_footerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Higher education\\nin Kazakhstan"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстандағы жоғары білім"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Высшее образование\\nв Казахстане"
+          }
+        }
+      }
+    },
+    "main_headerPrograms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programs"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бағдарламалар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Программы"
+          }
+        }
+      }
+    },
+    "main_headerTitleMain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Admission pathway\\n"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қабылдау жолы\\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Траектория поступления\\n"
+          }
+        }
+      }
+    },
+    "main_headerTitleSecondary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "in Kazakhstan universities"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстан университеттерінде"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "в вузы Казахстана"
+          }
+        }
+      }
+    },
+    "main_headerUnis" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Universities"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттер"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вузы"
+          }
+        }
+      }
+    },
+    "main_journalTitleMain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Journal EduConnect\\n"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EduConnect журналы\\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Журнал Educonnect\\n"
+          }
+        }
+      }
+    },
+    "main_journalTitleSecondary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "for applicants"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "талапкерлер үшін"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "для абитуриента"
+          }
+        }
+      }
+    },
+    "main_programsShowAll" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show all bachelor’s programs"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлық бакалавриат бағдарламаларын көрсету"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать все программы бакалавриата"
+          }
+        }
+      }
+    },
+    "main_programsTitleMain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Higher education\\n"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жоғары білім\\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Направления высшего\\n"
+          }
+        }
+      }
+    },
+    "main_programTitleSecondary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "in Kazakhstan"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстанда"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "образования в Казахстане"
+          }
+        }
+      }
+    },
+    "main_servicesTabProfessionOptions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Career choice"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандық таңдау"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбор профессии"
+          }
+        }
+      }
+    },
+    "main_servicesTabTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Services for\\nApplicants"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Талапкерлерге арналған\\nқызметтер"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сервисы для\\nпоступающих"
+          }
+        }
+      }
+    },
+    "main_servicesTabUniversityHelp" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help choosing a university"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет таңдауға көмек"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помощь в выборе вуза"
+          }
+        }
+      }
+    },
+    "main_showAllProfessions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show all profession"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлық мамандықтарды көрсету"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать все профессии вузов"
+          }
+        }
+      }
+    },
+    "main_showAllPrograms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show All Programs"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлық бағдарламаларды көрсету"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать все программы вузов"
+          }
+        }
+      }
+    },
+    "main_showAllUniversities" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show All universities"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлық университеттерді көрсету"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать все наши вузы"
+          }
+        }
+      }
+    },
+    "main_stepsChooseENT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose\\nENT"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ЕНТ-ны\\nтаңдау"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбери\\nЕНТ"
+          }
+        }
+      }
+    },
+    "main_stepsChooseProfession" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose\\nProfession"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандықты\\nтаңдау"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбери\\nпрофессию"
+          }
+        }
+      }
+    },
+    "main_stepsChooseUni" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose\\nUni"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университетті\\nтаңдау"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбери\\nвуз"
+          }
+        }
+      }
+    },
+    "main_stepsHideSteps" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide Steps"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қадамдарды жасыру"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скрыть все шаги"
+          }
+        }
+      }
+    },
+    "main_stepsShowAllSteps" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show All Steps"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлық қадамдарды көрсету"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Развернуть все шаги"
+          }
+        }
+      }
+    },
+    "profession_aboutProfession" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About Profession"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандық туралы"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "О профессии"
+          }
+        }
+      }
+    },
+    "profession_footerSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Getting admitted is now easier — with the “Postupi Online Kazakhstan” platform! The service is powered by an AI-based recommendation system that analyzes your interests and suggests universities that match your field, level of preparation, and other criteria. All universities on the platform have a valid state license and are accredited for higher education programs.\n\nThe site provides detailed and up-to-date information about public and private universities in Kazakhstan — including universities, institutes, and academies across different regions, from Almaty and Astana to Shymkent and Ust-Kamenogorsk. You can sort universities by the average UNT score for 2025 to see where you have a better chance of admission. Historical data is also available: passing scores, competition, tuition fees, and the number of funded and paid spots. This helps you evaluate your chances and choose the best option for higher education.\n\nIf you want to focus on a specific university, use the convenient feature"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Енді оқуға түсу оңайырақ — «Поступи Онлайн Қазақстан» платформасымен!\\nБұл сервис жасанды интеллект негізіндегі ұсыныс жүйесі арқылы жұмыс істейді, ол сіздің қызығушылықтарыңызды талдап, бағытыңызға, дайындық деңгейіңізге және басқа да критерийлерге сәйкес келетін университеттерді ұсынады. Платформада ұсынылған барлық университеттердің мемлекеттік лицензиясы бар және жоғары білім беру бағдарламалары бойынша аккредиттелген.\\n\\nСайтта Қазақстандағы мемлекеттік және жеке университеттер туралы толық әрі өзекті ақпарат берілген — Алматы мен Астанадан бастап Шымкент пен Өскеменге дейінгі түрлі аймақтардағы университеттер, институттар және академиялар қамтылған. Сіз 2025 жылғы орташа ҰБТ балы бойынша университеттерді сұрыптап, қай оқу орнына түсу мүмкіндігіңіз жоғары екенін анықтай аласыз. Сонымен қатар өткен жылдардың деректері де қолжетімді: өту балдары, конкурс, оқу ақысы, грант және ақылы орындар саны. Бұл сізге өз мүмкіндігіңізді бағалап, жоғары білім алу үшін ең тиімді нұсқаны таңдауға көмектеседі.\\n\\nЕгер сіз белгілі бір университетке назар аударғыңыз келсе, ыңғайлы мүмкіндікті пайдаланыңыз"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования.  Если ты хочешь сфокусироваться на каком-то конкретном вузе, используй удобную функцию"
+          }
+        }
+      }
+    },
+    "profession_footerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Career selection in the guide"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нұсқаулықтағы мамандық таңдау"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбор профессии в справочнике"
+          }
+        }
+      }
+    },
+    "profession_headerSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complete A–Z catalog of professions"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандықтардың толық A–Z каталогы"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Полный каталог профессий от A до Я"
+          }
+        }
+      }
+    },
+    "profession_profession" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profession"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандық"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профессия"
+          }
+        }
+      }
+    },
+    "profession_professionPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Professions"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандықтар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профессии"
+          }
+        }
+      }
+    },
+    "profession_relatedProf" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Related Professions"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ұқсас мамандықтар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Похожие профессии"
+          }
+        }
+      }
+    },
+    "profession_setEnt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set ENT"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ЕНТ-ны орнату"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Укажите ЕНТ"
+          }
+        }
+      }
+    },
+    "profession_setEntSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Specify UNT results using ranges"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ҰБТ нәтижелерін диапазондар арқылы көрсету"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Укажи результаты ЕНТ используя диапазоны"
+          }
+        }
+      }
+    },
+    "program_aboutProgram" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About Program"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бағдарлама туралы"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "О Программе"
+          }
+        }
+      }
+    },
+    "program_byCategoryError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No programs in this category. You can try searching in other categories."
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бұл санатта бағдарламалар жоқ. Басқа санаттардан іздеп көріңіз."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Программ в этой категории нету. Вы можете попробовать поискать в других категориях."
+          }
+        }
+      }
+    },
+    "program_byCategoryFooterSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose a program that interests you and get a list of universities offering it. You’ll find out which universities have the program, what exams are required, the minimum and passing scores, and the tuition cost."
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қызықтыратын бағдарламаны таңдаңыз және оны ұсынатын университеттердің тізімін алыңыз. Қай университеттерде бұл бағдарлама бар екенін, қандай емтихандар қажет екенін, ең төменгі және өту балдарын, сондай-ақ оқу құнын біле аласыз."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбери интересную тебе программу обучения и получи список университетов с этой программой. Ты узнаешь в каких вузах есть соответствующие программы, какие требуются экзамены, минимальные и проходные баллы, стоимость обучения."
+          }
+        }
+      }
+    },
+    "program_byCategoryTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programs in this category"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бұл санаттағы бағдарламалар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Программы категории"
+          }
+        }
+      }
+    },
+    "program_educationalPrograms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Educational Programs"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Білім беру бағдарламалары"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Программы обучения"
+          }
+        }
+      }
+    },
+    "program_footerSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose a field of study that interests you and get a list of bachelor’s and specialist programs in that area. You’ll find out which universities offer these programs, what exams are required, the minimum and passing scores, and the tuition cost. In this list, you can explore areas of activity, industries, and fields of study, and learn the details of admission."
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қызығушылық танытқан оқу бағытыңызды таңдаңыз және сол сала бойынша бакалавр және мамандық бағдарламаларының тізімін алыңыз. Сіз қай университеттер бұл бағдарламаларды ұсынатынын, қандай емтихандар талап етілетінін, ең төменгі және өту балдарын, сондай-ақ оқу ақысын білесіз. Бұл тізімде сіз қызмет салаларын, индустрияларды және оқу бағыттарын зерттеп, қабылдау шарттары туралы толық ақпарат ала аласыз."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбери интересное тебе направление образования в вузе и получи список программ бакалавриата и специалитета по требуемому направлению обучения. Ты узнаешь в каких вузах есть соответствующие программы по направлению подготовки, какие требуются экзамены, минимальные и проходные баллы, стоимость обучения. В этом списке ты можешь найти интересную сферу деятельности, отрасль, направление обучения и узнать детали поступления в вуз."
+          }
+        }
+      }
+    },
+    "program_footerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fields of study in bachelor’s and specialist programs"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бакалавриат және мамандық бағдарламаларындағы оқу бағыттары"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Направления обучения в бакалавриате и специалитете"
+          }
+        }
+      }
+    },
+    "program_headerFields" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fields"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Өрістер"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Направлений"
+          }
+        }
+      }
+    },
+    "program_headerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for bachelor’s and specialist programs in universities by field of study:"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттердегі бакалавриат және мамандық бағдарламаларын оқу бағыты бойынша іздеу"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск программ бакалавриата и специалитета в вузах по направлениям образования: "
+          }
+        }
+      }
+    },
+    "program_relatedProfessions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Related Professions"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ұқсас мамандықтар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Связанные Профессии"
+          }
+        }
+      }
+    },
+    "program_similarPrograms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Similar Programs"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ұқсас бағдарламалар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Похожие программы"
           }
         }
       }
@@ -2251,6 +4229,1363 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Рассмотрена"
+          }
+        }
+      }
+    },
+    "university_aboutUni" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About University"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет туралы"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Об Университете"
+          }
+        }
+      }
+    },
+    "university_addedFilters" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Added Filters"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қосылған сүзгілер"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавленные фильтры:"
+          }
+        }
+      }
+    },
+    "university_admission" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Admission"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қабылдау"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "поступления"
+          }
+        }
+      }
+    },
+    "university_andMore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "And More"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Және тағы басқа"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "И еще"
+          }
+        }
+      }
+    },
+    "university_application" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Application"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Өтініш"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "заявку"
+          }
+        }
+      }
+    },
+    "university_averageScoreENT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average ENT Score"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Орташа ҰБТ балы"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Средний балл ЕНТ"
+          }
+        }
+      }
+    },
+    "university_budgetPlaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget Places"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Грант орындары"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Места бюджет"
+          }
+        }
+      }
+    },
+    "university_filterUnis" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter Universities"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттерді сүзу"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фильтр по вузам"
+          }
+        }
+      }
+    },
+    "university_filterWith" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "With"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Есть"
+          }
+        }
+      }
+    },
+    "university_filterWithout" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Without"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жоқ"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет"
+          }
+        }
+      }
+    },
+    "university_filterWordsCity" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "City"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қала"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Город"
+          }
+        }
+      }
+    },
+    "university_filterWordsDormitory" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dormitory"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жатақхана"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Общежитие"
+          }
+        }
+      }
+    },
+    "university_filterWordsMilitaryDepartment" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Military Department"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Әскери кафедра"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Военная кафедра"
+          }
+        }
+      }
+    },
+    "university_filterWordsPrice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Price"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баға"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цена"
+          }
+        }
+      }
+    },
+    "university_filterWordsProfession" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profession"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандық"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профессия"
+          }
+        }
+      }
+    },
+    "university_filterWordsTypeOfUni" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type of University"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет түрі"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тип вуза"
+          }
+        }
+      }
+    },
+    "university_footerSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Getting admitted is now easier — with the “Postupi Online Kazakhstan” platform! The service is powered by an AI-based recommendation system that analyzes your interests and suggests universities that match your field, level of preparation, and other criteria. All universities on the platform have a valid state license and are accredited for higher education programs.\n\nThe platform provides detailed and up-to-date information about public and private universities in Kazakhstan — including universities, institutes, and academies across different regions, from Almaty and Astana to Shymkent and Ust-Kamenogorsk. You can sort universities by the average UNT score for 2025 to see where you have a better chance of admission. Historical data is also available: passing scores, competition, tuition fees, and the number of funded and paid spots. This helps you evaluate your chances and choose the most suitable option for higher education."
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қабылдау енді әлдеқайда жеңіл — «Поступи Онлайн Казахстан» платформасымен! Бұл сервис жасанды интеллект негізіндегі ұсыным жүйесі арқылы жұмыс істейді: ол сіздің қызығушылықтарыңызды талдап, сіздің бағытыңызға, дайындық деңгейіңізге және басқа да критерийлерге сәйкес келетін университеттерді ұсынады. Платформадағы барлық университеттердің мемлекеттік лицензиясы бар және жоғары білім беру бағдарламалары бойынша аккредиттелген.\n\nПлатформа Қазақстандағы мемлекеттік және жеке жоғары оқу орындары туралы толық әрі өзекті ақпарат ұсынады — оның ішінде еліміздің әртүрлі өңірлеріндегі университеттер, институттар және академиялар (Алматы, Астана, Шымкент, Өскемен және т.б.). Сіз 2025 жылғы орташа ҰБТ балы бойынша университеттерді сұрыптап, қай жерге түсу мүмкіндігіңіз жоғары екенін көре аласыз. Сондай-ақ өткен жылдардың деректері де қолжетімді: өту балдары, конкурс деңгейі, оқу ақысы, грант және ақылы орындар саны. Бұл сізге өз мүмкіндіктеріңізді бағалап, жоғары білім алу үшін ең қолайлы нұсқаны таңдауға көмектеседі."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования. "
+          }
+        }
+      }
+    },
+    "university_footerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "List of universities in Kazakhstan by average score and tuition"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстандағы университеттер тізімі (орташа балл және оқу ақысы бойынша)"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Список вузов Казахстана по среднему баллу, стоимости обучения"
+          }
+        }
+      }
+    },
+    "university_headerSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Universities, institutes, academies"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттер, институттар, академиялар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеты, институты, академии"
+          }
+        }
+      }
+    },
+    "university_headerTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kazakhstan universities:"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстан университеттері:"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вузы Казахстана:"
+          }
+        }
+      }
+    },
+    "university_militaryDepartmentCenterShort" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Military Dep. Center"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Әскери каф. орталығы"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Воен. уч. центр"
+          }
+        }
+      }
+    },
+    "university_militaryDepartmentShort" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Military Dep."
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Әскери каф."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Воен. уч."
+          }
+        }
+      }
+    },
+    "university_paidPlaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contract Places"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ақылы орындар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Места платно"
+          }
+        }
+      }
+    },
+    "university_priceNotSet" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Price not set"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баға көрсетілмеген"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цена не указана"
+          }
+        }
+      }
+    },
+    "university_scoreBudget" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget Score"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Грант балы"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бал бюджет"
+          }
+        }
+      }
+    },
+    "university_scorePaid" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contract Score"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ақылы балл"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бал платно"
+          }
+        }
+      }
+    },
+    "university_sortByDefault" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By Default"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Әдепкі бойынша"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По умолчанию"
+          }
+        }
+      }
+    },
+    "university_sortByNameFromAToZ" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By name from A-Z"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Атауы бойынша (А–Я)"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По названию А-Я"
+          }
+        }
+      }
+    },
+    "university_sortByNameFromZToA" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By name from Z-A"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Атауы бойынша (Я–А)"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По названию Я-А"
+          }
+        }
+      }
+    },
+    "university_sortByPriceDown" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By Price ↓"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баға бойынша ↓"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По цене ↓"
+          }
+        }
+      }
+    },
+    "university_sortByPriceUp" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "By Price ↑"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баға бойынша ↑"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По цене ↑"
+          }
+        }
+      }
+    },
+    "university_uniFor" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "University For"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кімдерге арналған университет"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "вуз для"
+          }
+        }
+      }
+    },
+    "university_university" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "University"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет"
+          }
+        }
+      }
+    },
+    "words_budgetPlaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget Places"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Грант орындары"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бюджетных мест"
+          }
+        }
+      }
+    },
+    "words_budgetPlacesShort" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget P."
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Грант орын."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бюдж. мест"
+          }
+        }
+      }
+    },
+    "words_calendar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendar"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Күнтізбе"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Календарь"
+          }
+        }
+      }
+    },
+    "words_category" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Category"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Санат"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Категория"
+          }
+        }
+      }
+    },
+    "words_cityPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cities"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қалалар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "городов"
+          }
+        }
+      }
+    },
+    "words_education" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Education"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Білім беру"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обучение"
+          }
+        }
+      }
+    },
+    "words_facultyPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faculties"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Факультеттер"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Факультеты"
+          }
+        }
+      }
+    },
+    "words_freePlaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Free Places"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тегін орындар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Свободных мест"
+          }
+        }
+      }
+    },
+    "words_from" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бастап"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "От"
+          }
+        }
+      }
+    },
+    "words_fromAtoZ" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From A-Z"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "А-дан Я-ға дейін"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "От А до Я"
+          }
+        }
+      }
+    },
+    "words_fromZtoA" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From Z-A"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Я-дан А-ға дейін"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "От Я до А"
+          }
+        }
+      }
+    },
+    "words_governmentalKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Governmental"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мемлекеттік"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Государственный"
+          }
+        }
+      }
+    },
+    "words_notFound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Found"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Табылмады"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ничего не найдено"
+          }
+        }
+      }
+    },
+    "words_paidPlaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contract Places"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ақылы орындар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Платных мест"
+          }
+        }
+      }
+    },
+    "words_paidPlacesShort" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contract P."
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ақылы орын."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Плат. мест"
+          }
+        }
+      }
+    },
+    "words_price" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Price"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баға"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Стоимость"
+          }
+        }
+      }
+    },
+    "words_privateKey" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Private"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жеке"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Частный"
+          }
+        }
+      }
+    },
+    "words_programPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programs"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бағдарламалар"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Программ"
+          }
+        }
+      }
+    },
+    "words_searchSomwhereElse" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Somewhere Else"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Басқа жерден іздеңіз"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поищите где нибудь еше"
+          }
+        }
+      }
+    },
+    "words_tengePerYear" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tenge per year"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жылына теңге"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тенге в год"
+          }
+        }
+      }
+    },
+    "words_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Атауы"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Название"
+          }
+        }
+      }
+    },
+    "words_to" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дейін"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "До"
+          }
+        }
+      }
+    },
+    "words_tryAgain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try Again"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қайта көріңіз"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Попробуйте еще раз"
+          }
+        }
+      }
+    },
+    "words_tryOtherSearch" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try Other Search"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Басқа іздеуді қолданып көріңіз"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Попробуйте другой поиск"
+          }
+        }
+      }
+    },
+    "words_type" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Түрі"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тип"
+          }
+        }
+      }
+    },
+    "words_universityPlural" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Universities"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттер"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вузов"
           }
         }
       }
