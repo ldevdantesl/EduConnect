@@ -10,6 +10,12 @@
             "value" : "Applications are not found, try applying first and come back (Tap to look for university)"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Өтінімдер табылмады. Алдымен өтінім беріп көріңіз, содан кейін қайта оралыңыз (университетті іздеу үшін басыңыз)."
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -510,6 +516,12 @@
             "value" : "Last Applications"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Соңғы өтінімдер"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -525,6 +537,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "List of the last applications:"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Соңғы өтінімдердің тізімі:"
           }
         },
         "ru" : {
@@ -567,6 +585,12 @@
             "value" : "Here are a few tips to get started:"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бастау үшін бірнеше кеңес:"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -584,6 +608,12 @@
             "value" : "This section is your personal dashboard. Once you add a university to your list, you will be able to track the progress of your application.\\n* All universities will require you to answer general questions in the application form. To apply to a university, go to the University Search section.\\n* Once you add a university, you will be able to complete and submit your application in the My Universities section.\\n\\nWe are always ready to help you at every step! If you have any questions, you can contact our Applicant Support Center or reach out to us at any time."
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бұл бөлім — сіздің жеке басқару тақтаңыз. Университетті тізіміңізге қосқаннан кейін, өтініміңіздің барысын бақылай аласыз.\\n• Барлық университеттер өтінім формасында жалпы сұрақтарға жауап беруді талап етеді. Университетке өтініш беру үшін Университеттерді іздеу бөліміне өтіңіз.\\n• Университетті қосқаннан кейін, Менің университеттерім бөлімінде өтініміңізді толтырып, жібере аласыз.\\n\\nБіз әр қадамда сізге көмектесуге дайынбыз! Егер сұрақтарыңыз болса, Өтініш берушілерді қолдау орталығы арқылы немесе кез келген уақытта бізбен байланыса аласыз."
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -599,6 +629,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Congratulations on taking the first step toward admission to one of the best universities in Kazakhstan!\\nHere, you will be able to choose an educational institution, submit your application, and track the entire admission process."
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстандағы ең үздік университеттердің біріне түсу жолындағы алғашқы қадамыңызбен құттықтаймыз!\\nМұнда сіз оқу орнын таңдап, өтінім беріп, қабылдау процесінің толық барысын бақылай аласыз."
           }
         },
         "ru" : {
@@ -963,6 +999,12 @@
             "value" : "Admission Navigator for University Applicants"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университетке түсушілерге арналған қабылдау навигаторы"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -980,9 +1022,15 @@
             "value" : "More to Read"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қосымша оқу үшін"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Читай так же"
           }
         }
@@ -997,9 +1045,15 @@
             "value" : "Article"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мақала"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Статьи"
           }
         }
@@ -1014,9 +1068,15 @@
             "value" : "No news in this category"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бұл санатта жаңалықтар жоқ"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Нет новостей в этой категории"
           }
         }
@@ -1031,9 +1091,15 @@
             "value" : "Show All Articles"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлық мақалаларды көрсету"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Показать все новости"
           }
         }
@@ -1071,9 +1137,15 @@
             "value" : "Apply"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Өтініш беру"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Применить"
           }
         }
@@ -1132,6 +1204,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Budget"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бюджетный"
           }
         },
         "ru" : {
@@ -1220,9 +1298,15 @@
             "value" : "Code"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Код"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Код"
           }
         }
@@ -1260,6 +1344,12 @@
             "value" : "Contacts"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Байланыстар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1275,6 +1365,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contract"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ақылы"
           }
         },
         "ru" : {
@@ -1294,9 +1390,15 @@
             "value" : "Current"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ағымдағы"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "нынешнюю"
           }
         }
@@ -1380,9 +1482,15 @@
             "value" : "Filter"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сүзгі"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Фильтр"
           }
         }
@@ -1397,9 +1505,15 @@
             "value" : "Hide"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жасыру"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Свернуть"
           }
         }
@@ -1506,9 +1620,15 @@
             "value" : "None"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кез келген"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Любое"
           }
         }
@@ -1569,9 +1689,15 @@
             "value" : "Remove"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жою"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Удалить"
           }
         }
@@ -1655,9 +1781,15 @@
             "value" : "Show"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Көрсету"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Развернуть"
           }
         }
@@ -1695,9 +1827,15 @@
             "value" : "Start"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бастау"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Начать"
           }
         }
@@ -1781,9 +1919,15 @@
             "value" : "Year"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жыл"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Год"
           }
         }
@@ -1798,9 +1942,15 @@
             "value" : "Error"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қате"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Ошибка"
           }
         }
@@ -1815,9 +1965,15 @@
             "value" : "Request timed out"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сұраныс уақыты аяқталды"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Превышено время ожидания"
           }
         }
@@ -1832,9 +1988,15 @@
             "value" : "Log In again"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қайта кіру"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Войдите снова"
           }
         }
@@ -1849,9 +2011,15 @@
             "value" : "Network Connection Lost"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Желі байланысы үзілді"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Проверьте подключение к интернету"
           }
         }
@@ -1866,9 +2034,15 @@
             "value" : "No internet connection"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Интернетке қосылу жоқ"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Нет соединения"
           }
         }
@@ -1883,9 +2057,15 @@
             "value" : "No Response try again later"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жауап жоқ, кейінірек қайта көріңіз"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Сервер не отвечает. Попробуйте позже"
           }
         }
@@ -1900,9 +2080,15 @@
             "value" : "Request Error"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сұраныс қатесі"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Ошибка запроса"
           }
         }
@@ -1917,9 +2103,15 @@
             "value" : "Server Error"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сервер қатесі"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Ошибка сервера"
           }
         }
@@ -1934,9 +2126,15 @@
             "value" : "Session has expired"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сессияның мерзімі аяқталды"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Сессия истекла"
           }
         }
@@ -1951,9 +2149,15 @@
             "value" : "Try later"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кейінірек көріңіз"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Попробуйте позже"
           }
         }
@@ -1968,16 +2172,19 @@
             "value" : "Use code 123456 for beta testing"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бета тестілеу үшін 123456 кодын пайдаланыңыз"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Для бета теста используйте код 123456"
           }
         }
       }
-    },
-    "Key" : {
-      "extractionState" : "manual"
     },
     "main_academicTabProfessions" : {
       "extractionState" : "manual",
@@ -1988,9 +2195,15 @@
             "value" : "University majors"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет мамандықтары"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Профессии вузов"
           }
         }
@@ -2005,9 +2218,15 @@
             "value" : "University Fields"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет бағыттары"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Направления вузов"
           }
         }
@@ -2022,9 +2241,15 @@
             "value" : "of Kazakhstan"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстанның"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Казахстана"
           }
         }
@@ -2039,9 +2264,15 @@
             "value" : "Higher education\\ninstitutions"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жоғары білім\\nмекемелері"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Высшие учебные\\nзаведения"
           }
         }
@@ -2056,9 +2287,15 @@
             "value" : "Universities"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттер"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Вузы"
           }
         }
@@ -2073,9 +2310,15 @@
             "value" : "Apply to universities\\n"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттерге өтініш беру\\n"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Поступи в вузы\\n"
           }
         }
@@ -2090,9 +2333,15 @@
             "value" : "Kazakhstan is a country of great opportunities for higher education. As of 2025, there are over 130 universities in Kazakhstan. These include 40 public institutions, of which 15 are universities, 10 are academies, and 5 are institutes. There are also around 90 private educational organizations. About 500,000 students study at universities across the country. In 2025, more than 70,000 government-funded spots are available for admission. The platform allows applicants of 2025 to compare and choose universities, explore academic programs, take career guidance tests, and assess their chances of admission. A complete guide for applicants applying to universities in Kazakhstan."
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстан — жоғары білім алуға үлкен мүмкіндіктер елі. 2025 жылғы жағдай бойынша Қазақстанда 130-дан астам университет бар. Олардың ішінде 40 мемлекеттік оқу орны бар, оның ішінде 15 университет, 10 академия және 5 институт. Сонымен қатар шамамен 90 жеке білім беру ұйымы бар. Ел бойынша университеттерде шамамен 500 000 студент оқиды. 2025 жылы қабылдау үшін 70 000-нан астам мемлекеттік грант бөлінген.\\nПлатформа 2025 жылғы талапкерлерге университеттерді салыстырып, таңдауға, білім беру бағдарламаларын зерттеуге, кәсіби бағдар тесттерінен өтуге және оқуға түсу мүмкіндіктерін бағалауға мүмкіндік береді.\\nҚазақстан университеттеріне түсетін талапкерлерге арналған толық нұсқаулық."
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Казахстан — страна потрясающих возможностей для получения высшего образования. По состоянию\n        на 2025 год в Казахстане насчитывается более 130 вузов. Это 40 государственных учебных заведений, из которых 15 — университеты, 10 — академии, и 5 — институтов. Также есть около 90 частных образовательных организаций. В казахстанских вузах обучается порядка 500 тысяч студентов. В 2025 году в университетах Казахстана предусмотрено более 70 тыс. бюджетных мест для приема. Сайт предоставляет абитуриенту 2025 возможность сравнить и выбрать вузы, программы образования, пройти профориентацию и оценить свои шансы поступить. Полный справочник абитуриента для поступающих в вузы Казахстана."
           }
         }
@@ -2107,9 +2356,15 @@
             "value" : "Education in Kazakhstan"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстандағы білім беру"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Образование в Казахстане"
           }
         }
@@ -2124,9 +2379,15 @@
             "value" : "Accessible quality education for all"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлығы үшін қолжетімді сапалы білім"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Доступное качественное образование для всех"
           }
         }
@@ -2141,9 +2402,15 @@
             "value" : "Private Universities"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жеке университеттер"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "частных вузов"
           }
         }
@@ -2158,9 +2425,15 @@
             "value" : "Higher education\\nin Kazakhstan"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстандағы жоғары білім"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Высшее образование\\nв Казахстане"
           }
         }
@@ -2175,9 +2448,15 @@
             "value" : "Programs"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бағдарламалар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Программы"
           }
         }
@@ -2192,9 +2471,15 @@
             "value" : "Admission pathway\\n"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қабылдау жолы\\n"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Траектория поступления\\n"
           }
         }
@@ -2209,9 +2494,15 @@
             "value" : "in Kazakhstan universities"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстан университеттерінде"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "в вузы Казахстана"
           }
         }
@@ -2226,9 +2517,15 @@
             "value" : "Universities"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттер"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Вузы"
           }
         }
@@ -2243,9 +2540,15 @@
             "value" : "Journal EduConnect\\n"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EduConnect журналы\\n"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Журнал Educonnect\\n"
           }
         }
@@ -2260,9 +2563,15 @@
             "value" : "for applicants"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "талапкерлер үшін"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "для абитуриента"
           }
         }
@@ -2277,9 +2586,15 @@
             "value" : "Show all bachelor’s programs"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлық бакалавриат бағдарламаларын көрсету"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Показать все программы бакалавриата"
           }
         }
@@ -2294,9 +2609,15 @@
             "value" : "Higher education\\n"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жоғары білім\\n"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Направления высшего\\n"
           }
         }
@@ -2311,9 +2632,15 @@
             "value" : "in Kazakhstan"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстанда"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "образования в Казахстане"
           }
         }
@@ -2328,9 +2655,15 @@
             "value" : "Career choice"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандық таңдау"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Выбор профессии"
           }
         }
@@ -2345,9 +2678,15 @@
             "value" : "Services for\\nApplicants"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Талапкерлерге арналған\\nқызметтер"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Сервисы для\\nпоступающих"
           }
         }
@@ -2362,9 +2701,15 @@
             "value" : "Help choosing a university"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет таңдауға көмек"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Помощь в выборе вуза"
           }
         }
@@ -2379,9 +2724,15 @@
             "value" : "Show all profession"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлық мамандықтарды көрсету"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Показать все профессии вузов"
           }
         }
@@ -2396,9 +2747,15 @@
             "value" : "Show All Programs"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлық бағдарламаларды көрсету"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Показать все программы вузов"
           }
         }
@@ -2413,9 +2770,15 @@
             "value" : "Show All universities"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлық университеттерді көрсету"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Показать все наши вузы"
           }
         }
@@ -2430,9 +2793,15 @@
             "value" : "Choose\\nENT"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ЕНТ-ны\\nтаңдау"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Выбери\\nЕНТ"
           }
         }
@@ -2447,9 +2816,15 @@
             "value" : "Choose\\nProfession"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандықты\\nтаңдау"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Выбери\\nпрофессию"
           }
         }
@@ -2464,9 +2839,15 @@
             "value" : "Choose\\nUni"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университетті\\nтаңдау"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Выбери\\nвуз"
           }
         }
@@ -2481,9 +2862,15 @@
             "value" : "Hide Steps"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қадамдарды жасыру"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Скрыть все шаги"
           }
         }
@@ -2498,9 +2885,15 @@
             "value" : "Show All Steps"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлық қадамдарды көрсету"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Развернуть все шаги"
           }
         }
@@ -2515,9 +2908,15 @@
             "value" : "About Profession"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандық туралы"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "О профессии"
           }
         }
@@ -2532,9 +2931,15 @@
             "value" : "Getting admitted is now easier — with the “Postupi Online Kazakhstan” platform! The service is powered by an AI-based recommendation system that analyzes your interests and suggests universities that match your field, level of preparation, and other criteria. All universities on the platform have a valid state license and are accredited for higher education programs.\n\nThe site provides detailed and up-to-date information about public and private universities in Kazakhstan — including universities, institutes, and academies across different regions, from Almaty and Astana to Shymkent and Ust-Kamenogorsk. You can sort universities by the average UNT score for 2025 to see where you have a better chance of admission. Historical data is also available: passing scores, competition, tuition fees, and the number of funded and paid spots. This helps you evaluate your chances and choose the best option for higher education.\n\nIf you want to focus on a specific university, use the convenient feature"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Енді оқуға түсу оңайырақ — «Поступи Онлайн Қазақстан» платформасымен!\\nБұл сервис жасанды интеллект негізіндегі ұсыныс жүйесі арқылы жұмыс істейді, ол сіздің қызығушылықтарыңызды талдап, бағытыңызға, дайындық деңгейіңізге және басқа да критерийлерге сәйкес келетін университеттерді ұсынады. Платформада ұсынылған барлық университеттердің мемлекеттік лицензиясы бар және жоғары білім беру бағдарламалары бойынша аккредиттелген.\\n\\nСайтта Қазақстандағы мемлекеттік және жеке университеттер туралы толық әрі өзекті ақпарат берілген — Алматы мен Астанадан бастап Шымкент пен Өскеменге дейінгі түрлі аймақтардағы университеттер, институттар және академиялар қамтылған. Сіз 2025 жылғы орташа ҰБТ балы бойынша университеттерді сұрыптап, қай оқу орнына түсу мүмкіндігіңіз жоғары екенін анықтай аласыз. Сонымен қатар өткен жылдардың деректері де қолжетімді: өту балдары, конкурс, оқу ақысы, грант және ақылы орындар саны. Бұл сізге өз мүмкіндігіңізді бағалап, жоғары білім алу үшін ең тиімді нұсқаны таңдауға көмектеседі.\\n\\nЕгер сіз белгілі бір университетке назар аударғыңыз келсе, ыңғайлы мүмкіндікті пайдаланыңыз"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования.  Если ты хочешь сфокусироваться на каком-то конкретном вузе, используй удобную функцию"
           }
         }
@@ -2549,9 +2954,15 @@
             "value" : "Career selection in the guide"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нұсқаулықтағы мамандық таңдау"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Выбор профессии в справочнике"
           }
         }
@@ -2566,9 +2977,15 @@
             "value" : "Complete A–Z catalog of professions"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандықтардың толық A–Z каталогы"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Полный каталог профессий от A до Я"
           }
         }
@@ -2583,9 +3000,15 @@
             "value" : "Profession"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандық"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Профессия"
           }
         }
@@ -2600,9 +3023,15 @@
             "value" : "Professions"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандықтар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Профессии"
           }
         }
@@ -2617,9 +3046,15 @@
             "value" : "Related Professions"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ұқсас мамандықтар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Похожие профессии"
           }
         }
@@ -2634,9 +3069,15 @@
             "value" : "Set ENT"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ЕНТ-ны орнату"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Укажите ЕНТ"
           }
         }
@@ -2651,9 +3092,15 @@
             "value" : "Specify UNT results using ranges"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ҰБТ нәтижелерін диапазондар арқылы көрсету"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Укажи результаты ЕНТ используя диапазоны"
           }
         }
@@ -2668,9 +3115,15 @@
             "value" : "About Program"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бағдарлама туралы"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "О Программе"
           }
         }
@@ -2685,9 +3138,15 @@
             "value" : "No programs in this category. You can try searching in other categories."
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бұл санатта бағдарламалар жоқ. Басқа санаттардан іздеп көріңіз."
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Программ в этой категории нету. Вы можете попробовать поискать в других категориях."
           }
         }
@@ -2702,9 +3161,15 @@
             "value" : "Choose a program that interests you and get a list of universities offering it. You’ll find out which universities have the program, what exams are required, the minimum and passing scores, and the tuition cost."
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қызықтыратын бағдарламаны таңдаңыз және оны ұсынатын университеттердің тізімін алыңыз. Қай университеттерде бұл бағдарлама бар екенін, қандай емтихандар қажет екенін, ең төменгі және өту балдарын, сондай-ақ оқу құнын біле аласыз."
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Выбери интересную тебе программу обучения и получи список университетов с этой программой. Ты узнаешь в каких вузах есть соответствующие программы, какие требуются экзамены, минимальные и проходные баллы, стоимость обучения."
           }
         }
@@ -2719,9 +3184,15 @@
             "value" : "Programs in this category"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бұл санаттағы бағдарламалар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Программы категории"
           }
         }
@@ -2736,9 +3207,15 @@
             "value" : "Educational Programs"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Білім беру бағдарламалары"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Программы обучения"
           }
         }
@@ -2753,9 +3230,15 @@
             "value" : "Choose a field of study that interests you and get a list of bachelor’s and specialist programs in that area. You’ll find out which universities offer these programs, what exams are required, the minimum and passing scores, and the tuition cost. In this list, you can explore areas of activity, industries, and fields of study, and learn the details of admission."
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қызығушылық танытқан оқу бағытыңызды таңдаңыз және сол сала бойынша бакалавр және мамандық бағдарламаларының тізімін алыңыз. Сіз қай университеттер бұл бағдарламаларды ұсынатынын, қандай емтихандар талап етілетінін, ең төменгі және өту балдарын, сондай-ақ оқу ақысын білесіз. Бұл тізімде сіз қызмет салаларын, индустрияларды және оқу бағыттарын зерттеп, қабылдау шарттары туралы толық ақпарат ала аласыз."
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Выбери интересное тебе направление образования в вузе и получи список программ бакалавриата и специалитета по требуемому направлению обучения. Ты узнаешь в каких вузах есть соответствующие программы по направлению подготовки, какие требуются экзамены, минимальные и проходные баллы, стоимость обучения. В этом списке ты можешь найти интересную сферу деятельности, отрасль, направление обучения и узнать детали поступления в вуз."
           }
         }
@@ -2770,9 +3253,15 @@
             "value" : "Fields of study in bachelor’s and specialist programs"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бакалавриат және мамандық бағдарламаларындағы оқу бағыттары"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Направления обучения в бакалавриате и специалитете"
           }
         }
@@ -2787,9 +3276,15 @@
             "value" : "Fields"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Өрістер"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Направлений"
           }
         }
@@ -2804,9 +3299,15 @@
             "value" : "Search for bachelor’s and specialist programs in universities by field of study:"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттердегі бакалавриат және мамандық бағдарламаларын оқу бағыты бойынша іздеу"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Поиск программ бакалавриата и специалитета в вузах по направлениям образования: "
           }
         }
@@ -2821,9 +3322,15 @@
             "value" : "Related Professions"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ұқсас мамандықтар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Связанные Профессии"
           }
         }
@@ -2838,9 +3345,15 @@
             "value" : "Similar Programs"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ұқсас бағдарламалар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Похожие программы"
           }
         }
@@ -3729,9 +4242,15 @@
             "value" : "About University"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет туралы"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Об Университете"
           }
         }
@@ -3746,9 +4265,15 @@
             "value" : "Added Filters"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қосылған сүзгілер"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Добавленные фильтры:"
           }
         }
@@ -3763,9 +4288,15 @@
             "value" : "Admission"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қабылдау"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "поступления"
           }
         }
@@ -3780,9 +4311,15 @@
             "value" : "And More"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Және тағы басқа"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "И еще"
           }
         }
@@ -3797,9 +4334,15 @@
             "value" : "Application"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Өтініш"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "заявку"
           }
         }
@@ -3814,9 +4357,15 @@
             "value" : "Average ENT Score"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Орташа ҰБТ балы"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Средний балл ЕНТ"
           }
         }
@@ -3831,9 +4380,15 @@
             "value" : "Budget Places"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Грант орындары"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Места бюджет"
           }
         }
@@ -3848,9 +4403,15 @@
             "value" : "Filter Universities"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттерді сүзу"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Фильтр по вузам"
           }
         }
@@ -3865,9 +4426,15 @@
             "value" : "With"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Есть"
           }
         }
@@ -3882,9 +4449,15 @@
             "value" : "Without"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жоқ"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Нет"
           }
         }
@@ -3899,9 +4472,15 @@
             "value" : "City"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қала"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Город"
           }
         }
@@ -3916,9 +4495,15 @@
             "value" : "Dormitory"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жатақхана"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Общежитие"
           }
         }
@@ -3933,9 +4518,15 @@
             "value" : "Military Department"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Әскери кафедра"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Военная кафедра"
           }
         }
@@ -3950,9 +4541,15 @@
             "value" : "Price"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баға"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Цена"
           }
         }
@@ -3967,9 +4564,15 @@
             "value" : "Profession"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мамандық"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Профессия"
           }
         }
@@ -3984,9 +4587,15 @@
             "value" : "Type of University"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет түрі"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Тип вуза"
           }
         }
@@ -4001,9 +4610,15 @@
             "value" : "Getting admitted is now easier — with the “Postupi Online Kazakhstan” platform! The service is powered by an AI-based recommendation system that analyzes your interests and suggests universities that match your field, level of preparation, and other criteria. All universities on the platform have a valid state license and are accredited for higher education programs.\n\nThe platform provides detailed and up-to-date information about public and private universities in Kazakhstan — including universities, institutes, and academies across different regions, from Almaty and Astana to Shymkent and Ust-Kamenogorsk. You can sort universities by the average UNT score for 2025 to see where you have a better chance of admission. Historical data is also available: passing scores, competition, tuition fees, and the number of funded and paid spots. This helps you evaluate your chances and choose the most suitable option for higher education."
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қабылдау енді әлдеқайда жеңіл — «Поступи Онлайн Казахстан» платформасымен! Бұл сервис жасанды интеллект негізіндегі ұсыным жүйесі арқылы жұмыс істейді: ол сіздің қызығушылықтарыңызды талдап, сіздің бағытыңызға, дайындық деңгейіңізге және басқа да критерийлерге сәйкес келетін университеттерді ұсынады. Платформадағы барлық университеттердің мемлекеттік лицензиясы бар және жоғары білім беру бағдарламалары бойынша аккредиттелген.\n\nПлатформа Қазақстандағы мемлекеттік және жеке жоғары оқу орындары туралы толық әрі өзекті ақпарат ұсынады — оның ішінде еліміздің әртүрлі өңірлеріндегі университеттер, институттар және академиялар (Алматы, Астана, Шымкент, Өскемен және т.б.). Сіз 2025 жылғы орташа ҰБТ балы бойынша университеттерді сұрыптап, қай жерге түсу мүмкіндігіңіз жоғары екенін көре аласыз. Сондай-ақ өткен жылдардың деректері де қолжетімді: өту балдары, конкурс деңгейі, оқу ақысы, грант және ақылы орындар саны. Бұл сізге өз мүмкіндіктеріңізді бағалап, жоғары білім алу үшін ең қолайлы нұсқаны таңдауға көмектеседі."
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "С поступлением теперь легче — с платформой «Поступи Онлайн Казахстан»! Сервис работает на базе рекомендательной системы с искусственным интеллектом, которая анализирует твои интересы и предлагает именно те университеты, которые подходят тебе по направлениям, уровню подготовки и другим параметрам. Все вузы, представленные на платформе, имеют действующую государственную лицензию и прошли аккредитацию по программам высшего образования. На сайте собрана подробная и актуальная информация о государственных и частных вузах Казахстана: университетах, институтах, академиях, расположенных в разных регионах страны — от Алматы и Астаны до Шымкента и Усть-Каменогорска. Ты можешь отсортировать вузы по среднему баллу ЕНТ за 2025 год, чтобы понять, куда у тебя больше шансов поступить. Также доступна статистика прошлых лет: проходные баллы, конкурс, стоимость обучения, количество бюджетных и платных мест. Это поможет тебе оценить свои перспективы и выбрать наиболее подходящий вариант для получения высшего образования. "
           }
         }
@@ -4018,9 +4633,15 @@
             "value" : "List of universities in Kazakhstan by average score and tuition"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстандағы университеттер тізімі (орташа балл және оқу ақысы бойынша)"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Список вузов Казахстана по среднему баллу, стоимости обучения"
           }
         }
@@ -4035,9 +4656,15 @@
             "value" : "Universities, institutes, academies"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттер, институттар, академиялар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Университеты, институты, академии"
           }
         }
@@ -4052,9 +4679,15 @@
             "value" : "Kazakhstan universities:"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қазақстан университеттері:"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Вузы Казахстана:"
           }
         }
@@ -4069,9 +4702,15 @@
             "value" : "Military Dep. Center"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Әскери каф. орталығы"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Воен. уч. центр"
           }
         }
@@ -4086,9 +4725,15 @@
             "value" : "Military Dep."
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Әскери каф."
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Воен. уч."
           }
         }
@@ -4103,9 +4748,15 @@
             "value" : "Contract Places"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ақылы орындар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Места платно"
           }
         }
@@ -4120,9 +4771,15 @@
             "value" : "Price not set"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баға көрсетілмеген"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Цена не указана"
           }
         }
@@ -4137,9 +4794,15 @@
             "value" : "Budget Score"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Грант балы"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Бал бюджет"
           }
         }
@@ -4154,9 +4817,15 @@
             "value" : "Contract Score"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ақылы балл"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Бал платно"
           }
         }
@@ -4171,9 +4840,15 @@
             "value" : "By Default"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Әдепкі бойынша"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "По умолчанию"
           }
         }
@@ -4188,9 +4863,15 @@
             "value" : "By name from A-Z"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Атауы бойынша (А–Я)"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "По названию А-Я"
           }
         }
@@ -4205,9 +4886,15 @@
             "value" : "By name from Z-A"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Атауы бойынша (Я–А)"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "По названию Я-А"
           }
         }
@@ -4222,9 +4909,15 @@
             "value" : "By Price ↓"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баға бойынша ↓"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "По цене ↓"
           }
         }
@@ -4239,9 +4932,15 @@
             "value" : "By Price ↑"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баға бойынша ↑"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "По цене ↑"
           }
         }
@@ -4256,9 +4955,15 @@
             "value" : "University For"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кімдерге арналған университет"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "вуз для"
           }
         }
@@ -4273,9 +4978,15 @@
             "value" : "University"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университет"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Университет"
           }
         }
@@ -4290,9 +5001,15 @@
             "value" : "Budget Places"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Грант орындары"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Бюджетных мест"
           }
         }
@@ -4307,9 +5024,15 @@
             "value" : "Budget P."
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Грант орын."
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Бюдж. мест"
           }
         }
@@ -4324,9 +5047,15 @@
             "value" : "Calendar"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Күнтізбе"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Календарь"
           }
         }
@@ -4341,9 +5070,15 @@
             "value" : "Category"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Санат"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Категория"
           }
         }
@@ -4358,9 +5093,15 @@
             "value" : "Cities"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қалалар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "городов"
           }
         }
@@ -4375,9 +5116,15 @@
             "value" : "Education"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Білім беру"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Обучение"
           }
         }
@@ -4392,9 +5139,15 @@
             "value" : "Faculties"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Факультеттер"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Факультеты"
           }
         }
@@ -4409,9 +5162,15 @@
             "value" : "Free Places"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тегін орындар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Свободных мест"
           }
         }
@@ -4426,9 +5185,15 @@
             "value" : "From"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бастап"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "От"
           }
         }
@@ -4443,9 +5208,15 @@
             "value" : "From A-Z"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "А-дан Я-ға дейін"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "От А до Я"
           }
         }
@@ -4460,9 +5231,15 @@
             "value" : "From Z-A"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Я-дан А-ға дейін"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "От Я до А"
           }
         }
@@ -4477,9 +5254,15 @@
             "value" : "Governmental"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мемлекеттік"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Государственный"
           }
         }
@@ -4492,6 +5275,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Not Found"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Табылмады"
           }
         },
         "ru" : {
@@ -4511,9 +5300,15 @@
             "value" : "Contract Places"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ақылы орындар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Платных мест"
           }
         }
@@ -4528,9 +5323,15 @@
             "value" : "Contract P."
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ақылы орын."
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Плат. мест"
           }
         }
@@ -4545,9 +5346,15 @@
             "value" : "Price"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баға"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Стоимость"
           }
         }
@@ -4562,9 +5369,15 @@
             "value" : "Private"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жеке"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Частный"
           }
         }
@@ -4579,9 +5392,15 @@
             "value" : "Programs"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бағдарламалар"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Программ"
           }
         }
@@ -4594,6 +5413,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search Somewhere Else"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Басқа жерден іздеңіз"
           }
         },
         "ru" : {
@@ -4613,9 +5438,15 @@
             "value" : "Tenge per year"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жылына теңге"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Тенге в год"
           }
         }
@@ -4630,9 +5461,15 @@
             "value" : "Name"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Атауы"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Название"
           }
         }
@@ -4647,9 +5484,15 @@
             "value" : "To"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дейін"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "До"
           }
         }
@@ -4664,9 +5507,15 @@
             "value" : "Try Again"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қайта көріңіз"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Попробуйте еще раз"
           }
         }
@@ -4681,9 +5530,15 @@
             "value" : "Try Other Search"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Басқа іздеуді қолданып көріңіз"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Попробуйте другой поиск"
           }
         }
@@ -4698,9 +5553,15 @@
             "value" : "Type"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Түрі"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Тип"
           }
         }
@@ -4715,9 +5576,15 @@
             "value" : "Universities"
           }
         },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Университеттер"
+          }
+        },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Вузов"
           }
         }
