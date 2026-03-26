@@ -29,7 +29,7 @@ final class ForgotPasswordTypeEmailCell: UICollectionViewCell {
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Forgot Password"
+        label.text = ConstantLocalizedStrings.Registration.ForgotPassword.forgotPassword
         label.font = ECFont.font(.bold, size: 18)
         label.textColor = .black
         label.numberOfLines = 1
@@ -39,7 +39,7 @@ final class ForgotPasswordTypeEmailCell: UICollectionViewCell {
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Type your email to reset your password"
+        label.text = ConstantLocalizedStrings.Registration.ForgotPassword.typeInEmailSubtitle
         label.font = ECFont.font(.regular, size: 14)
         label.textColor = .black
         label.numberOfLines = 0

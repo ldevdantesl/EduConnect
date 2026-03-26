@@ -35,7 +35,7 @@ final class ForgotPasswordNewPasswordCell: UICollectionViewCell {
     // MARK: - VIEW PROPERTIES
     private let setPasswordLabel: UILabel = {
         let label = UILabel()
-        label.text = "Set New Password"
+        label.text = ConstantLocalizedStrings.Registration.ForgotPassword.setNewPasswordTitle
         label.font = ECFont.font(.bold, size: 30)
         label.textAlignment = .center
         label.textColor = .black
@@ -45,10 +45,10 @@ final class ForgotPasswordNewPasswordCell: UICollectionViewCell {
     
     private let setPasswordSubtitle: UILabel = {
         let label = UILabel()
-        label.text = "Type in your new password"
+        label.text = ConstantLocalizedStrings.Registration.ForgotPassword.setNewPasswordSubtitle
         label.font = ECFont.font(.regular, size: 14)
         label.textAlignment = .center
-        label.textColor = .darkGray
+        label.textColor = .black
         label.numberOfLines = 0
         return label
     }()

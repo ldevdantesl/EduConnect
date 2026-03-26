@@ -26,7 +26,7 @@ final class ForgotPasswordBackToLoginCell: UICollectionViewCell {
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Your new Password is set"
+        label.text = ConstantLocalizedStrings.Registration.ForgotPassword.newPasswordSetTitle
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 0
@@ -36,8 +36,8 @@ final class ForgotPasswordBackToLoginCell: UICollectionViewCell {
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Now you can easily log in with your new password"
-        label.textColor = .darkGray
+        label.text = ConstantLocalizedStrings.Registration.ForgotPassword.newPasswordSetSubtitle
+        label.textColor = .black
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 0
@@ -45,7 +45,7 @@ final class ForgotPasswordBackToLoginCell: UICollectionViewCell {
         return label
     }()
     
-    private let backToLoginButton: ECButton = ECButton(text: "Back to login")
+    private let backToLoginButton: ECButton = ECButton(text: ConstantLocalizedStrings.Registration.ForgotPassword.backToLogin)
     
     private let vStack: UIStackView = {
         let stack = UIStackView()

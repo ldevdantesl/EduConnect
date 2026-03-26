@@ -75,7 +75,7 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
         } didTapSendCode: { [weak self] in
             self?.didTapSendCode(email: $0)
         } didTapPhone: { [weak self] in
-            self?.view?.showError(errorMessage: "Phone Registration is not available for now")
+            self?.view?.showError(errorMessage: ConstantLocalizedStrings.Registration.Words.phoneRegistrationNotAvailable)
         }
         items.append(.registrationItem(.init(id: "registration", viewModel: registrationVM)))
         
@@ -127,7 +127,7 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
         self.email = email
         self.view?.hideLoading()
         self.view?.scrollToNextItem()
-        self.view?.showMessage(message: "Code has been successfully sended")
+        self.view?.showMessage(message: ConstantLocalizedStrings.Account.Words.codeHasBeenSent)
     }
     
     func didVerifyCode() {
@@ -143,7 +143,7 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
     
     func didResendCode(email: String?) {
         self.view?.hideLoading()
-        self.view?.showMessage(message: "Code has been successfully sended")
+        self.view?.showMessage(message: ConstantLocalizedStrings.Account.Words.codeHasBeenSent)
     }
     
     func didLogin(user: AuthUser) {

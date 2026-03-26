@@ -28,7 +28,7 @@ final class ConfirmDeletionPopUpView: PopUpView {
     // MARK: - VIEW PROPERTIES
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Confirm Code"
+        label.text = ConstantLocalizedStrings.Account.Words.deleteAccountConfirmCode
         label.textColor = .black
         label.font = ECFont.font(.bold, size: 18)
         label.numberOfLines = 1
@@ -38,7 +38,7 @@ final class ConfirmDeletionPopUpView: PopUpView {
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "We sent you an email with code for deletion."
+        label.text = ConstantLocalizedStrings.Account.Words.deleteAccountSendEmailWithCode
         label.textColor = .darkGray
         label.font = ECFont.font(.regular, size: 14)
         label.numberOfLines = 0

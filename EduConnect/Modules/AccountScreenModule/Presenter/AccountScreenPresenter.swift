@@ -318,8 +318,8 @@ final class AccountScreenPresenter {
     
     private func didTapDelete() {
         self.view?.presentAlert(
-            title: "Delete Account",
-            message: "You sure you want to delete your account. All your data will be lost",
+            title: ConstantLocalizedStrings.Account.MainTab.deleteAccount,
+            message: ConstantLocalizedStrings.Account.Words.deleteAccountAlertMessage,
             confirmButtonName: ConstantLocalizedStrings.Common.confirm
         ) { [weak self] in
             self?.view?.showLoading()
@@ -405,7 +405,7 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     }
     
     func didLogOut() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             self?.router.routeToLogin()
         }
     }

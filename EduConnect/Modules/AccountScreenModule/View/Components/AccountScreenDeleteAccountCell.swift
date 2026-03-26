@@ -63,7 +63,7 @@ final class AccountScreenDeleteAccountCell: UICollectionViewCell {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTap)))
         
         let label = UILabel()
-        label.text = "Delete Account"
+        label.text = ConstantLocalizedStrings.Account.MainTab.deleteAccount
         label.font = ECFont.font(.bold, size: 16)
         label.textColor = .white
         label.numberOfLines = 1

@@ -74,7 +74,7 @@ final class LoginScreenLoginCell: UICollectionViewCell {
         return button
     }()
     private let forgotPassword: ECUnderlineButton = {
-        let button = ECUnderlineButton(text: "Forgot Password")
+        let button = ECUnderlineButton(text: ConstantLocalizedStrings.Registration.ForgotPassword.forgotPassword)
         return button
     }()
     

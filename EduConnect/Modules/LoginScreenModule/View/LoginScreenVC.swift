@@ -32,6 +32,7 @@ final class LoginScreenVC: UIViewController {
         collectionView.registerCell(LoginScreenSetPasswordCell.self, reuseID: LoginScreenSetPasswordCell.identifier)
         collectionView.registerCell(LoginScreenCompleteRegistrationCell.self, reuseID: LoginScreenCompleteRegistrationCell.identifier)
         collectionView.registerCell(LoginScreenLoginCell.self, reuseID: LoginScreenLoginCell.identifier)
+        collectionView.adjustsForKeyboard = true
         collectionView.backgroundColor = .systemBlue
         collectionView.collectionView.backgroundColor = .systemBlue
         collectionView.collectionView.isPagingEnabled = true
