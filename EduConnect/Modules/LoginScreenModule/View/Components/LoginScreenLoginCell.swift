@@ -11,10 +11,12 @@ import SnapKit
 struct LoginScreenLoginCellViewModel {
     let didPressLogin: ((String?, String?) -> Void)?
     let didPressRegister: (() -> Void)?
+    let didPressForgotPassword: (() -> Void)?
     
-    init(didPressLogin: ((String?, String?) -> Void)? = nil, didPressRegister: (() -> Void)? = nil) {
+    init(didPressLogin: ((String?, String?) -> Void)? = nil, didPressRegister: (() -> Void)? = nil, didPressForgotPassword: (() -> Void)?) {
         self.didPressLogin = didPressLogin
         self.didPressRegister = didPressRegister
+        self.didPressForgotPassword = didPressForgotPassword
     }
 }
 
@@ -71,6 +73,10 @@ final class LoginScreenLoginCell: UICollectionViewCell {
         let button = ECUnderlineButton(text: ConstantLocalizedStrings.Registration.Words.register)
         return button
     }()
+    private let forgotPassword: ECUnderlineButton = {
+        let button = ECUnderlineButton(text: "Forgot Password")
+        return button
+    }()
     
     private let topSpacer = UIView()
     private let bottomSpacer = UIView()
@@ -109,6 +115,7 @@ final class LoginScreenLoginCell: UICollectionViewCell {
         self.viewModel = vm
         loginButton.setAction { [weak self] in vm.didPressLogin?(self?.emailField.text, self?.passwordField.text) }
         registerButton.setAction(action: vm.didPressRegister)
+        forgotPassword.setAction(action: vm.didPressForgotPassword)
     }
     
     // MARK: - PRIVATE FUNC
@@ -119,7 +126,7 @@ final class LoginScreenLoginCell: UICollectionViewCell {
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
         
-        [topSpacer, loginTitleLabel, loginTypeSwitcher, emailField, passwordField, loginButton, registerButton, bottomSpacer].forEach {
+        [topSpacer, loginTitleLabel, loginTypeSwitcher, emailField, passwordField, loginButton, registerButton, forgotPassword, bottomSpacer].forEach {
             vStack.addArrangedSubview($0)
         }
         
@@ -127,6 +134,7 @@ final class LoginScreenLoginCell: UICollectionViewCell {
         vStack.setCustomSpacing(Constants.verticalStackSpacing, after: loginTypeSwitcher)
         vStack.setCustomSpacing(Constants.verticalStackSpacing, after: emailField)
         vStack.setCustomSpacing(Constants.verticalStackSpacing, after: passwordField)
+        vStack.setCustomSpacing(Constants.verticalStackSpacing, after: registerButton)
         vStack.setCustomSpacing(Constants.hSpacing, after: loginButton)
         
         loginTypeSwitcher.snp.makeConstraints {

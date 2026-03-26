@@ -64,6 +64,8 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
             self?.didPressLogin(email: $0, password: $1)
         } didPressRegister: {
             self.view?.scrollToNextItem()
+        } didPressForgotPassword: {
+            
         }
         items.append(.loginItem(.init(id: "login", viewModel: loginVM)))
         
@@ -72,6 +74,8 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
             self?.view?.scrollToPreviousItem()
         } didTapSendCode: { [weak self] in
             self?.didTapSendCode(email: $0)
+        } didTapPhone: { [weak self] in
+            self?.view?.showError(errorMessage: "Phone Registration is not available for now")
         }
         items.append(.registrationItem(.init(id: "registration", viewModel: registrationVM)))
         
