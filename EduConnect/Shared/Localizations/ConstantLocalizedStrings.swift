@@ -54,6 +54,7 @@ public enum ConstantLocalizedStrings {
     /// For __Common__ words
     enum Common {
         static let start = String(localized: .Localizables.commonStart)
+        static let `continue` = String(localized: .Localizables.commonContinue)
         static let none = String(localized: .Localizables.commonNone)
         static let apply = String(localized: .Localizables.commonApply)
         static let add = String(localized: .Localizables.commonAdd)

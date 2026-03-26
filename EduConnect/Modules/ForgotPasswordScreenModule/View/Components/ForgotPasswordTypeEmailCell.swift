@@ -1,26 +1,19 @@
 //
-//  LoginScreenConfirmRegistrationCell.swift
+//  ForgotPasswordTypePasswordCell.swift
 //  EduConnect
 //
-//  Created by Buzurg Rakhimzoda on 8.01.2026.
+//  Created by Buzurg Rakhimzoda on 26.03.2026.
 //
 
 import UIKit
 import SnapKit
 
-struct LoginScreenConfirmRegistrationCellVM {
-    let confirmAction: ((String?) -> Void)?
-    let backButtonAction: (() -> Void)?
-    let resendAction: (() -> Void)?
-    
-    init(confirmAction: ((String?) -> Void)? = nil, resendAction: (() -> Void)? = nil, backButtonAction: (() -> Void)? = nil) {
-        self.confirmAction = confirmAction
-        self.resendAction = resendAction
-        self.backButtonAction = backButtonAction
-    }
+struct ForgotPasswordTypeEmailCellViewModel {
+    let didTapBack: (() -> Void)?
+    let didTapEmail: ((String?) -> Void)?
 }
 
-final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
+final class ForgotPasswordTypeEmailCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let hSpacing = 15.0
@@ -31,40 +24,39 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
     }
     
     // MARK: - PROPERTIES
-    private var viewModel: LoginScreenConfirmRegistrationCellVM?
+    private var viewModel: ForgotPasswordTypeEmailCellViewModel?
     
     // MARK: - VIEW PROPERTIES
-    private let confirmSignInLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = ConstantLocalizedStrings.Registration.Page2.confirmSignInTitle
-        label.font = ECFont.font(.bold, size: 30)
-        label.textAlignment = .center
+        label.text = "Forgot Password"
+        label.font = ECFont.font(.bold, size: 18)
+        label.textColor = .black
+        label.numberOfLines = 1
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    private let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Type your email to reset your password"
+        label.font = ECFont.font(.regular, size: 14)
         label.textColor = .black
         label.numberOfLines = 0
+        label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
-    private let checkEmailLabel: UILabel = {
-        let label = UILabel()
-        label.text = ConstantLocalizedStrings.Registration.Page2.checkEmailSubtitle
-        label.font = ECFont.font(.bold, size: 14)
-        label.textAlignment = .center
-        label.textColor = .systemGray
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    private let backButton: ECIconButton = ECIconButton()
-    
-    private let codeField: ECTextField = {
-        let field = ECTextField(placeHolder: ConstantLocalizedStrings.Registration.Page2.confirmCodeTextField)
-        field.textContentType = .oneTimeCode
+    private let emailField: ECTextField = {
+        let field = ECTextField(placeHolder: ConstantLocalizedStrings.Registration.Words.email)
+        field.keyboardType = .emailAddress
         return field
     }()
     
-    private let confirmButton: ECButton = ECButton(text: ConstantLocalizedStrings.Common.confirm)
+    private let continueButton: ECButton = ECButton(text: ConstantLocalizedStrings.Common.continue)
     
-    private let resendCodeButton: ECUnderlineButton = ECUnderlineButton(text: ConstantLocalizedStrings.Registration.Page2.resendCodeUnderlineButton)
+    private let backButton: ECIconButton = ECIconButton()
     
     private let topSpacer = UIView()
     private let bottomSpacer = UIView()
@@ -99,17 +91,15 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: LoginScreenConfirmRegistrationCellVM) {
+    public func configure(withVM vm: ForgotPasswordTypeEmailCellViewModel) {
         self.viewModel = vm
-        self.confirmButton.setAction { [weak self] in vm.confirmAction?(self?.codeField.text)}
-        self.resendCodeButton.setAction(action: vm.resendAction)
+        self.continueButton.setAction { [weak self] in vm.didTapEmail?(self?.emailField.text) }
         let backButtonVM = ECIconButtonVM(
             systemImage: Constants.backButtonImageName,
             style: .title3, weight: .semibold,
-            didTapAction: vm.backButtonAction
+            didTapAction: vm.didTapBack
         )
         self.backButton.configure(viewModel: backButtonVM)
-        layoutIfNeeded()
     }
     
     // MARK: - PRIVATE FUNC
@@ -120,25 +110,20 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
 
-        [topSpacer, confirmSignInLabel, checkEmailLabel, codeField, confirmButton, resendCodeButton, bottomSpacer].forEach { vStack.addArrangedSubview($0) }
+        [topSpacer, titleLabel, subtitleLabel, emailField, continueButton, bottomSpacer].forEach { vStack.addArrangedSubview($0) }
         
-        vStack.setCustomSpacing(10, after: confirmSignInLabel)
-        vStack.setCustomSpacing(20, after: checkEmailLabel)
-        vStack.setCustomSpacing(20, after: codeField)
-        vStack.setCustomSpacing(20, after: confirmButton)
+        vStack.setCustomSpacing(10, after: titleLabel)
+        vStack.setCustomSpacing(20, after: subtitleLabel)
+        vStack.setCustomSpacing(20, after: emailField)
         
-        codeField.snp.makeConstraints {
+        emailField.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.textFieldsHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
         
-        confirmButton.snp.makeConstraints {
+        continueButton.snp.makeConstraints {
             $0.height.equalTo(SharedConstants.buttonHeight)
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
-        }
-        
-        resendCodeButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
         }
         
         topSpacer.snp.makeConstraints {

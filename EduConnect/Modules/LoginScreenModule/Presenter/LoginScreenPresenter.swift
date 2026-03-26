@@ -64,8 +64,8 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
             self?.didPressLogin(email: $0, password: $1)
         } didPressRegister: {
             self.view?.scrollToNextItem()
-        } didPressForgotPassword: {
-            
+        } didPressForgotPassword: { [weak self] in
+            self?.router.routeToForgotPassword()
         }
         items.append(.loginItem(.init(id: "login", viewModel: loginVM)))
         
