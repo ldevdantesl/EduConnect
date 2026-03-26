@@ -13,6 +13,7 @@ protocol AccountScreenRouterProtocol {
     func routeToMain()
     func routeToUniversities()
     func routeToUniversityByID(id: Int)
+    func routeToLogin()
 }
 
 final class AccountScreenRouter: AccountScreenRouterProtocol {
@@ -40,6 +41,9 @@ final class AccountScreenRouter: AccountScreenRouterProtocol {
         case let vm as AddOlympiadPopUpViewModel:
             let view = AddOlympiadPopUpView(viewModel: vm)
             viewController?.showPopup(view)
+        case let vm as ConfirmDeletionPopUpViewModel:
+            let view = ConfirmDeletionPopUpView(viewModel: vm)
+            viewController?.showPopup(view)
         default: break
         }
     }
@@ -54,6 +58,10 @@ final class AccountScreenRouter: AccountScreenRouterProtocol {
     
     func routeToMain() {
         appRouter.routeToMain()
+    }
+    
+    func routeToLogin() {
+        self.appRouter.routeToAuthentication()
     }
     
     func routeToUniversityByID(id: Int) {

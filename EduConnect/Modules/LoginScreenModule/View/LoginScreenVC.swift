@@ -11,6 +11,7 @@ import SnapKit
 protocol LoginScreenViewProtocol: AnyObject {
     func applySnapshot(sections: [LoginScreenSection], itemsBySection: [LoginScreenSection : [LoginScreenItem]])
     func showError(errorMessage: String)
+    func showMessage(message: String)
     func scrollToNextItem()
     func scrollToPreviousItem()
     func showLoading()
@@ -98,6 +99,10 @@ extension LoginScreenVC:LoginScreenViewProtocol {
     
     func showError(errorMessage: String) {
         self.showToastedError(message: errorMessage)
+    }
+    
+    func showMessage(message: String) {
+        self.showToastedMessage(message: message)
     }
     
     func scrollToNextItem() {

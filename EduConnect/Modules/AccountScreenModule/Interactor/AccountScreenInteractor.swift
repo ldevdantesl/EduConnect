@@ -8,6 +8,10 @@
 import UIKit
 
 protocol AccountScreenInteractorProtocol: AnyObject {
+    func requestDeletionCode(email: String?)
+    func confirmDeletion(email: String?, code: String?)
+    func logOut()
+    
     func getEntSubjects()
     func getExtracurricularActivities()
     func getOlympiadTypes()
@@ -41,9 +45,38 @@ final class AccountScreenInteractor: AccountScreenInteractorProtocol {
     weak var presenter: AccountScreenPresenterProtocol?
     
     private let networkService: NetworkServiceProtocol
+    private let authService: AuthenticationProtocol
     
-    init(networkService: NetworkServiceProtocol) {
+    init(networkService: NetworkServiceProtocol, authService: AuthenticationProtocol) {
         self.networkService = networkService
+        self.authService = authService
+    }
+    
+    func requestDeletionCode(email: String?) {
+        Task {
+            do {
+                let response = try await networkService.accountDeletion.requestCode(email: email)
+                self.presenter?.didRequestDeletionCode(message: response.message)
+            } catch {
+                self.presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
+    func confirmDeletion(email: String?, code: String?) {
+        Task {
+            do {
+                let response = try await networkService.accountDeletion.confirmDeletion(email: email, code: code)
+                self.presenter?.didConfirmDeletion(message: response.message)
+            } catch {
+                self.presenter?.didReceiveError(error: error)
+            }
+        }
+    }
+    
+    func logOut() {
+        authService.deleteAccount()
+        self.presenter?.didLogOut()
     }
     
     func getEntSubjects() {

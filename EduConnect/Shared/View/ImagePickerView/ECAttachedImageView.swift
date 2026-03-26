@@ -51,7 +51,7 @@ final class ECImageAttachmentView: UIView {
     }()
     
     private lazy var addButton: ECButton = {
-        let button = ECButton(text: ConstantLocalizedStrings.Common.browse, textSize: 14, backgroundColor: .systemBackground, textColor: .blue)
+        let button = ECButton(text: ConstantLocalizedStrings.Common.browse, textSize: 16, backgroundColor: .systemBackground, textColor: .blue)
         button.borderColor = .blue
         button.borderWidth = 1
         button.setAction { [weak self] in

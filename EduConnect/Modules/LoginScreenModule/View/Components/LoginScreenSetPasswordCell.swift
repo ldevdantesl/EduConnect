@@ -130,7 +130,6 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell {
         
         [topSpacer, setPasswordLabel, setPasswordSubtitle, passwordField, reenterPasswordField, savePasswordButton, bottomSpacer].forEach { vStack.addArrangedSubview($0) }
         
-
         vStack.setCustomSpacing(10, after: setPasswordLabel)
         vStack.setCustomSpacing(20, after: setPasswordSubtitle)
         vStack.setCustomSpacing(20, after: passwordField)
@@ -160,10 +159,6 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell {
         backButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Constants.hSpacing)
             $0.leading.equalToSuperview().offset(Constants.spacing)
-        }
-        
-        topSpacer.snp.makeConstraints {
-            $0.height.equalTo(bottomSpacer.snp.height).multipliedBy(0.6)
         }
     }
     

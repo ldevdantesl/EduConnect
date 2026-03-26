@@ -9,6 +9,7 @@ import UIKit
 
 protocol NetworkServiceProtocol {
     var application: ApplicationAPISubServiceProtocol { get }
+    var accountDeletion: AccountDeletionAPISubServiceProtocol { get }
     var authentication: AuthAPISubServiceProtocol { get }
     var references: ReferencesAPISubServiceProtocol { get }
     var news: NewsAPISubServiceProtocol { get }
@@ -20,6 +21,7 @@ protocol NetworkServiceProtocol {
 
 final class ECNetworkService: NetworkServiceProtocol {
     let authentication: AuthAPISubServiceProtocol
+    let accountDeletion: AccountDeletionAPISubServiceProtocol
     let references: ReferencesAPISubServiceProtocol
     let news: NewsAPISubServiceProtocol
     let university: UniversityAPISubServiceProtocol
@@ -37,5 +39,6 @@ final class ECNetworkService: NetworkServiceProtocol {
         self.news = NewsAPISubService(httpClient: httpClient)
         self.profile = ProfileAPISubService(httpClient: httpClient)
         self.application = ApplicationAPISubService(httpClient: httpClient)
+        self.accountDeletion = AccountDeletionAPISubService(httpClient: httpClient)
     }
 }
