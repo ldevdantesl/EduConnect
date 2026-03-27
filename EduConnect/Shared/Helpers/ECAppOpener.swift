@@ -14,7 +14,7 @@ struct ECAppOpener {
     }
     
     static func openPrivacyURL() {
-        guard let url = URL(string: "https://educonnect.kz/privacy-policy"),
+        guard let url = URL(string: "https://educonnect.kz/policy"),
               UIApplication.shared.canOpenURL(url) else { return }
         
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
