@@ -46,9 +46,27 @@ final class SidebarMenuView: UIView {
         return stack
     }()
     
+    private lazy var privacyPolicyLabel: UILabel = {
+        let label = UILabel()
+        label.text = ConstantLocalizedStrings.Common.privacyPolicy
+        label.isUserInteractionEnabled = true
+        label.textColor = .systemBlue
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
+        label.font = ECFont.font(.semiBold, size: 14)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapPrivacyPolicy))
+        label.addGestureRecognizer(tapGesture)
+    
+        return label
+    }()
+    
     private let versionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Version: \(SharedConstants.appVersion)"
+        label.text = "\(ConstantLocalizedStrings.Common.version): \(SharedConstants.appVersion)"
+        label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
         label.textColor = .darkGray
         label.textAlignment = .center
         label.font = ECFont.font(.semiBold, size: 14)
@@ -89,6 +107,12 @@ final class SidebarMenuView: UIView {
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-Constants.bigSpacing)
         }
+        
+        addSubview(privacyPolicyLabel)
+        privacyPolicyLabel.snp.makeConstraints {
+            $0.bottom.equalTo(versionLabel.snp.top).offset(-Constants.spacing)
+            $0.horizontalEdges.equalToSuperview().inset(Constants.bigSpacing)
+        }
     }
     
     private func makeTabs() {
@@ -115,5 +139,9 @@ final class SidebarMenuView: UIView {
         else { return }
 
         viewModel.onItemTapped?(item)
+    }
+    
+    @objc private func didTapPrivacyPolicy() {
+        ECAppOpener.openPrivacyURL()
     }
 }

@@ -102,6 +102,8 @@ public enum ConstantLocalizedStrings {
         static let contract = String(localized: .Localizables.commonContract)
         static let budget = String(localized: .Localizables.commonBudget)
         static let contacts = String(localized: .Localizables.commonContacts)
+        static let privacyPolicy = String(localized: .Localizables.commonPrivacyPolicy)
+        static let version = String(localized: .Localizables.commonVersion)
     }
     
     /// For __Account__ Tab
