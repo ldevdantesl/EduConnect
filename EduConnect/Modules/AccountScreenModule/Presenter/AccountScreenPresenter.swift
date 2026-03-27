@@ -15,6 +15,10 @@ protocol AccountScreenPresenterProtocol: AnyObject {
     var selectedTab: AccountScreenTab { get set }
     var headerMenuViewModel: AccountScreenSegmentedReusableMenuViewModel { get }
 
+    func didRequestDeletionCode(message: String?)
+    func didConfirmDeletion(message: String?)
+    func didLogOut()
+    
     func didPerformTask(message: String?, refreshID: ExpandableCellID?)
     func didReceiveProfile(_ profile: Profile)
     func didFetchProfile(_ profile: Profile)
@@ -270,6 +274,9 @@ final class AccountScreenPresenter {
                 items.append(.pendingApplicationItem(.init(item: $0, prefix: "main-application-", viewModel: vm)))
             }
         }
+        
+        let deleteAccountVM = AccountScreenDeleteAccountCellViewModel { [weak self] in self?.didTapDelete() }
+        items.append(.deleteAccountItem(.init(id: "delete-account", viewModel: deleteAccountVM)))
 
         view?.applySnapshot(
             sections: [.main],
@@ -307,6 +314,17 @@ final class AccountScreenPresenter {
     private func didTapAddExtracurricular(id: Int?, description: String?, files: [ECAttachedImage]) {
         self.view?.showLoading()
         self.interactor.addExtracurricular(id: id, description: description, files: files)
+    }
+    
+    private func didTapDelete() {
+        self.view?.presentAlert(
+            title: ConstantLocalizedStrings.Account.MainTab.deleteAccount,
+            message: ConstantLocalizedStrings.Account.Words.deleteAccountAlertMessage,
+            confirmButtonName: ConstantLocalizedStrings.Common.confirm
+        ) { [weak self] in
+            self?.view?.showLoading()
+            self?.interactor.requestDeletionCode(email: self?.profile?.email)
+        }
     }
 }
 
@@ -360,6 +378,36 @@ extension AccountScreenPresenter: AccountScreenPresenterProtocol {
     
     func didTapTabBar() {
         router.showSidebar()
+    }
+    
+    func didRequestDeletionCode(message: String?) {
+        self.view?.hideLoading()
+        if let message {
+            self.view?.showMessage(message: message)
+        }
+        let confirmDeletionPopVM = ConfirmDeletionPopUpViewModel(email: profile?.email) { email, code in
+            self.view?.showLoading()
+            self.interactor.confirmDeletion(email: email, code: code)
+        } onClose: {
+            self.view?.dismissPopup()
+        }
+
+        self.router.showPopUp(viewModel: confirmDeletionPopVM)
+    }
+    
+    func didConfirmDeletion(message: String?) {
+        self.view?.hideLoading()
+        self.view?.dismissPopup()
+        if let message {
+            self.view?.showMessage(message: message)
+        }
+        self.interactor.logOut()
+    }
+    
+    func didLogOut() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.router.routeToLogin()
+        }
     }
     
     func didPerformTask(message: String?, refreshID: ExpandableCellID?) {

@@ -152,10 +152,7 @@ final class MainScreenPresenter {
     }
     
     private func didTapCalendar() {
-        self.view?.scrollToSection(section: .journal) { [weak self] in
-            let calendar = self?.newsTypes.first { $0.id == 1 }
-            self?.didSelectJournalType(calendar)
-        }
+        self.router.navigateToAllArticles()
     }
 }
 

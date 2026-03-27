@@ -16,6 +16,7 @@ protocol AuthenticationProtocol: AnyObject {
     func logIn(email: String?, password: String?) async throws -> AuthUser
     func me() async throws -> AuthUser
     func logOut() async throws
+    func deleteAccount()
 }
 
 
@@ -54,6 +55,10 @@ final class ECAuthentication: AuthenticationProtocol {
     
     func logOut() async throws {
         try await networkService.authentication.logOut()
+        tokenStorage.clear()
+    }
+    
+    func deleteAccount() {
         tokenStorage.clear()
     }
     

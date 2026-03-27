@@ -7,6 +7,7 @@
 
 protocol LoginScreenInteractorProtocol: AnyObject {
     func sendVerificationCode(email: String?)
+    func resendVerficationCode(email: String?)
     func verifyCode(email: String, code: String?)
     func register(email: String, password: String?, confirmPassword: String?)
     func login(email: String?, password: String?)
@@ -36,6 +37,17 @@ final class LoginScreenInteractor: LoginScreenInteractorProtocol {
             do {
                 try await authentication.sendVerificationCode(email: email)
                 presenter?.didSendCode(email: email)
+            } catch {
+                presenter?.didReceiveError(erorr: error)
+            }
+        }
+    }
+    
+    func resendVerficationCode(email: String?) {
+        Task {
+            do {
+                try await authentication.sendVerificationCode(email: email)
+                presenter?.didResendCode(email: email)
             } catch {
                 presenter?.didReceiveError(erorr: error)
             }

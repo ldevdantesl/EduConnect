@@ -10,21 +10,27 @@ import UIKit
 protocol LoginScreenRouterProtocol {
     func routeToAccountScreen()
     func routeToMainScreen()
+    func routeToForgotPassword()
 }
 
 final class LoginScreenRouter: LoginScreenRouterProtocol {
     weak var viewController: LoginScreenVC?
-    weak var appRouter: AppRoutingProtocol?
+    private let appRouter: AppRoutingProtocol
     
     init(appRouter: AppRoutingProtocol) {
         self.appRouter = appRouter
     }
     
     func routeToAccountScreen() {
-        appRouter?.routeToAccount()
+        appRouter.routeToAccount()
     }
     
     func routeToMainScreen() {
-        appRouter?.routeToMain()
+        appRouter.routeToMain()
+    }
+    
+    func routeToForgotPassword() {
+        let vc = ForgotPasswordScreenAssembler.assemble(appRouter: appRouter)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

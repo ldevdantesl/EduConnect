@@ -1,15 +1,15 @@
 //
-//  LoginScreenVC.swift
+//  ForgotPasswordScreenVC.swift
 //  Super easy dev
 //
-//  Created by Buzurg Rakhimzoda on 3.01.2026
+//  Created by Buzurg Rakhimzoda on 26.03.2026
 //
 
 import UIKit
 import SnapKit
 
-protocol LoginScreenViewProtocol: AnyObject {
-    func applySnapshot(sections: [LoginScreenSection], itemsBySection: [LoginScreenSection : [LoginScreenItem]])
+protocol ForgotPasswordScreenViewProtocol: AnyObject {
+    func applySnapshot(sections: [ForgotPasswordSection], itemsBySection: [ForgotPasswordSection : [ForgotPasswordItem]])
     func showError(errorMessage: String)
     func showMessage(message: String)
     func scrollToNextItem()
@@ -19,21 +19,20 @@ protocol LoginScreenViewProtocol: AnyObject {
     func removeKeyboard()
 }
 
-final class LoginScreenVC: UIViewController {
-    
-    // MARK: - VIPER
-    var presenter: LoginScreenPresenterProtocol?
+final class ForgotPasswordScreenVC: UIViewController {
+
+    var presenter: ForgotPasswordScreenPresenterProtocol?
     
     // MARK: - VIEW PROPERTIES
     private lazy var collectionContainer: DiffableCollectionViewContainer = {
-        let collectionView = DiffableCollectionViewContainer<LoginScreenSection, LoginScreenItem>(layout: LoginScreenLayoutFactory.make())
-        collectionView.registerCell(LoginScreenRegistrationCell.self, reuseID: LoginScreenRegistrationCell.identifier)
-        collectionView.registerCell(LoginScreenConfirmRegistrationCell.self, reuseID: LoginScreenConfirmRegistrationCell.identifier)
-        collectionView.registerCell(LoginScreenSetPasswordCell.self, reuseID: LoginScreenSetPasswordCell.identifier)
-        collectionView.registerCell(LoginScreenCompleteRegistrationCell.self, reuseID: LoginScreenCompleteRegistrationCell.identifier)
-        collectionView.registerCell(LoginScreenLoginCell.self, reuseID: LoginScreenLoginCell.identifier)
-        collectionView.adjustsForKeyboard = true
+        let layout = ForgotPasswordLayoutFactory.make()
+        let collectionView = DiffableCollectionViewContainer<ForgotPasswordSection, ForgotPasswordItem>(layout: layout)
         collectionView.backgroundColor = .systemBlue
+        collectionView.adjustsForKeyboard = true
+        collectionView.registerCell(ForgotPasswordConfirmCodeCell.self, reuseID: ForgotPasswordConfirmCodeCell.identifier)
+        collectionView.registerCell(ForgotPasswordTypeEmailCell.self, reuseID: ForgotPasswordTypeEmailCell.identifier)
+        collectionView.registerCell(ForgotPasswordNewPasswordCell.self, reuseID: ForgotPasswordNewPasswordCell.identifier)
+        collectionView.registerCell(ForgotPasswordBackToLoginCell.self, reuseID: ForgotPasswordBackToLoginCell.identifier)
         collectionView.collectionView.backgroundColor = .systemBlue
         collectionView.collectionView.isPagingEnabled = true
         collectionView.collectionView.isScrollEnabled = false
@@ -59,42 +58,32 @@ final class LoginScreenVC: UIViewController {
     private func configureDataSource() {
         collectionContainer.configureDataSource { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
-            case .loginItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoginScreenLoginCell.identifier, for: indexPath) as? LoginScreenLoginCell
-                cell?.configure(withVM: item.viewModel)
+            case .backToLoginItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ForgotPasswordBackToLoginCell.identifier, for: indexPath)
+                (cell as? ForgotPasswordBackToLoginCell)?.configure(withVM: item.viewModel)
                 return cell
                 
-            case .completeRegisterItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoginScreenCompleteRegistrationCell.identifier, for: indexPath) as? LoginScreenCompleteRegistrationCell
-                cell?.configure(withVM: item.viewModel)
+            case .newPasswordItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ForgotPasswordNewPasswordCell.identifier, for: indexPath)
+                (cell as? ForgotPasswordNewPasswordCell)?.configure(withVM: item.viewModel)
                 return cell
                 
-            case .registrationItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoginScreenRegistrationCell.identifier, for: indexPath) as? LoginScreenRegistrationCell
-                cell?.configure(withVM: item.viewModel)
+            case .confirmCodeItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ForgotPasswordConfirmCodeCell.identifier, for: indexPath)
+                (cell as? ForgotPasswordConfirmCodeCell)?.configure(withVM: item.viewModel)
                 return cell
-                
-            case .setPasswordItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoginScreenSetPasswordCell.identifier, for: indexPath) as? LoginScreenSetPasswordCell
-                cell?.configure(withVM: item.viewModel)
-                return cell
-                
-            case .confirmRegisterItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoginScreenConfirmRegistrationCell.identifier, for: indexPath) as? LoginScreenConfirmRegistrationCell
-                cell?.configure(withVM: item.viewModel)
-                return cell
-                
-            case .loadingItem(let item):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoadingCell.identifier, for: indexPath) as? LoadingCell
-                cell?.configure(withVM: item.viewModel)
+            
+            case .typeInEmailItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ForgotPasswordTypeEmailCell.identifier, for: indexPath)
+                (cell as? ForgotPasswordTypeEmailCell)?.configure(withVM: item.viewModel)
                 return cell
             }
         }
     }
 }
 
-extension LoginScreenVC:LoginScreenViewProtocol {
-    func applySnapshot(sections: [LoginScreenSection], itemsBySection: [LoginScreenSection : [LoginScreenItem]]) {
+extension ForgotPasswordScreenVC: ForgotPasswordScreenViewProtocol {
+    func applySnapshot(sections: [ForgotPasswordSection], itemsBySection: [ForgotPasswordSection : [ForgotPasswordItem]]) {
         collectionContainer.applySnapshot(sections: sections, itemsBySection: itemsBySection)
     }
     

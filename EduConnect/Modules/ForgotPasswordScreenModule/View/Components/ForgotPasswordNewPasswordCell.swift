@@ -1,24 +1,24 @@
 //
-//  LoginScreenSetPasswordCell.swift
+//  ForgotPasswordNewPasswordCell.swift
 //  EduConnect
 //
-//  Created by Buzurg Rakhimzoda on 8.01.2026.
+//  Created by Buzurg Rakhimzoda on 26.03.2026.
 //
 
 import UIKit
 import SnapKit
 
-struct LoginScreenSetPasswordCellViewModel {
-    let savePasswordAction: ((String?, String?) -> Void)?
-    let backButtonAction: (() -> Void)?
+struct ForgotPasswordNewPasswordCellViewModel {
+    let didTapSave: ((String?, String?) -> Void)?
+    let didTapBack: (() -> Void)?
     
-    init(savePasswordAction: ((String?, String?) -> Void)? = nil, backButtonAction: (() -> Void)? = nil) {
-        self.savePasswordAction = savePasswordAction
-        self.backButtonAction = backButtonAction
+    init(didTapSave: ((String?, String?) -> Void)? = nil, didTapBack: (() -> Void)? = nil) {
+        self.didTapSave = didTapSave
+        self.didTapBack = didTapBack
     }
 }
 
-final class LoginScreenSetPasswordCell: UICollectionViewCell {
+final class ForgotPasswordNewPasswordCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         // Spacing
@@ -30,12 +30,12 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell {
     }
     
     // MARK: - PROPERTIES
-    private var viewModel: LoginScreenSetPasswordCellViewModel?
+    private var viewModel: ForgotPasswordNewPasswordCellViewModel?
     
     // MARK: - VIEW PROPERTIES
     private let setPasswordLabel: UILabel = {
         let label = UILabel()
-        label.text = ConstantLocalizedStrings.Registration.Page3.setPasswordTitle
+        label.text = ConstantLocalizedStrings.Registration.ForgotPassword.setNewPasswordTitle
         label.font = ECFont.font(.bold, size: 30)
         label.textAlignment = .center
         label.textColor = .black
@@ -45,10 +45,10 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell {
     
     private let setPasswordSubtitle: UILabel = {
         let label = UILabel()
-        label.text = ConstantLocalizedStrings.Registration.Page3.setNewPasswordSubtitle
-        label.font = ECFont.font(.bold, size: 14)
+        label.text = ConstantLocalizedStrings.Registration.ForgotPassword.setNewPasswordSubtitle
+        label.font = ECFont.font(.regular, size: 14)
         label.textAlignment = .center
-        label.textColor = .systemGray
+        label.textColor = .black
         label.numberOfLines = 0
         return label
     }()
@@ -71,7 +71,7 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell {
     
     private let savePasswordButton: ECButton = ECButton(text: ConstantLocalizedStrings.Registration.Page3.savePasswordButton)
     
-    private lazy var vStack: UIStackView = {
+    private let vStack: UIStackView = {
         let stack = UIStackView()
         stack.backgroundColor = .white
         stack.axis = .vertical
@@ -106,18 +106,15 @@ final class LoginScreenSetPasswordCell: UICollectionViewCell {
     }
     
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: LoginScreenSetPasswordCellViewModel) {
+    public func configure(withVM vm: ForgotPasswordNewPasswordCellViewModel) {
         self.viewModel = vm
-        self.savePasswordButton.setAction { [weak self] in
-            vm.savePasswordAction?(self?.passwordField.text, self?.reenterPasswordField.text)
-        }
+        self.savePasswordButton.setAction { [weak self] in vm.didTapSave?(self?.passwordField.text, self?.reenterPasswordField.text) }
         let backButtonVM = ECIconButtonVM(
             systemImage: Constants.backButtonImageName,
             style: .title3, weight: .semibold,
-            didTapAction: vm.backButtonAction
+            didTapAction: vm.didTapBack
         )
         self.backButton.configure(viewModel: backButtonVM)
-        layoutIfNeeded()
     }
     
     // MARK: - PRIVATE FUNC

@@ -17,6 +17,7 @@ protocol AccountScreenViewProtocol: AnyObject {
     func dismissPopup()
     
     func showError(error: UserFacingError)
+    func presentAlert(title: String, message: String, confirmButtonName: String, confirmAction: (() -> Void)?)
     func showMessage(message: String)
     func showLoading()
     func hideLoading()
@@ -50,6 +51,7 @@ final class AccountScreenVC: UIViewController {
         cv.registerCell(ApplicationCell.self, reuseID: ApplicationCell.identifier)
         cv.registerCell(NotFoundCell.self, reuseID: NotFoundCell.identifier)
         cv.registerCell(SectionHeaderCell.self, reuseID: SectionHeaderCell.identifier)
+        cv.registerCell(AccountScreenDeleteAccountCell.self, reuseID: AccountScreenDeleteAccountCell.identifier)
         cv.registerCell(AccountScreenExpandablePersonalInfoCell.self, reuseID: AccountScreenExpandablePersonalInfoCell.identifier)
         cv.registerCell(AccountScreenExpandableFamilyInfoCell.self, reuseID: AccountScreenExpandableFamilyInfoCell.identifier)
         cv.registerCell(AccountScreenExpandableEducationCell.self, reuseID: AccountScreenExpandableEducationCell.identifier)
@@ -103,14 +105,22 @@ final class AccountScreenVC: UIViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionHeaderCell.identifier, for: indexPath) as? SectionHeaderCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
+                
             case .university(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ApplicationCell.identifier, for: indexPath) as? ApplicationCell
                 cell?.configure(withVM: item.viewModel)
                 return cell
+                
             case .expandableCell(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.viewModel.cellIdentifier, for: indexPath)
                 (cell as? ExpandableCellProtocol)?.configure(withVM: item.viewModel)
                 return cell
+                
+            case .deleteAccountItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccountScreenDeleteAccountCell.identifier, for: indexPath)
+                (cell as? AccountScreenDeleteAccountCell)?.configure(withVM: item.viewModel)
+                return cell
+                
             case .notFoundItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NotFoundCell.identifier, for: indexPath) as? NotFoundCell
                 cell?.configure(withVM: item.viewModel)
@@ -185,5 +195,9 @@ extension AccountScreenVC: AccountScreenViewProtocol {
     
     func hideLoading() {
         self.hideHoverLoading()
+    }
+    
+    func presentAlert(title: String, message: String, confirmButtonName: String, confirmAction: (() -> Void)?) {
+        self.showAlert(title: title, message: message, confirmButtonName: confirmButtonName, confirmAction: confirmAction)
     }
 }

@@ -11,6 +11,7 @@ import SnapKit
 struct LoginScreenRegistrationCellViewModel {
     let didPressBack: (() -> Void)?
     let didTapSendCode: ((String?) -> Void)?
+    let didTapPhone: (() -> Void)?
 }
 
 final class LoginScreenRegistrationCell: UICollectionViewCell {
@@ -163,9 +164,13 @@ final class LoginScreenRegistrationCell: UICollectionViewCell {
             emailTextField.keyboardType = .emailAddress
             emailTextField.textContentType = .username
         } else {
-            emailTextField.placeholder = ConstantLocalizedStrings.Registration.Page1.enterPhoneTextField
-            emailTextField.keyboardType = .phonePad
-            emailTextField.textContentType = .telephoneNumber
+            self.viewModel?.didTapPhone?()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                self?.loginTypeSwitcher.selectedSegmentIndex = 0
+            }
+//            emailTextField.placeholder = ConstantLocalizedStrings.Registration.Page1.enterPhoneTextField
+//            emailTextField.keyboardType = .phonePad
+//            emailTextField.textContentType = .telephoneNumber
         }
     }
 }

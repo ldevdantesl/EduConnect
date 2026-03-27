@@ -20,6 +20,7 @@ enum AccountScreenItem: Hashable {
     case expandableCell(DiffableItem<any ExpandableCellViewModel>)
     case pendingApplicationItem(DiffableItem<AccountPendingApplicationsCellViewModel>)
     case mainTabInfo(DiffableItem<AccountScreenMainTabInfoCellViewModel>)
+    case deleteAccountItem(DiffableItem<AccountScreenDeleteAccountCellViewModel>)
     case notFoundItem(DiffableItem<NotFoundCellViewModel>)
 }
 

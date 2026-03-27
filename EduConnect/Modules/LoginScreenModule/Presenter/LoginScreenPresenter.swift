@@ -9,6 +9,7 @@ protocol LoginScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
     func didReceiveError(erorr: any Error)
     func didSendCode(email: String?)
+    func didResendCode(email: String?)
     func didVerifyCode()
     func didLogin(user: AuthUser)
     func didRegister(user: AuthUser)
@@ -63,6 +64,8 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
             self?.didPressLogin(email: $0, password: $1)
         } didPressRegister: {
             self.view?.scrollToNextItem()
+        } didPressForgotPassword: { [weak self] in
+            self?.router.routeToForgotPassword()
         }
         items.append(.loginItem(.init(id: "login", viewModel: loginVM)))
         
@@ -71,15 +74,16 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
             self?.view?.scrollToPreviousItem()
         } didTapSendCode: { [weak self] in
             self?.didTapSendCode(email: $0)
+        } didTapPhone: { [weak self] in
+            self?.view?.showError(errorMessage: ConstantLocalizedStrings.Registration.Words.phoneRegistrationNotAvailable)
         }
         items.append(.registrationItem(.init(id: "registration", viewModel: registrationVM)))
         
         let confirmRegisterVM = LoginScreenConfirmRegistrationCellVM { [weak self] in
             self?.didTapVerifyCode(code: $0)
-        } resendAction: {
-            #if DEBUG
-            self.view?.showError(errorMessage: ConstantLocalizedStrings.DEBUG.useThisCode)
-            #endif
+        } resendAction: { [weak self] in
+            self?.view?.showLoading()
+            self?.interactor.resendVerficationCode(email: self?.email)
         } backButtonAction: { [weak self] in
             self?.view?.removeKeyboard()
             self?.view?.scrollToPreviousItem()
@@ -123,6 +127,7 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
         self.email = email
         self.view?.hideLoading()
         self.view?.scrollToNextItem()
+        self.view?.showMessage(message: ConstantLocalizedStrings.Account.Words.codeHasBeenSent)
     }
     
     func didVerifyCode() {
@@ -134,6 +139,11 @@ extension LoginScreenPresenter: LoginScreenPresenterProtocol {
         self.view?.hideLoading()
         self.view?.scrollToNextItem()
         self.user = user
+    }
+    
+    func didResendCode(email: String?) {
+        self.view?.hideLoading()
+        self.view?.showMessage(message: ConstantLocalizedStrings.Account.Words.codeHasBeenSent)
     }
     
     func didLogin(user: AuthUser) {

@@ -43,17 +43,30 @@ public enum ConstantLocalizedStrings {
             static let goToMainButton = String(localized: .Localizables.registrationGoToMainButton)
         }
         
+        enum ForgotPassword {
+            static let forgotPassword = String(localized: .Localizables.registrationForgotPassword)
+            static let typeInEmailSubtitle = String(localized: .Localizables.registrationForgotTypeYourEmail)
+            static let setNewPasswordTitle = String(localized: .Localizables.registrationForgotSetNewPasswordTitle)
+            static let setNewPasswordSubtitle = String(localized: .Localizables.registrationForgotSetNewPasswordSubtitle)
+            static let newPasswordSetTitle = String(localized: .Localizables.registrationForgotNewPasswordSetTitle)
+            static let newPasswordSetSubtitle = String(localized: .Localizables.registrationForgotNewPasswordSetSubtitle)
+            static let confirmCodeTitle = String(localized: .Localizables.registrationForgotConfirmCodeTitle)
+            static let backToLogin = String(localized: .Localizables.registrationForgotBackToLogin)
+        }
+        
         enum Words {
             static let login = String(localized: .Localizables.registrationLogin)
             static let register = String(localized: .Localizables.registrationRegister)
             static let phone = String(localized: .Localizables.registrationPhone)
             static let email = String(localized: .Localizables.registrationEmail)
+            static let phoneRegistrationNotAvailable = String(localized: .Localizables.registrationPhoneLoginIsNotAvailable)
         }
     }
     
     /// For __Common__ words
     enum Common {
         static let start = String(localized: .Localizables.commonStart)
+        static let `continue` = String(localized: .Localizables.commonContinue)
         static let none = String(localized: .Localizables.commonNone)
         static let apply = String(localized: .Localizables.commonApply)
         static let add = String(localized: .Localizables.commonAdd)
@@ -101,6 +114,7 @@ public enum ConstantLocalizedStrings {
             static let welcomeMessage = String(localized: .Localizables.accountMainTabWelcomeMessage).acceptingNewLines
             static let adviceSection = String(localized: .Localizables.accountMainTabAdviceSection).acceptingNewLines
             static let adviceSubtitle = String(localized: .Localizables.accountMainTabAdviceSubtitle).acceptingNewLines
+            static let deleteAccount = String(localized: .Localizables.accountDeleteAccount)
         }
         
         enum ApplicationTab {
@@ -171,6 +185,10 @@ public enum ConstantLocalizedStrings {
             static let name = String(localized: .Localizables.accountName)
             static let surname = String(localized: .Localizables.accountSurname)
             static let patronymic = String(localized: .Localizables.accountPatronymic)
+            static let deleteAccountAlertMessage = String(localized: .Localizables.accountDeleteAccountAlertMessage)
+            static let deleteAccountConfirmCode = String(localized: .Localizables.accountDeleteAccountConfirmCode)
+            static let deleteAccountSendEmailWithCode = String(localized: .Localizables.accountDeleteAccountSendEmailWithCode)
+            static let codeHasBeenSent = String(localized: .Localizables.registrationCodeHasBeenSent)
         }
     }
     
