@@ -1,26 +1,20 @@
 //
-//  LoginScreenConfirmRegistrationCell.swift
+//  ForgtoPasswordConfirmCodeCell.swift
 //  EduConnect
 //
-//  Created by Buzurg Rakhimzoda on 8.01.2026.
+//  Created by Buzurg Rakhimzoda on 26.03.2026.
 //
 
 import UIKit
 import SnapKit
 
-struct LoginScreenConfirmRegistrationCellVM {
-    let confirmAction: ((String?) -> Void)?
-    let backButtonAction: (() -> Void)?
-    let resendAction: (() -> Void)?
-    
-    init(confirmAction: ((String?) -> Void)? = nil, resendAction: (() -> Void)? = nil, backButtonAction: (() -> Void)? = nil) {
-        self.confirmAction = confirmAction
-        self.resendAction = resendAction
-        self.backButtonAction = backButtonAction
-    }
+struct ForgotPasswordConfirmCodeCellViewModel {
+    let didPressConfirm: ((String?) -> Void)?
+    let didPressResendCode: (() -> Void)?
+    let didPressBack: (() -> Void)?
 }
 
-final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
+final class ForgotPasswordConfirmCodeCell: UICollectionViewCell {
     // MARK: - CONSTANTS
     fileprivate enum Constants {
         static let hSpacing = 15.0
@@ -31,14 +25,14 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
     }
     
     // MARK: - PROPERTIES
-    private var viewModel: LoginScreenConfirmRegistrationCellVM?
+    private var viewModel: ForgotPasswordConfirmCodeCellViewModel?
     private var resendTimer: Timer?
     private var remainingSeconds = 0
     
     // MARK: - VIEW PROPERTIES
-    private let confirmSignInLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = ConstantLocalizedStrings.Registration.Page2.confirmSignInTitle
+        label.text = ConstantLocalizedStrings.Registration.ForgotPassword.confirmCodeTitle
         label.font = ECFont.font(.bold, size: 30)
         label.textAlignment = .center
         label.textColor = .black
@@ -46,7 +40,7 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
         return label
     }()
     
-    private let checkEmailLabel: UILabel = {
+    private let subtitleLabel: UILabel = {
         let label = UILabel()
         label.text = ConstantLocalizedStrings.Registration.Page2.checkEmailSubtitle
         label.font = ECFont.font(.bold, size: 14)
@@ -66,7 +60,9 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
     
     private let confirmButton: ECButton = ECButton(text: ConstantLocalizedStrings.Common.confirm)
     
-    private let resendCodeButton: ECUnderlineButton = ECUnderlineButton(text: ConstantLocalizedStrings.Registration.Page2.resendCodeUnderlineButton)
+    private let resendCodeButton: ECUnderlineButton = ECUnderlineButton(
+        text: ConstantLocalizedStrings.Registration.Page2.resendCodeUnderlineButton
+    )
     
     private let topSpacer = UIView()
     private let bottomSpacer = UIView()
@@ -100,18 +96,25 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
         self.vStack.layer.cornerRadius = SharedConstants.standardCornerRadius
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resendTimer?.invalidate()
+        resendTimer = nil
+        resendCodeButton.isEnabled = true
+    }
+    
     // MARK: - PUBLIC FUNC
-    func configure(withVM vm: LoginScreenConfirmRegistrationCellVM) {
+    func configure(withVM vm: ForgotPasswordConfirmCodeCellViewModel) {
         self.viewModel = vm
-        self.confirmButton.setAction { [weak self] in vm.confirmAction?(self?.codeField.text)}
+        self.confirmButton.setAction { [weak self] in vm.didPressConfirm?(self?.codeField.text)}
         self.resendCodeButton.setAction { [weak self] in
-            vm.resendAction?()
+            vm.didPressResendCode?()
             self?.startResendCooldown()
         }
         let backButtonVM = ECIconButtonVM(
             systemImage: Constants.backButtonImageName,
             style: .title3, weight: .semibold,
-            didTapAction: vm.backButtonAction
+            didTapAction: vm.didPressBack
         )
         self.backButton.configure(viewModel: backButtonVM)
         layoutIfNeeded()
@@ -125,10 +128,10 @@ final class LoginScreenConfirmRegistrationCell: UICollectionViewCell {
             $0.horizontalEdges.equalToSuperview().inset(Constants.hSpacing)
         }
 
-        [topSpacer, confirmSignInLabel, checkEmailLabel, codeField, confirmButton, resendCodeButton, bottomSpacer].forEach { vStack.addArrangedSubview($0) }
+        [topSpacer, titleLabel, subtitleLabel, codeField, confirmButton, resendCodeButton, bottomSpacer].forEach { vStack.addArrangedSubview($0) }
         
-        vStack.setCustomSpacing(10, after: confirmSignInLabel)
-        vStack.setCustomSpacing(20, after: checkEmailLabel)
+        vStack.setCustomSpacing(10, after: titleLabel)
+        vStack.setCustomSpacing(20, after: subtitleLabel)
         vStack.setCustomSpacing(20, after: codeField)
         vStack.setCustomSpacing(20, after: confirmButton)
         

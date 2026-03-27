@@ -26,6 +26,15 @@ final class ECUnderlineButton: UIView {
     
     private let underlineView: UIView = UIView()
     
+    var isEnabled: Bool = true {
+        didSet {
+            isUserInteractionEnabled = isEnabled
+            UIView.animate(withDuration: 0.2) {
+                self.alpha = self.isEnabled ? 1.0 : 0.5
+            }
+        }
+    }
+    
     // MARK: - LIFECYCLE
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -90,6 +99,10 @@ final class ECUnderlineButton: UIView {
         self.textLabel.textColor = textColor
         self.textLabel.textAlignment = .center
         self.underlineView.backgroundColor = textColor
+    }
+    
+    public func setTitle(_ text: String) {
+        self.textLabel.text = text
     }
     
     // MARK: - PRIVATE FUNC

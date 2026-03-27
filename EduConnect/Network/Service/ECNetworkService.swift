@@ -10,6 +10,7 @@ import UIKit
 protocol NetworkServiceProtocol {
     var application: ApplicationAPISubServiceProtocol { get }
     var accountDeletion: AccountDeletionAPISubServiceProtocol { get }
+    var passwordReset: PasswordResetAPISubServiceProtocol { get }
     var authentication: AuthAPISubServiceProtocol { get }
     var references: ReferencesAPISubServiceProtocol { get }
     var news: NewsAPISubServiceProtocol { get }
@@ -29,6 +30,7 @@ final class ECNetworkService: NetworkServiceProtocol {
     let professions: ProfessionsAPISubServiceProtocol
     let profile: ProfileAPISubServiceProtocol
     let application: ApplicationAPISubServiceProtocol
+    let passwordReset: PasswordResetAPISubServiceProtocol
     
     init(httpClient: HTTPClientProtocol) {
         self.authentication = AuthAPISubService(httpClient: httpClient)
@@ -40,5 +42,6 @@ final class ECNetworkService: NetworkServiceProtocol {
         self.profile = ProfileAPISubService(httpClient: httpClient)
         self.application = ApplicationAPISubService(httpClient: httpClient)
         self.accountDeletion = AccountDeletionAPISubService(httpClient: httpClient)
+        self.passwordReset = PasswordResetAPISubService(httpClient: httpClient)
     }
 }

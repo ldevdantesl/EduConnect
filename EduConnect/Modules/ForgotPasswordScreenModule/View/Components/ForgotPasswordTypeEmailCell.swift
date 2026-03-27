@@ -30,9 +30,10 @@ final class ForgotPasswordTypeEmailCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = ConstantLocalizedStrings.Registration.ForgotPassword.forgotPassword
-        label.font = ECFont.font(.bold, size: 18)
+        label.font = ECFont.font(.bold, size: 30)
         label.textColor = .black
-        label.numberOfLines = 1
+        label.numberOfLines = 0
+        label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
     }()

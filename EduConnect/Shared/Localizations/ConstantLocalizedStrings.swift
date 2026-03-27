@@ -50,6 +50,7 @@ public enum ConstantLocalizedStrings {
             static let setNewPasswordSubtitle = String(localized: .Localizables.registrationForgotSetNewPasswordSubtitle)
             static let newPasswordSetTitle = String(localized: .Localizables.registrationForgotNewPasswordSetTitle)
             static let newPasswordSetSubtitle = String(localized: .Localizables.registrationForgotNewPasswordSetSubtitle)
+            static let confirmCodeTitle = String(localized: .Localizables.registrationForgotConfirmCodeTitle)
             static let backToLogin = String(localized: .Localizables.registrationForgotBackToLogin)
         }
         

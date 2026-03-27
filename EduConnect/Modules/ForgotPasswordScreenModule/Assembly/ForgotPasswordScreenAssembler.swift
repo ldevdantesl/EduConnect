@@ -9,7 +9,7 @@ import UIKit
 
 final class ForgotPasswordScreenAssembler {
     static func assemble(appRouter: AppRoutingProtocol) -> ForgotPasswordScreenVC {
-        let interactor = ForgotPasswordScreenInteractor(authService: appRouter.diContainer.authentication)
+        let interactor = ForgotPasswordScreenInteractor(networkService: appRouter.diContainer.networkService)
         let router = ForgotPasswordScreenRouter(appRouter: appRouter)
         let presenter = ForgotPasswordScreenPresenter(interactor: interactor, router: router, errorService: appRouter.diContainer.errorService)
         let viewController = ForgotPasswordScreenVC()

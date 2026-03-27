@@ -3750,6 +3750,29 @@
         }
       }
     },
+    "registration_forgotConfirmCodeTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Code For Password Reset"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Құпиясөзді қалпына келтіруді растау"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подтверждение сброса пароля"
+          }
+        }
+      }
+    },
     "registration_forgotNewPasswordSetSubtitle" : {
       "extractionState" : "manual",
       "localizations" : {

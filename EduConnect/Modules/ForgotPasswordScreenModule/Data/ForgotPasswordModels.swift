@@ -15,4 +15,5 @@ enum ForgotPasswordItem: Hashable {
     case typeInEmailItem(DiffableItem<ForgotPasswordTypeEmailCellViewModel>)
     case newPasswordItem(DiffableItem<ForgotPasswordNewPasswordCellViewModel>)
     case backToLoginItem(DiffableItem<ForgotPasswordBackToLoginCellViewModel>)
+    case confirmCodeItem(DiffableItem<ForgotPasswordConfirmCodeCellViewModel>)
 }

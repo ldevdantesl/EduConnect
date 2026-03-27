@@ -29,6 +29,7 @@ final class ForgotPasswordScreenVC: UIViewController {
         let collectionView = DiffableCollectionViewContainer<ForgotPasswordSection, ForgotPasswordItem>(layout: layout)
         collectionView.backgroundColor = .systemBlue
         collectionView.adjustsForKeyboard = true
+        collectionView.registerCell(ForgotPasswordConfirmCodeCell.self, reuseID: ForgotPasswordConfirmCodeCell.identifier)
         collectionView.registerCell(ForgotPasswordTypeEmailCell.self, reuseID: ForgotPasswordTypeEmailCell.identifier)
         collectionView.registerCell(ForgotPasswordNewPasswordCell.self, reuseID: ForgotPasswordNewPasswordCell.identifier)
         collectionView.registerCell(ForgotPasswordBackToLoginCell.self, reuseID: ForgotPasswordBackToLoginCell.identifier)
@@ -65,6 +66,11 @@ final class ForgotPasswordScreenVC: UIViewController {
             case .newPasswordItem(let item):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ForgotPasswordNewPasswordCell.identifier, for: indexPath)
                 (cell as? ForgotPasswordNewPasswordCell)?.configure(withVM: item.viewModel)
+                return cell
+                
+            case .confirmCodeItem(let item):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ForgotPasswordConfirmCodeCell.identifier, for: indexPath)
+                (cell as? ForgotPasswordConfirmCodeCell)?.configure(withVM: item.viewModel)
                 return cell
             
             case .typeInEmailItem(let item):

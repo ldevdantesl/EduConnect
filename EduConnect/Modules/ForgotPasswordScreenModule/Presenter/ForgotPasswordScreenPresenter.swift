@@ -9,6 +9,10 @@ import UIKit
 
 protocol ForgotPasswordScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
+    func didSendCode(message: String?)
+    func didResendCode(message: String?)
+    func didConfirmNewPassword(message: String?)
+    func didReceiveError(error: any Error)
 }
 
 final class ForgotPasswordScreenPresenter {
@@ -20,6 +24,8 @@ final class ForgotPasswordScreenPresenter {
     
     // MARK: - PROPERTIES
     private let errorService: ErrorServiceProtocol
+    private var email: String?
+    private var code: String?
 
     init(interactor: ForgotPasswordScreenInteractorProtocol, router: ForgotPasswordScreenRouterProtocol, errorService: ErrorServiceProtocol) {
         self.interactor = interactor
@@ -33,16 +39,33 @@ final class ForgotPasswordScreenPresenter {
         let typeEmailVM = ForgotPasswordTypeEmailCellViewModel { [weak self] in
             self?.view?.removeKeyboard()
             self?.router.goBack()
-        } didTapEmail: { [weak self] _ in
+        } didTapEmail: { [weak self] email in
+            self?.email = email
+            self?.view?.showLoading()
+            self?.interactor.sendCode(email: email)
             self?.view?.removeKeyboard()
-            self?.view?.scrollToNextItem()
         }
         items.append(.typeInEmailItem(.init(id: "type-email", viewModel: typeEmailVM)))
         
-        let newPasswordVM = ForgotPasswordNewPasswordCellViewModel { [weak self] password, confirmPass in
-            print(password ?? "No password", confirmPass ?? "No confirm Password")
-            self?.view?.removeKeyboard()
+        let confirmCodeVM = ForgotPasswordConfirmCodeCellViewModel { [weak self] code in
+            self?.code = code
             self?.view?.scrollToNextItem()
+        } didPressResendCode: { [weak self] in
+            self?.view?.showLoading()
+            self?.interactor.resendCode(email: self?.email)
+        } didPressBack: { [weak self] in
+            self?.view?.scrollToPreviousItem()
+        }
+        
+        items.append(.confirmCodeItem(.init(id: "confirm-code", viewModel: confirmCodeVM)))
+        
+        let newPasswordVM = ForgotPasswordNewPasswordCellViewModel { [weak self] password, confirmPass in
+            self?.view?.showLoading()
+            self?.interactor.confirmNewPassword(
+                email: self?.email, code: self?.code,
+                newPassword: password, newPasswordConfirmation: confirmPass
+            )
+            self?.view?.removeKeyboard()
         } didTapBack: { [weak self] in
             self?.view?.removeKeyboard()
             self?.view?.scrollToPreviousItem()
@@ -64,5 +87,28 @@ final class ForgotPasswordScreenPresenter {
 extension ForgotPasswordScreenPresenter: ForgotPasswordScreenPresenterProtocol {
     func viewDidLoad() {
         applySnapshot()
+    }
+    
+    func didSendCode(message: String?) {
+        self.view?.hideLoading()
+        self.view?.scrollToNextItem()
+        if let message { self.view?.showMessage(message: message) }
+    }
+    
+    func didResendCode(message: String?) {
+        self.view?.hideLoading()
+        if let message { self.view?.showMessage(message: message) }
+    }
+    
+    func didConfirmNewPassword(message: String?) {
+        self.view?.hideLoading()
+        self.view?.scrollToNextItem()
+        if let message { self.view?.showMessage(message: message) }
+    }
+    
+    func didReceiveError(error: any Error) {
+        let userError = errorService.handle(error)
+        self.view?.showError(errorMessage: userError.message)
+        self.view?.hideLoading()
     }
 }
